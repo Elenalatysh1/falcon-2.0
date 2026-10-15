@@ -1,0 +1,29 @@
+---
+description: Falcon icons are Lucide 0.453 drawn through icons/api.js and foundation tokens
+alwaysApply: true
+---
+
+# Icons
+
+Falcon uses Lucide 0.453.0 (ISC). Draw icons through `icons/api.js`. Do not paste SVG paths, use another icon set, or use emoji.
+
+```js
+import { icon } from "./icons/api.js";
+
+button.append(icon("transfers"));
+row.append(icon("search", { size: "inline" }));
+tab.append(icon("home", { size: "nav", active: true }));
+```
+
+## Drawing
+
+- Stroke is `var(--icon-stroke)` (1.7). Active navigation uses `var(--icon-stroke-active)` (2.2). Caps and joins stay round.
+- Color is `currentColor`. Set it with a text or status token (`--text-primary`, `--text-tertiary`, `--brand-600`, `--status-danger`). No fill, gradient, or one-off color.
+- Sizes are `inline` 16, `default` 20, `nav` 22, and `feature` 28. One size and one stroke per row.
+- Names come from `icons/catalog`: `transfers`, `search`, `cards`. The same name is used on Web, Android, and iOS.
+- An icon-only control has a tooltip and an accessible name.
+- In RTL, `data-mirror` icons flip. Search, check, bell, card, clock, and charts do not.
+
+## React
+
+When a component is React, use `lucide-react@0.453.0` with the same defaults: `size` from the icon tokens and `strokeWidth={1.7}`. Prefer `icon()` until that package is the component runtime.

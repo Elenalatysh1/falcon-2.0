@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Introduction · Falcon 2.0</title>
+  <link rel="stylesheet" href="../styles/foundations.css">
+  <link rel="stylesheet" href="page.css">
+  <link rel="stylesheet" href="icons.css">
+  <link rel="stylesheet" href="logo.css">
+  <link rel="stylesheet" href="../components/button/button.css">
+  <link rel="stylesheet" href="../components/button-groups/button-groups.css">
+  <link rel="stylesheet" href="../components/selection/selection.css">
+  <link rel="stylesheet" href="../components/feedback/feedback.css">
+  <link rel="stylesheet" href="../components/badges/badges.css">
+  <link rel="stylesheet" href="../components/inputs/inputs.css">
+  <link rel="stylesheet" href="../components/accordions/accordions.css">
+  <link rel="stylesheet" href="../components/dividers/dividers.css">
+  <link rel="stylesheet" href="../components/command-menu/command-menu.css">
+  <link rel="stylesheet" href="../components/date-pickers/date-pickers.css">
+  <link rel="stylesheet" href="../components/overlays/overlays.css">
+  <link rel="stylesheet" href="buttons.css">
+  <link rel="stylesheet" href="button-groups.css">
+  <link rel="stylesheet" href="selection.css">
+  <link rel="stylesheet" href="feedback.css">
+  <link rel="stylesheet" href="badges.css">
+  <link rel="stylesheet" href="inputs.css">
+  <link rel="stylesheet" href="accordions.css">
+  <link rel="stylesheet" href="dividers.css">
+  <link rel="stylesheet" href="command-menu.css">
+  <link rel="stylesheet" href="date-pickers.css">
+  <link rel="stylesheet" href="overlays.css">
+  <link rel="stylesheet" href="getting-started.css">
+  <link rel="stylesheet" href="shell.css">
+</head>
+<body class="docs">
+  <div class="docs-app">
+    <aside class="docs-side">
+      <div class="docs-brand">
+        <span class="docs-mark" aria-hidden="true"></span>
+        <span>Falcon 2.0</span>
+      </div>
+      <nav class="docs-nav" aria-label="Documentation">
+      <div class="docs-group">
+        <button class="docs-group-btn" type="button" aria-expanded="true">
+          <span>Getting Started</span>
+          <span class="docs-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="docs-group-list">
+        <a class="docs-link" href="#introduction"><span data-label>Introduction</span><span class="badge" data-tone="draft" data-size="sm">Draft</span></a>
+        <a class="docs-link" href="#how-to-use"><span data-label>How to use</span><span class="badge" data-tone="draft" data-size="sm">Draft</span></a>
+        </div>
+      </div>
+      <div class="docs-group">
+        <button class="docs-group-btn" type="button" aria-expanded="true">
+          <span>Foundation</span>
+          <span class="docs-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="docs-group-list">
+        <a class="docs-link" href="#styles">Styles</a>
+        <a class="docs-link" href="#icons">Icons</a>
+        <a class="docs-link" href="#logo">Hala logo</a>
+        </div>
+      </div>
+      <div class="docs-group">
+        <button class="docs-group-btn" type="button" aria-expanded="true">
+          <span>All Components</span>
+          <span class="docs-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="docs-group-list">
+          <a class="docs-link" href="#button">Button</a>
+          <a class="docs-link" href="#button-groups">Button groups</a>
+          <a class="docs-link" href="#selection">Selection controls</a>
+          <a class="docs-link" href="#feedback">Feedback</a>
+          <a class="docs-link" href="#badges">Badges</a>
+          <a class="docs-link" href="#inputs">Inputs</a>
+          <a class="docs-link" href="#accordions">Accordions</a>
+          <a class="docs-link" href="#dividers">Dividers</a>
+          <a class="docs-link" href="#command-menu">Command menu</a>
+          <a class="docs-link" href="#date-pickers">Date pickers</a>
+          <a class="docs-link" href="#overlays">Overlays</a>
+        </div>
+      </div>
+      </nav>
+    </aside>
+    <div class="docs-stage">
+      <div class="docs-scroll">
+        <button class="docs-menu" type="button" data-menu>Menu</button>
+        <article class="doc-page" data-page="introduction" hidden></article>
+        <article class="doc-page" data-page="how-to-use" hidden></article>
+        <article class="doc-page" data-page="styles" hidden>
+<header class="wrap head">
+    <p class="kicker">Hala UI · Foundations</p>
+    <h1 class="type-display">Styles</h1>
+    <p class="lede type-body-l">The tokens behind every Hala screen: color, type in English and Arabic, spacing, radius, shadows and motion. Names match the values used across the component pages. Click any swatch to copy its hex.</p>
+    <nav class="nav" aria-label="Foundations">
+      <a href="#color">Color</a>
+      <a href="#type">Typography</a>
+      <a href="#arabic">Arabic</a>
+      <a href="#space">Spacing</a>
+      <a href="#radius">Radius</a>
+      <a href="#shadow">Elevation</a>
+      <a href="#motion">Motion</a>
+      <a href="#grid">Icons &amp; grid</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="color" class="wrap">
+      <div class="section-head">
+        <div class="titles">
+          <h2 class="doc-h2">Color</h2>
+          <p class="sub type-body-m">Hala green is for brand and primary actions only. Ink carries text and strong UI. Surfaces are white on a mint-gray canvas. Status colors are used only to show status.</p>
+        </div>
+        <span class="copied" data-copied></span>
+      </div>
+      <div data-palettes></div>
+      <div class="panel-grid">
+        <div class="panel">
+          <span class="kicker quiet">Gradients · use sparingly</span>
+          <div data-grads></div>
+        </div>
+        <div class="panel">
+          <span class="kicker quiet">Contrast · checked pairs</span>
+          <div data-pairs></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="type" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Typography</h2>
+        <p class="sub type-body-m">IBM Plex Sans for interface text, IBM Plex Mono for numbers, amounts, IBANs and labels, and IBM Plex Sans Arabic for Arabic. All three share the same proportions, so mixed text lines up.</p>
+      </div>
+      <div class="families" data-families></div>
+      <div class="table-card" data-scale></div>
+      <div class="auto-grid" data-type-rules></div>
+    </section>
+
+    <section id="arabic" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Arabic and RTL</h2>
+        <p class="sub type-body-m">Arabic text is set 1–2 px larger than English with taller line height, because Arabic letters look smaller at the same size. Numbers stay Western (0–9) and Mono, read left to right.</p>
+      </div>
+      <div class="cols-2">
+        <div class="demo">
+          <span class="kicker quiet">English · LTR</span>
+          <div class="demo-copy">
+            <span class="demo-title">Good morning, Abdulaziz</span>
+            <span class="demo-body">Your POS sales grew 12.4% compared with last month.</span>
+          </div>
+          <div class="demo-row">
+            <div class="demo-copy">
+              <span class="demo-name">Nour Trading</span>
+              <span class="demo-meta">Today, 09:30 · Transfer</span>
+            </div>
+            <span class="type-amount-m" dir="ltr">− 25,000.00</span>
+          </div>
+          <span class="demo-primary">Continue →</span>
+        </div>
+        <div class="demo" dir="rtl" lang="ar">
+          <span class="kicker quiet ltr-end">Arabic · RTL</span>
+          <div class="demo-copy">
+            <span class="demo-title">صباح الخير، عبدالعزيز</span>
+            <span class="demo-body">نمت مبيعات نقاط البيع بنسبة <bdi class="bdi" dir="ltr">12.4%</bdi> مقارنة بالشهر الماضي.</span>
+          </div>
+          <div class="demo-row">
+            <div class="demo-copy">
+              <span class="demo-name">نور للتجارة</span>
+              <span class="demo-meta">اليوم، <bdi class="bdi" dir="ltr">09:30</bdi> · تحويل</span>
+            </div>
+            <span class="type-amount-m" dir="ltr">− 25,000.00</span>
+          </div>
+          <span class="demo-primary">متابعة ←</span>
+        </div>
+      </div>
+      <div class="table-card" data-ar></div>
+      <div class="auto-grid" data-rtl></div>
+    </section>
+
+    <section id="space" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Spacing</h2>
+        <p class="sub type-body-m">A 4 px base. Small steps inside components, large steps between them. On mobile, the screen margin is 16 pt.</p>
+      </div>
+      <div class="space-layout">
+        <div class="table-card" data-space></div>
+        <div class="side">
+          <div class="card">
+            <span class="kicker quiet">Component padding</span>
+            <div data-pads></div>
+          </div>
+          <div class="card">
+            <span class="kicker quiet">Control heights</span>
+            <div class="heights" data-heights></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="radius" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Radius</h2>
+        <p class="sub type-body-m">Soft, generous corners. Buttons and chips are always pills. A container's radius is its child's radius plus the padding between them.</p>
+      </div>
+      <div class="radius-grid" data-radius></div>
+    </section>
+
+    <section id="shadow" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Elevation</h2>
+        <p class="sub type-body-m">Shadows are tinted with ink and pulled in with a negative spread, so they read soft and green-gray rather than black. Most cards have no shadow; elevation means something floats above the page.</p>
+      </div>
+      <div class="stage" data-shadows></div>
+      <div class="rule">
+        <strong>Backdrops</strong>
+        <span class="use">Modal rgba(12,31,26,.45) · Bottom sheet .42 · Command menu .35 · Drawer .22. No blur behind overlays.</span>
+      </div>
+    </section>
+
+    <section id="motion" class="wrap">
+      <div class="section-head">
+        <div class="titles">
+          <h2 class="doc-h2">Motion</h2>
+          <p class="sub type-body-m">Quick and calm. One standard curve for almost everything. Respect "reduce motion": swap movement for a short fade.</p>
+        </div>
+        <button class="play" type="button" data-play>Play all</button>
+      </div>
+      <div class="table-card" data-motion></div>
+      <div class="notes">
+        <span><b>Standard</b> <span class="mono mono-strong">cubic-bezier(.2,.9,.2,1)</span></span>
+        <span><b>Exit</b> <span class="mono mono-strong">ease-in, 70% of enter time</span></span>
+        <span><b>Mobile sheets</b> <span class="mono mono-strong">spring 320 ms</span></span>
+      </div>
+    </section>
+
+    <section id="grid" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Icons, layout and breakpoints</h2>
+      </div>
+      <div class="icon-layout">
+        <div class="card">
+          <span class="kicker quiet">Icons · 1.7 stroke, round</span>
+          <div class="icons" data-icons></div>
+          <span class="use">Outline icons on a 24 grid, currentColor. Filled only for active tab bar items.</span>
+        </div>
+        <div class="card">
+          <span class="kicker quiet">Breakpoints</span>
+          <div data-bps></div>
+        </div>
+        <div class="card">
+          <span class="kicker quiet">Layout</span>
+          <div data-layout></div>
+        </div>
+      </div>
+    </section>
+  </main>
+        </article>
+        <article class="doc-page" data-page="icons" hidden>
+<header class="wrap head icons-head">
+    <p class="kicker">Hala UI · Foundations</p>
+    <h1 class="type-display">Icons</h1>
+    <p class="lede type-body-l">Hala uses <strong>Lucide</strong>, an open-source outline icon set (ISC license), with one change: the stroke is 1.7 instead of 2, to match Plex Sans. Icons on this page are the real Lucide files, version 0.453.</p>
+  </header>
+
+  <main>
+    <section class="wrap" id="anatomy">
+      <div class="specs" data-specs></div>
+      <div class="pair">
+        <div class="anatomy">
+          <span class="kicker quiet">Anatomy · 24 × 24 grid</span>
+          <div class="anatomy-row">
+            <div class="board">
+              <span class="board-live"></span>
+              <div class="board-icon" data-anatomy></div>
+            </div>
+            <div class="notes">
+              <span><b>Live area 20 × 20.</b> 2 px padding on each side, as drawn by Lucide.</span>
+              <span><b>Round caps and joins.</b> Never square.</span>
+              <span><b>No fill.</b> Outline only, color from currentColor.</span>
+            </div>
+          </div>
+        </div>
+        <div class="stroke-card">
+          <span class="kicker quiet">Why 1.7 · next to Plex Sans 15/500</span>
+          <div data-strokes></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="sizes">
+      <div class="titles">
+        <h2 class="doc-h2">Sizes</h2>
+        <p class="sub type-body-m">Four sizes. Keep the stroke at 1.7 for all of them; only use 1.5 at 28 px and up if the icon looks heavy.</p>
+      </div>
+      <div class="size-table" data-sizes></div>
+    </section>
+
+    <section class="wrap" id="set">
+      <div class="section-head">
+        <div class="titles">
+          <h2 class="doc-h2">Hala icon set</h2>
+          <p class="sub type-body-m"><span data-count></span> approved icons, grouped by area. Use these names in code. Click an icon to copy its name.</p>
+        </div>
+        <span class="copied" data-copied></span>
+      </div>
+      <div class="toolbar">
+        <label class="search">
+          <span data-search-icon></span>
+          <input type="search" placeholder="Search icons, e.g. card, transfer" data-search>
+        </label>
+        <div class="sizes" data-size-switch></div>
+        <div class="colors" data-colors></div>
+      </div>
+      <div data-groups></div>
+      <div class="empty" data-empty hidden></div>
+    </section>
+
+    <section class="wrap" id="icons-color">
+      <div class="titles">
+        <h2 class="doc-h2">Color and containers</h2>
+        <p class="sub type-body-m">Icons take the color of their text. Put them in a tile when they stand alone. Status colors only for status.</p>
+      </div>
+      <div class="tile-grid" data-tiles></div>
+    </section>
+
+    <section class="wrap" id="components">
+      <div class="titles">
+        <h2 class="doc-h2">In components</h2>
+        <p class="sub type-body-m">Spacing between icon and label, and the icon size each component uses.</p>
+      </div>
+      <div class="demos">
+        <div class="demo-card">
+          <span class="kicker quiet">Buttons · 20 px · gap 8</span>
+          <div class="button-row">
+            <span class="btn-primary"><span data-icon="add"></span>New transfer</span>
+            <span class="btn-secondary"><span data-icon="download"></span>Export</span>
+            <span class="btn-icon" title="More"><span data-icon="more"></span></span>
+          </div>
+          <span class="hint">Icon goes before the label. Trailing icons only for direction (→) or menus (⌄). Icon-only buttons need a tooltip and aria-label.</span>
+        </div>
+        <div class="demo-card">
+          <span class="kicker quiet">List row · input · badge</span>
+          <div class="list-row">
+            <span class="list-tile" data-icon="account"></span>
+            <div class="list-copy">
+              <strong>Main account</strong>
+              <span class="mono">SA57 •• 1951</span>
+            </div>
+            <span class="chev" data-icon="next"></span>
+          </div>
+          <div class="field">
+            <span data-icon="search"></span>
+            <span>Search beneficiaries</span>
+            <span data-icon="close"></span>
+          </div>
+          <div class="badge-row">
+            <span class="badge settled"><span data-icon="confirm"></span>Settled</span>
+            <span class="badge frozen"><span data-icon="freeze"></span>Frozen</span>
+          </div>
+        </div>
+        <div class="demo-card">
+          <span class="kicker quiet">Mobile tab bar · 22 pt</span>
+          <div class="tabbar" data-tabs></div>
+          <span class="hint">Active tab: Green 600 and stroke 2.2. Lucide has no filled versions, so the stroke weight shows the active state.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="rtl">
+      <div class="titles">
+        <h2 class="doc-h2">Arabic · right to left</h2>
+        <p class="sub type-body-m">Flip icons that show direction or movement. Keep icons that show objects or symbols as they are.</p>
+      </div>
+      <div class="pair">
+        <div class="demo-card">
+          <span class="kicker">Mirror in RTL</span>
+          <div class="mirror-grid" data-rtl-flip></div>
+        </div>
+        <div class="demo-card">
+          <span class="kicker danger">Don't mirror</span>
+          <div class="mirror-grid" data-rtl-keep></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="practice">
+      <div class="titles">
+        <h2 class="doc-h2">Do and don't</h2>
+      </div>
+      <div class="do-grid" data-dos></div>
+    </section>
+
+    <section class="wrap" id="dev">
+      <div class="titles">
+        <h2 class="doc-h2">For developers</h2>
+        <p class="sub type-body-m">Install the official package for each platform and wrap it once so every icon gets Hala's defaults.</p>
+      </div>
+      <div class="dev-grid" data-dev></div>
+    </section>
+  </main>
+        </article>
+        <article class="doc-page" data-page="logo" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Foundations</p>
+            <h1 class="type-display">Hala logo</h1>
+            <p class="lede type-body-l">The HALA wordmark and the H symbol, with the arrow inside the H. How to use them on web, in the mobile app, and as app and browser icons.</p>
+          </header>
+          <main>
+            <section class="wrap" id="logo-mark">
+              <div class="lg-hero">
+                <div class="lg-card">
+                  <span class="kicker quiet">Wordmark · primary</span>
+                  <div class="lg-stage">
+                    <img class="lg-word lg-word-primary" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                  </div>
+                  <span class="lg-caption">Use wherever there is room: website header, sign-up, documents, emails.</span>
+                </div>
+                <div class="lg-card">
+                  <span class="kicker quiet">Symbol · H</span>
+                  <div class="lg-stage">
+                    <div class="lg-symbol-hero">
+                      <img class="lg-on-fill" src="../media/type=short,%20color=brand.svg" alt="Hala symbol">
+                    </div>
+                  </div>
+                  <span class="lg-caption">For small spaces: app icon, favicon, avatar, collapsed sidebar.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="logo-color">
+              <div class="titles">
+                <h2 class="doc-h2">Color</h2>
+                <p class="sub type-body-m">Hala green is the logo color. Use white on green, dark or photo backgrounds; one-color black only where color printing isn't possible.</p>
+              </div>
+              <div class="lg-swatches" data-logo="swatches"></div>
+              <div class="lg-uses">
+                <div class="lg-use" data-ground="card">
+                  <img class="lg-word" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                  <span class="lg-label">Green on white</span>
+                </div>
+                <div class="lg-use" data-ground="brand">
+                  <img class="lg-word lg-on-fill" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                  <span class="lg-label">White on green</span>
+                </div>
+                <div class="lg-use" data-ground="ink">
+                  <img class="lg-word lg-on-fill" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                  <span class="lg-label">White on ink</span>
+                </div>
+                <div class="lg-use" data-ground="mint">
+                  <img class="lg-word" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                  <span class="lg-label">Green on mint</span>
+                </div>
+                <div class="lg-use" data-ground="photo">
+                  <img class="lg-word lg-on-fill" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                  <span class="lg-label">White on photo + scrim</span>
+                </div>
+                <div class="lg-use" data-ground="card">
+                  <img class="lg-word lg-ink" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                  <span class="lg-label">One color · print only</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="logo-space">
+              <div class="titles">
+                <h2 class="doc-h2">Clear space and minimum size</h2>
+                <p class="sub type-body-m">x = the width of the H stem. Keep at least 2x free on every side; nothing else enters that area.</p>
+              </div>
+              <div class="lg-split">
+                <div class="lg-card lg-clear-card">
+                  <div class="lg-clear">
+                    <img class="lg-word" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                    <span class="lg-clear-tag" data-edge="left">2x</span>
+                    <span class="lg-clear-tag" data-edge="right">2x</span>
+                    <span class="lg-clear-tag" data-edge="top">2x</span>
+                    <span class="lg-clear-tag" data-edge="bottom">2x</span>
+                    <span class="lg-stem" aria-hidden="true"></span>
+                    <span class="lg-stem-label">x</span>
+                  </div>
+                </div>
+                <div class="lg-card lg-card-tight">
+                  <span class="kicker quiet">Minimum size · actual pixels</span>
+                  <div class="lg-mins">
+                    <div class="lg-min">
+                      <img class="lg-word" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                      <span class="lg-meta">Wordmark<br>80 px · 20 mm</span>
+                    </div>
+                    <div class="lg-min">
+                      <img class="lg-symbol" src="../media/type=short,%20color=brand.svg" alt="H">
+                      <span class="lg-meta">Symbol<br>20 px · 6 mm</span>
+                    </div>
+                    <div class="lg-min">
+                      <div class="lg-favicon"><img class="lg-on-fill" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                      <span class="lg-meta">Favicon<br>16 px tile</span>
+                    </div>
+                  </div>
+                  <span class="lg-caption lg-rule">Below 80 px wide, switch from the wordmark to the symbol. Below 24 px, put the symbol on a green tile so it stays readable.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="logo-ios">
+              <div class="titles">
+                <h2 class="doc-h2">App icon · iOS</h2>
+                <p class="sub type-body-m">One 1024 × 1024 square with no transparency and no rounded corners; iOS applies the mask. The symbol fills about 56% of the height. Since iOS 18, also supply dark and tinted versions.</p>
+              </div>
+              <div class="lg-ios-grid">
+                <div class="lg-card lg-card-tight">
+                  <span class="kicker quiet">Light · dark · tinted</span>
+                  <div class="lg-specimens">
+                    <div class="lg-specimen">
+                      <div class="lg-app" data-tone="light"><img class="lg-on-fill" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                      <span class="lg-meta">Light</span>
+                    </div>
+                    <div class="lg-specimen">
+                      <div class="lg-app" data-tone="dark"><img class="lg-bright" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                      <span class="lg-meta">Dark</span>
+                    </div>
+                    <div class="lg-specimen">
+                      <div class="lg-app" data-tone="tinted"><img class="lg-on-fill lg-dim" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                      <span class="lg-meta">Tinted (gray, system colors it)</span>
+                    </div>
+                  </div>
+                  <span class="kicker quiet">Export sizes</span>
+                  <div class="lg-exports" data-logo="exports"></div>
+                </div>
+                <div class="lg-home">
+                  <span class="kicker quiet">On the home screen</span>
+                  <div class="lg-home-grid" data-logo="home"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="logo-android">
+              <div class="titles">
+                <h2 class="doc-h2">App icon · Android</h2>
+                <p class="sub type-body-m">Adaptive icon: a 108 dp foreground layer (the symbol) over a green background layer. Keep the symbol inside the 66 dp safe circle, because launchers crop to different shapes. Add a monochrome layer for themed icons.</p>
+              </div>
+              <div class="lg-android">
+                <div class="lg-card lg-card-tight lg-anatomy-card">
+                  <span class="kicker quiet">Anatomy · 108 dp</span>
+                  <div class="lg-anatomy">
+                    <span class="lg-visible" aria-hidden="true"></span>
+                    <span class="lg-safe" aria-hidden="true"></span>
+                    <img class="lg-on-fill" src="../media/type=short,%20color=brand.svg" alt="">
+                  </div>
+                  <div class="lg-legend">
+                    <span><i class="lg-key" aria-hidden="true"></i>108 dp layer</span>
+                    <span><i class="lg-key lg-key-dash" aria-hidden="true"></i>72 dp visible</span>
+                    <span><i class="lg-key lg-key-safe" aria-hidden="true"></i>66 dp safe</span>
+                  </div>
+                </div>
+                <div class="lg-card lg-card-tight">
+                  <span class="kicker quiet">Launcher masks</span>
+                  <div class="lg-masks" data-logo="masks"></div>
+                  <span class="kicker quiet">Themed (Material You) · Play Store</span>
+                  <div class="lg-themes">
+                    <div class="lg-theme" data-tone="light">
+                      <div class="lg-mask"><img class="lg-ink" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                      <span class="lg-meta">Light theme</span>
+                    </div>
+                    <div class="lg-theme" data-tone="dark">
+                      <div class="lg-mask"><img src="../media/type=short,%20color=brand.svg" alt=""></div>
+                      <span class="lg-meta">Dark theme</span>
+                    </div>
+                    <div class="lg-theme">
+                      <div class="lg-play"><img class="lg-on-fill" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                      <span class="lg-meta">Play 512 × 512</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="logo-web">
+              <div class="titles">
+                <h2 class="doc-h2">Web</h2>
+                <p class="sub type-body-m">Favicon set, home-screen icon for iPhone, PWA icon and link preview image.</p>
+              </div>
+              <div class="lg-web">
+                <div class="lg-card lg-card-tight">
+                  <span class="kicker quiet">Browser tab</span>
+                  <div class="lg-browser">
+                    <div class="lg-tabs">
+                      <div class="lg-tab">
+                        <div class="lg-favicon"><img class="lg-on-fill" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                        <span>Hala Business · Dashboard</span>
+                        <i aria-hidden="true">×</i>
+                      </div>
+                      <div class="lg-tab-idle"><span class="lg-idle-mark" aria-hidden="true"></span>Inbox</div>
+                    </div>
+                    <div class="lg-omnibox"><span>business.hala.com/dashboard</span></div>
+                  </div>
+                  <span class="kicker quiet">Favicon set</span>
+                  <div class="lg-favs" data-logo="favs"></div>
+                </div>
+                <div class="lg-card lg-card-tight">
+                  <span class="kicker quiet">Link preview · 1200 × 630</span>
+                  <div class="lg-preview">
+                    <div class="lg-og">
+                      <img class="lg-word lg-on-fill" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                    </div>
+                    <div class="lg-og-copy">
+                      <span class="lg-meta">business.hala.com</span>
+                      <strong>Hala Business</strong>
+                    </div>
+                  </div>
+                  <span class="lg-caption">Logo centered, 38% of the width, inside the middle 80% so platforms that crop to square still show it.</span>
+                </div>
+              </div>
+              <div class="lg-card lg-product">
+                <span class="kicker quiet">In the product · web header and sidebar</span>
+                <div class="lg-header">
+                  <img class="lg-word" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                  <div class="lg-links"><span>Accounts</span><span>Cards</span><span>POS</span><span>Pricing</span></div>
+                  <span class="lg-account">Open account</span>
+                </div>
+                <div class="lg-sides">
+                  <div class="lg-side">
+                    <img class="lg-word" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                    <span class="lg-side-slot" aria-hidden="true"></span>
+                  </div>
+                  <div class="lg-rail">
+                    <img src="../media/type=short,%20color=brand.svg" alt="H">
+                  </div>
+                  <span class="lg-caption">Header: wordmark 24 px high, left-aligned, links to home. Sidebar expanded: wordmark 22 px. Collapsed: symbol 28 px.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="logo-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile app</h2>
+                <p class="sub type-body-m">Launch screen and logo placement inside the app. The logo is not repeated on every screen; the app icon already says who we are.</p>
+              </div>
+              <div class="lg-mobile">
+                <div class="lg-phones">
+                  <div class="lg-phone-col">
+                    <div class="lg-phone" data-tone="light"><img class="lg-on-fill" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                    <span class="lg-meta">Launch · light</span>
+                  </div>
+                  <div class="lg-phone-col">
+                    <div class="lg-phone" data-tone="dark"><img class="lg-bright" src="../media/type=short,%20color=brand.svg" alt=""></div>
+                    <span class="lg-meta">Launch · dark</span>
+                  </div>
+                </div>
+                <div class="lg-stack">
+                  <div class="lg-card lg-card-tight">
+                    <span class="kicker quiet">Sign-in · wordmark 32 px</span>
+                    <div class="lg-signin">
+                      <img class="lg-word" src="../media/type=full,%20color=brand.svg" alt="HALA">
+                      <span>Business banking</span>
+                    </div>
+                  </div>
+                  <div class="lg-card lg-card-tight">
+                    <span class="kicker quiet">Home header · symbol 28 px</span>
+                    <div class="lg-homebar">
+                      <img src="../media/type=short,%20color=brand.svg" alt="H">
+                      <div>
+                        <span class="lg-greet">Good morning</span>
+                        <strong>Khamis Arabia</strong>
+                      </div>
+                      <span class="lg-avatar" aria-hidden="true"></span>
+                    </div>
+                    <span class="lg-caption">Launch screen: symbol only, 64 pt, centered. No loading text or tagline. It should look like the first frame of the app.</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="logo-dont">
+              <div class="titles">
+                <h2 class="doc-h2">Don't</h2>
+                <p class="sub type-body-m">Always use the supplied files. Never redraw, retype or edit the logo.</p>
+              </div>
+              <div class="lg-donts" data-logo="donts"></div>
+            </section>
+
+            <section class="wrap" id="logo-files">
+              <div class="titles">
+                <h2 class="doc-h2">Files to export</h2>
+                <p class="sub type-body-m">Give developers this set. SVG wherever the platform accepts it.</p>
+              </div>
+              <div class="lg-files">
+                <div class="lg-file-head"><span>File</span><span>Size</span><span>Format</span><span>Notes</span></div>
+                <div data-logo="files"></div>
+              </div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="button" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Buttons</h1>
+            <p class="lede type-body-l">One button system for web and mobile. Pills everywhere, IBM Plex Sans labels, and one gradient primary per screen. The default buttons on this page respond to hover, press and keyboard focus.</p>
+          </header>
+          <main>
+            <section class="wrap" id="button-sizes">
+              <div class="titles">
+                <h2 class="doc-h2">Sizes</h2>
+                <p class="sub type-body-m">Large is the mobile default. Web forms use Medium; dashboard toolbars and tables use Small and X-small.</p>
+              </div>
+              <div class="btn-sheet" data-button="sizes"></div>
+            </section>
+
+            <section class="wrap" id="button-states">
+              <div class="titles">
+                <h2 class="doc-h2">Variants and states</h2>
+                <p class="sub type-body-m">Shown at Large. Every size uses the same colors per state.</p>
+              </div>
+              <div class="btn-state-head">
+                <span></span>
+                <span>Default</span>
+                <span>Hover</span>
+                <span>Pressed</span>
+                <span>Focus</span>
+                <span>Loading</span>
+                <span>Disabled</span>
+              </div>
+              <div class="btn-variants" data-button="variants"></div>
+              <div class="btn-specs" data-button="specs"></div>
+            </section>
+
+            <section class="wrap" id="button-arrow">
+              <div class="titles">
+                <h2 class="doc-h2">Arrow button</h2>
+                <p class="sub type-body-m">Icon only. Moves the user to the next or previous step in onboarding and multi-step flows. Always add an aria-label: "Next step" or "Back".</p>
+              </div>
+              <div class="btn-panels">
+                <div class="btn-panel">
+                  <span class="kicker quiet">Shapes · sizes</span>
+                  <div class="btn-cluster" data-button="arrow-shapes"></div>
+                </div>
+                <div class="btn-panel">
+                  <span class="kicker quiet">Variants · direction</span>
+                  <div class="btn-cluster" data-button="arrow-variants"></div>
+                </div>
+              </div>
+              <div class="btn-panel">
+                <span class="kicker quiet">States · wide 120 × 54</span>
+                <div class="btn-arrow-states" data-button="arrow-states"></div>
+              </div>
+            </section>
+
+            <section class="wrap" id="button-dashboard">
+              <div class="titles">
+                <h2 class="doc-h2">Small buttons · web dashboard</h2>
+                <p class="sub type-body-m">Toolbars, card headers and table rows in Hala Dashboard WEB.</p>
+              </div>
+              <div class="btn-split">
+                <div class="btn-panel btn-block">
+                  <span class="kicker quiet">Toolbar · S 36</span>
+                  <div class="btn-row" data-button="toolbar"></div>
+                  <span class="kicker quiet">Segmented · range</span>
+                  <div class="btn-track" data-button="ranges"></div>
+                </div>
+                <div class="btn-panel btn-block">
+                  <span class="kicker quiet">Inline · XS 28</span>
+                  <div class="btn-row" data-button="inline"></div>
+                  <span class="kicker quiet">Icon buttons · 32</span>
+                  <div class="btn-row" data-button="icon-buttons"></div>
+                  <span class="kicker quiet">Filter chips</span>
+                  <div class="btn-row" data-button="chips"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="button-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Small buttons · mobile</h2>
+                <p class="sub type-body-m">The visible button can be smaller, but the tap area is never under 44 × 44.</p>
+              </div>
+              <div class="btn-split">
+                <div class="btn-panel btn-block">
+                  <span class="kicker quiet">Quick actions · 56</span>
+                  <div class="btn-quick" data-button="quick"></div>
+                  <span class="kicker quiet">Top bar · 40</span>
+                  <div class="btn-row" data-button="topbar"></div>
+                </div>
+                <div class="btn-panel btn-block">
+                  <span class="kicker quiet">Amount chips · 36</span>
+                  <div class="btn-row" data-button="amounts"></div>
+                  <span class="kicker quiet">Inline · 32</span>
+                  <div class="btn-row" data-button="mobile-inline"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="button-usage">
+              <div class="titles">
+                <h2 class="doc-h2">Usage</h2>
+              </div>
+              <div class="btn-rules" data-button="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="button-groups" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Button groups</h1>
+            <p class="lede type-body-l">Related buttons shown together: switching views, picking one or several options, and pairing actions. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="button-groups-guide">
+              <div class="titles">
+                <h2 class="doc-h2">Which group to use</h2>
+                <p class="sub type-body-m">They look alike but behave differently. Choose by what a tap does.</p>
+              </div>
+              <div class="grp-guide" data-button-groups="guide"></div>
+            </section>
+
+            <section class="wrap" id="button-groups-segment">
+              <div class="titles">
+                <h2 class="doc-h2">Segmented control</h2>
+                <p class="sub type-body-m">Pick one of 2–5 views of the same content. The selected segment is a white pill that slides on a mint-gray track. It switches immediately; there is no Apply.</p>
+              </div>
+              <div class="grp-sheet" data-button-groups="sizes"></div>
+              <div class="grp-states" data-button-groups="states"></div>
+            </section>
+
+            <section class="wrap" id="button-groups-chips">
+              <div class="titles">
+                <h2 class="doc-h2">Toggle and chip groups</h2>
+                <p class="sub type-body-m">For choosing values, not views. Chips wrap onto new lines; toggles stay on one line.</p>
+              </div>
+              <div class="grp-grid">
+                <div class="grp-panel">
+                  <div class="grp-title">
+                    <span class="grp-kicker">Single choice · amount chips</span>
+                    <span class="grp-live">Live</span>
+                  </div>
+                  <div class="grp-limit">
+                    <span class="grp-quiet">Monthly card limit</span>
+                    <span class="grp-amount" data-button-groups="amount-value">SAR 10,000</span>
+                  </div>
+                  <div data-button-groups="amounts"></div>
+                </div>
+                <div class="grp-panel">
+                  <div class="grp-title">
+                    <span class="grp-kicker">Multi choice · filter chips</span>
+                    <span class="grp-live">Live</span>
+                  </div>
+                  <span class="grp-quiet">Payment methods · <span data-button-groups="filter-count">2 selected</span></span>
+                  <div data-button-groups="filters"></div>
+                </div>
+                <div class="grp-panel">
+                  <div class="grp-title">
+                    <span class="grp-kicker">Icon toggles · view and chart</span>
+                    <span class="grp-live">Live</span>
+                  </div>
+                  <div class="grp-icon-row">
+                    <div data-button-groups="views"></div>
+                    <span class="grp-quiet" data-button-groups="view-label">Bar chart</span>
+                  </div>
+                  <div class="grp-chart" data-button-groups="chart" data-view="bar"></div>
+                  <span class="grp-hint">Icon-only groups always have a tooltip and aria-label.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="button-groups-attached">
+              <div class="titles">
+                <h2 class="doc-h2">Attached buttons and split button</h2>
+                <p class="sub type-body-m">Outline buttons that share borders. Use them in toolbars and table headers. A split button puts the main action and its alternatives in one control.</p>
+              </div>
+              <div class="grp-grid">
+                <div class="grp-panel" data-gap="loose">
+                  <span class="grp-kicker">Attached · toolbar</span>
+                  <div data-button-groups="toolbar"></div>
+                  <div data-button-groups="pager"></div>
+                  <span class="grp-hint">Max 3 buttons with labels, 5 icon-only. Destructive is last and red. More than that: use a "More" menu.</span>
+                </div>
+                <div class="grp-panel" data-gap="loose" data-tall="true">
+                  <div class="grp-title">
+                    <span class="grp-kicker">Split button · export</span>
+                    <span class="grp-live">Live</span>
+                  </div>
+                  <div class="grp-splits" data-button-groups="split"></div>
+                  <span class="grp-hint" data-button-groups="split-message"></span>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="button-groups-pairs">
+              <div class="titles">
+                <h2 class="doc-h2">Action pairs · web and mobile</h2>
+                <p class="sub type-body-m">On web the primary is on the right, where the eye ends. On mobile the buttons stack full width with the primary on top, within thumb reach.</p>
+              </div>
+              <div class="grp-columns">
+                <div class="grp-panel">
+                  <span class="grp-kicker">Web · dialog, drawer, form footer</span>
+                  <div class="grp-pair-list" data-button-groups="pairs"></div>
+                </div>
+                <div class="grp-panel">
+                  <span class="grp-kicker">Mobile · bottom of screen</span>
+                  <div class="grp-phone">
+                    <span class="grp-phone-title">Review transfer</span>
+                    <div class="grp-summary">
+                      <div class="grp-summary-row"><span>To</span><span>Nour Trading</span></div>
+                      <div class="grp-summary-row"><span>Amount</span><span class="grp-mono">25,000.00</span></div>
+                    </div>
+                    <span class="grp-spacer" aria-hidden="true"></span>
+                    <div data-button-groups="mobile-pair"></div>
+                  </div>
+                  <span class="grp-hint">Primary 52 pt, secondary as a 48 pt text button. Gap 10 pt. 16 pt side margins, above the home indicator.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="button-groups-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · segmented and split</h2>
+                <p class="sub type-body-m">Segments fill the width with equal sizes. On mobile, a split button's extra options open in an action sheet.</p>
+              </div>
+              <div class="grp-grid">
+                <div class="grp-panel">
+                  <div class="grp-title">
+                    <span class="grp-kicker">Full-width segmented</span>
+                    <span class="grp-live">Live</span>
+                  </div>
+                  <div class="grp-phone">
+                    <span class="grp-phone-title" data-size="l">New transfer</span>
+                    <div data-button-groups="mobile-segment"></div>
+                    <div class="grp-note">
+                      <strong data-button-groups="transfer-title">To any Saudi bank</strong>
+                      <span data-button-groups="transfer-copy">Arrives within minutes via sarie.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="grp-panel">
+                  <div class="grp-title">
+                    <span class="grp-kicker">Split → action sheet</span>
+                    <span class="grp-live">Live</span>
+                  </div>
+                  <div class="grp-phone" data-frame="sheet">
+                    <span class="grp-phone-title" data-size="l">Statement</span>
+                    <span class="grp-quiet">September 2026 · Main account</span>
+                    <div data-button-groups="sheet"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="button-groups-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div class="grp-rules" data-button-groups="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="selection" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Selection controls</h1>
+            <p class="lede type-body-l">Checkboxes, radios, toggles, selection cards, segmented controls and chips. One green for on, one ink for focus. Every example with a Live tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="selection-states">
+              <div class="titles">
+                <h2 class="doc-h2">States</h2>
+                <p class="sub type-body-m">The control is 18 px. The tap area is the whole row, at least 44 px high.</p>
+              </div>
+              <div class="sel-head">
+                <span></span>
+                <span>Default</span>
+                <span>Hover</span>
+                <span>Pressed</span>
+                <span>Focus</span>
+                <span>Disabled</span>
+                <span>Error</span>
+              </div>
+              <div data-selection="matrix"></div>
+              <div class="sel-specs" data-selection="specs"></div>
+            </section>
+
+            <section class="wrap" id="selection-checkbox">
+              <div class="titles">
+                <h2 class="doc-h2">Checkbox</h2>
+                <p class="sub type-body-m">For independent choices, and for agreeing to terms. A parent shows mixed when only some children are on.</p>
+              </div>
+              <div class="sel-split">
+                <div class="sel-panel">
+                  <div class="sel-title"><span class="sel-kicker">Group with parent</span><span class="sel-live">Live</span></div>
+                  <div class="sel-list" data-selection="tree"></div>
+                </div>
+                <div class="sel-panel" data-selection="terms"></div>
+              </div>
+            </section>
+
+            <section class="wrap" id="selection-radio">
+              <div class="titles">
+                <h2 class="doc-h2">Radio</h2>
+                <p class="sub type-body-m">One choice from 2–5 options that all need to be visible. More than 5: use a dropdown. Always preselect a safe default.</p>
+              </div>
+              <div class="sel-split">
+                <div class="sel-panel">
+                  <div class="sel-title"><span class="sel-kicker">List · settlement schedule</span><span class="sel-live">Live</span></div>
+                  <div class="sel-list" data-selection="radios"></div>
+                </div>
+                <div class="sel-panel">
+                  <div class="sel-title"><span class="sel-kicker">Inline · horizontal</span><span class="sel-live">Live</span></div>
+                  <span class="sel-kicker">Card type</span>
+                  <div class="sel-inline" data-selection="inline"></div>
+                  <span class="sel-kicker">Who pays the fee?</span>
+                  <div class="sel-inline" data-selection="pay"></div>
+                  <p class="sel-error">Choose who pays the SAR 5 fee.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="selection-toggle">
+              <div class="titles">
+                <h2 class="doc-h2">Toggle</h2>
+                <p class="sub type-body-m">For settings that apply immediately, with no Save button. If the change needs a server call, show loading on the knob. If it is risky, confirm first.</p>
+              </div>
+              <div class="sel-split">
+                <div class="sel-panel">
+                  <div class="sel-title"><span class="sel-kicker">Card controls</span><span class="sel-live">Live</span></div>
+                  <div class="sel-list" data-selection="toggles"></div>
+                </div>
+                <div class="sel-panel">
+                  <span class="sel-kicker">Sizes</span>
+                  <div class="sel-sizes" data-selection="switch-sizes"></div>
+                  <div data-selection="confirm"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="selection-cards">
+              <div class="titles">
+                <h2 class="doc-h2">Selection cards</h2>
+                <p class="sub type-body-m">For choices that need a description, a price, or a picture. The whole card is the tap target. The corner control tells single from multi choice.</p>
+              </div>
+              <div class="sel-panel">
+                <div class="sel-title"><span class="sel-kicker">Card states</span><span class="sel-help">radius 14</span></div>
+                <div class="sel-states" data-selection="card-states"></div>
+              </div>
+              <div class="sel-panel">
+                <div class="sel-title"><span class="sel-kicker">Image cards · single choice · business type</span><span class="sel-live">Live</span></div>
+                <div class="sel-photos" data-selection="biz"></div>
+              </div>
+              <div class="sel-split">
+                <div class="sel-panel">
+                  <div class="sel-title"><span class="sel-kicker">Plan cards · single choice</span><span class="sel-live">Live</span></div>
+                  <div class="sel-list" data-selection="plans"></div>
+                </div>
+                <div class="sel-panel">
+                  <div class="sel-title"><span class="sel-kicker">Tiles · multi choice</span><span class="sel-live">Live</span></div>
+                  <div class="sel-tiles" data-selection="tiles"></div>
+                  <p class="sel-help" data-selection="tiles-count"></p>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="selection-segmented">
+              <div class="titles">
+                <h2 class="doc-h2">Segmented control and chips</h2>
+                <p class="sub type-body-m">Segmented switches a view, with 2–4 options. Choice chips pick one value. Filter chips toggle many.</p>
+              </div>
+              <div class="sel-split">
+                <div class="sel-panel">
+                  <div class="sel-title"><span class="sel-kicker">Segmented · L 44 / S 32</span><span class="sel-live">Live</span></div>
+                  <div class="sel-track" data-selection="seg-l"></div>
+                  <div class="sel-track" data-selection="seg-s"></div>
+                </div>
+                <div class="sel-panel">
+                  <div class="sel-title"><span class="sel-kicker">Choice chips · one</span><span class="sel-live">Live</span></div>
+                  <div class="sel-row" data-selection="choice"></div>
+                  <span class="sel-kicker">Filter chips · many</span>
+                  <div class="sel-row" data-selection="filters"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="wrap" id="selection-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile app · iOS and Android</h2>
+                <p class="sub type-body-m">Same tokens, bigger targets. Controls sit on the right of full-width rows. The whole row is tappable, and longer choices open in a sheet.</p>
+              </div>
+              <div class="sel-phones">
+                <div class="sel-device">
+                  <div class="sel-phone" data-selection="mobile-toggles"></div>
+                  <span class="sel-caption">Card settings · toggles L 52×32</span>
+                </div>
+                <div class="sel-device">
+                  <div class="sel-phone sel-list" data-selection="sheet"></div>
+                  <span class="sel-caption">Bottom sheet · radio list</span>
+                </div>
+                <div class="sel-device">
+                  <div class="sel-phone" data-selection="mobile-cards"></div>
+                  <div class="sel-phone">
+                    <span class="sel-kicker">Spending limit</span>
+                    <div class="sel-row" data-selection="limits"></div>
+                  </div>
+                  <span class="sel-caption">Selection cards · single choice</span>
+                </div>
+                <div class="sel-device">
+                  <div class="sel-phone">
+                    <div class="sel-title"><span class="sel-kicker">Filters</span><button type="button" class="button" data-variant="ghost" data-size="sm" data-selection="reset">Reset</button></div>
+                    <span class="sel-kicker">Status</span>
+                    <div class="sel-row" data-selection="status"></div>
+                    <span class="sel-kicker">Branch</span>
+                    <div class="sel-list" data-selection="branches"></div>
+                    <div data-selection="results"></div>
+                  </div>
+                  <span class="sel-caption">Filter sheet · checkboxes and chips</span>
+                </div>
+              </div>
+              <div class="sel-notes" data-selection="notes"></div>
+            </section>
+
+            <section class="wrap" id="selection-usage">
+              <div class="titles">
+                <h2 class="doc-h2">Which control to use</h2>
+              </div>
+              <div class="sel-rules" data-selection="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="feedback" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Feedback</h1>
+            <p class="lede type-body-l">Alerts, notifications, toasts and snackbars. Pick by how urgent the message is and whether the user has to act. Every example with a Live tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="feedback-guide">
+              <div class="titles">
+                <h2 class="doc-h2">Which one to use</h2>
+                <p class="sub type-body-m">Pick by how urgent the message is and whether the user has to act.</p>
+              </div>
+              <div class="fb-sheet" data-feedback="guide"></div>
+            </section>
+            <section class="wrap" id="feedback-tones">
+              <div class="titles">
+                <h2 class="doc-h2">Tones</h2>
+                <p class="sub type-body-m">Four status tones plus neutral. The icon carries the meaning too, so color is never the only signal.</p>
+              </div>
+              <div class="fb-tones" data-feedback="tones"></div>
+            </section>
+            <section class="wrap" id="feedback-alerts">
+              <div class="titles">
+                <h2 class="doc-h2">Inline alerts</h2>
+                <p class="sub type-body-m">Sit in the page next to what they describe. They stay until the problem is fixed or the user closes them.</p>
+              </div>
+              <div class="fb-title">
+                <span class="fb-live">Live</span>
+                <span data-feedback="reset-alerts"></span>
+              </div>
+              <div class="fb-cols" data-feedback="alert-cols"></div>
+              <div class="fb-alerts" data-feedback="alerts"></div>
+              <div class="fb-panel">
+                <span class="fb-kicker">Compact · one line, inside cards and forms</span>
+                <div class="fb-compacts" data-feedback="compact"></div>
+              </div>
+              <div class="fb-panel">
+                <span class="fb-kicker">Page banner · full width, above the page header</span>
+                <div data-feedback="banners"></div>
+              </div>
+            </section>
+            <section class="wrap" id="feedback-notifications">
+              <div class="titles">
+                <h2 class="doc-h2">Notifications · web</h2>
+                <p class="sub type-body-m">Tasks that need action. They stay until the user closes them or acts. Maximum 3 visible; the rest go to the notification center.</p>
+              </div>
+              <div class="fb-split">
+                <div class="fb-panel">
+                  <div class="fb-title">
+                    <span class="fb-live">Live · stack</span>
+                    <span class="fb-row"><span data-feedback="add-task"></span><span data-feedback="clear-tasks"></span></span>
+                  </div>
+                  <div class="fb-stage" data-feedback="stack"></div>
+                </div>
+                <div class="fb-panel">
+                  <span class="fb-live">Live · notification center</span>
+                  <div class="fb-center" data-feedback="center"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="feedback-toasts">
+              <div class="titles">
+                <h2 class="doc-h2">Toasts · web</h2>
+                <p class="sub type-body-m">Short confirmation after the user does something. Bottom-right, auto-close after 4 seconds, or 6 seconds with an action. Errors stay until closed. Pausing on hover keeps them open while being read.</p>
+              </div>
+              <div class="fb-panel">
+                <div class="fb-title">
+                  <span class="fb-live">Live</span>
+                  <div class="fb-row" data-feedback="toast-buttons"></div>
+                </div>
+                <div class="fb-toast-stage">
+                  <div class="fb-placeholder">
+                    <span>Page content</span>
+                    <span class="fb-line"></span>
+                    <span class="fb-line" data-short="true"></span>
+                  </div>
+                  <div class="fb-toasts" data-feedback="toasts"></div>
+                </div>
+                <div class="fb-static" data-feedback="toast-static"></div>
+              </div>
+            </section>
+            <section class="wrap" id="feedback-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile app · iOS and Android</h2>
+                <p class="sub type-body-m">Snackbars replace toasts: dark, one line, at the bottom of the screen, with an optional Undo. In-app banners slide in from the top for things that happen in the background.</p>
+              </div>
+              <div class="fb-phones">
+                <div class="fb-panel">
+                  <div class="fb-title">
+                    <span class="fb-kicker">Snackbar</span>
+                    <span class="fb-live">Live</span>
+                  </div>
+                  <div class="fb-list" data-feedback="people"></div>
+                  <div data-feedback="snack"></div>
+                </div>
+                <div class="fb-panel">
+                  <div class="fb-title">
+                    <span class="fb-kicker">In-app banner · top</span>
+                    <span data-feedback="simulate"></span>
+                  </div>
+                  <div data-feedback="push"></div>
+                  <p class="fb-help">Auto-hides after 4 seconds. Swipe up to dismiss, tap to open. The same design is used for push notifications on the lock screen.</p>
+                  <span class="fb-kicker">Inline alert · mobile</span>
+                  <div data-feedback="mobile-alerts"></div>
+                </div>
+                <div class="fb-panel">
+                  <div class="fb-title">
+                    <span class="fb-kicker">Inbox · swipe to act</span>
+                    <span class="fb-live">Live</span>
+                  </div>
+                  <div class="fb-inbox" data-feedback="inbox"></div>
+                  <p class="fb-help">Tap a row to reveal Done. Tap again to clear it.</p>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="feedback-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div class="fb-rules" data-feedback="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="badges" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Badges</h1>
+            <p class="lede type-body-l">Small labels for status, counts, trends and features. They are not buttons: badges don't react on hover unless they are removable tags. Every example with a Live tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="badges-sizes">
+              <div class="titles">
+                <h2 class="doc-h2">Sizes</h2>
+                <p class="sub type-body-m">Always pill-shaped. Text is sentence case, except the short feature labels (NEW, BETA), which use IBM Plex Mono caps.</p>
+              </div>
+              <div class="bd-sheet" data-badges="sizes"></div>
+            </section>
+            <section class="wrap" id="badges-status">
+              <div class="titles">
+                <h2 class="doc-h2">Status badges</h2>
+                <p class="sub type-body-m">One fixed color per status across web and mobile. Each status has its own icon or dot, so color is never the only signal.</p>
+              </div>
+              <div class="bd-cols" data-badges="status-cols"></div>
+              <div class="bd-sheet" data-badges="statuses"></div>
+            </section>
+            <section class="wrap" id="badges-counts">
+              <div class="titles">
+                <h2 class="doc-h2">Counters and dots</h2>
+                <p class="sub type-body-m">Counts show how many items need attention. Over 99 shows 99+. A dot means something new, without a number.</p>
+              </div>
+              <div class="bd-grid">
+                <div class="bd-panel">
+                  <div class="bd-title">
+                    <span class="bd-kicker">On icons and avatars</span>
+                    <span class="bd-live">Live</span>
+                  </div>
+                  <div data-badges="counters"></div>
+                  <div class="bd-captions">
+                    <span>Count · red</span>
+                    <span>New · dot</span>
+                    <span>Online</span>
+                    <span>Offline</span>
+                  </div>
+                </div>
+                <div class="bd-panel">
+                  <span class="bd-kicker">In navigation · sidebar and tab bar</span>
+                  <div class="bd-nav" data-badges="nav"></div>
+                  <div class="bd-tabs" data-badges="tabs"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="badges-feature">
+              <div class="titles">
+                <h2 class="doc-h2">Feature, trend and verification</h2>
+                <p class="sub type-body-m">Feature labels promote; trends compare with the previous period; verification shows trust.</p>
+              </div>
+              <div class="bd-grid">
+                <div class="bd-panel">
+                  <span class="bd-kicker">Feature labels</span>
+                  <div class="bd-row">
+                    <span class="badge" data-variant="feature" data-tone="brand">NEW</span>
+                    <span class="badge" data-variant="feature" data-tone="info">BETA</span>
+                    <span class="badge" data-variant="feature" data-tone="ink">PRO</span>
+                    <span class="badge" data-tone="brand">Recommended</span>
+                    <span class="badge" data-tone="brand">Save 20%</span>
+                    <span class="badge" data-variant="solid" data-tone="ink">Most popular</span>
+                    <span class="badge" data-variant="solid" data-tone="gradient">Included</span>
+                    <span class="badge" data-tone="neutral">Coming soon</span>
+                  </div>
+                </div>
+                <div class="bd-panel">
+                  <span class="bd-kicker">Trends · dashboard KPIs</span>
+                  <div class="bd-row" data-badges="trends"></div>
+                  <div class="bd-amount">SAR 184,320 <span data-badges="kpi-trend"></span></div>
+                  <span class="bd-kpi">POS sales · vs last 30 days</span>
+                </div>
+                <div class="bd-panel">
+                  <span class="bd-kicker">Verification</span>
+                  <div class="bd-row" data-badges="verify"></div>
+                  <div class="bd-company">
+                    <div>
+                      <strong>Khamis Arabia Trading Co</strong>
+                      <span>2346041544</span>
+                    </div>
+                    <span class="badge" data-variant="frosted" data-tone="neutral">Approved</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="badges-tags">
+              <div class="titles">
+                <h2 class="doc-h2">Tags and badges on cards</h2>
+                <p class="sub type-body-m">Tags can be removed (applied filters, team labels). On card art, badges use frosted white so they read on any color.</p>
+              </div>
+              <div class="bd-grid">
+                <div class="bd-panel">
+                  <div class="bd-title">
+                    <span class="bd-kicker">Removable tags · applied filters</span>
+                    <span class="bd-live">Live</span>
+                  </div>
+                  <div class="bd-row" data-badges="tags"></div>
+                  <span class="bd-kicker">Team labels</span>
+                  <div class="bd-row" data-badges="teams"></div>
+                </div>
+                <div class="bd-panel">
+                  <span class="bd-kicker">On card art</span>
+                  <div class="bd-cards">
+                    <div class="bd-art" data-art="brand">
+                      <span data-badges="art-active"></span>
+                      <b>•••• 4417</b>
+                    </div>
+                    <div class="bd-art" data-art="metal">
+                      <span data-badges="art-frozen"></span>
+                      <b>•••• 2086</b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="badges-context">
+              <div class="titles">
+                <h2 class="doc-h2">In context · web and mobile</h2>
+                <p class="sub type-body-m">Tables use the dot style to keep rows calm; mobile lists use the subtle badge under the amount.</p>
+              </div>
+              <div class="bd-split">
+                <div class="bd-panel">
+                  <div class="bd-title">
+                    <span class="bd-kicker">Web · transactions table</span>
+                    <span class="bd-live">Live · click a status</span>
+                  </div>
+                  <div class="bd-table-head">
+                    <span>Merchant</span>
+                    <span>Method</span>
+                    <span>Amount</span>
+                    <span>Status</span>
+                  </div>
+                  <div data-badges="table"></div>
+                </div>
+                <div class="bd-panel">
+                  <span class="bd-kicker">Mobile · activity list</span>
+                  <div data-badges="activity"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="badges-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile app · iOS and Android</h2>
+                <p class="sub type-body-m">Same badges, sized for touch screens: Large on detail screens, Small in list rows. Filter chips carry their own count.</p>
+              </div>
+              <div class="bd-phones">
+                <div class="bd-panel">
+                  <span class="bd-kicker">Transaction detail · large</span>
+                  <div class="bd-hero">
+                    <span class="bd-anchor">JB</span>
+                    <span>Jarir Bookstore</span>
+                    <span class="bd-amount">− 1,249.00 <span>SAR</span></span>
+                    <span data-badges="detail"></span>
+                  </div>
+                  <div class="bd-meta">
+                    <div class="bd-meta-row"><span>Card</span><span>Visa •• 4417 <span class="badge" data-tone="info" data-size="sm">Virtual</span></span></div>
+                    <div class="bd-meta-row"><span>Spent by</span><span>Omar Bakr <span class="badge" data-tone="scheduled" data-size="sm">Marketing</span></span></div>
+                    <div class="bd-meta-row"><span>Receipt</span><span class="badge" data-tone="warning" data-size="sm">Missing</span></div>
+                  </div>
+                  <div class="bd-row" data-badges="detail-picks"></div>
+                </div>
+                <div class="bd-panel">
+                  <div class="bd-title">
+                    <span class="bd-kicker">Filter chips with counts</span>
+                    <span class="bd-live">Live</span>
+                  </div>
+                  <div class="bd-chips" data-badges="chips"></div>
+                  <div data-badges="filtered"></div>
+                </div>
+                <div class="bd-panel">
+                  <span class="bd-kicker">Cards list</span>
+                  <div class="bd-card-row">
+                    <span class="bd-mini" data-art="brand"></span>
+                    <div class="bd-card-copy">
+                      <div><strong>Marketing team</strong></div>
+                      <span>•• 4417 · Virtual</span>
+                    </div>
+                    <span class="badge" data-variant="dot" data-tone="settled" data-size="sm">Active</span>
+                  </div>
+                  <div class="bd-card-row">
+                    <span class="bd-mini" data-art="metal"></span>
+                    <div class="bd-card-copy">
+                      <div><strong>Travel</strong></div>
+                      <span>•• 2086 · Physical</span>
+                    </div>
+                    <span class="badge" data-variant="dot" data-tone="frozen" data-size="sm">Frozen</span>
+                  </div>
+                  <div class="bd-card-row">
+                    <span class="bd-mini" data-art="ink"></span>
+                    <div class="bd-card-copy">
+                      <div><strong>Subscriptions</strong> <span class="badge" data-variant="feature" data-tone="brand" data-size="sm">NEW</span></div>
+                      <span>•• 9120 · Virtual</span>
+                    </div>
+                    <span class="badge" data-variant="dot" data-tone="pending" data-size="sm">Expires soon</span>
+                  </div>
+                  <div class="bd-profile">
+                    <span class="bd-anchor" data-art="info" data-badges="profile">AA</span>
+                    <div class="bd-copy">
+                      <div class="bd-row"><strong>Abdulaziz Ali</strong> <span class="badge" data-variant="feature" data-tone="ink" data-size="sm">PRO</span></div>
+                      <span>Verified account</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="badges-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div class="bd-rules" data-badges="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="inputs" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Inputs</h1>
+            <p class="lede type-body-l">Floating-label fields from the sign-up flow, extended to every state and input type. Web and mobile share the same field; dashboards use the compact sizes. Every example with a Live tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="inputs-anatomy">
+              <div class="titles">
+                <h2 class="doc-h2">Anatomy</h2>
+                <p class="sub type-body-m">The label sits inside the field as a placeholder and moves up when the field is focused or filled.</p>
+              </div>
+              <div class="in-anatomy" data-inputs="anatomy"></div>
+            </section>
+            <section class="wrap" id="inputs-states">
+              <div class="titles">
+                <h2 class="doc-h2">Text field states</h2>
+                <p class="sub type-body-m">The helper line is replaced by the error message, never shown together with it.</p>
+              </div>
+              <div class="in-states" data-inputs="states"></div>
+              <div data-inputs="live-name"></div>
+            </section>
+            <section class="wrap" id="inputs-password">
+              <div class="titles">
+                <h2 class="doc-h2">Password</h2>
+                <p class="sub type-body-m">Show/hide toggle, a 4-step strength meter and a live checklist of rules.</p>
+              </div>
+              <div class="in-pair" data-inputs="password"></div>
+            </section>
+            <section class="wrap" id="inputs-otp">
+              <div class="titles">
+                <h2 class="doc-h2">OTP code</h2>
+                <p class="sub type-body-m">Six boxes, numeric keyboard, auto-advance, backspace goes back, paste fills all. Submits on the sixth digit.</p>
+              </div>
+              <div class="in-pair in-otp-grid" data-inputs="otp"></div>
+            </section>
+            <section class="wrap" id="inputs-dropdowns">
+              <div class="titles">
+                <h2 class="doc-h2">Dropdowns</h2>
+                <p class="sub type-body-m">Select for short lists, a searchable combobox for long lists (banks, cities), multi-select for filters. On mobile all three open as a bottom sheet.</p>
+              </div>
+              <div class="in-drops" data-inputs="dropdowns"></div>
+            </section>
+            <section class="wrap" id="inputs-special">
+              <div class="titles">
+                <h2 class="doc-h2">Specialised fields</h2>
+                <p class="sub type-body-m">Formatted while typing so the value is easy to check. Numbers use IBM Plex Mono.</p>
+              </div>
+              <div class="in-special" data-inputs="special"></div>
+            </section>
+            <section class="wrap" id="inputs-compact">
+              <div class="titles">
+                <h2 class="doc-h2">Compact fields · web dashboard</h2>
+                <p class="sub type-body-m">No floating label; the context gives the meaning. Used in toolbars and table filters.</p>
+              </div>
+              <div data-inputs="compact"></div>
+            </section>
+            <section class="wrap" id="inputs-selection">
+              <div class="titles">
+                <h2 class="doc-h2">Selection controls</h2>
+                <p class="sub type-body-m">Visible boxes are 18 px; the tap area includes the label.</p>
+              </div>
+              <div class="in-choices" data-inputs="selection"></div>
+            </section>
+            <section class="wrap" id="inputs-usage">
+              <div class="titles">
+                <h2 class="doc-h2">Usage</h2>
+              </div>
+              <div class="in-rules" data-inputs="usage"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="accordions" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Accordions</h1>
+            <p class="lede type-body-l">Accordions show and hide sections of content so long pages stay scannable. The same component works on web and mobile; only the sizes change. Every example with a Live tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="accordions-anatomy">
+              <div class="titles">
+                <h2 class="doc-h2">Anatomy</h2>
+                <p class="sub type-body-m">The whole header row is the button. The chevron is on the right and turns 180° when the section opens.</p>
+              </div>
+              <div data-accordions="anatomy"></div>
+            </section>
+            <section class="wrap" id="accordions-states">
+              <div class="titles">
+                <h2 class="doc-h2">States</h2>
+                <p class="sub type-body-m">Header row states. Text and chevron colors stay readable in every state; only the background and ring change.</p>
+              </div>
+              <div class="ac-states" data-accordions="states"></div>
+            </section>
+            <section class="wrap" id="accordions-variants">
+              <div class="titles">
+                <h2 class="doc-h2">Variants · web</h2>
+                <p class="sub type-body-m">Three styles for three contexts. Pick one per page.</p>
+              </div>
+              <div class="ac-variants" data-accordions="variants"></div>
+            </section>
+            <section class="wrap" id="accordions-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">Same component with bigger touch targets: rows are at least 64 pt, text is 16 pt, and the content is padded 16 pt from the screen edge.</p>
+              </div>
+              <div class="ac-phones" data-accordions="mobile"></div>
+              <div class="ac-specs" data-accordions="mobile-specs"></div>
+            </section>
+            <section class="wrap" id="accordions-sizes">
+              <div class="titles">
+                <h2 class="doc-h2">Sizes</h2>
+                <p class="sub type-body-m">Web and mobile use the same parts at different sizes.</p>
+              </div>
+              <div class="ac-table" data-accordions="sizes"></div>
+            </section>
+            <section class="wrap" id="accordions-when">
+              <div class="titles">
+                <h2 class="doc-h2">When to use</h2>
+                <p class="sub type-body-m">Accordions hide content. Use them only when hiding helps people scan.</p>
+              </div>
+              <div class="ac-when" data-accordions="when"></div>
+              <div class="ac-rules" data-accordions="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="dividers" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Dividers and separators</h1>
+            <p class="lede type-body-l">Lines and gaps that group content. In Hala, space and white cards do most of the grouping; a line is added only when items sit close together on the same surface.</p>
+          </header>
+          <main>
+            <section class="wrap" id="dividers-hierarchy">
+              <div class="titles">
+                <h2 class="doc-h2">Hierarchy of separation</h2>
+                <p class="sub type-body-m">Use the lightest option that works. Go down the list only when the one above isn't enough.</p>
+              </div>
+              <div class="dv-cards" data-dividers="hierarchy"></div>
+            </section>
+            <section class="wrap" id="dividers-lines">
+              <div class="titles">
+                <h2 class="doc-h2">Line styles</h2>
+                <p class="sub type-body-m">Always 1 px (hairline on retina mobile). Color tokens follow the surface they sit on.</p>
+              </div>
+              <div class="dv-sheet" data-dividers="lines"></div>
+            </section>
+            <section class="wrap" id="dividers-inset">
+              <div class="titles">
+                <h2 class="doc-h2">Inset and full-bleed</h2>
+                <p class="sub type-body-m">In lists, the line starts where the text starts, so icons and avatars stay grouped with their row. Full-bleed lines separate sections, not rows.</p>
+              </div>
+              <div class="dv-cards" data-dividers="inset"></div>
+            </section>
+            <section class="wrap" id="dividers-labels">
+              <div class="titles">
+                <h2 class="doc-h2">Labelled and inline separators</h2>
+                <p class="sub type-body-m">A divider with text names what comes next. Inline separators split short facts on one line.</p>
+              </div>
+              <div class="dv-cards" data-dividers="labels"></div>
+            </section>
+            <section class="wrap" id="dividers-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">Grouped white blocks on a gray screen, with hairlines inside. Section captions replace full-width lines between groups.</p>
+              </div>
+              <div class="dv-cards" data-dividers="mobile"></div>
+            </section>
+            <section class="wrap" id="dividers-spacing">
+              <div class="titles">
+                <h2 class="doc-h2">Spacing scale between groups</h2>
+                <p class="sub type-body-m">When there is no line, the gap does the work. Keep these steps consistent on web and mobile.</p>
+              </div>
+              <div class="dv-sheet dv-sheet-scroll" data-dividers="spacing"></div>
+            </section>
+            <section class="wrap" id="dividers-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div class="dv-rules" data-dividers="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="command-menu" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Command menu</h1>
+            <p class="lede type-body-l">One search box for everything: go to a page, find a transaction or beneficiary, or start an action like a transfer. Open it with ⌘K on Mac or Ctrl K on Windows. On mobile it's the search on Home.</p>
+          </header>
+          <main>
+            <section class="wrap" id="command-menu-live">
+              <div class="section-head">
+                <div class="titles">
+                  <h2 class="doc-h2">Web · live</h2>
+                  <p class="sub type-body-m">Type to filter. ↑ ↓ to move, Enter to run, Esc to clear. Try "nour", "card" or "zzz".</p>
+                </div>
+                <div data-command="presets"></div>
+              </div>
+              <div data-command="stage"></div>
+            </section>
+            <section class="wrap" id="command-menu-states">
+              <div class="titles">
+                <h2 class="doc-h2">States</h2>
+                <p class="sub type-body-m">What the menu shows at each moment.</p>
+              </div>
+              <div data-command="states"></div>
+            </section>
+            <section class="wrap" id="command-menu-anatomy">
+              <div class="titles">
+                <h2 class="doc-h2">Anatomy and sizes · web</h2>
+              </div>
+              <div data-command="anatomy"></div>
+            </section>
+            <section class="wrap" id="command-menu-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">There are no shortcuts on mobile. The same search opens full screen from the Home search field, with suggestion chips instead of keyboard hints.</p>
+              </div>
+              <div data-command="mobile"></div>
+              <div data-command="mobile-specs"></div>
+            </section>
+            <section class="wrap" id="command-menu-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div data-command="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="date-pickers" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Date pickers</h1>
+            <p class="lede type-body-l">For scheduling transfers, filtering transactions and choosing statement periods. Dates show as DD/MM/YYYY, and weeks start on Sunday as in Saudi Arabia. Every example with a "Live" tag works; today is 15 Oct 2026.</p>
+          </header>
+          <main>
+            <section class="wrap" id="date-pickers-fields">
+              <div class="titles">
+                <h2 class="doc-h2">Field states</h2>
+                <p class="sub type-body-m">The date field uses the same 60 px floating-label input as the rest of Hala, with a calendar icon on the right. People can type the date or pick it.</p>
+              </div>
+              <div data-dates="fields"></div>
+            </section>
+            <section class="wrap" id="date-pickers-single">
+              <div class="titles">
+                <h2 class="doc-h2">Single date · web</h2>
+                <p class="sub type-body-m">Example: scheduling a transfer. Past dates and Fridays–Saturdays are disabled because banks don't process transfers then.</p>
+              </div>
+              <div data-dates="single"></div>
+            </section>
+            <section class="wrap" id="date-pickers-range">
+              <div class="titles">
+                <h2 class="doc-h2">Date range · web</h2>
+                <p class="sub type-body-m">For filters and statements. Presets come first, since most people want "This month". The first click sets the start, the second sets the end, and hovering previews the range.</p>
+              </div>
+              <div data-dates="range"></div>
+            </section>
+            <section class="wrap" id="date-pickers-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">Calendars open in a bottom sheet with 44 pt day cells. Dates far in the past, like a date of birth, use a wheel instead.</p>
+              </div>
+              <div data-dates="mobile"></div>
+            </section>
+            <section class="wrap" id="date-pickers-which">
+              <div class="titles">
+                <h2 class="doc-h2">Which picker to use</h2>
+              </div>
+              <div data-dates="which"></div>
+            </section>
+            <section class="wrap" id="date-pickers-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div data-dates="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="overlays" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Modals, drawers and popups</h1>
+            <p class="lede type-body-l">Layers that appear above the page. Each one interrupts a different amount, so choosing the right one matters more than how it looks. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="overlays-which">
+              <div class="titles">
+                <h2 class="doc-h2">Which one to use</h2>
+                <p class="sub type-body-m">Start from the least interruptive option. Only block the page when the user must decide before doing anything else.</p>
+              </div>
+              <div data-overlays="guide"></div>
+            </section>
+            <section class="wrap" id="overlays-modal">
+              <div class="titles">
+                <h2 class="doc-h2">Modal dialog · web</h2>
+                <p class="sub type-body-m">Centered, with a dimmed page behind. For short focused tasks and decisions. Three widths; content longer than the screen scrolls between a fixed header and footer.</p>
+              </div>
+              <div data-overlays="modal"></div>
+            </section>
+            <section class="wrap" id="overlays-drawer">
+              <div class="titles">
+                <h2 class="doc-h2">Drawer · web</h2>
+                <p class="sub type-body-m">Slides in from the right, 480 px (640 px for editing). The page behind is dimmed lightly so the list stays readable. Closing with unsaved changes asks first.</p>
+              </div>
+              <div data-overlays="drawer"></div>
+            </section>
+            <section class="wrap" id="overlays-pops">
+              <div class="titles">
+                <h2 class="doc-h2">Popover, menu and tooltip · web</h2>
+                <p class="sub type-body-m">Anchored to the element that opened them. They don't dim the page and close when you click elsewhere.</p>
+              </div>
+              <div data-overlays="pops"></div>
+            </section>
+            <section class="wrap" id="overlays-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">Mobile replaces centered modals with sheets that rise from the bottom, within thumb reach. Centered dialogs are only for short alerts.</p>
+              </div>
+              <div data-overlays="mobile"></div>
+            </section>
+            <section class="wrap" id="overlays-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+                <p class="sub type-body-m">Behaviour and accessibility that apply to every overlay.</p>
+              </div>
+              <div data-overlays="rules"></div>
+            </section>
+          </main>
+        </article>
+      </div>
+      <aside class="docs-toc" data-toc hidden>
+        <p class="docs-toc-label">On this page</p>
+        <nav data-toc-list aria-label="On this page"></nav>
+      </aside>
+    </div>
+  </div>
+  <script src="../node_modules/lucide/dist/umd/lucide.js"></script>
+  <script src="foundations.js"></script>
+  <script src="icons.js"></script>
+  <script src="logo.js"></script>
+  <script src="../components/button/button.js"></script>
+  <script src="../components/button-groups/button-groups.js"></script>
+  <script src="../components/selection/selection.js"></script>
+  <script src="../components/feedback/feedback.js"></script>
+  <script src="../components/badges/badges.js"></script>
+  <script src="../components/inputs/inputs.js"></script>
+  <script src="../components/accordions/accordions.js"></script>
+  <script src="../components/dividers/dividers.js"></script>
+  <script src="../components/command-menu/command-menu.js"></script>
+  <script src="../components/date-pickers/date-pickers.js"></script>
+  <script src="../components/overlays/overlays.js"></script>
+  <script src="buttons.js"></script>
+  <script src="button-groups.js"></script>
+  <script src="selection.js"></script>
+  <script src="feedback.js"></script>
+  <script src="badges.js"></script>
+  <script src="inputs.js"></script>
+  <script src="accordions.js"></script>
+  <script src="dividers.js"></script>
+  <script src="command-menu.js"></script>
+  <script src="date-pickers.js"></script>
+  <script src="overlays.js"></script>
+  <script src="introduction.js"></script>
+  <script src="how-to-use.js"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

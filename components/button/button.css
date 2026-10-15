@@ -1,0 +1,478 @@
+/* Button. Every value comes from styles/foundations.css. */
+
+.button {
+  --button-height: var(--size-control-web);
+  --button-pad: var(--pad-button-x);
+  --button-font: var(--type-label-m-size);
+  --button-weight: var(--font-weight-semibold);
+  --button-icon: var(--icon-default);
+  --button-gap: var(--gap-button-icon);
+
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--button-gap);
+  height: var(--button-height);
+  margin: 0;
+  padding: 0 var(--button-pad);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-primary);
+  color: var(--text-on-brand);
+  box-shadow: var(--shadow-brand);
+  font-family: var(--font-sans);
+  font-size: var(--button-font);
+  font-weight: var(--button-weight);
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background var(--motion-fast) var(--ease-out),
+    border-color var(--motion-fast) var(--ease-out),
+    box-shadow var(--motion-fast) var(--ease-out),
+    transform var(--motion-instant) var(--ease-out);
+}
+
+.button .hala-icon {
+  width: var(--button-icon);
+  height: var(--button-icon);
+  flex: none;
+}
+
+.button[data-size="lg"] {
+  --button-height: var(--size-control-mobile);
+  --button-pad: var(--pad-card-x);
+  --button-icon: var(--icon-default);
+}
+
+.button[data-size="md"] {
+  --button-height: var(--size-control-web);
+  --button-pad: var(--pad-button-x);
+  --button-font: var(--type-label-m-size);
+  --button-icon: var(--icon-default);
+}
+
+.button[data-size="sm"] {
+  --button-height: var(--icon-tile-default);
+  --button-pad: var(--pad-input-x);
+  --button-font: var(--type-body-s-size);
+  --button-weight: var(--font-weight-medium);
+  --button-icon: var(--icon-inline);
+}
+
+.button[data-size="xs"] {
+  --button-height: var(--space-7);
+  --button-pad: var(--pad-badge-x);
+  --button-font: var(--type-caption-size);
+  --button-gap: var(--icon-gap-inline);
+  --button-icon: var(--icon-inline);
+}
+
+.button[data-icon-only="true"] {
+  width: var(--button-height);
+  padding: 0;
+}
+
+.button[data-touch="true"] {
+  --button-height: var(--space-14);
+  --button-icon: var(--size-badge);
+}
+
+.button[data-shape="wide"] {
+  --button-icon: var(--icon-feature);
+  width: calc(var(--space-14) * 2 + var(--space-2));
+  padding: 0;
+}
+
+.button[data-block="true"] {
+  width: 100%;
+}
+
+.button[data-variant="primary"] {
+  background: var(--gradient-primary);
+  color: var(--text-on-brand);
+  box-shadow: var(--shadow-brand);
+}
+
+.button[data-variant="primary"]:hover,
+.button[data-variant="primary"][data-state="hover"] {
+  background: var(--gradient-primary-hover);
+}
+
+.button[data-variant="primary"]:active,
+.button[data-variant="primary"][data-state="pressed"] {
+  background: var(--gradient-primary-pressed);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-variant="ink"] {
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-variant="ink"]:hover,
+.button[data-variant="ink"][data-state="hover"],
+.button[data-variant="ink"]:active,
+.button[data-variant="ink"][data-state="pressed"] {
+  background: var(--surface-inverse-hover);
+}
+
+.button[data-variant="secondary"] {
+  background: var(--surface-card);
+  color: var(--text-primary);
+  border: var(--border-width) solid var(--border-control);
+  box-shadow: var(--shadow-0);
+  font-weight: var(--font-weight-medium);
+}
+
+.button[data-variant="secondary"]:hover,
+.button[data-variant="secondary"][data-state="hover"] {
+  background: var(--surface-subtle);
+  border-color: var(--border-control-hover);
+}
+
+.button[data-variant="secondary"]:active,
+.button[data-variant="secondary"][data-state="pressed"] {
+  background: var(--surface-pressed);
+  border-color: var(--border-control-hover);
+}
+
+.button[data-quiet="true"] {
+  background: var(--surface-sunken);
+  color: var(--text-primary);
+  border-color: transparent;
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-quiet="true"]:hover,
+.button[data-quiet="true"][data-state="hover"],
+.button[data-quiet="true"]:active,
+.button[data-quiet="true"][data-state="pressed"] {
+  background: var(--surface-pressed);
+  border-color: transparent;
+}
+
+.button[data-variant="tonal"] {
+  background: var(--brand-100);
+  color: var(--brand-600);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-variant="tonal"]:hover,
+.button[data-variant="tonal"][data-state="hover"] {
+  background: var(--brand-100-hover);
+}
+
+.button[data-variant="tonal"]:active,
+.button[data-variant="tonal"][data-state="pressed"] {
+  background: var(--brand-100-pressed);
+}
+
+.button[data-variant="ghost"] {
+  background: transparent;
+  color: var(--brand-800);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-variant="ghost"]:hover,
+.button[data-variant="ghost"][data-state="hover"] {
+  background: var(--surface-hover);
+}
+
+.button[data-variant="ghost"]:active,
+.button[data-variant="ghost"][data-state="pressed"] {
+  background: var(--surface-pressed);
+}
+
+.button[data-variant="destructive"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-variant="destructive"]:hover,
+.button[data-variant="destructive"][data-state="hover"] {
+  background: var(--status-error-tint-hover);
+}
+
+.button[data-variant="destructive"]:active,
+.button[data-variant="destructive"][data-state="pressed"] {
+  background: var(--status-error-tint-pressed);
+}
+
+.button:active:not(:disabled),
+.button[data-state="pressed"] {
+  transform: scale(0.97);
+}
+
+.button:focus-visible,
+.button[data-state="focus"] {
+  outline: var(--focus-ring);
+  outline-offset: var(--space-1);
+}
+
+.button[data-loading="true"] {
+  cursor: progress;
+  pointer-events: none;
+}
+
+.button[data-loading="true"] > :not(.button-spinner) {
+  visibility: hidden;
+}
+
+.button-spinner {
+  display: none;
+}
+
+.button[data-loading="true"] .button-spinner {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  visibility: visible;
+}
+
+.button-spinner .hala-icon {
+  animation: button-spin var(--motion-emphasis) linear infinite;
+}
+
+.button[data-shape="tile"] {
+  --button-height: var(--size-sm);
+  --button-icon: var(--icon-inline);
+  width: var(--button-height);
+  padding: 0;
+  border-radius: var(--icon-tile-radius-default);
+  background: transparent;
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-shape="tile"][data-variant="secondary"] {
+  border: var(--border-width) solid var(--border-control);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.button[data-shape="tile"][data-quiet="true"] {
+  background: var(--surface-sunken);
+  border-color: transparent;
+  color: var(--text-secondary);
+}
+
+.button[data-shape="tile"]:hover,
+.button[data-shape="tile"][data-state="hover"] {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.button[data-shape="round"] {
+  --button-height: var(--size-md);
+  --button-icon: var(--icon-default);
+  width: var(--button-height);
+  padding: 0;
+  background: var(--surface-sunken);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-shape="round"]:hover,
+.button[data-shape="round"][data-state="hover"],
+.button[data-shape="round"]:active,
+.button[data-shape="round"][data-state="pressed"] {
+  background: var(--surface-pressed);
+  transform: none;
+}
+
+.button[data-stack="true"],
+.button[data-stack="true"]:hover,
+.button[data-stack="true"]:active {
+  height: auto;
+  padding: 0;
+  background: transparent;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-0);
+  flex-direction: column;
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-medium);
+  gap: var(--gap-button-icon);
+  transform: none;
+}
+
+.button-disc {
+  width: var(--space-14);
+  height: var(--space-14);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-100);
+  color: var(--brand-600);
+}
+
+.button[data-variant="primary"] .button-disc {
+  background: var(--gradient-primary);
+  color: var(--text-on-brand);
+  box-shadow: var(--shadow-brand);
+}
+
+.button-disc .hala-icon {
+  width: var(--icon-nav);
+  height: var(--icon-nav);
+}
+
+.button-badge {
+  min-width: var(--type-heading-m-size);
+  height: var(--type-heading-m-size);
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-semibold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-dot {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-3);
+  width: var(--space-2);
+  height: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--status-count);
+  box-shadow: 0 0 0 var(--border-width) var(--surface-sunken);
+}
+
+.button[data-role="segment"][data-size="lg"],
+.button[data-role="segment"][data-size="md"] {
+  --button-height: var(--size-control-web);
+  --button-pad: var(--pad-button-x);
+}
+
+.button[data-role="segment"][data-size="sm"] {
+  --button-height: var(--size-sm);
+  --button-pad: var(--pad-chip-x);
+  --button-font: var(--type-body-s-size);
+}
+
+.button[data-role="segment"] {
+  --button-height: var(--space-7);
+  --button-pad: var(--pad-input-x);
+  --button-font: var(--type-body-s-size);
+  background: transparent;
+  color: var(--text-tertiary);
+  border-color: transparent;
+  box-shadow: var(--shadow-0);
+  font-weight: var(--font-weight-medium);
+}
+
+.button[data-role="segment"][data-selected="true"],
+.button[data-role="segment"][data-selected="true"]:hover,
+.button[data-role="segment"][data-selected="true"]:active {
+  background: var(--surface-card);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-1);
+  font-weight: var(--font-weight-semibold);
+  transform: none;
+}
+
+.button[data-role="chip"] {
+  --button-height: var(--space-7);
+  --button-pad: var(--pad-chip-x);
+  --button-gap: var(--icon-gap-inline);
+  --button-font: var(--type-body-s-size);
+  --button-icon: var(--icon-inline);
+  background: var(--surface-card);
+  color: var(--text-primary);
+  border: var(--border-width) solid var(--border-control);
+  box-shadow: var(--shadow-0);
+  font-weight: var(--font-weight-medium);
+}
+
+.button[data-role="chip"][data-selected="true"],
+.button[data-role="chip"][data-selected="true"]:hover,
+.button[data-role="chip"][data-selected="true"]:active {
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  border-color: var(--surface-inverse);
+  transform: none;
+}
+
+.button[data-role="amount"] {
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-medium);
+  background: var(--surface-sunken);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-role="amount"][data-selected="true"],
+.button[data-role="amount"][data-selected="true"]:hover,
+.button[data-role="amount"][data-selected="true"]:active {
+  background: var(--brand-100);
+  color: var(--brand-600);
+  transform: none;
+}
+
+.button[data-role="inline"] {
+  --button-height: var(--size-sm);
+  --button-pad: var(--pad-chip-x);
+  --button-gap: var(--icon-gap-inline);
+  --button-font: var(--type-body-s-size);
+  --button-icon: var(--icon-inline);
+}
+
+.button[data-role="inline"][data-variant="ghost"] {
+  --button-pad: var(--icon-gap-inline);
+}
+
+.button[data-role="filter"] {
+  background: var(--surface-card);
+  color: var(--text-primary);
+  border: var(--border-width) solid var(--border-control);
+  box-shadow: var(--shadow-0);
+  font-weight: var(--font-weight-medium);
+}
+
+.button[data-role="filter"][data-selected="true"],
+.button[data-role="filter"][data-selected="true"]:hover,
+.button[data-role="filter"][data-selected="true"]:active {
+  background: var(--brand-100);
+  color: var(--brand-600);
+  border-color: var(--brand-600);
+  transform: none;
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active {
+  background: var(--border-subtle);
+  color: var(--text-disabled);
+  border-color: transparent;
+  box-shadow: var(--shadow-0);
+  transform: none;
+  cursor: not-allowed;
+  outline: none;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button-spinner .hala-icon {
+    transition: none;
+    animation: none;
+  }
+}

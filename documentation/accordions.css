@@ -1,0 +1,361 @@
+/* Accordions documentation layout. Visual values come from styles/foundations.css. */
+
+[data-page="accordions"] .ac-panel,
+[data-page="accordions"] .ac-card,
+[data-page="accordions"] .ac-rule,
+[data-page="accordions"] .ac-spec {
+  background: var(--surface-card);
+}
+
+[data-page="accordions"] .ac-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: center;
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  padding: var(--pad-card-y) var(--pad-card-x);
+}
+
+[data-page="accordions"] .ac-sample {
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+[data-page="accordions"] .ac-notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-default);
+}
+
+[data-page="accordions"] .ac-note-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+[data-page="accordions"] .ac-note-row > .ac-num {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  margin-top: var(--gap-input-label);
+  border-radius: var(--radius-pill);
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--type-overline-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+[data-page="accordions"] .ac-note-row strong {
+  display: block;
+  font-size: var(--type-body-s-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="accordions"] .ac-note-row div span {
+  display: block;
+  color: var(--text-tertiary);
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+}
+
+[data-page="accordions"] .ac-states {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2) var(--pad-card-x);
+}
+
+[data-page="accordions"] .ac-state {
+  display: grid;
+  grid-template-columns: minmax(130px, 170px) minmax(0, 1fr) minmax(0, 260px);
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-4) 0;
+}
+
+[data-page="accordions"] .ac-state + .ac-state {
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="accordions"] .ac-state-card {
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-control);
+  background: var(--surface-card);
+  overflow: hidden;
+}
+
+[data-page="accordions"] .ac-state-card .accordion-trigger {
+  padding-inline: var(--space-4);
+  border-radius: 0;
+}
+
+[data-page="accordions"] .ac-state-card .accordion-body {
+  padding-inline: var(--space-4);
+}
+
+[data-page="accordions"] .ac-state-card:has(.accordion-item[data-state="focus"]) {
+  box-shadow: var(--shadow-focus);
+}
+
+[data-page="accordions"] .ac-state-card .accordion-item[data-state="focus"] .accordion-trigger {
+  box-shadow: none;
+}
+
+[data-page="accordions"] .ac-state-card:has(.accordion-item[data-disabled="true"]) {
+  opacity: var(--opacity-disabled);
+}
+
+[data-page="accordions"] .ac-state-card .accordion-item[data-disabled="true"] {
+  opacity: 1;
+}
+
+[data-page="accordions"] .ac-state strong {
+  display: block;
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="accordions"] .ac-state .ac-spec-label,
+[data-page="accordions"] .ac-kicker,
+[data-page="accordions"] .ac-size span,
+[data-page="accordions"] .ac-size b {
+  font-family: var(--font-mono);
+}
+
+[data-page="accordions"] .ac-state .ac-spec-label {
+  color: var(--text-tertiary);
+  font-size: var(--type-caption-size);
+}
+
+[data-page="accordions"] .ac-state > p,
+[data-page="accordions"] .ac-caption {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+}
+
+[data-page="accordions"] .ac-variants,
+[data-page="accordions"] .ac-phones,
+[data-page="accordions"] .ac-when,
+[data-page="accordions"] .ac-rules,
+[data-page="accordions"] .ac-specs {
+  display: grid;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="accordions"] .ac-variants,
+[data-page="accordions"] .ac-phones {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+}
+
+[data-page="accordions"] .ac-when,
+[data-page="accordions"] .ac-rules {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+[data-page="accordions"] .ac-specs {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+[data-page="accordions"] .ac-panel,
+[data-page="accordions"] .ac-card,
+[data-page="accordions"] .ac-spec {
+  border-radius: var(--radius-2xl);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="accordions"] .ac-card,
+[data-page="accordions"] .ac-spec,
+[data-page="accordions"] .ac-rule {
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+}
+
+[data-page="accordions"] .ac-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+[data-page="accordions"] .ac-kicker {
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+[data-page="accordions"] .ac-live {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-badge);
+  background: var(--brand-100);
+  color: var(--brand-700);
+  font-family: var(--font-mono);
+  font-size: var(--type-badge-feature-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+}
+
+[data-page="accordions"] .ac-device {
+  border-radius: var(--radius-sheet);
+  background: var(--surface-subtle);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-default);
+}
+
+[data-page="accordions"] .ac-device h3 {
+  margin: 0;
+  padding: var(--space-1) var(--space-1) 0;
+  font-size: var(--type-heading-l-size);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--type-heading-l-tracking);
+}
+
+[data-page="accordions"] .ac-group-label {
+  padding-inline: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+[data-page="accordions"] .ac-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--icon-gap-inline);
+  padding: var(--icon-gap-default) 0 var(--space-2);
+}
+
+[data-page="accordions"] .ac-avatar {
+  width: var(--size-control-mobile);
+  height: var(--size-control-mobile);
+  border-radius: var(--radius-pill);
+  background: var(--surface-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="accordions"] .ac-party {
+  color: var(--text-tertiary);
+  font-size: var(--type-body-m-size);
+}
+
+[data-page="accordions"] .ac-amount {
+  font-family: var(--font-mono);
+  font-size: var(--type-amount-xl-size);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--type-amount-xl-tracking);
+}
+
+[data-page="accordions"] .ac-spec strong {
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="accordions"] .ac-spec span,
+[data-page="accordions"] .ac-card span {
+  color: var(--text-tertiary);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+}
+
+[data-page="accordions"] .ac-card strong {
+  font-size: var(--type-body-s-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="accordions"] .ac-table {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2) var(--pad-card-x);
+  overflow-x: auto;
+}
+
+[data-page="accordions"] .ac-size {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) repeat(3, minmax(110px, 1fr));
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="accordions"] .ac-size + .ac-size {
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="accordions"] .ac-size b {
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  color: var(--text-tertiary);
+}
+
+[data-page="accordions"] .ac-size span {
+  color: var(--text-secondary);
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="accordions"] .ac-rule {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  background: var(--surface-card);
+  padding: var(--pad-modal) var(--space-5);
+}
+
+[data-page="accordions"] .ac-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+[data-page="accordions"] .ac-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-700);
+}
+
+[data-page="accordions"] .ac-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+[data-page="accordions"] .ac-mark .hala-icon {
+  width: var(--icon-badge-sm);
+  height: var(--icon-badge-sm);
+}
+
+[data-page="accordions"] .ac-rule span {
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+}
+
+@media (max-width: 900px) {
+  [data-page="accordions"] .ac-split,
+  [data-page="accordions"] .ac-state,
+  [data-page="accordions"] .ac-size {
+    grid-template-columns: 1fr;
+  }
+}

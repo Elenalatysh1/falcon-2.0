@@ -1,0 +1,22 @@
+---
+description: Falcon 2.0 web implementation
+globs: "**/*.{tsx,jsx,vue,css,scss,html}"
+alwaysApply: false
+---
+
+# Web
+
+- Build components with semantic HTML (`button`, `a`, `input`, `dialog`) and style them with `styles/foundations.css`.
+- Component CSS and React `style` use `var(--*)` from `styles/foundations.css` only. No hex, raw px, raw shadow, or font name in a component.
+- Keyboard: visible `:focus-visible`, a logical tab order, and Escape closes overlays.
+- Hover states add feedback. An action must still be available without a pointer.
+- Meet a 44×44 px minimum target. Name every control for assistive tech.
+
+```css
+/* ❌ BAD */
+.button:hover { background: #123; }
+
+/* ✅ GOOD */
+.button:hover { background: var(--surface-hover); }
+.button:focus-visible { outline: var(--focus-ring); }
+```

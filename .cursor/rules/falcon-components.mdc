@@ -1,0 +1,30 @@
+---
+description: Falcon 2.0 component contract shared by Web, Android, and iOS
+alwaysApply: true
+---
+
+# Components
+
+Every Falcon component uses the same name, anatomy, variants, and states on Web, Android, and iOS.
+
+## Contract
+
+- Public API uses the same concepts: `label`, `variant`, `size`, `disabled`, leading icon, trailing icon.
+- Variants are `primary`, `ink`, `secondary`, `tonal`, `ghost`, and `destructive`. Sizes are `lg`, `md`, `sm`, and `xs`.
+- `xs` is web only. On Android and iOS the tap target stays at least 44.
+- Required states: default, pressed, disabled, loading. Web also has hover and focus. Document any state a platform cannot show.
+
+## Styles
+
+Style every component from `styles/foundations.css` only. Color, spacing, radius, border, shadow, type, and motion are variables from that file. Do not hardcode those values in the component.
+
+## Anatomy
+
+- Give each component one job. Build larger UI from existing Falcon components.
+- Use Falcon icon names from `icons/api.js` (`transfers`, `search`, `cards`). Lucide 0.453.0 is the only icon set. The same name must exist on every platform.
+- Example copy is sentence case.
+
+```text
+❌ BAD   Web: <Btn type="main">   Android: FalconCTA   iOS: PrimaryActionButton
+✅ GOOD  Web, Android, and iOS: Button variant="primary" size="md"
+```

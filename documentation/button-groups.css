@@ -1,0 +1,392 @@
+/* Button groups chapter. Controls come from components/button-groups. */
+
+[data-page="button-groups"] .grp-sheet,
+[data-page="button-groups"] .grp-panel,
+[data-page="button-groups"] .grp-guide-card,
+[data-page="button-groups"] .grp-state,
+[data-page="button-groups"] .grp-rule {
+  background: var(--surface-card);
+}
+
+[data-page="button-groups"] .grp-sheet,
+[data-page="button-groups"] .grp-panel {
+  border-radius: var(--radius-2xl);
+}
+
+[data-page="button-groups"] .grp-sheet {
+  padding: var(--space-2) var(--pad-card-x);
+}
+
+[data-page="button-groups"] .grp-size {
+  display: grid;
+  grid-template-columns: minmax(calc(var(--space-14) * 2 + var(--space-7)), calc(var(--space-14) * 3 + var(--space-3))) minmax(0, 1fr) minmax(0, calc(var(--space-14) * 4 + var(--space-4)));
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-5) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="button-groups"] .grp-size:first-child {
+  border-top-color: transparent;
+}
+
+[data-page="button-groups"] .grp-name {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-input-label);
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="button-groups"] .grp-spec {
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-tertiary);
+}
+
+[data-page="button-groups"] .grp-use,
+[data-page="button-groups"] .grp-quiet {
+  font-size: var(--type-hint-size);
+  line-height: var(--type-hint-line);
+  color: var(--text-tertiary);
+}
+
+[data-page="button-groups"] .grp-sample {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+[data-page="button-groups"] .grp-states,
+[data-page="button-groups"] .grp-guide,
+[data-page="button-groups"] .grp-grid,
+[data-page="button-groups"] .grp-rules {
+  display: grid;
+  gap: var(--space-3);
+}
+
+[data-page="button-groups"] .grp-states {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 3 + var(--space-2)), 1fr));
+  gap: var(--icon-gap-default);
+}
+
+[data-page="button-groups"] .grp-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--icon-gap-default);
+  padding: var(--pad-row-y);
+  border-radius: var(--radius-l);
+}
+
+[data-page="button-groups"] .grp-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+[data-page="button-groups"] .grp-guide {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 3 + var(--space-12) + var(--space-1)), 1fr));
+}
+
+[data-page="button-groups"] .grp-guide-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-inline);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-xl);
+}
+
+[data-page="button-groups"] .grp-guide-card strong {
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="button-groups"] .grp-guide-card p {
+  margin: 0;
+  font-size: var(--type-hint-size);
+  line-height: var(--type-hint-line);
+  color: var(--text-tertiary);
+}
+
+[data-page="button-groups"] .grp-example {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  color: var(--brand-600);
+}
+
+[data-page="button-groups"] .grp-grid {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 6 + var(--space-1)), 1fr));
+  align-items: start;
+}
+
+[data-page="button-groups"] .grp-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad-row-y);
+  padding: var(--space-5) var(--space-6);
+}
+
+[data-page="button-groups"] .grp-panel[data-gap="loose"] {
+  gap: var(--space-4);
+}
+
+[data-page="button-groups"] .grp-panel[data-tall="true"] {
+  min-height: calc(var(--space-14) * 5);
+}
+
+[data-page="button-groups"] .grp-panel[data-tall="true"] > .grp-hint {
+  margin-top: auto;
+}
+
+[data-page="button-groups"] .grp-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+[data-page="button-groups"] .grp-live {
+  flex: none;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-badge);
+  background: var(--brand-100);
+  color: var(--brand-600);
+  font-family: var(--font-mono);
+  font-size: var(--type-badge-feature-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+}
+
+[data-page="button-groups"] .grp-limit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--icon-gap-inline) 0;
+}
+
+[data-page="button-groups"] .grp-amount {
+  font-family: var(--font-mono);
+  font-size: var(--type-amount-xl-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--type-amount-xl-line);
+  letter-spacing: var(--type-amount-xl-tracking);
+  white-space: nowrap;
+}
+
+[data-page="button-groups"] .grp-icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+[data-page="button-groups"] .grp-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--icon-gap-inline);
+  height: calc(var(--space-14) + var(--space-8) + var(--space-2));
+  padding: var(--icon-gap-default);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+}
+
+[data-page="button-groups"] .grp-bar {
+  flex: 1;
+  min-height: var(--space-1);
+  border-radius: var(--radius-check);
+  background: var(--chart-1);
+  transition:
+    height var(--motion-emphasis) var(--ease-standard),
+    background var(--motion-emphasis) var(--ease-standard);
+}
+
+[data-page="button-groups"] .grp-chart[data-view="line"] .grp-bar {
+  height: var(--space-1);
+  border-radius: var(--border-width-emphasis);
+}
+
+[data-page="button-groups"] .grp-chart[data-view="table"] .grp-bar {
+  height: var(--icon-badge-trend);
+  border-radius: var(--radius-xs);
+  background: var(--status-neutral-border);
+}
+
+[data-page="button-groups"] .grp-hint {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  color: var(--text-tertiary);
+}
+
+[data-page="button-groups"] .grp-splits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+[data-page="button-groups"] .grp-pair-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad-row-y);
+}
+
+[data-page="button-groups"] .grp-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--pad-row-y) var(--space-4);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+}
+
+[data-page="button-groups"] .grp-pair > span {
+  flex: 1;
+  min-width: calc(var(--space-14) * 2 + var(--space-7));
+  font-size: var(--type-hint-size);
+  color: var(--text-secondary);
+}
+
+[data-page="button-groups"] .grp-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="button-groups"] .grp-phone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-default);
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-sheet);
+  background: var(--surface-subtle);
+}
+
+[data-page="button-groups"] .grp-phone[data-frame="sheet"] {
+  position: relative;
+  overflow: hidden;
+  height: calc(var(--space-14) * 5 + var(--space-5));
+}
+
+[data-page="button-groups"] .grp-phone[data-frame="sheet"] [data-button-groups="sheet"] {
+  margin-top: auto;
+}
+
+[data-page="button-groups"] .grp-phone-title {
+  font-size: var(--type-heading-m-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="button-groups"] .grp-phone-title[data-size="l"] {
+  font-size: var(--type-title-size);
+}
+
+[data-page="button-groups"] .grp-summary,
+[data-page="button-groups"] .grp-note {
+  border-radius: var(--radius-xl);
+  background: var(--surface-card);
+}
+
+[data-page="button-groups"] .grp-summary {
+  padding: var(--space-1) var(--space-4);
+}
+
+[data-page="button-groups"] .grp-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  font-size: var(--type-menu-size);
+}
+
+[data-page="button-groups"] .grp-summary-row:first-child {
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="button-groups"] .grp-summary-row span:first-child {
+  color: var(--text-tertiary);
+}
+
+[data-page="button-groups"] .grp-mono {
+  font-family: var(--font-mono);
+}
+
+[data-page="button-groups"] .grp-spacer {
+  height: var(--space-6);
+}
+
+[data-page="button-groups"] .grp-note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+}
+
+[data-page="button-groups"] .grp-note strong {
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="button-groups"] .grp-note span {
+  font-size: var(--type-body-s-size);
+  color: var(--text-tertiary);
+}
+
+[data-page="button-groups"] .grp-rules {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 5), 1fr));
+}
+
+[data-page="button-groups"] .grp-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  font-size: var(--type-compact-size);
+  line-height: var(--type-compact-line);
+}
+
+[data-page="button-groups"] .grp-mark {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-nav);
+  height: var(--icon-nav);
+  border-radius: var(--radius-pill);
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="button-groups"] .grp-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-600);
+}
+
+[data-page="button-groups"] .grp-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+@media (max-width: 900px) {
+  [data-page="button-groups"] .grp-size,
+  [data-page="button-groups"] .grp-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-page="button-groups"] .grp-bar {
+    transition: none;
+  }
+}

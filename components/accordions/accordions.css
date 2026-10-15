@@ -1,0 +1,407 @@
+/* Accordions. Every value comes from styles/foundations.css. */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.accordion-item {
+  min-width: 0;
+}
+
+.accordion-trigger {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--icon-tile-feature);
+  margin: 0;
+  padding: 0 var(--space-1);
+  border: 0;
+  border-radius: var(--radius-compact);
+  background: transparent;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: start;
+  cursor: pointer;
+  font: inherit;
+}
+
+.accordion-trigger:hover,
+.accordion-trigger[data-state="hover"] {
+  background: var(--surface-hover);
+}
+
+.accordion-trigger:focus {
+  outline: 0;
+}
+
+.accordion-trigger:focus-visible,
+.accordion-item[data-state="focus"] .accordion-trigger {
+  box-shadow: var(--shadow-focus);
+}
+
+.accordion-trigger:disabled {
+  cursor: default;
+  opacity: 1;
+  color: var(--text-primary);
+}
+
+.accordion-item[data-disabled="true"] {
+  opacity: var(--opacity-disabled);
+}
+
+.accordion-icon {
+  width: var(--icon-tile-nav);
+  height: var(--icon-tile-nav);
+  border-radius: var(--radius-m);
+  background: var(--surface-sunken);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.accordion-icon .hala-icon {
+  width: var(--size-check);
+  height: var(--size-check);
+}
+
+.accordion-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-input-label);
+}
+
+.accordion-title {
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--type-body-m-line);
+}
+
+.accordion-sub {
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--type-caption-line);
+  color: var(--text-tertiary);
+}
+
+.accordion-item[data-disabled="true"] .accordion-sub {
+  color: var(--control-border);
+}
+
+.accordion-meta,
+.accordion-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  white-space: nowrap;
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-weight-semibold);
+}
+
+.accordion-meta {
+  height: var(--size-badge-feature);
+  padding: 0 var(--space-2);
+  background: var(--brand-100);
+  color: var(--brand-700);
+  font-size: var(--type-caption-size);
+}
+
+.accordion-count {
+  min-width: var(--space-5);
+  height: var(--space-5);
+  padding: 0 var(--icon-gap-inline);
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  font-size: var(--type-overline-size);
+}
+
+.accordion-count[hidden] {
+  display: none;
+}
+
+.accordion-spinner {
+  width: var(--icon-inline);
+  height: var(--icon-inline);
+  color: var(--brand-600);
+  display: flex;
+  flex: none;
+}
+
+.accordion-spinner[hidden] {
+  display: none;
+}
+
+.accordion-spinner .hala-icon {
+  width: var(--icon-inline);
+  height: var(--icon-inline);
+  animation: accordion-spin var(--motion-emphasis) linear infinite;
+}
+
+.accordion-chevron {
+  width: var(--size-check);
+  height: var(--size-check);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  transition: transform var(--motion-emphasis) var(--ease-standard);
+}
+
+.accordion-chevron .hala-icon {
+  width: var(--size-check);
+  height: var(--size-check);
+}
+
+.accordion-item[data-open="true"] .accordion-chevron,
+.accordion-item[data-state="expanded"] .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-item[data-state="expanded"] .accordion-chevron {
+  color: var(--text-primary);
+}
+
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--motion-emphasis) var(--ease-standard);
+}
+
+.accordion-item[data-open="true"] .accordion-panel {
+  grid-template-rows: 1fr;
+}
+
+.accordion-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.accordion-body {
+  margin: 0;
+  padding: 0 var(--space-1) var(--space-4);
+  color: var(--text-secondary);
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+}
+
+.accordion-lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-4) var(--space-4);
+  color: var(--text-tertiary);
+  font-size: var(--type-body-s-size);
+}
+
+.accordion-line {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.accordion-line span:last-child {
+  color: var(--text-primary);
+  text-align: end;
+}
+
+.accordion-line[data-mono="true"] span:last-child {
+  font-family: var(--font-mono);
+}
+
+.accordion-options {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--space-3);
+}
+
+.accordion-options .choice {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.accordion[data-variant="divided"] .accordion-item + .accordion-item {
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+.accordion[data-variant="divided"] .accordion-item[data-open="true"] .accordion-title,
+.accordion[data-variant="divided"] .accordion-item[data-state="expanded"] .accordion-title {
+  font-weight: var(--font-weight-semibold);
+}
+
+.accordion[data-variant="card"] {
+  gap: var(--space-2);
+}
+
+.accordion[data-variant="card"] .accordion-item {
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-l);
+  background: var(--surface-card);
+  overflow: hidden;
+  transition: border-color var(--motion-fast) var(--ease-out);
+}
+
+.accordion[data-variant="card"] .accordion-item[data-open="true"] {
+  border-color: var(--border-strong);
+}
+
+.accordion[data-variant="card"] .accordion-trigger {
+  min-height: calc(var(--space-14) + var(--space-2));
+  padding: 0 var(--pad-row-y);
+  border-radius: 0;
+}
+
+.accordion[data-variant="card"] .accordion-trigger:focus-visible,
+.accordion[data-variant="card"] .accordion-item[data-state="focus"] .accordion-trigger {
+  box-shadow: none;
+}
+
+.accordion[data-variant="card"] .accordion-item:has(.accordion-trigger:focus-visible),
+.accordion[data-variant="card"] .accordion-item[data-state="focus"] {
+  box-shadow: var(--shadow-focus);
+}
+
+.accordion[data-variant="card"] .accordion-title {
+  font-weight: var(--font-weight-semibold);
+}
+
+.accordion[data-variant="card"] .accordion-lines {
+  padding-inline-start: calc(var(--pad-row-y) + var(--icon-tile-nav) + var(--space-3));
+}
+
+.accordion[data-variant="compact"] .accordion-item {
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+
+.accordion[data-variant="compact"] .accordion-trigger {
+  height: var(--size-control-web);
+  min-height: var(--size-control-web);
+  gap: var(--space-2);
+}
+
+.accordion[data-variant="compact"] .accordion-title {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+}
+
+.accordion[data-variant="compact"] .accordion-chevron,
+.accordion[data-variant="compact"] .accordion-chevron .hala-icon {
+  width: var(--icon-inline);
+  height: var(--icon-inline);
+}
+
+.accordion[data-variant="grouped"],
+.accordion[data-variant="detail"] {
+  --accordion-row: calc(var(--space-14) + var(--space-2));
+}
+
+.accordion[data-variant="grouped"] {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  padding-inline: var(--space-4);
+}
+
+.accordion[data-variant="grouped"] .accordion-item + .accordion-item {
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+.accordion[data-variant="grouped"] .accordion-trigger,
+.accordion[data-variant="detail"] .accordion-trigger {
+  min-height: var(--accordion-row);
+  padding: 0;
+  border-radius: 0;
+}
+
+.accordion[data-variant="detail"] .accordion-trigger {
+  padding-inline: var(--space-4);
+}
+
+.accordion[data-variant="grouped"] .accordion-title,
+.accordion[data-variant="detail"] .accordion-title {
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-line);
+}
+
+.accordion[data-variant="grouped"] .accordion-item[data-open="true"] .accordion-title,
+.accordion[data-variant="detail"] .accordion-title {
+  font-weight: var(--font-weight-semibold);
+}
+
+.accordion[data-variant="grouped"] .accordion-chevron {
+  width: var(--icon-feature);
+  height: var(--icon-feature);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  transition: transform var(--motion-emphasis) var(--ease-standard), background var(--motion-fast) var(--ease-out);
+}
+
+.accordion[data-variant="grouped"] .accordion-chevron .hala-icon {
+  width: var(--icon-inline);
+  height: var(--icon-inline);
+}
+
+.accordion[data-variant="grouped"] .accordion-item[data-open="true"] .accordion-chevron {
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+}
+
+.accordion[data-variant="grouped"] .accordion-body {
+  padding: 0 0 var(--pad-modal-footer-bottom);
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-l-line);
+}
+
+.accordion[data-variant="detail"] {
+  gap: var(--icon-gap-default);
+}
+
+.accordion[data-variant="detail"] .accordion-item {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.accordion[data-variant="detail"] .accordion-aside {
+  color: var(--text-tertiary);
+  font-size: var(--type-body-s-size);
+  white-space: nowrap;
+  flex: none;
+}
+
+.accordion[data-variant="detail"] .accordion-lines {
+  gap: 0;
+  padding: 0 var(--space-4) var(--space-2);
+  font-size: var(--type-body-s-size);
+}
+
+.accordion[data-variant="detail"] .accordion-line {
+  padding: var(--space-3) 0;
+  border-top: var(--border-width) solid var(--surface-sunken);
+}
+
+@keyframes accordion-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-chevron,
+  .accordion-panel,
+  .accordion-spinner .hala-icon,
+  .accordion[data-variant="card"] .accordion-item,
+  .accordion[data-variant="grouped"] .accordion-chevron {
+    transition: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,541 @@
+/* Overlays chapter. Dialogs come from components/overlays. */
+
+[data-page="overlays"] .ov-card,
+[data-page="overlays"] .ov-table,
+[data-page="overlays"] .ov-rule,
+[data-page="overlays"] .ov-spec,
+[data-page="overlays"] .ov-decide,
+[data-page="overlays"] .ov-pop {
+  background: var(--surface-card);
+}
+
+[data-page="overlays"] .ov-table,
+[data-page="overlays"] .ov-card,
+[data-page="overlays"] .ov-pop {
+  border-radius: var(--radius-2xl);
+}
+
+[data-page="overlays"] .ov-table {
+  padding: var(--space-2) var(--pad-card-x);
+  overflow-x: auto;
+}
+
+[data-page="overlays"] .ov-guide,
+[data-page="overlays"] .ov-guide-head {
+  display: grid;
+  grid-template-columns: calc(var(--space-14) * 2 + var(--space-10)) minmax(calc(var(--space-14) * 4), 1.6fr) calc(var(--space-14) * 2) minmax(calc(var(--space-14) * 3), 1fr) calc(var(--space-14) * 2);
+  gap: var(--space-4);
+  padding: var(--pad-row-y) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+  align-items: start;
+}
+
+[data-page="overlays"] .ov-guide-head {
+  border-top-color: transparent;
+  color: var(--text-label);
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  letter-spacing: var(--type-overline-tracking);
+}
+
+[data-page="overlays"] .ov-block {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+[data-page="overlays"] .ov-dot {
+  width: var(--space-2);
+  height: var(--space-2);
+  border-radius: var(--radius-pill);
+  flex: none;
+}
+
+[data-page="overlays"] .ov-dot[data-tone="danger"] { background: var(--status-count); }
+[data-page="overlays"] .ov-dot[data-tone="partial"] { background: var(--status-partial); }
+[data-page="overlays"] .ov-dot[data-tone="brand"] { background: var(--brand-600); }
+
+[data-page="overlays"] .ov-decide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--pad-card-x);
+  margin-top: var(--space-3);
+}
+
+[data-page="overlays"] .ov-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 4), 1fr));
+  gap: var(--icon-gap-default);
+}
+
+[data-page="overlays"] .ov-q {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--pad-row-y);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+}
+
+[data-page="overlays"] .ov-q strong {
+  color: var(--brand-action);
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="overlays"] .ov-stage {
+  position: relative;
+  height: var(--size-stage);
+  border-radius: var(--radius-group);
+  background: var(--surface-canvas);
+  overflow: hidden;
+}
+
+[data-page="overlays"] .ov-fake {
+  position: absolute;
+  inset: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-default);
+}
+
+[data-page="overlays"] .ov-bar,
+[data-page="overlays"] .ov-tile {
+  background: var(--surface-card);
+  border-radius: var(--radius-control);
+}
+
+[data-page="overlays"] .ov-bar {
+  width: 30%;
+  height: var(--pad-row-y);
+  border-radius: var(--radius-pill);
+  background: var(--border-tint);
+}
+
+[data-page="overlays"] .ov-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--icon-gap-default);
+}
+
+[data-page="overlays"] .ov-tile {
+  height: var(--space-10);
+}
+
+[data-page="overlays"] .ov-tile-tall {
+  height: calc(var(--space-14) * 3 + var(--space-8));
+}
+
+[data-page="overlays"] .ov-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+[data-page="overlays"] .ov-toolbar,
+[data-page="overlays"] .ov-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+[data-page="overlays"] .ov-chips {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+[data-page="overlays"] .ov-live,
+[data-page="overlays"] .ov-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+}
+
+[data-page="overlays"] .ov-live {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-badge);
+  background: var(--brand-100);
+  color: var(--status-success-text);
+}
+
+[data-page="overlays"] .ov-kicker {
+  color: var(--text-tertiary);
+  text-transform: var(--type-overline-transform);
+}
+
+[data-page="overlays"] .ov-specs,
+[data-page="overlays"] .ov-pops,
+[data-page="overlays"] .ov-rules,
+[data-page="overlays"] .ov-behave {
+  display: grid;
+  gap: var(--space-3);
+}
+
+[data-page="overlays"] .ov-specs,
+[data-page="overlays"] .ov-behave {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 4), 1fr));
+}
+
+[data-page="overlays"] .ov-spec,
+[data-page="overlays"] .ov-behave-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-day);
+  padding: var(--space-3) var(--pad-row-y);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+}
+
+[data-page="overlays"] .ov-behave-card {
+  background: var(--surface-card);
+  border-radius: var(--radius-group);
+  padding: var(--space-4) var(--pad-command-x);
+}
+
+[data-page="overlays"] .ov-copy {
+  color: var(--text-secondary);
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+}
+
+[data-page="overlays"] .ov-list {
+  position: absolute;
+  inset: var(--space-4);
+  background: var(--surface-card);
+  border-radius: var(--radius-l);
+  padding: var(--space-2) var(--space-4);
+  overflow: auto;
+}
+
+[data-page="overlays"] .ov-tx {
+  width: 100%;
+  margin: 0;
+  padding: var(--pad-row-y) var(--space-2);
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font: inherit;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: start;
+  min-height: var(--target-web);
+}
+
+[data-page="overlays"] .ov-tx[aria-current="true"],
+[data-page="overlays"] .ov-tx[aria-current="true"]:hover {
+  background: var(--brand-50);
+}
+
+[data-page="overlays"] .ov-tx:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 0;
+}
+
+[data-page="overlays"] .ov-tx {
+  font-size: var(--type-compact-size);
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="overlays"] .ov-tx:hover {
+  background: var(--surface-subtle);
+}
+
+[data-page="overlays"] .ov-tx span:first-child {
+  font-weight: var(--font-weight-medium);
+}
+
+[data-page="overlays"] .ov-tx span:last-child {
+  font-family: var(--font-mono);
+}
+
+[data-page="overlays"] .ov-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad-input-x);
+}
+
+[data-page="overlays"] .ov-merchant {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+[data-page="overlays"] .ov-merchant strong {
+  font-size: var(--type-body-s-size);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-tertiary);
+}
+
+[data-page="overlays"] .ov-merchant em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: var(--type-amount-drawer);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--type-amount-xl-tracking);
+}
+
+[data-page="overlays"] .ov-merchant .badge {
+  align-self: flex-start;
+}
+
+[data-page="overlays"] .ov-note {
+  border: var(--border-width) solid var(--border-input);
+  border-radius: var(--radius-s);
+  padding: var(--icon-gap-default) var(--pad-input-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  background: var(--surface-card);
+}
+
+[data-page="overlays"] .ov-note[data-dirty="true"] {
+  border-color: var(--text-primary);
+}
+
+[data-page="overlays"] .ov-note span {
+  font-size: var(--type-overline-size);
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+[data-page="overlays"] .ov-note textarea {
+  border: 0;
+  outline: 0;
+  padding: 0;
+  resize: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--type-body-m-line);
+}
+
+[data-page="overlays"] .ov-facts {
+  padding: var(--space-1) var(--pad-input-x);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+}
+
+[data-page="overlays"] .ov-facts .overlay-kv-row {
+  border-top: 0;
+  border-bottom: var(--border-width) solid var(--border-subtle);
+  padding: var(--space-3) 0;
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="overlays"] .ov-facts .overlay-kv-row:last-child {
+  border-bottom: 0;
+}
+
+[data-page="overlays"] .ov-pops {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-modal-s) - var(--space-8)), 1fr));
+}
+
+[data-page="overlays"] .ov-pop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+[data-page="overlays"] .ov-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--pad-row-y);
+  border-radius: var(--radius-m);
+  background: var(--surface-subtle);
+  font-size: var(--type-compact-size);
+}
+
+[data-page="overlays"] .ov-row > .button[data-variant="ghost"],
+[data-page="overlays"] .ov-row > .button[data-variant="ghost"]:hover,
+[data-page="overlays"] .ov-row > .button[data-variant="ghost"]:active {
+  --button-height: var(--size-sm);
+  width: var(--size-sm);
+  height: var(--size-sm);
+  min-width: var(--size-sm);
+  min-height: var(--size-sm);
+  border: 0;
+  border-radius: var(--radius-compact);
+  background: transparent;
+  box-shadow: var(--shadow-0);
+  color: var(--text-primary);
+}
+
+[data-page="overlays"] .ov-row > .button[aria-expanded="true"],
+[data-page="overlays"] .ov-row > .button[aria-expanded="true"]:hover {
+  background: var(--border-default);
+}
+
+[data-page="overlays"] .ov-cal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-l);
+  border: var(--border-width) solid var(--border-subtle);
+  box-shadow: var(--shadow-2);
+}
+
+[data-page="overlays"] .ov-range.button,
+[data-page="overlays"] .ov-range.button:hover {
+  align-self: flex-start;
+  --button-height: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  min-height: var(--size-avatar-sm);
+  border-width: var(--border-check);
+  border-color: var(--text-primary);
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="overlays"] .ov-cal-chips .button,
+[data-page="overlays"] .ov-cal-chips .button:hover {
+  border: 0;
+  box-shadow: var(--shadow-0);
+  background: var(--surface-sunken);
+}
+
+[data-page="overlays"] .ov-cal-chips .button[data-variant="ink"],
+[data-page="overlays"] .ov-cal-chips .button[data-variant="ink"]:hover {
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+}
+
+[data-page="overlays"] .ov-cal-chips,
+[data-page="overlays"] .ov-cal-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+[data-page="overlays"] .ov-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--gap-day);
+}
+
+[data-page="overlays"] .ov-day {
+  height: var(--space-6);
+  border-radius: var(--radius-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--type-caption-size);
+}
+
+[data-page="overlays"] .ov-day[data-edge="true"] {
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+}
+
+[data-page="overlays"] .ov-day[data-in="true"] {
+  background: var(--brand-100);
+}
+
+[data-page="overlays"] .ov-tip-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--font-weight-medium);
+}
+
+[data-page="overlays"] .ov-mobile {
+  display: grid;
+  grid-template-columns: minmax(calc(var(--size-modal-s) - var(--space-5)), calc(var(--size-frame) - var(--space-10))) minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="overlays"] .ov-phone {
+  position: relative;
+  height: var(--size-phone-tall);
+  border-radius: var(--radius-phone);
+  background: var(--surface-subtle);
+  border: var(--border-width) solid var(--border-default);
+  overflow: hidden;
+}
+
+[data-page="overlays"] .ov-phone-back {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-5) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-default);
+}
+
+[data-page="overlays"] .ov-card-art {
+  height: calc(var(--space-14) * 2 + var(--space-2));
+  border-radius: var(--radius-xl);
+  background: var(--gradient-card);
+}
+
+[data-page="overlays"] .ov-line {
+  height: var(--size-input);
+  border-radius: var(--radius-l);
+  background: var(--surface-card);
+}
+
+[data-page="overlays"] .ov-switch {
+  display: flex;
+  gap: var(--gap-day);
+  padding: var(--gap-day);
+  border-radius: var(--radius-pill);
+  background: var(--border-default);
+  width: fit-content;
+}
+
+[data-page="overlays"] .ov-copy-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-card);
+}
+
+[data-page="overlays"] .ov-rules {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-tooltip) + var(--space-10)), 1fr));
+}
+
+[data-page="overlays"] .ov-rule {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--pad-command-x) var(--space-5);
+  border-radius: var(--radius-group);
+}
+
+[data-page="overlays"] .ov-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="overlays"] .ov-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-action);
+}
+
+[data-page="overlays"] .ov-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+

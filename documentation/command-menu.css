@@ -1,0 +1,304 @@
+/* Command menu chapter. The menu itself comes from components/command-menu. */
+
+[data-page="command-menu"] .cm-stage,
+[data-page="command-menu"] .cm-card,
+[data-page="command-menu"] .cm-state,
+[data-page="command-menu"] .cm-rule,
+[data-page="command-menu"] .cm-table,
+[data-page="command-menu"] .cm-spec {
+  background: var(--surface-card);
+}
+
+[data-page="command-menu"] .cm-presets {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+[data-page="command-menu"] .cm-stage {
+  position: relative;
+  height: var(--size-command-stage);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-stage);
+  overflow: hidden;
+}
+
+[data-page="command-menu"] .cm-app {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-5);
+  display: grid;
+  grid-template-columns: calc(var(--space-14) * 3 + var(--space-8)) minmax(0, 1fr);
+  gap: var(--space-4);
+  opacity: var(--opacity-stage);
+}
+
+[data-page="command-menu"] .cm-side,
+[data-page="command-menu"] .cm-block,
+[data-page="command-menu"] .cm-search {
+  background: var(--surface-card);
+  border-radius: var(--radius-group);
+}
+
+[data-page="command-menu"] .cm-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="command-menu"] .cm-search {
+  height: var(--target-web);
+  max-width: calc(var(--size-modal-s) - var(--space-10));
+  display: flex;
+  align-items: center;
+  gap: var(--icon-gap-default);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--control-border);
+  font-size: var(--type-compact-size);
+}
+
+[data-page="command-menu"] .cm-search .hala-icon {
+  width: var(--icon-inline);
+  height: var(--icon-inline);
+}
+
+[data-page="command-menu"] .cm-kbd {
+  margin-inline-start: auto;
+  padding: var(--gap-day) var(--icon-gap-inline);
+  border: var(--border-width) solid var(--border-control);
+  border-radius: var(--radius-badge);
+  background: var(--surface-card);
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+}
+
+[data-page="command-menu"] .cm-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+[data-page="command-menu"] .cm-block {
+  height: calc(var(--space-14) + var(--space-12));
+}
+
+[data-page="command-menu"] .cm-block-tall {
+  flex: 1;
+}
+
+[data-page="command-menu"] .cm-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-scrim-menu);
+}
+
+[data-page="command-menu"] .cm-stage .command-menu {
+  position: absolute;
+  top: var(--space-14);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - var(--space-10));
+  max-height: calc(100% - var(--space-12) - var(--space-12));
+}
+
+[data-page="command-menu"] .cm-states,
+[data-page="command-menu"] .cm-rules,
+[data-page="command-menu"] .cm-phones,
+[data-page="command-menu"] .cm-specs {
+  display: grid;
+  gap: var(--space-3);
+}
+
+[data-page="command-menu"] .cm-states {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 4), 1fr));
+}
+
+[data-page="command-menu"] .cm-state,
+[data-page="command-menu"] .cm-rule {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--pad-row-y) var(--pad-command-x);
+  border-radius: var(--radius-group);
+}
+
+[data-page="command-menu"] .cm-state {
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+[data-page="command-menu"] .cm-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--brand-600);
+}
+
+[data-page="command-menu"] .cm-phone-card > .cm-kicker,
+[data-page="command-menu"] .cm-live-head .cm-kicker,
+[data-page="command-menu"] .cm-specs-card > .cm-kicker {
+  color: var(--text-tertiary);
+}
+
+[data-page="command-menu"] .cm-copy,
+[data-page="command-menu"] .cm-note {
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+  color: var(--text-secondary);
+}
+
+[data-page="command-menu"] .cm-table {
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2) var(--pad-card-x);
+}
+
+[data-page="command-menu"] .cm-row {
+  display: grid;
+  grid-template-columns: minmax(var(--space-14), calc(var(--space-14) * 4)) minmax(0, 1fr);
+  gap: var(--space-6);
+  padding: var(--space-3) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="command-menu"] .cm-row:first-child {
+  border-top-color: transparent;
+}
+
+[data-page="command-menu"] .cm-row strong {
+  font-size: var(--type-body-m-size);
+}
+
+[data-page="command-menu"] .cm-phones {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-tooltip) + var(--space-14) + var(--space-6)), 1fr));
+  align-items: start;
+}
+
+[data-page="command-menu"] .cm-phone-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-card);
+}
+
+[data-page="command-menu"] .cm-phone-head,
+[data-page="command-menu"] .cm-live-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+[data-page="command-menu"] .cm-live {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-badge);
+  background: var(--brand-100);
+  color: var(--status-success-text);
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+}
+
+[data-page="command-menu"] .cm-phone {
+  height: var(--size-frame);
+  border-radius: var(--radius-phone);
+  background: var(--surface-subtle);
+  padding: var(--pad-command-x) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  overflow: hidden;
+}
+
+[data-page="command-menu"] .cm-phone-search {
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border-default);
+  padding: 0;
+}
+
+[data-page="command-menu"] .cm-home-bar,
+[data-page="command-menu"] .cm-search-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+[data-page="command-menu"] .cm-avatar {
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  border-radius: var(--radius-pill);
+  background: var(--surface-card);
+}
+
+[data-page="command-menu"] .cm-search-pill {
+  height: var(--space-12);
+  justify-content: flex-start;
+  gap: var(--icon-gap-default);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--surface-card);
+  color: var(--control-border);
+  box-shadow: 0 0 0 var(--border-width-emphasis) var(--brand-600);
+}
+
+[data-page="command-menu"] .cm-hero {
+  height: calc(var(--space-14) * 2 + var(--space-7));
+  border-radius: var(--radius-command);
+  background: var(--gradient-card);
+}
+
+[data-page="command-menu"] .cm-line {
+  height: var(--size-command-field);
+  border-radius: var(--radius-group);
+  background: var(--surface-card);
+}
+
+[data-page="command-menu"] .cm-specs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-default);
+}
+
+[data-page="command-menu"] .cm-spec {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-day);
+  padding: var(--space-3) var(--pad-row-y);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+}
+
+[data-page="command-menu"] .cm-spec strong {
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="command-menu"] .cm-rules {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-tooltip) + var(--space-10)), 1fr));
+}
+
+[data-page="command-menu"] .cm-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="command-menu"] .cm-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-action);
+}
+
+[data-page="command-menu"] .cm-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}

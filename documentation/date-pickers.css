@@ -1,0 +1,201 @@
+/* Date pickers chapter. Calendars come from components/date-pickers. */
+
+[data-page="date-pickers"] .dp-card,
+[data-page="date-pickers"] .dp-table,
+[data-page="date-pickers"] .dp-rule,
+[data-page="date-pickers"] .dp-state,
+[data-page="date-pickers"] .dp-phone-card {
+  background: var(--surface-card);
+}
+
+[data-page="date-pickers"] .dp-fields,
+[data-page="date-pickers"] .dp-split,
+[data-page="date-pickers"] .dp-cells,
+[data-page="date-pickers"] .dp-phones,
+[data-page="date-pickers"] .dp-rules {
+  display: grid;
+  gap: var(--space-3);
+}
+
+[data-page="date-pickers"] .dp-fields {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-tooltip) + var(--space-5)), 1fr));
+}
+
+[data-page="date-pickers"] .dp-state {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-group);
+}
+
+[data-page="date-pickers"] .dp-kicker,
+[data-page="date-pickers"] .dp-live {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+}
+
+[data-page="date-pickers"] .dp-kicker {
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+[data-page="date-pickers"] .dp-live {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-badge);
+  background: var(--brand-100);
+  color: var(--status-success-text);
+}
+
+[data-page="date-pickers"] .dp-split {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-modal-s) + var(--space-8)), 1fr));
+}
+
+[data-page="date-pickers"] .dp-card,
+[data-page="date-pickers"] .dp-phone-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-2xl);
+}
+
+[data-page="date-pickers"] .dp-split .dp-card:first-child {
+  min-height: calc(var(--size-stage) + var(--space-8));
+}
+
+[data-page="date-pickers"] .dp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-page="date-pickers"] .dp-cells {
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--space-14) * 2 + var(--space-2)), 1fr));
+}
+
+[data-page="date-pickers"] .dp-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--pad-row-y) var(--space-2);
+  border-radius: var(--radius-control);
+  background: var(--surface-hover);
+  text-align: center;
+}
+
+[data-page="date-pickers"] .dp-cell > strong {
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+[data-page="date-pickers"] .dp-cell > span:not(.date-cell) {
+  color: var(--text-tertiary);
+  font-size: var(--type-overline-size);
+  line-height: var(--type-caption-line);
+  text-align: center;
+}
+
+[data-page="date-pickers"] .dp-phone {
+  position: relative;
+  height: var(--size-phone);
+  border-radius: var(--radius-phone);
+  background: var(--surface-subtle);
+  overflow: hidden;
+}
+
+[data-page="date-pickers"] .dp-phone-back {
+  position: absolute;
+  inset: var(--pad-command-x) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-default);
+  opacity: var(--opacity-disabled);
+}
+
+[data-page="date-pickers"] .dp-ghost {
+  height: var(--size-input);
+  border-radius: var(--radius-l);
+  background: var(--surface-card);
+}
+
+[data-page="date-pickers"] .dp-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-scrim);
+}
+
+[data-page="date-pickers"] .dp-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+[data-page="date-pickers"] .dp-phones {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-modal-s) - var(--space-8)), 1fr));
+}
+
+[data-page="date-pickers"] .dp-table {
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2) var(--pad-card-x);
+}
+
+[data-page="date-pickers"] .dp-row,
+[data-page="date-pickers"] .dp-head-row {
+  display: grid;
+  grid-template-columns: minmax(calc(var(--space-14) * 3), 1fr) minmax(calc(var(--space-14) * 3), 1fr) minmax(calc(var(--space-14) * 3), 1fr) minmax(0, 1.2fr);
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="date-pickers"] .dp-head-row {
+  border-top-color: transparent;
+  color: var(--text-label);
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  letter-spacing: var(--type-overline-tracking);
+}
+
+[data-page="date-pickers"] .dp-rules {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-tooltip) + var(--space-10)), 1fr));
+}
+
+[data-page="date-pickers"] .dp-rule {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--pad-command-x) var(--space-5);
+  border-radius: var(--radius-group);
+}
+
+[data-page="date-pickers"] .dp-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="date-pickers"] .dp-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-action);
+}
+
+[data-page="date-pickers"] .dp-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+[data-page="date-pickers"] .dp-copy {
+  color: var(--text-secondary);
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+}

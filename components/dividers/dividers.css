@@ -1,0 +1,166 @@
+/* Dividers. Every value comes from styles/foundations.css.
+   Content-box keeps a 0-size rule from swallowing its border. */
+
+.divider,
+.divider-rule {
+  box-sizing: content-box;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.divider {
+  display: block;
+  appearance: none;
+  transition: border-color var(--motion-fast) var(--ease-standard);
+}
+
+.divider[data-variant="line"] {
+  width: 100%;
+  height: 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+.divider[data-variant="vertical"] {
+  width: 0;
+  height: var(--size-sm);
+  border-left: var(--border-width) solid var(--border-default);
+  flex: none;
+  align-self: center;
+}
+
+.divider[data-variant="vertical"][data-size="toolbar"] {
+  height: var(--space-5);
+}
+
+.divider[data-variant="label"] {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  height: auto;
+}
+
+.divider-rule {
+  flex: 1 1 auto;
+  height: 0;
+  border-top: var(--border-width) solid var(--border-default);
+}
+
+.divider[data-variant="dot"] {
+  width: var(--size-divider-dot);
+  height: var(--size-divider-dot);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--text-disabled);
+  flex: none;
+}
+
+.divider-label {
+  flex: none;
+  font-size: var(--type-hint-size);
+  line-height: var(--type-hint-line);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.divider[data-label="overline"] .divider-label {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--type-overline-line);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+.divider[data-label="chip"] .divider-label {
+  height: var(--icon-feature);
+  padding: 0 var(--pad-chip-x);
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-pill);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.divider[data-tone="subtle"],
+.divider[data-tone="subtle"] .divider-rule {
+  border-color: var(--border-subtle);
+}
+
+.divider[data-tone="default"],
+.divider[data-tone="default"] .divider-rule {
+  border-color: var(--border-default);
+}
+
+.divider[data-tone="strong"],
+.divider[data-tone="strong"] .divider-rule {
+  border-color: var(--border-strong);
+}
+
+.divider[data-tone="tint"],
+.divider[data-tone="tint"] .divider-rule {
+  border-color: var(--border-tint);
+}
+
+.divider[data-tone="control"],
+.divider[data-tone="control"] .divider-rule {
+  border-color: var(--border-control);
+}
+
+.divider[data-tone="inverse"],
+.divider[data-tone="inverse"] .divider-rule {
+  border-color: var(--border-on-inverse);
+}
+
+.divider[data-tone="danger"],
+.divider[data-tone="danger"] .divider-rule {
+  border-color: var(--border-danger);
+}
+
+.divider[data-tone="danger"] .divider-label {
+  color: var(--status-danger);
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+.divider[data-tone="dashed"],
+.divider[data-tone="dashed"] .divider-rule {
+  border-style: dashed;
+  border-color: var(--border-control);
+}
+
+.divider[data-variant="line"][data-weight="hairline"] {
+  border-top-width: var(--border-width-hairline);
+}
+
+.divider[data-variant="vertical"][data-weight="hairline"] {
+  border-left-width: var(--border-width-hairline);
+}
+
+.divider[data-variant="label"][data-weight="hairline"] .divider-rule {
+  border-top-width: var(--border-width-hairline);
+}
+
+.divider[data-inset="text"] {
+  width: auto;
+  margin-inline-start: var(--inset-row);
+}
+
+.divider[data-inset="section"] {
+  width: auto;
+  margin-inline: var(--space-4);
+}
+
+.divider[data-visible="false"],
+.divider[data-visible="false"] .divider-rule {
+  border-color: transparent;
+}

@@ -1,0 +1,729 @@
+/* Dividers documentation layout. Visual values come from styles/foundations.css. */
+
+[data-page="dividers"] .dv-cards,
+[data-page="dividers"] .dv-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-card-min)), 1fr));
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="dividers"] .dv-card,
+[data-page="dividers"] .dv-rule,
+[data-page="dividers"] .dv-sheet {
+  background: var(--surface-card);
+}
+
+[data-page="dividers"] .dv-card {
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="dividers"] .dv-sketch {
+  height: calc(var(--space-14) + var(--space-14) + var(--space-2));
+  border-radius: var(--radius-control);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+[data-page="dividers"] .dv-sketch[data-bg="subtle"] {
+  background: var(--surface-subtle);
+}
+
+[data-page="dividers"] .dv-sketch[data-bg="canvas"] {
+  background: var(--surface-canvas);
+}
+
+[data-page="dividers"] .dv-sketch[data-bg="card"] {
+  background: var(--surface-card);
+}
+
+[data-page="dividers"] .dv-sketch[data-gap="loose"] {
+  gap: calc(var(--space-4) + var(--gap-input-label));
+}
+
+[data-page="dividers"] .dv-sketch[data-gap="cards"] {
+  gap: var(--space-2);
+}
+
+[data-page="dividers"] .dv-bar {
+  flex: none;
+}
+
+[data-page="dividers"] .dv-bar[data-h="20"] {
+  height: var(--space-5);
+}
+
+[data-page="dividers"] .dv-bar[data-h="28"] {
+  height: var(--space-7);
+}
+
+[data-page="dividers"] .dv-bar[data-h="30"] {
+  height: calc(var(--space-7) + var(--gap-input-label));
+}
+
+[data-page="dividers"] .dv-bar[data-radius="badge"] {
+  border-radius: var(--radius-badge);
+}
+
+[data-page="dividers"] .dv-bar[data-radius="compact"] {
+  border-radius: var(--radius-compact);
+}
+
+[data-page="dividers"] .dv-bar[data-radius="top"] {
+  border-radius: var(--radius-s) var(--radius-s) 0 0;
+}
+
+[data-page="dividers"] .dv-bar[data-radius="bottom"] {
+  border-radius: 0 0 var(--radius-s) var(--radius-s);
+}
+
+[data-page="dividers"] .dv-bar[data-bg="tint"] {
+  background: var(--border-tint);
+}
+
+[data-page="dividers"] .dv-bar[data-bg="card"] {
+  background: var(--surface-card);
+}
+
+[data-page="dividers"] .dv-bar[data-bg="subtle"] {
+  background: var(--surface-subtle);
+}
+
+[data-page="dividers"] .dv-bar[data-bg="brand"] {
+  background: var(--brand-100);
+}
+
+[data-page="dividers"] .dv-name {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+[data-page="dividers"] .dv-index {
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--brand-600);
+}
+
+[data-page="dividers"] .dv-name strong,
+[data-page="dividers"] .dv-line strong,
+[data-page="dividers"] .dv-fact-title {
+  font-size: var(--type-label-m-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="dividers"] .dv-card > span,
+[data-page="dividers"] .dv-note,
+[data-page="dividers"] .dv-line > p {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+}
+
+[data-page="dividers"] .dv-card > span:last-child {
+  font-size: var(--type-hint-size);
+  line-height: var(--type-hint-line);
+}
+
+[data-page="dividers"] .dv-sheet {
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2) var(--pad-card-x);
+}
+
+[data-page="dividers"] .dv-line {
+  display: grid;
+  grid-template-columns: minmax(var(--size-segment-lg), var(--layout-card-min)) minmax(0, 1fr) minmax(0, var(--layout-sidebar));
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-5) 0;
+}
+
+[data-page="dividers"] .dv-line + .dv-line {
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="dividers"] .dv-line .dv-spec,
+[data-page="dividers"] .dv-amount,
+[data-page="dividers"] .dv-kicker,
+[data-page="dividers"] .dv-sum,
+[data-page="dividers"] .dv-space-head,
+[data-page="dividers"] .dv-space:not(.dv-space-head) b {
+  font-family: var(--font-mono);
+}
+
+[data-page="dividers"] .dv-spec {
+  display: block;
+  color: var(--text-tertiary);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+[data-page="dividers"] .dv-well {
+  height: var(--space-14);
+  border-radius: var(--radius-m);
+  background: var(--surface-card);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+}
+
+[data-page="dividers"] .dv-well[data-surface="subtle"] {
+  background: var(--surface-subtle);
+}
+
+[data-page="dividers"] .dv-well[data-surface="inverse"] {
+  background: var(--surface-inverse);
+}
+
+[data-page="dividers"] .dv-well .divider {
+  flex: 1;
+  width: auto;
+}
+
+[data-page="dividers"] .dv-panel {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="dividers"] .dv-panel-inset {
+  padding-inline: calc(var(--space-5) + var(--gap-input-label));
+}
+
+[data-page="dividers"] .dv-panel-copy {
+  padding: calc(var(--space-5) + var(--gap-input-label)) var(--space-6);
+}
+
+[data-page="dividers"] .dv-kicker {
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+[data-page="dividers"] .dv-list,
+[data-page="dividers"] .dv-bleed {
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-l);
+}
+
+[data-page="dividers"] .dv-list {
+  padding: 0 var(--space-4);
+}
+
+[data-page="dividers"] .dv-row,
+[data-page="dividers"] .dv-activity-row,
+[data-page="dividers"] .dv-stats,
+[data-page="dividers"] .dv-toolbar,
+[data-page="dividers"] .dv-setting {
+  display: flex;
+  align-items: center;
+}
+
+[data-page="dividers"] .dv-row,
+[data-page="dividers"] .dv-activity-row {
+  gap: var(--space-3);
+}
+
+[data-page="dividers"] .dv-avatar,
+[data-page="dividers"] .dv-avatar-sm {
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="dividers"] .dv-avatar {
+  width: var(--size-md);
+  height: var(--size-md);
+  font-size: var(--type-hint-size);
+}
+
+[data-page="dividers"] .dv-avatar-sm {
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  font-size: var(--type-caption-size);
+}
+
+[data-page="dividers"] .dv-row-main,
+[data-page="dividers"] .dv-activity-main {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--icon-gap-default);
+}
+
+[data-page="dividers"] .dv-row-main {
+  padding: var(--pad-row-y) 0;
+}
+
+[data-page="dividers"] .dv-activity-main {
+  min-height: var(--size-input);
+}
+
+[data-page="dividers"] .dv-row-main .divider,
+[data-page="dividers"] .dv-activity-main .divider,
+[data-page="dividers"] .dv-setting .divider {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  width: auto;
+}
+
+[data-page="dividers"] .dv-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+[data-page="dividers"] .dv-merchant,
+[data-page="dividers"] .dv-sub {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-page="dividers"] .dv-merchant {
+  font-size: var(--type-menu-size);
+  font-weight: var(--font-weight-medium);
+}
+
+[data-page="dividers"] .dv-sub {
+  font-size: var(--type-caption-size);
+  color: var(--text-tertiary);
+}
+
+[data-page="dividers"] .dv-amount {
+  white-space: nowrap;
+}
+
+[data-page="dividers"] .dv-row-main .dv-amount,
+[data-page="dividers"] .dv-activity-main .dv-amount,
+[data-page="dividers"] .dv-misuse-row .dv-amount {
+  font-weight: var(--font-weight-medium);
+}
+
+[data-page="dividers"] .dv-row-main .dv-amount {
+  font-size: var(--type-compact-size);
+}
+
+[data-page="dividers"] .dv-activity-main .dv-merchant {
+  font-size: var(--type-body-m-size);
+}
+
+[data-page="dividers"] .dv-activity-main .dv-amount {
+  font-size: var(--type-menu-size);
+}
+
+[data-page="dividers"] .dv-bleed {
+  overflow: hidden;
+}
+
+[data-page="dividers"] .dv-bleed-head,
+[data-page="dividers"] .dv-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--pad-row-y) var(--space-4);
+  font-size: var(--type-compact-size);
+}
+
+[data-page="dividers"] .dv-bleed-head strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="dividers"] .dv-total {
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="dividers"] .dv-total .dv-amount {
+  font-weight: inherit;
+}
+
+[data-page="dividers"] .dv-bleed-head span,
+[data-page="dividers"] .dv-muted {
+  color: var(--text-tertiary);
+}
+
+[data-page="dividers"] .dv-bleed-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="dividers"] .dv-bleed-body div,
+[data-page="dividers"] .dv-total {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--icon-gap-default);
+}
+
+[data-page="dividers"] .dv-total {
+  padding: var(--space-3) var(--space-4) var(--pad-row-y);
+}
+
+[data-page="dividers"] .dv-note[data-tone="danger"] {
+  color: var(--status-danger);
+}
+
+[data-page="dividers"] .dv-misuse {
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-l);
+  background: var(--surface-subtle);
+  padding: var(--icon-gap-inline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-inline);
+}
+
+[data-page="dividers"] .dv-misuse-row {
+  border: var(--border-width) solid var(--border-strong);
+  border-bottom-width: var(--border-width-emphasis);
+  border-bottom-color: var(--text-disabled);
+  border-radius: var(--radius-compact);
+  background: var(--surface-card);
+  padding: var(--icon-gap-default) var(--pad-chip-x);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--icon-gap-default);
+  font-size: var(--type-compact-size);
+}
+
+[data-page="dividers"] .dv-label-stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-5) + var(--gap-input-label));
+}
+
+[data-page="dividers"] .dv-inline-stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-4) + var(--gap-input-label));
+}
+
+[data-page="dividers"] .dv-facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+[data-page="dividers"] .dv-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--icon-gap-inline);
+  color: var(--text-tertiary);
+  font-size: var(--type-hint-size);
+}
+
+[data-page="dividers"] .dv-stats {
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  font-size: var(--type-compact-size);
+}
+
+[data-page="dividers"] .dv-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-page="dividers"] .dv-stat span {
+  font-size: var(--type-caption-size);
+  color: var(--text-tertiary);
+}
+
+[data-page="dividers"] .dv-stat b {
+  font-family: var(--font-mono);
+  font-size: var(--type-input-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="dividers"] .dv-toolbar {
+  gap: var(--icon-gap-default);
+}
+
+[data-page="dividers"] .dv-chip,
+[data-page="dividers"] .dv-icon-btn {
+  height: var(--size-input-sm);
+  border: var(--border-width) solid var(--border-control);
+  border-radius: var(--radius-pill);
+  font-size: var(--type-hint-size);
+  display: flex;
+  align-items: center;
+}
+
+[data-page="dividers"] .dv-chip {
+  padding: 0 var(--pad-chip-x);
+}
+
+[data-page="dividers"] .dv-icon-btn {
+  width: var(--size-input-sm);
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+[data-page="dividers"] .dv-phone {
+  border-radius: var(--radius-sheet);
+  background: var(--surface-subtle);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+[data-page="dividers"] .dv-group-label {
+  padding: var(--icon-gap-inline) var(--space-1) 0;
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+[data-page="dividers"] .dv-group-label + .dv-group-label,
+[data-page="dividers"] .dv-phone .dv-group-label:not(:first-child) {
+  padding-top: var(--pad-modal-footer-top);
+}
+
+[data-page="dividers"] .dv-group {
+  border-radius: var(--radius-group);
+  background: var(--surface-card);
+  padding-inline-start: var(--space-4);
+}
+
+[data-page="dividers"] .dv-setting {
+  position: relative;
+  min-height: var(--size-control-mobile);
+  padding-inline-end: var(--space-4);
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--type-body-m-size);
+}
+
+[data-page="dividers"] .dv-setting-meta,
+[data-page="dividers"] .dv-activity-main {
+  font-size: var(--type-compact-size);
+}
+
+[data-page="dividers"] .dv-setting-meta {
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+[data-page="dividers"] .dv-setting-meta .hala-icon {
+  width: var(--icon-badge-lg);
+  height: var(--icon-badge-lg);
+}
+
+[data-page="dividers"] .dv-setting-meta[data-tone="quiet"] {
+  color: var(--text-disabled);
+}
+
+[data-page="dividers"] .dv-day {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+[data-page="dividers"] .dv-day-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-2) var(--space-1) 0;
+}
+
+[data-page="dividers"] .dv-day-head strong {
+  font-size: var(--type-hint-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+[data-page="dividers"] .dv-sum {
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+}
+
+[data-page="dividers"] .dv-activity {
+  border-radius: var(--radius-group);
+  background: var(--surface-card);
+  padding: 0 var(--space-4);
+}
+
+[data-page="dividers"] .dv-activity-main {
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-medium);
+}
+
+[data-page="dividers"] .dv-activity-main .dv-amount {
+  font-size: var(--type-menu-size);
+}
+
+[data-page="dividers"] .dv-scroll-frame {
+  position: relative;
+  height: calc(var(--space-14) * 5 + var(--space-5));
+  border-radius: var(--radius-sheet);
+  background: var(--surface-subtle);
+  overflow: hidden;
+}
+
+[data-page="dividers"] .dv-sticky {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  height: var(--size-input);
+  background: var(--surface-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--type-input-size);
+  font-weight: var(--font-weight-semibold);
+  z-index: 1;
+}
+
+[data-page="dividers"] .dv-scroller {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: var(--layout-topbar) var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  scrollbar-width: none;
+}
+
+[data-page="dividers"] .dv-scroller::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+[data-page="dividers"] .dv-scroll-row {
+  flex: none;
+  height: var(--size-control-mobile);
+  border-radius: var(--radius-control);
+  background: var(--surface-card);
+  padding: 0 var(--pad-input-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--icon-gap-default);
+  font-size: var(--type-compact-size);
+}
+
+[data-page="dividers"] .dv-space {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) calc(var(--size-otp) + var(--space-2) + var(--gap-input-label)) calc(var(--size-otp) + var(--space-2) + var(--gap-input-label)) minmax(var(--size-segment-lg), 1fr);
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-3) 0;
+  font-size: var(--type-compact-size);
+}
+
+[data-page="dividers"] .dv-space-head {
+  padding: var(--pad-row-y) 0;
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+[data-page="dividers"] .dv-space + .dv-space {
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="dividers"] .dv-space:not(.dv-space-head) b {
+  font-size: var(--type-hint-size);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-secondary);
+}
+
+[data-page="dividers"] .dv-scale {
+  height: var(--size-presence);
+  border-radius: var(--radius-xs);
+  background: var(--brand-300);
+}
+
+[data-page="dividers"] .dv-scale[data-scale="0"] { width: 0; }
+[data-page="dividers"] .dv-scale[data-scale="6"] { width: 6%; }
+[data-page="dividers"] .dv-scale[data-scale="12"] { width: 12%; }
+[data-page="dividers"] .dv-scale[data-scale="24"] { width: 24%; }
+[data-page="dividers"] .dv-scale[data-scale="56"] { width: 56%; }
+
+[data-page="dividers"] .dv-rule {
+  border-radius: var(--radius-group);
+  padding: calc(var(--space-4) + var(--gap-input-label)) var(--space-5);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+[data-page="dividers"] .dv-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+[data-page="dividers"] .dv-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-700);
+}
+
+[data-page="dividers"] .dv-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+[data-page="dividers"] .dv-mark .hala-icon {
+  width: var(--icon-badge-trend);
+  height: var(--icon-badge-trend);
+}
+
+[data-page="dividers"] .dv-rule p {
+  margin: 0;
+  font-size: var(--type-compact-size);
+  line-height: var(--type-compact-line);
+}
+
+[data-page="dividers"] .dv-sheet-scroll {
+  overflow-x: auto;
+}
+
+@media (max-width: 599px) {
+  [data-page="dividers"] .dv-line,
+  [data-page="dividers"] .dv-space {
+    grid-template-columns: 1fr;
+  }
+}

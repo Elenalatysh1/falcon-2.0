@@ -1,0 +1,36 @@
+---
+description: Falcon 2.0 design system — platforms, tokens, and cross-platform consistency
+alwaysApply: true
+---
+
+# Falcon 2.0
+
+Falcon 2.0 is the design system for Web, Android, and iOS. One system, three implementations.
+
+## Platforms
+
+- Specify every component, token, and pattern for Web, Android, and iOS.
+- A component is incomplete until all three platforms are specified, or a written exception names the platforms it skips and why.
+- Keep meaning, hierarchy, and tokens the same. Adapt interaction to the platform: keyboard and hover on web, touch and system gestures on mobile.
+
+## Tokens
+
+Color, typography, spacing, radius, elevation, and motion come from `styles/foundations.css`. Reference those variables by name.
+
+```css
+/* ❌ BAD */
+button { background: #009A78; padding: 0 20px; }
+
+/* ✅ GOOD */
+button { background: var(--gradient-primary); padding: 0 var(--pad-button-x); }
+```
+
+## Naming
+
+Use the same component and token names on every platform: `Button`, `brand/500`, `space/4`. Map those names into platform syntax. Do not invent a second palette.
+
+## Accessibility
+
+- Text contrast meets WCAG AA.
+- Interactive targets are at least 44×44 px on web, 48×48 dp on Android, and 44×44 pt on iOS.
+- Every control has an accessible name. Web shows a visible focus ring. Android uses `contentDescription`. iOS uses VoiceOver labels.

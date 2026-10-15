@@ -1,0 +1,249 @@
+/* Button chapter layout. Buttons themselves are components/button/button.css. */
+
+[data-page="button"] .btn-sheet,
+[data-page="button"] .btn-variant,
+[data-page="button"] .btn-panel {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+}
+
+[data-page="button"] .btn-sheet {
+  padding: var(--space-2) var(--pad-card-x);
+}
+
+[data-page="button"] .btn-size {
+  display: grid;
+  grid-template-columns: minmax(calc(var(--space-14) * 2 + var(--space-10)), calc(var(--space-12) * 4)) minmax(0, 1fr) minmax(0, calc(var(--space-14) * 4 + var(--space-8)));
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-5) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="button"] .btn-size:first-child {
+  border-top-color: transparent;
+}
+
+[data-page="button"] .btn-name {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+[data-page="button"] .btn-spec,
+[data-page="button"] .btn-caption {
+  font-family: var(--font-mono);
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-tertiary);
+}
+
+[data-page="button"] .btn-row,
+[data-page="button"] .btn-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+[data-page="button"] .btn-use,
+[data-page="button"] .btn-help {
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+  color: var(--text-tertiary);
+}
+
+[data-page="button"] .btn-state-head,
+[data-page="button"] .btn-variant {
+  display: grid;
+  grid-template-columns: minmax(calc(var(--space-14) * 3 + var(--space-3)), calc(var(--space-14) * 4)) repeat(6, minmax(0, 1fr));
+  gap: var(--space-3);
+  align-items: center;
+}
+
+[data-page="button"] .btn-state-head {
+  padding: 0 var(--pad-card-x);
+}
+
+[data-page="button"] .btn-state-head span {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+[data-page="button"] .btn-variants {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="button"] .btn-variant {
+  padding: var(--space-5) var(--pad-card-x);
+}
+
+[data-page="button"] .btn-variant-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-right: var(--space-2);
+}
+
+[data-page="button"] .btn-variant-copy strong {
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="button"] .btn-cell {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2) 0;
+}
+
+[data-page="button"] .btn-cell .button {
+  width: 100%;
+  max-width: calc(var(--space-14) * 2 + var(--space-10));
+}
+
+[data-page="button"] .btn-specs,
+[data-page="button"] .btn-rules,
+[data-page="button"] .btn-panels,
+[data-page="button"] .btn-split {
+  display: grid;
+  gap: var(--space-3);
+}
+
+[data-page="button"] .btn-specs,
+[data-page="button"] .btn-rules {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 4 + var(--space-4)), 1fr));
+}
+
+[data-page="button"] .btn-panels,
+[data-page="button"] .btn-split {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 5 + var(--space-8)), 1fr));
+}
+
+[data-page="button"] .btn-spec-card,
+[data-page="button"] .btn-rule {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+[data-page="button"] .btn-spec-card strong,
+[data-page="button"] .btn-rule {
+  font-size: var(--type-body-s-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+[data-page="button"] .btn-rule {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--type-body-s-line);
+}
+
+[data-page="button"] .btn-mark {
+  width: var(--icon-nav);
+  height: var(--icon-nav);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="button"] .btn-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-600);
+}
+
+[data-page="button"] .btn-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+[data-page="button"] .btn-panel {
+  padding: var(--pad-card-y) var(--pad-card-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+[data-page="button"] .btn-panel .btn-cluster {
+  gap: var(--space-6);
+  align-items: flex-end;
+}
+
+[data-page="button"] .btn-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+[data-page="button"] .btn-arrow-states {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 2 + var(--space-6)), 1fr));
+  gap: var(--space-4);
+}
+
+[data-page="button"] .btn-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+[data-page="button"] .btn-block .kicker {
+  margin-top: var(--space-2);
+}
+
+[data-page="button"] .btn-block .kicker:first-child {
+  margin-top: 0;
+}
+
+[data-page="button"] .btn-track {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--border-subtle);
+  align-self: flex-start;
+}
+
+[data-page="button"] .btn-quick {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  max-width: calc(var(--space-14) * 6 + var(--space-1));
+}
+
+[data-page="button"] .btn-caption {
+  white-space: pre-line;
+}
+
+@media (max-width: 900px) {
+  [data-page="button"] .btn-size,
+  [data-page="button"] .btn-state-head,
+  [data-page="button"] .btn-variant {
+    grid-template-columns: 1fr;
+  }
+
+  [data-page="button"] .btn-state-head {
+    display: none;
+  }
+}
