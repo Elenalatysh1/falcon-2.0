@@ -1,0 +1,9 @@
+/* Empty states chapter. Patterns come from components/empty-states. */
+
+@media (max-width: 900px) {
+  [data-page="empty-states"] .es-charts,
+  [data-page="empty-states"] .es-anatomy,
+  [data-page="empty-states"] .es-wrow {
+    grid-template-columns: 1fr;
+  }
+}

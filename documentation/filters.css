@@ -1,0 +1,202 @@
+/* Filters chapter. Controls come from components/filters. */
+
+[data-page="filters"] .flt-panel,
+[data-page="filters"] .flt-block,
+[data-page="filters"] .flt-side,
+[data-page="filters"] .flt-rule {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+}
+
+[data-page="filters"] .flt-panel,
+[data-page="filters"] .flt-block,
+[data-page="filters"] .flt-side {
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+[data-page="filters"] .flt-label {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+[data-page="filters"] .flt-note {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-body-s-line);
+}
+
+[data-page="filters"] .flt-specimens {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--space-14) * 3 + var(--space-3)), 1fr));
+  gap: var(--icon-gap-feature);
+}
+
+[data-page="filters"] .flt-specimen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+[data-page="filters"] .flt-specimen strong {
+  font-size: var(--type-body-s-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="filters"] .flt-hint {
+  margin-top: calc(var(--space-2) * -1);
+  color: var(--text-tertiary);
+  font-size: var(--type-caption-size);
+}
+
+[data-page="filters"] .flt-blocks,
+[data-page="filters"] .flt-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-12) * 5 + var(--space-5)), 1fr));
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="filters"] .flt-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="filters"] .flt-mobile {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 6), 1fr));
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="filters"] .flt-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="filters"] .flt-side {
+  gap: var(--space-3);
+}
+
+[data-page="filters"] .flt-diff-head,
+[data-page="filters"] .flt-diff-row {
+  display: grid;
+  grid-template-columns: calc(var(--space-14) * 2) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+}
+
+[data-page="filters"] .flt-diff-head {
+  border-top-color: transparent;
+  color: var(--text-label);
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+}
+
+[data-page="filters"] .flt-diff-row strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="filters"] .flt-diff-row span {
+  color: var(--text-secondary);
+}
+
+[data-page="filters"] .flt-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="filters"] .flt-area:first-of-type {
+  border-top-color: transparent;
+}
+
+[data-page="filters"] .flt-area strong {
+  font-size: var(--type-compact-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="filters"] .flt-area-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+[data-page="filters"] .flt-area-chip {
+  height: var(--size-badge);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  color: var(--text-secondary);
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-medium);
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+[data-page="filters"] .flt-area-chip[data-primary="true"] {
+  background: var(--brand-100);
+  color: var(--status-success-text);
+}
+
+[data-page="filters"] .flt-rule {
+  border-radius: var(--radius-group);
+  padding: var(--space-5);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+[data-page="filters"] .flt-rule-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="filters"] .flt-rule-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-action);
+}
+
+[data-page="filters"] .flt-rule-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+[data-page="filters"] .flt-rule span {
+  font-size: var(--type-compact-size);
+  line-height: var(--type-body-s-line);
+}
+
+@media (max-width: 900px) {
+  [data-page="filters"] .flt-split,
+  [data-page="filters"] .flt-diff-head,
+  [data-page="filters"] .flt-diff-row {
+    grid-template-columns: 1fr;
+  }
+}

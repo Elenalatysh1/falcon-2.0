@@ -1,0 +1,16 @@
+/* Navigation chapter. Patterns come from components/navigation. */
+
+@media (max-width: 900px) {
+  [data-page="navigation"] .nv-mega,
+  [data-page="navigation"] .nv-footer-top,
+  [data-page="navigation"] .nv-which,
+  [data-page="navigation"] .nv-wrow,
+  [data-page="navigation"] .nv-cards {
+    grid-template-columns: 1fr;
+  }
+
+  [data-page="navigation"] .nv-feature {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}

@@ -1,0 +1,95 @@
+/* Time picker chapter. Controls come from components/time-picker. */
+
+[data-page="time-picker"] .tp-pair,
+[data-page="time-picker"] .tp-phones,
+[data-page="time-picker"] .tp-bottom {
+  display: grid;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="time-picker"] .tp-pair,
+[data-page="time-picker"] .tp-phones {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 5 + var(--space-10)), 1fr));
+}
+
+[data-page="time-picker"] .tp-bottom {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+}
+
+[data-page="time-picker"] .tp-which {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2) var(--space-5);
+}
+
+[data-page="time-picker"] .tp-which-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="time-picker"] .tp-which-row:first-child {
+  border-top-color: transparent;
+}
+
+[data-page="time-picker"] .tp-which-row strong {
+  font-size: var(--type-compact-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-page="time-picker"] .tp-which-row span {
+  color: var(--text-secondary);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-body-s-line);
+}
+
+[data-page="time-picker"] .tp-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 4 + var(--space-8)), 1fr));
+  gap: var(--space-3);
+}
+
+[data-page="time-picker"] .tp-rule {
+  background: var(--surface-card);
+  border-radius: var(--radius-group);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+[data-page="time-picker"] .tp-rule-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="time-picker"] .tp-rule-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-action);
+}
+
+[data-page="time-picker"] .tp-rule-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+[data-page="time-picker"] .tp-rule span:last-child {
+  font-size: var(--type-compact-size);
+  line-height: var(--type-body-s-line);
+}
+
+@media (max-width: 900px) {
+  [data-page="time-picker"] .tp-bottom {
+    grid-template-columns: 1fr;
+  }
+}

@@ -366,6 +366,10 @@
   --motion-standard: 240ms;
   --motion-emphasis: 300ms;
   --motion-sheet: 320ms;
+  --motion-spin: 800ms;
+  --motion-skeleton: 1400ms;
+  --motion-dots: 1200ms;
+  --motion-progress: 1300ms;
 
   /* Icons — Lucide 0.453. Draw with icons/api.js. */
   --icon-stroke: 1.7;

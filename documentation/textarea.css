@@ -1,0 +1,106 @@
+/* Text area chapter. Controls come from components/textarea. */
+
+[data-page="textarea"] .ta-split,
+[data-page="textarea"] .ta-variants,
+[data-page="textarea"] .ta-phones,
+[data-page="textarea"] .ta-bottom {
+  display: grid;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="textarea"] .ta-split {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+}
+
+[data-page="textarea"] .ta-variants {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 6), 1fr));
+}
+
+[data-page="textarea"] .ta-phones {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 5 + var(--space-10)), 1fr));
+}
+
+[data-page="textarea"] .ta-bottom {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+}
+
+[data-page="textarea"] .ta-which {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+[data-page="textarea"] .ta-which-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: var(--border-width) solid var(--border-subtle);
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="textarea"] .ta-which-row:first-of-type {
+  border-top-color: transparent;
+}
+
+[data-page="textarea"] .ta-which-row span:last-child {
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+[data-page="textarea"] .ta-which-row[data-area="true"] span:last-child {
+  color: var(--brand-action);
+}
+
+[data-page="textarea"] .ta-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 4 + var(--space-8)), 1fr));
+  gap: var(--space-3);
+}
+
+[data-page="textarea"] .ta-rule {
+  background: var(--surface-card);
+  border-radius: var(--radius-group);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+[data-page="textarea"] .ta-rule-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="textarea"] .ta-rule-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-action);
+}
+
+[data-page="textarea"] .ta-rule-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+[data-page="textarea"] .ta-rule span:last-child {
+  font-size: var(--type-compact-size);
+  line-height: var(--type-body-s-line);
+}
+
+@media (max-width: 900px) {
+  [data-page="textarea"] .ta-split,
+  [data-page="textarea"] .ta-bottom {
+    grid-template-columns: 1fr;
+  }
+}

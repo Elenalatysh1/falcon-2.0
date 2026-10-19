@@ -1,0 +1,65 @@
+/* Loading chapter. Controls come from components/loading. */
+
+[data-page="loading"] .ld-pair,
+[data-page="loading"] .ld-rules {
+  display: grid;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="loading"] .ld-pair {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 6 + var(--space-4)), 1fr));
+}
+
+[data-page="loading"] .ld-rules-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="loading"] .ld-rules {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 5), 1fr));
+}
+
+[data-page="loading"] .ld-rule {
+  background: var(--surface-card);
+  border-radius: var(--radius-group);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+[data-page="loading"] .ld-rule-mark {
+  width: var(--size-badge-feature);
+  height: var(--size-badge-feature);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  font-size: var(--type-caption-size);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-page="loading"] .ld-rule-mark[data-ok="true"] {
+  background: var(--brand-100);
+  color: var(--brand-action);
+}
+
+[data-page="loading"] .ld-rule-mark[data-ok="false"] {
+  background: var(--status-error-tint);
+  color: var(--status-danger);
+}
+
+[data-page="loading"] .ld-rule span:last-child {
+  font-size: var(--type-compact-size);
+  line-height: var(--type-body-s-line);
+}
+
+@media (max-width: 900px) {
+  [data-page="loading"] .ld-screens,
+  [data-page="loading"] .ld-kpis {
+    grid-template-columns: 1fr;
+  }
+}

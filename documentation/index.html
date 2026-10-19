@@ -19,6 +19,14 @@
   <link rel="stylesheet" href="../components/command-menu/command-menu.css">
   <link rel="stylesheet" href="../components/date-pickers/date-pickers.css">
   <link rel="stylesheet" href="../components/overlays/overlays.css">
+  <link rel="stylesheet" href="../components/filters/filters.css">
+  <link rel="stylesheet" href="../components/tables/tables.css">
+  <link rel="stylesheet" href="../components/textarea/textarea.css">
+  <link rel="stylesheet" href="../components/time-picker/time-picker.css">
+  <link rel="stylesheet" href="../components/breadcrumbs/breadcrumbs.css">
+  <link rel="stylesheet" href="../components/loading/loading.css">
+  <link rel="stylesheet" href="../components/empty-states/empty-states.css">
+  <link rel="stylesheet" href="../components/navigation/navigation.css">
   <link rel="stylesheet" href="buttons.css">
   <link rel="stylesheet" href="button-groups.css">
   <link rel="stylesheet" href="selection.css">
@@ -30,6 +38,14 @@
   <link rel="stylesheet" href="command-menu.css">
   <link rel="stylesheet" href="date-pickers.css">
   <link rel="stylesheet" href="overlays.css">
+  <link rel="stylesheet" href="filters.css">
+  <link rel="stylesheet" href="tables.css">
+  <link rel="stylesheet" href="textarea.css">
+  <link rel="stylesheet" href="time-picker.css">
+  <link rel="stylesheet" href="breadcrumbs.css">
+  <link rel="stylesheet" href="loading.css">
+  <link rel="stylesheet" href="empty-states.css">
+  <link rel="stylesheet" href="navigation.css">
   <link rel="stylesheet" href="getting-started.css">
   <link rel="stylesheet" href="shell.css">
 </head>
@@ -79,6 +95,14 @@
           <a class="docs-link" href="#command-menu">Command menu</a>
           <a class="docs-link" href="#date-pickers">Date pickers</a>
           <a class="docs-link" href="#overlays">Overlays</a>
+          <a class="docs-link" href="#filters"><span data-label>Filters</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
+          <a class="docs-link" href="#tables"><span data-label>Tables</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
+          <a class="docs-link" href="#textarea"><span data-label>Text area</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
+          <a class="docs-link" href="#time-picker"><span data-label>Time picker</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
+          <a class="docs-link" href="#breadcrumbs"><span data-label>Breadcrumbs</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
+          <a class="docs-link" href="#loading"><span data-label>Loading</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
+          <a class="docs-link" href="#empty-states"><span data-label>Empty states</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
+          <a class="docs-link" href="#navigation"><span data-label>Navigation</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
         </div>
       </div>
       </nav>
@@ -1784,6 +1808,397 @@
             </section>
           </main>
         </article>
+        <article class="doc-page" data-page="filters" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Filters</h1>
+            <p class="lede type-body-l">How people narrow down transactions, chart data and cards. Filters apply as soon as they change, applied filters are always visible, and every filtered view has a way back to "All". Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="filters-controls">
+              <div class="titles">
+                <h2 class="doc-h2">Filter controls</h2>
+                <p class="sub type-body-m">The building blocks. A filter pill opens a small popover; its label shows the value once set.</p>
+              </div>
+              <div data-filters="pills"></div>
+              <div data-filters="blocks"></div>
+            </section>
+            <section class="wrap" id="filters-transactions">
+              <div class="titles">
+                <h2 class="doc-h2">Transactions · web</h2>
+                <p class="sub type-body-m">Search plus the three most used filters in the bar; everything else in "More filters" (a drawer). Applied filters show as tags with the result count and "Clear all". Try combining filters until nothing matches.</p>
+              </div>
+              <div data-filters="transactions"></div>
+            </section>
+            <section class="wrap" id="filters-chart">
+              <div class="titles">
+                <h2 class="doc-h2">Chart data and cards · web</h2>
+                <p class="sub type-body-m">Charts filter in the card header: period, comparison and series toggles that double as the legend. Card lists use status tabs with counts, plus a holder filter.</p>
+              </div>
+              <div data-filters="chart"></div>
+            </section>
+            <section class="wrap" id="filters-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">A horizontal chip row under the search; the filter icon opens a full sheet. In the sheet, changes are collected and applied with one button that shows the result count. iOS and Android share this sheet.</p>
+              </div>
+              <div class="flt-mobile">
+                <div data-filters="mobile"></div>
+                <div data-filters="aside"></div>
+              </div>
+            </section>
+            <section class="wrap" id="filters-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div data-filters="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="tables" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Tables</h1>
+            <p class="lede type-body-l">One table system for transactions, cards, users, invoices and terminals. It includes 16 cell types, sorting, selection with bulk actions, expandable rows, density and column settings. On mobile, rows become list items or cards. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="tables-cells">
+              <div class="titles">
+                <h2 class="doc-h2">Cell types</h2>
+                <p class="sub type-body-m">Each column uses one type. Alignment follows the type: text on the left, numbers and amounts on the right, controls in the center.</p>
+              </div>
+              <div data-tables="cells"></div>
+            </section>
+            <section class="wrap" id="tables-full">
+              <div class="titles">
+                <h2 class="doc-h2">Full table · web</h2>
+                <p class="sub type-body-m">Card transactions waiting for review. Sort by clicking a header. Select rows to see bulk actions. Click a row to expand it. Change density, hide columns, and approve rows one at a time or in bulk.</p>
+              </div>
+              <div data-tables="spend"></div>
+            </section>
+            <section class="wrap" id="tables-more">
+              <div class="titles">
+                <h2 class="doc-h2">More table types · web</h2>
+                <p class="sub type-body-m">Tables you can edit in place, tables with totals, and the states every table needs.</p>
+              </div>
+              <div data-tables="more"></div>
+            </section>
+            <section class="wrap" id="tables-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">Tables don't fit on a phone. Turn each row into a list item (two lines on the left, amount and status on the right) or a card for rich data. Use a scrolling table only for statements.</p>
+              </div>
+              <div data-tables="mobile"></div>
+            </section>
+            <section class="wrap" id="tables-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Specs and rules</h2>
+              </div>
+              <div data-tables="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="textarea" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Text area</h1>
+            <p class="lede type-body-l">For free text longer than one line: transfer notes, card request reasons, reasons for rejecting an approval, support messages and invoice terms. It uses the same field style as the text input: floating label, 8 px radius and the same states. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="textarea-states">
+              <div class="titles">
+                <h2 class="doc-h2">States</h2>
+                <p class="sub type-body-m">Minimum 3 lines (96 px). The label sits inside the top of the field; helper text or the error goes underneath with the counter on the right.</p>
+              </div>
+              <div data-textarea="states"></div>
+            </section>
+            <section class="wrap" id="textarea-live">
+              <div class="titles">
+                <h2 class="doc-h2">Live field</h2>
+                <p class="sub type-body-m">The field grows as you type, from 3 to 8 lines, then scrolls. The counter appears at 80% of the limit and turns red when you go over. Errors show when you leave the field, not while typing.</p>
+              </div>
+              <div data-textarea="live"></div>
+            </section>
+            <section class="wrap" id="textarea-variants">
+              <div class="titles">
+                <h2 class="doc-h2">Variants · web</h2>
+                <p class="sub type-body-m">The same field adapted for different jobs.</p>
+              </div>
+              <div data-textarea="variants"></div>
+            </section>
+            <section class="wrap" id="textarea-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">Font 16 pt so iOS doesn't zoom in. When the keyboard opens, the field scrolls above it and the main button stays on top of the keyboard.</p>
+              </div>
+              <div data-textarea="mobile"></div>
+            </section>
+            <section class="wrap" id="textarea-rules">
+              <div class="titles">
+                <h2 class="doc-h2">When to use and rules</h2>
+              </div>
+              <div data-textarea="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="time-picker" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Time picker</h1>
+            <p class="lede type-body-l">For scheduling transfers and payroll, setting branch opening hours, and filtering transactions by time. Times are shown in Riyadh time (GMT+3). The 12-hour format is the default in English and 24-hour is available as a setting. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="time-states">
+              <div class="titles">
+                <h2 class="doc-h2">Field states</h2>
+                <p class="sub type-body-m">Same 60 px field as the other inputs, with a clock icon on the right. Times are in Mono so digits line up.</p>
+              </div>
+              <div data-time="states"></div>
+            </section>
+            <section class="wrap" id="time-web">
+              <div class="titles">
+                <h2 class="doc-h2">Web · time slots and columns</h2>
+                <p class="sub type-body-m">Use time slots when a fixed step is enough (scheduling, 30 min). Typing filters the list. Use hour and minute columns when you need exact minutes.</p>
+              </div>
+              <div data-time="web"></div>
+            </section>
+            <section class="wrap" id="time-hours">
+              <div class="titles">
+                <h2 class="doc-h2">Time ranges · opening hours</h2>
+                <p class="sub type-body-m">Branch hours decide when POS terminals and food delivery accept orders. Each day can be switched on or off, has a from–to range, and can have a second range for split shifts.</p>
+              </div>
+              <div data-time="hours"></div>
+            </section>
+            <section class="wrap" id="time-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">iOS uses a wheel in a bottom sheet. Android uses the Material clock dial: tap the hour, then the minutes. Both have a keyboard-entry option for exact times.</p>
+              </div>
+              <div data-time="mobile"></div>
+            </section>
+            <section class="wrap" id="time-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Which picker and rules</h2>
+              </div>
+              <div data-time="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="breadcrumbs" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Breadcrumbs</h1>
+            <p class="lede type-body-l">Breadcrumbs show where a page sits and let people go back up one or more levels. On web they appear on detail pages two or more levels deep. Mobile apps use a back button instead. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="breadcrumbs-states">
+              <div class="titles">
+                <h2 class="doc-h2">Anatomy and states</h2>
+                <p class="sub type-body-m">14 px Plex Sans. Links in tertiary text, the current page in ink and not clickable. Chevron separators at 14 px, 6 px gap on each side.</p>
+              </div>
+              <div data-crumbs="states"></div>
+            </section>
+            <section class="wrap" id="breadcrumbs-header">
+              <div class="titles">
+                <h2 class="doc-h2">In the page header · web</h2>
+                <p class="sub type-body-m">Above the page title, 12 px gap. Click any crumb to move up; the page below changes with it.</p>
+              </div>
+              <div data-crumbs="header"></div>
+            </section>
+            <section class="wrap" id="breadcrumbs-long">
+              <div class="titles">
+                <h2 class="doc-h2">Long paths and long names</h2>
+                <p class="sub type-body-m">With more than 4 levels, keep the first and the last two and collapse the middle into "…", which opens a menu. Long names are truncated at 200 px with a tooltip; the current page is never truncated.</p>
+              </div>
+              <div data-crumbs="long"></div>
+            </section>
+            <section class="wrap" id="breadcrumbs-narrow">
+              <div class="titles">
+                <h2 class="doc-h2">Narrow web and Arabic</h2>
+                <p class="sub type-body-m">Below 600 px, show only a back link to the parent. In Arabic the order runs right to left and the chevrons point left.</p>
+              </div>
+              <div data-crumbs="narrow"></div>
+            </section>
+            <section class="wrap" id="breadcrumbs-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">No breadcrumbs. The back button carries the parent's name on iOS and an arrow on Android. Tap the rows to go deeper and back to see the title change.</p>
+              </div>
+              <div data-crumbs="mobile"></div>
+            </section>
+            <section class="wrap" id="breadcrumbs-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div data-crumbs="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="loading" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Loading states</h1>
+            <p class="lede type-body-l">Skeletons for content, spinners inside buttons and small areas, progress bars for longer jobs, and the timing rules that decide which to show. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="loading-which">
+              <div class="titles">
+                <h2 class="doc-h2">Which loader to use</h2>
+                <p class="sub type-body-m">Decide by how long it takes and whether you know the layout of what is coming.</p>
+              </div>
+              <div data-load="which"></div>
+            </section>
+            <section class="wrap" id="loading-parts">
+              <div class="titles">
+                <h2 class="doc-h2">Skeleton parts</h2>
+                <p class="sub type-body-m">Neutral shapes with a soft light sweep every 1.4 s. They match the size and radius of the real element so nothing jumps when content arrives.</p>
+              </div>
+              <div data-load="parts"></div>
+            </section>
+            <section class="wrap" id="loading-screens">
+              <div class="titles">
+                <h2 class="doc-h2">Skeleton screens · web</h2>
+                <p class="sub type-body-m">Reload to see the skeleton, then the real content fade in. Labels and headers that are already known stay visible.</p>
+              </div>
+              <div data-load="screens"></div>
+            </section>
+            <section class="wrap" id="loading-spinners">
+              <div class="titles">
+                <h2 class="doc-h2">Spinners and indicators</h2>
+                <p class="sub type-body-m">A ring spinner in three sizes, inline dots for background work, and a thin top bar while a page changes.</p>
+              </div>
+              <div data-load="spinners"></div>
+            </section>
+            <section class="wrap" id="loading-buttons">
+              <div class="titles">
+                <h2 class="doc-h2">Buttons and fields</h2>
+                <p class="sub type-body-m">The button keeps its width, the label is replaced by a spinner, and it can't be pressed twice. Click to try.</p>
+              </div>
+              <div data-load="buttons"></div>
+            </section>
+            <section class="wrap" id="loading-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">Skeletons on first load, pull to refresh with the system spinner, and "loading more" at the end of lists.</p>
+              </div>
+              <div data-load="mobile"></div>
+            </section>
+            <section class="wrap" id="loading-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Timing and rules</h2>
+              </div>
+              <div data-load="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="empty-states" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Patterns</p>
+            <h1 class="type-display">Empty and error states</h1>
+            <p class="lede type-body-l">What every chart, table, list and screen shows when there is nothing to show yet, nothing matches, something failed, or the user can't see it. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="empty-anatomy">
+              <div class="titles">
+                <h2 class="doc-h2">Anatomy</h2>
+                <p class="sub type-body-m">Icon, title, one sentence, one action. Centered in the space the content would take, so the layout doesn't jump when data arrives.</p>
+              </div>
+              <div data-empty="anatomy"></div>
+            </section>
+            <section class="wrap" id="empty-charts">
+              <div class="titles">
+                <h2 class="doc-h2">Charts</h2>
+                <p class="sub type-body-m">Keep the axes and the card size. Show a flat dashed line instead of hiding the chart, so people see where data will appear.</p>
+              </div>
+              <div data-empty="charts"></div>
+            </section>
+            <section class="wrap" id="empty-tables">
+              <div class="titles">
+                <h2 class="doc-h2">Tables and lists</h2>
+                <p class="sub type-body-m">Keep the header row and filters visible so people can change what they're looking at.</p>
+              </div>
+              <div data-empty="tables"></div>
+            </section>
+            <section class="wrap" id="empty-widgets">
+              <div class="titles">
+                <h2 class="doc-h2">Cards and widgets</h2>
+                <p class="sub type-body-m">Smaller spaces get a compact version: icon left, text right, one link.</p>
+              </div>
+              <div data-empty="widgets"></div>
+            </section>
+            <section class="wrap" id="empty-pages">
+              <div class="titles">
+                <h2 class="doc-h2">Full-page errors</h2>
+                <p class="sub type-body-m">When the whole page can't load. Keep the sidebar and header if they work, so people can go elsewhere.</p>
+              </div>
+              <div data-empty="pages"></div>
+            </section>
+            <section class="wrap" id="empty-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile app · iOS and Android</h2>
+                <p class="sub type-body-m">Same structure; the action becomes a full-width button at the bottom, and pull-to-refresh replaces Retry where it makes sense.</p>
+              </div>
+              <div data-empty="mobile"></div>
+            </section>
+            <section class="wrap" id="empty-writing">
+              <div class="titles">
+                <h2 class="doc-h2">Writing</h2>
+                <p class="sub type-body-m">Calm, specific, and about what happens next. Never blame the user.</p>
+              </div>
+              <div data-empty="writing"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="navigation" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Navigation</h1>
+            <p class="lede type-body-l">Sidebars, headers and footers for the Hala Business web app and the marketing site, plus the mobile tab bar, top bars and drawer. Every example with a "Live" tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="nav-sidebars">
+              <div class="titles">
+                <h2 class="doc-h2">Sidebars · web app</h2>
+                <p class="sub type-body-m">The main navigation of Hala Business. Expanded at 272 px, collapsed to an 80 px icon rail. People choose; the app remembers. Below 1024 px it becomes a drawer behind a menu button.</p>
+              </div>
+              <div data-nav="sidebar"></div>
+            </section>
+            <section class="wrap" id="nav-mobile-web">
+              <div class="titles">
+                <h2 class="doc-h2">Sidebar · web at phone sizes</h2>
+                <p class="sub type-body-m">The Hala Business web app opened in a phone browser. The sidebar becomes a full-height drawer behind a menu button in a 56 px top bar. It keeps every section and sub-item, with 48 px rows for touch. Two options: drawer only, or drawer plus a bottom bar for the four most used areas.</p>
+              </div>
+              <div data-nav="mobile-web"></div>
+            </section>
+            <section class="wrap" id="nav-headers">
+              <div class="titles">
+                <h2 class="doc-h2">Headers · web</h2>
+                <p class="sub type-body-m">Three headers for three contexts. The app header sits next to the sidebar; the marketing header is the site's only navigation; the flow header removes navigation so people finish the task.</p>
+              </div>
+              <div data-nav="headers"></div>
+            </section>
+            <section class="wrap" id="nav-footers">
+              <div class="titles">
+                <h2 class="doc-h2">Footers · web</h2>
+                <p class="sub type-body-m">The marketing site has a full footer with regulatory details. The app has a slim one, and forms have a sticky action footer.</p>
+              </div>
+              <div data-nav="footers"></div>
+            </section>
+            <section class="wrap" id="nav-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">A tab bar for the 4–5 main areas, a top bar on every screen, and a "More" screen for everything else. The same structure on both platforms, with platform-native back and title alignment.</p>
+              </div>
+              <div data-nav="mobile"></div>
+            </section>
+            <section class="wrap" id="nav-guide">
+              <div class="titles">
+                <h2 class="doc-h2">Which navigation to use</h2>
+              </div>
+              <div data-nav="guide"></div>
+            </section>
+          </main>
+        </article>
       </div>
       <aside class="docs-toc" data-toc hidden>
         <p class="docs-toc-label">On this page</p>
@@ -1806,6 +2221,14 @@
   <script src="../components/command-menu/command-menu.js"></script>
   <script src="../components/date-pickers/date-pickers.js"></script>
   <script src="../components/overlays/overlays.js"></script>
+  <script src="../components/filters/filters.js"></script>
+  <script src="../components/tables/tables.js"></script>
+  <script src="../components/textarea/textarea.js"></script>
+  <script src="../components/time-picker/time-picker.js"></script>
+  <script src="../components/breadcrumbs/breadcrumbs.js"></script>
+  <script src="../components/loading/loading.js"></script>
+  <script src="../components/empty-states/empty-states.js"></script>
+  <script src="../components/navigation/navigation.js"></script>
   <script src="buttons.js"></script>
   <script src="button-groups.js"></script>
   <script src="selection.js"></script>
@@ -1817,6 +2240,14 @@
   <script src="command-menu.js"></script>
   <script src="date-pickers.js"></script>
   <script src="overlays.js"></script>
+  <script src="filters.js"></script>
+  <script src="tables.js"></script>
+  <script src="textarea.js"></script>
+  <script src="time-picker.js"></script>
+  <script src="breadcrumbs.js"></script>
+  <script src="loading.js"></script>
+  <script src="empty-states.js"></script>
+  <script src="navigation.js"></script>
   <script src="introduction.js"></script>
   <script src="how-to-use.js"></script>
   <script src="docs.js"></script>
