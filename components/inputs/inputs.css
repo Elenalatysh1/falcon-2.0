@@ -463,6 +463,10 @@ button.input-box {
   color: var(--brand-600);
 }
 
+.input[data-warning="true"] .input-hint {
+  color: var(--status-warning-text);
+}
+
 .input[data-disabled="true"] .input-hint {
   color: var(--control-border);
 }

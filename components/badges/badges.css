@@ -358,7 +358,7 @@
 
 .badge[data-variant="tag"] {
   height: var(--size-sm);
-  padding: 0 var(--space-1) 0 var(--space-3);
+  padding: 0 var(--space-3);
   background: var(--surface-sunken);
   border-color: var(--border-default);
   color: var(--text-primary);
@@ -373,6 +373,10 @@
 
 .badge-value {
   font-weight: var(--font-weight-semibold);
+}
+
+.badge[data-variant="tag"]:has(.badge-remove) {
+  padding-inline-end: var(--space-1);
 }
 
 .badge-remove {

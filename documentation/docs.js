@@ -87,7 +87,16 @@ function show() {
     else link.removeAttribute("aria-current");
   });
   const current = document.querySelector(".docs-link[aria-current='page']");
-  if (current) current.scrollIntoView({ block: "nearest" });
+  if (current) {
+    const group = current.closest(".docs-group");
+    const toggle = group?.querySelector(".docs-group-btn");
+    const list = group?.querySelector(".docs-group-list");
+    if (toggle && list) {
+      toggle.setAttribute("aria-expanded", "true");
+      list.hidden = false;
+    }
+    current.scrollIntoView({ block: "nearest" });
+  }
   buildToc(page, route.page);
   document.title = `${pageTitle(route)} · Falcon 2.0`;
   side.classList.remove("is-open");

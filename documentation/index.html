@@ -46,6 +46,11 @@
   <link rel="stylesheet" href="loading.css">
   <link rel="stylesheet" href="empty-states.css">
   <link rel="stylesheet" href="navigation.css">
+  <link rel="stylesheet" href="workflows.css">
+  <link rel="stylesheet" href="fintech.css">
+  <link rel="stylesheet" href="banking.css">
+  <link rel="stylesheet" href="card.css">
+  <link rel="stylesheet" href="dash.css">
   <link rel="stylesheet" href="getting-started.css">
   <link rel="stylesheet" href="shell.css">
 </head>
@@ -95,14 +100,27 @@
           <a class="docs-link" href="#command-menu">Command menu</a>
           <a class="docs-link" href="#date-pickers">Date pickers</a>
           <a class="docs-link" href="#overlays">Overlays</a>
-          <a class="docs-link" href="#filters"><span data-label>Filters</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
-          <a class="docs-link" href="#tables"><span data-label>Tables</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
-          <a class="docs-link" href="#textarea"><span data-label>Text area</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
-          <a class="docs-link" href="#time-picker"><span data-label>Time picker</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
-          <a class="docs-link" href="#breadcrumbs"><span data-label>Breadcrumbs</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
-          <a class="docs-link" href="#loading"><span data-label>Loading</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
-          <a class="docs-link" href="#empty-states"><span data-label>Empty states</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
-          <a class="docs-link" href="#navigation"><span data-label>Navigation</span><span class="badge" data-variant="feature" data-tone="brand" data-size="sm">New</span></a>
+          <a class="docs-link" href="#filters">Filters</a>
+          <a class="docs-link" href="#tables">Tables</a>
+          <a class="docs-link" href="#textarea">Text area</a>
+          <a class="docs-link" href="#time-picker">Time picker</a>
+          <a class="docs-link" href="#breadcrumbs">Breadcrumbs</a>
+          <a class="docs-link" href="#loading">Loading</a>
+          <a class="docs-link" href="#empty-states">Empty states</a>
+          <a class="docs-link" href="#navigation">Navigation</a>
+        </div>
+      </div>
+      <div class="docs-group">
+        <button class="docs-group-btn" type="button" aria-expanded="true">
+          <span>Patterns</span>
+          <span class="docs-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="docs-group-list">
+          <a class="docs-link" href="#fintech">Fintech core</a>
+          <a class="docs-link" href="#banking">Banking</a>
+          <a class="docs-link" href="#card">Bank card</a>
+          <a class="docs-link" href="#dash">Data and dashboards</a>
+          <a class="docs-link" href="#workflows">Workflows</a>
         </div>
       </div>
       </nav>
@@ -2199,7 +2217,868 @@
             </section>
           </main>
         </article>
-      </div>
+        <article class="doc-page" data-page="workflows" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Patterns</p>
+            <h1 class="type-display">Workflows</h1>
+            <p class="lede type-body-l">End-to-end journeys in Hala Business: who does what, on which screen, with which Falcon components, and what happens when something goes wrong. Pick a workflow, then click any step for details.</p>
+          </header>
+          <div class="wf-bar">
+            <div class="wf-bar-inner" data-wf="tabs" role="tablist" aria-label="Workflows"></div>
+          </div>
+          <main>
+            <section class="wrap" id="workflows-summary">
+              <div class="titles">
+                <h2 class="doc-h2">Overview</h2>
+                <p class="sub type-body-m">Who is involved, how long it takes, and what the journey is for.</p>
+              </div>
+              <div data-wf="summary"></div>
+            </section>
+            <section class="wrap" id="workflows-flow">
+              <div class="section-head">
+                <h2 class="doc-h2">Flow</h2>
+                <div class="wf-legend" data-wf="legend"></div>
+              </div>
+              <div data-wf="flow"></div>
+            </section>
+            <section class="wrap" id="workflows-step">
+              <div class="titles">
+                <h2 class="doc-h2">Selected step</h2>
+                <p class="sub type-body-m">The screen, the Falcon components on it, the rules, and what to do when it fails.</p>
+              </div>
+              <div data-wf="step"></div>
+            </section>
+            <section class="wrap" id="workflows-records">
+              <div class="titles">
+                <h2 class="doc-h2">Status, notifications, and permissions</h2>
+              </div>
+              <div class="panel-grid" data-wf="records"></div>
+            </section>
+            <section class="wrap" id="workflows-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules for every workflow</h2>
+              </div>
+              <div class="auto-grid" data-wf="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="fintech" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Patterns</p>
+            <h1 class="type-display">Money components</h1>
+            <p class="lede type-body-l">The eight components behind “Money first” and “Say what happens”: how amounts look, how they're typed, how a payment is reviewed, approved, confirmed and tracked. Teams build on these instead of making their own. The amount you type flows into the review.</p>
+            <nav class="nav" aria-label="Money components">
+              <a href="#fintech-amount"><span class="kicker">01</span> Amount display</a>
+              <a href="#fintech-input"><span class="kicker">02</span> Amount input</a>
+              <a href="#fintech-rows"><span class="kicker">03</span> Transaction row</a>
+              <a href="#fintech-review"><span class="kicker">04</span> Review summary</a>
+              <a href="#fintech-timeline"><span class="kicker">05</span> Status timeline</a>
+              <a href="#fintech-approval"><span class="kicker">06</span> Approval chain</a>
+              <a href="#fintech-otp"><span class="kicker">07</span> OTP and Nafath</a>
+              <a href="#fintech-iban"><span class="kicker">08</span> IBAN field</a>
+            </nav>
+          </header>
+          <div class="ft-bar">
+            <div class="ft-bar-inner" data-ft="settings"></div>
+          </div>
+          <main>
+            <section class="wrap" id="fintech-amount">
+              <div class="titles">
+                <p class="kicker">01</p>
+                <h2 class="doc-h2">Amount display</h2>
+                <p class="sub type-body-m">The single way money renders. IBM Plex Mono with tabular figures, a true minus sign, thousands separators, always two decimals, and the currency before the number.</p>
+              </div>
+              <div class="card ft-lines" data-ft="sizes"></div>
+              <div class="ft-variants" data-ft="variants"></div>
+              <div class="card ft-sign-row">
+                <div>
+                  <span class="kicker quiet">Saudi Riyal sign</span>
+                  <div class="ft-signs">
+                    <span class="ft-sign" data-tone="subtle"><span class="ft-sar"></span></span>
+                    <span class="ft-sign" data-tone="brand"><span class="ft-sar"></span></span>
+                    <span class="ft-sign" data-tone="ink"><span class="ft-sar"></span></span>
+                    <span class="ft-sign" data-tone="gradient"><span class="ft-sar"></span></span>
+                  </div>
+                  <p class="ft-spec">media/sar-symbol.svg</p>
+                </div>
+                <div class="ft-lines" data-ft="sign-rules"></div>
+              </div>
+              <div class="ft-pair">
+                <div class="card ft-lines" data-ft="formats"></div>
+                <div class="card ft-arabic" data-ft="arabic"></div>
+              </div>
+            </section>
+            <section class="wrap" id="fintech-input">
+              <div class="titles">
+                <p class="kicker">02</p>
+                <h2 class="doc-h2">Amount input</h2>
+                <p class="sub type-body-m">The amount field, not a plain text input. It adds separators as you type, limits the decimals, shows the available balance, and warns before the approval limit. Web and mobile share the same value.</p>
+              </div>
+              <div class="ft-split">
+                <div class="card">
+                  <div class="ft-card-head"><span class="kicker quiet">Web · transfer amount</span></div>
+                  <div data-ft="input"></div>
+                </div>
+                <div class="card">
+                  <div class="ft-card-head"><span class="kicker quiet">Mobile · keypad</span></div>
+                  <div class="ft-phone" data-ft="keypad"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="fintech-rows">
+              <div class="titles">
+                <p class="kicker">03</p>
+                <h2 class="doc-h2">Transaction row</h2>
+                <p class="sub type-body-m">The most repeated element in Hala. Counterparty, method and time, a status only when it isn't settled, and the signed amount at the end. Click a row to select it.</p>
+              </div>
+              <div class="card">
+                <div class="ft-card-head"><span class="kicker quiet">Web · row</span></div>
+                <div class="ft-tx-head"><span>Description</span><span>Method</span><span>Status</span><span>Amount</span><span></span></div>
+                <div data-ft="rows"></div>
+              </div>
+              <div class="ft-split">
+                <div class="card">
+                  <span class="kicker quiet">Mobile · today</span>
+                  <div class="ft-phone">
+                    <span class="kicker quiet">Today</span>
+                    <div class="card ft-mobile-list" data-ft="mobile-rows"></div>
+                  </div>
+                </div>
+                <div class="card">
+                  <span class="kicker quiet">Anatomy and rules</span>
+                  <div class="ft-lines" data-ft="row-rules"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="fintech-review">
+              <div class="titles">
+                <p class="kicker">04</p>
+                <h2 class="doc-h2">Review summary</h2>
+                <p class="sub type-body-m">The check before you send: a key-value list, the total set apart, and the arrival time in plain words. Change the amount in section 02 and this updates.</p>
+              </div>
+              <div class="ft-split">
+                <div class="card" data-ft="review"></div>
+                <div class="card">
+                  <span class="kicker quiet">Mobile · sheet</span>
+                  <div class="ft-sheet"><div class="ft-sheet-card" data-ft="sheet"></div></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="fintech-timeline">
+              <div class="titles">
+                <p class="kicker">05</p>
+                <h2 class="doc-h2">Payment status timeline</h2>
+                <p class="sub type-body-m">Created, approved, sent, received. Each step has a time and a person. The headline says what happens next. Step through it, or simulate a return.</p>
+              </div>
+              <div class="card">
+                <div class="ft-card-head">
+                  <div>
+                    <p class="ft-quiet" data-ft="timeline-caption">Transfer TRF-88213</p>
+                    <h3 class="type-heading-m" data-ft="timeline-head"></h3>
+                  </div>
+                  <div class="ft-actions" data-ft="timeline-actions"></div>
+                </div>
+                <div class="ft-track" data-ft="timeline"></div>
+              </div>
+              <div class="ft-split">
+                <div class="card">
+                  <span class="kicker quiet">Mobile · vertical</span>
+                  <div class="ft-phone"><div class="card" data-ft="timeline-mobile"></div></div>
+                </div>
+                <div class="card">
+                  <span class="kicker quiet">Step states</span>
+                  <div class="ft-lines" data-ft="step-states"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="fintech-approval">
+              <div class="titles">
+                <p class="kicker">06</p>
+                <h2 class="doc-h2">Approval chain</h2>
+                <p class="sub type-body-m">Who has approved, whose turn it is, and what happens after. The rule that triggered the approval is always shown. Act as the current approver.</p>
+              </div>
+              <div class="ft-split">
+                <div class="card">
+                  <div class="ft-card-head">
+                    <div>
+                      <h3 class="type-heading-m">Approvals · 2 required</h3>
+                      <p class="ft-use">Rule: transfers over SAR 20,000 need Finance, then Owner.</p>
+                    </div>
+                    <span data-ft="approval-status"></span>
+                  </div>
+                  <div class="ft-chain" data-ft="approval"></div>
+                  <div data-ft="approval-comment"></div>
+                  <div class="ft-card-head">
+                    <p class="ft-use" data-ft="approval-hint"></p>
+                    <div class="ft-actions" data-ft="approval-actions"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="card">
+                    <span class="kicker quiet">Compact · in tables and rows</span>
+                    <div data-ft="compact"></div>
+                  </div>
+                  <div class="card">
+                    <span class="kicker quiet">Chain types</span>
+                    <div class="ft-lines" data-ft="chain-types"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="fintech-otp">
+              <div class="titles">
+                <p class="kicker">07</p>
+                <h2 class="doc-h2">OTP, PIN and Nafath</h2>
+                <p class="sub type-body-m">Six digits, auto-check on the last one, paste, a resend timer, and an error when the code is wrong. The live code is 123456. Nafath is the alternative for a high-risk action.</p>
+              </div>
+              <div class="ft-pair">
+                <div class="card" data-ft="otp"></div>
+                <div>
+                  <div class="card">
+                    <span class="kicker quiet">States</span>
+                    <div class="ft-otp-states" data-ft="otp-states"></div>
+                  </div>
+                  <div class="card">
+                    <span class="kicker quiet">Card PIN · mobile · 4 digits</span>
+                    <div class="ft-dots" aria-hidden="true">
+                      <span class="ft-dot-pin" data-on="true"></span>
+                      <span class="ft-dot-pin" data-on="true"></span>
+                      <span class="ft-dot-pin"></span>
+                      <span class="ft-dot-pin"></span>
+                    </div>
+                    <p class="ft-use">Dots, never digits. Confirm by entering it again. Block 1234, 0000 and birth years.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="fintech-iban">
+              <div class="titles">
+                <p class="kicker">08</p>
+                <h2 class="doc-h2">IBAN and account field</h2>
+                <p class="sub type-body-m">Saudi IBANs are SA plus 22 digits. The field groups them in fours, detects the bank from digits 5–6, and checks the checksum when you leave the field. Try the samples.</p>
+              </div>
+              <div class="ft-split">
+                <div class="card">
+                  <div class="ft-card-head"><span class="kicker quiet">New beneficiary</span></div>
+                  <div data-ft="iban-field"></div>
+                  <div class="ft-chips" data-ft="iban-samples"></div>
+                </div>
+                <div>
+                  <div class="card">
+                    <span class="kicker quiet">Structure</span>
+                    <div class="ft-parts" data-ft="iban-parts"></div>
+                  </div>
+                  <div class="card">
+                    <span class="kicker quiet">Bank codes detected</span>
+                    <div class="ft-banks" data-ft="banks"></div>
+                    <p class="ft-use">Initials are placeholders. Use each bank's approved logo, and confirm the code list with SAMA before launch.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="fintech-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div class="auto-grid" data-ft="rules"></div>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="banking" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Patterns</p>
+            <h1 class="type-display">Banking components</h1>
+            <p class="lede type-body-l">Seven jobs only a business bank has: choosing who to pay, controlling cards, watching limits, approving in bulk, checking uploads, showing fees, and protecting sensitive numbers. Every live example works, and the mobile frames share that state.</p>
+            <nav class="nav" aria-label="Banking components">
+              <a href="#bank-beneficiary"><span class="kicker">01</span> Beneficiary</a>
+              <a href="#bank-card"><span class="kicker">02</span> Card</a>
+              <a href="#bank-meters"><span class="kicker">03</span> Meters</a>
+              <a href="#bank-bulk"><span class="kicker">04</span> Bulk actions</a>
+              <a href="#bank-upload"><span class="kicker">05</span> Upload</a>
+              <a href="#bank-fees"><span class="kicker">06</span> Fees and VAT</a>
+              <a href="#bank-mask"><span class="kicker">07</span> Masked data</a>
+              <a href="#bank-mobile"><span class="kicker">08</span> Mobile</a>
+            </nav>
+          </header>
+          <main>
+            <section class="wrap" id="bank-beneficiary">
+              <div class="titles">
+                <p class="kicker">01</p>
+                <h2 class="doc-h2">Beneficiary picker</h2>
+                <p class="sub type-body-m">Search saved recipients by name, bank or last four digits. Add a new one without leaving the transfer. Verified means the name matched the account at the bank.</p>
+              </div>
+              <div class="bk-split">
+                <div class="card bk-stack">
+                  <div class="bk-head"><span class="kicker quiet">Pay to</span></div>
+                  <div data-bk="search"></div>
+                  <span class="bk-quiet bk-mono" data-bk="count"></span>
+                  <div data-bk="list"></div>
+                  <div class="bk-stack" data-bk="empty" hidden></div>
+                  <div data-bk="add"></div>
+                  <div class="card bk-stack" data-bk="add-form" hidden></div>
+                </div>
+                <div class="bk-stack">
+                  <div class="card bk-stack">
+                    <span class="kicker quiet">Selected</span>
+                    <div data-bk="selected"></div>
+                  </div>
+                  <div class="card">
+                    <span class="kicker quiet">States</span>
+                    <div class="bk-lines" data-bk="states"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="bank-card">
+              <div class="titles">
+                <p class="kicker">02</p>
+                <h2 class="doc-h2">Card visual and controls</h2>
+                <p class="sub type-body-m">Freeze, reveal and per-category limits sit next to the card. Freezing is instant and reversible. Showing the number asks for a PIN or Face ID.</p>
+              </div>
+              <div class="bk-split" data-flip="true">
+                <div class="card bk-stack">
+                  <div class="bk-head"><span class="kicker quiet">Marketing card · virtual</span></div>
+                  <div class="bk-card-art" data-bk="card-art"></div>
+                  <div class="bk-secrets">
+                    <div class="bk-stack"><span>Card number</span><strong class="bk-mono" data-bk="card-number"></strong></div>
+                    <div class="bk-stack"><span>Expiry</span><strong class="bk-mono" data-bk="card-expiry"></strong></div>
+                    <div class="bk-stack"><span>CVV</span><strong class="bk-mono" data-bk="card-cvv"></strong></div>
+                  </div>
+                  <div class="bk-actions" data-bk="card-actions"></div>
+                </div>
+                <div class="bk-stack" data-bk="controls">
+                  <div class="card">
+                    <span class="kicker quiet">Where it works</span>
+                    <div data-bk="toggles"></div>
+                  </div>
+                  <div class="card bk-stack">
+                    <div class="bk-head"><span class="kicker quiet">Category limits · monthly</span><span class="bk-mono" data-bk="limit-total"></span></div>
+                    <div data-bk="limits"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="bank-meters">
+              <div class="titles">
+                <p class="kicker">03</p>
+                <h2 class="doc-h2">Limit and usage meters</h2>
+                <p class="sub type-body-m">One meter per question: how much is left, where the budget went, and whether payroll is covered. Green until 75%, amber until 100%, red at the limit. Always show the amount, not only the bar.</p>
+              </div>
+              <div class="bk-meters">
+                <div class="card bk-stack">
+                  <div class="bk-head"><span class="kicker quiet">Spend vs limit</span></div>
+                  <div class="bk-head"><strong class="bk-mono type-heading-m" data-bk="meter-spent"></strong><span class="bk-mono bk-quiet">/ SAR 5,000.00</span></div>
+                  <div class="bk-meter-track"><span class="bk-meter-fill" data-bk="meter-fill"></span></div>
+                  <div class="bk-meter-foot bk-head" data-bk="meter-foot"></div>
+                  <div data-bk="meter"></div>
+                </div>
+                <div class="card bk-stack">
+                  <span class="kicker quiet">Budget split · Q4 marketing</span>
+                  <div class="bk-head"><strong class="bk-mono type-heading-m">97,500.00</strong><span class="bk-mono bk-quiet">/ SAR 120,000.00</span></div>
+                  <div class="bk-split-bar" data-bk="split-bar"></div>
+                  <div class="bk-stack" data-bk="split-legend"></div>
+                </div>
+                <div class="card bk-stack">
+                  <div class="bk-head"><span class="kicker quiet">Payroll funded · 25 Oct</span></div>
+                  <div class="bk-fund">
+                    <div class="bk-ring" data-bk="ring"><span></span></div>
+                    <div class="bk-stack">
+                      <strong data-bk="payroll-title"></strong>
+                      <span class="bk-mono bk-quiet" data-bk="payroll-have"></span>
+                      <span class="bk-note" data-bk="payroll-msg"></span>
+                    </div>
+                  </div>
+                  <div data-bk="payroll-slot"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="bank-bulk">
+              <div class="titles">
+                <p class="kicker">04</p>
+                <h2 class="doc-h2">Bulk action bar</h2>
+                <p class="sub type-body-m">Appears when one or more rows are selected. It always shows the count and the total, so approvers know exactly what they're signing.</p>
+              </div>
+              <div class="card bk-stack">
+                <div class="bk-head">
+                  <span class="kicker quiet">Pending approvals</span>
+                  <div class="bk-head"><span data-bk="bulk-reset"></span></div>
+                </div>
+                <div class="bk-table">
+                  <div class="bk-grid" data-head="true">
+                    <span data-bk="bulk-all"></span>
+                    <span>Beneficiary</span>
+                    <span>Reference</span>
+                    <span class="bk-end">Amount (SAR)</span>
+                    <span class="bk-end">Status</span>
+                  </div>
+                  <div data-bk="bulk-rows"></div>
+                  <div class="bk-bar-slot" data-bk="bulk-bar" data-open="false">
+                    <div class="bk-bar">
+                      <strong data-count></strong>
+                      <span class="bk-mono" data-total></span>
+                      <span class="bk-grow"></span>
+                      <div class="bk-head" data-bk="bulk-actions"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="bank-upload">
+              <div class="titles">
+                <p class="kicker">05</p>
+                <h2 class="doc-h2">File upload with validation report</h2>
+                <p class="sub type-body-m">After a payroll or invoice file is checked, show a summary first, then each error with its row, column and fix. People can continue with the valid rows or download the errors.</p>
+              </div>
+              <div class="card bk-stack">
+                <div class="bk-head"><span class="kicker quiet">Payroll · October</span></div>
+                <div data-bk="up-idle"></div>
+                <div class="bk-stack" data-bk="up-checking" hidden>
+                  <div class="bk-head"><strong>Checking payroll_oct.csv</strong><span class="bk-quiet">48 rows</span></div>
+                  <div class="bk-meter-track"><span class="bk-meter-fill" data-tone="success" data-indeterminate="true"></span></div>
+                  <span class="bk-quiet">Checking IBANs, amounts and duplicate employees.</span>
+                </div>
+                <div class="bk-stack" data-bk="up-report" hidden>
+                  <div class="bk-stats" data-bk="up-stats"></div>
+                  <div class="bk-errors">
+                    <div class="bk-error-head"><span>3 rows need fixing. They won't be paid until fixed.</span></div>
+                    <div data-bk="up-errors"></div>
+                  </div>
+                  <div class="bk-head" data-bk="up-actions"></div>
+                </div>
+                <div class="bk-done" data-bk="up-done" hidden></div>
+              </div>
+            </section>
+            <section class="wrap" id="bank-fees">
+              <div class="titles">
+                <p class="kicker">06</p>
+                <h2 class="doc-h2">Fee and VAT breakdown</h2>
+                <p class="sub type-body-m">One list, reused in confirmations, receipts and invoices. VAT at 15% applies to the fee, not to the transfer amount. Each line is rounded to 2 decimals, and the total is the sum of those lines.</p>
+              </div>
+              <div class="bk-split">
+                <div class="card bk-stack">
+                  <div class="bk-head"><span class="kicker quiet">Transfer confirmation</span></div>
+                  <div class="bk-head"><div data-bk="fee-input"></div><div data-bk="fee-type"></div></div>
+                  <div class="card" data-bk="fee-rows"></div>
+                  <p class="bk-quiet" data-bk="fee-note"></p>
+                </div>
+                <div class="card bk-stack">
+                  <span class="kicker quiet">Invoice · tax invoice</span>
+                  <div data-bk="invoice"></div>
+                  <p class="bk-quiet">VAT number <span class="bk-mono">300 1234 5678 9003</span>. Show the VAT number and the QR code on every tax invoice.</p>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="bank-mask">
+              <div class="titles">
+                <p class="kicker">07</p>
+                <h2 class="doc-h2">Masked data and reveal</h2>
+                <p class="sub type-body-m">Sensitive numbers are hidden by default. The check depends on what is being shown. Revealed values hide again after 30 seconds, or when the page goes to the background.</p>
+              </div>
+              <div class="card" data-bk="mask"></div>
+            </section>
+            <section class="wrap" id="bank-mobile">
+              <div class="titles">
+                <p class="kicker">08</p>
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">The picker opens as a sheet, card controls stack under the card, and the bulk bar sits above the tab bar. These share state with the examples above.</p>
+              </div>
+              <div class="bk-phones">
+                <div class="bk-phone" data-scrim="true">
+                  <div class="bk-sheet">
+                    <span class="bk-handle"></span>
+                    <strong>Pay to</strong>
+                    <div class="bk-mobile-list" data-bk="mobile-list"></div>
+                  </div>
+                </div>
+                <div class="bk-phone bk-phone-pad">
+                  <strong class="bk-center">Marketing card</strong>
+                  <div class="bk-card-art" data-bk="mobile-art"></div>
+                  <div class="bk-icon-row" data-bk="mobile-actions"></div>
+                  <div class="card bk-stack" data-bk="mobile-meter">
+                    <div class="bk-head"><strong>This month</strong><span class="bk-mono" data-spent></span></div>
+                    <div class="bk-meter-track"><span class="bk-meter-fill" data-fill></span></div>
+                    <span class="bk-quiet" data-state></span>
+                  </div>
+                  <span class="bk-mono bk-center" data-bk="mobile-card-number"></span>
+                </div>
+                <div class="bk-phone">
+                  <div class="bk-head bk-pad">
+                    <button class="button" type="button" data-variant="ghost" data-size="sm" data-bk="mobile-select">Select</button>
+                    <strong>Approvals</strong>
+                    <span></span>
+                  </div>
+                  <div class="card bk-inset"><div data-bk="mobile-bulk"></div></div>
+                  <div class="bk-mobile-bar" data-bk="mobile-bar" hidden>
+                    <strong data-count></strong>
+                    <div class="bk-actions" data-bk="mobile-bulk-actions"></div>
+                  </div>
+                  <div class="bk-tabbar"><span>Home</span><span data-on="true">Approvals</span><span>Cards</span><span>More</span></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="bank-rules">
+              <div class="titles"><h2 class="doc-h2">Rules</h2></div>
+              <div class="auto-grid" data-bk="rules"></div>
+            </section>
+          </main>
+          <div class="bk-dialog" data-bk="pin" hidden>
+            <div class="bk-pin" role="dialog" aria-modal="true" aria-labelledby="bank-pin-title">
+              <div class="bk-stack">
+                <h3 class="type-heading-m" id="bank-pin-title" data-bk="pin-title"></h3>
+                <p class="bk-quiet" data-bk="pin-copy"></p>
+              </div>
+              <div class="bk-dots" data-bk="pin-dots"><span class="bk-dot"></span><span class="bk-dot"></span><span class="bk-dot"></span><span class="bk-dot"></span></div>
+              <div class="bk-keys" data-bk="pin-keys"></div>
+              <div data-bk="pin-face"></div>
+              <div data-bk="pin-cancel"></div>
+            </div>
+          </div>
+          <div class="bk-toast" data-bk="toast"></div>
+        </article>
+        <article class="doc-page" data-page="card" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Patterns</p>
+            <h1 class="type-display">Bank card</h1>
+            <p class="lede type-body-l">How a Hala card looks, which states it can be in, and how the number, network marks and sensitive details behave. The artwork is the submitted card. Name, limits and actions stay outside it.</p>
+            <nav class="nav" aria-label="Bank card">
+              <a href="#card-anatomy"><span class="kicker">01</span> Anatomy</a>
+              <a href="#card-kinds"><span class="kicker">02</span> Two kinds</a>
+              <a href="#card-designs"><span class="kicker">03</span> Designs</a>
+              <a href="#card-states"><span class="kicker">04</span> States</a>
+              <a href="#card-reveal"><span class="kicker">05</span> Reveal</a>
+              <a href="#card-sizes"><span class="kicker">06</span> Sizes</a>
+              <a href="#card-networks"><span class="kicker">07</span> Networks</a>
+              <a href="#card-number"><span class="kicker">08</span> Card number</a>
+              <a href="#card-list"><span class="kicker">09</span> In a list</a>
+              <a href="#card-rules"><span class="kicker">10</span> Rules</a>
+            </nav>
+          </header>
+          <main>
+            <section class="wrap" id="card-anatomy">
+              <div class="titles">
+                <p class="kicker">01</p>
+                <h2 class="doc-h2">Anatomy</h2>
+                <p class="sub type-body-m">Five pieces on the art, and a clear zone at the bottom-left. The H pattern stays behind everything, low contrast.</p>
+              </div>
+              <div class="bcard-stack" data-bc="anatomy"></div>
+            </section>
+            <section class="wrap" id="card-kinds">
+              <div class="titles">
+                <p class="kicker">02</p>
+                <h2 class="doc-h2">Two kinds</h2>
+                <p class="sub type-body-m">The file sent to the wallets is stricter than the card drawn inside Hala. They must still look like the same card.</p>
+              </div>
+              <div class="bcard-pair" data-bc="kinds"></div>
+            </section>
+            <section class="wrap" id="card-designs">
+              <div class="titles">
+                <p class="kicker">03</p>
+                <h2 class="doc-h2">Three designs</h2>
+                <p class="sub type-body-m">Purchase digital, purchase physical, and cash. Network marks stay full color, in the official file, with clear space.</p>
+              </div>
+              <div class="bcard-designs" data-bc="designs"></div>
+              <div class="auto-grid" data-bc="marks"></div>
+            </section>
+            <section class="wrap" id="card-states">
+              <div class="titles">
+                <p class="kicker">04</p>
+                <h2 class="doc-h2">States</h2>
+                <p class="sub type-body-m">A badge sits on the art. The network mark is never greyed out, redrawn, or recolored.</p>
+              </div>
+              <div class="bcard-states" data-bc="states"></div>
+            </section>
+            <section class="wrap" id="card-reveal">
+              <div class="titles">
+                <p class="kicker">05</p>
+                <h2 class="doc-h2">Reveal</h2>
+                <p class="sub type-body-m">Card number, expiry and CVV stay hidden until Face ID or a PIN. They show for 60 seconds, then hide again. Copy is per field.</p>
+              </div>
+              <div class="bcard-split">
+                <div class="card bcard-stack">
+                  <div class="bcard-head">
+                    <span class="kicker quiet">Card details</span>
+                    <span class="bcard-timer" data-bc="reveal-timer" hidden></span>
+                  </div>
+                  <div class="bcard-fields">
+                    <div data-bc="reveal-fields"></div>
+                    <div class="bcard-auth" data-bc="reveal-auth" hidden>
+                      <strong>Confirm it's you</strong>
+                      <span class="bcard-quiet">Face ID or PIN</span>
+                    </div>
+                  </div>
+                  <div class="bcard-foot">
+                    <span class="bcard-hint" data-bc="reveal-msg"></span>
+                    <span data-bc="reveal-toggle-slot"></span>
+                  </div>
+                </div>
+                <div class="bcard-phone">
+                  <span class="kicker quiet">On a phone</span>
+                  <div class="bcard-fields">
+                    <div data-bc="reveal-mobile"></div>
+                    <div class="bcard-auth" hidden>
+                      <strong>Confirm it's you</strong>
+                      <span class="bcard-quiet">Face ID or PIN</span>
+                    </div>
+                  </div>
+                  <div data-bc="reveal-mobile-slot"></div>
+                </div>
+              </div>
+              <div class="auto-grid">
+                <div class="card bcard-stack">
+                  <span class="kicker quiet">Who sees what</span>
+                  <div class="bcard-spec"><strong>Default</strong><span class="bcard-quiet">Last 4 digits only.</span></div>
+                  <div class="bcard-spec"><strong>Cardholder</strong><span class="bcard-quiet">Full number, expiry and CVV after Face ID or PIN, for 60 seconds.</span></div>
+                  <div class="bcard-spec"><strong>Staff</strong><span class="bcard-quiet">First 6 and last 4. Never the full number, expiry or CVV.</span></div>
+                </div>
+                <div class="card bcard-stack">
+                  <span class="kicker quiet">How the number is written</span>
+                  <div class="bcard-spec"><strong>Groups</strong><span class="bcard-quiet">Four digits, then a space. 4716 2210 8093 7731.</span></div>
+                  <div class="bcard-spec"><strong>Direction</strong><span class="bcard-quiet">Left to right, even on an Arabic screen.</span></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="card-sizes">
+              <div class="titles">
+                <p class="kicker">06</p>
+                <h2 class="doc-h2">Sizes</h2>
+                <p class="sub type-body-m">Hero, selector and list. Stacked cards keep the network mark fully visible.</p>
+              </div>
+              <div class="bcard-sizes" data-bc="sizes"></div>
+            </section>
+            <section class="wrap" id="card-networks">
+              <div class="titles">
+                <p class="kicker">07</p>
+                <h2 class="doc-h2">Networks</h2>
+                <p class="sub type-body-m">mada comes first and stays the same size as the other marks. “First” follows the reading direction. The marks below are placeholders until the official files are in.</p>
+              </div>
+              <div class="bcard-split">
+                <div class="card bcard-stack">
+                  <div class="bcard-head">
+                    <span class="kicker quiet">Accepted</span>
+                    <span data-bc="lang"></span>
+                  </div>
+                  <div class="bcard-accept" data-bc="accept"></div>
+                  <div class="bcard-bad" data-bc="bad-rows"></div>
+                </div>
+                <div class="card bcard-stack">
+                  <span class="kicker quiet">mada</span>
+                  <div data-bc="mada"></div>
+                  <p class="bcard-quiet" data-bc="mada-colors"></p>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="card-number">
+              <div class="titles">
+                <p class="kicker">08</p>
+                <h2 class="doc-h2">Card number</h2>
+                <p class="sub type-body-m">The first 6 digits name the network. A mada BIN wins when the card is also Visa or Mastercard. The last digit is a Luhn check. This demo table is not the production BIN list.</p>
+              </div>
+              <div class="bcard-split">
+                <div class="card bcard-stack bcard-pan">
+                  <div data-bc="pan-field"></div>
+                  <div class="bcard-marks" data-bc="samples"></div>
+                </div>
+                <div class="bcard-stack">
+                  <div class="bcard-secure">
+                    <div class="bcard-stack">
+                      <strong>3-D Secure</strong>
+                      <span class="bcard-quiet">Hala logo at the top-left, then the mada secure mark, then the one-time code from Money components.</span>
+                    </div>
+                    <span class="bcard-secure-slot">mada secure</span>
+                  </div>
+                  <div class="card bcard-stack">
+                    <span class="kicker quiet">Demo BINs</span>
+                    <span class="bcard-mono bcard-quiet">588845 · 440647 · 446404 · 457865 · 968208 · 636120 · 417633 · 468540 · 529415 · 543357</span>
+                    <span class="bcard-quiet">Visa starts with 4. Mastercard starts with 51–55 or 22–27. Production uses the processor’s BIN table.</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="card-list">
+              <div class="titles">
+                <p class="kicker">09</p>
+                <h2 class="doc-h2">In a list</h2>
+                <p class="sub type-body-m">The employee, nickname, type and spend sit beside the card. Arabic flips the row. The artwork and the mada mark do not mirror.</p>
+              </div>
+              <div class="bcard-split">
+                <div class="card bcard-stack" data-bc="list"></div>
+                <div class="card bcard-stack bcard-rtl" data-bc="list-ar">
+                </div>
+              </div>
+              <p class="bcard-quiet bcard-rtl">تصميم البطاقة لا ينعكس، وشعار مدى ثنائي اللغة ولا يُعكس. ترتيب الشعارات فقط يتبع اتجاه القراءة.</p>
+            </section>
+            <section class="wrap" id="card-rules">
+              <div class="titles">
+                <p class="kicker">10</p>
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div class="auto-grid" data-bc="rules"></div>
+              <div class="bcard-confirm">
+                <strong>Confirm before launch</strong>
+                <div class="bcard-stack" data-bc="confirm"></div>
+              </div>
+              <p class="bcard-quiet">Sources: Visa Digital Card Brand Standards (Sept 2025), Mastercard Brand Center, mada Branding Guidelines (e-commerce V03) and the mada brand manual, PCI DSS 3.3.</p>
+            </section>
+          </main>
+        </article>
+        <article class="doc-page" data-page="dash" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Patterns</p>
+            <h1 class="type-display">Data and dashboards</h1>
+            <p class="lede type-body-l">The blocks of a Hala dashboard: KPI tiles, bars, a line, sparklines, a meter, and the account card. Amounts use mono with tabular figures. Hover a chart to read a month or a day. The phone shares the account you pick and whether balances are hidden.</p>
+            <nav class="nav" aria-label="Data and dashboards">
+              <a href="#dash-kpi"><span class="kicker">01</span> KPI tile</a>
+              <a href="#dash-bars"><span class="kicker">02</span> Cash flow</a>
+              <a href="#dash-line"><span class="kicker">03</span> Balance</a>
+              <a href="#dash-spark"><span class="kicker">04</span> Sparkline</a>
+              <a href="#dash-account"><span class="kicker">05</span> Account</a>
+              <a href="#dash-mobile"><span class="kicker">06</span> Mobile</a>
+              <a href="#dash-rules"><span class="kicker">07</span> Rules</a>
+            </nav>
+          </header>
+          <main>
+            <section class="wrap" id="dash-kpi">
+              <div class="titles">
+                <p class="kicker">01</p>
+                <h2 class="doc-h2">KPI stat tile</h2>
+                <p class="sub type-body-m">Label, amount, change against the same period last time, and a sparkline. The change is colored by whether it is good for the business. Money out going up is red.</p>
+              </div>
+              <div class="dd-kpis" data-dd="kpis"></div>
+              <div class="dd-kpis">
+                <div class="card dd-tile">
+                  <span class="dd-meta">Loading</span>
+                  <span class="ld-bone dd-bone" data-w="label"></span>
+                  <span class="ld-bone dd-bone" data-w="value"></span>
+                  <span class="ld-bone dd-bone" data-w="chart"></span>
+                </div>
+                <div class="card dd-tile">
+                  <span class="dd-meta">No data yet</span>
+                  <span class="dd-quiet">Card spend</span>
+                  <span class="dd-amount" data-size="kpi" data-muted="true">—</span>
+                  <span class="dd-meta">No card payments this month.</span>
+                  <span data-dd="empty-action"></span>
+                </div>
+                <div class="card dd-tile" data-dd="error"></div>
+                <div class="card dd-tile">
+                  <span class="dd-meta">Anatomy</span>
+                  <div class="dd-spec"><strong>Label</strong><span class="dd-quiet">Secondary text, one line.</span></div>
+                  <div class="dd-spec"><strong>Amount</strong><span class="dd-quiet">Mono, tabular, currency before the number.</span></div>
+                  <div class="dd-spec"><strong>Change</strong><span class="dd-quiet">A pill, colored by good or bad.</span></div>
+                  <div class="dd-spec"><strong>Sparkline</strong><span class="dd-quiet">Same period as the change. No axes.</span></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="dash-bars">
+              <div class="titles">
+                <p class="kicker">02</p>
+                <h2 class="doc-h2">Cash flow · bars</h2>
+                <p class="sub type-body-m">Money in against money out for each month. Green for in, ink for out. The net is in the summary and the tooltip. Hover a month.</p>
+              </div>
+              <div class="card dd-stack">
+                <div class="dd-chart-head">
+                  <div class="dd-sums" data-dd="flow-sums"></div>
+                  <div class="dd-row">
+                    <span data-dd="flow-live"></span>
+                    <span data-dd="ranges"></span>
+                  </div>
+                </div>
+                <div class="dd-plot" data-dd="flow-plot">
+                  <div class="dd-axis"><span>600K</span><span>400K</span><span>200K</span><span>0</span></div>
+                  <div class="dd-plot-body">
+                    <div class="dd-grid" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                    <div class="dd-cols" data-dd="flow-cols"></div>
+                    <div class="dd-tip" data-dd="flow-tip" hidden></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="dash-line">
+              <div class="titles">
+                <p class="kicker">03</p>
+                <h2 class="doc-h2">Balance over time · line</h2>
+                <p class="sub type-body-m">Daily closing balance for the last 30 days, with a soft fill and a crosshair. The dashed line is a threshold, here the payroll that is due.</p>
+              </div>
+              <div class="card dd-stack">
+                <div class="dd-chart-head">
+                  <div class="dd-stack">
+                    <span class="dd-meta" data-dd="line-label"></span>
+                    <span data-dd="line-value"></span>
+                    <span class="dd-delta" data-dd="line-delta"></span>
+                  </div>
+                  <span data-dd="line-live"></span>
+                </div>
+                <div class="dd-line-plot" data-dd="line-plot">
+                  <div class="dd-line-stage">
+                    <svg class="dd-line-svg" data-dd="line-svg" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true"></svg>
+                    <span class="dd-payroll" data-dd="line-payroll">Payroll due · 340,000</span>
+                    <span class="dd-cross" data-dd="line-cross" hidden></span>
+                    <span class="dd-dot" data-dd="line-dot" hidden></span>
+                    <div class="dd-hits" data-dd="line-hits"></div>
+                  </div>
+                  <div class="dd-dates"><span>22 Sep</span><span>29 Sep</span><span>6 Oct</span><span>13 Oct</span><span>21 Oct</span></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="dash-spark">
+              <div class="titles">
+                <p class="kicker">04</p>
+                <h2 class="doc-h2">Sparkline and meter</h2>
+                <p class="sub type-body-m">A sparkline shows the shape of a trend in a row, without axes. A meter shows parts of one total. Both always come with the number.</p>
+              </div>
+              <div class="dd-split">
+                <div class="card" data-dd="sparks"></div>
+                <div class="card dd-stack">
+                  <span class="dd-meta">Spend by category · October</span>
+                  <div class="dd-meter" data-dd="meter"></div>
+                  <div class="dd-stack" data-dd="meter-rows"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="dash-account">
+              <div class="titles">
+                <p class="kicker">05</p>
+                <h2 class="doc-h2">Account and balance card</h2>
+                <p class="sub type-body-m">Account name, available balance, IBAN, and the four most used actions. Amounts on hold sit under the balance. Hide balances when the screen is shared.</p>
+              </div>
+              <div class="dd-split" data-wide="true">
+                <div class="card dd-account dd-stack" data-dd="account"></div>
+                <div class="card dd-stack">
+                  <span class="dd-meta">Accounts · switch</span>
+                  <div data-dd="accounts"></div>
+                  <div class="dd-total" data-dd="total"></div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="dash-mobile">
+              <div class="titles">
+                <p class="kicker">06</p>
+                <h2 class="doc-h2">Mobile · home</h2>
+                <p class="sub type-body-m">The same blocks, stacked. Balance first, two KPI tiles, then six months of cash flow. It uses the account and the hide setting from the card above.</p>
+              </div>
+              <div class="dd-split">
+                <div class="dd-phone" data-dd="phone"></div>
+                <div class="dd-stack">
+                  <div class="card dd-stack">
+                    <span class="dd-meta">Mobile chart rules</span>
+                    <div class="dd-stack" data-dd="mobile-rules"></div>
+                  </div>
+                  <div class="card dd-stack">
+                    <span class="dd-meta">Which chart?</span>
+                    <div data-dd="which"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="wrap" id="dash-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Rules</h2>
+              </div>
+              <div class="auto-grid" data-dd="rules"></div>
+            </section>
+          </main>
+          <div class="dd-toast" data-dd="toast"></div>
+        </article>
+        </div>
       <aside class="docs-toc" data-toc hidden>
         <p class="docs-toc-label">On this page</p>
         <nav data-toc-list aria-label="On this page"></nav>
@@ -2248,6 +3127,11 @@
   <script src="loading.js"></script>
   <script src="empty-states.js"></script>
   <script src="navigation.js"></script>
+  <script src="workflows.js"></script>
+  <script src="fintech.js"></script>
+  <script src="banking.js"></script>
+  <script src="card.js"></script>
+  <script src="dash.js"></script>
   <script src="introduction.js"></script>
   <script src="how-to-use.js"></script>
   <script src="docs.js"></script>

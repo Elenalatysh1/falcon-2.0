@@ -90,6 +90,14 @@
     return raw.replace(/(.{4})/g, "$1 ").trim();
   }
 
+  function ibanValid(raw) {
+    if (!/^SA\d{22}$/.test(raw)) return false;
+    const moved = `${raw.slice(4)}${raw.slice(0, 4)}`.replace(/[A-Z]/g, (char) => String(char.charCodeAt(0) - 55));
+    let mod = 0;
+    for (const char of moved) mod = (mod * 10 + Number(char)) % 97;
+    return mod === 1;
+  }
+
   function formatAmount(value) {
     const raw = String(value || "").replace(/[^\d.]/g, "");
     const parts = raw.split(".");
@@ -348,6 +356,7 @@
       const ok = Boolean(result.success);
       root.dataset.error = erred ? "true" : "false";
       root.dataset.success = ok ? "true" : "false";
+      root.dataset.warning = result.warning ? "true" : "false";
       control.setAttribute("aria-invalid", erred ? "true" : "false");
       if (hintNode.parentNode) hintNode.setAttribute("role", erred ? "alert" : "status");
       if (result.status) setStatus(result.status);
@@ -375,6 +384,18 @@
         bankNode.hidden = !bank;
         bankNode.textContent = bank;
         const done = raw.length === length;
+        if (iban.check && done && touched && !ibanValid(raw)) {
+          return {
+            error: iban.invalid || "This IBAN doesn't pass the check. Look for a mistyped digit.",
+            status: "error",
+          };
+        }
+        if (iban.check && done && ibanValid(raw)) {
+          return {
+            success: bank ? `${bank} · checksum matches` : "Checksum matches",
+            status: "success",
+          };
+        }
         return {
           hint: done ? (iban.done || "24 characters · bank detected from the IBAN") : `${raw.length}/${length} characters`,
         };
@@ -382,9 +403,11 @@
       if (format === "amount") {
         const number = parseFloat(current.replace(/,/g, "")) || 0;
         const over = amount.limit != null && number > amount.limit;
+        const approve = !over && amount.approval != null && number > amount.approval;
         return {
           error: over ? (amount.over || "") : "",
-          hint: over ? "" : (amount.available || ""),
+          hint: over ? "" : approve ? (amount.approvalNote || "") : (amount.available || ""),
+          warning: approve,
         };
       }
       if (validate) return validate(current, { touched }) || {};

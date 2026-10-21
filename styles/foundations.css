@@ -324,6 +324,12 @@
   --size-check: 18px;
   --size-switch: 26px;
   --size-switch-sm: 34px;
+  --size-card-list: 96px;
+  --size-card-selector: 220px;
+  --size-card-stack: 200px;
+  --size-card-hero: 280px;
+  --size-mada-min: 60px;
+  --size-chart: 240px;
 
   /* Radius */
   --radius-xs: 4px;
@@ -651,6 +657,7 @@ body {
   line-height: var(--type-amount-xl-line);
   letter-spacing: var(--type-amount-xl-tracking);
   text-transform: var(--type-amount-xl-transform);
+  font-variant-numeric: tabular-nums;
 }
 
 .type-amount-m {
@@ -660,6 +667,7 @@ body {
   line-height: var(--type-amount-m-line);
   letter-spacing: var(--type-amount-m-tracking);
   text-transform: var(--type-amount-m-transform);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Lucide icons rendered by icons/api.js */

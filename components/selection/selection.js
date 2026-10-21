@@ -12,11 +12,13 @@
 (function () {
   const catalog = {
     cards: "credit-card",
+    cash: "banknote",
     confirm: "check",
     contactless: "nfc",
     ecommerce: "shopping-cart",
     "food-delivery": "utensils-crossed",
     freeze: "snowflake",
+    adjust: "sliders-horizontal",
     invoicing: "file-text",
     language: "globe",
     payroll: "users",
