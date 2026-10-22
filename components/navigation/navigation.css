@@ -435,7 +435,8 @@
 }
 .nv-device-scroll::-webkit-scrollbar { display: none; }
 .nv-device[data-layout="floating"] .nv-device-scroll { padding-bottom: calc(var(--space-14) + var(--space-12)); }
-.nv-device .nv-large {
+.nv-device .nv-large,
+.nv-liquid-content .nv-large {
   margin: 0;
   padding: 0 var(--space-4) var(--space-3);
   font-size: var(--type-heading-xl-size);
@@ -550,6 +551,118 @@
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
   color: var(--text-tertiary);
+}
+
+/* Liquid Glass top bar (iOS 26): no bar fill, floating glass controls, blurred scroll edge. */
+.nv-appbar[data-style="liquid"] { isolation: isolate; padding: 0 var(--space-4); background: transparent; border-bottom-color: transparent; }
+.nv-appbar[data-style="liquid"] .nv-appbar-row { grid-template-columns: 1fr auto 1fr; gap: var(--space-3); }
+.nv-appbar[data-style="liquid"] .nv-appbar-title { text-align: center; }
+.nv-appbar[data-style="liquid"]::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: calc(var(--size-status-bar) * -1) 0 calc(var(--space-6) * -1);
+  background: linear-gradient(var(--glass-edge-tint), var(--glass-scroll-edge-end));
+  -webkit-backdrop-filter: blur(var(--glass-bar-blur));
+  backdrop-filter: blur(var(--glass-bar-blur));
+  -webkit-mask-image: linear-gradient(var(--glass-scroll-edge) 55%, var(--glass-scroll-edge-end));
+  mask-image: linear-gradient(var(--glass-scroll-edge) 55%, var(--glass-scroll-edge-end));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+[data-under="true"] .nv-appbar[data-style="liquid"]::before { opacity: 1; }
+.nv-appbar[data-tone="media"]::before { display: none; }
+.nv-appbar[data-tone="media"] .nv-appbar-title { color: var(--glass-on-media-text); }
+.nv-glass-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--target-web);
+  height: var(--target-web);
+  padding: 0;
+  border: var(--border-width) solid var(--glass-stroke);
+  border-radius: var(--radius-pill);
+  background: var(--glass-fill);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-glass-control);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--motion-fast) var(--ease-standard), background var(--motion-fast) var(--ease-standard);
+}
+.nv-glass-btn:hover { background: linear-gradient(var(--glass-hover), var(--glass-hover)), var(--glass-fill); }
+.nv-glass-btn:active, .nv-glass-btn[data-state="pressed"] {
+  transform: scale(var(--glass-press-scale));
+  background: linear-gradient(var(--glass-pressed), var(--glass-pressed)), var(--glass-fill);
+}
+.nv-glass-btn:focus-visible { outline: var(--focus-ring); outline-offset: var(--gap-day); }
+.nv-glass-btn[data-tone="prominent"] { border-color: transparent; background: var(--action-primary); color: var(--text-on-brand); }
+.nv-glass-group {
+  display: inline-flex;
+  border: var(--border-width) solid var(--glass-stroke);
+  border-radius: var(--radius-pill);
+  background: var(--glass-fill);
+  box-shadow: var(--shadow-glass-control);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+}
+.nv-glass-group .nv-glass-btn { border-color: transparent; background: transparent; box-shadow: var(--shadow-0); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.nv-glass-group .nv-glass-btn:hover { background: var(--glass-hover); }
+.nv-glass-group .nv-glass-btn:active { background: var(--glass-pressed); }
+.nv-appbar[data-tone="media"] .nv-glass-btn,
+.nv-appbar[data-tone="media"] .nv-glass-group { background: var(--glass-media-fill); color: var(--glass-on-media-text); }
+.nv-appbar[data-tone="media"] .nv-glass-group .nv-glass-btn { background: transparent; }
+.nv-device[data-platform="ios"][data-style="glass"] .nv-device-bar {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: var(--shadow-0);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.nv-liquid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(calc(var(--space-14) * 5), 1fr)); gap: var(--space-5); }
+.nv-liquid-card { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.nv-liquid-screen {
+  --nv-bar: var(--size-topbar-ios);
+  position: relative;
+  isolation: isolate;
+  height: calc(var(--space-14) * 5);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-canvas);
+  overflow: hidden;
+}
+.nv-liquid-content { position: absolute; inset: 0; display: flex; flex-direction: column; gap: var(--space-3); padding-top: calc(var(--size-status-bar) + var(--nv-bar)); }
+.nv-liquid-screen[data-under="true"] > .nv-liquid-content { padding-top: var(--size-status-bar); }
+.nv-liquid-screen[data-kind="media"] > .nv-liquid-content { padding-top: 0; }
+.nv-liquid-hero { flex: none; height: calc(var(--space-14) * 2); margin: 0 var(--space-4); border-radius: var(--radius-xl); background: var(--gradient-card); }
+.nv-liquid-photo { flex: none; height: calc(var(--space-14) * 3); background: var(--gradient-hero); }
+.nv-liquid-screen[data-kind="media"] .nv-statusbar { color: var(--glass-on-media-text); }
+.nv-liquid-bar { position: absolute; z-index: 2; top: 0; inset-inline: 0; padding-top: var(--size-status-bar); }
+.nv-liquid-screen[data-kind="sheet"]::after { content: ""; position: absolute; z-index: 1; inset: 0; background: var(--overlay-scrim); }
+.nv-liquid-sheet {
+  position: absolute;
+  z-index: 2;
+  inset: calc(var(--size-status-bar) + var(--space-2)) 0 0;
+  border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+  background: var(--surface-card);
+  overflow: hidden;
+}
+.nv-liquid-sheet .nv-liquid-bar { position: relative; padding-top: var(--space-2); }
+.nv-liquid-sheet .nv-liquid-content { position: static; padding: var(--space-3) var(--space-4) 0; }
+.nv-liquid-form { display: flex; flex-direction: column; gap: var(--space-3); }
+.nv-liquid-form .nv-bone { display: block; height: var(--size-md); border-radius: var(--radius-m); background: var(--surface-sunken); }
+.nv-liquid-form .nv-short { width: 60%; }
+.nv-liquid-caption strong { display: block; font-size: var(--type-label-m-size); line-height: var(--type-label-m-line); font-weight: var(--font-weight-semibold); }
+.nv-liquid-caption p { margin: var(--gap-day) 0 0; color: var(--text-tertiary); font-size: var(--type-caption-size); line-height: var(--type-caption-line); }
+
+@media (prefers-reduced-transparency: reduce) {
+  .nv-glass-btn, .nv-glass-group { background: var(--surface-card); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .nv-appbar[data-style="liquid"]::before { background: var(--surface-card); -webkit-backdrop-filter: none; backdrop-filter: none; -webkit-mask-image: none; mask-image: none; }
 }
 
 /* Tab bar */

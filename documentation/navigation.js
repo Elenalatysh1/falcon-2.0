@@ -9,6 +9,7 @@
   mount("shell").append(createNavShell());
   mount("mobile").append(createNavMobile());
   mount("top-bars").append(createNavTopBars());
+  mount("liquid").append(createNavLiquidBars());
   mount("states").append(createNavStates());
   mount("arabic").append(
     createNavShell({ locale: "ar" }),

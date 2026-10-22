@@ -66,6 +66,10 @@
   --glass-selected-pill: rgba(11, 143, 110, 0.08);
   --glass-scroll-edge: rgba(238, 243, 241, 0.9);
   --glass-scroll-edge-end: rgba(238, 243, 241, 0);
+  /* Liquid Glass (iOS 26) — floating bar controls. */
+  --shadow-glass-control: inset 0 1px 0 var(--glass-highlight), 0 4px 16px rgba(12, 31, 26, 0.1);
+  --glass-press-scale: 1.08;
+  --glass-edge-tint: rgba(238, 243, 241, 0.55);
   --surface-inverse-chip: rgba(255, 255, 255, 0.1);
   --surface-inverse-button: rgba(255, 255, 255, 0.14);
   --surface-mint-chip: rgba(94, 224, 181, 0.16);
@@ -619,6 +623,8 @@
   --glass-selected-pill: rgba(64, 179, 154, 0.2);
   --glass-scroll-edge: rgba(0, 0, 0, 0.9);
   --glass-scroll-edge-end: rgba(0, 0, 0, 0);
+  --shadow-glass-control: inset 0 1px 0 var(--glass-highlight), 0 4px 16px rgba(0, 0, 0, 0.4);
+  --glass-edge-tint: rgba(0, 0, 0, 0.5);
   --surface-subtle: #262626;
   --surface-sticky: rgba(38, 38, 38, 0.92);
   --surface-sunken: #1F1F1F;

@@ -7,6 +7,7 @@
  * createNavWebTopBar({ locale })      72 tall bar: search, account switcher, notifications, avatar.
  * createNavMobile({ locale, controls }) Phone app shell: status bar, Mobile top bar, Tab bar.
  * createNavTopBars()                  Mobile top bar types for iOS and Android.
+ * createNavLiquidBars({ locale })     iOS 26 Liquid Glass top bars over content.
  * createNavStates()                   Sidebar item, Tab bar item and large title states.
  * createNavMobileWeb()
  * createNavHeaders()
@@ -106,7 +107,7 @@
       initials: "KA", user: "MA", userName: "Mona Alharbi", business: "Business", home: "Home", export: "Export",
       tabs: ["Overview", "Activity", "Settings"], collapse: "Collapse sidebar", expand: "Expand sidebar",
       notifications: "Notifications", switcher: "Switch account", desktop: "Desktop · 272", tablet: "Tablet · 80 rail",
-      breakpoint: "Breakpoint", back: "Back", close: "Close", done: "Done", tabbar: "App", time: "9:41",
+      breakpoint: "Breakpoint", back: "Back", close: "Close", done: "Done", tabbar: "App", time: "9:41", find: "Search",
       markRead: "Mark all read", alerts: [["Transfer needs approval", "Nour Trading · today"], ["Card frozen", "Operations •• 2086"], ["Statement ready", "September 2026"]],
     },
     ar: {
@@ -114,7 +115,7 @@
       initials: "KA", user: "MA", userName: "منى الحربي", business: "الأعمال", home: "الرئيسية", export: "تصدير",
       tabs: ["نظرة عامة", "النشاط", "الإعدادات"], collapse: "طي الشريط الجانبي", expand: "توسيع الشريط الجانبي",
       notifications: "الإشعارات", switcher: "تبديل الحساب", desktop: "سطح المكتب · 272", tablet: "الجهاز اللوحي · 80",
-      breakpoint: "نقطة التوقف", back: "رجوع", close: "إغلاق", done: "تم", tabbar: "التطبيق", time: "9:41",
+      breakpoint: "نقطة التوقف", back: "رجوع", close: "إغلاق", done: "تم", tabbar: "التطبيق", time: "9:41", find: "بحث",
       markRead: "تحديد الكل كمقروء", alerts: [["تحويل بانتظار الموافقة", "نور للتجارة · اليوم"], ["تم تجميد البطاقة", "العمليات •• 2086"], ["الكشف جاهز", "سبتمبر 2026"]],
     },
   };
@@ -455,25 +456,55 @@
     return root;
   }
 
-  /* Mobile top bar. Standard: back, title, one action. Large title: big title below the bar. Modal: close, title, Done. */
+  /* Liquid Glass control: a 44 pt glass circle. Prominent is the tinted confirm button in sheets. */
+  function glassButton(name, label, tone) {
+    const node = button("nv-glass-btn", "", null);
+    node.setAttribute("aria-label", label);
+    node.title = label;
+    if (tone) node.dataset.tone = tone;
+    const glyph = icon(name);
+    if (glyph) node.append(glyph);
+    return node;
+  }
+
+  /* Several trailing actions share one glass capsule. */
+  function glassGroup(actions) {
+    const group = el("span", "nv-glass-group");
+    group.setAttribute("role", "group");
+    actions.forEach(([name, label]) => group.append(glassButton(name, label)));
+    return group;
+  }
+
+  /* Mobile top bar. Standard: back, title, one action. Large title: big title below the bar. Modal: close, title, Done.
+     iOS with style "glass" is Liquid Glass: no bar fill, floating glass controls, a blurred scroll edge. */
   function mobileBar(options) {
     const t = copy(options.locale);
+    const liquid = options.platform !== "android" && options.style === "glass";
     const bar = el("div", "nv-appbar");
     bar.dataset.type = options.type || "standard";
     bar.dataset.scrolled = options.scrolled ? "true" : "false";
-    bar.dataset.style = options.style || "solid";
+    bar.dataset.style = liquid ? "liquid" : options.style || "solid";
+    if (options.tone) bar.dataset.tone = options.tone;
     const edge = el("span", "nv-scroll-edge");
     edge.setAttribute("aria-hidden", "true");
     const row = el("div", "nv-appbar-row");
     const start = el("span", "nv-appbar-slot");
-    if (options.type === "modal") start.append(iconButton("close", t.close));
-    else if (options.back) start.append(iconButton(options.platform === "android" ? "back" : "previous", t.back));
     const title = el("strong", "nv-appbar-title", options.title);
     const end = el("span", "nv-appbar-slot");
-    if (options.type === "modal") {
-      end.append(window.createButton ? createButton({ label: t.done, variant: "ghost", size: "sm" }) : el("span", "", t.done));
+    if (liquid) {
+      if (options.type === "modal") start.append(glassButton("x", t.close));
+      else if (options.back) start.append(glassButton("previous", t.back));
+      if (options.type === "modal") end.append(glassButton("check", t.done, "prominent"));
+      else if (options.actions === 1) end.append(glassButton("notifications", t.notifications));
+      else end.append(glassGroup([["search", t.find], ["notifications", t.notifications]]));
     } else {
-      end.append(iconButton("notifications", t.notifications));
+      if (options.type === "modal") start.append(iconButton("close", t.close));
+      else if (options.back) start.append(iconButton(options.platform === "android" ? "back" : "previous", t.back));
+      if (options.type === "modal") {
+        end.append(window.createButton ? createButton({ label: t.done, variant: "ghost", size: "sm" }) : el("span", "", t.done));
+      } else {
+        end.append(iconButton("notifications", t.notifications));
+      }
     }
     row.append(start, title, end);
     bar.append(edge, row);
@@ -606,6 +637,7 @@
     }
 
     function paint() {
+      device.dataset.under = "false";
       paintBar();
       paintContent();
       paintTabs();
@@ -614,6 +646,7 @@
     }
 
     scroller.addEventListener("scroll", () => {
+      device.dataset.under = scroller.scrollTop > 0 ? "true" : "false";
       const threshold = state.type === "large" ? scroller.querySelector(".nv-large").offsetHeight : 1;
       const next = scroller.scrollTop > threshold - 8;
       if (next === state.scrolled) return;
@@ -667,7 +700,7 @@
       ["iOS", "Top bar 52 pt, large title 96 pt. Tab bar 58 pt above the home indicator. Centred title, chevron back. VoiceOver reads \"Payments, 4, tab, 3 of 4\"."],
       ["Android", "Top bar 64 dp, large title 112 dp. Tab bar 80 dp above the system navigation bar. Title at the start, arrow back. contentDescription \"Payments, 4 new\"."],
       ["Scrolling", "At the top the bar has no fill. Once the list scrolls, it gets the surface and a hairline, and a large title moves into the bar."],
-      ["Glass", "iOS only: a frosted bar with blur 24 and a top highlight, no hairline, and a fade under the bar. Android keeps a tonal bar with no blur and a solid tab bar."],
+      ["Glass", "iOS only, Liquid Glass: the bar has no fill, controls float in glass circles, and content blurs as it passes under them. Android keeps a tonal bar with no blur and a solid tab bar."],
     ].forEach(([name, text]) => {
       const spec = el("div", "nv-spec");
       spec.append(el("strong", "", name), el("p", "", text));
@@ -703,6 +736,101 @@
       });
       root.append(row);
     });
+    return root;
+  }
+
+  function liquidContent(spec) {
+    const content = el("div", "nv-liquid-content");
+    content.setAttribute("aria-hidden", "true");
+    if (spec.kind === "media") {
+      content.append(el("div", "nv-liquid-photo"));
+    } else if (spec.kind === "sheet") {
+      const form = el("div", "nv-liquid-form");
+      ["", "nv-short", ""].forEach((extra) => form.append(el("span", `nv-bone ${extra}`.trim())));
+      content.append(form);
+      return content;
+    }
+    if (spec.type === "large" && !spec.scrolled) content.append(el("h3", "nv-large", spec.title));
+    if (spec.kind !== "media") content.append(el("div", "nv-liquid-hero"));
+    const list = el("div", "nv-device-list");
+    for (let index = 0; index < 3; index += 1) {
+      const row = el("div", "nv-list-row");
+      const copyCol = el("span", "nv-list-copy");
+      copyCol.append(el("span", "nv-bone"), el("span", "nv-bone nv-short"));
+      row.append(el("span", "nv-bone nv-dot-bone"), copyCol, el("span", "nv-bone nv-end-bone"));
+      list.append(row);
+    }
+    content.append(list);
+    return content;
+  }
+
+  /* iOS 26 Liquid Glass top bars, each over real content so the glass has something to refract. */
+  function createNavLiquidBars(options = {}) {
+    const t = copy(options.locale);
+    const root = el("div", "nv-stack");
+    const grid = el("div", "nv-liquid-grid");
+    const title = t.lang === "ar" ? "البطاقات" : "Cards";
+    const screens = [
+      ["Standard · top", "Back, title and a capsule of actions. No fill: the bar is the content.",
+        { type: "standard", back: true, scrolled: false }],
+      ["Standard · scrolled", "Content passes under the controls. A soft blur at the top edge keeps the title readable.",
+        { type: "standard", back: true, scrolled: true }],
+      ["Large title · top", "The title sits in the content at 34 pt. Root screens have no back button.",
+        { type: "large", scrolled: false, actions: 1 }],
+      ["Large title · scrolled", "The large title scrolls away and the inline title appears in the bar.",
+        { type: "large", scrolled: true, actions: 1 }],
+      ["Sheet", "Close on the leading side, a tinted check on the trailing side to confirm.",
+        { type: "modal", scrolled: false, kind: "sheet", title: t.lang === "ar" ? "تحويل جديد" : "New transfer" }],
+      ["Over media", "On photos and card art the controls switch to dark glass with white glyphs.",
+        { type: "standard", back: true, scrolled: false, kind: "media", tone: "media", title: "" }],
+    ];
+    screens.forEach(([caption, note, spec]) => {
+      const card = el("figure", "nv-liquid-card");
+      const screen = el("div", "nv-liquid-screen");
+      screen.dataset.platform = "ios";
+      screen.dataset.under = spec.scrolled ? "true" : "false";
+      if (spec.kind) screen.dataset.kind = spec.kind;
+      const barHost = el("div", "nv-liquid-bar");
+      barHost.append(mobileBar({
+        locale: t.lang,
+        platform: "ios",
+        style: "glass",
+        type: spec.type,
+        back: spec.back,
+        actions: spec.actions,
+        scrolled: spec.scrolled,
+        tone: spec.tone,
+        title: spec.title != null ? spec.title : title,
+      }));
+      const status = statusBar(t);
+      if (spec.kind === "sheet") {
+        const sheet = el("div", "nv-liquid-sheet");
+        sheet.append(barHost, liquidContent({ ...spec, title }));
+        screen.append(status, liquidContent({ type: "standard", title }), sheet);
+      } else {
+        screen.append(status, liquidContent({ ...spec, title }), barHost);
+      }
+      const label = el("figcaption", "nv-liquid-caption");
+      label.append(el("strong", "", caption), el("p", "", note));
+      card.append(screen, label);
+      grid.append(card);
+    });
+    root.append(grid);
+    if (options.specs === false) return root;
+    const notes = el("div", "nv-specs");
+    [
+      ["Bar", "No fill and no hairline at any scroll position. Height 52 pt, padding 0 16. Title 15 SemiBold, centred."],
+      ["Controls", "44 pt glass circles: glass fill, 1 px glass stroke, top highlight, blur 16. Two or more actions share one capsule."],
+      ["Scroll edge", "When content is under the bar, a blur 24 layer fades out 24 pt below it. Nothing shows at the top of the list."],
+      ["Sheets", "Close is a glass circle. Confirm is a tinted circle in action primary with a white check."],
+      ["Accessibility", "Reduce Transparency swaps glass for surface card. Each control has a VoiceOver label: \"Back\", \"Search\", \"Done\"."],
+      ["Android", "No Liquid Glass. Android keeps the Material top bar: tonal surface when scrolled, no blur."],
+    ].forEach(([name, text]) => {
+      const spec = el("div", "nv-spec");
+      spec.append(el("strong", "", name), el("p", "", text));
+      notes.append(spec);
+    });
+    root.append(notes);
     return root;
   }
 
@@ -1090,6 +1218,7 @@
   window.createNavWebTopBar = createNavWebTopBar;
   window.createNavMobile = createNavMobile;
   window.createNavTopBars = createNavTopBars;
+  window.createNavLiquidBars = createNavLiquidBars;
   window.createNavStates = createNavStates;
   window.createNavMobileWeb = createNavMobileWeb;
   window.createNavHeaders = createNavHeaders;
