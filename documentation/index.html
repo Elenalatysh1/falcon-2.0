@@ -473,7 +473,7 @@
 <header class="wrap head icons-head">
     <p class="kicker">Hala UI · Foundations</p>
     <h1 class="type-display">Icons</h1>
-    <p class="lede type-body-l">Hala uses <strong>Lucide</strong>, an open-source outline icon set (ISC license), with one change: the stroke is 1.7 instead of 2, to match Plex Sans. Icons on this page are the real Lucide files, version 0.453.</p>
+    <p class="lede type-body-l">Hala uses its own <strong>twotone icon set</strong>: 1,027 icons on the Source board in HALA DNA. The repo’s 85 approved icons are shown below with their Hala match. Eight have no Hala match and use Lucide (ISC), drawn at stroke 1.7.</p>
   </header>
 
   <main>
@@ -481,22 +481,22 @@
       <div class="specs" data-specs></div>
       <div class="pair">
         <div class="anatomy">
-          <span class="kicker quiet">Anatomy · 24 × 24 grid</span>
+          <span class="kicker quiet">Anatomy · 16 × 16 grid</span>
           <div class="anatomy-row">
             <div class="board">
               <span class="board-live"></span>
               <div class="board-icon" data-anatomy></div>
             </div>
             <div class="notes">
-              <span><b>Live area 20 × 20.</b> 2 px padding on each side, as drawn by Lucide.</span>
-              <span><b>Round caps and joins.</b> Never square.</span>
-              <span><b>No fill.</b> Outline only, color from currentColor.</span>
+              <span><b>Live area 13 × 13.</b> 1.5 px padding on each side, as drawn in HALA DNA.</span>
+              <span><b>Two tones.</b> Primary for the main shape, secondary for the detail.</span>
+              <span><b>Filled shapes.</b> No strokes, color from currentColor.</span>
             </div>
           </div>
         </div>
         <div class="stroke-card">
-          <span class="kicker quiet">Why 1.7 · next to Plex Sans 15/500</span>
-          <div data-strokes></div>
+          <span class="kicker quiet">Tones · next to Plex Sans 15/500</span>
+          <div data-tones></div>
         </div>
       </div>
     </section>
@@ -504,7 +504,7 @@
     <section class="wrap" id="sizes">
       <div class="titles">
         <h2 class="doc-h2">Sizes</h2>
-        <p class="sub type-body-m">Four sizes. Keep the stroke at 1.7 for all of them; only use 1.5 at 28 px and up if the icon looks heavy.</p>
+        <p class="sub type-body-m">Four sizes. Standalone icons sit in a tile.</p>
       </div>
       <div class="size-table" data-sizes></div>
     </section>
@@ -512,8 +512,8 @@
     <section class="wrap" id="set">
       <div class="section-head">
         <div class="titles">
-          <h2 class="doc-h2">Hala icon set</h2>
-          <p class="sub type-body-m"><span data-count></span> approved icons, grouped by area. Use these names in code. Click an icon to copy its name.</p>
+          <h2 class="doc-h2">Approved set</h2>
+          <p class="sub type-body-m"><span data-count></span> icons from the repo, grouped by area. Use the repo name in code. Icons marked LUCIDE have no Hala match. Click an icon to copy its name.</p>
         </div>
         <span class="copied" data-copied></span>
       </div>
@@ -531,7 +531,7 @@
 
     <section class="wrap" id="icons-color">
       <div class="titles">
-        <h2 class="doc-h2">Color and containers</h2>
+        <h2 class="doc-h2">Color and tiles</h2>
         <p class="sub type-body-m">Icons take the color of their text. Put them in a tile when they stand alone. Status colors only for status.</p>
       </div>
       <div class="tile-grid" data-tiles></div>
@@ -575,7 +575,7 @@
         <div class="demo-card">
           <span class="kicker quiet">Mobile tab bar · 22 pt</span>
           <div class="tabbar" data-tabs></div>
-          <span class="hint">Active tab: Green 600 and stroke 2.2. Lucide has no filled versions, so the stroke weight shows the active state.</span>
+          <span class="hint">Active tab: Green 600 for the icon and label. Inactive tabs use the tertiary text color.</span>
         </div>
       </div>
     </section>
@@ -599,7 +599,8 @@
 
     <section class="wrap" id="practice">
       <div class="titles">
-        <h2 class="doc-h2">Do and don't</h2>
+        <h2 class="doc-h2">Use / Don’t</h2>
+        <p class="sub type-body-m">Four habits from the repo.</p>
       </div>
       <div class="do-grid" data-dos></div>
     </section>
@@ -607,7 +608,7 @@
     <section class="wrap" id="dev">
       <div class="titles">
         <h2 class="doc-h2">For developers</h2>
-        <p class="sub type-body-m">Install the official package for each platform and wrap it once so every icon gets Hala's defaults.</p>
+        <p class="sub type-body-m">Draw icons through one wrapper on each platform so every icon gets Hala's names, sizes and tones.</p>
       </div>
       <div class="dev-grid" data-dev></div>
     </section>
@@ -3256,7 +3257,7 @@
       </aside>
     </div>
   </div>
-  <script src="../vendor/lucide.js"></script>
+  <script src="../vendor/hala-icons.js"></script>
   <script src="foundations.js"></script>
   <script src="icons.js"></script>
   <script src="logo.js"></script>

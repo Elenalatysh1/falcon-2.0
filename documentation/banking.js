@@ -74,12 +74,12 @@
   }
 
   function icon(name) {
-    const lucide = window.lucide;
+    const iconSet = window.halaIcons;
     const map = { confirm: "check", error: "x" };
     const kebab = map[name] || name;
     const pascal = kebab.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join("");
-    if (!lucide || !lucide.icons[pascal]) return null;
-    const svg = lucide.createElement(lucide.icons[pascal]);
+    if (!iconSet || !iconSet.icons[pascal]) return null;
+    const svg = iconSet.createElement(iconSet.icons[pascal]);
     svg.classList.add("hala-icon");
     svg.dataset.size = "inline";
     svg.setAttribute("aria-hidden", "true");

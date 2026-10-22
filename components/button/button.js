@@ -1,5 +1,5 @@
 /**
- * Button. Load lucide UMD, then this script.
+ * Button. Load vendor/hala-icons.js, then this script.
  * Names match icons/api.js: download, next, back, refresh.
  *
  * createButton({
@@ -55,12 +55,12 @@
   }
 
   function drawIcon(name) {
-    const lucide = window.lucide;
-    if (!lucide) return null;
+    const iconSet = window.halaIcons;
+    if (!iconSet) return null;
     const kebab = catalog[name] || name;
-    const node = lucide.icons[pascal(kebab)];
+    const node = iconSet.icons[pascal(kebab)];
     if (!node) return null;
-    const svg = lucide.createElement(node);
+    const svg = iconSet.createElement(node);
     svg.classList.add("hala-icon");
     svg.dataset.icon = kebab;
     svg.style.strokeWidth = "var(--icon-stroke)";

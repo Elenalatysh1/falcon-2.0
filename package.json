@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "description": "Falcon 2.0 design system",
-  "dependencies": {
+  "scripts": {
+    "build:icons": "node icons/build.mjs"
+  },
+  "devDependencies": {
     "lucide": "0.453.0"
   }
 }

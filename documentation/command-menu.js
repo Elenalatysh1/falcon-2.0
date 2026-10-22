@@ -54,11 +54,11 @@
   }
 
   function icon(name) {
-    const lucide = window.lucide;
-    if (!lucide) return null;
-    const node = lucide.icons[name];
+    const iconSet = window.halaIcons;
+    if (!iconSet) return null;
+    const node = iconSet.icons[name];
     if (!node) return null;
-    const svg = lucide.createElement(node);
+    const svg = iconSet.createElement(node);
     svg.classList.add("hala-icon");
     svg.style.strokeWidth = "var(--icon-stroke)";
     svg.setAttribute("aria-hidden", "true");

@@ -21,7 +21,7 @@ Style every component from `styles/foundations.css` only. Color, spacing, radius
 ## Anatomy
 
 - Give each component one job. Build larger UI from existing Falcon components.
-- Use Falcon icon names from `icons/api.js` (`transfers`, `search`, `cards`). Lucide 0.453.0 is the only icon set. The same name must exist on every platform.
+- Use Falcon icon names from `icons/api.js` (`transfers`, `search`, `cards`). The Hala icon set from HALA DNA is the only icon set, with the Lucide fallbacks listed in `falcon-icons.mdc`. The same name must exist on every platform.
 - Example copy is sentence case.
 
 ```text

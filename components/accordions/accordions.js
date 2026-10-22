@@ -1,5 +1,5 @@
 /**
- * Accordions. Load lucide UMD and selection.js, then this script.
+ * Accordions. Load vendor/hala-icons.js and selection.js, then this script.
  *
  * createAccordion({
  *   variant: "divided" | "card" | "compact" | "grouped" | "detail",
@@ -40,12 +40,12 @@
   }
 
   function drawIcon(name) {
-    const lucide = window.lucide;
-    if (!lucide || !name) return null;
+    const iconSet = window.halaIcons;
+    if (!iconSet || !name) return null;
     const kebab = catalog[name] || name;
-    const node = lucide.icons[pascal(kebab)];
+    const node = iconSet.icons[pascal(kebab)];
     if (!node) return null;
-    const svg = lucide.createElement(node);
+    const svg = iconSet.createElement(node);
     svg.classList.add("hala-icon");
     svg.dataset.icon = kebab;
     svg.style.strokeWidth = "var(--icon-stroke)";

@@ -1,29 +1,40 @@
 ---
-description: Falcon icons are Lucide 0.453 drawn through icons/api.js and foundation tokens
+description: Falcon icons are the Hala twotone set from HALA DNA, drawn through icons/api.js and foundation tokens
 alwaysApply: true
 ---
 
 # Icons
 
-Falcon uses Lucide 0.453.0 (ISC). Draw icons through `icons/api.js`. Do not paste SVG paths, use another icon set, or use emoji.
+Falcon uses the Hala icon set from the HALA DNA Figma file (Icons page). Draw icons through `icons/api.js` on web, which reads `vendor/hala-icons.js`. Do not paste SVG paths, use another icon set, or use emoji.
 
 ```js
 import { icon } from "./icons/api.js";
 
 button.append(icon("transfers"));
 row.append(icon("search", { size: "inline" }));
-tab.append(icon("home", { size: "nav", active: true }));
+tile.append(icon("cards", { tone: "default" }));
 ```
 
 ## Drawing
 
-- Stroke is `var(--icon-stroke)` (1.7). Active navigation uses `var(--icon-stroke-active)` (2.2). Caps and joins stay round.
-- Color is `currentColor`. Set it with a text or status token (`--text-primary`, `--text-tertiary`, `--brand-600`, `--status-danger`). No fill, gradient, or one-off color.
-- Sizes are `inline` 16, `default` 20, `nav` 22, and `feature` 28. One size and one stroke per row.
-- Names come from `icons/catalog`: `transfers`, `search`, `cards`. The same name is used on Web, Android, and iOS.
+- Hala icons are filled shapes on a 16 grid in two tones: icon/primary and icon/secondary. No strokes.
+- Color is `currentColor`. Set it with a text or status token (`--text-primary`, `--text-tertiary`, `--brand-600`, `--status-danger`). No gradient or one-off color.
+- Both tones use `currentColor` unless you pass `tone: "default"` (text/primary + text/tertiary) or `tone: "secondary"` (text/secondary + text/tertiary). The secondary tone reads `--icon-secondary`.
+- Sizes are `inline` 16, `default` 20, `nav` 22, and `feature` 28. One size per row.
+- Names come from the Falcon catalog in `icons/api.js`: `transfers`, `search`, `cards`. The same name is used on Web, Android, and iOS.
 - An icon-only control has a tooltip and an accessible name.
 - In RTL, `data-mirror` icons flip. Search, check, bell, card, clock, and charts do not.
 
+## Lucide fallbacks
+
+Eight Falcon names have no Hala match and stay on Lucide 0.453.0 (ISC), as in the Figma Lucide category: `account`, `wallet`, `savings`, `trend-up`, `trend-down`, `delivery`, `email`, `phone`. The spinner (`loader-circle`) and `linkedin` also stay on Lucide. These draw at `var(--icon-stroke)` (1.7), and active navigation uses `var(--icon-stroke-active)` (2.2).
+
+## Adding an icon
+
+1. Pick it from the HALA DNA Icons page. Ask design if no Hala icon fits.
+2. Export its paths and checksum into `icons/source/` (a new `batch-N.json` and a line in `sums.json`).
+3. Map the Falcon name in `catalog` in `icons/build.mjs`, then run `npm run build:icons`. The build fails if a path does not match Figma.
+
 ## React
 
-When a component is React, use `lucide-react@0.453.0` with the same defaults: `size` from the icon tokens and `strokeWidth={1.7}`. Prefer `icon()` until that package is the component runtime.
+When a component is React, wrap `icon()` once in a `HalaIcon` component with `name`, `size`, and `tone` props. Do not add `lucide-react` for Hala icons.

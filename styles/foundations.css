@@ -441,10 +441,11 @@
   --motion-dots: 1200ms;
   --motion-progress: 1300ms;
 
-  /* Icons — Lucide 0.453. Draw with icons/api.js. */
+  /* Icons — Hala twotone set from HALA DNA. Draw with icons/api.js.
+     Stroke values apply only to the few icons kept on Lucide 0.453. */
   --icon-stroke: 1.7;
   --icon-stroke-active: 2.2;
-  --icon-grid: 24;
+  --icon-grid: 16;
   --icon-inline: 16px;
   --icon-badge: 13px;
   --icon-badge-lg: 14px;
@@ -871,17 +872,36 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Lucide icons rendered by icons/api.js */
+/* Icons rendered by icons/api.js and vendor/hala-icons.js */
 .hala-icon {
   display: block;
   flex: none;
+  width: var(--icon-default);
+  height: var(--icon-default);
+}
+
+.hala-icon[data-set="hala"] {
+  fill: currentColor;
+  stroke: none;
+}
+
+.hala-icon[data-set="lucide"] {
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: var(--icon-stroke);
-  width: var(--icon-default);
-  height: var(--icon-default);
+}
+
+/* Twotone modes. Without a tone, both tones use currentColor. */
+.hala-icon[data-tone="default"] {
+  color: var(--text-primary);
+  --icon-secondary: var(--text-tertiary);
+}
+
+.hala-icon[data-tone="secondary"] {
+  color: var(--text-secondary);
+  --icon-secondary: var(--text-tertiary);
 }
 
 .hala-icon[data-size="inline"] {
@@ -899,7 +919,7 @@ body {
   height: var(--icon-feature);
 }
 
-.hala-icon[data-active="true"] {
+.hala-icon[data-set="lucide"][data-active="true"] {
   stroke-width: var(--icon-stroke-active);
 }
 

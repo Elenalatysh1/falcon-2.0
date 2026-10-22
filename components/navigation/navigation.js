@@ -1,5 +1,5 @@
 /**
- * Navigation. Load lucide UMD, then this script.
+ * Navigation. Load vendor/hala-icons.js, then this script.
  *
  * createNavSidebar()
  * createNavMobileWeb()
@@ -53,10 +53,10 @@
   }
 
   function icon(name, size, active) {
-    const lucide = window.lucide;
+    const iconSet = window.halaIcons;
     const kebab = NAMES[name] || name;
-    if (!lucide || !kebab || !lucide.icons[pascal(kebab)]) return null;
-    const svg = lucide.createElement(lucide.icons[pascal(kebab)]);
+    if (!iconSet || !kebab || !iconSet.icons[pascal(kebab)]) return null;
+    const svg = iconSet.createElement(iconSet.icons[pascal(kebab)]);
     svg.classList.add("hala-icon");
     svg.dataset.icon = kebab;
     if (size) svg.dataset.size = size;

@@ -1,136 +1,118 @@
+(function () {
 const iconPage = document.querySelector('[data-page="icons"]') || document;
+const iconSet = window.halaIcons;
 const sizeKeys = ["inline", "default", "nav", "feature"];
 const colors = [
-  ["Ink", "var(--text-primary)"],
-  ["Tertiary", "var(--text-tertiary)"],
-  ["Green 600", "var(--brand-600)"],
-  ["Danger", "var(--status-danger)"],
+  ["Ink", "var(--text-primary)", "default"],
+  ["Tertiary", "var(--text-tertiary)", ""],
+  ["Green 600", "var(--brand-600)", ""],
+  ["Danger", "var(--status-danger)", ""],
 ];
 
 const groups = [
   ["NAVIGATION", [
-    ["Dashboard", "dashboard", ["LayoutDashboard"]],
-    ["Transactions", "transactions", ["ArrowLeftRight"]],
-    ["Transfers", "transfers", ["Send"]],
-    ["Payroll", "payroll", ["CalendarDays"]],
-    ["Cards", "cards", ["CreditCard"]],
-    ["SADAD", "sadad", ["ReceiptText", "Receipt"]],
-    ["POS", "pos", ["Smartphone"]],
-    ["eCommerce", "ecommerce", ["ShoppingCart"]],
-    ["Invoicing", "invoicing", ["FileText"]],
-    ["Food delivery", "food-delivery", ["UtensilsCrossed"]],
-    ["Locations", "locations", ["MapPin"]],
-    ["Users", "users", ["Users"]],
-    ["Documents", "documents", ["Files"]],
-    ["Help", "help", ["CircleHelp", "HelpCircle"]],
-    ["Settings", "settings", ["Settings"]],
+    ["Dashboard", "dashboard"],
+    ["Transactions", "transactions"],
+    ["Transfers", "transfers"],
+    ["Payroll", "payroll"],
+    ["Cards", "cards"],
+    ["SADAD", "sadad"],
+    ["POS", "pos"],
+    ["eCommerce", "ecommerce"],
+    ["Invoicing", "invoicing"],
+    ["Food delivery", "food-delivery"],
+    ["Locations", "locations"],
+    ["Users", "users"],
+    ["Documents", "documents"],
+    ["Help", "help"],
+    ["Settings", "settings"],
   ]],
   ["MONEY", [
-    ["Account", "account", ["Landmark"]],
-    ["Wallet", "wallet", ["Wallet"]],
-    ["Cash", "cash", ["Banknote"]],
-    ["Savings", "savings", ["PiggyBank"]],
-    ["Income", "income", ["ArrowDownLeft"]],
-    ["Outgoing", "outgoing", ["ArrowUpRight"]],
-    ["Trend up", "trend-up", ["TrendingUp"]],
-    ["Trend down", "trend-down", ["TrendingDown"]],
-    ["Bar chart", "bar-chart", ["ChartColumn", "BarChart3"]],
-    ["Line chart", "line-chart", ["ChartLine", "LineChart"]],
-    ["Percent", "percent", ["Percent"]],
-    ["Refund", "refund", ["Undo2"]],
-    ["QR pay", "qr-pay", ["QrCode"]],
-    ["Contactless", "contactless", ["Nfc"]],
+    ["Account", "account"],
+    ["Wallet", "wallet"],
+    ["Cash", "cash"],
+    ["Savings", "savings"],
+    ["Income", "income"],
+    ["Outgoing", "outgoing"],
+    ["Trend up", "trend-up"],
+    ["Trend down", "trend-down"],
+    ["Bar chart", "bar-chart"],
+    ["Line chart", "line-chart"],
+    ["Percent", "percent"],
+    ["Refund", "refund"],
+    ["QR pay", "qr-pay"],
+    ["Contactless", "contactless"],
   ]],
   ["ACTIONS", [
-    ["Add", "add", ["Plus"]],
-    ["Close", "close", ["X"]],
-    ["Confirm", "confirm", ["Check"]],
-    ["Edit", "edit", ["Pencil"]],
-    ["Delete", "delete", ["Trash2"]],
-    ["Copy", "copy", ["Copy"]],
-    ["Download", "download", ["Download"]],
-    ["Upload", "upload", ["Upload"]],
-    ["Share", "share", ["Share2"]],
-    ["Filter", "filter", ["ListFilter", "Filter"]],
-    ["Adjust", "adjust", ["SlidersHorizontal"]],
-    ["Search", "search", ["Search"]],
-    ["Refresh", "refresh", ["RefreshCw"]],
-    ["More", "more", ["Ellipsis", "MoreHorizontal"]],
-    ["Open link", "open-link", ["ExternalLink"]],
+    ["Add", "add"],
+    ["Close", "close"],
+    ["Confirm", "confirm"],
+    ["Edit", "edit"],
+    ["Delete", "delete"],
+    ["Copy", "copy"],
+    ["Download", "download"],
+    ["Upload", "upload"],
+    ["Share", "share"],
+    ["Filter", "filter"],
+    ["Adjust", "adjust"],
+    ["Search", "search"],
+    ["Refresh", "refresh"],
+    ["More", "more"],
+    ["Open link", "open-link"],
   ]],
   ["SECURITY", [
-    ["Lock", "lock", ["Lock"]],
-    ["Unlock", "unlock", ["LockOpen", "Unlock"]],
-    ["Verified", "verified", ["ShieldCheck"]],
-    ["Fingerprint", "fingerprint", ["Fingerprint"]],
-    ["Face ID", "face-id", ["ScanFace"]],
-    ["Show", "show", ["Eye"]],
-    ["Hide", "hide", ["EyeOff"]],
-    ["Freeze", "freeze", ["Snowflake"]],
-    ["Key", "key", ["KeyRound"]],
-    ["Sign out", "sign-out", ["LogOut"]],
+    ["Lock", "lock"],
+    ["Unlock", "unlock"],
+    ["Verified", "verified"],
+    ["Fingerprint", "fingerprint"],
+    ["Face ID", "face-id"],
+    ["Show", "show"],
+    ["Hide", "hide"],
+    ["Freeze", "freeze"],
+    ["Key", "key"],
+    ["Sign out", "sign-out"],
   ]],
   ["STATUS", [
-    ["Success", "success", ["CircleCheck", "CheckCircle2"]],
-    ["Error", "error", ["CircleX", "XCircle"]],
-    ["Warning", "warning", ["TriangleAlert", "AlertTriangle"]],
-    ["Info", "info", ["Info"]],
-    ["Pending", "pending", ["Clock"]],
-    ["Notifications", "notifications", ["Bell"]],
-    ["Muted", "muted", ["BellOff"]],
-    ["Offline", "offline", ["WifiOff"]],
+    ["Success", "success"],
+    ["Error", "error"],
+    ["Warning", "warning"],
+    ["Info", "info"],
+    ["Pending", "pending"],
+    ["Notifications", "notifications"],
+    ["Muted", "muted"],
+    ["Offline", "offline"],
   ]],
   ["BUSINESS AND CONTENT", [
-    ["Company", "company", ["Building2"]],
-    ["Shop", "shop", ["Store"]],
-    ["Delivery", "delivery", ["Truck"]],
-    ["Product", "product", ["Package"]],
-    ["Tag", "tag", ["Tag"]],
-    ["Calendar", "calendar", ["Calendar"]],
-    ["Camera", "camera", ["Camera"]],
-    ["Image", "image", ["Image"]],
-    ["Attachment", "attachment", ["Paperclip"]],
-    ["Email", "email", ["Mail"]],
-    ["Phone", "phone", ["Phone"]],
-    ["Chat", "chat", ["MessageCircle"]],
-    ["Language", "language", ["Globe"]],
-    ["Support", "support", ["Headset", "Headphones"]],
-    ["Gift", "gift", ["Gift"]],
+    ["Company", "company"],
+    ["Shop", "shop"],
+    ["Delivery", "delivery"],
+    ["Product", "product"],
+    ["Tag", "tag"],
+    ["Calendar", "calendar"],
+    ["Camera", "camera"],
+    ["Image", "image"],
+    ["Attachment", "attachment"],
+    ["Email", "email"],
+    ["Phone", "phone"],
+    ["Chat", "chat"],
+    ["Language", "language"],
+    ["Support", "support"],
+    ["Gift", "gift"],
   ]],
   ["ARROWS", [
-    ["Back", "back", ["ArrowLeft"]],
-    ["Forward", "forward", ["ArrowRight"]],
-    ["Expand", "expand", ["ChevronDown"]],
-    ["Next", "next", ["ChevronRight"]],
-    ["Previous", "previous", ["ChevronLeft"]],
-    ["Collapse", "collapse", ["ChevronUp"]],
-    ["Sort", "sort", ["ArrowUpDown"]],
-    ["Sidebar", "sidebar", ["PanelLeft"]],
+    ["Back", "back"],
+    ["Forward", "forward"],
+    ["Expand", "expand"],
+    ["Next", "next"],
+    ["Previous", "previous"],
+    ["Collapse", "collapse"],
+    ["Sort", "sort"],
+    ["Sidebar", "sidebar"],
   ]],
 ];
 
 const state = { size: 1, color: 0, query: "" };
 let copiedTimer = 0;
-
-function kebabOf(pascal) {
-  return pascal
-    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-    .replace(/([A-Za-z])([0-9])/g, "$1-$2")
-    .toLowerCase();
-}
-
-const catalog = {};
-
-function remember(key, aliases) {
-  const found = aliases.find((name) => lucide.icons[name]);
-  catalog[key] = kebabOf(found || aliases[0]);
-}
-
-groups.forEach(([, items]) => {
-  items.forEach(([, key, aliases]) => remember(key, aliases));
-});
-remember("home", ["House", "Home"]);
-remember("sparkles", ["Sparkles"]);
 
 const iconSizes = {
   inline: "--icon-inline",
@@ -139,17 +121,6 @@ const iconSizes = {
   feature: "--icon-feature",
 };
 
-const mirrorNames = new Set([
-  "arrow-left",
-  "arrow-right",
-  "chevron-left",
-  "chevron-right",
-  "send",
-  "log-out",
-  "undo-2",
-  "panel-left",
-]);
-
 function pascal(kebab) {
   return kebab
     .split("-")
@@ -157,34 +128,40 @@ function pascal(kebab) {
     .join("");
 }
 
+function halaName(key) {
+  return iconSet.catalog[key] || key;
+}
+
+function isLucide(key) {
+  return iconSet.icons[pascal(halaName(key))].set === "lucide";
+}
+
 function icon(name, options = {}) {
-  const kebab = catalog[name] || name;
-  const node = lucide.icons[pascal(kebab)];
+  const kebab = halaName(name);
+  const node = iconSet.icons[pascal(kebab)];
   if (!node) throw new Error(`Unknown Falcon icon "${name}"`);
   const size = iconSizes[options.size] ? options.size : "default";
-  const svg = lucide.createElement(node);
+  const svg = iconSet.createElement(node);
   svg.classList.add("hala-icon");
   svg.dataset.size = size;
   svg.dataset.icon = kebab;
   svg.style.width = `var(${iconSizes[size]})`;
   svg.style.height = `var(${iconSizes[size]})`;
-  svg.style.strokeWidth = options.active ? "var(--icon-stroke-active)" : "var(--icon-stroke)";
-  if (mirrorNames.has(kebab)) svg.dataset.mirror = "true";
+  if (options.tone) svg.dataset.tone = options.tone;
+  if (iconSet.mirror.has(kebab)) svg.dataset.mirror = "true";
   if (options.active) svg.dataset.active = "true";
   svg.setAttribute("aria-hidden", "true");
   return svg;
 }
 
-function draw(name, { size = "default", active = false, px, stroke, flip, fill } = {}) {
-  const svg = icon(name, { size, active });
+function draw(name, { size = "default", active = false, tone, px, flip } = {}) {
+  const svg = icon(name, { size, active, tone });
   if (px) {
     const length = typeof px === "number" ? `${px}px` : px;
     svg.style.width = length;
     svg.style.height = length;
   }
-  if (stroke) svg.style.strokeWidth = String(stroke);
   if (flip) svg.classList.add("is-flipped");
-  if (fill) svg.style.fill = fill;
   return svg;
 }
 
@@ -202,13 +179,12 @@ function mount(slot, node) {
 function specs() {
   const root = getComputedStyle(document.documentElement);
   const grid = root.getPropertyValue("--icon-grid").trim();
-  const stroke = root.getPropertyValue("--icon-stroke").trim();
   const rows = [
-    ["GRID", `${grid} × ${grid}`, "Lucide default canvas"],
-    ["STROKE", stroke, "Set strokeWidth={1.7}. Lucide default is 2."],
-    ["CAPS / JOINS", "round", "Lucide default, keep it"],
+    ["GRID", `${grid} × ${grid}`, "Hala DNA canvas, scaled to 16, 20, 22 or 28"],
+    ["STYLE", "Twotone fill", "Filled shapes in two tones. No strokes."],
+    ["TONES", "primary · secondary", "icon/primary and icon/secondary"],
     ["COLOR", "currentColor", "Inherit text color; never hard-code"],
-    ["LICENSE", "ISC", "Free for commercial use"],
+    ["SOURCE", "HALA DNA", "1,027 icons on the Figma Source board"],
   ];
   const host = iconPage.querySelector("[data-specs]");
   rows.forEach(([k, v, d]) => {
@@ -219,24 +195,21 @@ function specs() {
 }
 
 function anatomy() {
-  const svg = draw("cards", {
-    px: "calc((var(--icon-grid) - 4) * var(--space-2))",
-  });
-  mount(iconPage.querySelector("[data-anatomy]"), svg);
+  mount(iconPage.querySelector("[data-anatomy]"), draw("cards", { tone: "default", px: "100%" }));
 }
 
-function strokes() {
-  const host = iconPage.querySelector("[data-strokes]");
+function tones() {
+  const host = iconPage.querySelector("[data-tones]");
   const rows = [
-    ["1.5", "1.5 · too light", false],
-    [null, "1.7 · Hala", true],
-    ["2", "2 · Lucide default, heavy", false],
+    ["default", "Default · text/primary + text/tertiary", true],
+    ["secondary", "Secondary · text/secondary + text/tertiary", false],
+    ["", "One color · currentColor for both tones", false],
   ];
-  rows.forEach(([stroke, label, hala]) => {
+  rows.forEach(([tone, label, hala]) => {
     const row = el("div", hala ? "stroke-row is-hala" : "stroke-row");
     const icons = el("div", "stroke-icons");
     ["transactions", "cards", "notifications"].forEach((name) => {
-      icons.append(draw(name, stroke ? { stroke } : {}));
+      icons.append(draw(name, tone ? { tone } : {}));
     });
     row.append(icons, el("span", "stroke-label", "Transfers"), el("span", "stroke-meta", label));
     host.append(row);
@@ -251,7 +224,7 @@ function sizes() {
     ["Navigation · 22", "22 px · tile 40", "nav", "--icon-tile-nav", "--icon-tile-radius-nav", "--icon-gap-nav", "Mobile tab bar and top bar actions."],
     ["Feature · 28", "28 px · tile 56", "feature", "--icon-tile-feature", "--icon-tile-radius-feature", "--icon-gap-feature", "Quick actions, empty-state tiles, product cards."],
   ];
-  const samples = ["home", "transfers", "wallet", "search", "settings"];
+  const samples = ["home", "transfers", "cards", "search", "settings"];
   rows.forEach(([name, spec, size, tile, radius, gap, use]) => {
     const row = el("div", "size-row");
     const title = el("div", "size-name");
@@ -285,30 +258,30 @@ function library() {
   host.replaceChildren();
   let shown = 0;
   groups.forEach(([name, items]) => {
-    const matches = items.filter(([label, , aliases]) => {
+    const matches = items.filter(([label, key]) => {
       if (!q) return true;
-      const blob = [label, name, ...aliases, ...aliases.map(kebabOf)].join(" ").toLowerCase();
-      return blob.includes(q);
+      return [label, name, key, halaName(key)].join(" ").toLowerCase().includes(q);
     });
     if (!matches.length) return;
     shown += matches.length;
     const group = el("div", "group");
-    group.append(el("span", "group-name", name));
+    group.append(el("span", "group-name", `${name} · ${items.length}`));
     const grid = el("div", "icon-grid");
     matches.forEach(([label, key]) => {
-      const code = catalog[key];
+      const [, color, tone] = colors[state.color];
       const button = el("button", "icon-cell");
       button.type = "button";
-      button.title = code;
-      button.style.color = colors[state.color][1];
-      button.append(draw(key, { size: sizeKeys[state.size] }));
+      button.title = `${key} · ${halaName(key)}`;
+      button.style.color = color;
+      button.append(draw(key, { size: sizeKeys[state.size], tone }));
       const text = el("span");
-      text.append(el("span", "label", label), el("span", "code", code));
+      text.append(el("span", "label", label), el("span", "code", key));
+      if (isLucide(key)) text.append(el("span", "set-tag", "LUCIDE"));
       button.append(text);
       button.addEventListener("click", () => {
-        showCopied(code);
+        showCopied(key);
         const clipboard = navigator.clipboard;
-        if (clipboard) clipboard.writeText(code).catch(() => {});
+        if (clipboard) clipboard.writeText(key).catch(() => {});
       });
       grid.append(button);
     });
@@ -316,7 +289,7 @@ function library() {
     host.append(group);
   });
   empty.hidden = !q || shown > 0;
-  empty.textContent = `No Hala icon matches "${state.query}". Check lucide.dev, then ask design to add it to the set.`;
+  empty.textContent = `No approved icon matches "${state.query}". Find it on the HALA DNA Icons page in Figma, then ask design to add it to the set.`;
 }
 
 function toolbar() {
@@ -372,7 +345,7 @@ function tiles() {
     ["Warning", "Pending, needs action", "var(--status-warning-tint)", "var(--status-warning)", "pending", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
     ["Error", "Declined, failed", "var(--status-error-tint)", "var(--status-danger)", "error", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
     ["Info", "Frozen, information", "var(--status-info-tint)", "var(--status-info)", "freeze", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
-    ["On gradient", "White icon on primary or card art", "rgba(255,255,255,.18)", "var(--text-on-brand)", "wallet", "var(--gradient-card)", "var(--text-on-brand)", "var(--brand-300)"],
+    ["On gradient", "White icon on primary or card art", "rgba(255,255,255,.18)", "var(--text-on-brand)", "cards", "var(--gradient-card)", "var(--text-on-brand)", "var(--brand-300)"],
     ["On ink", "Tooltips, dark cards", "rgba(255,255,255,.1)", "var(--text-on-brand)", "lock", "var(--surface-inverse)", "var(--text-on-brand)", "var(--text-disabled)"],
   ];
   const host = iconPage.querySelector("[data-tiles]");
@@ -394,15 +367,15 @@ function tiles() {
 
 function components() {
   const slots = {
-    add: () => draw("add", { stroke: "2" }),
+    add: () => draw("add"),
     download: () => draw("download", { px: 18 }),
     more: () => draw("more"),
     account: () => draw("account"),
     next: () => draw("next", { px: 18 }),
     search: () => draw("search", { px: 18 }),
     close: () => draw("close", { size: "inline" }),
-    confirm: () => draw("confirm", { px: 14, stroke: "2.4" }),
-    freeze: () => draw("freeze", { px: 14, stroke: "2" }),
+    confirm: () => draw("success", { px: 14 }),
+    freeze: () => draw("freeze", { px: 14 }),
   };
   iconPage.querySelectorAll("#components [data-icon]").forEach((slot) => {
     const make = slots[slot.dataset.icon];
@@ -434,7 +407,7 @@ function direction() {
   ];
   const keep = [
     ["Search", "search"],
-    ["Check", "confirm"],
+    ["Check", "success"],
     ["Bell", "notifications"],
     ["Card", "cards"],
     ["Clock", "pending"],
@@ -456,71 +429,78 @@ function direction() {
   });
 }
 
+function tinted(color, node) {
+  const wrap = el("span");
+  wrap.style.color = color;
+  wrap.append(node);
+  return wrap;
+}
+
+function labelButton(label, name, after) {
+  const button = el("span", "btn-secondary");
+  const glyph = draw(name, { px: 18 });
+  if (after) button.append(document.createTextNode(label), glyph);
+  else button.append(glyph, document.createTextNode(label));
+  return button;
+}
+
 function practice() {
   const host = iconPage.querySelector("[data-dos]");
   const cards = [
-    [true, "Use one size and stroke across a row of icons.", () => [
+    [true, "Use one size across a row of icons.", () => [
       draw("transfers"),
-      draw("wallet"),
+      draw("cards"),
       draw("notifications"),
     ]],
-    [false, "Don't mix sizes or strokes in the same row.", () => [
-      draw("transfers", { px: 16, stroke: "1.2" }),
-      draw("wallet", { px: 26, stroke: "2.6" }),
+    [false, "Mix sizes or strokes in the same row.", () => [
+      draw("transfers", { px: 14 }),
+      draw("cards", { px: 28 }),
       draw("notifications"),
     ]],
-    [true, "Color icons with the text color or a status color.", () => {
-      const ok = el("span");
-      ok.style.color = "var(--brand-600)";
-      ok.append(draw("success", { px: "var(--size-badge)" }));
-      const bad = el("span");
-      bad.style.color = "var(--status-danger)";
-      bad.append(draw("error", { px: "var(--size-badge)" }));
-      return [ok, bad];
-    }],
-    [false, "Don't use gradients, fills or random colors on icons.", () => {
-      const pink = el("span");
-      pink.style.color = "#E879F9";
-      pink.append(draw("transfers", { px: "var(--size-badge)" }));
-      const amber = el("span");
-      amber.style.color = "#F59E0B";
-      amber.append(draw("wallet", { px: "var(--size-badge)", fill: "#FDE68A" }));
-      return [pink, amber];
-    }],
-    [true, "Pair icon-only buttons with a tooltip.", () => {
+    [true, "Color icons with the text color or a status color.", () => [
+      tinted("var(--brand-600)", draw("success", { px: "var(--size-badge)" })),
+      tinted("var(--status-danger)", draw("error", { px: "var(--size-badge)" })),
+    ]],
+    [false, "Use status colors for decoration.", () => [
+      tinted("var(--status-warning)", draw("transfers", { px: "var(--size-badge)" })),
+      tinted("var(--status-info)", draw("cards", { px: "var(--size-badge)" })),
+    ]],
+    [true, "Put the icon before the label. Icon-only buttons need a tooltip.", () => {
       const row = el("span", "tip");
       const button = el("span", "btn-icon");
       button.append(draw("download", { px: 18 }));
       row.append(button, el("span", "tip-bubble", "Download"));
-      return [row];
+      return [labelButton("Export", "download"), row];
     }],
-    [false, "Don't mix Lucide with other icon sets or emoji.", () => {
-      const emoji = el("span", "", "💳");
-      emoji.style.fontSize = "var(--icon-nav)";
-      emoji.style.lineHeight = "1";
-      const block = el("span");
-      block.style.width = "var(--icon-nav)";
-      block.style.height = "var(--icon-nav)";
-      block.style.borderRadius = "var(--radius-xs)";
-      block.style.background = "var(--text-primary)";
-      return [draw("transfers", { size: "nav" }), emoji, block];
-    }],
+    [false, "Put icons after the label, except arrows (→) and menus (⌄).", () => [
+      labelButton("Export", "download", true),
+    ]],
+    [true, "Mirror icons that show direction in Arabic: back, next, send.", () => [
+      draw("back", { size: "nav", flip: true }),
+      draw("next", { size: "nav", flip: true }),
+      draw("transfers", { size: "nav", flip: true }),
+    ]],
+    [false, "Mirror objects and symbols: search, check, bell, card.", () => [
+      draw("search", { size: "nav", flip: true }),
+      draw("notifications", { size: "nav", flip: true }),
+      draw("cards", { size: "nav", flip: true }),
+    ]],
   ];
   cards.forEach(([ok, text, demo]) => {
     const card = el("div", "do-card");
     const stage = el("div", "do-stage");
     demo().forEach((node) => stage.append(node));
     stage.append(el("span", ok ? "mark ok" : "mark no", ok ? "✓" : "×"));
-    card.append(stage, el("p", "", text));
+    card.append(stage, el("p", "", `${ok ? "Do" : "Don't"}: ${text}`));
     host.append(card);
   });
 }
 
 function developers() {
   const rows = [
-    ["Web · React", "npm i lucide-react@0.453.0\n\nimport { Send } from 'lucide-react';\n\n<Send size={20} strokeWidth={1.7}\n  absoluteStrokeWidth={false} />", "Make a <HalaIcon> wrapper with size 20 and stroke 1.7 as defaults."],
-    ["Flutter", "flutter pub add lucide_icons_flutter\n\nIcon(LucideIcons.send,\n  size: 20, color: ink)", "Flutter icon fonts have a fixed stroke. If 1.7 matters, import the SVGs with flutter_svg instead."],
-    ["iOS · Android native", "npm i lucide-static@0.453.0\n# icons/*.svg → set stroke-width=\"1.7\"\n# iOS: add to Assets as Symbol Image\n# Android: import as Vector Asset", "Convert only the icons on this page. Keep the kebab-case names, e.g. ic_credit_card."],
+    ["Web", "<script src=\"vendor/hala-icons.js\"></script>\n\nimport { icon } from './icons/api.js';\n\nbutton.append(icon('transfers'));\ntile.append(icon('cards', { tone: 'default' }));", "Falcon names come from icons/api.js. Both tones use currentColor unless you pass a tone."],
+    ["Web · React", "const HalaIcon = ({ name, size = 'default', ...p }) =>\n  <span ref={(n) => n && n.replaceChildren(\n    icon(name, { size }))} {...p} />;", "Wrap icon() once. Keep the Falcon name and size tokens as props."],
+    ["iOS · Android native", "# Figma: HALA DNA · Icons · Source\n# Export SVG at 16 × 16, keep both tones\n# iOS: Assets as Symbol Image\n# Android: import as Vector Asset", "Export only the icons on this page. Keep the kebab-case names, e.g. ic_credit_card."],
   ];
   const host = iconPage.querySelector("[data-dev]");
   rows.forEach(([title, code, note]) => {
@@ -532,13 +512,13 @@ function developers() {
   });
 }
 
-if (!window.lucide || !window.lucide.icons) {
+if (!iconSet || !iconSet.icons) {
   const note = iconPage.querySelector("[data-groups]");
-  if (note) note.textContent = "Lucide did not load. Open this page from the Falcon 2.0 folder.";
+  if (note) note.textContent = "Hala icons did not load. Open this page from the Falcon 2.0 folder.";
 } else {
   specs();
   anatomy();
-  strokes();
+  tones();
   sizes();
   toolbar();
   library();
@@ -548,3 +528,4 @@ if (!window.lucide || !window.lucide.icons) {
   practice();
   developers();
 }
+})();

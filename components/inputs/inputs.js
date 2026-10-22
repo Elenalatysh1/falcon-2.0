@@ -1,6 +1,6 @@
 /**
  * Text fields, password, OTP, select, combobox, multi-select, and file upload.
- * Load lucide UMD, then this script.
+ * Load vendor/hala-icons.js, then this script.
  *
  * createInput({
  *   label, value, hint, placeholder, error, success,
@@ -55,12 +55,12 @@
   }
 
   function drawIcon(name, size) {
-    const lucide = window.lucide;
-    if (!lucide || !name) return null;
+    const iconSet = window.halaIcons;
+    if (!iconSet || !name) return null;
     const kebab = catalog[name] || name;
-    const node = lucide.icons[pascal(kebab)];
+    const node = iconSet.icons[pascal(kebab)];
     if (!node) return null;
-    const svg = lucide.createElement(node);
+    const svg = iconSet.createElement(node);
     svg.classList.add("hala-icon");
     svg.dataset.icon = kebab;
     if (size) svg.dataset.size = size;

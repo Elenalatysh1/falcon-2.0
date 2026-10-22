@@ -1,5 +1,5 @@
 /**
- * Breadcrumbs. Load lucide UMD, then this script.
+ * Breadcrumbs. Load vendor/hala-icons.js, then this script.
  *
  * createBreadcrumbAnatomy()
  * createBreadcrumbHeader()
@@ -20,11 +20,11 @@
   }
 
   function icon(name, size) {
-    const lucide = window.lucide;
-    if (!lucide || !name) return null;
-    const node = lucide.icons[pascal(name)];
+    const iconSet = window.halaIcons;
+    if (!iconSet || !name) return null;
+    const node = iconSet.icons[pascal(name)];
     if (!node) return null;
-    const svg = lucide.createElement(node);
+    const svg = iconSet.createElement(node);
     svg.classList.add("hala-icon");
     svg.dataset.icon = name;
     if (size) svg.dataset.size = size;

@@ -579,8 +579,8 @@ const strokes = [
   ["stroke/1", "--border-width", "Default border on cards, inputs, buttons"],
   ["stroke/1-5", "--border-check", "Checkbox and radio rings, focused input border, today ring"],
   ["stroke/2", "--border-width-emphasis", "Emphasis: selected badges, active inputs, focus ring"],
-  ["stroke/1-7", "--icon-stroke", "Icon stroke"],
-  ["stroke/2-2", "--icon-stroke-active", "Active icon stroke"],
+  ["stroke/1-7", "--icon-stroke", "Lucide fallback icon stroke"],
+  ["stroke/2-2", "--icon-stroke-active", "Active Lucide fallback stroke"],
 ];
 
 const sizes = [
@@ -810,7 +810,7 @@ function renderPlatform(root) {
 }
 
 function drawIcon(size) {
-  const svg = window.lucide.createElement(window.lucide.icons.Send);
+  const svg = window.halaIcons.createElement(window.halaIcons.icons.Send);
   svg.classList.add("hala-icon");
   svg.setAttribute("data-size", size);
   svg.setAttribute("aria-hidden", "true");
@@ -824,7 +824,7 @@ function renderIcons(root) {
     box.style.width = `var(${tile})`;
     box.style.height = `var(${tile})`;
     box.style.borderRadius = `var(${radius})`;
-    if (window.lucide && window.lucide.icons) box.append(drawIcon(size));
+    if (window.halaIcons && window.halaIcons.icons) box.append(drawIcon(size));
     item.append(box, el("span", "mono mono-strong", value(variable)), el("span", "use", name));
     root.append(item);
   });

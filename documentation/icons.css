@@ -70,20 +70,20 @@
 
 .board {
   position: relative;
-  width: calc(var(--icon-grid) * var(--space-2));
-  height: calc(var(--icon-grid) * var(--space-2));
+  width: calc(var(--icon-grid) * var(--space-3));
+  height: calc(var(--icon-grid) * var(--space-3));
   border-radius: var(--radius-s);
   border: var(--border-width) solid var(--border-default);
   background-image:
     linear-gradient(var(--border-subtle) 1px, transparent 1px),
     linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
-  background-size: var(--space-2) var(--space-2);
+  background-size: var(--space-3) var(--space-3);
   color: var(--text-primary);
 }
 
 .board-live {
   position: absolute;
-  inset: var(--space-4);
+  inset: calc(var(--space-3) * 1.5);
   border: var(--border-width) dashed var(--chart-3);
   border-radius: var(--radius-xs);
 }
@@ -94,11 +94,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.board-icon .hala-icon {
-  width: calc((var(--icon-grid) - 4) * var(--space-2));
-  height: calc((var(--icon-grid) - 4) * var(--space-2));
 }
 
 .notes {
@@ -349,6 +344,13 @@
   max-width: 100%;
   text-align: center;
   overflow-wrap: anywhere;
+}
+
+.icon-cell .set-tag {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--status-warning-text);
 }
 
 .empty {

@@ -46,10 +46,10 @@
   }
 
   function icon(name, size) {
-    const lucide = window.lucide;
+    const iconSet = window.halaIcons;
     const kebab = catalog[name] || name;
-    if (!lucide || !lucide.icons[pascal(kebab)]) return null;
-    const svg = lucide.createElement(lucide.icons[pascal(kebab)]);
+    if (!iconSet || !iconSet.icons[pascal(kebab)]) return null;
+    const svg = iconSet.createElement(iconSet.icons[pascal(kebab)]);
     svg.classList.add("hala-icon");
     svg.dataset.icon = kebab;
     if (size) svg.dataset.size = size;

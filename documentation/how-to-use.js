@@ -27,14 +27,12 @@
 
 .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }`;
 
-  const iconCode = `// npm i lucide-react@0.453.0
-import { Send } from 'lucide-react';
+  const iconCode = `<script src="vendor/hala-icons.js"></script>
+import { icon } from './icons/api.js';
 
-export const Icon = ({ as: I, size = 20, ...p }) =>
-  <I size={size} strokeWidth={1.7} aria-hidden {...p} />;
-
-<Icon as={Send} />
-<Icon as={Send} size={16} />`;
+button.append(icon('transfers'));
+row.append(icon('search', { size: 'inline' }));
+tile.append(icon('cards', { tone: 'default' }));`;
 
   const rtl = `/* logical properties, never left/right */
 .row   { padding-inline: 16px; margin-inline-start: 8px; }
@@ -63,7 +61,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
 - Money: "− 25,000.00" / "+ 86.25", "SAR" before the number, 2 decimals.
 
 ## Icons
-- Lucide only, stroke 1.7, sizes 16/20/22/28. Use the approved list.
+- Hala twotone icons from HALA DNA through icons/api.js, sizes 16/20/22/28. Use the approved list.
 - Icon-only buttons need an accessible name and a tooltip.
 
 ## RTL and accessibility
@@ -168,7 +166,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   dev.id = "developers";
   dev.append(el("p", "gs-kicker", "01 · Developers"), el("h2", "", "Set up once, then use tokens everywhere"), el("p", "gs-lead", "Tokens come first. Components only reference tokens, never hex values, so a theme change or an Arabic layout needs no component changes."));
   const devPanel = el("div", "gs-panel gs-dev");
-  [["1", "Add the tokens", "Paste into your global CSS. On mobile, mirror the same names in the theme file.", "styles/foundations.css", tokens], ["2", "Load the fonts", "Three families. Use Mono with tabular numbers for anything people compare or copy.", "index.html", fonts], ["3", "Wrap the icons", "Lucide with Hala defaults. Only use icons from the approved set on the Icons page.", "icons/api.js", iconCode], ["4", "Support Arabic and money formats", "Logical CSS properties, flipped direction icons, and one shared money formatter.", "styles/rtl.css", rtl]].forEach(([number, name, copy, file, code]) => {
+  [["1", "Add the tokens", "Paste into your global CSS. On mobile, mirror the same names in the theme file.", "styles/foundations.css", tokens], ["2", "Load the fonts", "Three families. Use Mono with tabular numbers for anything people compare or copy.", "index.html", fonts], ["3", "Wrap the icons", "Hala icons with Falcon names. Only use icons from the approved set on the Icons page.", "icons/api.js", iconCode], ["4", "Support Arabic and money formats", "Logical CSS properties, flipped direction icons, and one shared money formatter.", "styles/rtl.css", rtl]].forEach(([number, name, copy, file, code]) => {
     const step = el("div", "");
     const head = el("div", "gs-step-head");
     head.append(el("span", "gs-num", number), el("h3", "", name));
@@ -201,7 +199,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   });
   const map = el("div", "gs-panel gs-map");
   map.append(el("h3", "", "Platform mapping"));
-  [["Web", "Angular and CSS variables from foundations.css. Lucide."], ["iOS", "SwiftUI. The same token names as Color and Font extensions. Sheets for overlays."], ["Android", "Jetpack Compose. The same token names in a Falcon theme. Sheets for overlays."], ["Email / PDF", "Inline styles with the same values. Plex with a system fallback."]].forEach(([name, copy]) => {
+  [["Web", "Angular and CSS variables from foundations.css. Hala icons."], ["iOS", "SwiftUI. The same token names as Color and Font extensions. Sheets for overlays."], ["Android", "Jetpack Compose. The same token names in a Falcon theme. Sheets for overlays."], ["Email / PDF", "Inline styles with the same values. Plex with a system fallback."]].forEach(([name, copy]) => {
     const row = el("div", "gs-map-row");
     row.append(el("b", "", name), el("span", "", copy));
     map.append(row);

@@ -177,7 +177,7 @@
     ["Shape", "Radius and elevation", "Soft corners, pill buttons, tinted shadows.", "#space/space-radius"],
     ["Motion", "Motion", "Smooth springs, seven durations, reduced motion.", "#motion"],
     ["Brand", "Logo", "Wordmark, symbol, app icons, favicons.", "#logo"],
-    ["Icons", "Icons", "Lucide at 1.7 stroke, 85 approved icons.", "#icons"],
+    ["Icons", "Icons", "Hala twotone set, 85 approved icons.", "#icons"],
     ["Art", "Illustrations", "Glass spot illustrations for every state.", ""],
   ].forEach(([tag, name, copy, href]) => {
     const item = href ? el("a", "gs-mini") : card("gs-mini");
@@ -230,7 +230,7 @@
   const roles = el("div", "gs-roles");
   [
     ["Designers", ["Start from Foundations and use tokens, never raw values.", "Copy components from their page; check every state is covered.", "Read the rules section before combining components.", "Design mobile and Arabic versions with the web version, not after it."]],
-    ["Engineers", ["Map tokens to your theme: CSS variables on web, theme files on mobile.", "Use Lucide at stroke 1.7 and Plex fonts from Google Fonts.", "Use the live demos to check behavior: focus, errors, loading.", "Support RTL from the start with logical properties."]],
+    ["Engineers", ["Map tokens to your theme: CSS variables on web, theme files on mobile.", "Use Hala icons through icons/api.js and Plex fonts from Google Fonts.", "Use the live demos to check behavior: focus, errors, loading.", "Support RTL from the start with logical properties."]],
     ["Product and content", ["Use Patterns to choose the right flow and feedback.", "Write buttons as verbs and errors as fixes.", "Format money as “SAR 25,000.00”, dates as DD/MM/YYYY.", "Ask for new components in #falcon-design before building one-offs."]],
   ].forEach(([name, steps]) => {
     const item = card();
@@ -256,7 +256,7 @@
   const fresh = card();
   fresh.id = "introduction-new";
   fresh.append(el("p", "gs-kicker", "06 · What's new in 2.0"), el("h2", "", "What's new in 2.0"));
-  [["brand", "Arabic and right-to-left rules on every page, using IBM Plex Sans Arabic."], ["brand", "Mobile versions for every component, following iOS and Android conventions."], ["brand", "Lucide icon set at stroke 1.7, replacing the hand-drawn icons."], ["brand", "Glass spot illustrations for empty, error and success states."], ["info", "Softer surfaces: white cards on mint-gray, pill buttons, floating drawers."], ["info", "Amounts and IDs use Plex Mono everywhere."]].forEach(([tone, text], index) => {
+  [["brand", "Arabic and right-to-left rules on every page, using IBM Plex Sans Arabic."], ["brand", "Mobile versions for every component, following iOS and Android conventions."], ["brand", "Hala twotone icon set from HALA DNA, replacing Lucide."], ["brand", "Glass spot illustrations for empty, error and success states."], ["info", "Softer surfaces: white cards on mint-gray, pill buttons, floating drawers."], ["info", "Amounts and IDs use Plex Mono everywhere."]].forEach(([tone, text], index) => {
     const row = el("div", "gs-news");
     const label = index < 4 ? "New" : "Changed";
     row.append(window.createBadge ? window.createBadge({ label, tone, size: "sm" }) : el("span", "", label), el("span", "", text));

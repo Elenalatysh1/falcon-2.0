@@ -1,5 +1,5 @@
 /**
- * Date pickers. Load lucide UMD and components/button/button.js, then this script.
+ * Date pickers. Load vendor/hala-icons.js and components/button/button.js, then this script.
  *
  * createDatePicker({ value, open, onChange }) — single date, type or pick.
  * createDateRange({ start, end, onChange }) — presets and two months.
@@ -19,11 +19,11 @@
   }
 
   function drawIcon(name) {
-    const lucide = window.lucide;
-    if (!lucide || !name) return null;
-    const node = lucide.icons[pascal(name)];
+    const iconSet = window.halaIcons;
+    if (!iconSet || !name) return null;
+    const node = iconSet.icons[pascal(name)];
     if (!node) return null;
-    const svg = lucide.createElement(node);
+    const svg = iconSet.createElement(node);
     svg.classList.add("hala-icon");
     svg.dataset.icon = name;
     svg.style.strokeWidth = "var(--icon-stroke)";
