@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}@keyframes hShim{from{background-position:150% 0}to{background-position:-50% 0}}@keyframes hSpin{to{transform:rotate(360deg)}}@keyframes hDot{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}@keyframes hBar{0%{left:-40%;width:40%}60%{left:60%;width:50%}100%{left:110%;width:40%}}@keyframes hFade{from{opacity:0}}@keyframes hPulse{50%{opacity:.55}}@media (prefers-reduced-motion:reduce){*{animation-duration:2.4s!important}}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Loading states</h1>
+  <p style="margin:0;max-width:780px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Skeletons for content, spinners inside buttons and small areas, progress bars for longer jobs, and the timing rules that decide which to show. Every example with a "Live" tag works.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Which loader to use</h2><p style="margin:0;font-size:15px;color:#4A615A">Decide by how long it takes and whether you know the layout of what is coming.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+    <sc-for list="{{ which }}" as="w" hint-placeholder-count="5"><div style="background:#FFFFFF;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px"><div style="height:64px;border-radius:12px;background:#F7FAF9;display:flex;align-items:center;justify-content:center;padding:0 14px">{{ w.demo }}</div><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#0B6F56">{{ w.time }}</span><span style="font-size:15px;font-weight:600">{{ w.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ w.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Skeleton parts</h2><p style="margin:0;font-size:15px;color:#4A615A">Neutral #E6ECE9 shapes with a soft light sweep every 1.4 s. They match the size and radius of the real element so nothing jumps when content arrives.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px">
+    <sc-for list="{{ parts }}" as="p" hint-placeholder-count="8"><div style="display:flex;flex-direction:column;gap:10px"><div style="height:64px;display:flex;align-items:center">{{ p.el }}</div><span style="font-size:13.5px;font-weight:600">{{ p.k }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ p.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Skeleton screens · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Reload to see the skeleton, then the real content fade in. Labels and headers that are already known stay visible.</p></div><button onClick="{{ reload }}" style="height:42px;padding:0 18px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:14px;font-weight:500;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"></path></svg>Reload examples</button></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">DASHBOARD · KPI + CHART</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px"><sc-for list="{{ kpis }}" as="k" hint-placeholder-count="3"><div style="border-radius:16px;background:#F7FAF9;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:88px"><span style="font-size:12.5px;color:#5E7770">{{ k.l }}</span>{{ k.val }}</div></sc-for></div>
+      <div style="border-radius:16px;background:#F7FAF9;padding:14px;height:220px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;justify-content:space-between"><span style="font-size:14px;font-weight:600">POS sales</span><span style="font-size:12.5px;color:#5E7770">Last 30 days</span></div>{{ chart }}</div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">CARD DETAILS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      {{ cardBlock }}
+    </div>
+  </div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">TRANSACTIONS TABLE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+    <div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) 120px;gap:16px;padding:10px 0;border-bottom:1px solid #EEF2F0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#6B827B"><span>MERCHANT</span><span>DATE</span><span style="text-align:right">AMOUNT</span><span>STATUS</span></div>
+    {{ table }}
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Spinners and indicators</h2><p style="margin:0;font-size:15px;color:#4A615A">A ring spinner in three sizes, inline dots for background work, and a thin top bar while a page changes.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">RING · 16 / 20 / 32</span><div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap">{{ spinS }}{{ spinM }}{{ spinL }}<span style="width:56px;height:56px;border-radius:16px;background:#0C1F1A;display:flex;align-items:center;justify-content:center">{{ spinW }}</span></div><span style="font-size:12.5px;line-height:1.5;color:#5E7770">Green on light surfaces, white on ink or gradient. 0.8 s per turn, linear.</span></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">INLINE · SAVING AND SYNCING</span><div style="display:flex;flex-direction:column;gap:12px"><span style="display:flex;align-items:center;gap:10px;font-size:14px;color:#4A615A">{{ dotsI }}Saving changes</span><span style="display:flex;align-items:center;gap:10px;font-size:14px;color:#4A615A">{{ spinS2 }}Syncing with Wathq…</span><span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#0B6F56"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Saved · just now</span></div></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">TOP BAR · PAGE CHANGE</span><div style="border-radius:14px;border:1px solid #EEF2F0;overflow:hidden"><div style="height:3px">{{ topBar }}</div><div style="height:48px;padding:0 14px;display:flex;align-items:center;gap:10px"><span style="width:20px;height:20px;border-radius:6px;background:#E3F6EF"></span><span style="font-size:14px;font-weight:600">Transactions</span></div></div><span style="font-size:12.5px;line-height:1.5;color:#5E7770">3 px at the very top. Starts after 300 ms; the old page stays visible until the new one is ready.</span></div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Buttons and fields</h2><p style="margin:0;font-size:15px;color:#4A615A">The button keeps its width, the label is replaced by a spinner, and it can't be pressed twice. Click to try.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">BUTTONS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <button onClick="{{ b1.go }}" aria-busy="{{ b1.busy }}" style="position:relative;height:48px;min-width:180px;padding:0 24px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:15px;font-weight:600;cursor:{{ b1.cur }};box-shadow:0 10px 22px -12px rgba(10,117,89,.8);display:flex;align-items:center;justify-content:center;gap:8px">{{ b1.spin }}<span style="opacity:{{ b1.op }}">{{ b1.l }}</span></button>
+        <button onClick="{{ b2.go }}" aria-busy="{{ b2.busy }}" style="height:44px;min-width:130px;padding:0 18px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:14px;font-weight:500;cursor:{{ b2.cur }};display:flex;align-items:center;justify-content:center;gap:8px">{{ b2.spin }}<span>{{ b2.l }}</span></button>
+        <button onClick="{{ b3.go }}" aria-label="Refresh" style="width:44px;height:44px;border:1px solid #D7E0DC;border-radius:50%;background:#FFFFFF;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;justify-content:center">{{ b3.icon }}</button>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Primary: spinner replaces the label, width fixed. Secondary: spinner before a present-tense label ("Exporting"). Icon: the icon itself spins.</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">FIELDS · CHECKING A VALUE</span>
+      <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:10px"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">IBAN</span><span style="font:400 16px 'IBM Plex Mono',monospace">SA03 8000 0000 6080 1016 7519</span></div>{{ spinF }}</div>
+      <span style="font-size:12.5px;color:#5E7770;margin-top:-6px">Looking up the account holder…</span>
+      <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:10px"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Search beneficiaries</span><span style="font-size:16px">Nour</span></div>{{ spinF2 }}</div>
+      <div style="border-radius:12px;border:1px solid #E6ECE9;padding:6px;display:flex;flex-direction:column;gap:4px;margin-top:-8px">{{ ddSk }}</div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Skeletons on first load, pull to refresh with the system spinner, and "loading more" at the end of lists.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">HOME · FIRST LOAD</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div><div style="height:560px;border-radius:36px;background:#F4F7F6;overflow:hidden;padding:52px 16px 16px;display:flex;flex-direction:column;gap:12px">{{ mHome }}</div></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">PULL TO REFRESH</span><div style="height:560px;border-radius:36px;background:#F4F7F6;overflow:hidden;display:flex;flex-direction:column"><div style="padding:52px 16px 8px"><span style="font-size:28px;font-weight:700;letter-spacing:-.02em">Activity</span></div><div style="height:56px;display:flex;align-items:center;justify-content:center">{{ spinPull }}</div><div style="padding:0 16px;display:flex;flex-direction:column;gap:8px;opacity:.6">{{ mRows }}</div></div></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">LOADING MORE · END OF LIST</span><div style="height:560px;border-radius:36px;background:#F4F7F6;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:16px"><div style="display:flex;flex-direction:column;gap:8px">{{ mRows2 }}</div><div style="height:64px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:13.5px;color:#5E7770">{{ spinMore }}Loading older transactions</div></div></div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Timing and rules</h2>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px"><sc-for list="{{ timeline }}" as="t" hint-placeholder-count="5"><div style="display:flex;flex-direction:column;gap:8px;min-width:0"><span style="height:6px;border-radius:3px;background:{{ t.c }}"></span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0C1F1A">{{ t.l }}</span><span style="font-size:12.5px;line-height:1.4;color:#5E7770">{{ t.s }}</span></div></sc-for></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px"><sc-for list="{{ rules }}" as="r" hint-placeholder-count="10"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for></div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { loaded: false, t: 0 };
+  componentDidMount() { this.start(); }
+  componentWillUnmount() { clearTimeout(this.lt); }
+  start() { clearTimeout(this.lt); this.setState({ loaded: false }); this.lt = setTimeout(() => this.setState({ loaded: true }), 1800); }
+  sk(w, h, r = 6, extra = {}) { return React.createElement('span', { 'aria-hidden': true, style: { display: 'block', width: w, height: h, borderRadius: r, flex: 'none', background: 'linear-gradient(90deg,#E6ECE9 0%,#E6ECE9 40%,#F3F7F5 50%,#E6ECE9 60%,#E6ECE9 100%)', backgroundSize: '300% 100%', animation: 'hShim 1.4s ease-in-out infinite', ...extra } }); }
+  spin(size = 20, color = '#0B8F6E', track = 'rgba(11,143,110,.18)', w = 2.5) { return React.createElement('span', { role: 'status', 'aria-label': 'Loading', style: { display: 'inline-block', width: size, height: size, borderRadius: '50%', border: `${w}px solid ${track}`, borderTopColor: color, animation: 'hSpin .8s linear infinite', flex: 'none' } }); }
+  dots(color = '#0B8F6E', s = 7) { const e = React.createElement; return e('span', { style: { display: 'inline-flex', gap: 5 }, 'aria-label': 'Loading' }, [0, 1, 2].map(i => e('span', { key: i, style: { width: s, height: s, borderRadius: '50%', background: color, animation: `hDot 1.2s ${i * .16}s ease-in-out infinite` } }))); }
+  bar(w = '100%', h = 4) { const e = React.createElement; return e('span', { role: 'progressbar', 'aria-label': 'Loading', style: { position: 'relative', display: 'block', width: w, height: h, borderRadius: h, background: '#E3F6EF', overflow: 'hidden' } }, e('span', { style: { position: 'absolute', top: 0, bottom: 0, borderRadius: h, background: 'linear-gradient(90deg,#0A7559,#2C957A)', animation: 'hBar 1.3s cubic-bezier(.4,0,.2,1) infinite' } })); }
+  renderVals() {
+    const e = React.createElement, s = this.state, L = s.loaded, sk = this.sk.bind(this);
+    const fade = (c, extra = {}) => e('div', { style: { animation: 'hFade .3s ease-out', ...extra } }, c);
+    const which = [
+      ['Under 300 ms', 'Nothing', 'Show the result directly. A flash of loader feels slower than none.', e('span', { style: { fontSize: 13, color: '#8A9C96' } }, '—')],
+      ['0.3 – 1 s · known layout', 'Skeleton', 'Pages, lists, cards, charts. Shows the shape of what is coming.', e('div', { style: { display: 'flex', flexDirection: 'column', gap: 6, width: '100%' } }, sk('70%', 10), sk('100%', 10), sk('45%', 10))],
+      ['0.3 – 3 s · small area', 'Spinner', 'Inside a button, a field, a refresh, or a small widget.', this.spin(26)],
+      ['Background action', 'Inline dots or top bar', 'Saving, syncing, switching account. Doesn\'t block the screen.', e('div', { style: { display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center', width: '100%' } }, this.bar('80%', 3), this.dots())],
+      ['Over 3 s', 'Progress bar', 'Uploads, payroll runs, exports. Show percent and time left.', e('div', { style: { width: '100%', display: 'flex', flexDirection: 'column', gap: 6 } }, e('span', { style: { display: 'block', height: 6, borderRadius: 3, background: '#E3F6EF', overflow: 'hidden' } }, e('span', { style: { display: 'block', width: '62%', height: '100%', background: 'linear-gradient(90deg,#0A7559,#2C957A)' } })), e('span', { style: { font: "500 11px 'IBM Plex Mono',monospace", color: '#5E7770' } }, '62% · 12 s left'))]
+    ].map(([time, k, v, demo]) => ({ time, k, v, demo }));
+    const parts = [
+      ['Text line', 'H 10–12 · r 6 · 40–90% width', e('div', { style: { display: 'flex', flexDirection: 'column', gap: 6, width: '100%' } }, sk('85%', 11), sk('60%', 11))],
+      ['Heading', 'H 22 · r 8 · 50% width', sk('55%', 22, 8)],
+      ['Amount', 'H 26 · r 8 · Mono width', sk('70%', 26, 8)],
+      ['Avatar', '40 × 40 · circle', sk(40, 40, '50%')],
+      ['Icon tile', '40 × 40 · r 12', sk(40, 40, 12)],
+      ['Badge', 'H 22 · pill · 64 w', sk(64, 22, 999)],
+      ['Button', 'H 40 · pill · 120 w', sk(120, 40, 999)],
+      ['Card / media', 'r 16–20 · real ratio', sk('100%', 56, 14)]
+    ].map(([k, v, el]) => ({ k, v, el }));
+    const kpis = [['Balance', 'SAR 175,000.00'], ['POS sales', 'SAR 184,320.00'], ['To approve', '3']].map(([l, v]) => ({ l, val: L ? fade(e('span', { style: { font: "600 18px 'IBM Plex Mono',monospace", letterSpacing: '-.01em' } }, v)) : sk('75%', 22, 8) }));
+    const H = [38, 52, 44, 66, 58, 74, 62, 80, 70, 88, 76, 92];
+    const chart = L ? fade(e('svg', { viewBox: '0 0 300 120', preserveAspectRatio: 'none', style: { width: '100%', height: '100%' } }, e('path', { d: 'M0 100 C30 92 50 80 80 78 S130 56 160 50 210 30 240 34 280 16 300 12 L300 120 L0 120Z', fill: 'rgba(15,163,127,.12)' }), e('path', { d: 'M0 100 C30 92 50 80 80 78 S130 56 160 50 210 30 240 34 280 16 300 12', fill: 'none', stroke: '#0B8F6E', strokeWidth: 2.5 })), { flex: 1, minHeight: 0 })
+      : e('div', { style: { flex: 1, display: 'flex', alignItems: 'flex-end', gap: 8 } }, H.map((h, i) => e('span', { key: i, style: { flex: 1, height: h + '%', borderRadius: 6, background: 'linear-gradient(90deg,#E6ECE9 0%,#E6ECE9 40%,#F3F7F5 50%,#E6ECE9 60%,#E6ECE9 100%)', backgroundSize: '300% 100%', animation: `hShim 1.4s ${i * .05}s ease-in-out infinite` } })));
+    const cardBlock = L ? fade(e('div', { style: { display: 'flex', flexDirection: 'column', gap: 14 } },
+      e('div', { style: { aspectRatio: '1.586', borderRadius: 18, background: 'linear-gradient(135deg,#0F3D33,#0A7559 60%,#2C957A)', color: '#FFFFFF', padding: 16, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' } }, e('span', { style: { fontSize: 13, fontWeight: 600 } }, 'Marketing card'), e('span', { style: { font: "500 16px 'IBM Plex Mono',monospace" } }, '•• 4417')),
+      ...[['Holder', 'Omar Bakr'], ['Monthly limit', 'SAR 5,000.00'], ['Spent this month', 'SAR 3,287.50']].map(([k, v]) => e('div', { key: k, style: { display: 'flex', justifyContent: 'space-between', fontSize: 14 } }, e('span', { style: { color: '#5E7770' } }, k), e('span', { style: { fontFamily: k === 'Holder' ? 'inherit' : "'IBM Plex Mono',monospace" } }, v)))))
+      : e('div', { style: { display: 'flex', flexDirection: 'column', gap: 14 } }, sk('100%', 'auto', 18, { aspectRatio: '1.586' }), ...[0, 1, 2].map(i => e('div', { key: i, style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } }, e('span', { style: { fontSize: 14, color: '#5E7770' } }, ['Holder', 'Monthly limit', 'Spent this month'][i]), sk([80, 110, 100][i], 14))));
+    const R = [['Al Baik · Olaya', 'Today, 12:41', '+ 86.25', 'Settled', '#0B8F6E'], ['Jarir Bookstore', 'Today, 11:08', '− 1,249.00', 'Settled', '#0B8F6E'], ['Nour Trading', 'Today, 09:30', '− 25,000.00', 'Pending', '#B45309'], ['Careem', 'Yesterday', '− 38.50', 'Settled', '#0B8F6E'], ['Online store #2041', 'Yesterday', '+ 420.00', 'Settled', '#0B8F6E']];
+    const row = c => e('div', { style: { display: 'grid', gridTemplateColumns: 'minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) 120px', gap: 16, padding: '12px 0', borderBottom: '1px solid #F2F5F4', alignItems: 'center', minHeight: 56 } }, ...c);
+    const table = e('div', null, R.map((r, i) => e(React.Fragment, { key: i }, L ? fade(row([e('div', { style: { display: 'flex', alignItems: 'center', gap: 12 } }, e('span', { style: { width: 36, height: 36, borderRadius: '50%', background: '#F2F6F4', fontSize: 12.5, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center' } }, r[0].split(' ').map(w => w[0]).join('').slice(0, 2)), e('span', { style: { fontSize: 14, fontWeight: 500 } }, r[0])), e('span', { style: { fontSize: 13.5, color: '#5E7770' } }, r[1]), e('span', { style: { font: "500 14px 'IBM Plex Mono',monospace", textAlign: 'right', color: r[2][0] === '+' ? '#0B7A5F' : '#0C1F1A' } }, r[2]), e('span', { style: { display: 'flex', alignItems: 'center', gap: 8, fontSize: 13.5 } }, e('span', { style: { width: 8, height: 8, borderRadius: '50%', background: r[4] } }), r[3])]), { animationDelay: i * 40 + 'ms', animationFillMode: 'both' })
+      : row([e('div', { style: { display: 'flex', alignItems: 'center', gap: 12 } }, sk(36, 36, '50%'), sk([140, 120, 110, 80, 150][i], 12)), sk(80, 12), e('div', { style: { display: 'flex', justifyContent: 'flex-end' } }, sk([60, 80, 100, 50, 64][i], 12)), sk(72, 12)]))));
+    const busy = k => !!s['b' + k], run = (k, ms) => () => { if (s['b' + k]) return; this.setState({ ['b' + k]: true }); setTimeout(() => this.setState({ ['b' + k]: false, ['d' + k]: true }), ms); setTimeout(() => this.setState({ ['d' + k]: false }), ms + 1600); };
+    const b1 = { busy: busy(1) ? 'true' : 'false', cur: busy(1) ? 'progress' : 'pointer', spin: busy(1) ? e('span', { style: { position: 'absolute' } }, this.spin(20, '#FFFFFF', 'rgba(255,255,255,.3)')) : null, op: busy(1) ? 0 : 1, l: s.d1 ? 'Sent ✓' : 'Send SAR 25,000', go: run(1, 1800) };
+    const b2 = { busy: busy(2) ? 'true' : 'false', cur: busy(2) ? 'progress' : 'pointer', spin: busy(2) ? this.spin(16) : null, l: busy(2) ? 'Exporting' : s.d2 ? 'Downloaded' : 'Export CSV', go: run(2, 1600) };
+    const b3 = { icon: e('svg', { viewBox: '0 0 24 24', style: { width: 18, height: 18, animation: busy(3) ? 'hSpin .8s linear infinite' : 'none' }, fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }, e('path', { d: 'M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5' })), go: run(3, 1200) };
+    const ddSk = [0, 1, 2].map(i => e('div', { key: i, style: { display: 'flex', alignItems: 'center', gap: 10, padding: 8 } }, sk(32, 32, '50%'), e('div', { style: { flex: 1, display: 'flex', flexDirection: 'column', gap: 6 } }, sk(['60%', '45%', '70%'][i], 10), sk(['35%', '50%', '30%'][i], 9))));
+    const mrow = (i, real) => e('div', { key: i, style: { borderRadius: 16, background: '#FFFFFF', padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 12 } }, real ? e('span', { style: { width: 40, height: 40, borderRadius: '50%', background: '#F2F6F4', fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center' } }, real[0].slice(0, 2).toUpperCase()) : sk(40, 40, '50%'), e('div', { style: { flex: 1, display: 'flex', flexDirection: 'column', gap: real ? 2 : 7 } }, real ? e('span', { style: { fontSize: 15, fontWeight: 500 } }, real[0]) : sk(['65%', '50%', '72%', '58%'][i % 4], 12), real ? e('span', { style: { fontSize: 12.5, color: '#5E7770' } }, real[1]) : sk('35%', 10)), real ? e('span', { style: { font: "500 15px 'IBM Plex Mono',monospace" } }, real[2]) : sk(64, 13));
+    const MR = [['Careem', 'Yesterday', '− 38.50'], ['Al Baik', 'Yesterday', '+ 86.25'], ['Jarir', '12 Oct', '− 1,249.00'], ['STC Pay', '11 Oct', '− 200.00']];
+    const mHome = e('div', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
+      e('span', { style: { fontSize: 13, color: '#5E7770' } }, 'Good morning'), L ? fade(e('span', { style: { fontSize: 22, fontWeight: 700 } }, 'Khamis Arabia')) : sk('60%', 24, 8),
+      e('div', { style: { borderRadius: 24, background: '#FFFFFF', padding: 18, display: 'flex', flexDirection: 'column', gap: 10 } }, e('span', { style: { fontSize: 13, color: '#5E7770' } }, 'Available balance'), L ? fade(e('span', { style: { font: "600 30px 'IBM Plex Mono',monospace", letterSpacing: '-.02em' } }, '175,000.00')) : sk('75%', 32, 8), e('div', { style: { display: 'flex', gap: 8, marginTop: 6 } }, ...['Transfer', 'Pay', 'Cards'].map(l => e('span', { key: l, style: { flex: 1, height: 40, borderRadius: 999, background: '#F2F6F4', fontSize: 13, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center' } }, l)))),
+      e('span', { style: { fontSize: 15, fontWeight: 600, marginTop: 4 } }, 'Recent activity'), ...[0, 1, 2].map(i => L ? fade(mrow(i, MR[i]), { animationDelay: i * 40 + 'ms', animationFillMode: 'both' }) : mrow(i)));
+    const mRows = MR.map((r, i) => mrow(i, r)), mRows2 = MR.slice(0, 3).map((r, i) => mrow(i, r));
+    const timeline = [['0 – 300 ms', 'Show nothing', '#EEF2F0'], ['300 ms', 'Loader appears', '#BFE6D6'], ['1 s', 'Skeleton holds', '#9DD3C2'], ['3 s', 'Show progress', '#4FB89A'], ['10 s+', 'Offer background or Retry', '#0B8F6E']].map(([l, s2, c]) => ({ l, s: s2, c }));
+    const rules = [[1, 'Wait 300 ms before showing any loader; if it\'s faster, show nothing.'], [1, 'Once shown, keep a loader at least 500 ms so it doesn\'t flicker.'], [1, 'Match skeletons to the real layout and keep known labels visible.'], [1, 'Load sections independently; never block the whole page for one slow widget.'], [1, 'Disable a loading button and keep its width; prevent double payments.'], [1, 'Add aria-busy and a "Loading" label for screen readers.'], [0, 'Don\'t use a full-screen spinner for content that has a layout.'], [0, 'Don\'t show skeletons for more than 10 s; switch to an error with Retry.'], [0, 'Don\'t mix skeletons and spinners in the same area.'], [0, 'Don\'t animate skeletons when the user prefers reduced motion; keep them still and gray.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { which, parts, kpis, chart, cardBlock, table, reload: () => this.start(),
+      spinS: this.spin(16, '#0B8F6E', 'rgba(11,143,110,.18)', 2), spinM: this.spin(20), spinL: this.spin(32, '#0B8F6E', 'rgba(11,143,110,.18)', 3), spinW: this.spin(24, '#FFFFFF', 'rgba(255,255,255,.25)'),
+      dotsI: this.dots('#0B8F6E', 6), spinS2: this.spin(16, '#0B8F6E', 'rgba(11,143,110,.18)', 2), topBar: this.bar('100%', 3),
+      b1, b2, b3, spinF: this.spin(18), spinF2: this.spin(18), ddSk, mHome, mRows, mRows2, spinPull: this.spin(24, '#5E7770', 'rgba(94,119,112,.2)'), spinMore: this.spin(18), timeline, rules };
+  }
+}
+</script>
+</body>
+</html>

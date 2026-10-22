@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<div style="max-width:1240px;margin:0 auto;padding:56px 32px 96px;display:flex;flex-direction:column;gap:56px">
+  <header style="display:flex;flex-direction:column;gap:12px;max-width:720px">
+    <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+    <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Buttons</h1>
+    <p style="margin:0;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">One button system for web and mobile. Pills everywhere, IBM Plex Sans labels, and one gradient primary per screen. The default buttons on this page respond to hover, press and keyboard focus.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Sizes</h2><p style="margin:0;font-size:15px;color:#4A615A">Large is the mobile default. Web forms use Medium; dashboard toolbars and tables use Small and X-small.</p></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+      <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:minmax(150px,200px) minmax(0,1fr) minmax(0,260px);gap:24px;align-items:center;padding:22px 0;border-top:1px solid {{ s.bd }}">
+          <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:16px;font-weight:600">{{ s.name }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ s.spec }}</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+            <button style="height:{{ s.h }};padding:0 {{ s.px }};border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:{{ s.fs }};font-weight:600;cursor:pointer;box-shadow:0 10px 22px -12px rgba(10,117,89,.8)" style-hover="filter:brightness(1.08)" style-active="transform:scale(.97)">Continue</button>
+            <button style="height:{{ s.h }};padding:0 {{ s.px }};border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:{{ s.fs }};font-weight:500;cursor:pointer;display:flex;align-items:center;gap:{{ s.gap }}" style-hover="background:#F4F7F6;border-color:#C3D0CB" style-active="background:#E9EFEC"><svg viewBox="0 0 24 24" style="width:{{ s.ic }};height:{{ s.ic }}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>Export</button>
+            <button style="height:{{ s.h }};padding:0 {{ s.px }};border:0;border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:{{ s.fs }};font-weight:600;cursor:pointer;display:flex;align-items:center;gap:{{ s.gap }}" style-hover="background:#D3F0E5" style-active="background:#C2E8DA">Next<svg viewBox="0 0 24 24" style="width:{{ s.ic }};height:{{ s.ic }}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></button>
+            <button aria-label="Next" style="width:{{ s.h }};height:{{ s.h }};border:0;border-radius:50%;background:#0C1F1A;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#1D332D" style-active="transform:scale(.94)"><svg viewBox="0 0 24 24" style="width:{{ s.ic }};height:{{ s.ic }}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></button>
+          </div>
+          <span style="font-size:13.5px;line-height:1.5;color:#5E7770">{{ s.use }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Variants and states</h2><p style="margin:0;font-size:15px;color:#4A615A">Shown at Large. Every size uses the same colors per state.</p></div>
+    <div style="display:grid;grid-template-columns:minmax(180px,220px) repeat(6,minmax(0,1fr));gap:12px;padding:0 28px">
+      <span></span>
+      <sc-for list="{{ stateNames }}" as="n" hint-placeholder-count="6"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;text-align:center">{{ n }}</span></sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ variants }}" as="v" hint-placeholder-count="6">
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px;display:grid;grid-template-columns:minmax(180px,220px) repeat(6,minmax(0,1fr));gap:12px;align-items:center">
+          <div style="display:flex;flex-direction:column;gap:4px;padding-right:8px"><span style="font-size:16px;font-weight:600">{{ v.name }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ v.use }}</span></div>
+          <sc-for list="{{ v.states }}" as="c" hint-placeholder-count="6">
+            <div style="display:flex;justify-content:center;padding:8px 0">
+              <button tabIndex="{{ c.tab }}" style="width:100%;max-width:150px;height:48px;border:{{ c.border }};border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;cursor:{{ c.cur }};box-shadow:{{ c.sh }};transform:{{ c.tf }};outline:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,transform .1s,box-shadow .15s" style-hover="background:{{ c.hbg }}" style-active="background:{{ c.abg }};transform:{{ c.atf }}" style-focus="box-shadow:{{ c.fsh }}">
+                <sc-if value="{{ c.spin }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9" opacity=".3"></circle><path d="M21 12a9 9 0 0 0-9-9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"></animateTransform></path></svg></sc-if>
+                {{ c.label }}
+              </button>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+      <sc-for list="{{ stateSpecs }}" as="t" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ t.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ t.v }}</span></div></sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Arrow button</h2><p style="margin:0;font-size:15px;color:#4A615A">Icon only. Moves the user to the next or previous step in onboarding and multi-step flows. Always add an aria-label: "Next step" or "Back".</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:20px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">SHAPES · SIZES</span>
+        <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end">
+          <sc-for list="{{ arrowSizes }}" as="a" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+              <button aria-label="Next step" style="width:{{ a.w }};height:{{ a.h }};border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -12px rgba(10,117,89,.8)" style-hover="filter:brightness(1.08)" style-active="transform:scale(.95)" style-focus="outline:none;box-shadow:0 0 0 3px #FFFFFF,0 0 0 5px #0B8F6E"><svg viewBox="0 0 24 24" style="width:{{ a.ic }};height:{{ a.ic }}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></button>
+              <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770;text-align:center">{{ a.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:20px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">VARIANTS · DIRECTION</span>
+        <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end">
+          <sc-for list="{{ arrowVariants }}" as="a" hint-placeholder-count="5">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+              <button aria-label="{{ a.aria }}" style="width:52px;height:52px;border:{{ a.border }};border-radius:50%;background:{{ a.bg }};color:{{ a.fg }};cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:{{ a.sh }}" style-hover="background:{{ a.hbg }}" style-active="transform:scale(.94)"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.d }}"></path></svg></button>
+              <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ a.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:18px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">STATES · WIDE 120 × 54</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px">
+        <sc-for list="{{ arrowStates }}" as="c" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <button aria-label="Next step" tabIndex="{{ c.tab }}" style="width:120px;height:54px;border:0;border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};cursor:{{ c.cur }};box-shadow:{{ c.sh }};transform:{{ c.tf }};outline:none;display:flex;align-items:center;justify-content:center">
+              <sc-if value="{{ c.spin }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9" opacity=".3"></circle><path d="M21 12a9 9 0 0 0-9-9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"></animateTransform></path></svg></sc-if>
+              <sc-if value="{{ c.arrow }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" style="width:26px;height:26px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></sc-if>
+            </button>
+            <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ c.name }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Small buttons · web dashboard</h2><p style="margin:0;font-size:15px;color:#4A615A">Toolbars, card headers and table rows in Hala Dashboard WEB.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">TOOLBAR · S 36</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <button style="height:36px;padding:0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:#F4F7F6"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M7 12h10M10 18h4"></path></svg>Filter<span style="min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center">2</span></button>
+          <button style="height:36px;padding:0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:#F4F7F6"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>1 – 14 Oct<svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+          <button style="height:36px;padding:0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:#F4F7F6"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>Export</button>
+          <button style="height:36px;padding:0 16px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:#1D332D"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>New transfer</button>
+        </div>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-top:8px">SEGMENTED · RANGE</span>
+        <div style="display:flex;gap:2px;padding:3px;border-radius:999px;background:#EEF2F0;align-self:flex-start">
+          <sc-for list="{{ ranges }}" as="r" hint-placeholder-count="4"><button onClick="{{ r.pick }}" style="height:30px;padding:0 14px;border:0;border-radius:999px;background:{{ r.bg }};color:{{ r.fg }};font-size:13px;font-weight:{{ r.fw }};cursor:pointer;box-shadow:{{ r.sh }};transition:all .15s">{{ r.label }}</button></sc-for>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">INLINE · XS 28</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <button style="height:28px;padding:0 10px;border:0;border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:12.5px;font-weight:600;cursor:pointer" style-hover="background:#D3F0E5">Approve</button>
+          <button style="height:28px;padding:0 10px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:12.5px;font-weight:500;cursor:pointer" style-hover="background:#F4F7F6">Review</button>
+          <button style="height:28px;padding:0 10px;border:0;border-radius:999px;background:#FDECEC;color:#C81E1E;font-size:12.5px;font-weight:600;cursor:pointer" style-hover="background:#FBDCDC">Reject</button>
+          <button style="height:28px;padding:0 8px;border:0;border-radius:999px;background:transparent;color:#0E7C62;font-size:12.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px" style-hover="background:rgba(12,31,26,.05)">View all<svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+        </div>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-top:8px">ICON BUTTONS · 32</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <sc-for list="{{ iconBtns }}" as="i" hint-placeholder-count="5"><button aria-label="{{ i.label }}" title="{{ i.label }}" style="width:32px;height:32px;border:{{ i.border }};border-radius:10px;background:{{ i.bg }};color:{{ i.fg }};cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(12,31,26,.06);color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ i.d }}"></path></svg></button></sc-for>
+        </div>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-top:8px">FILTER CHIPS</span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" aria-pressed="{{ c.pressed }}" style="height:30px;padding:0 12px;border:1px solid {{ c.bd }};border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s"><sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:13px;height:13px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{ c.label }}</button></sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Small buttons · mobile</h2><p style="margin:0;font-size:15px;color:#4A615A">The visible button can be smaller, but the tap area is never under 44 × 44.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:18px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">QUICK ACTIONS · 56</span>
+        <div style="display:flex;justify-content:space-between;gap:8px;max-width:340px">
+          <sc-for list="{{ quick }}" as="q" hint-placeholder-count="4"><button style="border:0;background:transparent;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;color:#0C1F1A;font-size:12.5px;font-weight:500"><span style="width:56px;height:56px;border-radius:50%;background:{{ q.bg }};color:{{ q.fg }};display:flex;align-items:center;justify-content:center;box-shadow:{{ q.sh }}"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ q.d }}"></path></svg></span>{{ q.label }}</button></sc-for>
+        </div>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-top:6px">TOP BAR · 40</span>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button aria-label="Back" style="width:40px;height:40px;border:0;border-radius:50%;background:#F2F6F4;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;justify-content:center" style-active="background:#E3EAE7"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+          <button aria-label="Close" style="width:40px;height:40px;border:0;border-radius:50%;background:#F2F6F4;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;justify-content:center" style-active="background:#E3EAE7"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+          <button aria-label="Notifications" style="position:relative;width:40px;height:40px;border:0;border-radius:50%;background:#F2F6F4;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg><span style="position:absolute;top:9px;right:10px;width:8px;height:8px;border-radius:50%;background:#E5484D;border:2px solid #F2F6F4"></span></button>
+          <button style="height:32px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:#0E7C62;font-size:15px;font-weight:600;cursor:pointer;margin-left:6px">Done</button>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:18px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">AMOUNT CHIPS · 36</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ amounts }}" as="a" hint-placeholder-count="3"><button onClick="{{ a.pick }}" style="height:36px;padding:0 14px;border:0;border-radius:999px;background:{{ a.bg }};color:{{ a.fg }};font:500 14px 'IBM Plex Mono',monospace;cursor:pointer;transition:all .15s">{{ a.label }}</button></sc-for>
+        </div>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-top:6px">INLINE · 32</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <button style="height:32px;padding:0 12px;border:0;border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>Copy IBAN</button>
+          <button style="height:32px;padding:0 12px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"></path></svg>Share</button>
+          <button style="height:32px;padding:0 6px;border:0;background:transparent;color:#0E7C62;font-size:13.5px;font-weight:600;cursor:pointer">See all</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Usage</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+      <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { range: 1, chips: { Settled: true }, amt: 2 };
+  renderVals() {
+    const G = 'linear-gradient(90deg,#0A7559,#2C957A)', GH = 'linear-gradient(90deg,#0C8466,#35A487)', GP = 'linear-gradient(90deg,#08654D,#24826A)';
+    const RING = '0 0 0 3px #FFFFFF,0 0 0 5px #0B8F6E', PSH = '0 10px 22px -12px rgba(10,117,89,.8)';
+    const V = [
+      { name: 'Primary', use: 'The main action. One per screen.', bg: G, hbg: GH, abg: GP, fg: '#FFFFFF', sh: PSH, label: 'Confirm' },
+      { name: 'Ink', use: 'Neutral main action when the gradient competes with a card or chart.', bg: '#0C1F1A', hbg: '#1D332D', abg: '#000000', fg: '#FFFFFF', label: 'Continue' },
+      { name: 'Secondary', use: 'Next to a primary, or for less important actions.', bg: '#FFFFFF', hbg: '#F4F7F6', abg: '#E9EFEC', fg: '#0C1F1A', border: '1px solid #D7E0DC', label: 'Cancel' },
+      { name: 'Tonal', use: 'Helpful actions inside cards: Top up, Add CR.', bg: '#E3F6EF', hbg: '#D3F0E5', abg: '#C2E8DA', fg: '#0B6F56', label: 'Top up' },
+      { name: 'Ghost', use: 'Low emphasis: View all, Skip, Edit.', bg: 'transparent', hbg: 'rgba(12,31,26,.05)', abg: 'rgba(12,31,26,.09)', fg: '#0E7C62', label: 'Skip' },
+      { name: 'Destructive', use: 'Freeze card, delete, cancel order. Ask to confirm first.', bg: '#FDECEC', hbg: '#FBDCDC', abg: '#F8CACA', fg: '#C81E1E', label: 'Freeze' }
+    ];
+    const ST = ['DEFAULT', 'HOVER', 'PRESSED', 'FOCUS', 'LOADING', 'DISABLED'];
+    const variants = V.map(v => ({ name: v.name, use: v.use, states: ST.map((s, i) => {
+      const live = i === 0, dis = i === 5, b = v.border || 'none';
+      const bg = [v.bg, v.hbg, v.abg, v.bg, v.bg, '#EEF2F0'][i];
+      return { label: i === 4 ? '' : v.label, spin: i === 4, tab: live ? 0 : -1, border: dis ? 'none' : (i === 2 && v.border ? '1px solid #C3D0CB' : b), bg, fg: dis ? '#9AACA6' : v.fg,
+        sh: i === 3 ? RING + (v.sh ? ',' + v.sh : '') : (i === 2 || dis ? 'none' : v.sh || 'none'), tf: i === 2 ? 'scale(.97)' : 'none', cur: dis ? 'not-allowed' : i === 4 ? 'progress' : 'pointer',
+        hbg: live ? v.hbg : bg, abg: live ? v.abg : bg, atf: live ? 'scale(.97)' : 'none', fsh: live ? RING : 'none' };
+    }) }));
+    const stateSpecs = [
+      ['Default', 'Resting look. Primary has a soft green shadow.'], ['Hover', 'Web only. Slightly lighter; 150 ms ease.'], ['Pressed', 'Darker, scales to 97%, shadow drops. On mobile this is the tap feedback.'],
+      ['Focus', 'Keyboard only. 2 px green ring with a 3 px white gap.'], ['Loading', 'Label swaps to a spinner; width stays fixed so the layout does not jump. Not clickable.'], ['Disabled', 'Gray fill, 4.5:1 label. Explain nearby why it is disabled.']
+    ].map(([k, v]) => ({ k, v }));
+    const sizes = [
+      { name: 'Large', spec: 'H 52 · 16/600 · px 28', h: '52px', px: '28px', fs: '16px', ic: '20px', gap: '8px', use: 'Mobile main actions, full width at the bottom of the screen.' },
+      { name: 'Medium', spec: 'H 44 · 15/600 · px 22', h: '44px', px: '22px', fs: '15px', ic: '18px', gap: '8px', use: 'Web forms, dialogs and onboarding.' },
+      { name: 'Small', spec: 'H 36 · 13.5/500 · px 14', h: '36px', px: '14px', fs: '13.5px', ic: '16px', gap: '7px', use: 'Dashboard toolbars and card headers.' },
+      { name: 'X-small', spec: 'H 28 · 12.5/600 · px 10', h: '28px', px: '10px', fs: '12.5px', ic: '14px', gap: '5px', use: 'Table rows and inline actions. Web only.' }
+    ].map((s, i) => ({ ...s, bd: i ? '#EEF2F0' : 'transparent' }));
+    const arrowSizes = [['120px', '54px', '26px', 'Wide 120×54\nweb onboarding'], ['56px', '56px', '24px', '56 · mobile'], ['44px', '44px', '20px', '44 · web'], ['36px', '36px', '16px', '36 · compact']].map(([w, h, ic, label]) => ({ w, h, ic, label }));
+    const F = 'M4 12h16M14 6l6 6-6 6', B = 'M20 12H4M10 6l-6 6 6 6';
+    const arrowVariants = [
+      { label: 'Gradient', bg: G, hbg: G, fg: '#FFFFFF', sh: PSH, d: F }, { label: 'Ink', bg: '#0C1F1A', hbg: '#1D332D', fg: '#FFFFFF', d: F },
+      { label: 'Tonal', bg: '#E3F6EF', hbg: '#D3F0E5', fg: '#0B6F56', d: F }, { label: 'Outline', bg: '#FFFFFF', hbg: '#F4F7F6', fg: '#0C1F1A', border: '1px solid #D7E0DC', d: F },
+      { label: 'Back', bg: '#F2F6F4', hbg: '#E6ECE9', fg: '#0C1F1A', d: B, aria: 'Back' }
+    ].map(a => ({ border: 'none', sh: 'none', aria: 'Next step', ...a }));
+    const arrowStates = ['DEFAULT', 'HOVER', 'PRESSED', 'FOCUS', 'LOADING', 'DISABLED'].map((name, i) => ({ name, tab: -1, arrow: i !== 4, spin: i === 4,
+      bg: [G, GH, GP, G, G, '#EEF2F0'][i], fg: i === 5 ? '#9AACA6' : '#FFFFFF', sh: i === 3 ? RING + ',' + PSH : (i === 2 || i === 5 ? 'none' : PSH), tf: i === 2 ? 'scale(.96)' : 'none', cur: i === 5 ? 'not-allowed' : 'pointer' }));
+    const ranges = ['7D', '30D', '90D', '12M'].map((label, i) => { const on = this.state.range === i; return { label, bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0C1F1A' : '#5E7770', fw: on ? 600 : 500, sh: on ? '0 1px 3px rgba(12,31,26,.12)' : 'none', pick: () => this.setState({ range: i }) }; });
+    const iconBtns = [['More', 'M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM19 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM5 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z'], ['Refresh', 'M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5'], ['Download', 'M12 3v12M7 10l5 5 5-5M5 21h14'], ['Expand', 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'], ['Close', 'M18 6 6 18M6 6l12 12']].map(([label, d], i) => ({ label, d, bg: i === 0 ? '#F2F6F4' : 'transparent', fg: '#4A615A', border: i === 2 ? '1px solid #D7E0DC' : 'none' }));
+    const chips = ['Settled', 'Pending', 'Refunds', 'mada'].map(label => { const on = !!this.state.chips[label]; return { label, on, pressed: on ? 'true' : 'false', bd: on ? '#0C1F1A' : '#D7E0DC', bg: on ? '#0C1F1A' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0C1F1A', pick: () => this.setState(s => ({ chips: { ...s.chips, [label]: !s.chips[label] } })) }; });
+    const quick = [['Transfer', 'M7 17 17 7M8 7h9v9'], ['Pay bills', 'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7ZM14 2v4a2 2 0 0 0 2 2h4'], ['Top up', 'M12 5v14M5 12h14'], ['More', 'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z']].map(([label, d], i) => ({ label, d, bg: i === 0 ? G : '#E3F6EF', fg: i === 0 ? '#FFFFFF' : '#0B6F56', sh: i === 0 ? PSH : 'none' }));
+    const amounts = ['5,000', '10,000', '25,000'].map((label, i) => { const on = this.state.amt === i; return { label, bg: on ? '#E3F6EF' : '#F2F6F4', fg: on ? '#0B6F56' : '#0C1F1A', pick: () => this.setState({ amt: i }) }; });
+    const rules = [
+      [1, 'One primary button per screen. Pair it with Secondary or Ghost.'], [1, 'Labels are verbs that name the result: "Send SAR 25,000", not "OK".'],
+      [1, 'On mobile, keep main actions at the bottom within thumb reach, full width.'], [1, 'The arrow button is only for moving between steps, and always has an aria-label.'],
+      [0, 'Don\'t put two gradient buttons side by side.'], [0, 'Don\'t use X-small on mobile; tap areas must be at least 44 × 44.']
+    ].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { sizes, stateNames: ST, variants, stateSpecs, arrowSizes, arrowVariants, arrowStates, ranges, iconBtns, chips, quick, amounts, rules };
+  }
+}
+</script>
+</body>
+</html>

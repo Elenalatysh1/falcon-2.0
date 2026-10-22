@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button,textarea{font-family:inherit}textarea::placeholder{color:#9AACA6}a{color:#0B8F6E}a:hover{color:#066A51}@keyframes hUp{from{opacity:0;transform:translateY(6px)}}@keyframes hSheet{from{transform:translateY(100%)}}@keyframes hFade{from{opacity:0}}@keyframes hBlink{50%{opacity:0}}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Text area</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">For free text longer than one line: transfer notes, card request reasons, reasons for rejecting an approval, support messages and invoice terms. It uses the same field style as the text input: floating label, 8 px radius and the same states. Every example with a "Live" tag works.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">States</h2><p style="margin:0;font-size:15px;color:#4A615A">Minimum 3 lines (96 px). The label sits inside the top of the field; helper text or the error goes underneath with the counter on the right.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px">
+    <sc-for list="{{ states }}" as="s" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ s.k }}</span>
+      <div style="position:relative;min-height:112px;border:{{ s.bw }} solid {{ s.bd }};border-radius:8px;background:{{ s.bg }};padding:10px 14px 12px;display:flex;flex-direction:column;gap:4px;box-shadow:{{ s.ring }};opacity:{{ s.op }}">
+        <span style="font-size:11px;color:{{ s.lc }};display:flex;align-items:center;gap:4px">{{ s.label }}<sc-if value="{{ s.opt }}" hint-placeholder-val="{{ false }}"><span style="color:#8A9C96">· optional</span></sc-if></span>
+        <span style="font-size:15px;line-height:1.5;color:{{ s.vc }};white-space:pre-wrap">{{ s.v }}<sc-if value="{{ s.caret }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;width:1.5px;height:17px;background:#0C1F1A;vertical-align:-3px;margin-left:1px;animation:hBlink 1s steps(1) infinite"></span></sc-if></span>
+        <sc-if value="{{ s.lock }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="position:absolute;right:12px;top:12px;width:16px;height:16px" fill="none" stroke="#9AACA6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h12v10H6zM8 11V7a4 4 0 0 1 8 0v4"></path></svg></sc-if>
+        <svg viewBox="0 0 10 10" style="position:absolute;right:4px;bottom:4px;width:9px;height:9px;opacity:{{ s.grip }}" fill="none" stroke="#9AACA6" stroke-width="1.2" stroke-linecap="round"><path d="M9 3 3 9M9 6 6 9"></path></svg>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:10px;font-size:12.5px;min-height:18px"><span style="color:{{ s.hc }};display:flex;gap:5px;align-items:flex-start">{{ s.help }}</span><span style="font-family:'IBM Plex Mono',monospace;color:{{ s.cc }};white-space:nowrap">{{ s.count }}</span></div>
+    </div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Live field</h2><p style="margin:0;font-size:15px;color:#4A615A">The field grows as you type, from 3 to 8 lines, then scrolls. The counter appears at 80% of the limit and turns red when you go over. Errors show when you leave the field, not while typing.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">TRANSFER NOTE · MAX {{ lv.max }}</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · TYPE</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="position:relative;display:flex;flex-direction:column;gap:2px;border:{{ lv.bw }} solid {{ lv.bd }};border-radius:8px;background:{{ lv.bg }};padding:10px 14px 10px;box-shadow:{{ lv.ring }};transition:border-color .15s,box-shadow .15s;cursor:text">
+          <span style="font-size:11px;color:{{ lv.lc }}">Note to beneficiary</span>
+          <textarea ref="{{ lv.ref }}" value="{{ lv.v }}" onChange="{{ lv.set }}" onFocus="{{ lv.focus }}" onBlur="{{ lv.blur }}" rows="3" placeholder="e.g. Invoice INV-2041, October rent" aria-invalid="{{ lv.inv }}" style="border:0;outline:0;resize:none;background:transparent;padding:0;font-size:15px;line-height:24px;color:#0C1F1A;min-height:72px;max-height:192px;overflow-y:{{ lv.ov }};height:{{ lv.h }}"></textarea>
+        </label>
+        <div style="display:flex;justify-content:space-between;gap:10px;font-size:12.5px;min-height:18px"><span style="color:{{ lv.hc }}">{{ lv.help }}</span><span style="font-family:'IBM Plex Mono',monospace;color:{{ lv.cc }};white-space:nowrap;opacity:{{ lv.co }};transition:opacity .2s">{{ lv.count }}</span></div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:12.5px;color:#5E7770;align-self:center;margin-right:4px">Try:</span><sc-for list="{{ lv.samples }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" style="height:30px;padding:0 12px;border-radius:999px;border:1px solid #D7E0DC;background:#FFFFFF;font-size:12.5px;color:#0C1F1A;cursor:pointer;white-space:nowrap">{{ o.l }}</button></sc-for></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">ANATOMY</span>
+      <sc-for list="{{ anat }}" as="a" hint-placeholder-count="7"><div style="display:grid;grid-template-columns:24px 120px minmax(0,1fr);gap:10px;align-items:baseline;padding:6px 0;border-top:1px solid {{ a.bdr }}"><span style="width:20px;height:20px;border-radius:50%;background:#0C1F1A;color:#FFFFFF;font:600 10.5px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center">{{ a.n }}</span><span style="font-size:13.5px;font-weight:600">{{ a.k }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ a.v }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Variants · web</h2><p style="margin:0;font-size:15px;color:#4A615A">The same field adapted for different jobs.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">REJECT APPROVAL · QUICK REASONS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="border-radius:18px;border:1px solid #E6ECE9;box-shadow:0 24px 48px -24px rgba(12,31,26,.35);padding:18px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:700">Reject transfer to Nour Trading?</span><span style="font-size:13.5px;color:#5E7770">SAR 25,000.00 · requested by Omar Bakr</span></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ rj.chips }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.pick }}" style="height:30px;padding:0 12px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:12.5px;font-weight:500;cursor:pointer;white-space:nowrap">{{ c.l }}</button></sc-for></div>
+        <div style="display:flex;flex-direction:column;gap:2px;border:{{ rj.bw }} solid {{ rj.bd }};border-radius:8px;padding:10px 14px;background:{{ rj.bg }}"><span style="font-size:11px;color:{{ rj.lc }}">Reason · required</span><textarea value="{{ rj.v }}" onChange="{{ rj.set }}" rows="3" placeholder="Tell Omar what to change" style="border:0;outline:0;resize:none;background:transparent;padding:0;font-size:15px;line-height:24px;color:#0C1F1A"></textarea></div>
+        <span style="font-size:12.5px;color:{{ rj.hc }};min-height:18px">{{ rj.help }}</span>
+        <div style="display:flex;justify-content:flex-end;gap:8px"><button onClick="{{ rj.reset }}" style="height:40px;padding:0 16px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:14px;cursor:pointer;color:#0C1F1A">Cancel</button><button onClick="{{ rj.submit }}" style="height:40px;padding:0 18px;border:0;border-radius:999px;background:{{ rj.pbg }};color:{{ rj.pfg }};font-size:14px;font-weight:600;cursor:pointer">Reject transfer</button></div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">COMMENT · TOOLBAR + ATTACH</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · ⌘ ENTER</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><sc-for list="{{ cm.list }}" as="c" hint-placeholder-count="2"><div style="display:flex;gap:10px;animation:hUp .2s ease-out"><span style="width:32px;height:32px;border-radius:50%;background:{{ c.bg }};color:{{ c.fg }};font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none">{{ c.ini }}</span><div style="flex:1;border-radius:4px 14px 14px 14px;background:#F4F7F6;padding:10px 12px;display:flex;flex-direction:column;gap:3px"><span style="font-size:12.5px;font-weight:600">{{ c.n }} <span style="font-weight:400;color:#8A9C96">· {{ c.t }}</span></span><span style="font-size:14px;line-height:1.5;white-space:pre-wrap">{{ c.m }}</span></div></div></sc-for></div>
+      <div style="border:{{ cm.bw }} solid {{ cm.bd }};border-radius:14px;background:#FFFFFF;display:flex;flex-direction:column;box-shadow:{{ cm.ring }};transition:all .15s">
+        <textarea value="{{ cm.v }}" onChange="{{ cm.set }}" onKeyDown="{{ cm.key }}" onFocus="{{ cm.focus }}" onBlur="{{ cm.blur }}" rows="2" placeholder="Write a comment… use @ to mention" style="border:0;outline:0;resize:none;background:transparent;padding:12px 14px 4px;font-size:14.5px;line-height:22px;color:#0C1F1A"></textarea>
+        <div style="display:flex;align-items:center;gap:2px;padding:6px 8px 8px"><sc-for list="{{ cm.tools }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.do }}" aria-label="{{ t.l }}" title="{{ t.l }}" style="width:32px;height:32px;border:0;border-radius:8px;background:transparent;color:#5E7770;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#F2F6F4;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg></button></sc-for><span style="flex:1"></span><button onClick="{{ cm.send }}" aria-label="Send" style="height:32px;padding:0 14px;border:0;border-radius:999px;background:{{ cm.sbg }};color:{{ cm.sfg }};font-size:13px;font-weight:600;cursor:{{ cm.scur }};display:flex;align-items:center;gap:6px;transition:all .15s">Send<svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path></svg></button></div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">FIXED HEIGHT · INVOICE TERMS</span>
+      <div style="display:flex;flex-direction:column;gap:2px;border:1px solid #D9D9D9;border-radius:8px;padding:10px 14px;background:#FFFFFF"><span style="font-size:11px">Terms and conditions</span><textarea rows="6" style="border:0;outline:0;resize:vertical;background:transparent;padding:0;font-size:14px;line-height:22px;color:#0C1F1A;min-height:132px">1. Payment due within 30 days of the invoice date.
+2. Late payments incur a 2% monthly fee.
+3. Goods remain the property of Khamis Arabia until paid in full.
+4. Disputes are handled under the laws of the Kingdom of Saudi Arabia.
+5. Prices include 15% VAT unless stated otherwise.
+6. Returns are accepted within 14 days in original packaging.</textarea></div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">For long, saved text people edit rarely. Fixed 6 lines, scrolls, the user can drag to resize vertically.</span>
+    </div>
+    <div dir="rtl" style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px;font-family:'IBM Plex Sans Arabic',sans-serif">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;direction:ltr;text-align:right">ARABIC · RTL</span>
+      <div style="display:flex;flex-direction:column;gap:2px;border:1px solid #D9D9D9;border-radius:8px;padding:10px 14px;background:#FFFFFF"><span style="font-size:12px">ملاحظة للمستفيد</span><textarea dir="auto" rows="3" style="border:0;outline:0;resize:none;background:transparent;padding:0;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:16px;line-height:28px;color:#0C1F1A">دفعة الفاتورة INV-2041 لشهر أكتوبر</textarea></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:#5E7770">تظهر في كشف حساب المستفيد</span><bdi dir="ltr" style="font-family:'IBM Plex Mono',monospace;color:#5E7770">34 / 140</bdi></div>
+      <span style="font-size:13px;line-height:1.7;color:#5E7770">استخدم dir="auto" ليتبع اتجاه النص لغة الكتابة. حجم الخط 16 وارتفاع السطر 28.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Font 16 pt so iOS doesn't zoom in. When the keyboard opens, the field scrolls above it and the main button stays on top of the keyboard.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">FORM FIELD · KEYBOARD OPEN</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · TAP FIELD</span></div>
+      <div style="position:relative;height:600px;border-radius:32px;background:#F4F7F6;overflow:hidden;display:flex;flex-direction:column">
+        <div style="padding:14px 16px;display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#0C1F1A" stroke-width="2" stroke-linecap="round"><path d="m15 18-6-6 6-6"></path></svg></span><span style="font-size:17px;font-weight:600">Request a card</span></div>
+        <div style="flex:1;padding:0 16px;display:flex;flex-direction:column;gap:12px;transform:translateY({{ mb.shift }});transition:transform .3s cubic-bezier(.2,.9,.2,1)">
+          <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;background:#FFFFFF;padding:0 14px;display:flex;flex-direction:column;justify-content:center"><span style="font-size:11px">Card type</span><span style="font-size:16px">Virtual</span></div>
+          <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;background:#FFFFFF;padding:0 14px;display:flex;flex-direction:column;justify-content:center"><span style="font-size:11px">Monthly limit</span><span style="font:400 16px 'IBM Plex Mono',monospace">SAR 5,000</span></div>
+          <button onClick="{{ mb.toggle }}" style="min-height:124px;border:{{ mb.bw }} solid {{ mb.bd }};border-radius:8px;background:#FFFFFF;padding:10px 14px;display:flex;flex-direction:column;gap:4px;text-align:left;cursor:text;box-shadow:{{ mb.ring }};color:#0C1F1A"><span style="font-size:11px">Why do you need it?</span><span style="font-size:16px;line-height:24px;color:{{ mb.vc }}">{{ mb.v }}<sc-if value="{{ mb.open }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;width:1.5px;height:18px;background:#0C1F1A;vertical-align:-3px;margin-left:1px;animation:hBlink 1s steps(1) infinite"></span></sc-if></span></button>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:#5E7770"><span>Your manager sees this</span><span style="font-family:'IBM Plex Mono',monospace">{{ mb.count }}</span></div>
+        </div>
+        <div style="padding:12px 16px 20px;transform:translateY({{ mb.btnY }});transition:transform .3s cubic-bezier(.2,.9,.2,1)"><span style="height:52px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">Continue</span></div>
+        <sc-if value="{{ mb.open }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;right:0;bottom:0;height:236px;background:#D3D8DB;padding:8px 4px 20px;display:flex;flex-direction:column;gap:8px;animation:hSheet .3s cubic-bezier(.2,.9,.2,1)"><div style="display:flex;justify-content:space-between;padding:0 10px;height:32px;align-items:center;font-size:15px;color:#3A4A46"><span>Marketing</span><span>campaigns</span><button onClick="{{ mb.toggle }}" style="border:0;background:transparent;font-size:15px;font-weight:600;color:#0B6F56;cursor:pointer">Done</button></div><sc-for list="{{ mb.keys }}" as="row" hint-placeholder-count="3"><div style="display:flex;gap:5px;justify-content:center;padding:0 4px"><sc-for list="{{ row }}" as="k" hint-placeholder-count="10"><span style="flex:1;max-width:32px;height:40px;border-radius:6px;background:#FFFFFF;box-shadow:0 1px 0 rgba(0,0,0,.25);font-size:16px;display:flex;align-items:center;justify-content:center">{{ k }}</span></sc-for></div></sc-for></div></sc-if>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">CHAT COMPOSER · SUPPORT</span>
+      <div style="height:600px;border-radius:32px;background:#F4F7F6;overflow:hidden;display:flex;flex-direction:column">
+        <div style="padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #E6ECE9;background:#FFFFFF"><span style="width:36px;height:36px;border-radius:50%;background:#E3F6EF;color:#0B8F6E;font-weight:700;display:flex;align-items:center;justify-content:center">H</span><div style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">Hala support</span><span style="font-size:12px;color:#0B6F56">Replies in about 2 min</span></div></div>
+        <div style="flex:1;padding:16px;display:flex;flex-direction:column;gap:8px;justify-content:flex-end"><span style="align-self:flex-start;max-width:78%;border-radius:4px 18px 18px 18px;background:#FFFFFF;padding:10px 12px;font-size:15px;line-height:1.45">Hi Abdulaziz, how can we help today?</span><span style="align-self:flex-end;max-width:78%;border-radius:18px 4px 18px 18px;background:#0C1F1A;color:#FFFFFF;padding:10px 12px;font-size:15px;line-height:1.45">A card payment to Careem shows twice on my statement.</span></div>
+        <div style="padding:10px 12px 22px;background:#FFFFFF;border-top:1px solid #E6ECE9;display:flex;align-items:flex-end;gap:8px"><span style="width:40px;height:40px;border-radius:50%;background:#F2F6F4;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="#0C1F1A" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span><div style="flex:1;min-height:40px;max-height:120px;border-radius:20px;background:#F2F6F4;padding:9px 14px;font-size:16px;line-height:22px;color:#0C1F1A">It was on 13 Oct at 22:10, the amount is 38.50 each time. Can you check and refund one of them?</div><span style="width:40px;height:40px;border-radius:50%;background:linear-gradient(90deg,#0A7559,#2C957A);display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path></svg></span></div>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Pill-shaped, grows to 5 lines. Send button appears active only when there is text. Return adds a new line; Send sends.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">When to use and rules</h2>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:6px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-bottom:4px">INPUT OR TEXT AREA?</span><sc-for list="{{ which }}" as="w" hint-placeholder-count="6"><div style="display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:6px 0;border-top:1px solid {{ w.bdr }}"><span>{{ w.k }}</span><span style="font-weight:600;color:{{ w.c }};white-space:nowrap">{{ w.v }}</span></div></sc-for></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px"><sc-for list="{{ rules }}" as="r" hint-placeholder-count="10"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for></div>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { v: 'Payment for invoice INV-2041. ', foc: false, touched: false };
+  ref = React.createRef();
+  componentDidMount() { this.fit(); }
+  componentDidUpdate() { this.fit(); }
+  fit() { const el = this.ref.current; if (!el) return; el.style.height = 'auto'; const h = Math.min(192, Math.max(72, el.scrollHeight)); el.style.height = h + 'px'; el.style.overflowY = el.scrollHeight > 192 ? 'auto' : 'hidden'; }
+  renderVals() {
+    const s = this.state;
+    const states = [
+      ['DEFAULT · EMPTY', 'Reason for card', 'Tell your manager what the card is for', '1px', '#D9D9D9', '#FFFFFF', 'none', 1, '#0C1F1A', '#9AACA6', false, false, 'Shown to the approver', '#5E7770', '', '#5E7770', 1, false],
+      ['HOVER', 'Reason for card', 'Tell your manager what the card is for', '1px', '#9AACA6', '#FFFFFF', 'none', 1, '#0C1F1A', '#9AACA6', false, false, 'Web only', '#5E7770', '', '#5E7770', 1, false],
+      ['FOCUSED · TYPING', 'Reason for card', 'Google Ads and Meta campaigns for Q4', '1.5px', '#0C1F1A', '#FFFFFF', '0 0 0 3px rgba(12,31,26,.06)', 1, '#0C1F1A', '#0C1F1A', true, false, 'Shown to the approver', '#5E7770', '', '#5E7770', 1, false],
+      ['FILLED', 'Reason for card', 'Google Ads and Meta campaigns for Q4.\nMonthly budget around SAR 4,000.', '1px', '#D9D9D9', '#FFFFFF', 'none', 1, '#0C1F1A', '#0C1F1A', false, false, 'Shown to the approver', '#5E7770', '', '#5E7770', 1, false],
+      ['NEAR LIMIT', 'Note to beneficiary', 'Payment for invoice INV-2041 and the October delivery to Olaya, Malqa and Jeddah', '1.5px', '#0C1F1A', '#FFFFFF', '0 0 0 3px rgba(12,31,26,.06)', 1, '#0C1F1A', '#0C1F1A', false, false, 'Appears on their statement', '#5E7770', '128 / 140', '#B45309', 1, false],
+      ['ERROR', 'Reason for rejecting', '', '1px', '#E02424', '#FFFBFB', 'none', 1, '#E02424', '#0C1F1A', false, false, 'Add a reason so Omar knows what to fix.', '#C81E1E', '0 / 500', '#C81E1E', 1, false],
+      ['DISABLED', 'Invoice terms', 'Payment due within 30 days.', '1px', '#E6ECE9', '#F7FAF9', 'none', .6, '#5E7770', '#5E7770', false, false, 'Set by your admin', '#8A9C96', '', '#8A9C96', 0, false],
+      ['READ ONLY', 'Approver comment', 'Approved. Please attach the receipt by Thursday.', '1px', 'transparent', '#F4F7F6', 'none', 1, '#5E7770', '#0C1F1A', false, true, 'Omar Bakr · 14 Oct, 11:20', '#5E7770', '', '#5E7770', 0, false]
+    ].map(([k, label, v, bw, bd, bg, ring, op, lc, vc, caret, lock, help, hc, count, cc, grip, opt]) => ({ k, label, v, bw, bd, bg, ring, op, lc, vc, caret, lock, help, hc, count, cc, grip, opt: k.startsWith('DEFAULT') || k === 'HOVER' }));
+    const max = 140, n = s.v.length, over = n > max, near = n >= max * .8;
+    const showErr = over && (s.touched || !s.foc);
+    const lv = { ref: this.ref, max, v: s.v, set: e => this.setState({ v: e.target.value }), focus: () => this.setState({ foc: true }), blur: () => this.setState({ foc: false, touched: true }),
+      bw: s.foc || showErr ? '1.5px' : '1px', bd: showErr ? '#E02424' : s.foc ? '#0C1F1A' : '#D9D9D9', bg: showErr ? '#FFFBFB' : '#FFFFFF', ring: s.foc ? (showErr ? '0 0 0 3px rgba(224,36,36,.12)' : '0 0 0 3px rgba(12,31,26,.06)') : 'none', lc: showErr ? '#E02424' : '#0C1F1A', inv: showErr ? 'true' : 'false',
+      help: showErr ? `${n - max} characters too long. Shorten it to send.` : 'Appears on their bank statement. Optional.', hc: showErr ? '#C81E1E' : '#5E7770',
+      count: `${n} / ${max}`, cc: over ? '#C81E1E' : near ? '#B45309' : '#5E7770', co: near ? 1 : 0, h: 'auto', ov: 'hidden',
+      samples: [['Short', 'Rent October'], ['Near limit', 'Payment for invoice INV-2041 and the October delivery to Olaya, Malqa and Jeddah branches. Thank you.'], ['Too long', 'Payment for invoice INV-2041 and the October delivery to our Olaya, Malqa and Jeddah branches, including assembly and two extra chairs. Thank you for the quick service.'], ['Clear', '']].map(([l, v]) => ({ l, pick: () => this.setState({ v, touched: true }) })) };
+    const anat = [['1', 'Container', '1 px border #D9D9D9, radius 8, padding 10 14. Min 3 lines.'], ['2', 'Label', '11 px inside the top. "· optional" when not required.'], ['3', 'Text', '15 / 24 Plex Sans. Placeholder #9AACA6, shows an example.'], ['4', 'Resize', 'Auto-grow 3→8 lines on web and mobile. Manual grip only in admin tools.'], ['5', 'Helper', '12.5 px below, left. Replaced by the error message.'], ['6', 'Counter', 'Mono, right. Shows from 80% of the limit; amber, then red.'], ['7', 'Focus', '1.5 px ink border + 3 px soft ring.']].map(([n2, k, v], i) => ({ n: n2, k, v, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const rv = s.rv ?? '', rt = !!s.rt, rErr = rt && !rv.trim(), rDone = !!s.rdone;
+    const RC = ['Wrong amount', 'Missing invoice', 'Not in budget'];
+    const rj = { v: rv, set: e => this.setState({ rv: e.target.value, rdone: false }), bw: rErr ? '1px' : '1px', bd: rErr ? '#E02424' : '#D9D9D9', bg: rErr ? '#FFFBFB' : '#FFFFFF', lc: rErr ? '#E02424' : '#0C1F1A',
+      help: rDone ? 'Rejected. Omar was notified with your reason.' : rErr ? 'Add a reason so Omar knows what to fix.' : 'Pick a quick reason or write your own.', hc: rDone ? '#0B6F56' : rErr ? '#C81E1E' : '#5E7770',
+      pbg: '#FDECEC', pfg: '#C81E1E', submit: () => rv.trim() ? this.setState({ rdone: true, rt: false }) : this.setState({ rt: true }), reset: () => this.setState({ rv: '', rt: false, rdone: false }),
+      chips: RC.map(l => { const on = rv.startsWith(l); return { l, bd: on ? '#0B8F6E' : '#D7E0DC', bg: on ? '#E3F6EF' : '#FFFFFF', fg: on ? '#0B4F3E' : '#0C1F1A', pick: () => this.setState({ rv: l + '. ', rt: false, rdone: false }) }; }) };
+    const cl = s.cl || [['Omar Bakr', 'OB', '#FFE2C4', '#7A4508', '11:20', 'Receipt attached. This was for the Q4 campaign kickoff.']];
+    const cv = s.cv ?? '', cf = !!s.cf, has = cv.trim().length > 0;
+    const send = () => { if (!has) return; this.setState({ cl: [...cl, ['Abdulaziz Ali', 'AA', '#DCE5FF', '#1E3A9E', 'now', cv.trim()]], cv: '' }); };
+    const ins = t2 => this.setState({ cv: cv + t2 });
+    const cm = { list: cl.map(([n2, ini, bg, fg, t2, m]) => ({ n: n2, ini, bg, fg, t: t2, m })), v: cv, set: e => this.setState({ cv: e.target.value }), focus: () => this.setState({ cf: true }), blur: () => this.setState({ cf: false }),
+      key: e => { if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); send(); } }, send,
+      bw: cf ? '1.5px' : '1px', bd: cf ? '#0C1F1A' : '#D9D9D9', ring: cf ? '0 0 0 3px rgba(12,31,26,.06)' : 'none', sbg: has ? '#0C1F1A' : '#EEF2F0', sfg: has ? '#FFFFFF' : '#9AACA6', scur: has ? 'pointer' : 'default',
+      tools: [['Mention', 'M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1', () => ins('@Omar ')], ['Attach', 'M21.4 11.1 12.2 20.3a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5', () => ins('[receipt.pdf] ')], ['Emoji', 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01', () => ins('👍 ')], ['Bullet list', 'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01', () => ins('\n• ')]].map(([l, icon, d]) => ({ l, icon, do: d })) };
+    const mo = !!s.mo;
+    const mb = { open: mo, toggle: () => this.setState({ mo: !mo }), bw: mo ? '1.5px' : '1px', bd: mo ? '#0C1F1A' : '#D9D9D9', ring: mo ? '0 0 0 3px rgba(12,31,26,.06)' : 'none', v: mo ? 'Marketing campaigns' : 'e.g. Ad spend for Q4 campaigns', vc: mo ? '#0C1F1A' : '#9AACA6', count: mo ? '19 / 300' : '', shift: mo ? '-60px' : '0', btnY: mo ? '-236px' : '0',
+      keys: ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'].map(r => r.split('')) };
+    const which = [['Name, IBAN, amount', 'Input', '#0C1F1A'], ['Transfer reference (≤ 35)', 'Input', '#0C1F1A'], ['Transfer note (≤ 140)', 'Text area', '#0B6F56'], ['Rejection reason', 'Text area', '#0B6F56'], ['Support message', 'Text area', '#0B6F56'], ['Address', 'Several inputs', '#0C1F1A']].map(([k, v, c], i) => ({ k, v, c, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const rules = [[1, 'Use when the answer can be longer than one line or 60 characters.'], [1, 'Show an example in the placeholder, never the instructions.'], [1, 'Start at 3 lines and grow to 8; then scroll.'], [1, 'Show the counter only near the limit; let people type past it and say how much to cut.'], [1, 'Validate on blur or submit, not while typing.'], [1, 'Mark it "optional" when not required.'], [0, 'Don\'t use a text area for structured data (amounts, dates, IBANs).'], [0, 'Don\'t clear what the user typed after an error.'], [0, 'Don\'t use font below 16 on mobile.'], [0, 'Don\'t submit on Enter in multi-line fields; use ⌘/Ctrl + Enter on web.']].map(([ok, t2]) => ({ t: t2, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { states, lv, anat, rj, cm, mb, which, rules };
+  }
+}
+</script>
+</body>
+</html>

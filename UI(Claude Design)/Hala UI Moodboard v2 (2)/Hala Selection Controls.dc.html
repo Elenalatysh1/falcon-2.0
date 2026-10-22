@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<div style="max-width:1240px;margin:0 auto;padding:56px 32px 96px;display:flex;flex-direction:column;gap:56px">
+  <header style="display:flex;flex-direction:column;gap:12px;max-width:720px">
+    <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+    <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Selection controls</h1>
+    <p style="margin:0;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Checkboxes, radios, toggles, selection cards, segmented controls and chips. One green for "on", one ink for focus. Every example with a "Live" tag works.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">States</h2><p style="margin:0;font-size:15px;color:#4A615A">The control is 18 px; the tap area is the whole row, at least 44 px high.</p></div>
+    <div style="display:grid;grid-template-columns:minmax(150px,190px) repeat(6,minmax(0,1fr));gap:12px;padding:0 28px">
+      <span></span>
+      <sc-for list="{{ stateNames }}" as="n" hint-placeholder-count="6"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;text-align:center">{{ n }}</span></sc-for>
+    </div>
+    <sc-for list="{{ matrix }}" as="g" hint-placeholder-count="3">
+      <div style="background:#FFFFFF;border-radius:24px;padding:10px 28px">
+        <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:minmax(150px,190px) repeat(6,minmax(0,1fr));gap:12px;align-items:center;padding:14px 0;border-top:1px solid {{ r.bd }}">
+            <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">{{ r.name }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ r.sub }}</span></div>
+            <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6">
+              <div style="display:flex;justify-content:center;align-items:center;height:44px">
+                <span style="width:{{ c.w }};height:{{ c.h }};border-radius:{{ c.r }};border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:#FFFFFF;display:flex;align-items:center;justify-content:{{ c.j }};padding:{{ c.p }};box-shadow:{{ c.sh }};flex:none"><sc-if value="{{ c.check }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if><sc-if value="{{ c.dash }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:2px;border-radius:1px;background:#FFFFFF"></span></sc-if><sc-if value="{{ c.dot }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:8px;border-radius:50%;background:{{ c.dotC }}"></span></sc-if><sc-if value="{{ c.knob }}" hint-placeholder-val="{{ false }}"><span style="width:{{ c.kn }};height:{{ c.kn }};border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,.2)"></span></sc-if></span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+      <sc-for list="{{ stateSpecs }}" as="t" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ t.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ t.v }}</span></div></sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Checkbox</h2><p style="margin:0;font-size:15px;color:#4A615A">For independent choices, and for agreeing to terms. A parent shows "mixed" when only some children are on.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">GROUP WITH PARENT</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <button onClick="{{ tree.toggleAll }}" role="checkbox" aria-checked="{{ tree.aria }}" style="min-height:48px;border:0;border-radius:12px;padding:0 10px;display:flex;align-items:center;gap:12px;background:transparent;color:#0C1F1A;cursor:pointer;text-align:left" style-hover="background:#F4F7F6">
+          <span style="width:18px;height:18px;border-radius:5px;border:1.5px solid {{ tree.bd }};background:{{ tree.bg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;transition:all .15s"><sc-if value="{{ tree.all }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if><sc-if value="{{ tree.some }}" hint-placeholder-val="{{ true }}"><span style="width:8px;height:2px;border-radius:1px;background:#FFFFFF"></span></sc-if></span>
+          <span style="flex:1;font-size:15px;font-weight:600">All terminals</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ tree.count }}</span>
+        </button>
+        <div style="display:flex;flex-direction:column;padding-left:30px;position:relative">
+          <span style="position:absolute;left:19px;top:4px;bottom:24px;width:1px;background:#E6ECE9"></span>
+          <sc-for list="{{ tree.kids }}" as="k" hint-placeholder-count="4"><button onClick="{{ k.toggle }}" role="checkbox" aria-checked="{{ k.aria }}" style="min-height:44px;border:0;border-radius:12px;padding:0 10px;display:flex;align-items:center;gap:12px;background:transparent;color:#0C1F1A;cursor:pointer;text-align:left" style-hover="background:#F4F7F6"><span style="width:18px;height:18px;border-radius:5px;border:1.5px solid {{ k.bd }};background:{{ k.bg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;transition:all .15s"><sc-if value="{{ k.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14.5px">{{ k.label }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ k.id }}</span></div></button></sc-for>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">CONSENT · REQUIRED</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <button onClick="{{ terms.toggle }}" role="checkbox" aria-checked="{{ terms.aria }}" style="border:0;background:transparent;padding:0;display:flex;align-items:flex-start;gap:12px;color:#0C1F1A;cursor:pointer;text-align:left">
+          <span style="margin-top:2px;width:18px;height:18px;border-radius:5px;border:1.5px solid {{ terms.bd }};background:{{ terms.bg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;transition:all .15s"><sc-if value="{{ terms.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+          <span style="font-size:14.5px;line-height:1.5">I agree to the <span style="color:#0E7C62;font-weight:600;text-decoration:underline;text-underline-offset:3px">POS rental terms</span> and confirm the business details are correct.</span>
+        </button>
+        <sc-if value="{{ terms.err }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#E02424;padding-left:30px;margin-top:-8px">Accept the terms to place the order</span></sc-if>
+        <button onClick="{{ terms.submit }}" style="align-self:flex-start;height:44px;padding:0 22px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 10px 22px -12px rgba(10,117,89,.8)">{{ terms.btn }}</button>
+        <div style="margin-top:auto;border-top:1px solid #EEF2F0;padding-top:14px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">INLINE · APPLY TO ALL CRs</span>
+          <button onClick="{{ apply.toggle }}" role="checkbox" aria-checked="{{ apply.aria }}" style="align-self:flex-start;border:0;background:transparent;padding:0;display:flex;align-items:center;gap:10px;font-size:14px;color:#0C1F1A;cursor:pointer"><span style="width:16px;height:16px;border-radius:4px;border:1.3px solid {{ apply.bd }};background:{{ apply.bg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;transition:all .15s"><sc-if value="{{ apply.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>Apply this information to all CRs</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Radio</h2><p style="margin:0;font-size:15px;color:#4A615A">One choice from 2–5 options that all need to be visible. More than 5: use a dropdown. Always preselect a safe default.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:6px" role="radiogroup">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">LIST · SETTLEMENT SCHEDULE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <sc-for list="{{ radios }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.pick }}" role="radio" aria-checked="{{ o.aria }}" disabled="{{ o.dis }}" style="min-height:56px;border:0;border-radius:12px;padding:8px 10px;display:flex;align-items:center;gap:12px;background:transparent;color:{{ o.fg }};cursor:{{ o.cur }};text-align:left;pointer-events:{{ o.pe }};transition:background .15s" style-hover="background:#EEF3F1"><span style="width:18px;height:18px;border-radius:50%;border:1.5px solid {{ o.bd }};background:{{ o.rbg }};display:flex;align-items:center;justify-content:center;flex:none;transition:all .15s"><span style="width:8px;height:8px;border-radius:50%;background:{{ o.dot }};transition:background .15s"></span></span><div style="flex:1;display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:500">{{ o.label }}</span><span style="font-size:13px;color:{{ o.sc }}">{{ o.sub }}</span></div><span style="font:500 13px 'IBM Plex Mono',monospace;color:{{ o.sc }}">{{ o.fee }}</span></button></sc-for>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">INLINE · HORIZONTAL</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <span style="font-size:14px;font-weight:600">Card type</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px" role="radiogroup"><sc-for list="{{ inlineR }}" as="o" hint-placeholder-count="2"><button onClick="{{ o.pick }}" role="radio" aria-checked="{{ o.aria }}" style="min-height:44px;border:0;border-radius:999px;background:transparent;padding:0 14px 0 10px;margin-left:-10px;display:flex;align-items:center;gap:10px;font-size:15px;color:#0C1F1A;cursor:pointer;transition:background .15s" style-hover="background:#EEF3F1"><span style="width:18px;height:18px;border-radius:50%;border:1.5px solid {{ o.bd }};display:flex;align-items:center;justify-content:center;transition:all .15s"><span style="width:8px;height:8px;border-radius:50%;background:{{ o.dot }}"></span></span>{{ o.label }}</button></sc-for></div>
+        <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #EEF2F0;padding-top:14px"><span style="font-size:14px;font-weight:600">Who pays the fee?</span><div style="display:flex;flex-wrap:wrap;gap:24px"><span style="min-height:44px;display:flex;align-items:center;gap:10px;font-size:15px"><span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #E02424;background:#FFFBFB"></span>Me</span><span style="min-height:44px;display:flex;align-items:center;gap:10px;font-size:15px"><span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #E02424;background:#FFFBFB"></span>Beneficiary</span></div><span style="font-size:13px;color:#E02424">Choose who pays the SAR 5 fee</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Toggle</h2><p style="margin:0;font-size:15px;color:#4A615A">For settings that apply immediately, with no Save button. If the change needs a server call, show loading on the knob; if it is risky, confirm first.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">CARD CONTROLS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <sc-for list="{{ toggles }}" as="t" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid {{ t.bdr }}">
+            <span style="width:40px;height:40px;border-radius:12px;background:#F2F6F4;color:#0C1F1A;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg></span>
+            <div style="flex:1;display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:500;color:{{ t.fg }}">{{ t.label }}</span><span style="font-size:13px;color:{{ t.sc }}">{{ t.sub }}</span></div>
+            <button onClick="{{ t.toggle }}" role="switch" aria-checked="{{ t.aria }}" aria-label="{{ t.label }}" disabled="{{ t.dis }}" style="width:44px;height:26px;border:0;border-radius:999px;padding:3px;display:flex;justify-content:{{ t.j }};background:{{ t.bg }};cursor:{{ t.cur }};flex:none;transition:background .2s"><span style="width:20px;height:20px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;color:#0B8F6E"><sc-if value="{{ t.loading }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M21 12a9 9 0 0 0-9-9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".7s" repeatCount="indefinite"></animateTransform></path></svg></sc-if></span></button>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:18px">
+          <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">SIZES</span>
+          <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:flex-end">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><span style="width:52px;height:32px;border-radius:999px;padding:3px;display:flex;justify-content:flex-end;background:linear-gradient(90deg,#0A7559,#2C957A)"><span style="width:26px;height:26px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">L 52×32 · mobile</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><span style="width:44px;height:26px;border-radius:999px;padding:3px;display:flex;justify-content:flex-end;background:linear-gradient(90deg,#0A7559,#2C957A)"><span style="width:20px;height:20px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,.2)"></span></span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">M 44×26 · web</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px"><span style="width:34px;height:20px;border-radius:999px;padding:2px;display:flex;justify-content:flex-end;background:linear-gradient(90deg,#0A7559,#2C957A)"><span style="width:16px;height:16px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,.2)"></span></span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">S 34×20 · tables</span></div>
+          </div>
+        </div>
+        <sc-if value="{{ confirm.open }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 50px -24px rgba(12,31,26,.35);border:1px solid #F3D9D9">
+            <span style="width:40px;height:40px;border-radius:12px;background:#FDECEC;color:#C81E1E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg></span>
+            <span style="font-size:17px;font-weight:700">Freeze all cards?</span>
+            <span style="font-size:14px;line-height:1.5;color:#4A615A">All 8 team cards stop working right away, including subscriptions. You can unfreeze at any time.</span>
+            <div style="display:flex;gap:10px;margin-top:4px"><button onClick="{{ confirm.cancel }}" style="flex:1;height:44px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:15px;font-weight:500;cursor:pointer">Cancel</button><button onClick="{{ confirm.ok }}" style="flex:1;height:44px;border:0;border-radius:999px;background:#FDECEC;color:#C81E1E;font-size:15px;font-weight:600;cursor:pointer">Freeze cards</button></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ confirm.closed }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">BEHAVIOUR</span><span style="font-size:14px;line-height:1.55;color:#4A615A">"International" waits for the server (loading knob). "Freeze all cards" asks to confirm before switching. "ATM withdrawals" is locked by the account admin.</span></div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Selection cards</h2><p style="margin:0;font-size:15px;color:#4A615A">For choices that need a description, a price or a picture. The whole card is the tap target; the corner control tells single from multi choice.</p></div>
+    <div style="display:grid;grid-template-columns:minmax(150px,190px) repeat(6,minmax(0,1fr));gap:12px;background:#FFFFFF;border-radius:24px;padding:22px 28px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:2px;padding-top:8px"><span style="font-size:15px;font-weight:600">Card states</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">radius 14</span></div>
+      <sc-for list="{{ cardStates }}" as="c" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:stretch">
+          <div style="height:84px;border-radius:14px;border:{{ c.bw }} solid {{ c.bd }};background:{{ c.bg }};box-shadow:{{ c.sh }};padding:12px;display:flex;flex-direction:column;justify-content:space-between;transform:{{ c.tf }}">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="width:26px;height:26px;border-radius:8px;background:{{ c.ib }}"></span><span style="width:16px;height:16px;border-radius:50%;border:1.5px solid {{ c.rbd }};display:flex;align-items:center;justify-content:center"><span style="width:7px;height:7px;border-radius:50%;background:{{ c.dot }}"></span></span></div>
+            <span style="height:6px;width:70%;border-radius:3px;background:{{ c.line }}"></span>
+          </div>
+          <span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E7770;text-align:center">{{ c.name }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">IMAGE CARDS · SINGLE CHOICE · BUSINESS TYPE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px" role="radiogroup">
+        <sc-for list="{{ biz }}" as="b" hint-placeholder-count="4">
+          <button onClick="{{ b.pick }}" role="radio" aria-checked="{{ b.aria }}" style="border:0;padding:0;border-radius:16px;background:#FFFFFF;text-align:left;cursor:pointer;color:#0C1F1A;display:flex;flex-direction:column;overflow:hidden;outline:2px solid {{ b.ol }};outline-offset:-2px;box-shadow:{{ b.sh }};transform:{{ b.tf }};transition:transform .25s cubic-bezier(.2,.9,.2,1),box-shadow .25s,outline-color .2s">
+            <div style="position:relative;width:100%;aspect-ratio:16/10;background:#EEF3F1"><img src="{{ b.src }}" alt="{{ b.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"/><span style="position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:{{ b.ck }};border:2px solid #FFFFFF;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:background .2s"><svg viewBox="0 0 24 24" style="width:13px;height:13px" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></div>
+            <div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px"><span style="font-size:16px;font-weight:600">{{ b.name }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ b.desc }}</span></div>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">PLAN CARDS · SINGLE CHOICE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div role="radiogroup" style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ plans }}" as="p" hint-placeholder-count="3"><button onClick="{{ p.pick }}" role="radio" aria-checked="{{ p.aria }}" style="border:{{ p.bw }} solid {{ p.bd }};text-align:left;cursor:pointer;background:{{ p.bg }};border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;color:#0C1F1A;transition:all .15s" style-hover="border-color:{{ p.hbd }}"><span style="width:18px;height:18px;border-radius:50%;flex:none;border:1.5px solid {{ p.rb }};display:flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;border-radius:50%;background:{{ p.dot }}"></span></span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:15.5px;font-weight:600">{{ p.name }}</span><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#E3F8EF;color:#16A26F;display:{{ p.tagD }}">{{ p.tag }}</span></div><span style="font-size:13px;color:#5E7770">{{ p.desc }}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end"><span style="font:600 16px 'IBM Plex Mono',monospace">{{ p.price }}</span><span style="font-size:11.5px;color:#5E7770">{{ p.unit }}</span></div></button></sc-for>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">TILES · MULTI CHOICE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="6"><button onClick="{{ t.toggle }}" role="checkbox" aria-checked="{{ t.aria }}" disabled="{{ t.dis }}" style="position:relative;border:{{ t.bw }} solid {{ t.bd }};border-radius:14px;padding:14px;background:{{ t.bg }};text-align:left;cursor:{{ t.cur }};color:{{ t.fg }};display:flex;flex-direction:column;gap:10px;transition:all .15s" style-hover="border-color:{{ t.hbd }}"><div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="width:36px;height:36px;border-radius:10px;background:{{ t.ib }};color:{{ t.ic }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg></span><span style="width:18px;height:18px;border-radius:5px;border:1.5px solid {{ t.cbd }};background:{{ t.cbg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;transition:all .15s"><sc-if value="{{ t.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span></div><div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:14.5px;font-weight:600">{{ t.label }}</span><span style="font-size:12.5px;color:{{ t.sc }}">{{ t.sub }}</span></div></button></sc-for>
+        </div>
+        <span style="font-size:13px;color:#5E7770">{{ tilesCount }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Segmented control and chips</h2><p style="margin:0;font-size:15px;color:#4A615A">Segmented switches a view (2–4 options). Choice chips pick one value; filter chips toggle many.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">SEGMENTED · L 44 / S 32</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div role="tablist" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px;border-radius:999px;background:#EEF2F0"><sc-for list="{{ segL }}" as="s" hint-placeholder-count="3"><button onClick="{{ s.pick }}" role="tab" aria-selected="{{ s.aria }}" style="height:40px;border:0;border-radius:999px;background:{{ s.bg }};color:{{ s.fg }};font-size:15px;font-weight:{{ s.fw }};cursor:pointer;box-shadow:{{ s.sh }};transition:all .15s">{{ s.label }}</button></sc-for></div>
+        <div role="tablist" style="align-self:flex-start;display:flex;gap:2px;padding:3px;border-radius:999px;background:#EEF2F0"><sc-for list="{{ segS }}" as="s" hint-placeholder-count="4"><button onClick="{{ s.pick }}" role="tab" aria-selected="{{ s.aria }}" style="height:28px;padding:0 14px;border:0;border-radius:999px;background:{{ s.bg }};color:{{ s.fg }};font-size:13px;font-weight:{{ s.fw }};cursor:pointer;box-shadow:{{ s.sh }};transition:all .15s">{{ s.label }}</button></sc-for></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">CHOICE CHIPS · ONE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ choice }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" role="radio" aria-checked="{{ c.aria }}" style="height:36px;padding:0 16px;border:1px solid {{ c.bd }};border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:{{ c.fw }};cursor:pointer;transition:all .15s">{{ c.label }}</button></sc-for></div>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">FILTER CHIPS · MANY</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ filters }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.toggle }}" aria-pressed="{{ c.aria }}" style="height:36px;padding:0 14px;border:1px solid {{ c.bd }};border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s"><sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{ c.label }}</button></sc-for></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile app · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Same tokens, bigger targets. Controls sit on the right of full-width rows, the whole row is tappable, and choices with many options open in a bottom sheet. All four elements are live.</p></div>
+    <div style="display:flex;flex-wrap:wrap;gap:28px;justify-content:center;background:transparent;padding:0">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div style="position:relative;width:360px">
+          <div style="position:relative;width:100%;display:flex;flex-direction:column">
+
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <sc-for list="{{ mob.groups }}" as="g" hint-placeholder-count="2">
+                <div style="display:flex;flex-direction:column;gap:8px"><span style="padding:0 6px;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ g.label }}</span>
+                  <div style="background:#FFFFFF;border-radius:20px;padding:0 16px">
+                    <sc-for list="{{ g.items }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.toggle }}" role="switch" aria-checked="{{ t.aria }}" style="width:100%;min-height:64px;border:0;border-top:1px solid {{ t.bdr }};background:transparent;padding:10px 0;display:flex;align-items:center;gap:12px;text-align:left;color:#0C1F1A;cursor:pointer"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:500;color:{{ t.fg }}">{{ t.label }}</span><span style="font-size:13px;color:{{ t.sc }}">{{ t.sub }}</span></div><span style="width:52px;height:32px;border-radius:999px;padding:3px;display:flex;justify-content:{{ t.j }};background:{{ t.bg }};flex:none;transition:background .2s"><span style="width:26px;height:26px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 4px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;color:#0B8F6E"><sc-if value="{{ t.loading }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M21 12a9 9 0 0 0-9-9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".7s" repeatCount="indefinite"></animateTransform></path></svg></sc-if></span></span></button></sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ mob.toast }}" hint-placeholder-val="{{ false }}"><div style="margin-top:14px;border-radius:16px;background:#0C1F1A;color:#FFFFFF;padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:14px;box-shadow:0 16px 30px -12px rgba(0,0,0,.5)"><span style="width:22px;height:22px;border-radius:50%;background:#0B8F6E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="flex:1">{{ mob.toastMsg }}</span><button onClick="{{ mob.undo }}" style="border:0;background:transparent;color:#5EE0B5;font-size:14px;font-weight:600;cursor:pointer;padding:0">Undo</button></div></sc-if>
+          </div>
+        </div>
+        <span style="font-size:14px;font-weight:600">Card settings · toggles L 52×32</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div style="position:relative;width:360px">
+          <div style="position:relative;width:100%;display:flex;flex-direction:column;justify-content:flex-end;min-height:120px">
+
+            <div style="display:flex;justify-content:center"><sc-if value="{{ mob.noSheet }}" hint-placeholder-val="{{ false }}"><button onClick="{{ mob.openSheet }}" style="height:44px;padding:0 20px;border:0;border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:15px;font-weight:600;cursor:pointer">Open sheet · {{ mob.schedName }}</button></sc-if></div>
+            <sc-if value="{{ mob.sheet }}" hint-placeholder-val="{{ true }}">
+              
+              <div role="radiogroup" style="position:relative;background:#FFFFFF;border-radius:28px;padding:10px 16px 20px;display:flex;flex-direction:column;gap:4px;box-shadow:0 -20px 40px -20px rgba(0,0,0,.3)">
+                <span style="align-self:center;width:40px;height:5px;border-radius:3px;background:#D7E0DC;margin-bottom:10px"></span>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px 8px"><span style="font-size:19px;font-weight:700">Settlement schedule</span><button onClick="{{ mob.closeSheet }}" aria-label="Close" style="width:36px;height:36px;border:0;border-radius:50%;background:#F2F6F4;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div>
+                <sc-for list="{{ mob.sched }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" role="radio" aria-checked="{{ o.aria }}" style="min-height:68px;border:1.5px solid {{ o.bd }};border-radius:16px;background:{{ o.bg }};padding:10px 14px;display:flex;align-items:center;gap:12px;text-align:left;color:#0C1F1A;cursor:pointer;transition:all .15s" style-active="transform:scale(.98)"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">{{ o.label }}</span><span style="font-size:13px;color:#5E7770">{{ o.sub }}</span></div><span style="width:22px;height:22px;border-radius:50%;border:2px solid {{ o.rb }};display:flex;align-items:center;justify-content:center;flex:none"><span style="width:10px;height:10px;border-radius:50%;background:{{ o.dot }}"></span></span></button></sc-for>
+                <button onClick="{{ mob.closeSheet }}" style="margin-top:12px;height:52px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 10px 22px -12px rgba(10,117,89,.8)">Save schedule</button>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <span style="font-size:14px;font-weight:600">Bottom sheet · radio list</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div style="position:relative;width:360px">
+          <div style="position:relative;width:100%;border-radius:28px;overflow:hidden;background:#F4F7F6;display:flex;flex-direction:column;padding-top:16px">
+
+            <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:4px 16px 16px;display:flex;flex-direction:column;gap:14px">
+              <div role="tablist" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:4px;border-radius:999px;background:#E6ECE9"><sc-for list="{{ mob.seg }}" as="s" hint-placeholder-count="2"><button onClick="{{ s.pick }}" role="tab" aria-selected="{{ s.aria }}" style="height:40px;border:0;border-radius:999px;background:{{ s.bg }};color:{{ s.fg }};font-size:15px;font-weight:{{ s.fw }};cursor:pointer;box-shadow:{{ s.sh }};transition:all .15s">{{ s.label }}</button></sc-for></div>
+              <div role="radiogroup" style="display:flex;flex-direction:column;gap:10px">
+                <sc-for list="{{ mob.cards }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.pick }}" role="radio" aria-checked="{{ c.aria }}" style="border:2px solid {{ c.bd }};border-radius:20px;background:#FFFFFF;padding:12px;display:flex;align-items:center;gap:14px;text-align:left;color:#0C1F1A;cursor:pointer;box-shadow:{{ c.sh }};transition:all .2s" style-active="transform:scale(.98)"><span style="width:64px;height:42px;border-radius:8px;background:{{ c.art }};flex:none;display:flex;align-items:flex-end;justify-content:flex-end;padding:5px;color:{{ c.artFg }};font-size:8px;font-weight:700;font-style:italic;box-shadow:0 4px 10px -4px rgba(0,0,0,.3)">VISA</span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">{{ c.name }}</span><span style="font-size:13px;color:#5E7770">{{ c.sub }}</span></div><span style="width:22px;height:22px;border-radius:50%;border:2px solid {{ c.rb }};background:{{ c.rbg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;transition:all .15s"><sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span></button></sc-for>
+              </div>
+              <span style="padding:6px 4px 0;font-size:14px;font-weight:600">Spending limit</span>
+              <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px"><sc-for list="{{ mob.limits }}" as="l" hint-placeholder-count="4"><button onClick="{{ l.pick }}" role="radio" aria-checked="{{ l.aria }}" style="flex:none;height:40px;padding:0 16px;border:1px solid {{ l.bd }};border-radius:999px;background:{{ l.bg }};color:{{ l.fg }};font:500 14px 'IBM Plex Mono',monospace;cursor:pointer;transition:all .15s">{{ l.label }}</button></sc-for></div>
+            </div>
+            <div style="flex:none;padding:12px 16px 16px;background:#F4F7F6;border-top:1px solid #E6ECE9"><button style="width:100%;height:52px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 10px 22px -12px rgba(10,117,89,.8)">Continue with {{ mob.cardName }}</button></div>
+          </div>
+        </div>
+        <span style="font-size:14px;font-weight:600">Selection cards · single choice</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div style="position:relative;width:360px">
+          <div style="position:relative;width:100%;height:600px;border-radius:28px;overflow:hidden;background:#FFFFFF;display:flex;flex-direction:column">
+
+            
+            <div style="position:absolute;inset:0;background:#FFFFFF;border-radius:28px;display:flex;flex-direction:column">
+              <div style="padding:10px 20px 0;display:flex;flex-direction:column"><span style="align-self:center;width:40px;height:5px;border-radius:3px;background:#D7E0DC;margin-bottom:12px"></span><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:19px;font-weight:700">Filters</span><button onClick="{{ mob.reset }}" style="border:0;background:transparent;padding:8px 0;font-size:15px;font-weight:600;color:#0E7C62;cursor:pointer">Reset</button></div></div>
+              <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:8px 20px 12px;display:flex;flex-direction:column;gap:14px">
+                <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">STATUS</span>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:-4px"><sc-for list="{{ mob.status }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.toggle }}" aria-pressed="{{ c.aria }}" style="height:40px;padding:0 14px;border:1px solid {{ c.bd }};border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:14.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s"><sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{ c.label }}</button></sc-for></div>
+                <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-top:6px">BRANCH</span>
+                <div style="display:flex;flex-direction:column;margin-top:-6px">
+                  <sc-for list="{{ mob.branches }}" as="b" hint-placeholder-count="4"><button onClick="{{ b.toggle }}" role="checkbox" aria-checked="{{ b.aria }}" style="min-height:52px;border:0;border-top:1px solid {{ b.bdr }};background:transparent;padding:0;display:flex;align-items:center;gap:14px;text-align:left;color:#0C1F1A;cursor:pointer"><span style="width:22px;height:22px;border-radius:7px;border:2px solid {{ b.bd }};background:{{ b.bg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;transition:all .15s"><sc-if value="{{ b.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if><sc-if value="{{ b.mixed }}" hint-placeholder-val="{{ false }}"><span style="width:10px;height:2.5px;border-radius:1px;background:#FFFFFF"></span></sc-if></span><span style="flex:1;font-size:16px;font-weight:{{ b.fw }}">{{ b.label }}</span><span style="font:400 13px 'IBM Plex Mono',monospace;color:#5E7770">{{ b.n }}</span></button></sc-for>
+                </div>
+              </div>
+              <div style="flex:none;padding:12px 20px 20px;border-top:1px solid #EEF2F0"><button style="width:100%;height:52px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:16px;font-weight:600;cursor:pointer">Show {{ mob.results }} transactions</button></div>
+            </div>
+          </div>
+        </div>
+        <span style="font-size:14px;font-weight:600">Filter sheet · checkboxes + chips</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+      <sc-for list="{{ mobNotes }}" as="t" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ t.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ t.v }}</span></div></sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Which control to use</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+      <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { kids: { a: true, b: true, c: false, d: false }, terms: false, termsTried: false, apply: true, radio: 'daily', inl: 'Virtual', tg: { online: true, nfc: true, intl: false, atm: false, freeze: false }, tgLoad: null, confirm: false, biz: 1, plan: 1, tiles: { pos: true, ecom: true }, segL: 0, segS: 1, choice: 1, filters: { Settled: true, mada: true } };
+  renderVals() {
+    const s = this.state, ink = '#0C1F1A', teal = '#0B8F6E', red = '#E02424', G = 'linear-gradient(90deg,#0A7559,#2C957A)';
+    const RING = '0 0 0 2px #FFFFFF,0 0 0 4px #0B8F6E', HALO = '0 0 0 6px rgba(11,143,110,.14)';
+    const ST = ['DEFAULT', 'HOVER', 'PRESSED', 'FOCUS', 'DISABLED', 'ERROR'];
+    const base = { w: '18px', h: '18px', r: '5px', j: 'center', p: '0', sh: 'none', check: false, dash: false, dot: false, knob: false, dotC: '#FFFFFF', kn: '20px' };
+    const cell = (kind, val, i) => {
+      const on = val !== 'off', dis = i === 4, err = i === 5;
+      const o = { ...base };
+      if (kind === 'radio') o.r = '50%';
+      if (kind === 'toggle') Object.assign(o, { w: '44px', h: '26px', r: '999px', p: '0 2px', knob: true, j: on ? 'flex-end' : 'flex-start' });
+      const onBg = [teal, '#0A7559', '#086A51', teal, '#C3D0CB', red][i];
+      if (kind === 'toggle') { o.bd = dis ? (on ? '#C3D0CB' : '#E6ECE9') : on ? (err ? red : teal) : ['#D9D9D9', '#C9D1CE', '#BFC9C5', '#D9D9D9', '#E6ECE9', '#F3C4C4'][i]; o.bg = on ? (dis ? '#C3D0CB' : err ? red : i === 1 ? '#0A7559' : G) : o.bd; }
+      else if (kind === 'radio') { o.bd = dis ? '#D7E0DC' : err ? red : on ? onBg : ['#8A9C96', '#4A615A', '#4A615A', '#8A9C96', '', ''][i]; o.bg = dis ? '#F4F6F5' : err && !on ? '#FFFBFB' : '#FFFFFF'; o.dot = on; o.dotC = dis ? '#C3D0CB' : err ? red : onBg; }
+      else { o.bd = dis ? '#D7E0DC' : err ? red : on ? onBg : ['#8A9C96', '#4A615A', '#4A615A', '#8A9C96', '', ''][i]; o.bg = on ? (dis ? '#D7E0DC' : onBg) : dis ? '#F4F6F5' : err ? '#FFFBFB' : '#FFFFFF'; o.check = val === 'on'; o.dash = val === 'mixed'; }
+      if (i === 2) o.sh = HALO; if (i === 3) o.sh = RING;
+      if (kind === 'toggle' && i === 1) o.sh = '0 0 0 4px rgba(12,31,26,.05)';
+      return o;
+    };
+    const mk = (kind, vals) => vals.map(([name, sub, v], k) => ({ name, sub, bd: k ? '#EEF2F0' : 'transparent', cells: ST.map((_, i) => cell(kind, v, i)) }));
+    const matrix = [
+      { rows: mk('check', [['Checkbox · off', '18 · radius 5', 'off'], ['Checkbox · on', 'fill #0B8F6E', 'on'], ['Checkbox · mixed', 'parent, some on', 'mixed']]) },
+      { rows: mk('radio', [['Radio · off', '18 · circle', 'off'], ['Radio · on', 'dot 8', 'on']]) },
+      { rows: mk('toggle', [['Toggle · off', '44 × 26', 'off'], ['Toggle · on', 'brand gradient', 'on']]) }
+    ];
+    const stateSpecs = [['Hover', 'Web only. Border darkens to #4A615A; on-state fill to #0A7559.'], ['Pressed', 'Soft green halo, 6 px. Also the tap feedback on mobile.'], ['Focus', 'Keyboard only. 2 px green ring with a 2 px white gap.'], ['Disabled', 'Grayed out, label at 4.5:1. Explain why nearby.'], ['Error', 'Red border, plus a message under the group saying what to do.'], ['Mixed', 'Only for a parent checkbox. Tapping it turns all children on.']].map(([k, v]) => ({ k, v }));
+    const CK = on => ({ bd: on ? teal : '#8A9C96', bg: on ? teal : '#FFFFFF' });
+    const K = [['a', 'Olaya · counter 1', 'TID 40021187'], ['b', 'Olaya · counter 2', 'TID 40021188'], ['c', 'Al Malqa · drive-thru', 'TID 40021301'], ['d', 'Jeddah Corniche', 'TID 40021455']];
+    const n = K.filter(k => s.kids[k[0]]).length, all = n === K.length, some = n > 0 && !all;
+    const tree = { all, some, count: `${n} of ${K.length}`, aria: all ? 'true' : some ? 'mixed' : 'false', bd: n ? teal : '#8A9C96', bg: n ? teal : '#FFFFFF',
+      toggleAll: () => this.setState({ kids: Object.fromEntries(K.map(k => [k[0], !all])) }),
+      kids: K.map(([k, label, id]) => { const on = !!s.kids[k]; return { label, id, on, aria: on ? 'true' : 'false', ...CK(on), toggle: () => this.setState({ kids: { ...s.kids, [k]: !on } }) }; }) };
+    const tErr = s.termsTried && !s.terms;
+    const terms = { on: s.terms, aria: s.terms ? 'true' : 'false', err: tErr, bd: tErr ? red : s.terms ? teal : '#8A9C96', bg: s.terms ? teal : tErr ? '#FFFBFB' : '#FFFFFF', toggle: () => this.setState({ terms: !s.terms }), submit: () => this.setState({ termsTried: true }), btn: s.termsTried && s.terms ? 'Order placed ✓' : 'Place order' };
+    const apply = { on: s.apply, aria: s.apply ? 'true' : 'false', bd: s.apply ? teal : '#8A8A8A', bg: s.apply ? teal : '#FFFFFF', toggle: () => this.setState({ apply: !s.apply }) };
+    const radios = [['instant', 'Instant', 'Sales land in your account in seconds', '0.2%'], ['daily', 'Daily', 'Next business day at 9 am', 'Free'], ['weekly', 'Weekly', 'Every Sunday, one transfer', 'Free'], ['manual', 'On request', 'Available on the Enterprise plan', '', true]].map(([k, label, sub, fee, dis]) => { const on = s.radio === k; return { label, sub, fee, dis: !!dis, aria: on ? 'true' : 'false', fg: dis ? '#9AACA6' : ink, sc: dis ? '#9AACA6' : '#5E7770', cur: dis ? 'not-allowed' : 'pointer', pe: dis ? 'none' : 'auto', bd: dis ? '#D7E0DC' : on ? teal : '#8A9C96', rbg: dis ? '#F4F6F5' : '#FFFFFF', dot: on ? teal : 'transparent', pick: () => !dis && this.setState({ radio: k }) }; });
+    const inlineR = ['Virtual', 'Physical'].map(label => { const on = s.inl === label; return { label, aria: on ? 'true' : 'false', bd: on ? teal : '#8A9C96', dot: on ? teal : 'transparent', pick: () => this.setState({ inl: label }) }; });
+    const TG = [['online', 'Online payments', 'Websites and apps', 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20'], ['nfc', 'Contactless', 'Tap to pay up to SAR 300', 'M6 8.3a5 5 0 0 1 0 7.4M9.5 5.5a9 9 0 0 1 0 13M13 3a13 13 0 0 1 0 18'], ['intl', 'International', 'Waits for the server', 'M3 12h18M12 3l4 9-4 9-4-9z'], ['atm', 'ATM withdrawals', 'Locked by the account admin', 'M3 7h18v10H3zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', true], ['freeze', 'Freeze all cards', 'Asks to confirm first', 'M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9']];
+    const toggles = TG.map(([k, label, sub, icon, dis], i) => { const on = !!s.tg[k], load = s.tgLoad === k, danger = k === 'freeze';
+      return { label, sub: load ? 'Updating…' : sub, icon, loading: load, dis: !!dis || load, aria: on ? 'true' : 'false', bdr: i ? '#EEF2F0' : 'transparent', fg: dis ? '#9AACA6' : ink, sc: load ? teal : dis ? '#9AACA6' : '#5E7770',
+        j: on ? 'flex-end' : 'flex-start', bg: dis ? (on ? '#C3D0CB' : '#E6ECE9') : on ? (danger ? '#C81E1E' : G) : '#D9D9D9', cur: dis ? 'not-allowed' : load ? 'progress' : 'pointer',
+        toggle: () => { if (dis || load) return; if (danger && !on) return this.setState({ confirm: true }); if (k === 'intl') { this.setState({ tgLoad: k }); setTimeout(() => this.setState(st => ({ tgLoad: null, tg: { ...st.tg, intl: !st.tg.intl } })), 900); return; } this.setState({ tg: { ...s.tg, [k]: !on } }); } }; });
+    const confirm = { open: s.confirm, closed: !s.confirm, cancel: () => this.setState({ confirm: false }), ok: () => this.setState({ confirm: false, tg: { ...s.tg, freeze: true } }) };
+    const cs = (name, o) => ({ name, bw: '1px', bd: '#E1E6E3', bg: '#FFFFFF', sh: 'none', tf: 'none', ib: '#F2F6F4', rbd: '#8A9C96', dot: 'transparent', line: '#E6ECE9', ...o });
+    const cardStates = [cs('DEFAULT'), cs('HOVER', { bd: '#A9B5B0' }), cs('SELECTED', { bw: '2px', bd: teal, bg: '#F3FBF8', ib: '#E3F6EF', rbd: teal, dot: teal, line: '#CDEBDF' }), cs('FOCUS', { bw: '2px', bd: teal, bg: '#F3FBF8', ib: '#E3F6EF', rbd: teal, dot: teal, line: '#CDEBDF', sh: '0 0 0 2px #FFFFFF,0 0 0 4px #0C1F1A' }), cs('DISABLED', { bd: '#EEF2F0', bg: '#F7F9F8', ib: '#EEF2F0', rbd: '#D7E0DC', line: '#EEF2F0' }), cs('ERROR', { bd: red, bg: '#FFFBFB', rbd: red })];
+    const U = id => `https://unsplash.com/photos/${id}/download?w=600`;
+    const biz = [['Shop', 'Retail stores and boutiques', 'dQyS2pMYtok'], ['Restaurant', 'Restaurants, cafés, cloud kitchens', '4g_M9D0rn8M'], ['Supplier', 'Wholesale and B2B services', 'M7G_m5XJ-go'], ['Corporate', 'Spend, payroll and teams', 'UikYLDQj9_I']].map(([name, desc, id], i) => { const on = s.biz === i; return { name, desc, src: U(id), aria: on ? 'true' : 'false', ol: on ? ink : 'rgba(12,31,26,.08)', sh: on ? '0 20px 36px -22px rgba(12,31,26,.45)' : 'none', tf: on ? 'translateY(-3px)' : 'none', ck: on ? teal : 'rgba(12,31,26,.28)', pick: () => this.setState({ biz: i }) }; });
+    const plans = [['Monthly rental', 'Cancel anytime', 'SAR 99', 'per month', ''], ['Annual rental', 'Billed yearly, 20% less', 'SAR 79', 'per month', 'Save 20%'], ['Buy outright', '12-month warranty', 'SAR 1,450', 'one-time', '']].map(([name, desc, price, unit, tag], i) => { const on = s.plan === i; return { name, desc, price, unit, tag, tagD: tag ? 'inline-block' : 'none', aria: on ? 'true' : 'false', bw: on ? '2px' : '1px', bd: on ? teal : '#E1E6E3', hbd: on ? teal : '#A9B5B0', bg: on ? '#F3FBF8' : '#FFFFFF', rb: on ? teal : '#8A9C96', dot: on ? teal : 'transparent', pick: () => this.setState({ plan: i }) }; });
+    const TL = [['pos', 'POS terminals', 'In-store payments', 'M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8v4H8z'], ['ecom', 'eCommerce', 'Website checkout', 'M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 1.9-1.6L22 7H5.1'], ['inv', 'Invoicing', 'Payment links', 'M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1ZM8 8h8M8 12h8'], ['cards', 'Corporate cards', 'Team spend', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20'], ['pay', 'Payroll', 'WPS salaries', 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'], ['food', 'Food delivery', 'Coming in 2027', 'M3 11h18M4 11a8 6 0 0 1 16 0M3 15h18', true]];
+    const tiles = TL.map(([k, label, sub, icon, dis]) => { const on = !!s.tiles[k]; return { label, sub, icon, on, dis: !!dis, aria: on ? 'true' : 'false', bw: on ? '2px' : '1px', bd: dis ? '#EEF2F0' : on ? teal : '#E1E6E3', hbd: dis ? '#EEF2F0' : on ? teal : '#A9B5B0', bg: dis ? '#F7F9F8' : on ? '#F3FBF8' : '#FFFFFF', fg: dis ? '#9AACA6' : ink, sc: dis ? '#9AACA6' : '#5E7770', cur: dis ? 'not-allowed' : 'pointer', ib: dis ? '#EEF2F0' : on ? teal : '#F2F6F4', ic: dis ? '#9AACA6' : on ? '#FFFFFF' : ink, cbd: dis ? '#D7E0DC' : on ? teal : '#8A9C96', cbg: on ? teal : dis ? '#F4F6F5' : '#FFFFFF', toggle: () => !dis && this.setState({ tiles: { ...s.tiles, [k]: !on } }) }; });
+    const tc = Object.values(s.tiles).filter(Boolean).length;
+    const seg = (labels, key) => labels.map((label, i) => { const on = s[key] === i; return { label, aria: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? ink : '#5E7770', fw: on ? 600 : 500, sh: on ? '0 1px 3px rgba(12,31,26,.12)' : 'none', pick: () => this.setState({ [key]: i }) }; });
+    const choice = ['Today', 'This week', 'This month', 'Custom'].map((label, i) => { const on = s.choice === i; return { label, aria: on ? 'true' : 'false', bd: on ? ink : '#D7E0DC', bg: on ? ink : '#FFFFFF', fg: on ? '#FFFFFF' : ink, fw: on ? 600 : 500, pick: () => this.setState({ choice: i }) }; });
+    const filters = ['Settled', 'Pending', 'Refunded', 'mada', 'Visa'].map(label => { const on = !!s.filters[label]; return { label, on, aria: on ? 'true' : 'false', bd: on ? teal : '#D7E0DC', bg: on ? '#E3F6EF' : '#FFFFFF', fg: on ? '#0B6F56' : ink, toggle: () => this.setState({ filters: { ...s.filters, [label]: !on } }) }; });
+    const rules = [[1, 'Toggle: the change happens immediately (card controls, notifications).'], [1, 'Checkbox: the choice is saved with a button, or it confirms consent.'], [1, 'Radio or plan cards: exactly one option; preselect the safest default.'], [1, 'Selection cards: when options need a picture, price or description.'], [0, 'Don\'t use a toggle inside a form that has a Save button.'], [0, 'Don\'t mix radios and checkboxes in one group.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    const mt = s.mTg || { online: true, nfc: true, intl: false, freeze: false, push: true, email: false }, mload = s.mLoad;
+    const MG = [['CARD CONTROLS', [['freeze', 'Freeze card', 'Stops all payments right away'], ['online', 'Online payments', 'Websites and apps'], ['nfc', 'Contactless', 'Tap to pay up to SAR 300'], ['intl', 'International', 'Saves to the server first']]], ['ALERTS', [['push', 'Push notifications', 'Every payment, instantly'], ['email', 'Email summary', 'Daily at 8 pm']]]];
+    const setM = (k, v, label) => { clearTimeout(this.toastT); this.setState({ mTg: { ...mt, [k]: v }, mPrev: { k, v: !v }, mToast: `${label} ${v ? 'on' : 'off'}` }); this.toastT = setTimeout(() => this.setState({ mToast: null }), 2600); };
+    const mGroups = MG.map(([label, items]) => ({ label, items: items.map(([k, l, sub], i) => { const on = !!mt[k], load = mload === k, fr = k === 'freeze';
+      return { label: l, sub: load ? 'Updating…' : sub, loading: load, aria: on ? 'true' : 'false', bdr: i ? '#EEF2F0' : 'transparent', fg: '#0C1F1A', sc: load ? teal : '#5E7770', j: on ? 'flex-end' : 'flex-start', bg: on ? (fr ? '#C81E1E' : G) : '#D9D9D9',
+        toggle: () => { if (load) return; if (k === 'intl') { this.setState({ mLoad: k }); setTimeout(() => { this.setState({ mLoad: null }); setM(k, !on, l); }, 900); return; } setM(k, !on, l); } }; }) }));
+    const SCH = [['instant', 'Instant', 'In seconds · 0.2% per sale'], ['daily', 'Daily', 'Next business day · free'], ['weekly', 'Weekly', 'Every Sunday · free']];
+    const msch = s.mSch || 'daily', mcard = s.mCard ?? 0, mseg = s.mSeg ?? 0, mlim = s.mLim ?? 1, mst = s.mSt || { Settled: true }, mbr = s.mBr || { Olaya: true, 'Al Malqa': true };
+    const CARDS = mseg === 0 ? [['Virtual', 'Ready in seconds · online only', 'linear-gradient(135deg,#0F3D33,#2C957A)', '#FFFFFF'], ['Virtual · single use', 'New number after each payment', 'linear-gradient(135deg,#E3F6EF,#9DD3C2)', '#0C1F1A'], ['Subscriptions', 'Locked to one merchant', 'linear-gradient(135deg,#1A1A1A,#3A4A45)', '#FFFFFF']] : [['Physical · Mint', 'Delivered in 3–5 days', 'linear-gradient(135deg,#E3F6EF,#9DD3C2)', '#0C1F1A'], ['Physical · Ink', 'Metal finish', 'linear-gradient(135deg,#0C1F1A,#2E3F3A)', '#FFFFFF'], ['Physical · Emerald', 'Delivered in 3–5 days', 'linear-gradient(135deg,#0F3D33,#2C957A)', '#FFFFFF']];
+    const BRs = [['Olaya', 48], ['Al Malqa', 31], ['Jeddah Corniche', 27], ['Khobar Mall', 22]];
+    const brOn = BRs.filter(b => mbr[b[0]]), stOn = Object.values(mst).filter(Boolean).length;
+    const mob = {
+      groups: mGroups, cardState: mt.freeze ? 'Frozen' : 'Active', cardOp: mt.freeze ? .55 : 1, toast: !!s.mToast, toastMsg: s.mToast || '',
+      undo: () => { const p = s.mPrev; if (p) this.setState({ mTg: { ...mt, [p.k]: p.v }, mToast: null }); },
+      sheet: s.mSheet !== false, noSheet: s.mSheet === false, openSheet: () => this.setState({ mSheet: true }), closeSheet: () => this.setState({ mSheet: false }), schedName: SCH.find(x => x[0] === msch)[1],
+      sched: SCH.map(([k, label, sub]) => { const on = msch === k; return { label, sub, aria: on ? 'true' : 'false', bd: on ? teal : '#E1E6E3', bg: on ? '#F3FBF8' : '#FFFFFF', rb: on ? teal : '#8A9C96', dot: on ? teal : 'transparent', pick: () => this.setState({ mSch: k }) }; }),
+      seg: ['Virtual', 'Physical'].map((label, i) => { const on = mseg === i; return { label, aria: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? ink : '#5E7770', fw: on ? 600 : 500, sh: on ? '0 1px 3px rgba(12,31,26,.12)' : 'none', pick: () => this.setState({ mSeg: i, mCard: 0 }) }; }),
+      cards: CARDS.map(([name, sub, art, artFg], i) => { const on = mcard === i; return { name, sub, art, artFg, on, aria: on ? 'true' : 'false', bd: on ? teal : 'transparent', sh: on ? '0 16px 30px -18px rgba(11,143,110,.6)' : '0 1px 2px rgba(12,31,26,.05)', rb: on ? teal : '#B9C8C2', rbg: on ? teal : '#FFFFFF', pick: () => this.setState({ mCard: i }) }; }),
+      cardName: CARDS[mcard][0].split(' · ')[0],
+      limits: ['5,000', '10,000', '25,000', 'Custom'].map((label, i) => { const on = mlim === i; return { label, aria: on ? 'true' : 'false', bd: on ? ink : '#D7E0DC', bg: on ? ink : '#FFFFFF', fg: on ? '#FFFFFF' : ink, pick: () => this.setState({ mLim: i }) }; }),
+      status: ['Settled', 'Pending', 'Refunded', 'Declined'].map(label => { const on = !!mst[label]; return { label, on, aria: on ? 'true' : 'false', bd: on ? teal : '#D7E0DC', bg: on ? '#E3F6EF' : '#FFFFFF', fg: on ? '#0B6F56' : ink, toggle: () => this.setState({ mSt: { ...mst, [label]: !on } }) }; }),
+      branches: [['All branches', BRs.reduce((a, b) => a + b[1], 0), 'all'], ...BRs].map(([label, n, all], i) => { const isAll = all === 'all', on = isAll ? brOn.length === BRs.length : !!mbr[label], mixed = isAll && brOn.length > 0 && !on;
+        return { label, n, on, mixed, aria: mixed ? 'mixed' : on ? 'true' : 'false', fw: isAll ? 600 : 400, bdr: i ? '#EEF2F0' : 'transparent', bd: on || mixed ? teal : '#8A9C96', bg: on || mixed ? teal : '#FFFFFF',
+          toggle: () => this.setState({ mBr: isAll ? Object.fromEntries(BRs.map(b => [b[0], !on])) : { ...mbr, [label]: !on } }) }; }),
+      reset: () => this.setState({ mSt: {}, mBr: {} }),
+      results: Math.round((brOn.length ? brOn.reduce((a, b) => a + b[1], 0) : 128) * (stOn ? stOn / 4 + .25 : 1))
+    };
+    const mobNotes = [['Tap area', 'Rows are at least 52 px high; chips 40 px. The visible control can be smaller than the target.'], ['Toggle L', '52 × 32 with a 26 px knob, used for every mobile setting. Changes apply instantly with an Undo toast.'], ['Bottom sheets', 'For any choice with more than 3 options or a long description. Drag handle, close button, one main action.'], ['Selected card', '2 px green border, a soft green shadow and a filled check on the right.'], ['Haptics', 'Light tap when a toggle, radio or checkbox changes (iOS selection feedback / Android CLOCK_TICK).'], ['iOS and Android', 'One shared design. Only system parts differ: iOS swipe-down to close sheets, Android back button closes them.']].map(([k, v]) => ({ k, v }));
+    return { mob, mobNotes, stateNames: ST, matrix, stateSpecs, tree, terms, apply, radios, inlineR, toggles, confirm, cardStates, biz, plans, tiles, tilesCount: `${tc} selected · you can change this later`, segL: seg(['Sales', 'Refunds', 'Payouts'], 'segL'), segS: seg(['7D', '30D', '90D', '12M'], 'segS'), choice, filters, rules };
+  }
+}
+</script>
+</body>
+</html>

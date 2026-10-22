@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<div style="max-width:1240px;margin:0 auto;padding:56px 32px 96px;display:flex;flex-direction:column;gap:56px">
+  <header style="display:flex;flex-direction:column;gap:12px;max-width:760px">
+    <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+    <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Alerts, notifications, toasts and snackbars</h1>
+    <p style="margin:0;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">How Hala tells people what happened and what needs their attention, on web and in the mobile app. Every example with a "Live" tag works.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Which one to use</h2><p style="margin:0;font-size:15px;color:#4A615A">Pick by how urgent the message is and whether the user has to act.</p></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px;overflow-x:auto">
+      <div style="display:grid;grid-template-columns:150px minmax(200px,1.4fr) repeat(3,minmax(120px,1fr));gap:16px;padding:14px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770"><span>COMPONENT</span><span>USE FOR</span><span>WHERE</span><span>DURATION</span><span>PLATFORM</span></div>
+      <sc-for list="{{ guide }}" as="g" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:150px minmax(200px,1.4fr) repeat(3,minmax(120px,1fr));gap:16px;padding:14px 0;border-top:1px solid #EEF2F0;font-size:14px;align-items:baseline"><span style="font-weight:600">{{ g.k }}</span><span style="color:#4A615A;line-height:1.45">{{ g.use }}</span><span style="color:#4A615A">{{ g.where }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px">{{ g.dur }}</span><span style="color:#4A615A">{{ g.plat }}</span></div></sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Tones</h2><p style="margin:0;font-size:15px;color:#4A615A">Four status tones plus neutral. The icon carries the meaning too, so color is never the only signal.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px">
+      <sc-for list="{{ toneList }}" as="t" hint-placeholder-count="5"><div style="background:#FFFFFF;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:10px;background:{{ t.tint }};color:{{ t.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg></span><span style="font-size:16px;font-weight:600">{{ t.name }}</span></div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px"><sc-for list="{{ t.sw }}" as="w" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:4px"><span style="height:28px;border-radius:8px;background:{{ w.c }};border:1px solid rgba(12,31,26,.06)"></span><span style="font:400 9.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ w.n }}</span></div></sc-for></div></div></sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Inline alerts</h2><p style="margin:0;font-size:15px;color:#4A615A">Sit in the page next to what they describe. They stay until the problem is fixed or the user closes them.</p></div><div style="display:flex;align-items:center;gap:10px"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span><button onClick="{{ resetAlerts }}" style="height:32px;padding:0 12px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13px;font-weight:500;cursor:pointer">Show closed alerts</button></div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0 4px">
+      <sc-for list="{{ alertCols }}" as="c" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:2px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ c.k }}</span><span style="font-size:13px;color:#5E7770">{{ c.v }}</span></div></sc-for>
+    </div>
+    <sc-for list="{{ alertRows }}" as="r" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start">
+        <sc-for list="{{ r.cells }}" as="a" hint-placeholder-count="3">
+          <div style="min-height:1px">
+            <sc-if value="{{ a.show }}" hint-placeholder-val="{{ true }}">
+              <div role="{{ a.role }}" style="border-radius:14px;border:1px solid {{ a.bd }};background:{{ a.bg }};padding:14px 14px 14px 16px;display:flex;gap:12px;align-items:flex-start">
+                <svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none;color:{{ a.ic }};margin-top:1px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><span style="font-size:14.5px;font-weight:600;color:{{ a.tc }}">{{ a.title }}</span><span style="font-size:13.5px;line-height:1.45;color:{{ a.dc }}">{{ a.desc }}</span><span style="margin-top:4px;font-size:13.5px;font-weight:600;color:{{ a.lc }};text-decoration:underline;text-underline-offset:3px;cursor:pointer">{{ a.action }}</span></div>
+                <button onClick="{{ a.close }}" aria-label="Dismiss" style="width:28px;height:28px;margin:-4px -4px 0 0;border:0;border-radius:8px;background:transparent;color:{{ a.dc }};cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:{{ a.hov }}"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">COMPACT · ONE LINE, INSIDE CARDS AND FORMS</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px">
+        <sc-for list="{{ compact }}" as="a" hint-placeholder-count="4"><div style="height:40px;border-radius:10px;background:{{ a.bg }};padding:0 12px;display:flex;align-items:center;gap:10px;font-size:13.5px;color:{{ a.tc }}"><svg viewBox="0 0 24 24" style="width:17px;height:17px;flex:none;color:{{ a.ic }}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg><span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ a.text }}</span><span style="font-weight:600;color:{{ a.lc }};white-space:nowrap">{{ a.action }}</span></div></sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">PAGE BANNER · FULL WIDTH, ABOVE THE PAGE HEADER</span>
+      <div style="border-radius:14px;background:#0C1F1A;color:#FFFFFF;padding:12px 12px 12px 18px;display:flex;align-items:center;gap:12px;font-size:14px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none;color:#F5B94A" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg><span style="flex:1"><b style="font-weight:600">Scheduled maintenance</b> · Transfers pause Friday 2:00–3:00 am. POS keeps working.</span><button style="height:32px;padding:0 14px;border:0;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13px;font-weight:600;cursor:pointer">Details</button><button aria-label="Dismiss" style="width:32px;height:32px;border:0;border-radius:8px;background:transparent;color:#C9D6D1;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div>
+      <div style="border-radius:14px;background:#FFF4E0;color:#7A4508;padding:12px 12px 12px 18px;display:flex;align-items:center;gap:12px;font-size:14px;border:1px solid #F5D9A8"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none;color:#B45309" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7ZM14 2v4a2 2 0 0 0 2 2h4"></path></svg><span style="flex:1"><b style="font-weight:600">Your CR expires in 12 days.</b> Renew it on Wathq to keep transfers above SAR 50,000.</span><button style="height:32px;padding:0 14px;border:0;border-radius:999px;background:#7A4508;color:#FFFFFF;font-size:13px;font-weight:600;cursor:pointer">Renew CR</button></div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Notifications · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Tasks that need action (approvals, expiring documents, offline terminals). They stay top-right until the user closes them or acts. Maximum 3 visible; the rest go to the notification center.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:12px;align-items:start">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · STACK</span><div style="display:flex;gap:8px"><button onClick="{{ addNotif }}" style="height:32px;padding:0 12px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>New task</button><button onClick="{{ clearNotifs }}" style="height:32px;padding:0 12px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13px;font-weight:500;cursor:pointer">Close all</button></div></div>
+        <div style="border-radius:18px;background:#EEF3F1;padding:16px;min-height:430px;display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ notifs }}" as="n" hint-placeholder-count="3">
+            <div role="status" style="background:#FFFFFF;border-radius:16px;padding:14px;display:flex;gap:12px;box-shadow:0 12px 28px -16px rgba(12,31,26,.35),0 1px 2px rgba(12,31,26,.05)">
+              <sc-if value="{{ n.isAvatar }}" hint-placeholder-val="{{ false }}"><span style="width:36px;height:36px;border-radius:50%;flex:none;background:linear-gradient(135deg,#DCE5FF,#B9C9FF);color:#1E3A9E;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ n.initials }}</span></sc-if>
+              <sc-if value="{{ n.isIcon }}" hint-placeholder-val="{{ true }}"><span style="width:36px;height:36px;border-radius:10px;flex:none;background:{{ n.tint }};color:{{ n.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg></span></sc-if>
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:14.5px;font-weight:600">{{ n.title }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9C96;white-space:nowrap">{{ n.time }}</span></div>
+                <span style="font-size:13.5px;line-height:1.45;color:#4A615A">{{ n.desc }}</span>
+                <div style="display:flex;gap:8px;margin-top:8px"><button style="height:32px;padding:0 14px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:13px;font-weight:600;cursor:pointer" style-hover="background:#1D332D">{{ n.primary }}</button><button onClick="{{ n.close }}" style="height:32px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:#4A615A;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:#F2F6F4">{{ n.secondary }}</button></div>
+              </div>
+              <button onClick="{{ n.close }}" aria-label="Close" style="width:28px;height:28px;margin:-4px -4px 0 0;border:0;border-radius:8px;background:transparent;color:#8A9C96;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:#F2F6F4;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+            </div>
+          </sc-for>
+          <sc-if value="{{ moreNotifs }}" hint-placeholder-val="{{ false }}"><span style="align-self:center;font-size:13px;font-weight:600;color:#0E7C62;padding:4px 12px;border-radius:999px;background:#FFFFFF">+{{ moreCount }} more in notification center</span></sc-if>
+          <sc-if value="{{ noNotifs }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:30px">
+              <span style="position:relative;width:64px;height:64px;border-radius:20px;background:#FFFFFF;color:#0B8F6E;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -14px rgba(12,31,26,.3)"><svg viewBox="0 0 24 24" style="width:28px;height:28px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg><span style="position:absolute;right:-4px;bottom:-4px;width:24px;height:24px;border-radius:50%;background:#0B8F6E;color:#FFFFFF;border:3px solid #EEF3F1;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:11px;height:11px" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></span>
+              <span style="font-size:17px;font-weight:700;margin-top:6px">You're all caught up</span>
+              <span style="font-size:14px;line-height:1.5;color:#5E7770;max-width:260px">New approvals and tasks will show up here. Press "New task" to bring one back.</span>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px">
+        <span style="align-self:flex-start;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · NOTIFICATION CENTER</span>
+        <div style="border-radius:18px;border:1px solid #E6ECE9;box-shadow:0 24px 48px -24px rgba(12,31,26,.3);overflow:hidden">
+          <div style="padding:16px 18px 0;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:17px;font-weight:700">Notifications</span><button onClick="{{ center.markAll }}" style="border:0;background:transparent;padding:4px 0;font-size:13px;font-weight:600;color:{{ center.markC }};cursor:pointer">Mark all as read</button></div>
+            <div style="display:flex;gap:18px;border-bottom:1px solid #EEF2F0"><sc-for list="{{ center.tabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="border:0;background:transparent;padding:0 0 10px;font-size:14px;font-weight:{{ t.fw }};color:{{ t.fg }};border-bottom:2px solid {{ t.bd }};margin-bottom:-1px;cursor:pointer;display:flex;align-items:center;gap:6px">{{ t.label }}<sc-if value="{{ t.hasN }}" hint-placeholder-val="{{ false }}"><span style="min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#0B8F6E;color:#FFFFFF;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ t.n }}</span></sc-if></button></sc-for></div>
+          </div>
+          <div style="max-height:400px;overflow-y:auto;padding:6px 8px 10px">
+            <sc-for list="{{ center.groups }}" as="g" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column">
+                <span style="padding:12px 10px 6px;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6B827B">{{ g.label }}</span>
+                <sc-for list="{{ g.items }}" as="i" hint-placeholder-count="3"><button onClick="{{ i.read }}" style="border:0;border-radius:12px;background:{{ i.bg }};padding:12px 10px;display:flex;gap:12px;text-align:left;color:#0C1F1A;cursor:pointer;align-items:flex-start" style-hover="background:#F4F7F6"><span style="width:32px;height:32px;border-radius:9px;flex:none;background:{{ i.tint }};color:{{ i.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ i.icon }}"></path></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:{{ i.fw }}">{{ i.title }}</span><span style="font-size:13px;color:#5E7770;line-height:1.4">{{ i.desc }}</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#8A9C96;margin-top:2px">{{ i.time }}</span></div><span style="width:8px;height:8px;border-radius:50%;background:{{ i.dot }};margin-top:6px;flex:none"></span></button></sc-for>
+              </div>
+            </sc-for>
+            <sc-if value="{{ center.empty }}" hint-placeholder-val="{{ false }}"><div style="padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center"><span style="width:48px;height:48px;border-radius:14px;background:#E3F6EF;color:#0B8F6E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="font-size:15px;font-weight:600;margin-top:6px">No unread notifications</span><span style="font-size:13px;color:#5E7770">Switch to All to see earlier ones.</span></div></sc-if>
+          </div>
+          <div style="border-top:1px solid #EEF2F0;padding:12px 18px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:#0E7C62">View all activity</span><span style="font-size:13px;color:#5E7770">Notification settings</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Toasts · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Short confirmation after the user does something. Bottom-right, auto-close after 4 s (6 s with an action). Errors stay until closed. Pausing on hover keeps them open while being read.</p></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ toastBtns }}" as="b" hint-placeholder-count="5"><button onClick="{{ b.fire }}" style="height:34px;padding:0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F4F7F6"><span style="width:8px;height:8px;border-radius:50%;background:{{ b.c }}"></span>{{ b.label }}</button></sc-for></div></div>
+      <div style="position:relative;height:360px;border-radius:18px;background:#EEF3F1;overflow:hidden">
+        <div style="position:absolute;left:24px;top:24px;display:flex;flex-direction:column;gap:6px;max-width:300px"><span style="font-size:15px;font-weight:600;color:#4A615A">Page content</span><span style="height:10px;width:220px;border-radius:5px;background:#DDE6E2"></span><span style="height:10px;width:180px;border-radius:5px;background:#DDE6E2"></span></div>
+        <div style="position:absolute;right:20px;bottom:20px;width:380px;max-width:calc(100% - 40px);display:flex;flex-direction:column;gap:10px;align-items:stretch">
+          <sc-for list="{{ toasts }}" as="t" hint-placeholder-count="0">
+            <div role="status" onMouseEnter="{{ t.pause }}" onMouseLeave="{{ t.resume }}" style="position:relative;background:#FFFFFF;border-radius:14px;padding:14px 12px 14px 14px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 18px 36px -18px rgba(12,31,26,.45),0 1px 2px rgba(12,31,26,.06);overflow:hidden">
+              <span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ t.ib }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;margin-top:1px"><sc-if value="{{ t.loading }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:22px;height:22px;color:#0B8F6E" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="9" opacity=".2"></circle><path d="M21 12a9 9 0 0 0-9-9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"></animateTransform></path></svg></sc-if><sc-if value="{{ t.notLoading }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" style="width:13px;height:13px" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.glyph }}"></path></svg></sc-if></span>
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:14.5px;font-weight:600">{{ t.title }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ t.desc }}</span><sc-if value="{{ t.hasAction }}" hint-placeholder-val="{{ false }}"><span style="margin-top:6px;font-size:13.5px;font-weight:600;color:#0E7C62;cursor:pointer">{{ t.action }}</span></sc-if></div>
+              <button onClick="{{ t.close }}" aria-label="Close" style="width:26px;height:26px;border:0;border-radius:8px;background:transparent;color:#8A9C96;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none" style-hover="background:#F2F6F4;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+              <span style="position:absolute;left:0;bottom:0;height:3px;width:{{ t.pct }};background:{{ t.bar }}"></span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
+        <sc-for list="{{ toastStatic }}" as="t" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:8px"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ t.k }}</span><div style="background:#FFFFFF;border:1px solid #EEF2F0;border-radius:14px;padding:12px;display:flex;gap:10px;align-items:center;box-shadow:0 10px 24px -16px rgba(12,31,26,.35)"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ t.ib }};color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:13px;height:13px" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.glyph }}"></path></svg></span><span style="flex:1;font-size:14px;font-weight:500">{{ t.title }}</span><span style="font-size:13px;font-weight:600;color:#0E7C62">{{ t.action }}</span></div></div></sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile app · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Snackbars replace toasts: dark, one line, bottom of the screen above the tab bar, with an optional Undo. In-app banners slide in from the top for things that happen in the background.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:12px;align-items:start">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">SNACKBAR</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="display:flex;flex-direction:column;border-radius:16px;background:#F4F7F6;padding:6px 14px">
+          <sc-for list="{{ benes }}" as="b" hint-placeholder-count="3"><div style="min-height:60px;display:flex;align-items:center;gap:12px;border-top:1px solid {{ b.bdr }}"><span style="width:38px;height:38px;border-radius:50%;background:#FFFFFF;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ b.ini }}</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500">{{ b.name }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ b.iban }}</span></div><button onClick="{{ b.copy }}" aria-label="Copy IBAN" style="width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:#4A615A;cursor:pointer;display:flex;align-items:center;justify-content:center" style-active="background:#E6ECE9"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></button><button onClick="{{ b.del }}" aria-label="Delete" style="width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:#C81E1E;cursor:pointer;display:flex;align-items:center;justify-content:center" style-active="background:#FDECEC"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button></div></sc-for>
+          <sc-if value="{{ noBenes }}" hint-placeholder-val="{{ false }}"><span style="padding:20px 0;text-align:center;font-size:14px;color:#5E7770">No beneficiaries. Undo to bring them back.</span></sc-if>
+        </div>
+        <div style="min-height:52px">
+          <sc-if value="{{ snack.show }}" hint-placeholder-val="{{ false }}"><div role="status" style="position:relative;border-radius:14px;background:#0C1F1A;color:#FFFFFF;padding:0 8px 0 16px;min-height:52px;display:flex;align-items:center;gap:10px;font-size:14.5px;box-shadow:0 16px 30px -14px rgba(0,0,0,.5);overflow:hidden"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none;color:#5EE0B5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="{{ snack.icon }}"></path></svg><span style="flex:1">{{ snack.msg }}</span><sc-if value="{{ snack.hasUndo }}" hint-placeholder-val="{{ false }}"><button onClick="{{ snack.undo }}" style="height:40px;padding:0 12px;border:0;border-radius:10px;background:transparent;color:#5EE0B5;font-size:14.5px;font-weight:600;cursor:pointer">Undo</button></sc-if><span style="position:absolute;left:0;bottom:0;height:2px;width:{{ snack.pct }};background:#5EE0B5;opacity:.7"></span></div></sc-if>
+          <sc-if value="{{ snack.hide }}" hint-placeholder-val="{{ true }}"><span style="display:flex;align-items:center;justify-content:center;min-height:52px;border:1.5px dashed #D7E0DC;border-radius:14px;font-size:13px;color:#8A9C96">Copy or delete a beneficiary</span></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid #EEF2F0;padding-top:14px">
+          <span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">VARIANTS</span>
+          <div style="border-radius:14px;background:#0C1F1A;color:#FFFFFF;padding:0 16px;min-height:48px;display:flex;align-items:center;font-size:14.5px">Card details copied</div>
+          <div style="border-radius:14px;background:#0C1F1A;color:#FFFFFF;padding:0 8px 0 16px;min-height:48px;display:flex;align-items:center;gap:10px;font-size:14.5px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;color:#FF8A8A" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg><span style="flex:1">No connection. Changes not saved.</span><span style="padding:0 12px;color:#5EE0B5;font-weight:600">Retry</span></div>
+          <div style="border-radius:14px;background:#0C1F1A;color:#FFFFFF;padding:12px 16px;display:flex;flex-direction:column;gap:8px;font-size:14.5px"><span style="line-height:1.45">Transfer of SAR 25,000 scheduled for Sunday 18 Oct, 9:00 am.</span><span style="align-self:flex-end;color:#5EE0B5;font-weight:600">View</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">IN-APP BANNER · TOP</span><button onClick="{{ banner.fire }}" style="height:30px;padding:0 12px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:12.5px;font-weight:500;cursor:pointer">Simulate payment</button></div>
+          <div style="border-radius:20px;background:rgba(255,255,255,.92);border:1px solid #E6ECE9;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 18px 36px -18px rgba(12,31,26,.4)"><span style="width:38px;height:38px;border-radius:11px;flex:none;background:linear-gradient(135deg,#0FA37F,#0A5C4A);color:#FFFFFF;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center">H</span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:14.5px;font-weight:600">{{ banner.title }}</span><span style="font-size:12px;color:#8A9C96">{{ banner.time }}</span></div><span style="font-size:13.5px;line-height:1.4;color:#4A615A">{{ banner.desc }}</span></div></div>
+          <span style="font-size:13px;line-height:1.5;color:#5E7770">Auto-hides after 4 s; swipe up to dismiss, tap to open. The same design is used for push notifications on the lock screen.</span>
+        </div>
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">INLINE ALERT · MOBILE</span>
+          <div style="border-radius:16px;background:#FFF4E0;padding:14px;display:flex;gap:12px;align-items:flex-start"><svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none;color:#B45309" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg><div style="flex:1;display:flex;flex-direction:column;gap:8px"><span style="font-size:14.5px;line-height:1.45;color:#7A4508"><b style="font-weight:600">2 transfers need approval</b> before 3 pm to arrive today.</span><span style="align-self:flex-start;height:36px;padding:0 14px;border-radius:999px;background:#7A4508;color:#FFFFFF;font-size:13.5px;font-weight:600;display:flex;align-items:center">Review now</span></div></div>
+          <div style="border-radius:16px;background:#E3F6EF;padding:14px;display:flex;gap:12px;align-items:center"><svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none;color:#0B6F56" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM16 9l-5.5 6L8 12.5"></path></svg><span style="flex:1;font-size:14.5px;color:#0B4F3E">Your account is fully verified.</span></div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">INBOX · SWIPE TO ACT</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <sc-for list="{{ inbox }}" as="i" hint-placeholder-count="4">
+            <div style="position:relative;border-radius:16px;overflow:hidden;background:#0B8F6E">
+              <div style="position:absolute;inset:0;display:flex;justify-content:flex-end;align-items:center;padding-right:18px;color:#FFFFFF;font-size:13px;font-weight:600;gap:6px"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Done</div>
+              <button onClick="{{ i.tap }}" style="position:relative;width:100%;border:0;background:{{ i.bg }};padding:14px;display:flex;gap:12px;align-items:flex-start;text-align:left;color:#0C1F1A;cursor:pointer;transform:translateX({{ i.x }});transition:transform .25s cubic-bezier(.2,.9,.2,1)"><span style="width:36px;height:36px;border-radius:10px;flex:none;background:{{ i.tint }};color:{{ i.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ i.icon }}"></path></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:15px;font-weight:{{ i.fw }}">{{ i.title }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9C96">{{ i.time }}</span></div><span style="font-size:13.5px;line-height:1.4;color:#5E7770">{{ i.desc }}</span></div><span style="width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px;background:{{ i.dot }}"></span></button>
+            </div>
+          </sc-for>
+          <sc-if value="{{ inboxEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:36px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;border-radius:16px;background:#F4F7F6"><span style="width:56px;height:56px;border-radius:18px;background:#FFFFFF;color:#0B8F6E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:26px;height:26px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"></path></svg></span><span style="font-size:16px;font-weight:700;margin-top:4px">Inbox zero</span><span style="font-size:13.5px;color:#5E7770">Nothing needs your attention.</span><button onClick="{{ resetInbox }}" style="margin-top:6px;height:36px;padding:0 14px;border:0;border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:13.5px;font-weight:600;cursor:pointer">Restore demo</button></div></sc-if>
+        </div>
+        <span style="font-size:13px;line-height:1.5;color:#5E7770">Tap a row to swipe it: first tap reveals "Done", second tap clears it. Long-press opens more actions.</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+      <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { hidden: {}, notifs: [0, 1, 2], nNext: 3, read: { 2: true, 4: true, 5: true }, tab: 0, toasts: [], tNext: 1, now: Date.now(), snack: null, benes: [0, 1, 2], banner: 0, inbox: [0, 1, 2, 3], swiped: null };
+  componentDidMount() {
+    this.iv = setInterval(() => {
+      const now = Date.now(), s = this.state;
+      const live = s.toasts.filter(t => t.dur === 0 || t.paused || now - t.at < t.dur);
+      const snackOk = s.snack && now - s.snack.at < 4000;
+      if (live.length !== s.toasts.length || s.toasts.length || (s.snack && !snackOk) || s.snack) this.setState({ now, toasts: live, snack: snackOk ? s.snack : null });
+    }, 100);
+  }
+  componentWillUnmount() { clearInterval(this.iv); }
+  T() {
+    const C = 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z';
+    return {
+      success: { name: 'Success', solid: '#0B8F6E', strong: '#0B7A5F', tint: '#E3F6EF', fg: '#0B6F56', text: '#0B4F3E', bd: '#BFE6D6', icon: C + 'M16 9l-5.5 6L8 12.5', glyph: 'M20 6 9 17l-5-5' },
+      info: { name: 'Info', solid: '#2F5BD3', strong: '#2F5BD3', tint: '#E8F0FF', fg: '#2F5BD3', text: '#1E3A8A', bd: '#C9D7FB', icon: C + 'M12 16v-4M12 8h.01', glyph: 'M12 16v-5M12 7.5h.01' },
+      warning: { name: 'Warning', solid: '#D97706', strong: '#B45309', tint: '#FFF4E0', fg: '#B45309', text: '#7A4508', bd: '#F5D9A8', icon: 'M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z', glyph: 'M12 7v6M12 17h.01' },
+      error: { name: 'Error', solid: '#E02424', strong: '#C81E1E', tint: '#FDECEC', fg: '#C81E1E', text: '#8A1414', bd: '#F5C2C2', icon: C + 'M12 8v4M12 16h.01', glyph: 'M12 7v6M12 17h.01' },
+      neutral: { name: 'Neutral', solid: '#0C1F1A', strong: '#0C1F1A', tint: '#F2F6F4', fg: '#0C1F1A', text: '#0C1F1A', bd: '#E1E6E3', icon: C + 'M12 16v-4M12 8h.01', glyph: 'M12 16v-5M12 7.5h.01' }
+    };
+  }
+  renderVals() {
+    const s = this.state, T = this.T();
+    const guide = [['Inline alert', 'Something about this page or form: a problem, a limit, a requirement.', 'In the page, near the cause', 'Until fixed', 'Web + mobile'], ['Page banner', 'Account-wide or system-wide: maintenance, expiring CR.', 'Top of the page', 'Until fixed', 'Web + mobile'], ['Notification', 'A task that needs action: approvals, documents, offline POS.', 'Top-right stack + center', 'Until closed', 'Web'], ['Toast', 'Confirmation of what the user just did.', 'Bottom-right', '4 s · 6 s with action', 'Web'], ['Snackbar', 'Confirmation on mobile, often with Undo.', 'Bottom, above tab bar', '4 s', 'Mobile'], ['In-app banner', 'Something that happened in the background: payment received.', 'Top of the screen', '4 s, swipe up', 'Mobile']].map(([k, use, where, dur, plat]) => ({ k, use, where, dur, plat }));
+    const toneList = ['success', 'info', 'warning', 'error', 'neutral'].map(k => { const t = T[k]; return { name: t.name, tint: t.tint, fg: t.fg, icon: t.icon, sw: [['solid', t.solid], ['tint', t.tint], ['border', t.bd], ['text', t.text]].map(([n, c]) => ({ n: `${n}\n${c}`, c })) }; });
+    const AC = { success: ['Payroll sent', '42 salaries are on their way. Most banks credit them within 2 hours.', 'View report'], info: ['New: instant settlement', 'Get POS sales in your account in seconds for 0.2% per sale.', 'Turn on'], warning: ['Daily limit almost reached', 'SAR 46,000 of SAR 50,000 used today. Limits reset at midnight.', 'Request higher limit'], error: ['Transfer failed', 'The beneficiary bank rejected the IBAN. No money left your account.', 'Edit transfer'] };
+    const styles = ['subtle', 'outline', 'filled'];
+    const alertCols = [['SUBTLE', 'Default. Inside pages and forms.'], ['OUTLINE', 'On tinted or busy backgrounds.'], ['FILLED', 'Highest urgency. One per page.']].map(([k, v]) => ({ k, v }));
+    const alertRows = Object.keys(AC).map(tk => { const t = T[tk]; return { cells: styles.map(st => { const id = tk + st, f = st === 'filled';
+      return { show: !s.hidden[id], role: tk === 'error' ? 'alert' : 'status', title: AC[tk][0], desc: AC[tk][1], action: AC[tk][2], icon: t.icon,
+        bg: f ? t.strong : st === 'outline' ? '#FFFFFF' : t.tint, bd: f ? t.strong : st === 'outline' ? t.bd : 'transparent', ic: f ? '#FFFFFF' : t.fg, tc: f ? '#FFFFFF' : t.text, dc: f ? 'rgba(255,255,255,.88)' : st === 'outline' ? '#4A615A' : t.text, lc: f ? '#FFFFFF' : t.fg, hov: f ? 'rgba(255,255,255,.16)' : 'rgba(12,31,26,.06)',
+        close: () => this.setState({ hidden: { ...s.hidden, [id]: true } }) }; }) }; });
+    const compact = [['success', 'CR verified with Wathq', ''], ['info', 'Settlement arrives tomorrow, 9 am', 'Change'], ['warning', 'VAT certificate expires in 5 days', 'Upload'], ['error', 'IBAN must be 24 characters', '']].map(([k, text, action]) => { const t = T[k]; return { text, action, icon: t.icon, bg: t.tint, tc: t.text, ic: t.fg, lc: t.fg }; });
+    const NT = [
+      { tone: 'warning', title: 'Approve 3 transfers', desc: 'SAR 48,200 waiting for your approval since 9:12 am.', primary: 'Review', secondary: 'Later', time: 'now' },
+      { tone: 'info', title: 'VAT certificate expiring', desc: 'Upload the new certificate within 5 days to keep your limits.', primary: 'Upload', secondary: 'Dismiss', time: '12m' },
+      { avatar: 'OB', title: 'Omar Bakr requested a card', desc: 'Virtual card, SAR 5,000 monthly limit, Marketing.', primary: 'Approve', secondary: 'Decline', time: '1h' },
+      { tone: 'error', title: 'POS terminal offline', desc: 'Olaya · counter 2 has not connected for 2 hours.', primary: 'Troubleshoot', secondary: 'Dismiss', time: '2h' },
+      { tone: 'success', title: 'Payroll ready to send', desc: 'October salaries for 42 employees are checked and ready.', primary: 'Send payroll', secondary: 'Later', time: '3h' }
+    ];
+    const vis = s.notifs.slice(0, 3);
+    const notifs = vis.map(id => { const n = NT[id % NT.length], t = T[n.tone || 'neutral']; return { ...n, isAvatar: !!n.avatar, isIcon: !n.avatar, initials: n.avatar || '', tint: t.tint, fg: t.fg, icon: t.icon, close: () => this.setState({ notifs: s.notifs.filter(x => x !== id) }) }; });
+    const CI = [
+      ['Today', 0, 'warning', 'Approve 3 transfers', 'SAR 48,200 waiting since 9:12 am', '10:24'], ['Today', 1, 'success', 'Payment received', 'SAR 1,250 from POS Olaya · counter 1', '10:02'], ['Today', 2, 'info', 'Statement ready', 'September statement for SA57 •• 1951', '08:00'],
+      ['Earlier', 3, 'error', 'Card payment declined', 'Amazon SA · insufficient card limit', 'Yesterday'], ['Earlier', 4, 'success', 'Payroll sent', 'September salaries · 41 employees', 'Mon'], ['Earlier', 5, 'neutral', 'New sign-in', 'Chrome on macOS · Riyadh', 'Sun']
+    ];
+    const unread = CI.filter(c => !s.read[c[1]]).length;
+    const shown = CI.filter(c => s.tab === 0 || !s.read[c[1]]);
+    const center = { markC: unread ? '#0E7C62' : '#9AACA6', markAll: () => this.setState({ read: Object.fromEntries(CI.map(c => [c[1], true])) }), empty: shown.length === 0,
+      tabs: [['All', 0], ['Unread', unread]].map(([label, n], i) => { const on = s.tab === i; return { label, n, hasN: i === 1 && n > 0, fw: on ? 600 : 500, fg: on ? '#0C1F1A' : '#5E7770', bd: on ? '#0C1F1A' : 'transparent', pick: () => this.setState({ tab: i }) }; }),
+      groups: ['Today', 'Earlier'].map(label => ({ label: label.toUpperCase(), items: shown.filter(c => c[0] === label).map(([, id, tone, title, desc, time]) => { const t = T[tone], r = !!s.read[id]; return { title, desc, time, tint: t.tint, fg: t.fg, icon: t.icon, fw: r ? 500 : 600, bg: r ? 'transparent' : '#F6FBF9', dot: r ? 'transparent' : '#0B8F6E', read: () => this.setState({ read: { ...s.read, [id]: true } }) }; }) })).filter(g => g.items.length) };
+    const fire = (tone, title, desc, action, opts = {}) => { const id = s.tNext; const dur = opts.dur ?? (tone === 'error' ? 0 : action ? 6000 : 4000); this.setState(st => ({ tNext: st.tNext + 1, toasts: [...st.toasts, { id, tone, title, desc, action, at: Date.now(), dur, loading: !!opts.loading }].slice(-3) })); return id; };
+    const toastBtns = [
+      ['Success', '#0B8F6E', () => fire('success', 'Beneficiary added', 'Khalid Al-Harbi · Al Rajhi Bank')],
+      ['With action', '#0B8F6E', () => fire('success', 'Invoice sent', 'INV-2041 to Nour Trading', 'Copy link')],
+      ['Info', '#2F5BD3', () => fire('info', 'Export started', 'We\'ll email the CSV when it\'s ready.')],
+      ['Error', '#E02424', () => fire('error', 'Couldn\'t freeze card', 'Check your connection and try again.', 'Retry')],
+      ['Loading → success', '#8A9C96', () => { const id = fire('neutral', 'Sending SAR 25,000…', 'To Nour Trading · SNB', '', { loading: true, dur: 0 }); setTimeout(() => this.setState(st => ({ toasts: st.toasts.map(t => t.id === id ? { ...t, tone: 'success', title: 'SAR 25,000 sent', desc: 'Arrives within minutes.', loading: false, at: Date.now(), dur: 4000 } : t) })), 1600); }]
+    ].map(([label, c, f]) => ({ label, c, fire: f }));
+    const toasts = s.toasts.map(t => { const tn = T[t.tone], left = t.dur ? Math.max(0, 1 - (s.now - t.at) / t.dur) : 1;
+      return { title: t.title, desc: t.desc, action: t.action || '', hasAction: !!t.action, loading: t.loading, notLoading: !t.loading, glyph: tn.glyph, ib: t.loading ? 'transparent' : tn.solid, bar: t.dur && !t.paused ? tn.solid : 'transparent', pct: `${left * 100}%`,
+        close: () => this.setState(st => ({ toasts: st.toasts.filter(x => x.id !== t.id) })),
+        pause: () => this.setState(st => ({ toasts: st.toasts.map(x => x.id === t.id ? { ...x, paused: true, rem: x.dur - (Date.now() - x.at) } : x) })),
+        resume: () => this.setState(st => ({ toasts: st.toasts.map(x => x.id === t.id && x.paused ? { ...x, paused: false, at: Date.now() - (x.dur - (x.rem ?? x.dur)) } : x) })) }; });
+    const toastStatic = [['DEFAULT', 'success', 'Changes saved', ''], ['WITH ACTION', 'success', 'Card frozen', 'Undo'], ['INFO', 'info', 'Statement is generating', ''], ['ERROR · STAYS', 'error', 'Upload failed', 'Retry']].map(([k, tone, title, action]) => ({ k, title, action, ib: T[tone].solid, glyph: T[tone].glyph }));
+    const BN = [['KA', 'Khalid Al-Harbi', 'SA44 •• 7519'], ['NT', 'Nour Trading', 'SA03 •• 6080'], ['FM', 'Faisal Motors', 'SA12 •• 2433']];
+    const showSnack = (msg, icon, undo) => this.setState({ snack: { msg, icon, undo, at: Date.now() } });
+    const benes = s.benes.map((id, i) => { const [ini, name, iban] = BN[id]; return { ini, name, iban, bdr: i ? '#E6ECE9' : 'transparent', copy: () => showSnack('IBAN copied', 'M20 6 9 17l-5-5'), del: () => { const prev = s.benes; this.setState({ benes: s.benes.filter(x => x !== id) }); showSnack(`${name} deleted`, 'M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6', prev); } }; });
+    const snack = { show: !!s.snack, hide: !s.snack, msg: s.snack?.msg || '', icon: s.snack?.icon || '', hasUndo: !!s.snack?.undo, pct: s.snack ? `${Math.max(0, 1 - (s.now - s.snack.at) / 4000) * 100}%` : '0%', undo: () => this.setState({ benes: s.snack.undo, snack: null }) };
+    const BA = [['Payment received', 'SAR 1,250.00 from POS Olaya · counter 1', 'now'], ['Settlement arrived', 'SAR 18,430.50 credited to SA57 •• 1951', 'now'], ['Card used abroad', 'USD 84.00 at Uber, Dubai. Not you? Freeze the card.', 'now']];
+    const banner = { title: BA[s.banner][0], desc: BA[s.banner][1], time: BA[s.banner][2], fire: () => this.setState({ banner: (s.banner + 1) % BA.length }) };
+    const IB = [['warning', 'Approve 2 transfers', 'Before 3 pm to arrive today', '10:24', false], ['success', 'Payment received', 'SAR 1,250 from POS Olaya', '10:02', false], ['info', 'New statement', 'September · SA57 •• 1951', '08:00', true], ['error', 'Card payment declined', 'Amazon SA · card limit reached', 'Mon', true]];
+    const inbox = s.inbox.map(id => { const [tone, title, desc, time, r] = IB[id], t = T[tone], sw = s.swiped === id; return { title, desc, time, tint: t.tint, fg: t.fg, icon: t.icon, fw: r ? 500 : 600, dot: r ? 'transparent' : '#0B8F6E', bg: r ? '#FFFFFF' : '#F6FBF9', x: sw ? '-96px' : '0px',
+      tap: () => sw ? this.setState({ inbox: s.inbox.filter(x => x !== id), swiped: null }) : this.setState({ swiped: id }) }; });
+    const rules = [[1, 'Say what happened and what to do next. "Transfer failed. Edit the IBAN and try again."'], [1, 'Errors never disappear on their own; the user closes them or fixes the cause.'], [1, 'Show at most 3 notifications or toasts at once. Older ones move to the notification center.'], [1, 'Use role="alert" for errors and role="status" for everything else, so screen readers announce them.'], [0, 'Don\'t use a toast for something the user must act on; use a notification or inline alert.'], [0, 'Don\'t stack a snackbar on top of a bottom sheet or keyboard; wait until it closes.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return {
+      guide, toneList, alertCols, alertRows, compact, resetAlerts: () => this.setState({ hidden: {} }),
+      notifs, moreNotifs: s.notifs.length > 3, moreCount: s.notifs.length - 3, noNotifs: s.notifs.length === 0,
+      addNotif: () => this.setState({ notifs: [s.nNext, ...s.notifs], nNext: s.nNext + 1 }), clearNotifs: () => this.setState({ notifs: [] }),
+      center, toastBtns, toasts, toastStatic, benes, noBenes: s.benes.length === 0, snack, banner, inbox, inboxEmpty: s.inbox.length === 0, resetInbox: () => this.setState({ inbox: [0, 1, 2, 3] }), rules
+    };
+  }
+}
+</script>
+</body>
+</html>

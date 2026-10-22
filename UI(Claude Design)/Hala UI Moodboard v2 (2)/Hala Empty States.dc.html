@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · PATTERNS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Empty and error states</h1>
+  <p style="margin:0;max-width:720px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">What every chart, table, list and screen shows when there is nothing to show yet, nothing matches, something failed, or the user can't see it. Every example with a "Live" tag works.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Anatomy</h2><p style="margin:0;font-size:15px;color:#4A615A">Icon, title, one sentence, one action. Centered in the space the content would take, so the layout doesn't jump when data arrives.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:32px 28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center">
+    <div style="border:1.5px dashed #CFDAD6;border-radius:18px;padding:40px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+      <span style="position:relative;width:64px;height:64px;border-radius:20px;background:#E3F6EF;color:#0B8F6E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:28px;height:28px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"></path></svg><span style="position:absolute;left:-26px;top:20px;font:500 11px 'IBM Plex Mono',monospace;color:#0B8F6E">①</span></span>
+      <span style="position:relative;font-size:18px;font-weight:700;margin-top:6px">No transactions yet<span style="position:absolute;left:-26px;top:2px;font:500 11px 'IBM Plex Mono',monospace;color:#0B8F6E">②</span></span>
+      <span style="position:relative;font-size:14px;line-height:1.5;color:#5E7770;max-width:300px">Payments you send and receive will appear here.<span style="position:absolute;left:-26px;top:0;font:500 11px 'IBM Plex Mono',monospace;color:#0B8F6E">③</span></span>
+      <span style="position:relative;margin-top:8px;height:44px;padding:0 22px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:15px;font-weight:600;display:flex;align-items:center;white-space:nowrap">Add money<span style="position:absolute;left:-26px;top:13px;font:500 11px 'IBM Plex Mono',monospace;color:#0B8F6E">④</span></span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <sc-for list="{{ anatomy }}" as="a" hint-placeholder-count="4"><div style="display:flex;gap:12px"><span style="font:500 13px 'IBM Plex Mono',monospace;color:#0B8F6E">{{ a.n }}</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">{{ a.k }}</span><span style="font-size:13.5px;line-height:1.5;color:#5E7770">{{ a.v }}</span></div></div></sc-for>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+    <sc-for list="{{ types }}" as="t" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px"><span style="width:40px;height:40px;border-radius:12px;background:{{ t.bg }};color:{{ t.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg></span><span style="font-size:15px;font-weight:600">{{ t.k }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ t.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Charts</h2><p style="margin:0;font-size:15px;color:#4A615A">Keep the axes and the card size. Show a flat dashed line instead of hiding the chart, so people see where data will appear.</p></div>
+    <div style="display:flex;align-items:center;gap:10px"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span><div style="display:flex;gap:2px;padding:3px;border-radius:999px;background:#E1E8E5"><sc-for list="{{ chartTabs }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" style="height:30px;padding:0 14px;border:0;border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:13px;font-weight:{{ c.fw }};cursor:pointer;box-shadow:{{ c.sh }}">{{ c.label }}</button></sc-for></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:12px">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;color:#5E7770">POS sales · last 30 days</span><span style="font:600 28px 'IBM Plex Mono',monospace;letter-spacing:-.02em;color:{{ ch.kc }}">{{ ch.kpi }}</span></div><span style="height:24px;padding:0 8px;border-radius:999px;background:{{ ch.tbg }};color:{{ ch.tfg }};font:500 12px 'IBM Plex Mono',monospace;display:inline-flex;align-items:center;white-space:nowrap">{{ ch.trend }}</span></div>
+      <div style="position:relative;height:220px">
+        <svg viewBox="0 0 600 220" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+          <path d="M0 40H600M0 90H600M0 140H600M0 190H600" stroke="#EEF2F0" stroke-width="1"></path>
+          <sc-if value="{{ ch.isData }}" hint-placeholder-val="{{ true }}"><path d="M0 170 C40 160 60 150 100 152 S160 120 200 118 S260 135 300 110 S370 70 400 78 S470 60 500 52 S570 40 600 30 L600 190 L0 190Z" fill="rgba(11,143,110,.1)"></path><path d="M0 170 C40 160 60 150 100 152 S160 120 200 118 S260 135 300 110 S370 70 400 78 S470 60 500 52 S570 40 600 30" fill="none" stroke="#0B8F6E" stroke-width="2.5"></path></sc-if>
+          <sc-if value="{{ ch.isEmpty }}" hint-placeholder-val="{{ false }}"><path d="M0 190H600" stroke="#B9C8C2" stroke-width="2" stroke-dasharray="6 6"></path></sc-if>
+          <sc-if value="{{ ch.isLoading }}" hint-placeholder-val="{{ false }}"><path d="M0 160 C80 150 120 140 200 130 S340 110 400 100 S520 80 600 70" fill="none" stroke="#E6ECE9" stroke-width="10" stroke-linecap="round"><animate attributeName="opacity" values="1;.45;1" dur="1.4s" repeatCount="indefinite"></animate></path></sc-if>
+        </svg>
+        <sc-if value="{{ ch.isEmpty }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding-bottom:30px"><span style="width:44px;height:44px;border-radius:14px;background:#F2F6F4;color:#4A615A;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"></path></svg></span><span style="font-size:15px;font-weight:600;margin-top:4px">No sales in this period</span><span style="font-size:13.5px;color:#5E7770">Sales from your terminals will show up here.</span></div></sc-if>
+        <sc-if value="{{ ch.isError }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center"><span style="width:44px;height:44px;border-radius:14px;background:#FDECEC;color:#C81E1E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg></span><span style="font-size:15px;font-weight:600;margin-top:4px">Couldn't load sales</span><span style="font-size:13.5px;color:#5E7770">Your data is safe. Try again in a moment.</span><button onClick="{{ ch.retry }}" style="margin-top:6px;height:36px;padding:0 16px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"></path></svg>Retry</button></div></sc-if>
+      </div>
+      <div style="display:flex;justify-content:space-between;font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9C96"><span>15 Sep</span><span>22 Sep</span><span>29 Sep</span><span>6 Oct</span><span>14 Oct</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px;flex:1">
+        <span style="font-size:14px;color:#5E7770">Sales by branch</span>
+        <div style="flex:1;display:flex;align-items:flex-end;gap:14px;height:120px;position:relative">
+          <sc-for list="{{ ch.bars }}" as="b" hint-placeholder-count="5"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><span style="width:100%;height:{{ b.h }};border-radius:8px 8px 4px 4px;background:{{ b.c }};border:{{ b.bd }};transition:height .4s"></span><span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#8A9C96">{{ b.l }}</span></div></sc-for>
+          <sc-if value="{{ ch.barMsg }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:0;right:0;top:20%;text-align:center;font-size:13.5px;font-weight:500;color:{{ ch.barMsgC }}">{{ ch.barText }}</span></sc-if>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;align-items:center;gap:18px">
+        <svg viewBox="0 0 42 42" style="width:84px;height:84px;flex:none;transform:rotate(-90deg)"><circle cx="21" cy="21" r="15.9" fill="none" stroke="{{ ch.ringBg }}" stroke-width="6" stroke-dasharray="{{ ch.ringDash }}"></circle><sc-if value="{{ ch.isData }}" hint-placeholder-val="{{ true }}"><circle cx="21" cy="21" r="15.9" fill="none" stroke="#0B8F6E" stroke-width="6" stroke-dasharray="58 42"></circle><circle cx="21" cy="21" r="15.9" fill="none" stroke="#7FD1B5" stroke-width="6" stroke-dasharray="27 73" stroke-dashoffset="-58"></circle></sc-if></svg>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;color:#5E7770">Payment methods</span><span style="font-size:15px;font-weight:600">{{ ch.donut }}</span><span style="font-size:13px;color:#5E7770">{{ ch.donutSub }}</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+    <div style="display:grid;grid-template-columns:120px repeat(4,minmax(0,1fr));gap:12px;padding:0 4px"><span></span><sc-for list="{{ csCols }}" as="c" hint-placeholder-count="4"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ c }}</span></sc-for></div>
+    <sc-for list="{{ csRows }}" as="r" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:120px repeat(4,minmax(0,1fr));gap:12px;align-items:stretch">
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:2px;padding-left:4px"><span style="font-size:15px;font-weight:600">{{ r.name }}</span><span style="font-size:12.5px;color:#5E7770">{{ r.sub }}</span></div>
+        <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4">
+          <div style="background:#FFFFFF;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-size:12.5px;color:#5E7770">{{ r.title }}</span>
+            <sc-if value="{{ c.isKpi }}" hint-placeholder-val="{{ false }}"><div style="height:84px;display:flex;flex-direction:column;justify-content:center;gap:6px"><span style="font:600 24px 'IBM Plex Mono',monospace;letter-spacing:-.02em;color:{{ c.kc }}">{{ c.kpi }}</span><span style="height:{{ c.skH }};width:60%;border-radius:6px;background:#EEF2F0"></span></div></sc-if>
+            <sc-if value="{{ c.isSvg }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 240 84" style="width:100%;height:84px;display:block"><path d="{{ c.grid }}" stroke="#EEF2F0" stroke-width="1" fill="none"></path><path d="{{ c.d }}" fill="{{ c.fill }}" stroke="{{ c.stroke }}" stroke-width="{{ c.sw }}" stroke-dasharray="{{ c.dash }}" stroke-linecap="round"></path><sc-if value="{{ c.isDonut }}" hint-placeholder-val="{{ false }}"><circle cx="120" cy="42" r="30" fill="none" stroke="{{ c.ring }}" stroke-width="12" stroke-dasharray="{{ c.rdash }}"></circle></sc-if></svg></sc-if>
+            <div style="display:flex;gap:10px;align-items:flex-start;border-top:1px solid #F2F5F4;padding-top:10px">
+              <span style="width:28px;height:28px;border-radius:9px;flex:none;background:{{ c.bg }};color:{{ c.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ c.icon }}"></path></svg></span>
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:13.5px;font-weight:600">{{ c.title }}</span><span style="font-size:12.5px;line-height:1.4;color:#5E7770">{{ c.desc }}</span><sc-if value="{{ c.hasLink }}" hint-placeholder-val="{{ false }}"><span style="margin-top:3px;font-size:12.5px;font-weight:600;color:{{ c.lc }}">{{ c.link }}</span></sc-if></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+    <sc-for list="{{ chartRules }}" as="t" hint-placeholder-count="4"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ t.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ t.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Tables and lists</h2><p style="margin:0;font-size:15px;color:#4A615A">Keep the header row and filters visible so people can change what they're looking at.</p></div>
+    <div style="display:flex;align-items:center;gap:10px"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span><div style="display:flex;gap:2px;padding:3px;border-radius:999px;background:#E1E8E5"><sc-for list="{{ tableTabs }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.pick }}" style="height:30px;padding:0 12px;border:0;border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:13px;font-weight:{{ c.fw }};cursor:pointer;box-shadow:{{ c.sh }};white-space:nowrap">{{ c.label }}</button></sc-for></div></div>
+  </div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:20px 24px;display:flex;flex-direction:column;gap:12px">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div style="height:40px;flex:1;min-width:220px;max-width:340px;border:1px solid #D7E0DC;border-radius:999px;padding:0 14px;display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" style="width:16px;height:16px;color:#5E7770" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input value="{{ tb.q }}" onChange="{{ tb.setQ }}" placeholder="Search transactions" style="flex:1;border:0;outline:0;font-size:14px;background:transparent;color:#0C1F1A;min-width:0"/></div>
+      <span style="height:40px;padding:0 14px;border:1px solid {{ tb.fbd }};border-radius:999px;display:flex;align-items:center;gap:6px;font-size:14px;background:{{ tb.fbg }};white-space:nowrap">Status: <b style="font-weight:600">{{ tb.fstat }}</b></span>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) 110px;gap:12px;padding:10px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#6B827B;border-bottom:1px solid #EEF2F0"><span>MERCHANT</span><span>DATE</span><span style="text-align:right">AMOUNT</span><span>STATUS</span></div>
+    <div style="min-height:300px;display:flex;flex-direction:column">
+      <sc-for list="{{ tb.rows }}" as="r" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) 110px;gap:12px;padding:14px 0;border-bottom:1px solid #F2F5F4;font-size:14px;align-items:center"><span style="font-weight:500">{{ r.m }}</span><span style="color:#5E7770">{{ r.d }}</span><span style="font-family:'IBM Plex Mono',monospace;text-align:right">{{ r.a }}</span><span style="display:flex;align-items:center;gap:8px;font-size:13.5px"><span style="width:8px;height:8px;border-radius:50%;background:{{ r.c }}"></span>{{ r.s }}</span></div></sc-for>
+      <sc-if value="{{ tb.isLoading }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ tb.skel }}" as="k" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) 110px;gap:12px;padding:18px 0;border-bottom:1px solid #F2F5F4;align-items:center"><span style="height:12px;width:{{ k.w }};border-radius:6px;background:#EEF2F0"></span><span style="height:12px;width:60%;border-radius:6px;background:#EEF2F0"></span><span style="height:12px;width:50%;justify-self:end;border-radius:6px;background:#EEF2F0"></span><span style="height:12px;width:70%;border-radius:6px;background:#EEF2F0"></span></div></sc-for></sc-if>
+      <sc-if value="{{ tb.hasState }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:40px 20px">
+          <span style="width:64px;height:64px;border-radius:20px;background:{{ tb.st.bg }};color:{{ tb.st.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:28px;height:28px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ tb.st.icon }}"></path></svg></span>
+          <span style="font-size:18px;font-weight:700;margin-top:6px">{{ tb.st.title }}</span>
+          <span style="font-size:14px;line-height:1.5;color:#5E7770;max-width:360px">{{ tb.st.desc }}</span>
+          <div style="display:flex;gap:8px;margin-top:8px"><button onClick="{{ tb.st.act }}" style="height:44px;padding:0 20px;border:0;border-radius:999px;background:{{ tb.st.btnBg }};color:{{ tb.st.btnFg }};font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap">{{ tb.st.btn }}</button><sc-if value="{{ tb.st.hasSec }}" hint-placeholder-val="{{ false }}"><button style="height:44px;padding:0 18px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:15px;font-weight:500;cursor:pointer;white-space:nowrap">{{ tb.st.sec }}</button></sc-if></div>
+          <sc-if value="{{ tb.st.hasCode }}" hint-placeholder-val="{{ false }}"><span style="margin-top:6px;font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9C96">Error ID 7F3A-21C9 · share it with support</span></sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+    <sc-for list="{{ tableRules }}" as="t" hint-placeholder-count="4"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ t.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ t.v }}</span></div></sc-for>
+  </div>
+</section>
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Cards and widgets</h2><p style="margin:0;font-size:15px;color:#4A615A">Smaller spaces get a compact version: icon left, text right, one link.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ widgets }}" as="w" hint-placeholder-count="8">
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:14px;min-height:200px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px;font-weight:600">{{ w.head }}</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:{{ w.tc }};background:{{ w.tbg }};padding:3px 7px;border-radius:6px;white-space:nowrap">{{ w.type }}</span></div>
+        <div style="flex:1;border-radius:16px;background:#F6F9F8;padding:18px;display:flex;align-items:center;gap:14px">
+          <span style="width:44px;height:44px;border-radius:14px;flex:none;background:{{ w.bg }};color:{{ w.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:21px;height:21px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ w.icon }}"></path></svg></span>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><span style="font-size:14.5px;font-weight:600">{{ w.title }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ w.desc }}</span><span style="margin-top:4px;font-size:13.5px;font-weight:600;color:{{ w.lc }}">{{ w.link }}</span></div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Full-page errors</h2><p style="margin:0;font-size:15px;color:#4A615A">When the whole page can't load. Keep the sidebar and header if they work, so people can go elsewhere.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px">
+    <sc-for list="{{ pages }}" as="p" hint-placeholder-count="4">
+      <div style="background:#FFFFFF;border-radius:24px;padding:36px 24px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;min-height:320px;justify-content:center">
+        <span style="font:600 44px 'IBM Plex Mono',monospace;letter-spacing:-.03em;color:{{ p.cc }}">{{ p.code }}</span>
+        <span style="font-size:18px;font-weight:700;margin-top:4px">{{ p.title }}</span>
+        <span style="font-size:14px;line-height:1.5;color:#5E7770;max-width:260px">{{ p.desc }}</span>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center"><span style="height:40px;padding:0 18px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ p.btn }}</span><sc-if value="{{ p.hasSec }}" hint-placeholder-val="{{ true }}"><span style="height:40px;padding:0 16px;border-radius:999px;border:1px solid #D7E0DC;font-size:14px;font-weight:500;display:flex;align-items:center;white-space:nowrap">{{ p.sec }}</span></sc-if></div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile app · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Same structure; the action becomes a full-width button at the bottom, and pull-to-refresh replaces Retry where it makes sense.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+    <sc-for list="{{ mobiles }}" as="m" hint-placeholder-count="4">
+      <div style="background:#FFFFFF;border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:14px;min-height:460px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ m.k }}</span>
+        <sc-if value="{{ m.banner }}" hint-placeholder-val="{{ false }}"><div style="border-radius:14px;background:#E8F0FF;color:#1E3A8A;padding:10px 12px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500"><svg viewBox="0 0 24 24" style="width:16px;height:16px;flex:none" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M12 20h.01"></path></svg>Offline · showing data from 10:42</div></sc-if>
+        <sc-if value="{{ m.search }}" hint-placeholder-val="{{ false }}"><div style="height:44px;border-radius:14px;background:#F2F6F4;padding:0 14px;display:flex;align-items:center;gap:8px;font-size:15px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;color:#5E7770" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>Nour Tradng<span style="margin-left:auto;width:18px;height:18px;border-radius:50%;background:#C9D4D0"></span></div></sc-if>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:10px">
+          <span style="width:72px;height:72px;border-radius:22px;background:{{ m.bg }};color:{{ m.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:30px;height:30px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ m.icon }}"></path></svg></span>
+          <span style="font-size:19px;font-weight:700;margin-top:8px">{{ m.title }}</span>
+          <span style="font-size:14.5px;line-height:1.5;color:#5E7770;max-width:250px">{{ m.desc }}</span>
+        </div>
+        <sc-if value="{{ m.hasBtn }}" hint-placeholder-val="{{ true }}"><span style="height:52px;border-radius:999px;background:{{ m.btnBg }};color:{{ m.btnFg }};border:{{ m.btnBd }};font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ m.btn }}</span></sc-if>
+        <sc-if value="{{ m.hint }}" hint-placeholder-val="{{ false }}"><span style="text-align:center;font-size:12.5px;color:#8A9C96">↓ Pull down to refresh</span></sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Writing</h2><p style="margin:0;font-size:15px;color:#4A615A">Calm, specific, and about what happens next. Never blame the user.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+    <div style="display:grid;grid-template-columns:140px minmax(0,1fr) minmax(0,1fr);gap:16px;padding:14px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770"><span>CASE</span><span style="color:#0B6F56">✓ WRITE</span><span style="color:#B91C1C">× AVOID</span></div>
+    <sc-for list="{{ copy }}" as="c" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:140px minmax(0,1fr) minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid #EEF2F0;font-size:14px;line-height:1.45"><span style="font-weight:600">{{ c.k }}</span><span>{{ c.good }}</span><span style="color:#8A9C96;text-decoration:line-through;text-decoration-color:rgba(200,30,30,.4)">{{ c.bad }}</span></div></sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { chart: 0, table: 0, q: '' };
+  load(key, to) { this.setState({ [key]: 2 }); setTimeout(() => this.setState({ [key]: to }), 1100); }
+  tabs(key, labels) { return labels.map((label, i) => { const on = this.state[key] === i; return { label, bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0C1F1A' : '#5E7770', fw: on ? 600 : 500, sh: on ? '0 1px 3px rgba(12,31,26,.12)' : 'none', pick: () => this.setState({ [key]: i }) }; }); }
+  renderVals() {
+    const s = this.state;
+    const anatomy = [['①', 'Icon', '64 px tile in a soft tint. Green for neutral, red for errors. No illustrations of people or money.'], ['②', 'Title', 'What is going on, in plain words: "No transactions yet".'], ['③', 'Description', 'One sentence: why it is empty or what happens next.'], ['④', 'Action', 'One button that fixes it. Skip it if there is nothing to do.']].map(([n, k, v]) => ({ n, k, v }));
+    const types = [
+      ['First use', 'Nothing created yet. Explain the value, offer the first step.', '#E3F6EF', '#0B8F6E', 'M12 5v14M5 12h14'],
+      ['No results', 'Search or filters match nothing. Offer to clear them.', '#F2F6F4', '#4A615A', 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-3.5-3.5'],
+      ['All done', 'User cleared everything. Positive, no action needed.', '#E3F6EF', '#0B8F6E', 'M20 6 9 17l-5-5'],
+      ['Error', 'Loading failed. Say it is safe and offer Retry.', '#FDECEC', '#C81E1E', 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01'],
+      ['No access', 'User lacks permission. Say who can grant it.', '#FFF4E0', '#B45309', 'M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4'],
+      ['Offline', 'No connection. Show cached data if possible.', '#E8F0FF', '#2F5BD3', 'M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.3-1.6M12 20h.01']
+    ].map(([k, v, bg, fg, icon]) => ({ k, v, bg, fg, icon }));
+    const c = s.chart, isData = c === 0, isEmpty = c === 1, isLoading = c === 2, isError = c === 3;
+    const BV = [62, 44, 80, 30, 52];
+    const ch = { isData, isEmpty, isLoading, isError, retry: () => this.load('chart', 0),
+      kpi: isData ? 'SAR 184,320' : isEmpty ? 'SAR 0.00' : '—', kc: isData || isEmpty ? '#0C1F1A' : '#B9C8C2',
+      trend: isData ? '↗ 12.4%' : isEmpty ? 'No change' : '—', tbg: isData ? '#E3F6EF' : '#F2F6F4', tfg: isData ? '#0B6F56' : '#5E7770',
+      bars: ['OLY', 'MLQ', 'JED', 'KHB', 'WEB'].map((l, i) => ({ l, h: isData ? BV[i] + '%' : isLoading ? (30 + i * 9) + '%' : '6px', c: isData ? '#0B8F6E' : '#EEF2F0', bd: isEmpty ? '1px dashed #C9D4D0' : 'none' })),
+      barMsg: !isData && !isLoading, barText: isError ? 'Couldn\'t load' : 'No sales yet', barMsgC: isError ? '#C81E1E' : '#5E7770',
+      ringBg: isLoading ? '#E6ECE9' : '#EEF2F0', ringDash: isEmpty ? '3 3' : '100 0',
+      donut: isData ? 'mada 58% · Visa 27%' : isEmpty ? 'No payments yet' : isLoading ? 'Loading…' : 'Couldn\'t load', donutSub: isData ? 'Apple Pay and others 15%' : isEmpty ? 'Shares appear after the first sale' : isLoading ? '' : 'Retry from the sales chart' };
+    const chartRules = [['Same size', 'Empty, loading and error keep the card height. Nothing below moves.'], ['KPI values', 'Zero is a real value: show "SAR 0.00". Unknown is "—", never 0.'], ['Loading', 'Gray skeleton of the chart shape, pulsing. Never a spinner on its own.'], ['Partial data', 'Missing days are gaps in the line, not drops to zero.']].map(([k, v]) => ({ k, v }));
+    const R = [['Al Baik · Olaya', 'Today, 12:41', '+ 86.25', 'Settled', '#0B8F6E'], ['Jarir Bookstore', 'Today, 11:08', '− 1,249.00', 'Settled', '#0B8F6E'], ['Nour Trading', 'Today, 09:30', '− 25,000.00', 'Pending', '#B45309'], ['Careem', 'Yesterday', '− 38.50', 'Settled', '#0B8F6E'], ['Online store #2041', 'Yesterday', '+ 420.00', 'Refunded', '#4A615A']];
+    const t = s.table;
+    const q = s.q.trim().toLowerCase();
+    const matches = t === 0 ? R.filter(r => !q || r[0].toLowerCase().includes(q)) : [];
+    const noRes = (t === 0 && q && !matches.length) || t === 3;
+    const ST = {
+      first: { title: 'No transactions yet', desc: 'Payments you send and receive will appear here. Add money or share your IBAN to get started.', icon: 'M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4', bg: '#E3F6EF', fg: '#0B8F6E', btn: 'Add money', btnBg: 'linear-gradient(90deg,#0A7559,#2C957A)', btnFg: '#FFFFFF', sec: 'Copy IBAN', act: () => {} },
+      none: { title: q ? `No results for "${s.q}"` : 'No transactions match these filters', desc: 'Try a different search, or clear the filters to see everything.', icon: 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-3.5-3.5M8 11h6', bg: '#F2F6F4', fg: '#4A615A', btn: 'Clear search and filters', btnBg: '#0C1F1A', btnFg: '#FFFFFF', act: () => this.setState({ table: 0, q: '' }) },
+      error: { title: 'Couldn\'t load transactions', desc: 'Something went wrong on our side. Your money and data are safe.', icon: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01', bg: '#FDECEC', fg: '#C81E1E', btn: 'Try again', btnBg: '#0C1F1A', btnFg: '#FFFFFF', sec: 'Contact support', code: true, act: () => this.load('table', 0) },
+      access: { title: 'You don\'t have access to transactions', desc: 'Ask an account admin (Abdulaziz Ali) to give you the Viewer or Finance role.', icon: 'M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4', bg: '#FFF4E0', fg: '#B45309', btn: 'Request access', btnBg: '#0C1F1A', btnFg: '#FFFFFF', act: () => {} }
+    };
+    const key = t === 1 ? 'first' : noRes ? 'none' : t === 4 ? 'error' : t === 5 ? 'access' : null;
+    const st = key ? ST[key] : ST.first;
+    const tb = { q: s.q, setQ: e => this.setState({ q: e.target.value, table: 0 }), rows: matches.map(([m, d, a, st2, c]) => ({ m, d, a, s: st2, c })), isLoading: t === 2, hasState: !!key,
+      fstat: t === 3 ? 'Declined' : 'All', fbd: t === 3 ? '#0C1F1A' : '#D7E0DC', fbg: t === 3 ? '#F2F6F4' : '#FFFFFF',
+      skel: ['70%', '55%', '80%', '45%', '65%'].map(w => ({ w })),
+      st: { ...st, hasSec: !!st.sec, sec: st.sec || '', hasCode: !!st.code } };
+    const tableRules = [['First use vs no results', 'First use sells the feature. No results helps fix the search. Never mix them.'], ['Skeleton rows', 'Show 5 gray rows while loading; switch to empty only after the response.'], ['Errors keep context', 'Header, search and filters stay. Only the rows area changes.'], ['Error ID', 'Show a short ID on server errors so support can find the log.']].map(([k, v]) => ({ k, v }));
+    const TY = { first: ['FIRST USE', '#0B6F56', '#E3F6EF', '#E3F6EF', '#0B8F6E', '#0E7C62'], done: ['ALL DONE', '#0B6F56', '#E3F6EF', '#E3F6EF', '#0B8F6E', '#0E7C62'], none: ['NO RESULTS', '#4A615A', '#F2F6F4', '#EEF2F0', '#4A615A', '#0E7C62'], error: ['ERROR', '#B91C1C', '#FDECEC', '#FDECEC', '#C81E1E', '#0C1F1A'], access: ['NO ACCESS', '#7A4508', '#FFF4E0', '#FFF4E0', '#B45309', '#0C1F1A'], offline: ['OFFLINE', '#1E3A8A', '#E8F0FF', '#E8F0FF', '#2F5BD3', '#0C1F1A'] };
+    const widgets = [
+      ['Cards', 'first', 'No cards yet', 'Create virtual cards for your team in seconds.', 'Create a card', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20'],
+      ['Beneficiaries', 'first', 'No saved beneficiaries', 'Save people you pay often to send faster.', 'Add beneficiary', 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM19 8v6M22 11h-6'],
+      ['POS terminals', 'first', 'No terminals yet', 'Accept mada, Visa and Apple Pay in your store.', 'Order terminals', 'M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8v4H8z'],
+      ['Tasks', 'done', 'You\'re all caught up', 'New approvals and tasks will show up here.', '', 'M20 6 9 17l-5-5'],
+      ['Invoices', 'none', 'No unpaid invoices', 'All invoices in this period are paid.', 'View paid invoices', 'M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1ZM8 8h8M8 12h8'],
+      ['Settlements', 'error', 'Couldn\'t load settlements', 'This card failed; the rest of the page works.', 'Retry', 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01'],
+      ['Payroll', 'access', 'Only admins can see payroll', 'Ask Abdulaziz Ali for the Payroll role.', 'Request access', 'M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4'],
+      ['Balance', 'offline', 'You\'re offline', 'Showing balance from 10:42. It updates when you reconnect.', 'Retry now', 'M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M12 20h.01']
+    ].map(([head, ty, title, desc, link, icon]) => { const [type, tc, tbg, bg, fg, lc] = TY[ty]; return { head, type, tc, tbg, bg, fg, lc, title, desc, link, icon }; });
+    const pages = [['404', '#B9C8C2', 'Page not found', 'The link may be old or mistyped.', 'Go to dashboard', ''], ['500', '#E5A3A3', 'Something went wrong', 'We\'ve been notified and are fixing it. Your money is safe.', 'Try again', 'Status page'], ['03:00', '#7FC9B4', 'Back soon', 'Scheduled maintenance until 3:00 am. POS keeps accepting payments.', 'See status', ''], ['0:00', '#E8C48A', 'Session expired', 'For your security we signed you out after 15 minutes.', 'Sign in again', '']].map(([code, cc, title, desc, btn, sec]) => ({ code, cc, title, desc, btn, sec, hasSec: !!sec }));
+    const G = 'linear-gradient(90deg,#0A7559,#2C957A)';
+    const mobiles = [
+      { k: 'FIRST USE · HOME', title: 'Your account is ready', desc: 'Add money or share your IBAN to receive your first payment.', icon: 'M12 5v14M5 12h14', bg: '#E3F6EF', fg: '#0B8F6E', btn: 'Add money', btnBg: G, btnFg: '#FFFFFF', btnBd: '0' },
+      { k: 'NO RESULTS · SEARCH', search: true, title: 'No matches for "Nour Tradng"', desc: 'Check the spelling or search by IBAN or amount.', icon: 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-3.5-3.5M8 11h6', bg: '#F2F6F4', fg: '#4A615A', btn: 'Clear search', btnBg: '#FFFFFF', btnFg: '#0C1F1A', btnBd: '1px solid #D7E0DC' },
+      { k: 'ERROR · LIST', title: 'Couldn\'t load activity', desc: 'Your money is safe. Pull down or tap to try again.', icon: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01', bg: '#FDECEC', fg: '#C81E1E', btn: 'Try again', btnBg: '#0C1F1A', btnFg: '#FFFFFF', btnBd: '0', hint: true },
+      { k: 'OFFLINE · CARDS', banner: true, title: 'Can\'t freeze cards offline', desc: 'Card controls need a connection. Your cards keep their last settings.', icon: 'M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M12 20h.01', bg: '#E8F0FF', fg: '#2F5BD3', btn: 'Open settings', btnBg: '#FFFFFF', btnFg: '#0C1F1A', btnBd: '1px solid #D7E0DC' }
+    ].map(m => ({ banner: false, search: false, hint: false, hasBtn: !!m.btn, ...m }));
+    const copy = [['First use', 'No cards yet. Create one for each team member.', 'Nothing here!'], ['No results', 'No transactions match "Nour". Try another name or clear filters.', 'Your search returned 0 results.'], ['Error', 'Couldn\'t load transactions. Your money is safe. Try again.', 'Error 500: Internal server error.'], ['No access', 'Only admins can see payroll. Ask Abdulaziz Ali for access.', 'Access denied.'], ['Offline', 'You\'re offline. Showing balance from 10:42.', 'Network request failed.']].map(([k, good, bad]) => ({ k, good, bad }));
+    const rules = [[1, 'Design the empty state together with the full state, in the same space.'], [1, 'One action at most. If nothing can be done, say when it will change.'], [1, 'Show loading skeletons first; decide between empty and error only after the response.'], [1, 'Errors in one card never blank the whole page.'], [0, 'Don\'t show "0" or an empty chart for data that failed to load. Use "—" and an error.'], [0, 'Don\'t use jokes, illustrations of people, or exclamation marks for errors involving money.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    const GRID = 'M0 10H240M0 34H240M0 58H240M0 82H240';
+    const SC = {
+      empty: { bg: '#F2F6F4', fg: '#4A615A', icon: 'M3 3v18h18M7 15l4-4 3 3 5-6', lc: '#0E7C62' },
+      loading: { bg: '#F2F6F4', fg: '#8A9C96', icon: 'M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5', lc: '#0E7C62' },
+      error: { bg: '#FDECEC', fg: '#C81E1E', icon: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01', lc: '#0C1F1A' },
+      access: { bg: '#FFF4E0', fg: '#B45309', icon: 'M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4', lc: '#0C1F1A' }
+    };
+    const bars = (hs) => hs.map((h, i) => `M${14 + i * 46} 82V${82 - h}h30V82Z`).join('');
+    const CH = [
+      { name: 'Line / area', sub: 'Trends over time', title: 'POS sales · 30 days', type: 'line',
+        vis: { empty: ['M0 82H240', 'none', '#B9C8C2', 2, '5 5'], loading: ['M0 70C50 64 80 56 120 50S200 34 240 28', 'none', '#E6ECE9', 8, '0'], error: [GRID, 'none', 'transparent', 0, '0'], access: ['M0 82H240', 'none', '#E6ECE9', 2, '0'] },
+        msg: { empty: ['No sales in this period', 'Sales from terminals appear here.', 'Change period'], loading: ['Loading sales…', 'Usually under 2 seconds.', ''], error: ['Couldn\'t load sales', 'Your data is safe.', 'Retry'], access: ['Only admins see sales', 'Ask Abdulaziz Ali for access.', 'Request access'] } },
+      { name: 'Bar', sub: 'Compare categories', title: 'Sales by branch', type: 'bar',
+        vis: { empty: [bars([4, 4, 4, 4, 4]), 'none', '#C9D4D0', 1, '3 3'], loading: [bars([40, 56, 30, 64, 46]), '#EEF2F0', 'none', 0, '0'], error: [bars([4, 4, 4, 4, 4]), '#F7EFEF', 'none', 0, '0'], access: [bars([4, 4, 4, 4, 4]), '#F2F6F4', 'none', 0, '0'] },
+        msg: { empty: ['No sales by branch yet', 'Bars fill in after the first sale.', 'Order terminals'], loading: ['Loading branches…', '', ''], error: ['Couldn\'t load branches', 'Other cards still work.', 'Retry'], access: ['Restricted to managers', 'You can see only your branch.', 'View my branch'] } },
+      { name: 'Donut', sub: 'Parts of a whole', title: 'Payment methods', type: 'donut',
+        ring: { empty: ['#EEF2F0', '4 4'], loading: ['#E6ECE9', '200 0'], error: ['#F7EFEF', '200 0'], access: ['#F2F6F4', '200 0'] },
+        msg: { empty: ['No payments yet', 'Shares appear after the first sale.', ''], loading: ['Loading methods…', '', ''], error: ['Couldn\'t load methods', 'Try again in a moment.', 'Retry'], access: ['Hidden for your role', 'Ask an admin for Finance access.', 'Request access'] } },
+      { name: 'KPI tile', sub: 'Single numbers', title: 'Net revenue', type: 'kpi',
+        kpi: { empty: ['SAR 0.00', '#0C1F1A', '0'], loading: ['', '#0C1F1A', '28px'], error: ['—', '#B9C8C2', '0'], access: ['••••••', '#B9C8C2', '0'] },
+        msg: { empty: ['No revenue this month', 'Zero is shown as a real value.', ''], loading: ['Loading…', 'Skeleton, not a spinner.', ''], error: ['Couldn\'t calculate', 'Unknown shows as "—", never 0.', 'Retry'], access: ['Hidden for your role', 'Value is masked, not removed.', ''] } }
+    ];
+    const csCols = ['EMPTY', 'LOADING', 'ERROR', 'NO ACCESS'];
+    const csRows = CH.map(ch => ({ name: ch.name, sub: ch.sub, title: ch.title, cells: ['empty', 'loading', 'error', 'access'].map(k => {
+      const sc = SC[k], [title, desc, link] = ch.msg[k];
+      const base = { ...sc, title, desc, link, hasLink: !!link, isKpi: ch.type === 'kpi', isSvg: ch.type !== 'kpi', isDonut: ch.type === 'donut', grid: ch.type === 'line' ? GRID : '', d: '', fill: 'none', stroke: 'none', sw: 0, dash: '0', ring: '#EEF2F0', rdash: '200 0', kpi: '', kc: '#0C1F1A', skH: '0' };
+      if (ch.vis) { const [d, fill, stroke, sw, dash] = ch.vis[k]; Object.assign(base, { d, fill, stroke, sw, dash }); }
+      if (ch.ring) { const [ring, rdash] = ch.ring[k]; Object.assign(base, { ring, rdash }); }
+      if (ch.kpi) { const [kpi, kc, skH] = ch.kpi[k]; Object.assign(base, { kpi, kc, skH }); }
+      return base; }) }));
+    return { csCols, csRows, mobiles, copy, rules, widgets, pages, tableTabs: this.tabs('table', ['Data', 'First use', 'Loading', 'No results', 'Error', 'No access']), tb, tableRules, anatomy, types, chartTabs: this.tabs('chart', ['Data', 'Empty', 'Loading', 'Error']), ch, chartRules };
+  }
+}
+</script>
+</body>
+</html>

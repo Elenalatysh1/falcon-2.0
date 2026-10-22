@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · BRAND</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Illustrations</h1>
+  <p style="margin:0;max-width:720px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Spot illustrations for empty, error and success states. Glass style: a solid gradient shape at the back, a frosted glass shape in front that blurs what's behind it, and a white symbol on the glass. Files are in <span style="font-family:'IBM Plex Mono',monospace;font-size:15px">assets/illustrations/</span>.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">The set</h2><p style="margin:0;font-size:15px;color:#4A615A">20 illustrations: 9 general states and 11 Hala features.</p></div>
+    <div style="display:flex;gap:2px;padding:3px;border-radius:999px;background:#E1E8E5"><sc-for list="{{ filters }}" as="f" hint-placeholder-count="3"><button onClick="{{ f.pick }}" style="height:32px;padding:0 14px;border:0;border-radius:999px;background:{{ f.bg }};color:{{ f.fg }};font-size:13.5px;font-weight:{{ f.fw }};cursor:pointer;box-shadow:{{ f.sh }};white-space:nowrap">{{ f.label }}</button></sc-for></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+    <sc-for list="{{ items }}" as="i" hint-placeholder-count="20">
+      <div style="background:#FFFFFF;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="aspect-ratio:5/4;border-radius:14px;background:#FAFCFB;display:flex;align-items:center;justify-content:center"><img src="{{ i.src }}" alt="{{ i.name }}" style="width:88%;height:auto"/></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font-size:15px;font-weight:600">{{ i.name }}</span><span style="height:20px;padding:0 7px;border-radius:999px;background:{{ i.tbg }};color:{{ i.tfg }};font-size:11px;font-weight:600;display:inline-flex;align-items:center;white-space:nowrap;flex:none">{{ i.tone }}</span></div>
+        <span style="font-size:12.5px;line-height:1.45;color:#5E7770;min-height:36px">{{ i.use }}</span>
+        <a href="{{ i.src }}" download="{{ i.file }}" style="font:400 11.5px 'IBM Plex Mono',monospace;color:#0E7C62;text-decoration:none">↓ {{ i.file }}</a>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Construction</h2><p style="margin:0;font-size:15px;color:#4A615A">Keep new illustrations inside these rules so the set stays consistent.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+    <div style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;align-items:center;justify-content:center">
+      <div style="position:relative;width:340px;max-width:100%;aspect-ratio:5/4;background-image:linear-gradient(#EEF2F0 1px,transparent 1px),linear-gradient(90deg,#EEF2F0 1px,transparent 1px);background-size:17px 17px;border:1px solid #E1E8E5;border-radius:6px">
+        <img src="assets/illustrations/first-use.svg" alt="" style="position:absolute;inset:0;width:100%;height:100%"/>
+        <span style="position:absolute;left:20%;top:20%;width:42%;height:45%;border:1.5px dashed #E5484D;border-radius:18%"></span>
+        <span style="position:absolute;left:39%;top:36.25%;width:42%;height:45%;border:1.5px dashed #3D6BE0;border-radius:18%"></span>
+        <span style="position:absolute;left:-2px;top:-24px;font:500 11px 'IBM Plex Mono',monospace;color:#5E7770">200 × 160</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">PALETTE</span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px"><sc-for list="{{ palette }}" as="p" hint-placeholder-count="8"><div style="display:flex;flex-direction:column;gap:4px"><span style="height:36px;border-radius:10px;background:{{ p.c }};border:1px solid rgba(12,31,26,.06)"></span><span style="font-size:12px;font-weight:600">{{ p.n }}</span><span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ p.c }}</span></div></sc-for></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ construct }}" as="c" hint-placeholder-count="5"><div style="display:flex;gap:10px;align-items:baseline"><span style="width:10px;height:10px;border-radius:50%;flex:none;background:{{ c.c }}"></span><div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:14px;font-weight:600">{{ c.k }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ c.v }}</span></div></div></sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Sizes and placement</h2><p style="margin:0;font-size:15px;color:#4A615A">Use illustrations for full-page and section states. Cards and widgets use the icon tile instead.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,.8fr);gap:12px;align-items:stretch">
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">WEB · PAGE OR TABLE · 200 PX</span>
+      <div style="flex:1;border:1px solid #EEF2F0;border-radius:16px;padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><img src="assets/illustrations/no-transactions.svg" alt="" style="width:200px"/><span style="font-size:18px;font-weight:700">No transactions yet</span><span style="font-size:14px;color:#5E7770;max-width:300px;line-height:1.5">Payments you send and receive will appear here.</span><span style="margin-top:8px;height:44px;padding:0 22px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:15px;font-weight:600;display:flex;align-items:center;white-space:nowrap">Add money</span></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">MOBILE · SCREEN · 160 PT</span>
+      <div style="flex:1;border-radius:22px;background:#F4F7F6;padding:24px 18px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><img src="assets/illustrations/no-cards.svg" alt="" style="width:160px"/><span style="font-size:18px;font-weight:700">No cards yet</span><span style="font-size:14px;color:#5E7770;line-height:1.5">Create a virtual card in seconds.</span><span style="margin-top:auto;align-self:stretch;height:52px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">Create card</span></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">MODAL · 120 PX</span>
+      <div style="flex:1;border-radius:20px;border:1px solid #EEF2F0;box-shadow:0 20px 40px -24px rgba(12,31,26,.35);padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center"><img src="assets/illustrations/payment-sent.svg" alt="" style="width:120px"/><span style="font-size:16px;font-weight:700">SAR 25,000 sent</span><span style="font-size:13px;color:#5E7770">Arrives within minutes.</span><span style="margin-top:auto;align-self:stretch;height:40px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center">Done</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { f: 0 };
+  renderVals() {
+    const TONE = { Neutral: ['#F2F6F4', '#4A615A'], Success: ['#E3F6EF', '#0B6F56'], Error: ['#FDECEC', '#8A1414'], Warning: ['#FFF4E0', '#7A4508'], Info: ['#E8F0FF', '#1E3A8A'] };
+    const ALL = [
+      ['first-use', 'First use', 'Success', 'state', 'Nothing created yet; any "get started" screen.'],
+      ['no-results', 'No results', 'Neutral', 'state', 'Search or filters match nothing.'],
+      ['all-done', 'All done', 'Success', 'state', 'Tasks or approvals cleared.'],
+      ['error', 'Error', 'Error', 'state', 'Page or section failed to load.'],
+      ['no-access', 'No access', 'Warning', 'state', 'User lacks the role to see this.'],
+      ['offline', 'Offline', 'Info', 'state', 'No connection, mobile and web.'],
+      ['not-found', 'Not found', 'Neutral', 'state', '404 and broken links.'],
+      ['maintenance', 'Maintenance', 'Warning', 'state', 'Scheduled downtime pages.'],
+      ['session-expired', 'Session expired', 'Warning', 'state', 'Signed out for security.'],
+      ['no-transactions', 'No transactions', 'Success', 'feature', 'Empty activity and statements.'],
+      ['no-cards', 'No cards', 'Success', 'feature', 'Cards list before the first card.'],
+      ['no-beneficiaries', 'No beneficiaries', 'Success', 'feature', 'Transfers: saved people list.'],
+      ['no-terminals', 'No POS terminals', 'Success', 'feature', 'POS section before ordering.'],
+      ['no-invoices', 'No unpaid invoices', 'Success', 'feature', 'Invoicing, all paid.'],
+      ['no-notifications', 'No notifications', 'Success', 'feature', 'Inbox and notification center.'],
+      ['no-chart-data', 'No chart data', 'Neutral', 'feature', 'Analytics with no data in period.'],
+      ['payment-sent', 'Payment sent', 'Success', 'feature', 'Transfer and payout confirmations.'],
+      ['verification-pending', 'Verification pending', 'Warning', 'feature', 'KYB/KYC under review.'],
+      ['upload-documents', 'Upload documents', 'Success', 'feature', 'CR, VAT and ID requests.'],
+      ['payroll', 'Payroll', 'Success', 'feature', 'Payroll setup and paid runs.']
+    ];
+    const f = this.state.f;
+    const items = ALL.filter(a => f === 0 || (f === 1 ? a[3] === 'state' : a[3] === 'feature')).map(([k, name, tone, , use]) => ({ name, use, tone, tbg: TONE[tone][0], tfg: TONE[tone][1], src: `assets/illustrations/${k}.svg`, file: `${k}.svg` }));
+    const filters = [['All 20', 0], ['States 9', 1], ['Features 11', 2]].map(([label, i]) => { const on = f === i; return { label, bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0C1F1A' : '#5E7770', fw: on ? 600 : 500, sh: on ? '0 1px 3px rgba(12,31,26,.12)' : 'none', pick: () => this.setState({ f: i }) }; });
+    const palette = [['Green from', '#2BC79F'], ['Green to', '#007A5C'], ['Amber', '#D9850F'], ['Red', '#C8262B'], ['Blue', '#2F55C8'], ['Neutral', '#3A4D48'], ['Glass tint', '#CFDDD8'], ['Glyph', '#FFFFFF']].map(([n, c]) => ({ n, c }));
+    const construct = [['Canvas 200 × 160', 'Export as SVG. Objects overlap diagonally: back top-left, glass bottom-right.', '#8A9C96'], ['Back shape', 'The subject (card, bell, document). Solid diagonal gradient in the status tone.', '#E5484D'], ['Glass shape', 'Simple form (circle, rounded square). Blur 7 of the back shape, 50% gray-mint tint, white gradient, 1.8 px white edge.', '#3D6BE0'], ['Symbol', 'White, 5 px stroke, round caps, with a soft shadow in the tone color.', '#009A78'], ['Shadow', 'Blurred shadow under the glass and a faint ellipse on the ground.', '#B9C8C2']].map(([k, v, c]) => ({ k, v, c }));
+    const rules = [[1, 'Use one illustration per screen, above the title.'], [1, 'Match the back-shape color to the state: green success, red error, amber warning, blue info, gray neutral.'], [1, 'Add alt="" when the title already says it; illustrations are decorative.'], [1, 'Under 120 px wide, switch to the 64 px icon tile.'], [0, 'Don\'t draw people, faces, money bills or flags.'], [0, 'Don\'t stack more than two layers or put text on the glass.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { items, filters, palette, construct, rules };
+  }
+}
+</script>
+</body>
+</html>

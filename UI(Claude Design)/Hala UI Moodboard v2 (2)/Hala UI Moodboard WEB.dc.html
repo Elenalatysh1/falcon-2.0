@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>.pscr::-webkit-scrollbar{display:none}.pscr{scrollbar-width:none}.pscr>*{flex-shrink:0}body{margin:0;background:#F2F4F3;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1A1A1A;-webkit-font-smoothing:antialiased}a{color:#0E7C62}a:hover{color:#1A1A1A}input{font-family:inherit}.dv-turn{padding:48px 52px 40px;scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 'IBM Plex Sans',sans-serif;color:#1a1a1a}.dv-grp{font:600 22px/1.2 'IBM Plex Sans',sans-serif;letter-spacing:-0.01em;margin:44px 0 18px;color:#1A1A1A}.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 12px/1.3 'IBM Plex Sans',sans-serif;color:rgba(0,0,0,.55)}.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}.dv-opt:target .dv-oid{background:#0E7C62;color:#fff}.dv-next{margin:40px 0 0;font:13px/1.5 'IBM Plex Sans',sans-serif;color:rgba(0,0,0,.5)}</style>
+</helmet>
+<section class="dv-turn" id="t3">
+<div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Sidebar from Hala Dashboard WEB · onboarding · POS issuing flow</span></div>
+<p style="margin:0;max-width:820px;font-size:14px;line-height:1.55;color:#5C5C5C">Onboarding keeps the sign-up layout (centred column, mint haze, pill arrow CTA). The business-type step is now photo cards, and the choice personalises the product step. Photo slots are empty: drag a photo onto each one. The POS flow is a checkout-style wizard with a live order summary.</p>
+<div class="dv-grp">Navigation · sidebar</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="3a"><div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>Sidebar from Hala Dashboard WEB · sections expand, collapse button switches to icon rail</div>
+<aside style="position:relative;width:{{ SB.w }};height:760px;flex:none;border-radius:24px;background:#FFFFFF;border:1px solid rgba(12,31,26,.06);box-shadow:0 24px 60px -28px rgba(12,60,48,.28),0 1px 3px rgba(12,31,26,.05);display:flex;flex-direction:column;overflow:hidden;transition:width .22s ease">
+  <div style="padding:20px 16px 0;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;justify-content:{{ SB.headJ }};min-height:36px;padding:0 6px">
+      <sc-if value="{{ SB.x }}" hint-placeholder-val="{{ true }}"><span style="font-size:26px;font-weight:700;letter-spacing:.14em;background:linear-gradient(100deg,#07785C,#0FA37F 55%,#22C997);-webkit-background-clip:text;background-clip:text;color:transparent">HALA</span></sc-if>
+      <button onClick="{{ SB.toggle }}" aria-label="Collapse or expand" style="width:32px;height:32px;border:0;border-radius:10px;background:transparent;color:#5E7770;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(12,31,26,.06);color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M9 4v16"></path><path d="{{ SB.tIcon }}"></path></svg></button>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:{{ SB.acctPad }};justify-content:{{ SB.j }};border-radius:14px;border:1px solid rgba(12,31,26,.07);background:#F7FAF9">
+      <span style="width:36px;height:36px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0FA37F,#0A5C4A);color:#EFFFF9;font-weight:700;font-size:16px">H</span>
+      <sc-if value="{{ SB.x }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14px;font-weight:600;color:#0C1F1A">Corporate Account</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#5E7770">SA •• 1951 · CR 2346041544</span></div><svg viewBox="0 0 24 24" style="width:16px;height:16px;flex:none" fill="none" stroke="#5E7770" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5M7 9l5-5 5 5"></path></svg></sc-if>
+    </div>
+  </div>
+  <nav style="flex:1;overflow-y:auto;scrollbar-width:none;padding:8px 12px 12px;display:flex;flex-direction:column">
+    <sc-for list="{{ SB.sections }}" as="g" hint-placeholder-count="4">
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-if value="{{ g.x }}" hint-placeholder-val="{{ true }}"><span style="padding:16px 12px 6px;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6B827B">{{ g.label }}</span></sc-if>
+        <sc-if value="{{ g.c }}" hint-placeholder-val="{{ false }}"><span style="height:1px;background:rgba(12,31,26,.07);margin:12px 10px"></span></sc-if>
+        <sc-for list="{{ g.items }}" as="n" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column">
+            <button onClick="{{ n.pick }}" title="{{ n.tip }}" style="position:relative;height:42px;border:0;border-radius:12px;padding:0 12px;display:flex;align-items:center;gap:12px;justify-content:{{ n.j }};cursor:pointer;background:{{ n.bg }};color:{{ n.fg }};font-size:14px;font-weight:{{ n.fw }};text-align:left;transition:background .15s" style-hover="background:{{ n.hbg }}">
+              <span style="position:absolute;left:-12px;top:11px;bottom:11px;width:3px;border-radius:0 3px 3px 0;background:{{ n.bar }}"></span>
+              <svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg>
+              <sc-if value="{{ n.x }}" hint-placeholder-val="{{ true }}"><span style="flex:1">{{ n.label }}</span></sc-if>
+              <sc-if value="{{ n.isNew }}" hint-placeholder-val="{{ false }}"><span style="font:500 9.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;padding:3px 6px;border-radius:6px;color:#0B6F56;background:#E3F6EF">NEW</span></sc-if>
+              <sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="min-width:20px;height:20px;padding:0 6px;border-radius:999px;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;background:#FFF1DE;color:#94550A;position:{{ n.bPos }};top:1px;right:2px">{{ n.badge }}</span></sc-if>
+              <sc-if value="{{ n.chev }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px;flex:none;opacity:.6;transform:{{ n.rot }};transition:transform .3s cubic-bezier(.2,.9,.2,1)" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></sc-if>
+            </button>
+            <sc-if value="{{ n.hasKids }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-rows:{{ n.rows }};transition:grid-template-rows .3s cubic-bezier(.2,.9,.2,1)"><div style="overflow:hidden;min-height:0"><div style="position:relative;display:flex;flex-direction:column;gap:1px;padding:2px 0 6px 34px"><span style="position:absolute;left:21px;top:4px;bottom:10px;width:1px;background:rgba(12,31,26,.09)"></span><sc-for list="{{ n.kids }}" as="k" hint-placeholder-count="2"><button onClick="{{ k.pick }}" style="height:34px;border:0;border-radius:10px;padding:0 12px;text-align:left;cursor:pointer;font-size:13.5px;background:{{ k.bg }};color:{{ k.fg }};font-weight:{{ k.fw }}" style-hover="color:#0C1F1A;background:rgba(12,31,26,.04)">{{ k.label }}</button></sc-for></div></div></div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </nav>
+  <div style="padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(12,31,26,.06)">
+    <sc-for list="{{ SB.foot }}" as="l" hint-placeholder-count="2"><button title="{{ l.tip }}" style="height:38px;border:0;border-radius:12px;padding:0 12px;display:flex;align-items:center;gap:12px;justify-content:{{ l.j }};cursor:pointer;background:transparent;color:#4A615A;font-size:13.5px;text-align:left" style-hover="background:rgba(12,31,26,.04)"><svg viewBox="0 0 24 24" style="width:19px;height:19px;flex:none" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ l.icon }}"></path></svg><sc-if value="{{ l.x }}" hint-placeholder-val="{{ true }}"><span>{{ l.label }}</span></sc-if></button></sc-for>
+    <div style="margin-top:6px;display:flex;align-items:center;gap:12px;padding:{{ SB.userPad }};justify-content:{{ SB.j }};border-radius:16px;border:1px solid rgba(12,31,26,.07);background:#F7FAF9">
+      <span style="position:relative;width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#1E3A9E;background:linear-gradient(135deg,#DCE5FF,#B9C9FF)">AA<span style="position:absolute;right:-1px;bottom:-1px;width:11px;height:11px;border-radius:50%;background:#0FA37F;border:2px solid #FFFFFF"></span></span>
+      <sc-if value="{{ SB.x }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14px;font-weight:600;color:#0C1F1A">Abdulaziz Ali</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#5E7770;letter-spacing:.04em">MANAGER</span></div></sc-if>
+    </div>
+  </div>
+</aside>
+  </div>
+</div>
+<div class="dv-grp">Onboarding</div>
+<div class="dv-opts" style="flex-direction:column;gap:44px">
+  <div class="dv-opt" id="3b"><div class="dv-olabel"><a class="dv-oid" href="#3b">3b</a>Business type with photos · selection lifts the card and unlocks Continue</div>
+    <div style="width:1180px;height:780px;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(70% 42% at 50% 100%,rgba(61,245,176,.22),rgba(61,245,176,0) 70%),#FFFFFF;border:1px solid rgba(0,0,0,.06);box-shadow:0 30px 60px -40px rgba(12,31,26,.35)"><div style="height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 36px"><span style="font:300 26px 'IBM Plex Sans',sans-serif;letter-spacing:.08em;color:#14967A">HALA</span><span style="font-size:14px;color:#0E7C62;font-weight:500;text-decoration:underline;text-underline-offset:3px">Need help?</span></div><div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:center;padding:0 40px 40px"><div style="width:100%;max-width:1000px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;flex-direction:column;gap:8px"><h2 style="margin:0;font-size:36px;font-weight:700;letter-spacing:-.02em">What best describes your business?</h2><p style="margin:0;font-size:16px;color:#4A615A">We'll personalize Hala to fit your business needs. You can change this later.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px">
+    <sc-for list="{{ OB.biz }}" as="b" hint-placeholder-count="4">
+      <button onClick="{{ b.pick }}" aria-pressed="{{ b.pressed }}" style="position:relative;border:0;padding:0;border-radius:18px;background:#FFFFFF;text-align:left;cursor:pointer;color:#0C1F1A;display:flex;flex-direction:column;overflow:hidden;box-shadow:{{ b.sh }};outline:2px solid {{ b.ol }};outline-offset:-2px;transform:{{ b.tf }};transition:transform .25s cubic-bezier(.2,.9,.2,1),box-shadow .25s,outline-color .2s">
+        <div style="position:relative;width:100%;aspect-ratio:4/3;background:#EEF3F1">
+          <image-slot id="{{ b.slot }}" shape="rect" placeholder="{{ b.ph }}" src="{{ b.src }}" credit="{{ b.credit }}" credit-href="{{ b.href }}"></image-slot>
+          <span style="position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;background:{{ b.ckBg }};border:2px solid #FFFFFF;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2);pointer-events:none;transition:background .2s"><svg viewBox="0 0 24 24" style="width:14px;height:14px;flex:none" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
+        </div>
+        <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:17px;font-weight:600">{{ b.name }}</span>
+          <span style="font-size:13px;line-height:1.45;color:#5E7770;min-height:38px">{{ b.desc }}</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><sc-for list="{{ b.tags }}" as="t" hint-placeholder-count="2"><span style="font-size:11.5px;font-weight:500;padding:3px 8px;border-radius:999px;background:{{ b.tagBg }};color:{{ b.tagC }}">{{ t }}</span></sc-for></div>
+        </div>
+      </button>
+    </sc-for>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px"><span style="font-size:14px;color:#5E7770">{{ OB.bizHint }}</span><button onClick="{{ OB.bizNext }}" style="height:54px;padding:0 26px 0 30px;border:0;border-radius:999px;background:{{ OB.bizBtnBg }};color:{{ OB.bizBtnFg }};cursor:{{ OB.bizBtnCur }};font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:{{ OB.bizBtnSh }};transition:all .2s">{{ OB.bizBtnLabel }}<svg viewBox="0 0 24 24" style="width:22px;height:22px;flex:none" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></button></div>
+</div></div></div>
+  </div>
+  <div class="dv-opt" id="3c"><div class="dv-olabel"><a class="dv-oid" href="#3c">3c</a>Business details · CR pulled from Wathq</div>
+    <div style="width:1180px;height:780px;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(70% 42% at 50% 100%,rgba(61,245,176,.22),rgba(61,245,176,0) 70%),#FFFFFF;border:1px solid rgba(0,0,0,.06);box-shadow:0 30px 60px -40px rgba(12,31,26,.35)"><div style="height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 36px"><span style="font:300 26px 'IBM Plex Sans',sans-serif;letter-spacing:.08em;color:#14967A">HALA</span><span style="font-size:14px;color:#0E7C62;font-weight:500;text-decoration:underline;text-underline-offset:3px">Need help?</span></div><div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:center;padding:0 40px 40px"><div style="width:500px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"><h2 style="margin:0;font-size:34px;font-weight:700;letter-spacing:-.02em">Your business details</h2><p style="margin:0;font-size:16px;line-height:1.5;color:#4A615A">This helps us understand your business size and provide the right support.</p></div>
+  <div style="border-radius:10px;padding:18px 20px;background:linear-gradient(100deg,#1A1A1A 55%,#2E6B5C);color:#FFFFFF;display:flex;justify-content:space-between;align-items:center"><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:17px;font-weight:600">Khamis Arabia Trading Co</span><span style="font:400 14px 'IBM Plex Mono',monospace;color:#C9D6D1">2346041544</span></div><span style="font-size:11px;font-weight:500;letter-spacing:.06em;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12)">APPROVED</span></div>
+  <div style="margin-top:8px"><div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;background:#FFFFFF"><span style="font-size:11px;color:#0C1F1A">Company name (English)</span><span style="font-size:16px">Khamis Arabia Trading Co</span></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="position:relative"><div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;background:#FFFFFF"><span style="font-size:11px;color:#0C1F1A">Number of employees</span><span style="font-size:16px">40–70</span></div><span style="position:absolute;right:14px;top:20px"><svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></div><div style="position:relative"><div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;background:#FFFFFF"><span style="font-size:11px;color:#0C1F1A">Number of locations</span><span style="font-size:16px">3–10</span></div><span style="position:absolute;right:14px;top:20px"><svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></div></div>
+  <div style="position:relative"><div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;background:#FFFFFF"><span style="font-size:11px;color:#0C1F1A">Expected monthly card sales</span><span style="font-size:16px">SAR 250k – 1M</span></div><span style="position:absolute;right:14px;top:20px"><svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:24px;margin-top:10px"><label onClick="{{ OB.toggleAll }}" style="display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer"><span style="width:16px;height:16px;border-radius:4px;border:1.3px solid {{ OB.allBd }};background:{{ OB.allBg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:11px">{{ OB.allMk }}</span>Apply this information to all CRs</label><button onClick="{{ OB.next }}" style="width:120px;height:54px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -12px rgba(10,117,89,.8)" style-hover="filter:brightness(1.08)"><svg viewBox="0 0 24 24" style="width:26px;height:26px;flex:none" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></button></div>
+</div></div></div>
+  </div>
+  <div class="dv-opt" id="3d"><div class="dv-olabel"><a class="dv-oid" href="#3d">3d</a>Owner details · type 9 digits starting with 5 to clear the error</div>
+    <div style="width:1180px;height:780px;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(70% 42% at 50% 100%,rgba(61,245,176,.22),rgba(61,245,176,0) 70%),#FFFFFF;border:1px solid rgba(0,0,0,.06);box-shadow:0 30px 60px -40px rgba(12,31,26,.35)"><div style="height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 36px"><span style="font:300 26px 'IBM Plex Sans',sans-serif;letter-spacing:.08em;color:#14967A">HALA</span><span style="font-size:14px;color:#0E7C62;font-weight:500;text-decoration:underline;text-underline-offset:3px">Need help?</span></div><div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:center;padding:0 40px 40px"><div style="width:500px;display:flex;flex-direction:column;gap:14px">
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px"><h2 style="margin:0;font-size:34px;font-weight:700;letter-spacing:-.02em">Business owner details</h2><p style="margin:0;font-size:16px;color:#4A615A">We match these with the company's CR on Absher and Wathq.</p></div>
+  <div style="display:flex;flex-direction:column;gap:6px"><div style="height:60px;border:1px solid {{ OB.mobBd }};border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:12px;background:#FFFFFF"><span style="font:500 16px 'IBM Plex Mono',monospace;padding-right:12px;border-right:1px solid #E6E6E6">+966</span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:{{ OB.mobLc }}">{{ OB.mobLabel }}</span><input value="{{ OB.mob }}" onChange="{{ OB.setMob }}" inputMode="numeric" style="border:0;outline:0;padding:0;font:400 16px 'IBM Plex Mono',monospace;color:#0C1F1A;background:transparent"></div><sc-if value="{{ OB.mobOk }}" hint-placeholder-val="{{ false }}"><span style="width:22px;height:22px;border-radius:50%;background:#0B8F6E;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:12px;height:12px;flex:none" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></sc-if></div><span style="font-size:13px;color:#5E7770">Must be registered to the owner's national ID.</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="height:60px;border:1.5px solid #0C1F1A;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;box-shadow:0 0 0 3px rgba(12,31,26,.06)"><span style="font-size:11px">National ID / Iqama</span><span style="font:400 16px 'IBM Plex Mono',monospace">1087 •••• 21</span></div><div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;background:#FFFFFF"><span style="font-size:11px;color:#0C1F1A">Date of birth</span><span style="font-size:16px">12/12/1991</span></div></div>
+  <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;background:#FFFFFF"><span style="font-size:11px;color:#0C1F1A">CR number</span><span style="font-size:16px">2346041544</span></div>
+  <div style="display:flex;justify-content:flex-end"><span style="height:32px;padding:0 12px;border:1px solid #D9D9D9;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:14px;background:#FFFFFF"><svg viewBox="0 0 24 24" style="width:14px;height:14px;flex:none" fill="none" stroke="#0C1F1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>Add more CRs</span></div>
+  <div style="display:flex;justify-content:flex-end;margin-top:8px"><button onClick="{{ OB.next }}" style="width:120px;height:54px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -12px rgba(10,117,89,.8)" style-hover="filter:brightness(1.08)"><svg viewBox="0 0 24 24" style="width:26px;height:26px;flex:none" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></button></div>
+</div></div></div>
+  </div>
+  <div class="dv-opt" id="3e"><div class="dv-olabel"><a class="dv-oid" href="#3e">3e</a>Products · recommendations follow the business picked in 3b</div>
+    <div style="width:1180px;height:780px;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(70% 42% at 50% 100%,rgba(61,245,176,.22),rgba(61,245,176,0) 70%),#FFFFFF;border:1px solid rgba(0,0,0,.06);box-shadow:0 30px 60px -40px rgba(12,31,26,.35)"><div style="height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 36px"><span style="font:300 26px 'IBM Plex Sans',sans-serif;letter-spacing:.08em;color:#14967A">HALA</span><span style="font-size:14px;color:#0E7C62;font-weight:500;text-decoration:underline;text-underline-offset:3px">Need help?</span></div><div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:center;padding:0 40px 40px"><div style="width:560px;display:flex;flex-direction:column;gap:14px">
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:6px"><span style="align-self:flex-start;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:#E3F6EF;color:#0B6F56">Picked for {{ OB.bizName }}</span><h2 style="margin:0;font-size:34px;font-weight:700;letter-spacing:-.02em">Products that you need</h2><p style="margin:0;font-size:16px;color:#4A615A">You will be able to edit your choice later.</p></div>
+  <div style="border:1px solid #E1E6E3;border-radius:12px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF"><div style="display:flex;flex-direction:column;gap:3px"><span style="font:500 16px 'IBM Plex Mono',monospace">SA12 3400 •••• 2433</span><span style="font-size:13.5px;color:#5E7770">Your Hala business account</span></div><span style="font-size:12px;font-weight:500;padding:6px 14px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF">Included</span></div>
+  <sc-for list="{{ OB.products }}" as="p" hint-placeholder-count="3">
+    <div style="border:1.5px solid {{ p.bd }};border-radius:12px;display:flex;overflow:hidden;background:#FFFFFF;transition:border-color .2s">
+      <div style="width:104px;flex:none;position:relative;background:linear-gradient(160deg,#D3EEE5,#9DD3C2)"><image-slot id="{{ p.slot }}" shape="rect" placeholder="{{ p.ph }}"></image-slot></div>
+      <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:4px"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font-size:16px;font-weight:600">{{ p.name }}</span><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#E3F8EF;color:#16A26F;display:{{ p.recD }}">Recommended</span><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#E8F0FF;color:#2F5BD3;display:{{ p.newD }}">NEW</span></div><span style="font-size:13.5px;line-height:1.45;color:#4A615A">{{ p.desc }}</span></div>
+      <div style="padding:14px 16px;display:flex;align-items:center">
+        <sc-if value="{{ p.isQty }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:14px;border:1px solid #D9D9D9;border-radius:10px;padding:8px 12px"><button onClick="{{ p.dec }}" aria-label="Fewer" style="border:0;background:transparent;font-size:18px;cursor:pointer;padding:0;width:18px;color:#0C1F1A">−</button><span style="font-size:15px;min-width:14px;text-align:center">{{ p.qty }}</span><button onClick="{{ p.inc }}" aria-label="More" style="border:0;background:transparent;font-size:18px;cursor:pointer;padding:0;width:18px;color:#0C1F1A">+</button></div></sc-if>
+        <sc-if value="{{ p.isChk }}" hint-placeholder-val="{{ true }}"><button onClick="{{ p.toggle }}" aria-label="Select" style="width:22px;height:22px;border-radius:6px;border:1.5px solid {{ p.cbd }};background:{{ p.cbg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0">{{ p.mk }}</button></sc-if>
+      </div>
+    </div>
+  </sc-for>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:24px;margin-top:8px"><span style="font-size:13.5px;color:#5E7770">{{ OB.prodSummary }}</span><button onClick="{{ OB.next }}" style="width:120px;height:54px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -12px rgba(10,117,89,.8)" style-hover="filter:brightness(1.08)"><svg viewBox="0 0 24 24" style="width:26px;height:26px;flex:none" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></button></div>
+</div></div></div>
+  </div>
+</div>
+<div class="dv-grp">POS issuing flow</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="3f"><div class="dv-olabel"><a class="dv-oid" href="#3f">3f</a>Choose terminals → plan → branches → review → confirmation · click the step pills or use the summary button</div>
+    <div style="width:1280px;height:820px;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:#EEF3F1;border:1px solid rgba(0,0,0,.06);box-shadow:0 30px 60px -40px rgba(12,31,26,.35)">
+      <div style="height:72px;flex:none;display:flex;align-items:center;gap:20px;padding:0 28px;background:#FFFFFF;border-bottom:1px solid #E6ECE9">
+        <button aria-label="Close" style="width:40px;height:40px;border-radius:50%;border:1px solid #E6ECE9;background:#FFFFFF;font-size:20px;color:#0C1F1A">×</button>
+        <span style="font-size:18px;font-weight:700">Order POS terminals</span>
+        <div style="flex:1;display:flex;justify-content:center;gap:6px">
+          <sc-for list="{{ POS.steps }}" as="s" hint-placeholder-count="5"><button onClick="{{ s.go }}" style="height:36px;padding:0 14px 0 6px;border:0;border-radius:999px;background:{{ s.bg }};color:{{ s.fg }};font-size:13.5px;font-weight:{{ s.fw }};display:flex;align-items:center;gap:8px;cursor:{{ s.cur }}"><span style="width:24px;height:24px;border-radius:50%;background:{{ s.nbg }};color:{{ s.nfg }};font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ s.mark }}</span>{{ s.label }}</button></sc-for>
+        </div>
+        <span style="width:92px"></span>
+      </div>
+      <div style="flex:1;min-height:0;display:flex;gap:24px;padding:24px 28px">
+        <div class="pscr" style="flex:1;min-width:0;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding-right:4px">
+          <div style="display:flex;flex-direction:column;gap:4px"><h3 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">{{ POS.title }}</h3><span style="font-size:14.5px;color:#4A615A">{{ POS.sub }}</span></div>
+
+          <sc-if value="{{ POS.s0 }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+              <sc-for list="{{ POS.models }}" as="m" hint-placeholder-count="3">
+                <div style="background:#FFFFFF;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;outline:2px solid {{ m.ol }};outline-offset:-2px;transition:outline-color .2s">
+                  <div style="position:relative;height:190px;background:radial-gradient(80% 80% at 50% 30%,#FFFFFF,#E3EFEA)"><image-slot id="{{ m.slot }}" shape="rect" fit="contain" placeholder="{{ m.ph }}"></image-slot><span style="position:absolute;top:12px;left:12px;font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;display:{{ m.tagD }};pointer-events:none">{{ m.tag }}</span></div>
+                  <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1">
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:17px;font-weight:600">{{ m.name }}</span><span style="font:500 13px 'IBM Plex Mono',monospace;color:#0B8F6E;white-space:nowrap">{{ m.from }}</span></div>
+                    <span style="font-size:13px;line-height:1.45;color:#5E7770">{{ m.desc }}</span>
+                    <div style="display:flex;flex-direction:column;gap:6px;margin-top:2px"><sc-for list="{{ m.feats }}" as="f" hint-placeholder-count="3"><span style="display:flex;gap:8px;align-items:center;font-size:13px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;flex:none" fill="none" stroke="#0B8F6E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{ f }}</span></sc-for></div>
+                    <div style="margin-top:auto;padding-top:12px;border-top:1px solid #EEF2F0;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#5E7770">Quantity</span><div style="display:flex;align-items:center;gap:14px;border:1px solid #D7E0DC;border-radius:10px;padding:7px 12px"><button onClick="{{ m.dec }}" aria-label="Fewer" style="border:0;background:transparent;font-size:18px;cursor:pointer;padding:0;width:18px;color:#0C1F1A">−</button><span style="font-size:15px;min-width:16px;text-align:center;font-weight:600">{{ m.qty }}</span><button onClick="{{ m.inc }}" aria-label="More" style="border:0;background:transparent;font-size:18px;cursor:pointer;padding:0;width:18px;color:#0C1F1A">+</button></div></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ POS.s1 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <sc-for list="{{ POS.plans }}" as="p" hint-placeholder-count="3">
+                <button onClick="{{ p.pick }}" style="border:0;text-align:left;cursor:pointer;background:#FFFFFF;border-radius:18px;padding:20px 22px;display:flex;align-items:center;gap:18px;outline:2px solid {{ p.ol }};outline-offset:-2px;color:#0C1F1A;transition:outline-color .2s">
+                  <span style="width:22px;height:22px;border-radius:50%;flex:none;border:2px solid {{ p.rb }};display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;border-radius:50%;background:{{ p.rf }}"></span></span>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px;font-weight:600">{{ p.name }}</span><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#E3F8EF;color:#16A26F;display:{{ p.tagD }}">{{ p.tag }}</span></div><span style="font-size:13.5px;color:#5E7770">{{ p.desc }}</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:flex-end"><span style="font:600 18px 'IBM Plex Mono',monospace">{{ p.price }}</span><span style="font-size:12px;color:#5E7770">{{ p.unit }}</span></div>
+                </button>
+              </sc-for>
+              <div style="background:#FFFFFF;border-radius:18px;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">Instant settlement</span><span style="font-size:13px;color:#5E7770">Sales land in your Hala account in seconds · 0.2% per transaction</span></div><button onClick="{{ POS.toggleInstant }}" style="flex:none;width:44px;height:26px;border-radius:999px;border:0;padding:3px;cursor:pointer;display:flex;justify-content:{{ POS.instJ }};background:{{ POS.instBg }}"><span style="width:20px;height:20px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,.2)"></span></button></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ POS.s2 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;background:{{ POS.assignBg }};color:{{ POS.assignFg }};font-size:14px;font-weight:500"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01"></path></svg>{{ POS.assignMsg }}</div>
+              <div style="background:#FFFFFF;border-radius:18px;padding:4px 20px">
+                <sc-for list="{{ POS.branches }}" as="b" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid {{ b.bd }}"><span style="width:40px;height:40px;border-radius:12px;background:#F2F6F4;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:19px;height:19px;flex:none" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path></svg></span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500">{{ b.name }}</span><span style="font-size:12.5px;color:#5E7770">{{ b.addr }}</span></div><span style="font-size:12.5px;color:#5E7770;margin-right:6px">{{ b.has }}</span><div style="display:flex;align-items:center;gap:14px;border:1px solid #D7E0DC;border-radius:10px;padding:7px 12px"><button onClick="{{ b.dec }}" aria-label="Fewer" style="border:0;background:transparent;font-size:18px;cursor:pointer;padding:0;width:18px;color:#0C1F1A">−</button><span style="font-size:15px;min-width:16px;text-align:center;font-weight:600">{{ b.n }}</span><button onClick="{{ b.inc }}" aria-label="More" style="border:0;background:transparent;font-size:18px;cursor:pointer;padding:0;width:18px;color:#0C1F1A">+</button></div></div></sc-for>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;background:#FFFFFF"><span style="font-size:11px;color:#0C1F1A">Contact on site</span><span style="font-size:16px">Omar Bakr · +966 55 •••• 821</span></div><div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;background:#FFFFFF"><span style="font-size:11px;color:#0C1F1A">Preferred delivery</span><span style="font-size:16px">Sun–Thu, 9 am – 1 pm</span></div></div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ POS.s3 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="background:#FFFFFF;border-radius:18px;padding:6px 22px">
+                <sc-for list="{{ POS.review }}" as="r" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-top:1px solid {{ r.bd }}"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">{{ r.k }}</span><span style="font-size:12.5px;color:#5E7770">{{ r.s }}</span></div><span style="font:500 14px 'IBM Plex Mono',monospace;text-align:right">{{ r.v }}</span></div></sc-for>
+              </div>
+              <div style="background:#FFFFFF;border-radius:18px;padding:16px 22px;display:flex;align-items:center;gap:14px"><span style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#0FA37F,#0A5C4A);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:700">H</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">Pay from Hala Business</span><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#5E7770">SA57 •• 1951 · balance SAR 45,000.00</span></div><span style="font-size:13px;font-weight:600;color:#0E7C62">Change</span></div>
+              <label onClick="{{ POS.toggleAgree }}" style="display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer"><span style="width:16px;height:16px;border-radius:4px;border:1.3px solid {{ POS.agreeBd }};background:{{ POS.agreeBg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:11px">{{ POS.agreeMk }}</span>I agree to the POS rental terms and the fees above</label>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ POS.s4 }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#FFFFFF;border-radius:20px;padding:32px;display:flex;gap:36px;align-items:flex-start">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:12px;width:260px;text-align:center"><span style="width:84px;height:84px;border-radius:50%;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(11,143,110,.12)"><svg viewBox="0 0 24 24" style="width:38px;height:38px;flex:none" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="margin-top:12px;font-size:22px;font-weight:700">Order placed</span><span style="font-size:14px;color:#5E7770">Order #POS-20461 · {{ POS.totalUnits }} terminals</span><span style="font-size:13.5px;color:#0B8F6E;font-weight:600">Arrives in 3–5 business days</span></div>
+              <div style="flex:1;display:flex;flex-direction:column">
+                <sc-for list="{{ POS.track }}" as="t" hint-placeholder-count="4"><div style="display:flex;gap:14px"><div style="display:flex;flex-direction:column;align-items:center"><span style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:{{ t.bg }};border:2px solid {{ t.bd }};color:#FFFFFF;box-shadow:{{ t.ring }}"><span style="width:8px;height:8px;border-radius:50%;background:{{ t.dot }}"></span></span><span style="width:2px;flex:1;min-height:24px;background:{{ t.line }};margin:4px 0"></span></div><div style="display:flex;flex-direction:column;gap:2px;padding-bottom:20px"><span style="font-size:15px;font-weight:600;color:{{ t.tc }}">{{ t.t }}</span><span style="font-size:13px;color:#5E7770">{{ t.s }}</span></div></div></sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <aside style="width:340px;flex:none;align-self:flex-start;background:#FFFFFF;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:16px;font-weight:700">Order summary</span>
+          <sc-for list="{{ POS.lines }}" as="l" hint-placeholder-count="2"><div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span>{{ l.k }}</span><span style="font-family:'IBM Plex Mono',monospace">{{ l.v }}</span></div></sc-for>
+          <sc-if value="{{ POS.noLines }}" hint-placeholder-val="{{ false }}"><span style="font-size:13.5px;color:#5E7770">Add at least one terminal to continue.</span></sc-if>
+          <div style="display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px dashed #D7E0DC;font-size:13.5px;color:#4A615A"><div style="display:flex;justify-content:space-between"><span>Setup &amp; delivery</span><span style="color:#0B8F6E;font-weight:600">Free</span></div><div style="display:flex;justify-content:space-between"><span>VAT (15%)</span><span style="font-family:'IBM Plex Mono',monospace">{{ POS.vat }}</span></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px solid #EEF2F0"><span style="font-size:15px;font-weight:600">{{ POS.totalLabel }}</span><span style="font:600 22px 'IBM Plex Mono',monospace">{{ POS.total }}</span></div>
+          <button onClick="{{ POS.next }}" style="height:52px;border:0;border-radius:999px;background:{{ POS.btn.bg }};color:{{ POS.btn.fg }};font-size:16px;font-weight:600;cursor:{{ POS.btn.cur }};box-shadow:{{ POS.btn.sh }};transition:all .2s">{{ POS.btn.label }}</button>
+          <sc-if value="{{ POS.showBack }}" hint-placeholder-val="{{ false }}"><button onClick="{{ POS.back }}" style="height:44px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:14.5px;font-weight:500;cursor:pointer">Back</button></sc-if>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Hala corporate UI moodboard, rebuilt from the sign-up screens (light, LTR, POS sales data)</span></div>
+<p style="margin:0;max-width:760px;font-size:14px;line-height:1.55;color:#5C5C5C">System taken from the screens: IBM Plex Sans, #1A1A1A ink, teal gradient pill CTAs (#0A7559 → #2C957A), 8px floating-label inputs with a #D9D9D9 border, a black-to-teal "Approved" card, and a mint haze at the bottom of the page. Options start close to those screens and get looser toward the right.</p>
+
+<div class="dv-grp">Navigation / sidebar</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="2a"><div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>White sidebar, mint active state, CR switcher</div>
+    <div class="dv-card" style="width:280px;height:600px;display:flex;flex-direction:column;padding:24px 16px;box-sizing:border-box;gap:28px">
+      <span style="font:300 30px 'IBM Plex Sans',sans-serif;letter-spacing:0.06em;color:#14967A;padding:0 8px">HALA</span>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ navA }}" as="n" hint-placeholder-count="7">
+          <div onClick="{{ n.pick }}" style="display:flex;align-items:center;gap:12px;height:42px;padding:0 12px;border-radius:10px;cursor:pointer;background:{{ n.bg }};color:{{ n.fg }};font-size:14px;font-weight:{{ n.fw }}">
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg><span style="flex:1">{{ n.label }}</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#0E7C62">{{ n.badge }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:auto;border-radius:10px;padding:14px;background:linear-gradient(100deg,#1A1A1A 55%,#2E6B5C);color:#FFFFFF;display:flex;flex-direction:column;gap:4px">
+        <span style="font-size:14px;font-weight:600">Khamis Arabia Trading Co</span>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:400 12px 'IBM Plex Mono',monospace;color:#C9D6D1">CR 2346041544</span><span style="font-size:12px;color:#C9D6D1">Switch ▾</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2b"><div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Ink sidebar, gradient active pill, mint glow</div>
+    <div class="dv-card" style="width:280px;height:600px;display:flex;flex-direction:column;padding:24px 16px;box-sizing:border-box;gap:28px;background:#1A1A1A;border:0;position:relative">
+      <div style="position:absolute;left:-60px;right:-60px;bottom:-140px;height:280px;border-radius:50%;background:radial-gradient(closest-side,rgba(64,224,180,0.35),rgba(64,224,180,0))"></div>
+      <span style="font:300 30px 'IBM Plex Sans',sans-serif;letter-spacing:0.06em;color:#3FD2A8;padding:0 8px;position:relative">HALA</span>
+      <div style="display:flex;flex-direction:column;gap:4px;position:relative">
+        <sc-for list="{{ navB }}" as="n" hint-placeholder-count="7">
+          <div onClick="{{ n.pick }}" style="display:flex;align-items:center;gap:12px;height:44px;padding:0 16px;border-radius:999px;cursor:pointer;background:{{ n.bg }};color:{{ n.fg }};font-size:14px;font-weight:500">
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg><span>{{ n.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:auto;display:flex;align-items:center;gap:10px;position:relative;padding:0 8px">
+        <span style="width:36px;height:36px;border-radius:50%;background:#2E6B5C;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600">FA</span>
+        <div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:500;color:#FFFFFF">Faisal Alharbi</span><span style="font-size:12px;color:#9AA8A3">Account owner</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2c"><div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Icon rail + labelled panel, grouped sections</div>
+    <div class="dv-card" style="width:330px;height:600px;display:flex">
+      <div style="width:72px;flex:none;background:#F6F7F6;border-right:1px solid #ECECEC;display:flex;flex-direction:column;align-items:center;padding:22px 0;gap:10px">
+        <span style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#0A7559,#2C957A);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;margin-bottom:12px">H</span>
+        <sc-for list="{{ navC }}" as="n" hint-placeholder-count="7">
+          <div onClick="{{ n.pick }}" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:{{ n.bg }};color:{{ n.fg }};box-shadow:{{ n.sh }}"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg></div>
+        </sc-for>
+      </div>
+      <div style="flex:1;padding:24px 18px;display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:20px;font-weight:700">{{ navTitle }}</span><span style="font-size:13px;color:#5C5C5C">Khamis Arabia Trading Co</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.08em;color:#8A8A8A">GET PAID</span>
+          <div style="height:38px;display:flex;align-items:center;padding:0 12px;border-radius:8px;background:#E8F7F1;color:#0E7C62;font-size:14px;font-weight:600">POS terminals<span style="margin-left:auto;font:500 12px 'IBM Plex Mono',monospace">12</span></div>
+          <div style="height:38px;display:flex;align-items:center;padding:0 12px;font-size:14px">eCommerce<span style="margin-left:8px;font-size:11px;font-weight:600;color:#16A26F;background:#E3F8EF;padding:2px 7px;border-radius:999px">NEW</span></div>
+          <div style="height:38px;display:flex;align-items:center;padding:0 12px;font-size:14px">Settlements</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.08em;color:#8A8A8A">REPORTS</span>
+          <div style="height:38px;display:flex;align-items:center;padding:0 12px;font-size:14px">Daily sales</div>
+          <div style="height:38px;display:flex;align-items:center;padding:0 12px;font-size:14px">By branch</div>
+          <div style="height:38px;display:flex;align-items:center;padding:0 12px;font-size:14px">Refunds &amp; disputes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dv-grp">Line / area charts</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="2d"><div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>Area chart with teal fill, range switch, tooltip</div>
+    <div class="dv-card" style="width:600px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;color:#5C5C5C">POS sales</span><span style="font-size:30px;font-weight:700;letter-spacing:-0.01em">SAR {{ areaTotal }}</span><span style="font-size:13px;color:#0E7C62;font-weight:500">▲ {{ areaDelta }} vs previous period</span></div>
+        <div style="display:flex;border:1px solid #D9D9D9;border-radius:999px;padding:3px;gap:2px">
+          <sc-for list="{{ ranges }}" as="r" hint-placeholder-count="3"><button onClick="{{ r.pick }}" style="border:0;cursor:pointer;font:500 13px 'IBM Plex Sans',sans-serif;padding:6px 14px;border-radius:999px;background:{{ r.bg }};color:{{ r.fg }}">{{ r.label }}</button></sc-for>
+        </div>
+      </div>
+      <div style="position:relative">
+        <svg viewBox="0 0 552 200" style="width:100%;height:auto;display:block">
+          <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1C9A7B" stop-opacity="0.25"></stop><stop offset="1" stop-color="#1C9A7B" stop-opacity="0"></stop></linearGradient></defs>
+          <g stroke="#EFEFEF"><line x1="0" y1="20" x2="552" y2="20"></line><line x1="0" y1="80" x2="552" y2="80"></line><line x1="0" y1="140" x2="552" y2="140"></line><line x1="0" y1="190" x2="552" y2="190"></line></g>
+          <path d="{{ areaFill }}" fill="url(#ga)"></path>
+          <path d="{{ areaLine }}" fill="none" stroke="#0E7C62" stroke-width="2.5" stroke-linejoin="round"></path>
+          <line x1="{{ tip.x }}" y1="{{ tip.y }}" x2="{{ tip.x }}" y2="190" stroke="#1A1A1A" stroke-dasharray="3 3"></line>
+          <circle cx="{{ tip.x }}" cy="{{ tip.y }}" r="5.5" fill="#FFFFFF" stroke="#0E7C62" stroke-width="2.5"></circle>
+        </svg>
+        <div style="position:absolute;left:{{ tip.left }};top:{{ tip.top }};transform:translate(-50%,-115%);background:#1A1A1A;color:#FFFFFF;border-radius:8px;padding:6px 10px;font-size:12px;white-space:nowrap;display:flex;flex-direction:column"><span style="color:#B5B5B5">{{ tip.label }}</span><span style="font:500 13px 'IBM Plex Mono',monospace">{{ tip.val }}</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font:400 11px 'IBM Plex Mono',monospace;color:#8A8A8A"><sc-for list="{{ areaX }}" as="x" hint-placeholder-count="6"><span>{{ x }}</span></sc-for></div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2e"><div class="dv-olabel"><a class="dv-oid" href="#2e">2e</a>Dark "Approved" card treatment, this vs last month</div>
+    <div class="dv-card" style="width:440px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;background:linear-gradient(115deg,#1A1A1A 50%,#2E6B5C);border:0;color:#FFFFFF">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:14px;color:#C9D6D1">Settled to IBAN · October</span><span style="font-size:11px;font-weight:500;letter-spacing:0.06em;padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.12)">ON TRACK</span></div>
+      <span style="font-size:34px;font-weight:600;letter-spacing:-0.01em">SAR 1,284,560</span>
+      <svg viewBox="0 0 392 140" style="width:100%;height:auto;display:block">
+        <path d="{{ darkPrev }}" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="4 5"></path>
+        <path d="{{ darkCur }}" fill="none" stroke="#4BE3B6" stroke-width="5" stroke-opacity="0.18" stroke-linecap="round"></path>
+        <path d="{{ darkCur }}" fill="none" stroke="#4BE3B6" stroke-width="2" stroke-linecap="round"></path>
+        <circle cx="{{ darkEnd.x }}" cy="{{ darkEnd.y }}" r="4" fill="#4BE3B6"></circle>
+      </svg>
+      <div style="display:flex;gap:20px;font-size:12px;color:#C9D6D1"><span style="display:flex;align-items:center;gap:8px"><span style="width:14px;height:2px;background:#4BE3B6"></span>This month</span><span style="display:flex;align-items:center;gap:8px"><span style="width:14px;border-top:1.5px dashed rgba(255,255,255,0.5)"></span>September</span></div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2f"><div class="dv-olabel"><a class="dv-oid" href="#2f">2f</a>KPI strip with sparklines</div>
+    <div style="display:flex;flex-direction:column;gap:12px;width:300px">
+      <sc-for list="{{ sparks }}" as="s" hint-placeholder-count="3">
+        <div class="dv-card" style="padding:16px 18px;display:grid;grid-template-columns:1fr 110px;gap:4px 12px;align-items:center">
+          <span style="font-size:13px;color:#5C5C5C">{{ s.label }}</span>
+          <svg viewBox="0 0 110 36" style="grid-row:span 2;width:110px;height:36px"><path d="{{ s.path }}" fill="none" stroke="{{ s.c }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:22px;font-weight:700">{{ s.val }}</span><span style="font-size:12px;font-weight:500;color:{{ s.c }}">{{ s.delta }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div class="dv-grp">Bar charts</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="2g"><div class="dv-olabel"><a class="dv-oid" href="#2g">2g</a>Daily sales, today highlighted in gradient</div>
+    <div class="dv-card" style="width:520px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:16px;font-weight:600">Daily sales · last 14 days</span><span style="font-size:13px;color:#5C5C5C">Avg SAR 41.2k</span></div>
+      <div style="position:relative;display:flex;align-items:flex-end;gap:8px;height:180px;border-bottom:1px solid #E6E6E6">
+        <div style="position:absolute;left:0;right:0;bottom:45%;border-top:1px dashed #BDBDBD"></div>
+        <sc-for list="{{ dailyBars }}" as="b" hint-placeholder-count="14"><div style="flex:1;height:{{ b.h }};border-radius:6px 6px 2px 2px;background:{{ b.bg }}"></div></sc-for>
+      </div>
+      <div style="display:flex;gap:8px;font:400 10px 'IBM Plex Mono',monospace;color:#8A8A8A"><sc-for list="{{ dailyBars }}" as="b" hint-placeholder-count="14"><span style="flex:1;text-align:center">{{ b.d }}</span></sc-for></div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2h"><div class="dv-olabel"><a class="dv-oid" href="#2h">2h</a>Sales by branch, horizontal</div>
+    <div class="dv-card" style="width:400px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:16px;font-weight:600">Sales by branch</span>
+      <sc-for list="{{ branches }}" as="b" hint-placeholder-count="5">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span>{{ b.name }}</span><span style="font-family:'IBM Plex Mono',monospace">{{ b.val }}</span></div>
+          <div style="height:10px;border-radius:999px;background:#F0F2F1"><div style="width:{{ b.w }};height:100%;border-radius:999px;background:{{ b.bg }}"></div></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div class="dv-opt" id="2i"><div class="dv-olabel"><a class="dv-oid" href="#2i">2i</a>Stacked by payment method + peak-hours heat strip</div>
+    <div class="dv-card" style="width:460px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
+      <span style="font-size:16px;font-weight:600">Payment methods · this week</span>
+      <div style="display:flex;align-items:flex-end;gap:12px;height:140px">
+        <sc-for list="{{ stacks }}" as="s" hint-placeholder-count="7">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end">
+            <div style="width:100%;display:flex;flex-direction:column;gap:2px;height:{{ s.h }}"><span style="flex:{{ s.a }};background:#0E7C62;border-radius:5px 5px 0 0"></span><span style="flex:{{ s.b }};background:#4BC9A2"></span><span style="flex:{{ s.c }};background:#BDEFDF;border-radius:0 0 3px 3px"></span></div>
+            <span style="font:400 10px 'IBM Plex Mono',monospace;color:#8A8A8A">{{ s.d }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:16px;font-size:12px;color:#5C5C5C"><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:#0E7C62"></span>mada</span><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:#4BC9A2"></span>Visa / Mastercard</span><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:#BDEFDF"></span>Apple Pay</span></div>
+      <div style="height:1px;background:#EFEFEF"></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:600">Peak hours</span><span style="color:#5C5C5C">Busiest: Thu 8–9 pm</span></div>
+      <div style="display:grid;grid-template-columns:repeat(16,1fr);gap:3px"><sc-for list="{{ heat }}" as="h" hint-placeholder-count="64"><span style="aspect-ratio:1;border-radius:3px;background:{{ h }}"></span></sc-for></div>
+      <div style="display:flex;justify-content:space-between;font:400 10px 'IBM Plex Mono',monospace;color:#8A8A8A"><span>8 am</span><span>12 pm</span><span>4 pm</span><span>8 pm</span><span>11 pm</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="dv-grp">Transactions table</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="2j"><div class="dv-olabel"><a class="dv-oid" href="#2j">2j</a>Classic table with filter chips and pagination</div>
+    <div class="dv-card" style="width:780px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <span style="font-size:18px;font-weight:700">Transactions</span>
+        <div style="display:flex;gap:8px">
+          <sc-for list="{{ txFilters }}" as="f" hint-placeholder-count="4"><button onClick="{{ f.pick }}" style="height:34px;padding:0 14px;border-radius:999px;font:500 13px 'IBM Plex Sans',sans-serif;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</button></sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.1fr 1.6fr 1.2fr 1fr 1fr;gap:12px;padding:10px 12px;background:#F6F7F6;border-radius:8px;font-size:12px;font-weight:500;color:#5C5C5C"><span>Date</span><span>Terminal / branch</span><span>Card</span><span>Status</span><span style="text-align:right">Amount</span></div>
+      <sc-for list="{{ txRows }}" as="t" hint-placeholder-count="6">
+        <div style="display:grid;grid-template-columns:1.1fr 1.6fr 1.2fr 1fr 1fr;gap:12px;padding:10px 12px;align-items:center;border-bottom:1px solid #F0F0F0;font-size:14px" style-hover="background:#FAFBFA">
+          <span style="color:#5C5C5C;font-size:13px">{{ t.date }}</span>
+          <div style="display:flex;flex-direction:column"><span style="font-weight:500">{{ t.term }}</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#8A8A8A">{{ t.id }}</span></div>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px">{{ t.card }}</span>
+          <span style="justify-self:start;font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:{{ t.sbg }};color:{{ t.sfg }}">{{ t.status }}</span>
+          <span style="text-align:right;font-family:'IBM Plex Mono',monospace;font-weight:500">{{ t.amt }}</span>
+        </div>
+      </sc-for>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#5C5C5C"><span>Showing {{ txCount }} of 1,284</span><div style="display:flex;gap:6px"><span style="width:32px;height:32px;border-radius:8px;border:1px solid #D9D9D9;display:flex;align-items:center;justify-content:center">‹</span><span style="width:32px;height:32px;border-radius:8px;background:#1A1A1A;color:#FFFFFF;display:flex;align-items:center;justify-content:center">1</span><span style="width:32px;height:32px;border-radius:8px;border:1px solid #D9D9D9;display:flex;align-items:center;justify-content:center">2</span><span style="width:32px;height:32px;border-radius:8px;border:1px solid #D9D9D9;display:flex;align-items:center;justify-content:center">›</span></div></div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2k"><div class="dv-olabel"><a class="dv-oid" href="#2k">2k</a>Grouped by settlement day, card rows</div>
+    <div style="width:440px;display:flex;flex-direction:column;gap:14px">
+      <sc-for list="{{ txGroups }}" as="g" hint-placeholder-count="2">
+        <div class="dv-card" style="display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid #EFEFEF"><div style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">{{ g.day }}</span><span style="font-size:12px;color:#5C5C5C">{{ g.note }}</span></div><span style="font:500 15px 'IBM Plex Mono',monospace;color:#0E7C62">{{ g.total }}</span></div>
+          <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 18px">
+              <span style="width:40px;height:28px;border-radius:5px;flex:none;background:{{ r.cbg }};color:{{ r.cfg }};font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ r.brand }}</span>
+              <div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:500">{{ r.term }}</span><span style="font-size:12px;color:#8A8A8A">{{ r.time }}</span></div>
+              <span style="font:500 14px 'IBM Plex Mono',monospace;color:{{ r.ac }}">{{ r.amt }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div class="dv-grp">Input forms</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="2l"><div class="dv-olabel"><a class="dv-oid" href="#2l">2l</a>Floating-label field states (from sign-up)</div>
+    <div class="dv-card" style="width:440px;padding:28px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px">
+      <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;align-items:center;font-size:16px;color:#6B6B6B">Company Name (English)</div>
+      <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Number of terminals</span><span style="font-size:16px">3-10</span></div><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="#1A1A1A" stroke-width="1.6"><path d="M6 9l6 6 6-6"></path></svg></div>
+      <div style="height:60px;border:1.5px solid #1A1A1A;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;box-shadow:0 0 0 3px rgba(26,26,26,0.06)"><span style="font-size:11px">Settlement IBAN</span><input value="{{ iban }}" onChange="{{ setIban }}" style="border:0;outline:0;padding:0;font:400 16px 'IBM Plex Sans',sans-serif;color:#1A1A1A;background:transparent"></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><div style="height:60px;border:1px solid #E02424;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px"><span style="font-size:11px;color:#E02424">Mobile number must be 9 digits</span><span style="font-size:16px">50 333 12 6</span></div><span style="font-size:13px;color:#5C5C5C">We use this to send settlement alerts.</span></div>
+      <div style="display:flex;justify-content:flex-end"><span style="height:32px;padding:0 12px;border:1px solid #D9D9D9;border-radius:8px;display:flex;align-items:center;gap:8px;font-size:14px"><span style="width:14px;height:14px;border-radius:50%;border:1.3px solid #1A1A1A;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1">+</span>Add more CRs</span></div>
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:24px;margin-top:6px">
+        <label onClick="{{ toggleApply }}" style="display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer"><span style="width:16px;height:16px;border-radius:4px;border:1.3px solid {{ applyBd }};background:{{ applyBg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:11px">{{ applyMark }}</span>Apply this information to all CRs</label>
+        <button style="width:120px;height:54px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="filter:brightness(1.08)"><svg viewBox="0 0 24 24" style="width:26px;height:26px" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"></path></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2m"><div class="dv-olabel"><a class="dv-oid" href="#2m">2m</a>Order terminals: stepper + selectable plan cards</div>
+    <div class="dv-card" style="width:440px;padding:28px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px">
+      <span style="font-size:22px;font-weight:700">Order POS terminals</span>
+      <div style="display:flex;align-items:center;gap:14px;border:1px solid #D9D9D9;border-radius:8px;padding:14px">
+        <div style="width:64px;height:64px;border-radius:6px;background:linear-gradient(160deg,#CFEDE4,#8CC9B6);flex:none;display:flex;align-items:center;justify-content:center;font:400 10px 'IBM Plex Mono',monospace;color:#2E6B5C">IMG</div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:500">POS terminal</span><span style="font-size:13px;color:#5C5C5C">Chip &amp; PIN, contactless</span></div>
+        <div style="display:flex;align-items:center;gap:14px;border:1px solid #D9D9D9;border-radius:10px;padding:8px 12px"><button onClick="{{ dec }}" style="border:0;background:transparent;font-size:18px;cursor:pointer;color:#1A1A1A;padding:0;width:18px">−</button><span style="font-size:15px;min-width:14px;text-align:center">{{ qty }}</span><button onClick="{{ inc }}" style="border:0;background:transparent;font-size:18px;cursor:pointer;color:#1A1A1A;padding:0;width:18px">+</button></div>
+      </div>
+      <span style="font-size:16px;font-weight:600;margin-top:6px">Rental plan</span>
+      <sc-for list="{{ plans }}" as="p" hint-placeholder-count="2">
+        <div onClick="{{ p.pick }}" style="display:flex;align-items:center;gap:14px;border:1px solid {{ p.bd }};background:{{ p.bg }};border-radius:8px;padding:14px;cursor:pointer">
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:15px;font-weight:500">{{ p.t }}</span><span style="font-size:11px;font-weight:600;color:#16A26F;background:#E3F8EF;padding:2px 7px;border-radius:999px;display:{{ p.tagD }}">SAVE 20%</span></div><span style="font-size:13px;color:#5C5C5C">{{ p.s }}</span></div>
+          <span style="width:16px;height:16px;border-radius:4px;border:1.3px solid {{ p.cbd }};background:{{ p.cbg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:11px">{{ p.mark }}</span>
+        </div>
+      </sc-for>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid #EFEFEF"><div style="display:flex;flex-direction:column"><span style="font-size:12px;color:#5C5C5C">Monthly total</span><span style="font-size:20px;font-weight:700">SAR {{ planTotal }}</span></div><button style="height:48px;padding:0 28px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font:500 15px 'IBM Plex Sans',sans-serif;cursor:pointer">Confirm order</button></div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2n"><div class="dv-olabel"><a class="dv-oid" href="#2n">2n</a>Dashboard filter bar: search, date, segmented, toggle</div>
+    <div class="dv-card" style="width:440px;padding:28px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px">
+      <div style="height:48px;border:1px solid #D9D9D9;border-radius:999px;padding:0 18px;display:flex;align-items:center;gap:10px;color:#6B6B6B;font-size:15px"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#1A1A1A" stroke-width="1.6"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Search by amount, RRN or terminal</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px"><span style="font-size:11px">From</span><span style="font-size:16px">01/10/2026</span></div>
+        <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px"><span style="font-size:11px">To</span><span style="font-size:16px">12/10/2026</span></div>
+      </div>
+      <div style="display:flex;background:#F2F4F3;border-radius:10px;padding:4px">
+        <sc-for list="{{ segs }}" as="s" hint-placeholder-count="3"><button onClick="{{ s.pick }}" style="flex:1;height:36px;border:0;border-radius:8px;cursor:pointer;font:500 14px 'IBM Plex Sans',sans-serif;background:{{ s.bg }};color:{{ s.fg }};box-shadow:{{ s.sh }}">{{ s.label }}</button></sc-for>
+      </div>
+      <sc-for list="{{ switches }}" as="w" hint-placeholder-count="2">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500">{{ w.t }}</span><span style="font-size:13px;color:#5C5C5C">{{ w.s }}</span></div><button onClick="{{ w.flip }}" style="flex:none;width:44px;height:26px;border-radius:999px;border:0;padding:3px;cursor:pointer;display:flex;justify-content:{{ w.j }};background:{{ w.bg }}"><span style="width:20px;height:20px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,0.2)"></span></button></div>
+      </sc-for>
+      <div style="display:flex;gap:10px;margin-top:4px"><button style="flex:1;height:48px;border-radius:999px;border:1px solid #D9D9D9;background:#FFFFFF;font:500 15px 'IBM Plex Sans',sans-serif;color:#1A1A1A;cursor:pointer">Reset</button><button style="flex:2;height:48px;border-radius:999px;border:0;background:linear-gradient(90deg,#0A7559,#2C957A);font:500 15px 'IBM Plex Sans',sans-serif;color:#FFFFFF;cursor:pointer">Apply filters</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="dv-grp">Corporate cards</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="2o"><div class="dv-olabel"><a class="dv-oid" href="#2o">2o</a>Ink + teal glow (matches Approved card)</div>
+    <div style="width:380px;display:flex;flex-direction:column;gap:14px">
+      <div style="aspect-ratio:1.586;border-radius:16px;padding:22px;box-sizing:border-box;background:radial-gradient(120% 90% at 100% 100%,#2E8A72 0%,#1F4A40 35%,#1A1A1A 70%);color:#FFFFFF;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 20px 40px -20px rgba(14,124,98,0.5)">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:#C9D6D1">Corporate · Marketing</span><span style="font:300 22px 'IBM Plex Sans',sans-serif;letter-spacing:0.06em;color:#4BE3B6">HALA</span></div>
+        <span style="width:40px;height:30px;border-radius:6px;background:linear-gradient(135deg,#D9D9D9,#9E9E9E)"></span>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end"><div style="display:flex;flex-direction:column;gap:4px"><span style="font:400 16px 'IBM Plex Mono',monospace;letter-spacing:0.12em">•••• 2433</span><span style="font-size:12px;color:#C9D6D1">SARA ALQAHTANI · 09/29</span></div><span style="font-size:20px;font-weight:700;font-style:italic">VISA</span></div>
+      </div>
+      <div class="dv-card" style="padding:16px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;font-size:13px"><span>Monthly limit</span><span style="font-family:'IBM Plex Mono',monospace">8,400 / 15,000</span></div><div style="height:6px;border-radius:999px;background:#F0F2F1"><div style="width:56%;height:100%;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A)"></div></div></div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2p"><div class="dv-olabel"><a class="dv-oid" href="#2p">2p</a>Green expense card + controls</div>
+    <div class="dv-card" style="width:380px;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px">
+      <div style="aspect-ratio:1.586;border-radius:14px;padding:20px;box-sizing:border-box;background:linear-gradient(135deg,#1D8F55 0%,#3DB06A 60%,#7ACB6A 100%);color:#FFFFFF;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;opacity:{{ frozenOp }}">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(120deg,rgba(255,255,255,0.06) 0 2px,transparent 2px 22px)"></div>
+        <div style="position:relative;display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:500">Expense card</span><span style="font:300 20px 'IBM Plex Sans',sans-serif;letter-spacing:0.06em">HALA</span></div>
+        <div style="position:relative;display:flex;justify-content:space-between;align-items:flex-end"><span style="font:400 15px 'IBM Plex Mono',monospace;letter-spacing:0.12em">•••• 7710</span><span style="font-size:18px;font-weight:700;font-style:italic">VISA</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+        <button onClick="{{ toggleFreeze }}" style="height:64px;border-radius:10px;border:1px solid {{ freezeBd }};background:{{ freezeBg }};font:500 13px 'IBM Plex Sans',sans-serif;color:#1A1A1A;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="font-size:16px">❄</span>{{ freezeLabel }}</button>
+        <button style="height:64px;border-radius:10px;border:1px solid #D9D9D9;background:#FFFFFF;font:500 13px 'IBM Plex Sans',sans-serif;color:#1A1A1A;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="font-size:16px">⚙</span>Limits</button>
+        <button style="height:64px;border-radius:10px;border:1px solid #D9D9D9;background:#FFFFFF;font:500 13px 'IBM Plex Sans',sans-serif;color:#1A1A1A;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="font-size:16px">⋯</span>Details</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:#5C5C5C"><span>Spent this month</span><span style="font-family:'IBM Plex Mono',monospace;color:#1A1A1A">SAR 3,920.00</span></div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2q"><div class="dv-olabel"><a class="dv-oid" href="#2q">2q</a>Fanned card stack + team card list</div>
+    <div class="dv-card" style="width:400px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;background:linear-gradient(180deg,#FFFFFF 40%,#E4FFF6)">
+      <div style="position:relative;height:170px">
+        <div style="position:absolute;left:70px;top:0;width:240px;height:150px;border-radius:12px;background:linear-gradient(135deg,#3DB06A,#7ACB6A);transform:rotate(8deg);box-shadow:0 10px 24px -12px rgba(0,0,0,0.3)"></div>
+        <div style="position:absolute;left:40px;top:12px;width:240px;height:150px;border-radius:12px;background:radial-gradient(120% 90% at 100% 100%,#2E8A72,#1A1A1A 70%);transform:rotate(-4deg);box-shadow:0 14px 30px -12px rgba(0,0,0,0.4);color:#FFFFFF;padding:16px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between"><span style="font:300 18px 'IBM Plex Sans',sans-serif;letter-spacing:0.06em;color:#4BE3B6">HALA</span><span style="font:400 13px 'IBM Plex Mono',monospace;letter-spacing:0.1em">•••• 2433</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:16px;font-weight:600">Team cards</span><span style="font-size:13px;color:#0E7C62;font-weight:500;text-decoration:underline;text-underline-offset:3px">Issue card</span></div>
+      <sc-for list="{{ teamCards }}" as="c" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="width:36px;height:24px;border-radius:4px;flex:none;background:{{ c.bg }}"></span>
+          <div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:500">{{ c.name }}</span><span style="font-size:12px;color:#8A8A8A">{{ c.sub }}</span></div>
+          <span style="font-size:11px;font-weight:500;padding:3px 9px;border-radius:999px;background:{{ c.sbg }};color:{{ c.sfg }}">{{ c.status }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div class="dv-grp">Progress</div>
+<div class="dv-opts">
+  <div class="dv-opt" id="2r"><div class="dv-olabel"><a class="dv-oid" href="#2r">2r</a>Sign-up stepper + linear bars</div>
+    <div class="dv-card" style="width:520px;padding:28px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;align-items:center">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;flex:{{ s.flex }}">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:64px"><span style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;background:{{ s.bg }};color:{{ s.fg }};border:1.5px solid {{ s.bd }};box-sizing:border-box">{{ s.mark }}</span><span style="font-size:12px;color:{{ s.tc }}">{{ s.t }}</span></div>
+            <span style="flex:1;height:2px;margin-bottom:20px;background:{{ s.line }}"></span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;font-size:14px"><span style="font-weight:500">Account setup</span><span style="font-family:'IBM Plex Mono',monospace">60%</span></div><div style="height:8px;border-radius:999px;background:#F0F2F1"><div style="width:60%;height:100%;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A)"></div></div></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;font-size:14px"><span style="font-weight:500">Terminals delivered</span><span style="font-family:'IBM Plex Mono',monospace">4 of 6</span></div><div style="display:flex;gap:4px"><span style="flex:1;height:8px;border-radius:3px;background:#1A1A1A"></span><span style="flex:1;height:8px;border-radius:3px;background:#1A1A1A"></span><span style="flex:1;height:8px;border-radius:3px;background:#1A1A1A"></span><span style="flex:1;height:8px;border-radius:3px;background:#1A1A1A"></span><span style="flex:1;height:8px;border-radius:3px;background:#E6E6E6"></span><span style="flex:1;height:8px;border-radius:3px;background:#E6E6E6"></span></div></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #D9D9D9;border-radius:8px"><span style="width:36px;height:36px;border-radius:6px;background:#F2F4F3;display:flex;align-items:center;justify-content:center;font:500 10px 'IBM Plex Mono',monospace;color:#5C5C5C">PDF</span><div style="flex:1;display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:500">CR_certificate.pdf</span><span style="color:#5C5C5C">{{ upload }}%</span></div><div style="height:4px;border-radius:2px;background:#EDEDED"><div style="width:{{ uploadW }};height:100%;border-radius:2px;background:#0E7C62"></div></div></div></div>
+    </div>
+  </div>
+  <div class="dv-opt" id="2s"><div class="dv-olabel"><a class="dv-oid" href="#2s">2s</a>Monthly target ring + settlement timeline</div>
+    <div class="dv-card" style="width:440px;padding:28px;box-sizing:border-box;display:flex;gap:24px;align-items:center;background:linear-gradient(180deg,#FFFFFF 50%,#E4FFF6)">
+      <div style="position:relative;width:150px;height:150px;flex:none">
+        <svg viewBox="0 0 120 120" style="width:150px;height:150px;transform:rotate(-90deg)"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A7559"></stop><stop offset="1" stop-color="#4BE3B6"></stop></linearGradient></defs><circle cx="60" cy="60" r="50" fill="none" stroke="#EDF1EF" stroke-width="12"></circle><circle cx="60" cy="60" r="50" fill="none" stroke="url(#gr)" stroke-width="12" stroke-linecap="round" stroke-dasharray="226 314.2"></circle></svg>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font-size:30px;font-weight:700">72%</span><span style="font-size:12px;color:#5C5C5C">of SAR 1.8M</span></div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:15px;font-weight:600">Today's settlement</span>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:13px">
+          <div style="display:flex;gap:10px;align-items:center"><span style="width:10px;height:10px;border-radius:50%;background:#0E7C62"></span><span style="flex:1">Batch closed</span><span style="color:#5C5C5C">23:59</span></div>
+          <div style="display:flex;gap:10px;align-items:center"><span style="width:10px;height:10px;border-radius:50%;background:#0E7C62"></span><span style="flex:1">Processed</span><span style="color:#5C5C5C">00:14</span></div>
+          <div style="display:flex;gap:10px;align-items:center"><span style="width:10px;height:10px;border-radius:50%;border:2px solid #0E7C62;box-sizing:border-box;background:#FFFFFF"></span><span style="flex:1;font-weight:600">Sent to IBAN</span><span style="color:#0E7C62">in progress</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="dv-next">Try next: "build a full POS dashboard from <a class="dv-oid" href="#2a">2a</a> + <a class="dv-oid" href="#2d">2d</a> + <a class="dv-oid" href="#2j">2j</a>" · "push <a class="dv-oid" href="#2e">2e</a>'s dark treatment across more components" · "add Arabic RTL versions"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { nav: 1, range: '30D', tx: 'All', apply: false, qty: 1, plan: 1, seg: 0, sw: [true, false], frozen: false, upload: 0, iban: 'SA03 8000 0000 6080 1016 7519' };
+  componentDidMount() { this.t = setInterval(() => this.setState(s => ({ upload: s.upload >= 100 ? 0 : s.upload + 4 })), 180); }
+  componentWillUnmount() { clearInterval(this.t); }
+  pts(a, W, top, bot, max = 100) { const st = W / (a.length - 1); return a.map((v, i) => [+(i * st).toFixed(1), +(bot - (v / max) * (bot - top)).toFixed(1)]); }
+  smooth(p) { let d = `M${p[0][0]} ${p[0][1]}`; for (let i = 1; i < p.length; i++) { const [x0, y0] = p[i - 1], [x1, y1] = p[i], c = (x0 + x1) / 2; d += ` C${c} ${y0} ${c} ${y1} ${x1} ${y1}`; } return d; }
+  t3() {
+    const s = this.state, ink = '#0C1F1A', teal = '#0B8F6E', grad = 'linear-gradient(90deg,#0A7559,#2C957A)';
+    const g = (k, d) => (s[k] === undefined ? d : s[k]);
+    const set = (k, v) => this.setState({ [k]: v });
+    const I = { dash: 'M3.34 19a10 10 0 1 1 17.32 0M12 14l4-4', tx: 'M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4', pay: 'M22 2 11 13M22 2l-7 20-4-9-9-4z', payroll: 'M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM16 2v4M8 2v4M3 10h18', card: 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20', sadad: 'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7ZM14 2v4a2 2 0 0 0 2 2h4M8 13h8v4H8z', pos: 'M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8v4H8zM8 14h.01M12 14h.01M16 14h.01', cart: 'M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 1.9-1.6L22 7H5.1', invoice: 'M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1ZM8 8h8M8 12h8', food: 'M3 11h18M4 11a8 6 0 0 1 16 0M3 15h18M5 15v2a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-2', loc: 'M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6', users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9', docs: 'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7ZM14 2v4a2 2 0 0 0 2 2h4M16 13H8M16 17H8', help: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01', gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M2 12h3M19 12h3' };
+    const SECT = [{ label: 'MAIN', items: [['Dashboard', 'dash'], ['Transactions', 'tx']] }, { label: 'PAY', items: [['Transfers', 'pay', ['Local transfer', 'International', 'Beneficiaries'], '3'], ['Payrolls', 'payroll'], ['Cards', 'card'], ['SADAD', 'sadad']] }, { label: 'ACCEPT PAYMENTS', items: [['POS', 'pos', ['Terminals', 'Order POS', 'Settlements']], ['eCommerce', 'cart', null, null, true], ['Invoicing', 'invoice'], ['Food delivery', 'food', null, null, true]] }, { label: 'MANAGE', items: [['Locations', 'loc'], ['Users', 'users'], ['Documents', 'docs', ['Statements', 'Contracts']]] }];
+    const x = !g('sbC', false), j = x ? 'flex-start' : 'center', pg = g('sbPage', 'POS'), sub = g('sbSub', 'Order POS'), open = g('sbOpen', { POS: true });
+    const SB = {
+      x, w: x ? '272px' : '80px', j, headJ: x ? 'space-between' : 'center', tIcon: x ? 'M16 9l-3 3 3 3' : 'M13 9l3 3-3 3', acctPad: x ? '10px 12px' : '8px', userPad: x ? '10px' : '6px',
+      toggle: () => set('sbC', x),
+      sections: SECT.map((sec, gi) => ({ label: sec.label, x, c: !x && gi > 0, items: sec.items.map(([k, ic, kids, badge, isNew]) => { const on = pg === k, op = !!kids && !!open[k] && x, sel = on && (!kids || !x); return { label: k, icon: I[ic], x, tip: x ? '' : k, j, bg: sel ? 'rgba(15,163,127,.1)' : 'transparent', hbg: sel ? 'rgba(15,163,127,.13)' : 'rgba(12,31,26,.04)', fg: on ? '#07372B' : '#4A615A', fw: on ? 600 : 500, bar: on ? '#0FA37F' : 'transparent', isNew: x && !!isNew, hasBadge: !!badge, badge: badge || '', bPos: x ? 'static' : 'absolute', chev: x && !!kids, rot: op ? 'rotate(180deg)' : 'none', hasKids: !!kids, rows: op ? '1fr' : '0fr', pick: () => kids ? this.setState({ sbC: false, sbOpen: { ...open, [k]: x ? !open[k] : true } }) : this.setState({ sbPage: k, sbSub: null }), kids: (kids || []).map(kk => { const a = on && sub === kk; return { label: kk, bg: a ? 'rgba(15,163,127,.1)' : 'transparent', fg: a ? '#07372B' : '#5E7770', fw: a ? 600 : 400, pick: () => this.setState({ sbPage: k, sbSub: kk }) }; }) }; }) })),
+      foot: [['Help & support', I.help], ['Settings & Preferences', I.gear]].map(([label, icon]) => ({ label, icon, x, j, tip: x ? '' : label }))
+    };
+    // onboarding
+    const BIZ = [
+      { k: 'shop', name: 'Shop', desc: 'Retail stores, boutiques, pharmacies and showrooms.', tags: ['POS', 'eCommerce'], ph: 'Photo: shop owner at the counter', src: 'https://unsplash.com/photos/dQyS2pMYtok/download?w=800', credit: 'Photo by Christiann Koepke on Unsplash', href: 'https://unsplash.com/@christiannkoepke' },
+      { k: 'rest', name: 'Restaurant', desc: 'Restaurants, cafés, food trucks and cloud kitchens.', tags: ['POS', 'Food delivery'], ph: 'Photo: café or restaurant service', src: 'https://unsplash.com/photos/4g_M9D0rn8M/download?w=800', credit: 'Photo by Vitaly Gariev on Unsplash', href: 'https://unsplash.com/@silverkblack' },
+      { k: 'sup', name: 'Supplier', desc: 'Wholesale, distribution and B2B services.', tags: ['Invoicing', 'Transfers'], ph: 'Photo: warehouse with stock', src: 'https://unsplash.com/photos/M7G_m5XJ-go/download?w=800', credit: 'Photo by Russ Murray on Unsplash', href: 'https://unsplash.com/@russmurray' },
+      { k: 'corp', name: 'Corporate', desc: 'Companies managing spend, payroll and teams.', tags: ['Cards', 'Payroll'], ph: 'Photo: team in an office', src: 'https://unsplash.com/photos/UikYLDQj9_I/download?w=800', credit: 'Photo by Vitaly Gariev on Unsplash', href: 'https://unsplash.com/@silverkblack' }
+    ];
+    const bz = g('obBiz', 1), mob = g('obMob', '50 333 12 6'), digits = mob.replace(/\D/g, ''), mobOk = /^5\d{8}$/.test(digits), all = g('obAll', false);
+    const PRODS = {
+      pos: { name: 'POS terminal', desc: 'Chip & PIN, contactless and mada. Know more', slot: 'ob-p-pos', ph: 'POS terminal' }, ecom: { name: 'eCommerce', desc: 'Accept card payments on your website or app.', slot: 'ob-p-ecom', ph: 'Checkout UI', isNew: true },
+      food: { name: 'Food delivery', desc: 'Orders from delivery apps straight into your POS.', slot: 'ob-p-food', ph: 'Delivery order', isNew: true }, exp: { name: 'Expense management', desc: 'Company cards, receipts and team spend in one place.', slot: 'ob-p-exp', ph: 'Corporate cards' },
+      inv: { name: 'Online invoicing', desc: 'Send payment links and get paid by card or SADAD.', slot: 'ob-p-inv', ph: 'Invoice link' }, pay: { name: 'Payroll', desc: 'Pay salaries to any Saudi bank, WPS compliant.', slot: 'ob-p-pay', ph: 'Payroll run' }
+    };
+    const REC = { shop: ['pos', 'ecom', 'exp'], rest: ['pos', 'food', 'exp'], sup: ['inv', 'ecom', 'exp'], corp: ['exp', 'pay', 'inv'] }[BIZ[bz].k];
+    const picked = g('obPicked', {}), posQty = g('obPosQty', 1);
+    const isOn = (k, i) => (picked[k] === undefined ? i < 2 : picked[k]);
+    const products = REC.map((k, i) => { const p = PRODS[k], q = k === 'pos', on = q ? posQty > 0 : isOn(k, i); return { ...p, recD: i === 0 ? 'inline-block' : 'none', newD: p.isNew ? 'inline-block' : 'none', isQty: q, isChk: !q, qty: posQty, dec: () => set('obPosQty', Math.max(0, posQty - 1)), inc: () => set('obPosQty', Math.min(50, posQty + 1)), bd: on ? '#0B8F6E' : '#E1E6E3', cbd: on ? teal : '#9AACA6', cbg: on ? teal : '#FFFFFF', mk: on ? '✓' : '', toggle: () => set('obPicked', { ...picked, [k]: !on }) }; });
+    const count = REC.filter((k, i) => (k === 'pos' ? posQty > 0 : isOn(k, i))).length;
+    const OB = {
+      next: () => {},
+      biz: BIZ.map((b, i) => { const on = i === bz; return { ...b, slot: 'ob-biz-' + b.k, pressed: on ? 'true' : 'false', ol: on ? ink : 'rgba(12,31,26,.08)', sh: on ? '0 24px 40px -24px rgba(12,31,26,.45)' : '0 1px 2px rgba(12,31,26,.04)', tf: on ? 'translateY(-4px)' : 'none', ckBg: on ? teal : 'rgba(12,31,26,.25)', tagBg: on ? '#E3F6EF' : '#F2F6F4', tagC: on ? '#0B6F56' : '#4A615A', pick: () => set('obBiz', i) }; }),
+      bizHint: `Good choice: we'll set up ${BIZ[bz].tags.join(' and ')} first.`, bizBtnLabel: `Continue as ${BIZ[bz].name}`, bizBtnBg: grad, bizBtnFg: '#FFFFFF', bizBtnCur: 'pointer', bizBtnSh: '0 10px 22px -12px rgba(10,117,89,.8)', bizNext: () => {},
+      allBd: all ? teal : '#8A8A8A', allBg: all ? teal : '#FFFFFF', allMk: all ? '✓' : '', toggleAll: () => set('obAll', !all),
+      mob, setMob: e => set('obMob', e.target.value), mobOk, mobBd: mobOk ? '#D9D9D9' : '#E02424', mobLc: mobOk ? ink : '#E02424', mobLabel: mobOk ? 'Mobile number' : 'Mobile number must be 9 digits starting with 5',
+      bizName: BIZ[bz].name.toLowerCase() + 's', products, prodSummary: `${count} of 3 selected · POS × ${posQty}`
+    };
+    // POS flow
+    const MODELS = [
+      { k: 'smart', name: 'Hala Smart POS', desc: 'Android terminal with printer, 4G and Wi-Fi. For busy counters.', feats: ['Built-in receipt printer', 'All-day battery', 'Inventory & menu app'], rent: [99, 79], buy: 1450, tag: 'Most popular', ph: 'Product photo: Smart POS' },
+      { k: 'mini', name: 'Hala Mini', desc: 'Pocket-size card reader that pairs with your phone.', feats: ['Pairs over Bluetooth', 'Digital receipts by SMS', 'Fits in a pocket'], rent: [59, 45], buy: 690, tag: '', ph: 'Product photo: Mini reader' },
+      { k: 'tap', name: 'Tap on Phone', desc: 'Accept contactless cards on any NFC Android phone. No hardware.', feats: ['No device to ship', 'Live in minutes', 'Ideal for deliveries'], rent: [0, 0], buy: 0, tag: 'No hardware', ph: 'Photo: phone taking a tap payment' }
+    ];
+    const qty = g('posQty', { smart: 3, mini: 0, tap: 1 }), plan = g('posPlan', 1), step = g('posStep', 0), inst = g('posInst', true), agree = g('posAgree', false);
+    const units = MODELS.reduce((a, m) => a + qty[m.k], 0), hw = MODELS.reduce((a, m) => a + (m.k === 'tap' ? 0 : qty[m.k]), 0);
+    const BR = [['Olaya, Riyadh', '8228 Olaya St, Al Olaya', 4], ['Al Malqa, Riyadh', 'Anas Ibn Malik Rd', 2], ['Jeddah Corniche', 'Corniche Rd, Al Shati', 3], ['Khobar Mall', 'King Fahd Rd, Al Khobar', 0]];
+    const asg = g('posAsg', [2, 1, 1, 0]), asgSum = asg.reduce((a, b) => a + b, 0);
+    const fmt = n => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const priceOf = m => (plan === 2 ? m.buy : m.rent[plan]);
+    const sub0 = MODELS.reduce((a, m) => a + priceOf(m) * qty[m.k], 0), vat = sub0 * 0.15;
+    const steps = ['Terminals', 'Plan', 'Branches', 'Review', 'Done'];
+    const canNext = [units > 0, true, asgSum === units, agree, true][step];
+    const PLANS = [['Monthly rental', 'Cancel anytime · free replacement if it breaks', 'per terminal / month', '', 0], ['Annual rental', 'Billed yearly · free replacement · 20% less', 'per terminal / month', 'Save 20%', 1], ['Buy outright', 'One-time payment · 12-month warranty', 'per terminal, one-time', '', 2]];
+    const POS = {
+      steps: steps.map((l, i) => { const done = i < step, cur = i === step; return { label: l, mark: done ? '✓' : String(i + 1), bg: cur ? '#0C1F1A' : 'transparent', fg: cur ? '#FFFFFF' : done ? ink : '#8A9C96', fw: cur ? 600 : 500, nbg: cur ? '#FFFFFF' : done ? teal : '#E6ECE9', nfg: cur ? ink : done ? '#FFFFFF' : '#5E7770', cur: i <= step && step < 4 ? 'pointer' : 'default', go: () => i <= step && step < 4 && set('posStep', i) }; }),
+      title: ['Choose your terminals', 'Pick a plan', 'Assign to branches', 'Review your order', 'Your terminals are on the way'][step],
+      sub: ['Mix models to fit each counter. You can add more later.', 'Prices are per terminal. Tap on Phone is always free.', `Tell us where each of the ${units} terminals goes. We deliver and install on site.`, 'Check everything before you place the order.', "We'll text the on-site contact before delivery."][step],
+      s0: step === 0, s1: step === 1, s2: step === 2, s3: step === 3, s4: step === 4,
+      models: MODELS.map(m => ({ ...m, slot: 'pos-m-' + m.k, from: m.k === 'tap' ? 'Free' : `from SAR ${m.rent[1]}/mo`, tagD: m.tag ? 'inline-block' : 'none', qty: qty[m.k], ol: qty[m.k] > 0 ? teal : 'transparent', dec: () => set('posQty', { ...qty, [m.k]: Math.max(0, qty[m.k] - 1) }), inc: () => set('posQty', { ...qty, [m.k]: Math.min(20, qty[m.k] + 1) }) })),
+      plans: PLANS.map(([name, desc, unit, tag, i]) => { const on = plan === i; return { name, desc, unit, tag, tagD: tag ? 'inline-block' : 'none', price: `SAR ${i === 2 ? '1,450' : MODELS[0].rent[i]}`, ol: on ? teal : 'transparent', rb: on ? teal : '#B9C8C2', rf: on ? teal : 'transparent', pick: () => set('posPlan', i) }; }),
+      toggleInstant: () => set('posInst', !inst), instJ: inst ? 'flex-end' : 'flex-start', instBg: inst ? grad : '#D9D9D9',
+      assignMsg: asgSum === units ? `All ${units} terminals assigned` : asgSum < units ? `${units - asgSum} terminal${units - asgSum > 1 ? 's' : ''} left to assign` : `${asgSum - units} more than you ordered, remove some or add terminals`,
+      assignBg: asgSum === units ? '#E3F6EF' : '#FFF1DE', assignFg: asgSum === units ? '#0B6F56' : '#94550A',
+      branches: BR.map(([name, addr, has], i) => ({ name, addr, has: has ? `${has} already` : 'No terminals yet', n: asg[i], bd: i ? '#EEF2F0' : 'transparent', dec: () => { const a = [...asg]; a[i] = Math.max(0, a[i] - 1); set('posAsg', a); }, inc: () => { const a = [...asg]; a[i] = a[i] + 1; set('posAsg', a); } })),
+      review: [...MODELS.filter(m => qty[m.k]).map(m => ({ k: `${m.name} × ${qty[m.k]}`, s: m.k === 'tap' ? 'App activation by SMS' : PLANS[plan][0], v: priceOf(m) ? `SAR ${fmt(priceOf(m) * qty[m.k])}` : 'Free' })), { k: 'Delivery', s: BR.filter((b, i) => asg[i]).map((b, i) => b[0].split(',')[0]).join(' · '), v: 'Free' }, { k: 'Settlement', s: inst ? 'Instant · 0.2% per transaction' : 'Next business day', v: inst ? 'Instant' : 'T+1' }].map((r, i) => ({ ...r, bd: i ? '#EEF2F0' : 'transparent' })),
+      agreeBd: agree ? teal : '#8A8A8A', agreeBg: agree ? teal : '#FFFFFF', agreeMk: agree ? '✓' : '', toggleAgree: () => set('posAgree', !agree),
+      totalUnits: units,
+      track: [['Order placed', 'Today, 10:42', 2], ['Preparing terminals', 'Configured with your branch names', 1], ['Out for delivery', 'Estimated Sun 18 Oct', 0], ['Installed & live', 'Our technician activates each terminal', 0]].map(([t, sub2, st], i, a) => ({ t, s: sub2, bg: st === 2 ? teal : '#FFFFFF', bd: st ? teal : '#D7E0DC', dot: st === 2 ? '#FFFFFF' : st === 1 ? teal : 'transparent', ring: st === 1 ? '0 0 0 5px #E3F6EF' : 'none', line: i === a.length - 1 ? 'transparent' : st === 2 ? teal : '#E6ECE9', tc: st ? ink : '#8A9C96' })),
+      lines: MODELS.filter(m => qty[m.k]).map(m => ({ k: `${m.name} × ${qty[m.k]}`, v: priceOf(m) ? fmt(priceOf(m) * qty[m.k]) : 'Free' })), noLines: units === 0,
+      vat: fmt(vat), totalLabel: plan === 2 ? 'Total today' : plan === 1 ? 'Monthly (billed yearly)' : 'Monthly total', total: `SAR ${fmt(sub0 + vat)}`,
+      btn: canNext ? { bg: step === 4 ? '#0C1F1A' : grad, fg: '#FFFFFF', cur: 'pointer', sh: step === 4 ? 'none' : '0 10px 22px -12px rgba(10,117,89,.8)', label: ['Continue', 'Continue', 'Continue', 'Place order', 'Track in POS › Terminals'][step] } : { bg: '#E6ECE9', fg: '#8A9C96', cur: 'not-allowed', sh: 'none', label: ['Add a terminal', '', 'Assign all terminals', 'Accept the terms', ''][step] },
+      next: () => canNext && (step < 4 ? set('posStep', step + 1) : this.setState({ posStep: 0, posAgree: false })),
+      showBack: step > 0 && step < 4, back: () => set('posStep', step - 1)
+    };
+    return { SB, OB, POS };
+  }
+  renderVals() {
+    const s = this.state, ink = '#1A1A1A', teal = '#0E7C62', grad = 'linear-gradient(90deg,#0A7559,#2C957A)';
+    const icons = { Overview: 'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z', Sales: 'M4 20V10M10 20V4M16 20v-7M2 20h20', Terminals: 'M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8v5H8z', Cards: 'M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zM2 10h20', Transfers: 'M4 8h14l-4-4M20 16H6l4 4', Team: 'M16 20v-2a4 4 0 0 0-8 0v2M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', Settings: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 12h2M3 12h2M12 3v2M12 19v2' };
+    const labels = Object.keys(icons), badges = { Terminals: '12', Transfers: '3' };
+    const nav = (fn) => labels.map((l, i) => ({ label: l, icon: icons[l], badge: badges[l] || '', pick: () => this.setState({ nav: i }), ...fn(i === s.nav) }));
+    const D = {
+      '7D': { a: [38, 52, 46, 64, 58, 88, 72], x: ['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon'], total: '288,410', delta: '6.2%' },
+      '30D': { a: [34, 44, 40, 52, 48, 62, 58, 70, 66, 82, 74, 90], x: ['13 Sep', '18', '23', '28', '3 Oct', '12 Oct'], total: '1,236,900', delta: '12.4%' },
+      '12M': { a: [28, 34, 30, 44, 50, 46, 58, 64, 60, 74, 84, 92], x: ['Nov', 'Jan', 'Mar', 'May', 'Jul', 'Oct'], total: '13.6M', delta: '31.0%' }
+    }[s.range];
+    const ap = this.pts(D.a, 552, 20, 190), al = this.smooth(ap);
+    let pi = 0; D.a.forEach((v, i) => { if (v > D.a[pi]) pi = i; }); const tp = ap[pi > 0 && pi === D.a.length - 1 ? pi - 1 : pi], tv = D.a[pi > 0 && pi === D.a.length - 1 ? pi - 1 : pi];
+    const dc = this.pts([20, 26, 24, 34, 40, 38, 50, 58, 56, 66, 74, 80], 392, 10, 130), dp = this.pts([18, 22, 28, 30, 32, 38, 42, 44, 50, 52, 56, 60], 392, 10, 130);
+    const sp = (a) => this.smooth(this.pts(a, 110, 4, 32));
+    const statusC = { Settled: ['#E3F8EF', '#0E7C62'], Pending: ['#FFF4E0', '#9A5B00'], Refunded: ['#F2F4F3', '#5C5C5C'], Declined: ['#FDECEC', '#C81E1E'] };
+    const rows = [
+      ['12 Oct, 14:22', 'Olaya branch · T-04', 'TID 60801016', 'mada ••3391', 'Settled', '1,240.00'],
+      ['12 Oct, 14:09', 'eCommerce · Web', 'Gateway', 'Visa ••8812', 'Pending', '389.50'],
+      ['12 Oct, 13:51', 'Al Malqa · T-07', 'TID 60801022', 'Apple Pay', 'Settled', '76.25'],
+      ['12 Oct, 13:40', 'Olaya branch · T-02', 'TID 60801012', 'Mastercard ••0045', 'Declined', '2,150.00'],
+      ['12 Oct, 13:12', 'Jeddah Corniche · T-01', 'TID 60801031', 'mada ••7720', 'Refunded', '−148.00'],
+      ['12 Oct, 12:58', 'Al Malqa · T-07', 'TID 60801022', 'mada ••1180', 'Settled', '512.75']
+    ];
+    const filt = s.tx === 'All' ? rows : rows.filter(r => r[4] === s.tx);
+    const brand = { mada: ['#1A1A1A', '#FFFFFF'], VISA: ['#1A1F71', '#FFFFFF'], MC: ['#F2F4F3', '#1A1A1A'], Pay: ['#000000', '#FFFFFF'] };
+    const heat = Array.from({ length: 64 }, (_, i) => { const h = i % 16, d = Math.floor(i / 16); const v = Math.max(0.06, Math.min(1, (Math.sin((h - 2) / 3.2) * 0.35 + 0.45 + (h > 10 ? 0.35 : 0) + (d === 2 ? 0.15 : 0) - (h > 14 ? 0.3 : 0)))); return `rgba(14,124,98,${v.toFixed(2)})`; });
+    const plans = [['Monthly rental', 'SAR 99 / terminal, cancel anytime', 99, false], ['Annual rental', 'SAR 79 / terminal, billed yearly', 79, true]];
+    return {
+      ...this.t3(),
+      navA: nav(on => ({ bg: on ? '#E8F7F1' : 'transparent', fg: on ? teal : ink, fw: on ? 600 : 400 })),
+      navB: nav(on => ({ bg: on ? grad : 'transparent', fg: on ? '#FFFFFF' : '#B5BFBB' })),
+      navC: nav(on => ({ bg: on ? '#FFFFFF' : 'transparent', fg: on ? teal : '#6B6B6B', sh: on ? '0 1px 4px rgba(0,0,0,0.08)' : 'none' })),
+      navTitle: labels[s.nav],
+      ranges: ['7D', '30D', '12M'].map(r => ({ label: r, bg: r === s.range ? ink : 'transparent', fg: r === s.range ? '#FFFFFF' : '#5C5C5C', pick: () => this.setState({ range: r }) })),
+      areaTotal: D.total, areaDelta: D.delta, areaLine: al, areaFill: `${al} L552 190 L0 190 Z`, areaX: D.x,
+      tip: { x: tp[0], y: tp[1], left: `${(tp[0] / 552) * 100}%`, top: `${(tp[1] / 200) * 100}%`, label: 'Peak day', val: `SAR ${(tv * 1.37).toFixed(1)}k` },
+      darkCur: this.smooth(dc), darkPrev: this.smooth(dp), darkEnd: { x: dc[dc.length - 1][0] - 4, y: dc[dc.length - 1][1] },
+      sparks: [
+        { label: 'Transactions today', val: '1,284', delta: '+8.1%', c: teal, path: sp([30, 36, 34, 44, 40, 52, 58, 56, 68]) },
+        { label: 'Average ticket', val: 'SAR 96.3', delta: '+2.4%', c: teal, path: sp([50, 48, 54, 52, 56, 55, 60, 58, 62]) },
+        { label: 'Refund rate', val: '0.8%', delta: '−0.3 pt', c: '#C81E1E', path: sp([60, 56, 58, 50, 48, 44, 46, 40, 38]) }
+      ],
+      dailyBars: [52, 46, 60, 58, 72, 88, 64, 48, 55, 62, 70, 84, 92, 78].map((v, i, a) => ({ h: `${v}%`, d: String(29 + i > 30 ? i - 1 : 29 + i), bg: i === a.length - 1 ? grad : (i === 12 ? '#1A1A1A' : '#CDEFE3') })),
+      branches: [['Olaya, Riyadh', 412, 'SAR 412.6k'], ['Al Malqa, Riyadh', 318, 'SAR 318.0k'], ['Jeddah Corniche', 264, 'SAR 264.3k'], ['Khobar Mall', 151, 'SAR 151.9k'], ['eCommerce', 90, 'SAR 90.1k']].map(([n, v, l], i) => ({ name: n, val: l, w: `${(v / 412) * 100}%`, bg: i === 0 ? grad : (i === 4 ? '#1A1A1A' : '#7FD3B8') })),
+      stacks: [['S', 60, 5, 3, 2], ['M', 70, 5, 3, 2], ['T', 64, 6, 3, 2], ['W', 78, 5, 4, 2], ['T', 96, 5, 3, 3], ['F', 100, 4, 3, 3], ['S', 72, 5, 3, 2]].map(([d, h, a, b, c]) => ({ d, h: `${h}%`, a, b, c })),
+      heat,
+      txFilters: ['All', 'Settled', 'Pending', 'Declined'].map(f => ({ label: f, pick: () => this.setState({ tx: f }), bg: s.tx === f ? ink : '#FFFFFF', fg: s.tx === f ? '#FFFFFF' : ink, bd: s.tx === f ? ink : '#D9D9D9' })),
+      txRows: filt.map(([date, term, id, card, status, amt]) => ({ date, term, id, card, status, amt, sbg: statusC[status][0], sfg: statusC[status][1] })),
+      txCount: filt.length,
+      txGroups: [
+        { day: 'Today, 12 Oct', note: 'Settles tonight · 214 transactions', total: 'SAR 48,920.40', rows: [['Olaya · T-04', '14:22', 'mada', '+1,240.00'], ['Web checkout', '14:09', 'VISA', '+389.50'], ['Al Malqa · T-07', '13:51', 'Pay', '+76.25']] },
+        { day: 'Yesterday, 11 Oct', note: 'Settled to IBAN ••2433 at 00:14', total: 'SAR 61,302.85', rows: [['Jeddah · T-01', '21:40', 'MC', '+2,815.00'], ['Olaya · T-02', '20:12', 'mada', '−148.00 refund']] }
+      ].map(g => ({ ...g, rows: g.rows.map(([term, time, b, amt]) => ({ term, time, brand: b === 'Pay' ? ' Pay' : b, cbg: brand[b][0], cfg: brand[b][1], amt, ac: amt.startsWith('−') ? '#C81E1E' : ink })) })),
+      iban: s.iban, setIban: e => this.setState({ iban: e.target.value }),
+      toggleApply: () => this.setState({ apply: !s.apply }), applyBd: s.apply ? teal : '#8A8A8A', applyBg: s.apply ? teal : '#FFFFFF', applyMark: s.apply ? '✓' : '',
+      qty: s.qty, inc: () => this.setState({ qty: Math.min(20, s.qty + 1) }), dec: () => this.setState({ qty: Math.max(1, s.qty - 1) }),
+      plans: plans.map(([t, sub, p, save], i) => { const on = s.plan === i; return { t, s: sub, tagD: save ? 'inline-block' : 'none', bd: on ? teal : '#D9D9D9', bg: on ? '#F3FBF8' : '#FFFFFF', cbd: on ? teal : '#8A8A8A', cbg: on ? teal : '#FFFFFF', mark: on ? '✓' : '', pick: () => this.setState({ plan: i }) }; }),
+      planTotal: (plans[s.plan][2] * s.qty).toLocaleString('en-US'),
+      segs: ['Sales', 'Refunds', 'Settlements'].map((l, i) => ({ label: l, pick: () => this.setState({ seg: i }), bg: s.seg === i ? '#FFFFFF' : 'transparent', fg: s.seg === i ? ink : '#5C5C5C', sh: s.seg === i ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' })),
+      switches: [['Include refunds', 'Show negative amounts in totals'], ['Group by branch', 'Combine terminals per location']].map(([t, sub], i) => ({ t, s: sub, bg: s.sw[i] ? grad : '#D9D9D9', j: s.sw[i] ? 'flex-end' : 'flex-start', flip: () => this.setState(st => { const w = [...st.sw]; w[i] = !w[i]; return { sw: w }; }) })),
+      toggleFreeze: () => this.setState({ frozen: !s.frozen }), freezeLabel: s.frozen ? 'Unfreeze' : 'Freeze', freezeBd: s.frozen ? teal : '#D9D9D9', freezeBg: s.frozen ? '#E8F7F1' : '#FFFFFF', frozenOp: s.frozen ? 0.45 : 1,
+      teamCards: [['Sara Alqahtani', 'Marketing · SAR 8,400 spent', 'Active', 'radial-gradient(circle at 100% 100%,#2E8A72,#1A1A1A 70%)'], ['Omar Bakr', 'Operations · SAR 3,920 spent', 'Active', 'linear-gradient(135deg,#3DB06A,#7ACB6A)'], ['Lina Hassan', 'Sales · limit reached', 'Frozen', '#CFCFCF']].map(([name, sub, st, bg]) => ({ name, sub, status: st, bg, sbg: st === 'Active' ? '#E3F8EF' : '#F2F4F3', sfg: st === 'Active' ? teal : '#5C5C5C' })),
+      steps: [['Mobile', 'done'], ['Owner', 'done'], ['Business', 'now'], ['Products', 'todo']].map(([t, st], i, a) => ({ t, mark: st === 'done' ? '✓' : String(i + 1), flex: i === a.length - 1 ? '0 0 auto' : '1', bg: st === 'done' ? teal : '#FFFFFF', fg: st === 'done' ? '#FFFFFF' : (st === 'now' ? ink : '#8A8A8A'), bd: st === 'todo' ? '#D9D9D9' : (st === 'now' ? ink : teal), tc: st === 'todo' ? '#8A8A8A' : ink, line: i === a.length - 1 ? 'transparent' : (st === 'done' ? teal : '#E6E6E6') })),
+      upload: s.upload, uploadW: `${s.upload}%`
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Accordions</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Accordions show and hide sections of content so long pages stay scannable. The same component works on web and mobile; only the sizes change. Every example with a "Live" tag works.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Anatomy</h2><p style="margin:0;font-size:15px;color:#4A615A">The whole header row is the button. The chevron is on the right and turns 180° when the section opens.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:28px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:center">
+    <div style="position:relative;border-radius:18px;border:1px solid #E1E8E5;overflow:hidden">
+      <div style="min-height:64px;padding:0 18px;display:flex;align-items:center;gap:14px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#F2F6F4;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20"></path></svg></span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">Card limits</span><span style="font-size:13px;color:#5E7770">Daily, monthly and per transaction</span></div><span style="height:22px;padding:0 8px;border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:11.5px;font-weight:600;display:flex;align-items:center;white-space:nowrap">3 set</span><span style="width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:18px;height:18px;transform:rotate(180deg)" fill="none" stroke="#4A615A" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+      <div style="padding:4px 18px 18px 72px;display:flex;flex-direction:column;gap:8px;font-size:14px;color:#4A615A"><div style="display:flex;justify-content:space-between"><span>Daily</span><span style="font-family:'IBM Plex Mono',monospace;color:#0C1F1A">SAR 5,000</span></div><div style="display:flex;justify-content:space-between"><span>Monthly</span><span style="font-family:'IBM Plex Mono',monospace;color:#0C1F1A">SAR 40,000</span></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ anatomy }}" as="a" hint-placeholder-count="6"><div style="display:flex;gap:12px;align-items:baseline"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:#0C1F1A;color:#FFFFFF;font:500 11px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center">{{ a.n }}</span><div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:14px;font-weight:600">{{ a.k }}</span><span style="font-size:13px;color:#5E7770;line-height:1.45">{{ a.v }}</span></div></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">States</h2><p style="margin:0;font-size:15px;color:#4A615A">Header row states. Text and chevron colors stay readable in every state; only the background and ring change.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+    <sc-for list="{{ states }}" as="s" hint-placeholder-count="6">
+      <div style="display:grid;grid-template-columns:minmax(130px,170px) minmax(0,1fr) minmax(0,260px);gap:24px;align-items:center;padding:16px 0;border-top:1px solid {{ s.bdr }}">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">{{ s.name }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ s.spec }}</span></div>
+        <div style="border-radius:14px;border:1px solid #E1E8E5;overflow:hidden;opacity:{{ s.op }};box-shadow:{{ s.ring }}">
+          <div style="min-height:56px;padding:0 16px;display:flex;align-items:center;gap:12px;background:{{ s.bg }}"><span style="flex:1;font-size:15px;font-weight:{{ s.fw }};color:{{ s.fg }}">How long do transfers take?</span><sc-if value="{{ s.loading }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="#0B8F6E" stroke-width="2.6" stroke-linecap="round"><path d="M21 12a9 9 0 0 0-9-9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"></animateTransform></path></svg></sc-if><svg viewBox="0 0 24 24" style="width:18px;height:18px;transform:{{ s.rot }}" fill="none" stroke="{{ s.ch }}" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></div>
+          <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}"><div style="padding:0 16px 14px;font-size:14px;line-height:1.5;color:#4A615A;background:#FFFFFF">Between Hala accounts: instantly. To other Saudi banks: within minutes via sarie.</div></sc-if>
+        </div>
+        <span style="font-size:13px;line-height:1.5;color:#5E7770">{{ s.use }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Variants · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Three styles for three contexts. Pick one per page.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">A · DIVIDED · FAQ, HELP</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <span style="font-size:12.5px;color:#5E7770">One open at a time</span>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ faq }}" as="f" hint-placeholder-count="4">
+          <div style="border-top:1px solid {{ f.bdr }}">
+            <button onClick="{{ f.toggle }}" aria-expanded="{{ f.exp }}" style="width:100%;min-height:56px;border:0;background:transparent;padding:0 4px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;color:#0C1F1A;border-radius:10px" style-hover="background:#F7FAF9"><span style="flex:1;font-size:15px;font-weight:{{ f.fw }}">{{ f.q }}</span><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none;transform:{{ f.rot }};transition:transform .3s cubic-bezier(.2,.9,.2,1)" fill="none" stroke="#4A615A" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+            <div style="display:grid;grid-template-rows:{{ f.rows }};transition:grid-template-rows .3s cubic-bezier(.2,.9,.2,1)"><div style="overflow:hidden;min-height:0"><p style="margin:0;padding:0 4px 16px;font-size:14px;line-height:1.55;color:#4A615A">{{ f.a }}</p></div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">B · CARDS · SETTINGS, FORMS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <span style="font-size:12.5px;color:#5E7770">Several can be open</span>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+          <div style="border-radius:16px;border:1px solid {{ c.bd }};background:#FFFFFF;overflow:hidden;transition:border-color .2s">
+            <button onClick="{{ c.toggle }}" aria-expanded="{{ c.exp }}" style="width:100%;min-height:64px;border:0;background:{{ c.hbg }};padding:0 14px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;color:#0C1F1A" style-hover="background:#F7FAF9"><span style="width:38px;height:38px;border-radius:11px;background:#F2F6F4;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ c.icon }}"></path></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:600">{{ c.t }}</span><span style="font-size:12.5px;color:#5E7770">{{ c.s }}</span></div><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none;transform:{{ c.rot }};transition:transform .3s cubic-bezier(.2,.9,.2,1)" fill="none" stroke="#4A615A" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+            <div style="display:grid;grid-template-rows:{{ c.rows }};transition:grid-template-rows .3s cubic-bezier(.2,.9,.2,1)"><div style="overflow:hidden;min-height:0"><div style="padding:2px 14px 14px 64px;display:flex;flex-direction:column;gap:8px"><sc-for list="{{ c.lines }}" as="l" hint-placeholder-count="2"><div style="display:flex;justify-content:space-between;gap:12px;font-size:13.5px"><span style="color:#5E7770">{{ l.k }}</span><span style="font-family:'IBM Plex Mono',monospace">{{ l.v }}</span></div></sc-for></div></div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">C · COMPACT · FILTERS, SIDEBAR</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <span style="font-size:12.5px;color:#5E7770">Header shows how many are selected</span>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ filt }}" as="g" hint-placeholder-count="3">
+          <div style="border-bottom:1px solid #EEF2F0">
+            <button onClick="{{ g.toggle }}" aria-expanded="{{ g.exp }}" style="width:100%;height:44px;border:0;background:transparent;padding:0 2px;display:flex;align-items:center;gap:8px;cursor:pointer;color:#0C1F1A"><span style="flex:1;text-align:left;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em">{{ g.t }}</span><sc-if value="{{ g.hasN }}" hint-placeholder-val="{{ false }}"><span style="min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ g.n }}</span></sc-if><svg viewBox="0 0 24 24" style="width:16px;height:16px;transform:{{ g.rot }};transition:transform .3s cubic-bezier(.2,.9,.2,1)" fill="none" stroke="#4A615A" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+            <div style="display:grid;grid-template-rows:{{ g.rows }};transition:grid-template-rows .3s cubic-bezier(.2,.9,.2,1)"><div style="overflow:hidden;min-height:0"><div style="padding:0 2px 12px;display:flex;flex-direction:column;gap:2px"><sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.toggle }}" style="height:36px;border:0;background:transparent;padding:0;display:flex;align-items:center;gap:10px;font-size:14px;color:#0C1F1A;cursor:pointer;text-align:left"><span style="width:18px;height:18px;border-radius:5px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:#FFFFFF;font-size:11px;display:flex;align-items:center;justify-content:center">{{ o.mk }}</span>{{ o.l }}</button></sc-for></div></div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Same component with bigger touch targets: rows are at least 64 pt, text is 16 pt, and the content is padded 16 pt from the screen edge.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">GROUPED LIST · HELP</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="border-radius:28px;background:#F4F7F6;padding:16px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:22px;font-weight:700;padding:4px 4px 0">Help</span>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6B827B;padding:0 4px">PAYMENTS</span>
+        <div style="border-radius:18px;background:#FFFFFF;padding:0 16px">
+          <sc-for list="{{ mfaq }}" as="f" hint-placeholder-count="3">
+            <div style="border-top:1px solid {{ f.bdr }}">
+              <button onClick="{{ f.toggle }}" aria-expanded="{{ f.exp }}" style="width:100%;min-height:64px;border:0;background:transparent;padding:0;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;color:#0C1F1A"><span style="flex:1;font-size:16px;font-weight:{{ f.fw }};line-height:1.35">{{ f.q }}</span><span style="width:28px;height:28px;border-radius:50%;background:{{ f.cbg }};display:flex;align-items:center;justify-content:center;flex:none;transition:background .2s"><svg viewBox="0 0 24 24" style="width:16px;height:16px;transform:{{ f.rot }};transition:transform .3s cubic-bezier(.2,.9,.2,1)" fill="none" stroke="{{ f.cc }}" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></span></button>
+              <div style="display:grid;grid-template-rows:{{ f.rows }};transition:grid-template-rows .3s cubic-bezier(.2,.9,.2,1)"><div style="overflow:hidden;min-height:0"><p style="margin:0;padding:0 0 18px;font-size:15px;line-height:1.55;color:#4A615A">{{ f.a }}</p></div></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">CARD · TRANSACTION DETAILS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="border-radius:28px;background:#F4F7F6;padding:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 0 6px"><span style="width:52px;height:52px;border-radius:50%;background:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">NT</span><span style="font-size:15px;color:#5E7770">Nour Trading</span><span style="font:600 30px 'IBM Plex Mono',monospace;letter-spacing:-.02em">− 25,000.00</span><span style="height:24px;padding:0 10px;border-radius:999px;background:#FFF4E0;color:#7A4508;font-size:12px;font-weight:600;display:flex;align-items:center;white-space:nowrap">Pending approval</span></div>
+        <sc-for list="{{ mcards }}" as="c" hint-placeholder-count="3">
+          <div style="border-radius:20px;background:#FFFFFF;overflow:hidden">
+            <button onClick="{{ c.toggle }}" aria-expanded="{{ c.exp }}" style="width:100%;min-height:64px;border:0;background:transparent;padding:0 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;color:#0C1F1A"><span style="flex:1;font-size:16px;font-weight:600">{{ c.t }}</span><span style="font-size:13px;color:#5E7770;white-space:nowrap">{{ c.meta }}</span><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none;transform:{{ c.rot }};transition:transform .3s cubic-bezier(.2,.9,.2,1)" fill="none" stroke="#4A615A" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+            <div style="display:grid;grid-template-rows:{{ c.rows }};transition:grid-template-rows .3s cubic-bezier(.2,.9,.2,1)"><div style="overflow:hidden;min-height:0"><div style="padding:0 16px 8px"><sc-for list="{{ c.lines }}" as="l" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #F2F5F4;font-size:14.5px"><span style="color:#5E7770;flex:none">{{ l.k }}</span><span style="min-width:0;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:{{ l.ff }}">{{ l.v }}</span></div></sc-for></div></div></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+    <sc-for list="{{ mspecs }}" as="t" hint-placeholder-count="4"><div style="background:#FFFFFF;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:3px"><span style="font-size:13.5px;font-weight:600">{{ t.k }}</span><span style="font-size:12.5px;line-height:1.45;color:#5E7770">{{ t.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Sizes</h2><p style="margin:0;font-size:15px;color:#4A615A">Web and mobile use the same parts at different sizes.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px;overflow-x:auto">
+    <div style="display:grid;grid-template-columns:minmax(160px,1fr) repeat(3,minmax(110px,1fr));gap:16px;padding:14px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770"><span>PROPERTY</span><span>WEB · DEFAULT</span><span>WEB · COMPACT</span><span>MOBILE</span></div>
+    <sc-for list="{{ sizes }}" as="r" hint-placeholder-count="7"><div style="display:grid;grid-template-columns:minmax(160px,1fr) repeat(3,minmax(110px,1fr));gap:16px;padding:12px 0;border-top:1px solid #EEF2F0;font-size:14px"><span style="font-weight:500">{{ r.k }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4A615A">{{ r.a }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4A615A">{{ r.b }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4A615A">{{ r.c }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">When to use</h2><p style="margin:0;font-size:15px;color:#4A615A">Accordions hide content. Use them only when hiding helps people scan.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ when }}" as="w" hint-placeholder-count="4"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ w.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ w.v }}</span></div></sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { faq: 0, cards: { limits: true }, filt: { st: true }, sel: { 'Settled': true, 'mada': true }, mob: 1, mcards: { 0: true } };
+  renderVals() {
+    const s = this.state, O = '1fr', C = '0fr', R = 'rotate(180deg)';
+    const anatomy = [['1', 'Leading icon (optional)', '40 × 40 tile. Use in settings and cards, not in FAQs.'], ['2', 'Title and subtitle', 'Title 16/600. Subtitle 13/400 summarises what is inside.'], ['3', 'Meta (optional)', 'A badge or count, e.g. "3 set". Updates when content changes.'], ['4', 'Chevron', '18 px, right-aligned, rotates 180° in 300 ms.'], ['5', 'Content', 'Indented to the title. Height animates; never jumps.'], ['6', 'Hit area', 'The full row: min 56 px web, 64 px mobile.']].map(([n, k, v]) => ({ n, k, v }));
+    const states = [
+      ['Collapsed', 'bg white · 15/500', '#FFFFFF', '#0C1F1A', '#4A615A', 500, 'none', 1, 'none', false, 'Default.'],
+      ['Hover', 'bg #F7FAF9', '#F7FAF9', '#0C1F1A', '#0C1F1A', 500, 'none', 1, 'none', false, 'Web only. Cursor pointer on the whole row.'],
+      ['Focus', '3 px ring rgba(11,143,110,.25)', '#FFFFFF', '#0C1F1A', '#0C1F1A', 500, 'none', 1, '0 0 0 3px rgba(11,143,110,.25)', false, 'Keyboard. Enter or Space toggles; arrow keys move between headers.'],
+      ['Expanded', 'title 600 · chevron 180°', '#FFFFFF', '#0C1F1A', '#0C1F1A', 600, R, 1, 'none', true, 'aria-expanded="true". Title becomes semibold.'],
+      ['Loading', 'spinner before chevron', '#FFFFFF', '#0C1F1A', '#4A615A', 500, 'none', 1, 'none', false, 'Content fetched on first open, e.g. card transactions.'],
+      ['Disabled', '45% opacity', '#FFFFFF', '#0C1F1A', '#8A9C96', 500, 'none', .45, 'none', false, 'Section not available for this role. Add a reason in the subtitle.']
+    ].map(([name, spec, bg, fg, ch, fw, rot, op, ring, open, use], i) => ({ name, spec, bg, fg, ch, fw, rot, op, ring, open, use, loading: name === 'Loading', bdr: i ? '#EEF2F0' : 'transparent' }));
+    const FAQ = [['How long do transfers take?', 'Between Hala accounts: instantly. To other Saudi banks: within minutes via sarie. International: 1–3 business days.'], ['When do POS sales reach my account?', 'Next business day by default. With instant settlement, within seconds for 0.2% per transaction.'], ['Can I set limits for each card?', 'Yes. Admins set daily, monthly and per-transaction limits for each card and can change them any time.'], ['Which documents do I need?', 'Your CR, the owner\'s national ID or Iqama, and the VAT certificate if you are registered.']];
+    const faq = FAQ.map(([q, a], i) => { const on = s.faq === i; return { q, a, fw: on ? 600 : 500, rot: on ? R : 'none', rows: on ? O : C, exp: on ? 'true' : 'false', bdr: i ? '#EEF2F0' : 'transparent', toggle: () => this.setState({ faq: on ? -1 : i }) }; });
+    const CARDS = [['limits', 'Card limits', 'Daily, monthly and per transaction', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20', [['Daily', 'SAR 5,000'], ['Monthly', 'SAR 40,000'], ['Per transaction', 'SAR 2,500']]], ['where', 'Where it works', 'Online, in store, abroad', 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM2 12h20M12 2a15 15 0 0 1 0 20', [['Online', 'On'], ['In store', 'On'], ['Abroad', 'Off']]], ['notif', 'Notifications', 'Push and email', 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0', [['Every payment', 'Push'], ['Declined payment', 'Push + email']]]];
+    const cards = CARDS.map(([k, t, sub, icon, lines]) => { const on = !!s.cards[k]; return { t, s: sub, icon, lines: lines.map(([a, b]) => ({ k: a, v: b })), rot: on ? R : 'none', rows: on ? O : C, exp: on ? 'true' : 'false', bd: on ? '#C9D8D2' : '#E1E8E5', hbg: '#FFFFFF', toggle: () => this.setState({ cards: { ...s.cards, [k]: !on } }) }; });
+    const FG = [['st', 'STATUS', ['Settled', 'Pending', 'Declined']], ['me', 'METHOD', ['mada', 'Visa', 'Apple Pay']], ['br', 'BRANCH', ['Olaya', 'Al Malqa', 'Jeddah Corniche']]];
+    const filt = FG.map(([k, t, opts]) => { const on = !!s.filt[k], n = opts.filter(o => s.sel[o]).length; return { t, n, hasN: n > 0, rot: on ? R : 'none', rows: on ? O : C, exp: on ? 'true' : 'false', toggle: () => this.setState({ filt: { ...s.filt, [k]: !on } }), opts: opts.map(l => { const c = !!s.sel[l]; return { l, bd: c ? '#0B8F6E' : '#9AACA6', bg: c ? '#0B8F6E' : '#FFFFFF', mk: c ? '✓' : '', toggle: () => this.setState({ sel: { ...s.sel, [l]: !c } }) }; }) }; });
+    const mfaq = FAQ.slice(0, 3).map(([q, a], i) => { const on = s.mob === i; return { q, a, fw: on ? 600 : 500, rot: on ? R : 'none', rows: on ? O : C, exp: on ? 'true' : 'false', cbg: on ? '#0C1F1A' : '#F2F6F4', cc: on ? '#FFFFFF' : '#4A615A', bdr: i ? '#EEF2F0' : 'transparent', toggle: () => this.setState({ mob: on ? -1 : i }) }; });
+    const MC = [['Details', 'Today, 09:30', [['From', 'Main · SA57 •• 1951', 1], ['To', 'SA03 •• 6080', 1], ['Reference', 'INV-2026-0912', 1]]], ['Approvals', '1 of 2', [['Omar Bakr', 'Approved'], ['Abdulaziz Ali', 'Waiting']]], ['Fees', 'SAR 0.00', [['Transfer fee', 'Free', 1], ['VAT', '0.00', 1]]]];
+    const mcards = MC.map(([t, meta, lines], i) => { const on = !!s.mcards[i]; return { t, meta, rot: on ? R : 'none', rows: on ? O : C, exp: on ? 'true' : 'false', lines: lines.map(([k, v, m]) => ({ k, v, ff: m ? "'IBM Plex Mono',monospace" : 'inherit' })), toggle: () => this.setState({ mcards: { ...s.mcards, [i]: !on } }) }; });
+    const mspecs = [['Touch target', 'Full row, 64 pt minimum height.'], ['Chevron', 'On a 28 pt circle that turns ink when open, so the open state is clear at a glance.'], ['Haptics', 'Light impact on open and close (iOS UIImpactFeedback, Android CLOCK_TICK).'], ['Scrolling', 'When a section opens below the fold, scroll so its header stays visible.']].map(([k, v]) => ({ k, v }));
+    const sizes = [['Header height', '56 px', '44 px', '64 pt'], ['Title', '15 / 500', '11 Mono caps', '16 / 500'], ['Subtitle', '13 / 400', '—', '14 / 400'], ['Padding', '16 px', '2 px', '16 pt'], ['Chevron', '18 px', '16 px', '16 on 28 circle'], ['Corner radius', '16 px (card)', '—', '20 pt (card)'], ['Animation', '300 ms', '300 ms', '300 ms + haptic']].map(([k, a, b, c]) => ({ k, a, b, c }));
+    const when = [['FAQs and help', 'Many questions where people look for one answer. Divided style, one open at a time.'], ['Settings groups', 'Related controls behind a clear summary. Card style, several open.'], ['Filters', 'Long filter lists in a drawer or bottom sheet. Compact style with counts.'], ['Secondary details', 'Fees, approvals and references in transaction details. Main facts stay visible above.']].map(([k, v]) => ({ k, v }));
+    const rules = [[1, 'Write titles people scan for: "Card limits", not "More".'], [1, 'Show a summary in the subtitle or meta so people don\'t need to open it.'], [1, 'Open the most relevant section by default, e.g. the one with an error.'], [1, 'Keep state when the user leaves and comes back.'], [0, 'Don\'t hide the primary action or required fields inside a collapsed section.'], [0, 'Don\'t nest accordions more than one level.'], [0, 'Don\'t use for 1–2 short items; just show them.'], [0, 'Don\'t use as navigation between pages; use tabs or the sidebar.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { anatomy, states, faq, cards, filt, mfaq, mcards, mspecs, sizes, when, rules };
+  }
+}
+</script>
+</body>
+</html>

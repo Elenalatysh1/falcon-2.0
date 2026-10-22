@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button,input{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · FOUNDATIONS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Icons</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Hala uses <b style="font-weight:600;color:#0C1F1A">Lucide</b>, an open-source outline icon set (ISC license), with one change: the stroke is 1.7 instead of 2, to match Plex Sans. Icons on this page are the real Lucide files, version 0.453.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+    <sc-for list="{{ specs }}" as="s" hint-placeholder-count="5"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ s.k }}</span><span style="font:600 20px 'IBM Plex Mono',monospace">{{ s.v }}</span><span style="font-size:12.5px;line-height:1.45;color:#5E7770">{{ s.d }}</span></div></sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">ANATOMY · 24 × 24 GRID</span>
+      <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+        <div style="position:relative;width:192px;height:192px;border-radius:8px;background-image:linear-gradient(#EEF2F0 1px,transparent 1px),linear-gradient(90deg,#EEF2F0 1px,transparent 1px);background-size:8px 8px;border:1px solid #E1E8E5;color:#0C1F1A">
+          <span style="position:absolute;inset:16px;border:1.5px dashed #F5B94A;border-radius:4px"></span>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">{{ anat }}</div>
+        </div>
+        <div style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:10px;font-size:13.5px;line-height:1.5"><span><b style="font-weight:600">Live area 20 × 20.</b> 2 px padding on each side, as drawn by Lucide.</span><span><b style="font-weight:600">Round caps and joins.</b> Never square.</span><span><b style="font-weight:600">No fill.</b> Outline only, color from currentColor.</span></div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">WHY 1.7 · NEXT TO PLEX SANS 15/500</span>
+      <sc-for list="{{ strokes }}" as="s" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:14px;background:{{ s.bg }};outline:{{ s.ol }};outline-offset:-1.5px"><div style="display:flex;gap:10px;color:#0C1F1A">{{ s.row }}</div><span style="flex:1;font-size:15px;font-weight:500">Transfers</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:{{ s.c }};white-space:nowrap">{{ s.l }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Sizes</h2><p style="margin:0;font-size:15px;color:#4A615A">Four sizes. Keep the stroke at 1.7 for all of them; only use 1.5 at 28 px and up if the icon looks heavy.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+    <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:140px 90px minmax(0,1fr) minmax(0,260px);gap:20px;align-items:center;padding:18px 0;border-top:1px solid {{ z.bdr }}"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">{{ z.k }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ z.spec }}</span></div><span style="width:{{ z.tile }};height:{{ z.tile }};border-radius:{{ z.r }};background:#F2F6F4;display:flex;align-items:center;justify-content:center;color:#0C1F1A">{{ z.icon }}</span><div style="display:flex;align-items:center;gap:{{ z.gap }};flex-wrap:wrap;color:#0C1F1A">{{ z.row }}</div><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ z.use }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Hala icon set</h2><p style="margin:0;font-size:15px;color:#4A615A">{{ lib.count }} approved icons, grouped by area. Use these names in code. Click an icon to copy its name.</p></div><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B6F56;min-height:18px">{{ lib.copied }}</span></div>
+  <div style="background:#FFFFFF;border-radius:20px;padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+    <div style="flex:1;min-width:220px;height:42px;border-radius:999px;background:#F4F7F6;padding:0 14px;display:flex;align-items:center;gap:8px;color:#5E7770">{{ lib.searchIcon }}<input value="{{ lib.q }}" onChange="{{ lib.setQ }}" placeholder="Search icons, e.g. card, transfer" style="flex:1;border:0;outline:0;background:transparent;font-size:14px;color:#0C1F1A"/></div>
+    <div style="display:inline-flex;padding:3px;border-radius:999px;background:#E9EFEC"><sc-for list="{{ lib.sizeOpts }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.pick }}" style="height:34px;padding:0 12px;border:0;border-radius:999px;background:{{ o.bg }};box-shadow:{{ o.sh }};font:500 12.5px 'IBM Plex Mono',monospace;color:{{ o.fg }};cursor:pointer">{{ o.l }}</button></sc-for></div>
+    <div style="display:flex;gap:6px"><sc-for list="{{ lib.colors }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" aria-label="{{ c.n }}" title="{{ c.n }}" style="width:30px;height:30px;border-radius:50%;border:2px solid {{ c.ring }};background:{{ c.c }};cursor:pointer;padding:0"></button></sc-for></div>
+  </div>
+  <sc-if value="{{ lib.loading }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFFFF;border-radius:20px;padding:28px;text-align:center;font-size:14px;color:#5E7770">Loading Lucide…</div></sc-if>
+  <sc-for list="{{ lib.groups }}" as="g" hint-placeholder-count="6">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6B827B">{{ g.name }}</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px">
+        <sc-for list="{{ g.items }}" as="i" hint-placeholder-count="8"><button onClick="{{ i.copy }}" title="{{ i.code }}" style="height:104px;border:0;border-radius:16px;background:#FFFFFF;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:{{ lib.color }};padding:8px" style-hover="box-shadow:0 10px 24px -14px rgba(12,31,26,.35)">{{ i.svg }}<span style="display:flex;flex-direction:column;align-items:center;gap:1px"><span style="font-size:12.5px;font-weight:500;color:#0C1F1A">{{ i.label }}</span><span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ i.code }}</span></span></button></sc-for>
+      </div>
+    </div>
+  </sc-for>
+  <sc-if value="{{ lib.none }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFFFF;border-radius:20px;padding:28px;text-align:center;font-size:14px;color:#5E7770">No Hala icon matches "{{ lib.q }}". Check lucide.dev, then ask design to add it to the set.</div></sc-if>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Color and containers</h2><p style="margin:0;font-size:15px;color:#4A615A">Icons take the color of their text. Put them in a tile when they stand alone. Status colors only for status.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px">
+    <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="8"><div style="background:{{ t.card }};border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px"><span style="width:44px;height:44px;border-radius:12px;background:{{ t.bg }};color:{{ t.fg }};display:flex;align-items:center;justify-content:center">{{ t.icon }}</span><span style="font-size:13.5px;font-weight:600;color:{{ t.tc }}">{{ t.k }}</span><span style="font-size:12px;line-height:1.4;color:{{ t.dc }}">{{ t.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">In components</h2><p style="margin:0;font-size:15px;color:#4A615A">Spacing between icon and label, and the icon size each component uses.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">BUTTONS · 20 PX · GAP 8</span>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span style="height:44px;padding:0 20px 0 16px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;white-space:nowrap">{{ cmp.plus }}New transfer</span>
+        <span style="height:40px;padding:0 16px 0 12px;border-radius:999px;border:1px solid #D7E0DC;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;white-space:nowrap">{{ cmp.dl }}Export</span>
+        <span style="width:40px;height:40px;border-radius:50%;border:1px solid #D7E0DC;display:flex;align-items:center;justify-content:center" title="More">{{ cmp.more }}</span>
+      </div>
+      <span style="font-size:12.5px;color:#5E7770;line-height:1.5">Icon goes before the label. Trailing icons only for direction (→) or menus (⌄). Icon-only buttons need a tooltip and aria-label.</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">LIST ROW · INPUT · BADGE</span>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F2F5F4"><span style="width:40px;height:40px;border-radius:12px;background:#F2F6F4;display:flex;align-items:center;justify-content:center;color:#0C1F1A">{{ cmp.bank }}</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14.5px;font-weight:500">Main account</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">SA57 •• 1951</span></div><span style="color:#9AACA6">{{ cmp.chev }}</span></div>
+      <div style="height:48px;border:1px solid #D9D9D9;border-radius:8px;padding:0 12px;display:flex;align-items:center;gap:8px;color:#5E7770;font-size:14px">{{ cmp.search }}<span style="flex:1">Search beneficiaries</span>{{ cmp.x }}</div>
+      <div style="display:flex;gap:8px"><span style="height:24px;padding:0 10px 0 8px;border-radius:999px;background:#E3F6EF;color:#0B4F3E;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:5px;color:#0B8F6E"><span style="color:#0B8F6E;display:flex">{{ cmp.ok }}</span><span style="color:#0B4F3E">Settled</span></span><span style="height:24px;padding:0 10px 0 8px;border-radius:999px;background:#E8F0FF;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:5px"><span style="color:#2F5BD3;display:flex">{{ cmp.snow }}</span><span style="color:#1E3A8A">Frozen</span></span></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">MOBILE TAB BAR · 22 PT</span>
+      <div style="border-radius:22px;background:#F4F7F6;padding:12px 8px 16px;display:grid;grid-template-columns:repeat(4,1fr)"><sc-for list="{{ cmp.tabs }}" as="t" hint-placeholder-count="4"><span style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:{{ t.fw }};color:{{ t.fg }}">{{ t.icon }}{{ t.l }}</span></sc-for></div>
+      <span style="font-size:12.5px;color:#5E7770;line-height:1.5">Active tab: Green 600 and stroke 2.2. Lucide has no filled versions, so the stroke weight shows the active state.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Arabic · right to left</h2><p style="margin:0;font-size:15px;color:#4A615A">Flip icons that show direction or movement. Keep icons that show objects or symbols as they are.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#0B6F56">MIRROR IN RTL</span><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px"><sc-for list="{{ rtl.flip }}" as="r" hint-placeholder-count="6"><div style="border-radius:14px;background:#F4F7F6;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;color:#0C1F1A"><div style="display:flex;gap:10px;align-items:center">{{ r.ltr }}<span style="color:#9AACA6;font-size:12px">→</span>{{ r.rtl }}</div><span style="font-size:12px">{{ r.l }}</span></div></sc-for></div></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8A1414">DON'T MIRROR</span><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px"><sc-for list="{{ rtl.keep }}" as="r" hint-placeholder-count="6"><div style="border-radius:14px;background:#F4F7F6;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;color:#0C1F1A">{{ r.ltr }}<span style="font-size:12px">{{ r.l }}</span></div></sc-for></div></div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Do and don't</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px">
+    <sc-for list="{{ dd }}" as="d" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:10px"><div style="position:relative;height:96px;border-radius:14px;background:#F4F7F6;display:flex;align-items:center;justify-content:center;gap:14px;color:#0C1F1A">{{ d.demo }}<span style="position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:{{ d.bg }};color:{{ d.fg }};font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ d.mk }}</span></div><span style="font-size:13.5px;line-height:1.45">{{ d.t }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">For developers</h2><p style="margin:0;font-size:15px;color:#4A615A">Install the official package for each platform and wrap it once so every icon gets Hala's defaults.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+    <sc-for list="{{ dev }}" as="d" hint-placeholder-count="3"><div style="background:#FFFFFF;border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;gap:10px"><span style="font-size:15px;font-weight:600">{{ d.k }}</span><pre style="margin:0;border-radius:12px;background:#0C1F1A;color:#CFEDE3;padding:14px 16px;font:400 12.5px/1.6 'IBM Plex Mono',monospace;white-space:pre-wrap;word-break:break-word">{{ d.code }}</pre><span style="font-size:12.5px;line-height:1.5;color:#5E7770">{{ d.note }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: !!window.lucide, q: '', sz: 1, col: 0, copied: '' };
+  componentDidMount() { if (!window.lucide) this.poll = setInterval(() => { if (window.lucide) { clearInterval(this.poll); this.setState({ ready: true }); } }, 150); }
+  componentWillUnmount() { clearInterval(this.poll); }
+  find(names) { const L = window.lucide && window.lucide.icons; if (!L) return null; for (const n of names) if (L[n]) return { n, node: L[n] }; return null; }
+  ic(names, size = 20, sw = 1.7, extra) {
+    const f = this.find([].concat(names));
+    if (!f) return React.createElement('span', { style: { width: size, height: size, borderRadius: 4, background: '#EEF2F0', display: 'inline-block' } });
+    let kids = f.node; if (Array.isArray(kids) && kids[0] === 'svg') kids = kids[2];
+    return React.createElement('svg', { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: sw, strokeLinecap: 'round', strokeLinejoin: 'round', style: { flex: 'none', display: 'block', ...(extra || {}) } }, kids.map(([t, a], i) => { const { key, ...rest } = a || {}; return React.createElement(t, { ...rest, key: i }); }));
+  }
+  kebab(n) { return n.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/([A-Za-z])([0-9])/g, '$1-$2').toLowerCase(); }
+  renderVals() {
+    const s = this.state, ic = this.ic.bind(this);
+    const specs = [['GRID', '24 × 24', 'Lucide default canvas'], ['STROKE', '1.7', 'Set strokeWidth={1.7}. Lucide default is 2.'], ['CAPS / JOINS', 'round', 'Lucide default, keep it'], ['COLOR', 'currentColor', 'Inherit text color; never hard-code'], ['LICENSE', 'ISC', 'Free for commercial use']].map(([k, v, d]) => ({ k, v, d }));
+    const anat = ic(['CreditCard'], 160, 1.7 * 24 / 160 * 6.67 / 1 > 0 ? 1.7 : 1.7);
+    const S3 = [['ArrowLeftRight'], ['CreditCard'], ['Bell']];
+    const strokes = [[1.5, '1.5 · too light', 'transparent', '#5E7770', 'none'], [1.7, '1.7 · Hala', '#F3FBF8', '#0B6F56', '1.5px solid #0B8F6E'], [2, '2 · Lucide default, heavy', 'transparent', '#5E7770', 'none']].map(([w, l, bg, c, ol]) => ({ l, bg, c, ol, row: React.createElement(React.Fragment, null, S3.map((n, i) => React.createElement('span', { key: i }, ic(n, 20, w)))) }));
+    const ROW = [['House', 'Home'], ['Send'], ['Wallet'], ['Search'], ['Settings']];
+    const sizes = [['Inline · 16', '16 px · tile 28', 16, '28px', '8px', '6px', 'Inside badges, small buttons, table cells, input adornments.'], ['Default · 20', '20 px · tile 36', 20, '36px', '10px', '10px', 'Buttons, list rows, menus, sidebar items.'], ['Navigation · 22', '22 px · tile 40', 22, '40px', '12px', '12px', 'Mobile tab bar and top bar actions.'], ['Feature · 28', '28 px · tile 56', 28, '56px', '16px', '14px', 'Quick actions, empty-state tiles, product cards.']].map(([k, spec, px, tile, r, gap, use], i) => ({ k, spec, tile, r, gap, use, bdr: i ? '#EEF2F0' : 'transparent', icon: ic(['CreditCard'], px), row: React.createElement(React.Fragment, null, ROW.map((n, j) => React.createElement('span', { key: j }, ic(n, px)))) }));
+    const G = [
+      ['NAVIGATION', [['Dashboard', ['LayoutDashboard']], ['Transactions', ['ArrowLeftRight']], ['Transfers', ['Send']], ['Payroll', ['CalendarDays']], ['Cards', ['CreditCard']], ['SADAD', ['ReceiptText', 'Receipt']], ['POS', ['Smartphone']], ['eCommerce', ['ShoppingCart']], ['Invoicing', ['FileText']], ['Food delivery', ['UtensilsCrossed']], ['Locations', ['MapPin']], ['Users', ['Users']], ['Documents', ['Files']], ['Help', ['CircleHelp', 'HelpCircle']], ['Settings', ['Settings']]]],
+      ['MONEY', [['Account', ['Landmark']], ['Wallet', ['Wallet']], ['Cash', ['Banknote']], ['Savings', ['PiggyBank']], ['Income', ['ArrowDownLeft']], ['Outgoing', ['ArrowUpRight']], ['Trend up', ['TrendingUp']], ['Trend down', ['TrendingDown']], ['Bar chart', ['ChartColumn', 'BarChart3']], ['Line chart', ['ChartLine', 'LineChart']], ['Percent', ['Percent']], ['Refund', ['Undo2']], ['QR pay', ['QrCode']], ['Contactless', ['Nfc']]]],
+      ['ACTIONS', [['Add', ['Plus']], ['Close', ['X']], ['Confirm', ['Check']], ['Edit', ['Pencil']], ['Delete', ['Trash2']], ['Copy', ['Copy']], ['Download', ['Download']], ['Upload', ['Upload']], ['Share', ['Share2']], ['Filter', ['ListFilter', 'Filter']], ['Adjust', ['SlidersHorizontal']], ['Search', ['Search']], ['Refresh', ['RefreshCw']], ['More', ['Ellipsis', 'MoreHorizontal']], ['Open link', ['ExternalLink']]]],
+      ['SECURITY', [['Lock', ['Lock']], ['Unlock', ['LockOpen', 'Unlock']], ['Verified', ['ShieldCheck']], ['Fingerprint', ['Fingerprint']], ['Face ID', ['ScanFace']], ['Show', ['Eye']], ['Hide', ['EyeOff']], ['Freeze', ['Snowflake']], ['Key', ['KeyRound']], ['Sign out', ['LogOut']]]],
+      ['STATUS', [['Success', ['CircleCheck', 'CheckCircle2']], ['Error', ['CircleX', 'XCircle']], ['Warning', ['TriangleAlert', 'AlertTriangle']], ['Info', ['Info']], ['Pending', ['Clock']], ['Notifications', ['Bell']], ['Muted', ['BellOff']], ['Offline', ['WifiOff']]]],
+      ['BUSINESS AND CONTENT', [['Company', ['Building2']], ['Shop', ['Store']], ['Delivery', ['Truck']], ['Product', ['Package']], ['Tag', ['Tag']], ['Calendar', ['Calendar']], ['Camera', ['Camera']], ['Image', ['Image']], ['Attachment', ['Paperclip']], ['Email', ['Mail']], ['Phone', ['Phone']], ['Chat', ['MessageCircle']], ['Language', ['Globe']], ['Support', ['Headset', 'Headphones']], ['Gift', ['Gift']]]],
+      ['ARROWS', [['Back', ['ArrowLeft']], ['Forward', ['ArrowRight']], ['Expand', ['ChevronDown']], ['Next', ['ChevronRight']], ['Previous', ['ChevronLeft']], ['Collapse', ['ChevronUp']], ['Sort', ['ArrowUpDown']], ['Sidebar', ['PanelLeft']]]]
+    ];
+    const SZ = [16, 20, 22, 28], px = SZ[s.sz];
+    const COL = [['Ink', '#0C1F1A'], ['Tertiary', '#5E7770'], ['Green 600', '#0B8F6E'], ['Danger', '#C81E1E']];
+    const q = s.q.trim().toLowerCase();
+    let count = 0;
+    const groups = !s.ready ? [] : G.map(([name, items]) => ({ name, items: items.filter(([l, ns]) => !q || l.toLowerCase().includes(q) || ns.some(n => n.toLowerCase().includes(q)) || name.toLowerCase().includes(q)).map(([label, ns]) => { const f = this.find(ns), code = f ? this.kebab(f.n) : ns[0]; return { label, code, svg: ic(ns, px), copy: () => { try { navigator.clipboard && navigator.clipboard.writeText(code); } catch (e) {} this.setState({ copied: `Copied "${code}"` }); clearTimeout(this.ct); this.ct = setTimeout(() => this.setState({ copied: '' }), 1500); } }; }) })).filter(g => g.items.length);
+    G.forEach(g => count += g[1].length);
+    const lib = { q: s.q, setQ: e => this.setState({ q: e.target.value }), groups, none: s.ready && q && !groups.length, loading: !s.ready, count, copied: s.copied, color: COL[s.col][1], searchIcon: ic(['Search'], 16),
+      sizeOpts: SZ.map((v, i) => { const on = s.sz === i; return { l: String(v), bg: on ? '#FFFFFF' : 'transparent', sh: on ? '0 1px 3px rgba(12,31,26,.14)' : 'none', fg: on ? '#0C1F1A' : '#5E7770', pick: () => this.setState({ sz: i }) }; }),
+      colors: COL.map(([n, c], i) => ({ n, c, ring: s.col === i ? '#FFFFFF' : 'transparent', pick: () => this.setState({ col: i }) })).map((c, i) => ({ ...c, ring: s.col === i ? '#0C1F1A' : '#FFFFFF' })) };
+    const tiles = [['Neutral tile', 'Default for list rows and quick actions', '#F2F6F4', '#0C1F1A', ['Landmark'], '#FFFFFF', '#0C1F1A', '#5E7770'], ['Brand tile', 'Selected item, promoted feature', '#E3F6EF', '#0B8F6E', ['Sparkles'], '#FFFFFF', '#0C1F1A', '#5E7770'], ['Success', 'Settled, verified, done', '#E3F6EF', '#0B8F6E', ['CircleCheck', 'CheckCircle2'], '#FFFFFF', '#0C1F1A', '#5E7770'], ['Warning', 'Pending, needs action', '#FFF4E0', '#B45309', ['Clock'], '#FFFFFF', '#0C1F1A', '#5E7770'], ['Error', 'Declined, failed', '#FDECEC', '#C81E1E', ['CircleX', 'XCircle'], '#FFFFFF', '#0C1F1A', '#5E7770'], ['Info', 'Frozen, information', '#E8F0FF', '#2F5BD3', ['Snowflake'], '#FFFFFF', '#0C1F1A', '#5E7770'], ['On gradient', 'White icon on primary or card art', 'rgba(255,255,255,.18)', '#FFFFFF', ['Wallet'], 'linear-gradient(135deg,#0F3D33,#0A7559 60%,#2C957A)', '#FFFFFF', '#CFEDE3'], ['On ink', 'Tooltips, dark cards', 'rgba(255,255,255,.1)', '#FFFFFF', ['Lock'], '#0C1F1A', '#FFFFFF', '#A9B8B3']].map(([k, v, bg, fg, n, card, tc, dc]) => ({ k, v, bg, fg, card, tc, dc, icon: ic(n, 22) }));
+    const TB = [['Home', ['House', 'Home'], true], ['Cards', ['CreditCard']], ['Payments', ['Send']], ['More', ['Ellipsis', 'MoreHorizontal']]];
+    const cmp = { plus: ic(['Plus'], 20, 2), dl: ic(['Download'], 18), more: ic(['Ellipsis', 'MoreHorizontal'], 20), bank: ic(['Landmark'], 20), chev: ic(['ChevronRight'], 18), search: ic(['Search'], 18), x: ic(['X'], 16), ok: ic(['Check'], 14, 2.4), snow: ic(['Snowflake'], 14, 2),
+      tabs: TB.map(([l, n, on]) => ({ l, fw: on ? 600 : 500, fg: on ? '#0B8F6E' : '#5E7770', icon: ic(n, 22, on ? 2.2 : 1.7) })) };
+    const flipNames = [['Back', ['ArrowLeft']], ['Next', ['ChevronRight']], ['Send', ['Send']], ['Sign out', ['LogOut']], ['Undo', ['Undo2']], ['Sidebar', ['PanelLeft']]];
+    const keepNames = [['Search', ['Search']], ['Check', ['Check']], ['Bell', ['Bell']], ['Card', ['CreditCard']], ['Clock', ['Clock']], ['Chart', ['ChartColumn', 'BarChart3']]];
+    const rtl = { flip: flipNames.map(([l, n]) => ({ l, ltr: ic(n, 22), rtl: ic(n, 22, 1.7, { transform: 'scaleX(-1)' }) })), keep: keepNames.map(([l, n]) => ({ l, ltr: ic(n, 22) })) };
+    const F = React.createElement, wrap = (...els) => F(React.Fragment, null, ...els.map((e, i) => F('span', { key: i, style: { display: 'flex' } }, e)));
+    const dd = [
+      [1, 'Use one size and stroke across a row of icons.', wrap(ic(['Send'], 20), ic(['Wallet'], 20), ic(['Bell'], 20))],
+      [0, 'Don\'t mix sizes or strokes in the same row.', wrap(ic(['Send'], 16, 1.2), ic(['Wallet'], 26, 2.6), ic(['Bell'], 20, 1.7))],
+      [1, 'Color icons with the text color or a status color.', wrap(F('span', { style: { color: '#0B8F6E', display: 'flex' } }, ic(['CircleCheck', 'CheckCircle2'], 24)), F('span', { style: { color: '#C81E1E', display: 'flex' } }, ic(['CircleX', 'XCircle'], 24)))],
+      [0, 'Don\'t use gradients, fills or random colors on icons.', wrap(F('span', { style: { color: '#E879F9', display: 'flex' } }, ic(['Send'], 24)), F('span', { style: { color: '#F59E0B', display: 'flex' } }, ic(['Wallet'], 24, 1.7, { fill: '#FDE68A' })))],
+      [1, 'Pair icon-only buttons with a tooltip.', F('span', { style: { display: 'flex', alignItems: 'center', gap: 8 } }, F('span', { style: { width: 40, height: 40, borderRadius: '50%', border: '1px solid #D7E0DC', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' } }, ic(['Download'], 18)), F('span', { style: { background: '#0C1F1A', color: '#FFFFFF', fontSize: 12, padding: '5px 9px', borderRadius: 8 } }, 'Download'))],
+      [0, 'Don\'t mix Lucide with other icon sets or emoji.', wrap(ic(['Send'], 22), F('span', { style: { fontSize: 22, lineHeight: 1 } }, '💳'), F('span', { style: { width: 22, height: 22, borderRadius: 4, background: '#0C1F1A' } }))]
+    ].map(([ok, t, demo]) => ({ t, demo, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    const dev = [
+      ['Web · React', "npm i lucide-react@0.453.0\n\nimport { Send } from 'lucide-react';\n\n<Send size={20} strokeWidth={1.7}\n  absoluteStrokeWidth={false} />", 'Make a <HalaIcon> wrapper with size 20 and stroke 1.7 as defaults.'],
+      ['Flutter', "flutter pub add lucide_icons_flutter\n\nIcon(LucideIcons.send,\n  size: 20, color: ink)", 'Flutter icon fonts have a fixed stroke. If 1.7 matters, import the SVGs with flutter_svg instead.'],
+      ['iOS · Android native', "npm i lucide-static@0.453.0\n# icons/*.svg → set stroke-width=\"1.7\"\n# iOS: add to Assets as Symbol Image\n# Android: import as Vector Asset", 'Convert only the icons on this page. Keep the kebab-case names, e.g. ic_credit_card.']
+    ].map(([k, code, note]) => ({ k, code, note }));
+    return { specs, anat, strokes, sizes, lib, tiles, cmp, rtl, dd, dev };
+  }
+}
+</script>
+</body>
+</html>

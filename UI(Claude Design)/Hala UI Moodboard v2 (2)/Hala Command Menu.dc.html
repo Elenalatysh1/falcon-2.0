@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button,input{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Command menu</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">One search box for everything: go to a page, find a transaction or beneficiary, or start an action like a transfer. Open it with ⌘K on Mac or Ctrl K on Windows. On mobile it's the search on Home.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Web · live</h2><p style="margin:0;font-size:15px;color:#4A615A">Type to filter. ↑ ↓ to move, Enter to run, Esc to clear. Try "nour", "card" or "zzz".</p></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ presets }}" as="p" hint-placeholder-count="4"><button onClick="{{ p.go }}" style="height:32px;padding:0 12px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:12.5px;color:#0C1F1A;cursor:pointer;white-space:nowrap">{{ p.l }}</button></sc-for></div></div>
+  <div style="position:relative;height:640px;border-radius:24px;background:#E3EAE7;overflow:hidden">
+    <div style="position:absolute;inset:0;padding:22px;display:grid;grid-template-columns:200px 1fr;gap:16px;opacity:.6"><span style="border-radius:18px;background:#FFFFFF"></span><div style="display:flex;flex-direction:column;gap:12px"><div style="height:44px;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;padding:0 16px;gap:10px;font-size:14px;color:#8A9C96;max-width:360px">Search or jump to…<span style="margin-left:auto;font:500 11px 'IBM Plex Mono',monospace;border:1px solid #D7E0DC;border-radius:6px;padding:2px 6px">⌘K</span></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"><span style="height:100px;border-radius:18px;background:#FFFFFF"></span><span style="height:100px;border-radius:18px;background:#FFFFFF"></span><span style="height:100px;border-radius:18px;background:#FFFFFF"></span></div><span style="flex:1;border-radius:18px;background:#FFFFFF"></span></div></div>
+    <div style="position:absolute;inset:0;background:rgba(12,31,26,.35)"></div>
+    <div role="dialog" aria-label="Command menu" style="position:absolute;left:50%;top:56px;transform:translateX(-50%);width:640px;max-width:calc(100% - 40px);max-height:calc(100% - 96px);background:#FFFFFF;border-radius:22px;box-shadow:0 40px 80px -30px rgba(12,31,26,.6),0 0 0 1px rgba(12,31,26,.06);display:flex;flex-direction:column;overflow:hidden">
+      <div style="height:64px;flex:none;padding:0 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #EEF2F0">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="#5E7770" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <sc-if value="{{ cm.hasScope }}" hint-placeholder-val="{{ false }}"><span style="height:26px;padding:0 6px 0 10px;border-radius:8px;background:#E3F6EF;color:#0B4F3E;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:4px;white-space:nowrap">{{ cm.scope }}<button onClick="{{ cm.clearScope }}" aria-label="Remove scope" style="border:0;background:transparent;color:inherit;cursor:pointer;padding:0 2px;font-size:13px">×</button></span></sc-if>
+        <input ref="{{ cm.ref }}" value="{{ cm.q }}" onChange="{{ cm.setQ }}" onKeyDown="{{ cm.key }}" placeholder="{{ cm.ph }}" aria-label="Search" style="flex:1;min-width:0;border:0;outline:0;font-size:17px;color:#0C1F1A;background:transparent"/>
+        <sc-if value="{{ cm.loading }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#0B8F6E" stroke-width="2.6" stroke-linecap="round"><path d="M21 12a9 9 0 0 0-9-9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"></animateTransform></path></svg></sc-if>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;color:#5E7770;border:1px solid #D7E0DC;border-radius:6px;padding:3px 7px;white-space:nowrap">ESC</span>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:8px;scrollbar-width:thin">
+        <sc-for list="{{ cm.groups }}" as="g" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:2px;padding-bottom:6px">
+            <span style="padding:10px 10px 6px;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6B827B">{{ g.label }}</span>
+            <sc-for list="{{ g.items }}" as="i" hint-placeholder-count="3">
+              <button onClick="{{ i.run }}" onMouseEnter="{{ i.hover }}" style="min-height:48px;border:0;border-radius:12px;background:{{ i.bg }};padding:0 10px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;color:#0C1F1A;box-shadow:{{ i.ring }}">
+                <span style="width:32px;height:32px;border-radius:10px;flex:none;background:{{ i.ibg }};color:{{ i.ifg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600"><sc-if value="{{ i.hasIcon }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ i.icon }}"></path></svg></sc-if>{{ i.ini }}</span>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:14.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ i.pre }}<b style="font-weight:700;background:#E3F6EF;border-radius:3px">{{ i.hit }}</b>{{ i.post }}</span><sc-if value="{{ i.hasSub }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;color:#5E7770;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ i.sub }}</span></sc-if></div>
+                <sc-if value="{{ i.hasMeta }}" hint-placeholder-val="{{ false }}"><span style="font:500 13.5px 'IBM Plex Mono',monospace;white-space:nowrap;color:{{ i.mc }}">{{ i.meta }}</span></sc-if>
+                <sc-if value="{{ i.hasKbd }}" hint-placeholder-val="{{ false }}"><span style="display:flex;gap:3px"><sc-for list="{{ i.kbd }}" as="k" hint-placeholder-count="2"><span style="min-width:22px;height:22px;padding:0 5px;border-radius:6px;border:1px solid #D7E0DC;background:#FFFFFF;font:500 11px 'IBM Plex Mono',monospace;color:#4A615A;display:flex;align-items:center;justify-content:center">{{ k }}</span></sc-for></span></sc-if>
+                <sc-if value="{{ i.active }}" hint-placeholder-val="{{ false }}"><span style="font:500 11px 'IBM Plex Mono',monospace;color:#5E7770;white-space:nowrap">↵</span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </sc-for>
+        <sc-if value="{{ cm.empty }}" hint-placeholder-val="{{ false }}"><div style="padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><span style="width:52px;height:52px;border-radius:16px;background:#F2F6F4;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="#5E7770" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5M8 11h6"></path></svg></span><span style="font-size:16px;font-weight:600">No results for "{{ cm.q }}"</span><span style="font-size:13.5px;color:#5E7770;max-width:320px;line-height:1.5">Try a name, IBAN, amount or the last 4 card digits.</span><button onClick="{{ cm.askSupport }}" style="margin-top:6px;height:38px;padding:0 16px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:13.5px;font-weight:500;color:#0C1F1A;cursor:pointer">Ask support about "{{ cm.q }}"</button></div></sc-if>
+      </div>
+      <div style="height:44px;flex:none;padding:0 16px;border-top:1px solid #EEF2F0;background:#FAFCFB;display:flex;align-items:center;gap:16px;font-size:12px;color:#5E7770;white-space:nowrap;overflow:hidden">
+        <span style="display:flex;align-items:center;gap:5px"><span style="border:1px solid #D7E0DC;border-radius:5px;padding:1px 5px;font-family:'IBM Plex Mono',monospace;background:#FFFFFF">↑↓</span>Move</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="border:1px solid #D7E0DC;border-radius:5px;padding:1px 5px;font-family:'IBM Plex Mono',monospace;background:#FFFFFF">↵</span>Open</span>
+        <span style="display:flex;align-items:center;gap:5px;min-width:0;overflow:hidden"><span style="border:1px solid #D7E0DC;border-radius:5px;padding:1px 5px;font-family:'IBM Plex Mono',monospace;background:#FFFFFF">TAB</span>Scope</span>
+        <span style="margin-left:auto;flex:none;color:#0B6F56;font-weight:500">{{ cm.status }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">States</h2><p style="margin:0;font-size:15px;color:#4A615A">What the menu shows at each moment.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+    <sc-for list="{{ states }}" as="s" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:6px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#0B8F6E">{{ s.k }}</span><span style="font-size:13.5px;line-height:1.5;color:#4A615A">{{ s.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Anatomy and sizes · web</h2></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px;overflow-x:auto">
+    <sc-for list="{{ specs }}" as="r" hint-placeholder-count="8"><div style="display:grid;grid-template-columns:minmax(160px,220px) minmax(0,1fr);gap:24px;padding:13px 0;border-top:1px solid {{ r.bdr }};font-size:14px"><span style="font-weight:600">{{ r.k }}</span><span style="color:#4A615A;line-height:1.5">{{ r.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">There are no shortcuts on mobile. The same search opens full screen from the Home search field, with suggestion chips instead of keyboard hints.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">1 · ENTRY ON HOME</span>
+      <div style="height:420px;border-radius:30px;background:#F4F7F6;padding:18px 16px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:22px;font-weight:700">Home</span><span style="width:38px;height:38px;border-radius:50%;background:#FFFFFF"></span></div>
+        <div style="height:48px;border-radius:999px;background:#FFFFFF;padding:0 16px;display:flex;align-items:center;gap:10px;font-size:15px;color:#8A9C96;box-shadow:0 0 0 2px #0B8F6E"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#5E7770" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>Search Hala</div>
+        <span style="height:140px;border-radius:22px;background:linear-gradient(135deg,#0F3D33,#0A7559 60%,#2C957A)"></span>
+        <span style="height:64px;border-radius:18px;background:#FFFFFF"></span>
+        <span style="font-size:12.5px;color:#5E7770;line-height:1.5;margin-top:auto">Tap the field, or pull down on Home. The field moves up into the search screen.</span>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">2 · SEARCH SCREEN</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="height:420px;border-radius:30px;background:#FFFFFF;border:1px solid #E1E8E5;padding:16px;display:flex;flex-direction:column;gap:12px;overflow:hidden">
+        <div style="display:flex;align-items:center;gap:10px"><div style="flex:1;height:44px;border-radius:999px;background:#F2F6F4;padding:0 14px;display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" style="width:17px;height:17px;flex:none" fill="none" stroke="#5E7770" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input value="{{ mob.q }}" onChange="{{ mob.setQ }}" placeholder="Search Hala" style="flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:16px;color:#0C1F1A"/></div><button onClick="{{ mob.clear }}" style="border:0;background:transparent;font-size:15px;font-weight:600;color:#0E7C62;cursor:pointer;padding:0">Cancel</button></div>
+        <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:none"><sc-for list="{{ mob.chips }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.pick }}" style="height:34px;padding:0 14px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:13.5px;font-weight:500;white-space:nowrap;cursor:pointer;flex:none">{{ c.l }}</button></sc-for></div>
+        <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:none">
+          <sc-for list="{{ mob.groups }}" as="g" hint-placeholder-count="2"><div style="display:flex;flex-direction:column"><span style="padding:10px 2px 4px;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6B827B">{{ g.label }}</span><sc-for list="{{ g.items }}" as="i" hint-placeholder-count="3"><div style="min-height:56px;display:flex;align-items:center;gap:12px;border-bottom:.5px solid #E6ECE9"><span style="width:36px;height:36px;border-radius:50%;flex:none;background:{{ i.ibg }};color:{{ i.ifg }};font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center"><sc-if value="{{ i.hasIcon }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ i.icon }}"></path></svg></sc-if>{{ i.ini }}</span><div style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ i.t }}</span><span style="font-size:12.5px;color:#5E7770;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ i.sub }}</span></div><span style="font:500 14px 'IBM Plex Mono',monospace;white-space:nowrap">{{ i.meta }}</span></div></sc-for></div></sc-for>
+          <sc-if value="{{ mob.empty }}" hint-placeholder-val="{{ false }}"><div style="padding:40px 10px;text-align:center;display:flex;flex-direction:column;gap:6px"><span style="font-size:16px;font-weight:600">No results</span><span style="font-size:14px;color:#5E7770">Try a name, amount or card digits.</span></div></sc-if>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">MOBILE SPECS</span>
+      <sc-for list="{{ mspecs }}" as="t" hint-placeholder-count="6"><div style="border-radius:14px;background:#F4F7F6;padding:12px 14px;display:flex;flex-direction:column;gap:3px"><span style="font-size:13.5px;font-weight:600">{{ t.k }}</span><span style="font-size:12.5px;line-height:1.45;color:#5E7770">{{ t.v }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { q: '', act: 0, scope: null, status: '' };
+  inp = React.createRef();
+  componentDidMount() { this.onKey = e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); this.inp.current && this.inp.current.focus(); } }; window.addEventListener('keydown', this.onKey); }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); }
+  data() {
+    const I = { send: 'M22 2 11 13M22 2l-7 20-4-9-9-4z', card: 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20', user: 'M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM19 8v6M22 11h-6', dash: 'M3.34 19a10 10 0 1 1 17.32 0M12 14l4-4', tx: 'M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4', pos: 'M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8v4H8z', doc: 'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7ZM14 2v4a2 2 0 0 0 2 2h4', freeze: 'M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9', gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M2 12h3M19 12h3', clock: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2' };
+    return [
+      { g: 'RECENT', t: 'Nour Trading', sub: 'Beneficiary · SA03 •• 6080', icon: I.clock, recent: true, scope: 'People' },
+      { g: 'RECENT', t: 'September statement', sub: 'Main account · PDF', icon: I.clock, recent: true, scope: 'Documents' },
+      { g: 'ACTIONS', t: 'New transfer', sub: 'Local, international or own accounts', icon: I.send, kbd: ['T'], green: true },
+      { g: 'ACTIONS', t: 'Create virtual card', icon: I.card, kbd: ['C'], green: true },
+      { g: 'ACTIONS', t: 'Add beneficiary', icon: I.user, green: true },
+      { g: 'ACTIONS', t: 'Freeze a card', sub: 'Pick which card next', icon: I.freeze, danger: true },
+      { g: 'ACTIONS', t: 'Order POS terminals', icon: I.pos, green: true },
+      { g: 'GO TO', t: 'Dashboard', icon: I.dash, kbd: ['G', 'D'] },
+      { g: 'GO TO', t: 'Transactions', icon: I.tx, kbd: ['G', 'T'] },
+      { g: 'GO TO', t: 'Cards', icon: I.card, kbd: ['G', 'C'] },
+      { g: 'GO TO', t: 'Settings & Preferences', icon: I.gear },
+      { g: 'PEOPLE', t: 'Nour Trading', sub: 'Beneficiary · SA03 •• 6080', ini: 'NT', scope: 'People' },
+      { g: 'PEOPLE', t: 'Khalid Al-Harbi', sub: 'Beneficiary · SA44 •• 7519', ini: 'KH', scope: 'People' },
+      { g: 'PEOPLE', t: 'Omar Bakr', sub: 'Team · Accountant', ini: 'OB', scope: 'People' },
+      { g: 'TRANSACTIONS', t: 'Nour Trading', sub: 'Today 09:30 · Transfer · Pending', ini: 'NT', meta: '− 25,000.00', scope: 'Transactions' },
+      { g: 'TRANSACTIONS', t: 'Al Baik · Olaya', sub: 'Today 12:41 · mada', ini: 'AB', meta: '+ 86.25', pos: true, scope: 'Transactions' },
+      { g: 'TRANSACTIONS', t: 'Careem', sub: 'Yesterday · Visa •• 4417', ini: 'CA', meta: '− 38.50', scope: 'Transactions' },
+      { g: 'CARDS', t: 'Marketing card', sub: 'Virtual · •• 4417 · Active', icon: I.card, scope: 'Cards' },
+      { g: 'CARDS', t: 'Operations card', sub: 'Physical · •• 2086 · Frozen', icon: I.card, scope: 'Cards' },
+      { g: 'DOCUMENTS', t: 'September statement', sub: 'Main account · PDF', icon: I.doc, scope: 'Documents' },
+      { g: 'DOCUMENTS', t: 'CR certificate', sub: 'Uploaded 3 Mar 2026', icon: I.doc, scope: 'Documents' }
+    ];
+  }
+  results() {
+    const { q, scope } = this.state, Q = q.trim().toLowerCase(), all = this.data();
+    let list;
+    if (!Q && !scope) list = all.filter(d => d.recent || d.g === 'ACTIONS' && d.green && d.kbd || d.g === 'GO TO' && d.kbd);
+    else list = all.filter(d => !d.recent && (!scope || d.scope === scope) && (!Q || (d.t + ' ' + (d.sub || '') + ' ' + (d.meta || '')).toLowerCase().includes(Q)));
+    const order = ['RECENT', 'ACTIONS', 'GO TO', 'TRANSACTIONS', 'PEOPLE', 'CARDS', 'DOCUMENTS'];
+    list.sort((a, b) => order.indexOf(a.g) - order.indexOf(b.g));
+    return list.slice(0, 12);
+  }
+  run(d) { this.setState({ status: (d.g === 'ACTIONS' ? 'Starting: ' : 'Opening: ') + d.t }); }
+  renderVals() {
+    const s = this.state, list = this.results(), Q = s.q.trim().toLowerCase();
+    const act = Math.min(s.act, Math.max(0, list.length - 1));
+    const groups = [];
+    list.forEach((d, idx) => {
+      let g = groups.find(x => x.label === d.g); if (!g) { g = { label: d.g, items: [] }; groups.push(g); }
+      const tl = d.t.toLowerCase(), at = Q ? tl.indexOf(Q) : -1, on = idx === act;
+      g.items.push({ pre: at >= 0 ? d.t.slice(0, at) : d.t, hit: at >= 0 ? d.t.slice(at, at + Q.length) : '', post: at >= 0 ? d.t.slice(at + Q.length) : '',
+        sub: d.sub || '', hasSub: !!d.sub, hasIcon: !!d.icon, icon: d.icon || '', ini: d.ini || '',
+        ibg: d.danger ? '#FDECEC' : d.green ? '#E3F6EF' : '#F2F6F4', ifg: d.danger ? '#C81E1E' : d.green ? '#0B6F56' : '#0C1F1A',
+        hasMeta: !!d.meta, meta: d.meta || '', mc: d.pos ? '#0B7A5F' : '#0C1F1A', hasKbd: !!d.kbd && !on, kbd: d.kbd || [], active: on,
+        bg: on ? '#F2F6F4' : 'transparent', ring: on ? 'inset 0 0 0 1px #E1E8E5' : 'none',
+        hover: () => s.act !== idx && this.setState({ act: idx }), run: () => this.run(d) });
+    });
+    const scopes = ['Transactions', 'People', 'Cards', 'Documents'];
+    const cm = {
+      ref: this.inp, q: s.q, groups, empty: list.length === 0 && (!!Q || !!s.scope), loading: Q.length > 0 && Q.length < 2,
+      hasScope: !!s.scope, scope: s.scope || '', clearScope: () => this.setState({ scope: null, act: 0 }),
+      ph: s.scope ? `Search ${s.scope.toLowerCase()}…` : 'Search or type a command…',
+      status: s.status || (list.length ? `${list.length} result${list.length > 1 ? 's' : ''}` : ''),
+      setQ: e => this.setState({ q: e.target.value, act: 0, status: '' }),
+      askSupport: () => this.setState({ status: 'Opening chat with support' }),
+      key: e => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); this.setState({ act: (act + 1) % Math.max(1, list.length) }); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); this.setState({ act: (act - 1 + list.length) % Math.max(1, list.length) }); }
+        else if (e.key === 'Enter' && list[act]) { e.preventDefault(); this.run(list[act]); }
+        else if (e.key === 'Escape') { e.preventDefault(); this.setState(s.q ? { q: '', act: 0 } : { scope: null, act: 0 }); }
+        else if (e.key === 'Tab') { e.preventDefault(); const i = scopes.indexOf(s.scope); this.setState({ scope: scopes[(i + 1) % scopes.length], act: 0 }); }
+        else if (e.key === 'Backspace' && !s.q && s.scope) this.setState({ scope: null });
+      }
+    };
+    const presets = [['Empty', '', null], ['"nour"', 'nour', null], ['Scope: Cards', '', 'Cards'], ['No results', 'zzz', null]].map(([l, q, sc]) => ({ l, go: () => { this.setState({ q, scope: sc, act: 0, status: '' }); this.inp.current && this.inp.current.focus(); } }));
+    const states = [['EMPTY QUERY', 'Recent items, top actions and Go to with shortcuts. Never a blank box.'], ['TYPING', 'Results filter on every key; the matched text is highlighted. First result is pre-selected.'], ['SCOPED', 'Tab picks a scope (Transactions, People, Cards, Documents). Backspace on empty removes it.'], ['LOADING', 'Spinner in the field while server results load. Local results show immediately.'], ['NO RESULTS', 'Says what was searched, suggests what to try, offers support.'], ['RUNNING', 'Enter runs the action and closes the menu. Actions with a form open it pre-filled.']].map(([k, v]) => ({ k, v }));
+    const specs = [['Open', '⌘K / Ctrl K anywhere, or the search field in the top bar. Opens 56 px from the top, not centered, so results grow downward.'], ['Width', '640 px, max height 70% of the screen. Backdrop 35% ink.'], ['Field', '64 px tall, 17 px text, search icon left, ESC hint right.'], ['Rows', '48 px. 32 px icon tile, title 14.5/500, subtitle 12.5, meta right in Mono.'], ['Groups', 'Order: Recent, Actions, Go to, Transactions, People, Cards, Documents. Max 12 rows total.'], ['Actions', 'Green tile for create actions, red tile for risky ones (freeze). Shortcut shown on the right.'], ['Footer', '44 px keyboard hints. Live result count or status on the right.'], ['Access', 'role="combobox" on the field, listbox for results, aria-activedescendant follows the highlight.']].map(([k, v], i) => ({ k, v, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const all = this.data().filter(d => !d.recent);
+    const mq = (s.mq || '').trim().toLowerCase(), msc = s.msc || null;
+    const ml = all.filter(d => d.g !== 'GO TO' && (!msc || d.scope === msc || (msc === 'Actions' && d.g === 'ACTIONS')) && (!mq || (d.t + ' ' + (d.sub || '')).toLowerCase().includes(mq)));
+    const show = !mq && !msc ? all.filter(d => d.g === 'ACTIONS' && d.green).slice(0, 3).concat(all.filter(d => d.g === 'TRANSACTIONS').slice(0, 2)) : ml.slice(0, 8);
+    const mgroups = []; show.forEach(d => { const lab = d.g === 'ACTIONS' ? (mq || msc ? 'ACTIONS' : 'SUGGESTED') : d.g; let g = mgroups.find(x => x.label === lab); if (!g) { g = { label: lab, items: [] }; mgroups.push(g); } g.items.push({ t: d.t, sub: d.sub || (d.g === 'ACTIONS' ? 'Action' : ''), meta: d.meta || '', hasIcon: !d.ini && !!d.icon, icon: d.icon || '', ini: d.ini || (d.icon ? '' : d.t.slice(0, 2).toUpperCase()), ibg: d.green ? '#E3F6EF' : '#F2F6F4', ifg: d.green ? '#0B6F56' : '#0C1F1A' }); });
+    const mob = { q: s.mq || '', setQ: e => this.setState({ mq: e.target.value }), clear: () => this.setState({ mq: '', msc: null }), groups: mgroups, empty: show.length === 0,
+      chips: ['Transactions', 'People', 'Cards', 'Documents', 'Actions'].map(l => { const on = msc === l; return { l, bd: on ? '#0C1F1A' : '#D7E0DC', bg: on ? '#0C1F1A' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0C1F1A', pick: () => this.setState({ msc: on ? null : l }) }; }) };
+    const mspecs = [['Entry', 'Search field on Home and a search icon in the tab bar\'s top screens.'], ['Layout', 'Full screen. Field 44 pt in the top bar, Cancel on the right.'], ['Scopes', 'Chips under the field replace Tab. One at a time; tap again to clear.'], ['Rows', '56 pt with 36 pt avatar or tile. Swipe left on a result for quick actions.'], ['Keyboard', 'Opens with the keyboard up; return key reads "Search".'], ['Android', 'Back button closes search. Same layout as iOS.']].map(([k, v]) => ({ k, v }));
+    const rules = [[1, 'Show something useful before typing: recent items and top actions.'], [1, 'Search names, IBANs, amounts and card last 4 digits.'], [1, 'Keep the same shortcut letters as the sidebar (G + D for Dashboard).'], [1, 'Hide results the user\'s role can\'t open.'], [0, 'Don\'t run money actions straight from Enter; open the flow pre-filled.'], [0, 'Don\'t show full card numbers or balances of other users.'], [0, 'Don\'t center the menu vertically; it jumps as results change.'], [0, 'Don\'t use it as the only way to reach a page.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { cm, presets, states, specs, mob, mspecs, rules };
+  }
+}
+</script>
+</body>
+</html>

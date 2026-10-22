@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 40px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · FOUNDATIONS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Styles</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">The tokens behind every Hala screen: color, type in English and Arabic, spacing, radius, shadows and motion. Names match the values used across the component pages. Click any swatch to copy its hex.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="8"><a href="{{ n.h }}" style="height:32px;padding:0 12px;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13px;text-decoration:none;display:flex;align-items:center;white-space:nowrap">{{ n.l }}</a></sc-for></div>
+</header>
+
+<section id="color" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em">Color</h2><p style="margin:0;font-size:15px;color:#4A615A;max-width:720px">Hala green is for brand and primary actions only. Ink carries text and strong UI. Surfaces are white on a mint-gray canvas. Status colors are used only to show status.</p></div><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B6F56;min-height:18px">{{ copied }}</span></div>
+  <sc-for list="{{ palettes }}" as="p" hint-placeholder-count="6">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><span style="font-size:18px;font-weight:700">{{ p.name }}</span><span style="font-size:14px;color:#5E7770">{{ p.desc }}</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px">
+        <sc-for list="{{ p.items }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.copy }}" title="Copy {{ c.hex }}" style="border:0;padding:0;background:#FFFFFF;border-radius:18px;overflow:hidden;text-align:left;cursor:pointer;display:flex;flex-direction:column;color:#0C1F1A;box-shadow:0 1px 2px rgba(12,31,26,.04)" style-hover="box-shadow:0 10px 24px -14px rgba(12,31,26,.35)"><span style="height:76px;background:{{ c.hex }};border-bottom:1px solid rgba(12,31,26,.06);display:flex;align-items:flex-end;justify-content:flex-end;padding:8px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:{{ c.on }};opacity:.9">{{ c.ratio }}</span></span><span style="padding:12px 14px 14px;display:flex;flex-direction:column;gap:3px"><span style="font-size:14px;font-weight:600">{{ c.n }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#0B6F56">{{ c.tok }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ c.hex }}</span><span style="font-size:12.5px;line-height:1.4;color:#5E7770;margin-top:4px">{{ c.use }}</span></span></button></sc-for>
+      </div>
+    </div>
+  </sc-for>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+    <div style="background:#FFFFFF;border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">GRADIENTS · USE SPARINGLY</span>
+      <sc-for list="{{ grads }}" as="g" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:12px"><span style="width:64px;height:40px;border-radius:12px;background:{{ g.css }};flex:none;border:1px solid rgba(12,31,26,.06)"></span><div style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:13.5px;font-weight:600">{{ g.n }}</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#5E7770;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ g.v }}</span><span style="font-size:12px;color:#5E7770">{{ g.use }}</span></div></div></sc-for>
+    </div>
+    <div style="background:#FFFFFF;border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">CONTRAST · CHECKED PAIRS</span>
+      <sc-for list="{{ pairs }}" as="c" hint-placeholder-count="6"><div style="display:flex;align-items:center;gap:12px"><span style="width:64px;height:36px;border-radius:10px;background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none;border:1px solid rgba(12,31,26,.06)">Aa</span><span style="flex:1;font-size:13px">{{ c.n }}</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:{{ c.rc }}">{{ c.r }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="type" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em">Typography</h2><p style="margin:0;font-size:15px;color:#4A615A;max-width:720px">IBM Plex Sans for interface text, IBM Plex Mono for numbers, amounts, IBANs and labels, and IBM Plex Sans Arabic for Arabic. All three share the same proportions, so mixed text lines up.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ families }}" as="f" hint-placeholder-count="3"><div style="background:#FFFFFF;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ f.role }}</span><span style="font-family:{{ f.ff }};font-size:52px;font-weight:600;line-height:1;direction:{{ f.dir }}">{{ f.glyph }}</span><span style="font-size:17px;font-weight:600">{{ f.name }}</span><span style="font-family:{{ f.ff }};font-size:14px;color:#4A615A;direction:{{ f.dir }}">{{ f.sample }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ f.weights }}</span></div></sc-for>
+  </div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px;overflow-x:auto">
+    <div style="display:grid;grid-template-columns:150px minmax(260px,1fr) 150px 150px;gap:20px;padding:14px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770"><span>TOKEN</span><span>SAMPLE</span><span>WEB</span><span>MOBILE</span></div>
+    <sc-for list="{{ scale }}" as="t" hint-placeholder-count="12"><div style="display:grid;grid-template-columns:150px minmax(260px,1fr) 150px 150px;gap:20px;padding:14px 0;border-top:1px solid #EEF2F0;align-items:center"><div style="display:flex;flex-direction:column;gap:2px"><span style="font:500 12.5px 'IBM Plex Mono',monospace;color:#0B6F56">{{ t.tok }}</span><span style="font-size:12px;color:#5E7770">{{ t.use }}</span></div><span style="font-family:{{ t.ff }};font-size:{{ t.px }};font-weight:{{ t.fw }};letter-spacing:{{ t.ls }};line-height:{{ t.lh }};text-transform:{{ t.tt }};min-width:0;overflow-wrap:anywhere">{{ t.sample }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#4A615A">{{ t.web }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#4A615A">{{ t.mob }}</span></div></sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+    <sc-for list="{{ typeRules }}" as="r" hint-placeholder-count="4"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ r.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ r.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section id="arabic" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em">Arabic and RTL</h2><p style="margin:0;font-size:15px;color:#4A615A;max-width:720px">Arabic text is set 1–2 px larger than English with taller line height, because Arabic letters look smaller at the same size. Numbers stay Western (0–9) and Mono, read left to right.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">ENGLISH · LTR</span>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:28px;font-weight:700;letter-spacing:-.01em">Good morning, Abdulaziz</span><span style="font-size:15px;line-height:1.55;color:#4A615A">Your POS sales grew 12.4% compared with last month.</span></div>
+      <div style="border-radius:16px;background:#F4F7F6;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500">Nour Trading</span><span style="font-size:12.5px;color:#5E7770">Today, 09:30 · Transfer</span></div><span style="font:500 15px 'IBM Plex Mono',monospace;white-space:nowrap">− 25,000.00</span></div>
+      <span style="align-self:flex-end;height:44px;padding:0 20px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px">Continue →</span>
+    </div>
+    <div dir="rtl" style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;font-family:'IBM Plex Sans Arabic',sans-serif">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;direction:ltr;text-align:right">ARABIC · RTL</span>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:30px;font-weight:700;line-height:1.35">صباح الخير، عبدالعزيز</span><span style="font-size:16px;line-height:1.75;color:#4A615A">نمت مبيعات نقاط البيع بنسبة <bdi dir="ltr" style="font-family:'IBM Plex Mono',monospace">12.4%</bdi> مقارنة بالشهر الماضي.</span></div>
+      <div style="border-radius:16px;background:#F4F7F6;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="display:flex;flex-direction:column"><span style="font-size:16px;font-weight:500">نور للتجارة</span><span style="font-size:13px;color:#5E7770">اليوم، <bdi dir="ltr" style="font-family:'IBM Plex Mono',monospace">09:30</bdi> · تحويل</span></div><span dir="ltr" style="font:500 15px 'IBM Plex Mono',monospace;white-space:nowrap">− 25,000.00</span></div>
+      <span style="align-self:flex-end;height:44px;padding:0 20px;border-radius:999px;background:linear-gradient(270deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px">متابعة ←</span>
+    </div>
+  </div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px;overflow-x:auto">
+    <div style="display:grid;grid-template-columns:160px repeat(2,minmax(140px,1fr)) minmax(200px,1.4fr);gap:20px;padding:14px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770"><span>STYLE</span><span>ENGLISH</span><span>ARABIC</span><span>NOTE</span></div>
+    <sc-for list="{{ arMap }}" as="a" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:160px repeat(2,minmax(140px,1fr)) minmax(200px,1.4fr);gap:20px;padding:12px 0;border-top:1px solid #EEF2F0;font-size:13.5px;align-items:baseline"><span style="font-weight:600">{{ a.k }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A615A">{{ a.en }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A615A">{{ a.ar }}</span><span style="color:#5E7770;font-size:13px">{{ a.n }}</span></div></sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+    <sc-for list="{{ rtl }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ r.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ r.v }}</span></div></sc-for>
+  </div>
+</section>
+<section id="space" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em">Spacing</h2><p style="margin:0;font-size:15px;color:#4A615A;max-width:720px">A 4 px base. Small steps inside components, large steps between them. On mobile, the screen margin is 16 pt.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:8px 24px">
+      <sc-for list="{{ space }}" as="s" hint-placeholder-count="11"><div style="display:grid;grid-template-columns:80px 56px minmax(0,1fr);gap:16px;align-items:center;padding:11px 0;border-top:1px solid {{ s.bdr }}"><span style="font:500 12.5px 'IBM Plex Mono',monospace;color:#0B6F56">{{ s.tok }}</span><span style="font:400 12.5px 'IBM Plex Mono',monospace">{{ s.v }}</span><div style="display:flex;align-items:center;gap:12px;min-width:0"><span style="width:{{ s.v }};height:16px;border-radius:3px;background:#9DD3C2;flex:none"></span><span style="font-size:12.5px;color:#5E7770;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.use }}</span></div></div></sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">COMPONENT PADDING</span>
+        <sc-for list="{{ pads }}" as="p" hint-placeholder-count="7"><div style="display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:2px 0"><span>{{ p.k }}</span><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#4A615A;text-align:right">{{ p.v }}</span></div></sc-for>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">CONTROL HEIGHTS</span>
+        <div style="display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap"><sc-for list="{{ heights }}" as="h" hint-placeholder-count="6"><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:56px;height:{{ h.v }};border-radius:{{ h.r }};background:{{ h.bg }}"></span><span style="font:500 11px 'IBM Plex Mono',monospace">{{ h.v }}</span><span style="font-size:11px;color:#5E7770;text-align:center;max-width:80px;line-height:1.3">{{ h.k }}</span></div></sc-for></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="radius" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em">Radius</h2><p style="margin:0;font-size:15px;color:#4A615A;max-width:720px">Soft, generous corners. Buttons and chips are always pills. A container's radius is its child's radius plus the padding between them.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px">
+    <sc-for list="{{ radius }}" as="r" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px"><span style="height:72px;border-radius:{{ r.v }};background:#E3F6EF;border:1.5px solid #0B8F6E"></span><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:500 12.5px 'IBM Plex Mono',monospace;color:#0B6F56">{{ r.tok }}</span><span style="font:400 12px 'IBM Plex Mono',monospace">{{ r.v }}</span></div><span style="font-size:12.5px;line-height:1.4;color:#5E7770">{{ r.use }}</span></div></sc-for>
+  </div>
+</section>
+
+<section id="shadow" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em">Elevation</h2><p style="margin:0;font-size:15px;color:#4A615A;max-width:720px">Shadows are tinted with ink and pulled in with a negative spread, so they read soft and green-gray rather than black. Most cards have no shadow; elevation means something floats above the page.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:24px;border-radius:24px;background:#EEF3F1;border:1px solid #E1E8E5">
+    <sc-for list="{{ shadows }}" as="s" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:20px;padding:18px;min-height:150px;display:flex;flex-direction:column;gap:6px;box-shadow:{{ s.css }}"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:15px;font-weight:600">{{ s.n }}</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B6F56">{{ s.tok }}</span></div><span style="font-size:12.5px;color:#5E7770;line-height:1.45">{{ s.use }}</span><span style="margin-top:auto;font:400 10.5px 'IBM Plex Mono',monospace;color:#5E7770;line-height:1.45;word-break:break-word">{{ s.css }}</span></div></sc-for>
+  </div>
+  <div style="background:#FFFFFF;border-radius:20px;padding:18px 22px;display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600">Backdrops</span><span style="font-size:13px;line-height:1.5;color:#5E7770">Modal rgba(12,31,26,.45) · Bottom sheet .42 · Command menu .35 · Drawer .22. No blur behind overlays.</span></div>
+</section>
+
+<section id="motion" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em">Motion</h2><p style="margin:0;font-size:15px;color:#4A615A;max-width:720px">Quick and calm. One standard curve for almost everything. Respect "reduce motion": swap movement for a short fade.</p></div><button onClick="{{ motion.play }}" style="height:40px;padding:0 18px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer">Play all</button></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 24px">
+    <sc-for list="{{ motion.rows }}" as="m" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:150px 110px minmax(0,1fr) minmax(0,220px);gap:16px;align-items:center;padding:14px 0;border-top:1px solid {{ m.bdr }}"><span style="font:500 12.5px 'IBM Plex Mono',monospace;color:#0B6F56">{{ m.tok }}</span><span style="font:400 12.5px 'IBM Plex Mono',monospace">{{ m.d }}</span><div style="position:relative;height:28px;border-radius:999px;background:#F2F6F4"><span style="position:absolute;top:4px;left:4px;width:20px;height:20px;border-radius:50%;background:#0B8F6E;transform:translateX({{ m.x }});transition:transform {{ m.d }} {{ m.ease }}"></span></div><span style="font-size:12.5px;color:#5E7770">{{ m.use }}</span></div></sc-for>
+  </div>
+  <div style="background:#FFFFFF;border-radius:20px;padding:16px 22px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:13px"><span><b style="font-weight:600">Standard</b> <span style="font-family:'IBM Plex Mono',monospace;color:#4A615A">cubic-bezier(.2,.9,.2,1)</span></span><span><b style="font-weight:600">Exit</b> <span style="font-family:'IBM Plex Mono',monospace;color:#4A615A">ease-in, 70% of enter time</span></span><span><b style="font-weight:600">Mobile sheets</b> <span style="font-family:'IBM Plex Mono',monospace;color:#4A615A">spring 320 ms</span></span></div>
+</section>
+
+<section id="grid" style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em">Icons, layout and breakpoints</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">ICONS · 1.7 STROKE, ROUND</span>
+      <div style="display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap"><sc-for list="{{ iconSizes }}" as="i" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:{{ i.tile }};height:{{ i.tile }};border-radius:{{ i.r }};background:#F2F6F4;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:{{ i.px }};height:{{ i.px }}" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path></svg></span><span style="font:500 11px 'IBM Plex Mono',monospace">{{ i.px }}</span><span style="font-size:11px;color:#5E7770">{{ i.k }}</span></div></sc-for></div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Outline icons on a 24 grid, currentColor. Filled only for active tab bar items.</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">BREAKPOINTS</span>
+      <sc-for list="{{ bps }}" as="b" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:90px 90px minmax(0,1fr);gap:12px;font-size:13px;padding:6px 0;border-top:1px solid {{ b.bdr }}"><span style="font-weight:600">{{ b.k }}</span><span style="font-family:'IBM Plex Mono',monospace;color:#4A615A">{{ b.v }}</span><span style="color:#5E7770">{{ b.use }}</span></div></sc-for>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">LAYOUT</span>
+      <sc-for list="{{ layout }}" as="l" hint-placeholder-count="6"><div style="display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:3px 0"><span>{{ l.k }}</span><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#4A615A;text-align:right">{{ l.v }}</span></div></sc-for>
+    </div>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { copied: '' };
+  copy(hex) { try { navigator.clipboard && navigator.clipboard.writeText(hex); } catch (e) {} this.setState({ copied: `Copied ${hex}` }); clearTimeout(this.t); this.t = setTimeout(() => this.setState({ copied: '' }), 1600); }
+  renderVals() {
+    const nav = [['Color', '#color'], ['Typography', '#type'], ['Arabic', '#arabic'], ['Spacing', '#space'], ['Radius', '#radius'], ['Elevation', '#shadow'], ['Motion', '#motion'], ['Icons & grid', '#grid']].map(([l, h]) => ({ l, h }));
+    const lum = h => { const c = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255).map(v => v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4)); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; };
+    const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+    const P = [
+      ['Brand', 'Logo, primary buttons, links, focus and selection.', [
+        ['Hala green', 'brand/500', '#009A78', 'Logo, app icon. Not for text below 18 px.'],
+        ['Green 600', 'brand/600', '#0B8F6E', 'Selected states, checkboxes, toggles, chart line.'],
+        ['Green 700', 'brand/700', '#0A7559', 'Gradient start, pressed primary.'],
+        ['Green 800 · link', 'brand/800', '#0E7C62', 'Text links and tertiary buttons.'],
+        ['Mint 300', 'brand/300', '#9DD3C2', 'Chart fills, illustrations, decorative.'],
+        ['Mint 100', 'brand/100', '#E3F6EF', 'Success tint, selected rows, chips on.'],
+        ['Mint 50', 'brand/50', '#F3FBF8', 'Hover on selected, soft highlight.']]],
+      ['Ink and text', 'Text uses ink at three strengths. Never pure black.', [
+        ['Ink', 'text/primary', '#0C1F1A', 'Headings, body, values, dark buttons.'],
+        ['Secondary', 'text/secondary', '#4A615A', 'Descriptions, supporting text.'],
+        ['Tertiary', 'text/tertiary', '#5E7770', 'Captions, meta, helper text, icons.'],
+        ['Muted label', 'text/label', '#6B827B', 'Mono section labels (UPPERCASE).'],
+        ['Disabled', 'text/disabled', '#9AACA6', 'Disabled text and placeholder icons.']]],
+      ['Surfaces', 'White cards sit on the mint-gray canvas. Gray containers sit inside cards.', [
+        ['Canvas', 'surface/canvas', '#EEF3F1', 'App and page background.'],
+        ['Card', 'surface/card', '#FFFFFF', 'Cards, sidebar, modals, inputs.'],
+        ['Subtle', 'surface/subtle', '#F4F7F6', 'Containers inside cards, mobile screen bg.'],
+        ['Sunken', 'surface/sunken', '#F2F6F4', 'Icon tiles, avatars, segmented track.'],
+        ['Hover', 'surface/hover', '#F7FAF9', 'Row and button hover on white.'],
+        ['Inverse', 'surface/inverse', '#0C1F1A', 'Tooltips, dark cards, selected pills.']]],
+      ['Borders', 'All borders are 1 px. Pick by how strong the edge needs to be.', [
+        ['Divider', 'border/subtle', '#EEF2F0', 'List rows, inside cards.'],
+        ['Default', 'border/default', '#E1E8E5', 'Card edges, labelled dividers.'],
+        ['Control', 'border/control', '#D7E0DC', 'Outline buttons, chips, steppers.'],
+        ['Input', 'border/input', '#D9D9D9', 'Text fields at rest.'],
+        ['Strong', 'border/strong', '#C9D4D0', 'Table header, sheet handle.']]],
+      ['Status', 'Each status has a strong color for icons and a tint + text pair for badges and alerts.', [
+        ['Success', 'status/success', '#0B8F6E', 'Settled, verified, done. Tint #E3F6EF · text #0B4F3E.'],
+        ['Warning', 'status/warning', '#B45309', 'Pending, needs action. Tint #FFF4E0 · text #7A4508.'],
+        ['Error', 'status/error', '#E02424', 'Field errors, declined. Tint #FDECEC · text #8A1414.'],
+        ['Danger', 'status/danger', '#C81E1E', 'Destructive buttons and menu items.'],
+        ['Info', 'status/info', '#2F5BD3', 'Frozen, information. Tint #E8F0FF · text #1E3A8A.'],
+        ['Scheduled', 'status/scheduled', '#6D4CD3', 'Scheduled payments. Tint #F0ECFF · text #3F2A8C.'],
+        ['Badge red', 'status/count', '#E5484D', 'Notification counts and unread dots only.']]],
+      ['Data visualisation', 'Order for chart series. Green first, then blue, amber, purple.', [
+        ['Series 1', 'chart/1', '#0B8F6E', 'Main series, income, POS sales.'],
+        ['Series 2', 'chart/2', '#7FA2FF', 'Comparison, previous period.'],
+        ['Series 3', 'chart/3', '#F5B94A', 'Third category.'],
+        ['Series 4', 'chart/4', '#A78BFA', 'Fourth category.'],
+        ['Grid line', 'chart/grid', '#EEF2F0', 'Axes and grid lines.']]]
+    ];
+    const palettes = P.map(([name, desc, items]) => ({ name, desc, items: items.map(([n, tok, hex, use]) => { const rw = ratio(hex, '#FFFFFF'), ri = ratio(hex, '#0C1F1A'), onW = rw >= ri; return { n, tok, hex, use, on: onW ? '#FFFFFF' : '#0C1F1A', ratio: (onW ? rw : ri).toFixed(1) + ':1', copy: () => this.copy(hex) }; }) }));
+    const grads = [['Primary button', 'linear-gradient(90deg,#0A7559,#2C957A)', 'One primary per screen.'], ['Card · emerald', 'linear-gradient(135deg,#0F3D33,#0A7559 60%,#2C957A)', 'Default corporate card art.'], ['Haze', 'radial-gradient(70% 42% at 50% 100%,rgba(61,245,176,.22),transparent 70%),#FFFFFF', 'Onboarding and sign-in background.'], ['Approved banner', 'linear-gradient(100deg,#1A1A1A 55%,#2E6B5C)', 'Verified company card (KYB).']].map(([n, v, use]) => ({ n, v, css: v, use }));
+    const PR = [['Ink on white', '#0C1F1A', '#FFFFFF'], ['Secondary on white', '#4A615A', '#FFFFFF'], ['Tertiary on canvas', '#5E7770', '#EEF3F1'], ['White on green 700', '#FFFFFF', '#0A7559'], ['Link on white', '#0E7C62', '#FFFFFF'], ['Success text on tint', '#0B4F3E', '#E3F6EF'], ['Warning text on tint', '#7A4508', '#FFF4E0'], ['Error text on tint', '#8A1414', '#FDECEC']];
+    const pairs = PR.map(([n, fg, bg]) => { const r = ratio(fg, bg); return { n, fg, bg, r: r.toFixed(1) + ':1 ' + (r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : 'Large'), rc: r >= 4.5 ? '#0B6F56' : '#B45309' }; });
+    const SANS = "'IBM Plex Sans',sans-serif", MONO = "'IBM Plex Mono',monospace";
+    const families = [['INTERFACE', 'IBM Plex Sans', SANS, 'Aa', 'Business banking for Saudi companies', '300 · 400 · 500 · 600 · 700', 'ltr'], ['NUMBERS AND LABELS', 'IBM Plex Mono', MONO, '0 1', 'SAR 175,000.00 · SA57 •• 1951', '400 · 500 · 600', 'ltr'], ['ARABIC', 'IBM Plex Sans Arabic', "'IBM Plex Sans Arabic',sans-serif", 'أب', 'خدمات مصرفية للشركات', '400 · 500 · 600 · 700', 'rtl']].map(([role, name, ff, glyph, sample, weights, dir]) => ({ role, name, ff, glyph, sample, weights, dir }));
+    const scale = [
+      ['display', 'Page hero, onboarding', 'Welcome', SANS, '48px', 700, '-.03em', '1.1', 'none', '48/52 · 700', '34/40 · 700'],
+      ['heading/xl', 'Page title', 'Transactions', SANS, '34px', 700, '-.02em', '1.2', 'none', '34/40 · 700', '28/34 · 700'],
+      ['heading/l', 'Section title', 'Recent activity', SANS, '26px', 700, '-.01em', '1.25', 'none', '26/32 · 700', '22/28 · 700'],
+      ['heading/m', 'Card and modal title', 'Add beneficiary', SANS, '18px', 700, '0', '1.35', 'none', '18/24 · 700', '19/24 · 700'],
+      ['body/l', 'Intro paragraphs', 'We check the IBAN with the bank before saving.', SANS, '17px', 400, '0', '1.55', 'none', '17/26 · 400', '17/24 · 400'],
+      ['body/m', 'Default UI text', 'Payments you send and receive appear here.', SANS, '15px', 400, '0', '1.5', 'none', '15/22 · 400', '16/22 · 400'],
+      ['body/s', 'Descriptions, helper', 'Must be registered to the owner\'s ID.', SANS, '13.5px', 400, '0', '1.5', 'none', '13.5/20 · 400', '14/20 · 400'],
+      ['label/m', 'Buttons, row titles', 'Continue', SANS, '15px', 600, '0', '1.2', 'none', '15/20 · 600', '16/20 · 600'],
+      ['caption', 'Meta, timestamps', 'Today, 12:41 · mada', SANS, '12.5px', 400, '0', '1.4', 'none', '12.5/16 · 400', '13/16 · 400'],
+      ['overline', 'Section labels', 'Accept payments', MONO, '11px', 500, '.12em', '1.3', 'uppercase', '11/14 · 500 · +12%', '11/14 · 500 · +12%'],
+      ['amount/xl', 'Balances, totals', 'SAR 175,000.00', MONO, '32px', 600, '-.02em', '1.1', 'none', '32/36 · 600', '30/34 · 600'],
+      ['amount/m', 'List amounts, IBANs', '− 25,000.00', MONO, '15px', 500, '0', '1.3', 'none', '15/20 · 500', '15/20 · 500']
+    ].map(([tok, use, sample, ff, px, fw, ls, lh, tt, web, mob]) => ({ tok, use, sample, ff, px, fw, ls, lh, tt, web, mob }));
+    const typeRules = [['Numbers in Mono', 'Amounts, IBANs, card digits, dates and codes use Plex Mono so columns line up.'], ['Amount format', 'Sign, space, thousands comma, 2 decimals: "− 25,000.00". Currency SAR before the number.'], ['Weights', 'Use 400, 500, 600 and 700. 300 is only for the HALA wordmark in headers.'], ['Mobile minimum', 'Body 16 pt on iOS and Android to avoid zoom and to meet Dynamic Type.']].map(([k, v]) => ({ k, v }));
+    const arMap = [['heading/xl', '34/40 · 700', '36/48 · 700', '+2 px, line height ×1.35'], ['heading/m', '18/24 · 700', '19/28 · 700', '+1 px'], ['body/m', '15/22 · 400', '16/28 · 400', 'Line height 1.75 for readability'], ['body/s', '13.5/20 · 400', '14.5/24 · 400', ''], ['label/m', '15/20 · 600', '16/24 · 600', 'Buttons keep 600'], ['overline', '11 Mono caps', '12/16 · 600', 'No caps or letter-spacing in Arabic']].map(([k, en, ar, n]) => ({ k, en, ar, n }));
+    const rtl = [['Mirror the layout', 'Sidebar right, back arrow points right, progress fills right to left.'], ['Don\'t mirror', 'Numbers, IBANs, card numbers, charts\' time axis, media controls, the logo.'], ['Icons', 'Mirror direction icons (arrows, send). Keep symbols as is (check, search, bell).'], ['Gradients', 'Reverse button gradients so the darker side stays at the start.'], ['Letter-spacing', 'Never add letter-spacing to Arabic; it breaks the connected letters.'], ['Mixed text', 'Wrap numbers and Latin names in a direction-isolated span (unicode-bidi: isolate).']].map(([k, v]) => ({ k, v }));
+    const space = [['space/1', '4px', 'Icon to text in a badge'], ['space/2', '8px', 'Chip gap, icon to label'], ['space/3', '12px', 'Card grid gap, row gap'], ['space/4', '16px', 'Card padding (compact), mobile margin'], ['space/5', '20px', 'Modal padding'], ['space/6', '24px', 'Card padding, group gap'], ['space/7', '28px', 'Large card padding'], ['space/8', '32px', 'Page side padding (web)'], ['space/10', '40px', 'Onboarding column gap'], ['space/12', '48px', 'Header to first section'], ['space/14', '56px', 'Between page sections']].map(([tok, v, use], i) => ({ tok, v, use, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const pads = [['Button', '0 20 · icon gap 8'], ['Input', '0 14 · label gap 2'], ['Chip / badge', '0 12 / 0 10'], ['Card · web', '24 28'], ['Card · mobile', '16'], ['Modal', '20 · footer 14 20 18'], ['List row', '14 0 · inset 52']].map(([k, v]) => ({ k, v }));
+    const heights = [['Badge', '24px', '999px', '#E3F6EF'], ['Small', '32px', '999px', '#DDE6E2'], ['Default', '40px', '999px', '#C9D4D0'], ['Web primary', '44px', '999px', '#9DD3C2'], ['Mobile', '52px', '999px', '#0B8F6E'], ['Input', '60px', '8px', '#0C1F1A']].map(([k, v, r, bg]) => ({ k, v, r, bg }));
+    const radius = [['radius/xs', '4px', 'Checkbox inner, chart bars'], ['radius/s', '8px', 'Inputs, small tiles'], ['radius/m', '12px', 'Icon tiles, menu items, day cells'], ['radius/l', '16px', 'Inner cards, list groups'], ['radius/xl', '20px', 'Cards, modals, mobile groups'], ['radius/2xl', '24px', 'Page cards, sidebar'], ['radius/sheet', '28px', 'Bottom sheet top, mobile screen'], ['radius/pill', '999px', 'Buttons, chips, badges, toggles']].map(([tok, v, use]) => ({ tok, v, use }));
+    const shadows = [['Flat', 'shadow/0', 'Default card on canvas. No shadow.', 'none'], ['Raised', 'shadow/1', 'Hover on clickable cards, segmented pill.', '0 1px 3px rgba(12,31,26,.12)'], ['Floating', 'shadow/2', 'Toasts, menus, popovers.', '0 18px 36px -16px rgba(12,31,26,.35)'], ['Overlay', 'shadow/3', 'Modals, date pickers, sidebar.', '0 24px 60px -28px rgba(12,60,48,.28), 0 1px 3px rgba(12,31,26,.05)'], ['Dialog', 'shadow/4', 'Command menu, large modals.', '0 40px 80px -30px rgba(12,31,26,.6)'], ['Primary glow', 'shadow/brand', 'Gradient primary button only.', '0 10px 22px -12px rgba(10,117,89,.8)']].map(([n, tok, use, css]) => ({ n, tok, use, css }));
+    const on = !!this.state.mo;
+    const motion = { play: () => { this.setState({ mo: false }); setTimeout(() => this.setState({ mo: true }), 30); }, rows: [['motion/instant', '100ms', 'ease-out', 'Hover, color, press'], ['motion/fast', '160ms', 'ease-out', 'Backdrop fade, tooltip'], ['motion/standard', '240ms', 'cubic-bezier(.2,.9,.2,1)', 'Drawer, toggle, segment pill'], ['motion/emphasis', '300ms', 'cubic-bezier(.2,.9,.2,1)', 'Accordion, chevron, card lift'], ['motion/sheet', '320ms', 'cubic-bezier(.32,1.2,.4,1)', 'Bottom sheet, full-screen modal']].map(([tok, d, ease, use], i) => ({ tok, d, ease, use, x: on ? 'calc(100% + 200px)' : '0', bdr: i ? '#EEF2F0' : 'transparent' })) };
+    const iconSizes = [['Inline', '16px', '28px', '8px'], ['Default', '20px', '36px', '10px'], ['Nav', '22px', '40px', '12px'], ['Feature', '28px', '56px', '16px']].map(([k, px, tile, r]) => ({ k, px, tile, r }));
+    const bps = [['Mobile', '< 600', 'Native app or 1 column, 16 margin'], ['Tablet', '600–1023', '2 columns, sidebar collapsed'], ['Desktop', '1024–1439', 'Sidebar 272 + 12-column grid'], ['Wide', '≥ 1440', 'Content max-width 1240'], ['Sidebar rail', '80', 'Collapsed sidebar width']].map(([k, v, use], i) => ({ k, v, use, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const layout = [['Content max width', '1240 px'], ['Grid', '12 columns · gap 12'], ['Sidebar', '272 / 80 px'], ['Top bar', '72 px'], ['Mobile tab bar', '84 pt incl. home bar'], ['Touch target', '≥ 44 pt (iOS) · 48 dp (Android)']].map(([k, v]) => ({ k, v }));
+    return { nav, palettes, grads, pairs, copied: this.state.copied, families, scale, typeRules, arMap, rtl, space, pads, heights, radius, shadows, motion, iconSizes, bps, layout };
+  }
+}
+</script>
+</body>
+</html>

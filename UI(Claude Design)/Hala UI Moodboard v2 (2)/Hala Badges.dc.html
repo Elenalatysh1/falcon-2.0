@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<div style="max-width:1240px;margin:0 auto;padding:56px 32px 96px;display:flex;flex-direction:column;gap:56px">
+  <header style="display:flex;flex-direction:column;gap:12px;max-width:720px">
+    <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+    <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Badges</h1>
+    <p style="margin:0;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Small labels for status, counts, trends and features. They are not buttons: badges don't react on hover unless they are removable tags. Every example with a "Live" tag works.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Sizes</h2><p style="margin:0;font-size:15px;color:#4A615A">Always pill-shaped. Text is sentence case, except the short feature labels (NEW, BETA), which use IBM Plex Mono caps.</p></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+      <sc-for list="{{ sizes }}" as="s" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:minmax(140px,180px) minmax(0,1fr) minmax(0,260px);gap:24px;align-items:center;padding:20px 0;border-top:1px solid {{ s.bd }}">
+          <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:16px;font-weight:600">{{ s.name }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ s.spec }}</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+            <span style="height:{{ s.h }};padding:0 {{ s.px }};border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:{{ s.fs }};font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:{{ s.gap }}"><span style="width:{{ s.dot }};height:{{ s.dot }};border-radius:50%;background:#0B8F6E"></span>Settled</span>
+            <span style="height:{{ s.h }};padding:0 {{ s.px }};border-radius:999px;background:#FFF4E0;color:#7A4508;font-size:{{ s.fs }};font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:{{ s.gap }}"><svg viewBox="0 0 24 24" style="width:{{ s.ic }};height:{{ s.ic }}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2"></path></svg>Pending</span>
+            <span style="height:{{ s.h }};padding:0 {{ s.px }};border-radius:999px;background:#E8F0FF;color:#1E3A8A;font:500 {{ s.ms }} 'IBM Plex Mono',monospace;letter-spacing:.08em;white-space:nowrap;flex:none;display:inline-flex;align-items:center">NEW</span>
+            <span style="min-width:{{ s.h }};height:{{ s.h }};padding:0 6px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:{{ s.fs }};font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;justify-content:center">12</span>
+          </div>
+          <span style="font-size:13.5px;line-height:1.5;color:#5E7770">{{ s.use }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Status badges</h2><p style="margin:0;font-size:15px;color:#4A615A">One fixed color per status across web and mobile. Each status has its own icon or dot, so color is never the only signal.</p></div></div>
+    <div style="display:grid;grid-template-columns:minmax(170px,220px) repeat(4,minmax(0,1fr));gap:12px;padding:0 28px">
+      <span></span>
+      <sc-for list="{{ styleNames }}" as="n" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:2px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ n.k }}</span><span style="font-size:12.5px;color:#5E7770">{{ n.v }}</span></div></sc-for>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+      <sc-for list="{{ statuses }}" as="r" hint-placeholder-count="9">
+        <div style="display:grid;grid-template-columns:minmax(170px,220px) repeat(4,minmax(0,1fr));gap:12px;align-items:center;padding:12px 0;border-top:1px solid {{ r.bdr }}">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14.5px;font-weight:600">{{ r.name }}</span><span style="font-size:12.5px;color:#5E7770">{{ r.when }}</span></div>
+          <div><span style="height:24px;padding:0 10px 0 8px;border-radius:999px;background:{{ r.tint }};color:{{ r.text }};font-size:12.5px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;color:{{ r.fg }}" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="{{ r.icon }}"></path></svg>{{ r.name }}</span></div>
+          <div><span style="height:24px;padding:0 10px 0 8px;border-radius:999px;background:#FFFFFF;border:1px solid {{ r.bd }};color:{{ r.text }};font-size:12.5px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;color:{{ r.fg }}" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="{{ r.icon }}"></path></svg>{{ r.name }}</span></div>
+          <div><span style="height:24px;padding:0 10px 0 8px;border-radius:999px;background:{{ r.solid }};color:#FFFFFF;font-size:12.5px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:13px;height:13px" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="{{ r.icon }}"></path></svg>{{ r.name }}</span></div>
+          <div><span style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:#0C1F1A"><span style="width:8px;height:8px;border-radius:50%;background:{{ r.fg }};box-shadow:0 0 0 3px {{ r.tint }}"></span>{{ r.name }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Counters and dots</h2><p style="margin:0;font-size:15px;color:#4A615A">Counts show how many items need attention. Over 99 shows "99+". A dot means "something new" without a number.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">ON ICONS AND AVATARS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:center">
+          <span style="position:relative;width:44px;height:44px;border-radius:50%;background:#F2F6F4;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:21px;height:21px" fill="none" stroke="#0C1F1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg><sc-if value="{{ ctr.has }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;top:-2px;left:26px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:#E5484D;color:#FFFFFF;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #FFFFFF">{{ ctr.label }}</span></sc-if></span>
+          <span style="position:relative;width:44px;height:44px;border-radius:50%;background:#F2F6F4;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:21px;height:21px" fill="none" stroke="#0C1F1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span style="position:absolute;top:8px;right:9px;width:10px;height:10px;border-radius:50%;background:#E5484D;border:2px solid #F2F6F4"></span></span>
+          <span style="position:relative;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#DCE5FF,#B9C9FF);color:#1E3A9E;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center">AA<span style="position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;background:#0FA37F;border:2px solid #FFFFFF"></span></span>
+          <span style="position:relative;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FFE2C4,#F7C08A);color:#7A4508;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center">OB<span style="position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;background:#C3D0CB;border:2px solid #FFFFFF"></span></span>
+          <div style="display:flex;align-items:center;gap:6px;margin-left:auto"><button onClick="{{ ctr.dec }}" aria-label="Fewer" style="width:32px;height:32px;border:1px solid #D7E0DC;border-radius:50%;background:#FFFFFF;font-size:16px;cursor:pointer;color:#0C1F1A">−</button><span style="font:500 13px 'IBM Plex Mono',monospace;min-width:34px;text-align:center">{{ ctr.n }}</span><button onClick="{{ ctr.inc }}" aria-label="More" style="width:32px;height:32px;border:1px solid #D7E0DC;border-radius:50%;background:#FFFFFF;font-size:16px;cursor:pointer;color:#0C1F1A">+</button><button onClick="{{ ctr.big }}" style="height:32px;padding:0 10px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:12px;cursor:pointer;color:#0C1F1A">120</button></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:8px 18px;font-size:12.5px;color:#5E7770"><span>Count · red</span><span>New · dot</span><span>Online</span><span>Offline</span></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">IN NAVIGATION · SIDEBAR AND TAB BAR</span>
+        <div style="display:flex;flex-direction:column;gap:2px;max-width:280px">
+          <span style="height:42px;border-radius:12px;padding:0 12px;display:flex;align-items:center;gap:12px;font-size:14px;color:#4A615A;font-weight:500"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path></svg><span style="flex:1">Transfers</span><span style="min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#FFF1DE;color:#94550A;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center">3</span></span>
+          <span style="height:42px;border-radius:12px;padding:0 12px;display:flex;align-items:center;gap:12px;font-size:14px;color:#07372B;font-weight:600;background:rgba(15,163,127,.1)"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 1.9-1.6L22 7H5.1"></path></svg><span style="flex:1">eCommerce</span><span style="font:500 9.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;padding:3px 6px;border-radius:6px;color:#0B6F56;background:#E3F6EF">NEW</span></span>
+          <span style="height:42px;border-radius:12px;padding:0 12px;display:flex;align-items:center;gap:12px;font-size:14px;color:#4A615A;font-weight:500"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20"></path></svg><span style="flex:1">Cards</span><span style="width:8px;height:8px;border-radius:50%;background:#0FA37F"></span></span>
+        </div>
+        <div style="display:flex;justify-content:space-around;border-top:1px solid #EEF2F0;padding-top:12px">
+          <sc-for list="{{ tabbar }}" as="t" hint-placeholder-count="4"><span style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:{{ t.fw }};color:{{ t.fg }}"><span style="position:relative;display:flex"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg><sc-if value="{{ t.hasN }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-5px;left:14px;min-width:18px;height:18px;padding:0 4px;border-radius:999px;background:#E5484D;color:#FFFFFF;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #FFFFFF">{{ t.n }}</span></sc-if></span>{{ t.label }}</span></sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Feature, trend and verification</h2><p style="margin:0;font-size:15px;color:#4A615A">Feature labels promote; trends compare with the previous period; verification shows trust.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">FEATURE LABELS</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <span style="height:22px;padding:0 7px;border-radius:6px;background:#E3F6EF;color:#0B6F56;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;white-space:nowrap;flex:none;display:inline-flex;align-items:center">NEW</span>
+          <span style="height:22px;padding:0 7px;border-radius:6px;background:#E8F0FF;color:#1E3A8A;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;white-space:nowrap;flex:none;display:inline-flex;align-items:center">BETA</span>
+          <span style="height:22px;padding:0 8px;border-radius:6px;background:#0C1F1A;color:#FFFFFF;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;white-space:nowrap;flex:none;display:inline-flex;align-items:center">PRO</span>
+          <span style="height:24px;padding:0 10px;border-radius:999px;background:#E3F8EF;color:#0B6F56;font-size:12px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center">Recommended</span>
+          <span style="height:24px;padding:0 10px;border-radius:999px;background:#E3F8EF;color:#0B6F56;font-size:12px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center">Save 20%</span>
+          <span style="height:24px;padding:0 10px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:12px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center">Most popular</span>
+          <span style="height:24px;padding:0 12px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:12px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center">Included</span>
+          <span style="height:24px;padding:0 10px;border-radius:999px;background:#F2F6F4;color:#4A615A;font-size:12px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center">Coming soon</span>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">TRENDS · DASHBOARD KPIs</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <span style="height:24px;padding:0 8px;border-radius:999px;background:#E3F6EF;color:#0B6F56;font:500 12.5px 'IBM Plex Mono',monospace;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:3px"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg>12.4%</span>
+          <span style="height:24px;padding:0 8px;border-radius:999px;background:#FDECEC;color:#B91C1C;font:500 12.5px 'IBM Plex Mono',monospace;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:3px"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 8v9H8"></path></svg>3.1%</span>
+          <span style="height:24px;padding:0 8px;border-radius:999px;background:#F2F6F4;color:#4A615A;font:500 12.5px 'IBM Plex Mono',monospace;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:3px"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14"></path></svg>0.0%</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:4px"><span style="font:600 26px 'IBM Plex Mono',monospace;letter-spacing:-.02em">SAR 184,320</span><span style="height:22px;padding:0 7px;border-radius:999px;background:#E3F6EF;color:#0B6F56;font:500 12px 'IBM Plex Mono',monospace;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:3px"><svg viewBox="0 0 24 24" style="width:11px;height:11px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg>12.4%</span></div>
+        <span style="font-size:12.5px;color:#5E7770;margin-top:-8px">POS sales · vs last 30 days</span>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">VERIFICATION</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+          <span style="height:24px;padding:0 10px 0 6px;border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:12.5px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:5px"><span style="width:16px;height:16px;border-radius:50%;background:#0B8F6E;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:10px;height:10px" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Verified</span>
+          <span style="height:24px;padding:0 10px;border-radius:999px;background:#FFF4E0;color:#7A4508;font-size:12.5px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center">Verification pending</span>
+          <span style="height:24px;padding:0 10px;border-radius:999px;background:#FDECEC;color:#8A1414;font-size:12.5px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center">Documents needed</span>
+        </div>
+        <div style="border-radius:10px;padding:14px 16px;background:linear-gradient(100deg,#1A1A1A 55%,#2E6B5C);color:#FFFFFF;display:flex;justify-content:space-between;align-items:center;gap:10px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14.5px;font-weight:600">Khamis Arabia Trading Co</span><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#C9D6D1">2346041544</span></div><span style="font-size:10.5px;font-weight:500;letter-spacing:.06em;padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12)">APPROVED</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Tags and badges on cards</h2><p style="margin:0;font-size:15px;color:#4A615A">Tags can be removed (applied filters, team labels). On card art, badges use frosted white so they read on any color.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">REMOVABLE TAGS · APPLIED FILTERS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:30px">
+          <sc-for list="{{ tags }}" as="t" hint-placeholder-count="4"><span style="height:30px;padding:0 4px 0 12px;border-radius:999px;background:#F2F6F4;border:1px solid #E1E6E3;color:#0C1F1A;font-size:13px;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px"><span style="color:#5E7770">{{ t.k }}:</span><b style="font-weight:600">{{ t.v }}</b><button onClick="{{ t.remove }}" aria-label="Remove filter" style="width:22px;height:22px;border:0;border-radius:50%;background:transparent;color:#4A615A;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#DDE6E2;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></span></sc-for>
+          <sc-if value="{{ hasTags }}" hint-placeholder-val="{{ true }}"><button onClick="{{ clearTags }}" style="border:0;background:transparent;padding:0 4px;font-size:13px;font-weight:600;color:#0E7C62;cursor:pointer;white-space:nowrap">Clear all</button></sc-if>
+          <sc-if value="{{ noTags }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#8A9C96">No filters applied.</span><button onClick="{{ resetTags }}" style="border:0;background:transparent;padding:0 4px;font-size:13px;font-weight:600;color:#0E7C62;cursor:pointer;white-space:nowrap">Restore</button></sc-if>
+        </div>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-top:6px">TEAM LABELS</span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ teams }}" as="t" hint-placeholder-count="5"><span style="height:24px;padding:0 10px;border-radius:999px;background:{{ t.bg }};color:{{ t.fg }};font-size:12.5px;font-weight:500;white-space:nowrap;flex:none;display:inline-flex;align-items:center">{{ t.label }}</span></sc-for></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">ON CARD ART</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="aspect-ratio:1.586;border-radius:16px;padding:14px;background:linear-gradient(135deg,#0F3D33,#0A7559 60%,#2C957A);color:#FFFFFF;display:flex;flex-direction:column;justify-content:space-between"><span style="align-self:flex-start;height:22px;padding:0 9px 0 7px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:#5EE0B5"></span>Active</span><span style="font:500 13px 'IBM Plex Mono',monospace">•••• 4417</span></div>
+          <div style="aspect-ratio:1.586;border-radius:16px;padding:14px;background:linear-gradient(135deg,#C9D6E8,#9FB4D3);color:#0C1F1A;display:flex;flex-direction:column;justify-content:space-between"><span style="align-self:flex-start;height:22px;padding:0 9px 0 7px;border-radius:999px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.7);color:#1E3A8A;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" style="width:11px;height:11px" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9"></path></svg>Frozen</span><span style="font:500 13px 'IBM Plex Mono',monospace">•••• 2086</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">In context · web and mobile</h2><p style="margin:0;font-size:15px;color:#4A615A">Tables use the dot style to keep rows calm; mobile lists use the subtle badge under the amount.</p></div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,1fr);gap:12px;align-items:start">
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 24px;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">WEB · TRANSACTIONS TABLE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · CLICK A STATUS</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) 120px;gap:12px;padding:10px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#6B827B;border-bottom:1px solid #EEF2F0"><span>MERCHANT</span><span>METHOD</span><span style="text-align:right">AMOUNT</span><span>STATUS</span></div>
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) 120px;gap:12px;padding:12px 0;align-items:center;border-bottom:1px solid #F2F5F4;font-size:14px"><div style="display:flex;flex-direction:column"><span style="font-weight:500">{{ r.m }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9C96">{{ r.t }}</span></div><span style="color:#4A615A">{{ r.method }}</span><span style="font-family:'IBM Plex Mono',monospace;text-align:right;color:{{ r.ac }}">{{ r.amt }}</span><button onClick="{{ r.cycle }}" style="justify-self:start;border:0;background:transparent;padding:4px 6px;margin-left:-6px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:#0C1F1A;cursor:pointer" style-hover="background:#F4F7F6"><span style="width:8px;height:8px;border-radius:50%;background:{{ r.dot }};box-shadow:0 0 0 3px {{ r.tint }}"></span>{{ r.status }}</button></div></sc-for>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 20px 12px;display:flex;flex-direction:column">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;margin-bottom:6px">MOBILE · ACTIVITY LIST</span>
+        <sc-for list="{{ mrows }}" as="r" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid {{ r.bdr }}"><span style="width:42px;height:42px;border-radius:50%;flex:none;background:#F2F6F4;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ r.ini }}</span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">{{ r.m }}</span><span style="font-size:12.5px;color:#5E7770">{{ r.t }}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span style="font:500 15px 'IBM Plex Mono',monospace;color:{{ r.ac }}">{{ r.amt }}</span><span style="height:20px;padding:0 8px;border-radius:999px;background:{{ r.tint }};color:{{ r.text }};font-size:11px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center">{{ r.status }}</span></div></div></sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile app · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Same badges, sized for touch screens: Large on detail screens, Small in list rows. Filter chips carry their own count.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">TRANSACTION DETAIL · LARGE</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 4px;text-align:center">
+          <span style="width:56px;height:56px;border-radius:50%;background:#F2F6F4;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center">JB</span>
+          <span style="font-size:15px;color:#4A615A">Jarir Bookstore</span>
+          <span style="font:600 34px 'IBM Plex Mono',monospace;letter-spacing:-.02em">− 1,249.00 <span style="font-size:16px;color:#5E7770">SAR</span></span>
+          <span style="height:28px;padding:0 12px 0 10px;border-radius:999px;background:{{ mob.st.tint }};color:{{ mob.st.text }};font-size:13px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;color:{{ mob.st.fg }}" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="{{ mob.st.icon }}"></path></svg>{{ mob.st.name }}</span>
+        </div>
+        <div style="border-radius:18px;background:#F4F7F6;padding:4px 16px">
+          <div style="min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:10px"><span style="font-size:14px;color:#5E7770">Card</span><span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500">Visa •• 4417<span style="height:28px;padding:0 12px;border-radius:999px;background:#E8F0FF;color:#1E3A8A;font-size:13px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px;height:20px;padding:0 8px;font-size:11px">Virtual</span></span></div>
+          <div style="min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #E6ECE9"><span style="font-size:14px;color:#5E7770">Spent by</span><span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500">Omar Bakr<span style="height:28px;padding:0 12px;border-radius:999px;background:#F0ECFF;color:#3F2A8C;font-size:13px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px;height:20px;padding:0 8px;font-size:11px">Marketing</span></span></div>
+          <div style="min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #E6ECE9"><span style="font-size:14px;color:#5E7770">Receipt</span><span style="height:28px;padding:0 12px;border-radius:999px;background:#FFF4E0;color:#7A4508;font-size:13px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px;height:20px;padding:0 8px;font-size:11px">Missing</span></div>
+        </div>
+        <div style="display:flex;gap:6px;justify-content:center"><sc-for list="{{ mob.stBtns }}" as="b" hint-placeholder-count="4"><button onClick="{{ b.pick }}" style="height:30px;padding:0 10px;border:1px solid {{ b.bd }};border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">{{ b.label }}</button></sc-for></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">FILTER CHIPS WITH COUNTS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -22px;padding:0 22px"><sc-for list="{{ mob.chips }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" style="flex:none;height:40px;padding:0 6px 0 14px;border:1px solid {{ c.bd }};border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:14.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;transition:all .15s">{{ c.label }}<span style="min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:{{ c.nbg }};color:{{ c.nfg }};font:500 12px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center">{{ c.n }}</span></button></sc-for></div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ mob.list }}" as="r" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid {{ r.bdr }}"><span style="width:42px;height:42px;border-radius:50%;flex:none;background:#F2F6F4;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ r.ini }}</span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">{{ r.m }}</span><span style="font-size:12.5px;color:#5E7770">{{ r.t }}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span style="font:500 15px 'IBM Plex Mono',monospace">{{ r.amt }}</span><span style="height:20px;padding:0 8px;border-radius:999px;background:{{ r.tint }};color:{{ r.text }};font-size:11px;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center">{{ r.status }}</span></div></div></sc-for>
+          <sc-if value="{{ mob.empty }}" hint-placeholder-val="{{ false }}"><span style="padding:24px 0;text-align:center;font-size:14px;color:#5E7770">No transactions with this status.</span></sc-if>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">CARDS LIST</span></div>
+        <sc-for list="{{ mob.cards }}" as="c" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:14px;padding:12px;border-radius:18px;background:#F4F7F6"><span style="width:58px;height:38px;border-radius:7px;flex:none;background:{{ c.art }};box-shadow:0 4px 10px -4px rgba(0,0,0,.3)"></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</span><sc-if value="{{ c.isNew }}" hint-placeholder-val="{{ false }}"><span style="height:18px;padding:0 6px;border-radius:5px;background:#E3F6EF;color:#0B6F56;font:500 9.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;display:inline-flex;align-items:center;flex:none">NEW</span></sc-if></div><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ c.num }}</span></div><span style="height:24px;padding:0 10px 0 8px;border-radius:999px;background:{{ c.tint }};color:{{ c.text }};font-size:12px;font-weight:600;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:{{ c.fg }}"></span>{{ c.status }}</span></div></sc-for>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:18px;border:1px solid #E6ECE9;margin-top:4px"><span style="position:relative;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#DCE5FF,#B9C9FF);color:#1E3A9E;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none">AA<span style="position:absolute;right:-2px;bottom:-2px;width:18px;height:18px;border-radius:50%;background:#0B8F6E;border:2px solid #FFFFFF;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:9px;height:9px" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></span><div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:600">Abdulaziz Ali</span><span style="height:18px;padding:0 6px;border-radius:5px;background:#0C1F1A;color:#FFFFFF;font:500 9.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;display:inline-flex;align-items:center">PRO</span></div><span style="font-size:12.5px;color:#0B6F56;font-weight:500">Verified account</span></div><svg viewBox="0 0 24 24" style="width:18px;height:18px;color:#8A9C96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+      <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { n: 4, tags: [0, 1, 2, 3], rowSt: [0, 1, 3, 4, 2] };
+  renderVals() {
+    const s = this.state;
+    const sizes = [
+      { name: 'Large', spec: 'H 28 · 13/600 · px 12', h: '28px', px: '12px', fs: '13px', ms: '11px', gap: '6px', dot: '7px', ic: '14px', use: 'Page headers, card details, mobile detail screens.' },
+      { name: 'Medium', spec: 'H 24 · 12.5/600 · px 10', h: '24px', px: '10px', fs: '12.5px', ms: '10.5px', gap: '6px', dot: '6px', ic: '13px', use: 'Default. Lists, cards, plan options.' },
+      { name: 'Small', spec: 'H 20 · 11/600 · px 8', h: '20px', px: '8px', fs: '11px', ms: '9.5px', gap: '5px', dot: '6px', ic: '11px', use: 'Sidebar counts, mobile list rows, dense tables.' }
+    ].map((x, i) => ({ ...x, bd: i ? '#EEF2F0' : 'transparent' }));
+    const C = 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z';
+    const ST = [
+      ['Settled', 'Money is in the account', '#0B8F6E', '#E3F6EF', '#0B4F3E', '#BFE6D6', 'M20 6 9 17l-5-5', '#0B7A5F'],
+      ['Pending', 'Waiting for the bank or approval', '#B45309', '#FFF4E0', '#7A4508', '#F5D9A8', C + 'M12 6v6l4 2', '#B45309'],
+      ['Processing', 'Being sent right now', '#0E7C62', '#E6F4F1', '#0B4F3E', '#BFE0D8', 'M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5', '#0E7C62'],
+      ['Scheduled', 'Will run on a set date', '#6D4CD3', '#F0ECFF', '#3F2A8C', '#D8CEFA', 'M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4', '#6D4CD3'],
+      ['Declined', 'Rejected, no money moved', '#C81E1E', '#FDECEC', '#8A1414', '#F5C2C2', C + 'M15 9l-6 6M9 9l6 6', '#C81E1E'],
+      ['Refunded', 'Returned to the customer', '#4A615A', '#F2F6F4', '#2E403B', '#DDE4E1', 'M9 14 4 9l5-5M4 9h11a5 5 0 0 1 0 10h-3', '#4A615A'],
+      ['Frozen', 'Card temporarily blocked', '#2F5BD3', '#E8F0FF', '#1E3A8A', '#C9D7FB', 'M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9', '#2F5BD3'],
+      ['Draft', 'Saved, not submitted', '#8A9C96', '#F4F6F5', '#4A615A', '#E1E6E3', 'M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z', '#6B7F79'],
+      ['Expired', 'Link or document no longer valid', '#9A6A6A', '#F7EFEF', '#6B3A3A', '#E8D5D5', C + 'M12 6v6M12 16h.01', '#8A5A5A']
+    ];
+    const statuses = ST.map(([name, when, fg, tint, text, bd, icon, solid], i) => ({ name, when, fg, tint, text, bd, icon, solid, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const styleNames = [['SUBTLE', 'Default'], ['OUTLINE', 'On tinted surfaces'], ['SOLID', 'Detail headers, one per view'], ['DOT', 'Tables and dense lists']].map(([k, v]) => ({ k, v }));
+    const n = s.n;
+    const ctr = { n, has: n > 0, label: n > 99 ? '99+' : String(n), inc: () => this.setState({ n: n + 1 }), dec: () => this.setState({ n: Math.max(0, n - 1) }), big: () => this.setState({ n: 120 }) };
+    const tabbar = [['Home', 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z', 0, true], ['Cards', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20', 0], ['Payments', 'M22 2 11 13M22 2l-7 20-4-9-9-4z', 3], ['Inbox', 'M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z', n]].map(([label, icon, c, on]) => ({ label, icon, hasN: c > 0, n: c > 99 ? '99+' : String(c), fw: on ? 600 : 500, fg: on ? '#0B8F6E' : '#5E7770' }));
+    const TG = [['Status', 'Settled'], ['Method', 'mada'], ['Branch', 'Olaya'], ['Amount', 'Over SAR 500']];
+    const tags = s.tags.map(i => ({ k: TG[i][0], v: TG[i][1], remove: () => this.setState({ tags: s.tags.filter(x => x !== i) }) }));
+    const teams = [['Marketing', '#F0ECFF', '#3F2A8C'], ['Operations', '#E6F4F1', '#0B4F3E'], ['Finance', '#E8F0FF', '#1E3A8A'], ['Sales', '#FFF4E0', '#7A4508'], ['Admin', '#F2F6F4', '#2E403B']].map(([label, bg, fg]) => ({ label, bg, fg }));
+    const R = [['Al Baik · Olaya', 'Today, 12:41', 'mada •• 3301', '+ 86.25'], ['Jarir Bookstore', 'Today, 11:08', 'Visa •• 4417', '− 1,249.00'], ['Nour Trading', 'Today, 09:30', 'Transfer', '− 25,000.00'], ['Careem', 'Yesterday', 'Visa •• 4417', '− 38.50'], ['Online store #2041', 'Yesterday', 'Apple Pay', '+ 420.00']];
+    const rows = R.map(([m, t, method, amt], i) => { const st = statuses[s.rowSt[i]]; return { m, t, method, amt, ac: amt[0] === '+' ? '#0B7A5F' : '#0C1F1A', status: st.name, dot: st.fg, tint: st.tint, cycle: () => { const a = [...s.rowSt]; a[i] = (a[i] + 1) % statuses.length; this.setState({ rowSt: a }); } }; });
+    const mrows = R.map(([m, t, , amt], i) => { const st = statuses[s.rowSt[i]]; return { m, t, amt, ini: m.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase(), ac: amt[0] === '+' ? '#0B7A5F' : '#0C1F1A', status: st.name, tint: st.tint, text: st.text, bdr: i ? '#EEF2F0' : 'transparent' }; });
+    const rules = [[1, 'One color per status everywhere: Settled is always green, Pending always amber.'], [1, 'Pair color with an icon or dot so the status reads without color.'], [1, 'Keep labels to one or two words. Put details in a tooltip or the detail screen.'], [1, 'Use red counters only for items that need action; use a dot for "new".'], [0, 'Don\'t make badges clickable. If it does something, it\'s a chip or button.'], [0, 'Don\'t put more than two badges next to one title.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    const dSt = s.dSt ?? 0, chip = s.chip ?? 0;
+    const ML = [['Al Baik · Olaya', 'Today, 12:41', '+ 86.25', 0], ['Nour Trading', 'Today, 09:30', '− 25,000.00', 1], ['Monthly rent', 'Sun 18 Oct', '− 12,000.00', 3], ['Careem', 'Yesterday', '− 38.50', 4], ['Online store #2041', 'Yesterday', '+ 420.00', 0], ['Jarir Bookstore', 'Mon', '− 1,249.00', 5]];
+    const CH = [['All', null], ['Settled', 0], ['Pending', 1], ['Scheduled', 3], ['Declined', 4]];
+    const filt = ML.filter(r => CH[chip][1] === null || r[3] === CH[chip][1]);
+    const mob = {
+      st: statuses[[0, 1, 4, 5][dSt]],
+      stBtns: ['Settled', 'Pending', 'Declined', 'Refunded'].map((label, i) => ({ label, bd: dSt === i ? '#0C1F1A' : '#D7E0DC', pick: () => this.setState({ dSt: i }) })),
+      chips: CH.map(([label, si], i) => { const on = chip === i; const cnt = si === null ? ML.length : ML.filter(r => r[3] === si).length; return { label, n: cnt, bd: on ? '#0C1F1A' : '#D7E0DC', bg: on ? '#0C1F1A' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0C1F1A', nbg: on ? 'rgba(255,255,255,.18)' : '#F2F6F4', nfg: on ? '#FFFFFF' : '#4A615A', pick: () => this.setState({ chip: i }) }; }),
+      list: filt.map(([m, t, amt, si], i) => { const st = statuses[si]; return { m, t, amt, ini: m.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase(), status: st.name, tint: st.tint, text: st.text, bdr: i ? '#EEF2F0' : 'transparent' }; }),
+      empty: filt.length === 0,
+      cards: [['Marketing team', '•• 4417 · Virtual', 'linear-gradient(135deg,#0F3D33,#2C957A)', 0, false, 'Active'], ['Travel', '•• 2086 · Physical', 'linear-gradient(135deg,#C9D6E8,#9FB4D3)', 6, false, 'Frozen'], ['Subscriptions', '•• 9120 · Virtual', 'linear-gradient(135deg,#1A1A1A,#3A4A45)', 1, true, 'Expires soon']].map(([name, num, art, si, isNew, label]) => { const st = statuses[si]; return { name, num, art, isNew, status: label, tint: st.tint, text: st.text, fg: st.fg }; })
+    };
+    return { mob, sizes, statuses, styleNames, ctr, tabbar, tags, hasTags: s.tags.length > 0, noTags: s.tags.length === 0, clearTags: () => this.setState({ tags: [] }), resetTags: () => this.setState({ tags: [0, 1, 2, 3] }), teams, rows, mrows, rules };
+  }
+}
+</script>
+</body>
+</html>

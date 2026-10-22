@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Dividers and separators</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Lines and gaps that group content. In Hala, space and white cards do most of the grouping; a line is added only when items sit close together on the same surface.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Hierarchy of separation</h2><p style="margin:0;font-size:15px;color:#4A615A">Use the lightest option that works. Go down the list only when the one above isn't enough.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+    <sc-for list="{{ ladder }}" as="l" hint-placeholder-count="4"><div style="background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:12px"><div style="height:120px;border-radius:14px;background:{{ l.bg }};padding:12px;display:flex;flex-direction:column;gap:{{ l.gap }}"><sc-for list="{{ l.rows }}" as="r" hint-placeholder-count="3"><span style="height:{{ r.h }};border-radius:{{ r.rad }};background:{{ r.bg }};border-bottom:{{ r.bb }};flex:none"></span></sc-for></div><div style="display:flex;align-items:baseline;gap:8px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">{{ l.n }}</span><span style="font-size:15px;font-weight:600">{{ l.k }}</span></div><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ l.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Line styles</h2><p style="margin:0;font-size:15px;color:#4A615A">Always 1 px (hairline on retina mobile). Color tokens follow the surface they sit on.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+    <sc-for list="{{ lines }}" as="l" hint-placeholder-count="6">
+      <div style="display:grid;grid-template-columns:minmax(150px,190px) minmax(0,1fr) minmax(0,260px);gap:24px;align-items:center;padding:20px 0;border-top:1px solid {{ l.bdr }}">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">{{ l.name }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ l.spec }}</span></div>
+        <div style="height:56px;border-radius:12px;background:{{ l.surf }};display:flex;align-items:center;padding:0 16px"><span style="flex:1;border-top:{{ l.css }}"></span></div>
+        <span style="font-size:13px;line-height:1.5;color:#5E7770">{{ l.use }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Inset and full-bleed</h2><p style="margin:0;font-size:15px;color:#4A615A">In lists, the line starts where the text starts, so icons and avatars stay grouped with their row. Full-bleed lines separate sections, not rows.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">INSET · ALIGNED TO TEXT</span>
+      <div style="border-radius:16px;border:1px solid #EEF2F0;padding:0 16px">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:12px"><span style="width:40px;height:40px;border-radius:50%;background:#F2F6F4;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none">{{ r.ini }}</span><div style="flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid {{ r.bb }}"><div style="display:flex;flex-direction:column;min-width:0"><span style="font-size:14.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.m }}</span><span style="font-size:12px;color:#5E7770;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.t }}</span></div><span style="font:500 14px 'IBM Plex Mono',monospace;white-space:nowrap">{{ r.a }}</span></div></div></sc-for>
+      </div>
+      <span style="font-size:12.5px;color:#5E7770">Inset = avatar 40 + gap 12 = 52 px from the content edge. No line under the last row.</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">FULL-BLEED · BETWEEN SECTIONS</span>
+      <div style="border-radius:16px;border:1px solid #EEF2F0;overflow:hidden">
+        <div style="padding:14px 16px;display:flex;justify-content:space-between;font-size:14px"><span style="font-weight:600">Order summary</span><span style="color:#5E7770">3 items</span></div>
+        <div style="border-top:1px solid #EEF2F0;padding:12px 16px;display:flex;flex-direction:column;gap:8px;font-size:13.5px"><div style="display:flex;justify-content:space-between"><span>Smart POS × 3</span><span style="font-family:'IBM Plex Mono',monospace">237.00</span></div><div style="display:flex;justify-content:space-between;color:#5E7770"><span>VAT 15%</span><span style="font-family:'IBM Plex Mono',monospace">35.55</span></div></div>
+        <div style="border-top:1px dashed #D7E0DC;margin:0 16px"></div>
+        <div style="padding:12px 16px 14px;display:flex;justify-content:space-between;font-size:15px;font-weight:700"><span>Total</span><span style="font-family:'IBM Plex Mono',monospace">272.55</span></div>
+      </div>
+      <span style="font-size:12.5px;color:#5E7770">Solid line between sections; dashed only before a total, like a receipt.</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">DON'T · LINE + CARD + SPACE</span>
+      <div style="border-radius:16px;border:1px solid #C9D4D0;padding:6px;display:flex;flex-direction:column;gap:6px;background:#F4F7F6">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="3"><div style="border-radius:10px;border:1px solid #C9D4D0;background:#FFFFFF;padding:10px 12px;display:flex;justify-content:space-between;gap:10px;border-bottom:2px solid #9AACA6"><span style="font-size:14px;white-space:nowrap">{{ r.m }}</span><span style="font:500 14px 'IBM Plex Mono',monospace;white-space:nowrap">{{ r.a }}</span></div></sc-for>
+      </div>
+      <span style="font-size:12.5px;color:#C81E1E">Three ways of separating at once. Pick one: cards with gaps, or rows with lines.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Labelled and inline separators</h2><p style="margin:0;font-size:15px;color:#4A615A">A divider with text names what comes next. Inline separators split short facts on one line.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:22px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">WITH LABEL</span>
+      <div style="display:flex;align-items:center;gap:12px"><span style="flex:1;border-top:1px solid #E1E8E5"></span><span style="font-size:13px;color:#5E7770;white-space:nowrap">or continue with</span><span style="flex:1;border-top:1px solid #E1E8E5"></span></div>
+      <div style="display:flex;align-items:center;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6B827B;white-space:nowrap">YESTERDAY</span><span style="flex:1;border-top:1px solid #E1E8E5"></span></div>
+      <div style="display:flex;align-items:center;gap:12px"><span style="flex:1;border-top:1px solid #E1E8E5"></span><span style="height:28px;padding:0 12px;border-radius:999px;border:1px solid #E1E8E5;font-size:12.5px;color:#4A615A;display:flex;align-items:center;white-space:nowrap">12 new transactions</span><span style="flex:1;border-top:1px solid #E1E8E5"></span></div>
+      <div style="display:flex;align-items:center;gap:12px"><span style="flex:1;border-top:1px solid #F3C6C7"></span><span style="font-size:12.5px;font-weight:600;color:#C81E1E;white-space:nowrap">Unread from here</span><span style="flex:1;border-top:1px solid #F3C6C7"></span></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:18px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">INLINE · DOT AND VERTICAL</span>
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:15px;font-weight:600">Al Baik · Olaya</span><span style="font-size:13px;color:#5E7770;display:flex;align-items:center;gap:6px;flex-wrap:wrap">12:41<span style="width:3px;height:3px;border-radius:50%;background:#9AACA6"></span>mada •• 3301<span style="width:3px;height:3px;border-radius:50%;background:#9AACA6"></span>Terminal 04</span></div>
+      <div style="display:flex;align-items:center;gap:16px;font-size:14px;flex-wrap:wrap"><span style="display:flex;flex-direction:column"><span style="font-size:12px;color:#5E7770">Balance</span><b style="font:600 16px 'IBM Plex Mono',monospace">175,000</b></span><span style="width:1px;height:32px;background:#E1E8E5"></span><span style="display:flex;flex-direction:column"><span style="font-size:12px;color:#5E7770">Pending</span><b style="font:600 16px 'IBM Plex Mono',monospace">25,000</b></span><span style="width:1px;height:32px;background:#E1E8E5"></span><span style="display:flex;flex-direction:column"><span style="font-size:12px;color:#5E7770">Cards</span><b style="font:600 16px 'IBM Plex Mono',monospace">8</b></span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="height:36px;padding:0 12px;border-radius:999px;border:1px solid #D7E0DC;font-size:13px;display:flex;align-items:center">Filters</span><span style="width:1px;height:20px;background:#D7E0DC"></span><span style="width:36px;height:36px;border-radius:50%;border:1px solid #D7E0DC;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="#0C1F1A" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg></span></div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Dot: 3 px, #9AACA6, 6 px gaps. Vertical line: 1 px, 60% of the row height, for stats and toolbar groups.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Grouped white blocks on a gray screen, with hairlines inside. Section captions replace full-width lines between groups.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">GROUPED LIST · SETTINGS</span>
+      <div style="border-radius:28px;background:#F4F7F6;padding:16px;display:flex;flex-direction:column;gap:8px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6B827B;padding:6px 4px 0">SECURITY</span>
+        <div style="border-radius:18px;background:#FFFFFF;padding-left:16px">
+          <div style="min-height:52px;padding-right:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid #DDE6E2;font-size:15px">Face ID<span style="color:#5E7770;font-size:14px">On</span></div>
+          <div style="min-height:52px;padding-right:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:.5px solid #DDE6E2;font-size:15px">Change password<span style="color:#9AACA6">›</span></div>
+          <div style="min-height:52px;padding-right:16px;display:flex;align-items:center;justify-content:space-between;font-size:15px">Trusted devices<span style="color:#5E7770;font-size:14px">2 ›</span></div>
+        </div>
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6B827B;padding:14px 4px 0">ACCOUNT</span>
+        <div style="border-radius:18px;background:#FFFFFF;padding-left:16px"><div style="min-height:52px;padding-right:16px;display:flex;align-items:center;justify-content:space-between;font-size:15px">Language<span style="color:#5E7770;font-size:14px">English ›</span></div></div>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">0.5 pt hairline, inset 16 pt from the left, running to the right edge. 24 pt gap plus caption between groups.</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">ACTIVITY · DATE SEPARATORS</span>
+      <div style="border-radius:28px;background:#F4F7F6;padding:16px;display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ mgroups }}" as="g" hint-placeholder-count="2">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;padding:8px 4px 0"><span style="font-size:13px;font-weight:600;color:#4A615A">{{ g.d }}</span><span style="font:500 12.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ g.sum }}</span></div>
+            <div style="border-radius:18px;background:#FFFFFF;padding:0 16px">
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="2"><div style="display:flex;align-items:center;gap:12px"><span style="width:38px;height:38px;border-radius:50%;background:#F2F6F4;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none">{{ r.ini }}</span><div style="flex:1;min-width:0;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:60px;border-bottom:.5px solid {{ r.bb }}"><span style="font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.m }}</span><span style="font:500 14.5px 'IBM Plex Mono',monospace;white-space:nowrap">{{ r.a }}</span></div></div></sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">The date header is the separator between days. The total on the right gives the label a job.</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">SCROLL EDGE · STICKY HEADER</span>
+      <div style="position:relative;height:300px;border-radius:28px;background:#F4F7F6;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:60px;background:rgba(244,247,246,.92);border-bottom:.5px solid {{ edge.bd }};display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;z-index:1;transition:border-color .2s">Transactions</div>
+        <div onScroll="{{ edge.onScroll }}" style="position:absolute;inset:0;overflow-y:auto;padding:72px 16px 16px;display:flex;flex-direction:column;gap:8px;scrollbar-width:none"><sc-for list="{{ edge.items }}" as="i" hint-placeholder-count="8"><div style="flex:none;height:52px;border-radius:14px;background:#FFFFFF;padding:0 14px;display:flex;align-items:center;justify-content:space-between;font-size:14px"><span>{{ i.m }}</span><span style="font-family:'IBM Plex Mono',monospace">{{ i.a }}</span></div></sc-for></div>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Scroll the list: the header line shows only once content goes under it. Live: {{ edge.state }}.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Spacing scale between groups</h2><p style="margin:0;font-size:15px;color:#4A615A">When there is no line, the gap does the work. Keep these steps consistent on web and mobile.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px;overflow-x:auto">
+    <div style="display:grid;grid-template-columns:minmax(180px,1.3fr) 90px 90px minmax(200px,1fr);gap:16px;padding:14px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770"><span>BETWEEN</span><span>WEB</span><span>MOBILE</span><span>SCALE</span></div>
+    <sc-for list="{{ spacing }}" as="s" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:minmax(180px,1.3fr) 90px 90px minmax(200px,1fr);gap:16px;padding:12px 0;border-top:1px solid #EEF2F0;font-size:14px;align-items:center"><span>{{ s.k }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px">{{ s.w }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px">{{ s.m }}</span><span style="height:10px;width:{{ s.bar }};border-radius:3px;background:#9DD3C2"></span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {};
+  renderVals() {
+    const ladder = [
+      ['1', 'Space', '24–32 px between groups. Enough for most pages.', '#F4F7F6', '18px', [['20px', '6px', '#DDE6E2', '0'], ['20px', '6px', '#DDE6E2', '0'], ['20px', '6px', '#DDE6E2', '0']]],
+      ['2', 'Cards', 'White card on mint-gray. For separate objects: KPIs, accounts.', '#EEF3F1', '8px', [['28px', '10px', '#FFFFFF', '0'], ['28px', '10px', '#FFFFFF', '0'], ['28px', '10px', '#FFFFFF', '0']]],
+      ['3', 'Lines', '1 px between rows of one list on a single card.', '#FFFFFF', '0', [['30px', '0', '#FFFFFF', '1px solid #E1E8E5'], ['30px', '0', '#FFFFFF', '1px solid #E1E8E5'], ['30px', '0', '#FFFFFF', '0']]],
+      ['4', 'Tinted band', 'Background change for a whole section, e.g. totals or table header.', '#FFFFFF', '0', [['30px', '8px 8px 0 0', '#F4F7F6', '0'], ['30px', '0', '#FFFFFF', '0'], ['30px', '0 0 8px 8px', '#E3F6EF', '0']]]
+    ].map(([n, k, v, bg, gap, rows]) => ({ n, k, v, bg, gap, rows: rows.map(([h, rad, b, bb]) => ({ h, rad, bg: b, bb })) }));
+    const lines = [
+      ['Subtle', '#EEF2F0 · on white', '#FFFFFF', '1px solid #EEF2F0', 'Default between list rows and inside cards.'],
+      ['Default', '#E1E8E5 · on white', '#FFFFFF', '1px solid #E1E8E5', 'Card edges, labelled dividers, section breaks.'],
+      ['Strong', '#C9D4D0 · on white', '#FFFFFF', '1px solid #C9D4D0', 'Table header bottom and focused regions only.'],
+      ['On tint', '#DDE6E2 · on #F4F7F6', '#F4F7F6', '1px solid #DDE6E2', 'Lines inside gray containers and mobile lists.'],
+      ['Dashed', '#D7E0DC · 1 px dash', '#FFFFFF', '1px dashed #D7E0DC', 'Before a total, empty drop zones.'],
+      ['On dark', 'rgba(255,255,255,.12)', '#0C1F1A', '1px solid rgba(255,255,255,.12)', 'Ink cards and dark mode.']
+    ].map(([name, spec, surf, css, use], i) => ({ name, spec, surf, css, use, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const rows = [['AB', 'Al Baik · Olaya', '12:41 · mada', '+ 86.25'], ['JB', 'Jarir Bookstore', '11:08 · Visa', '− 1,249.00'], ['NT', 'Nour Trading', '09:30 · Transfer', '− 25,000.00']].map(([ini, m, t, a], i, arr) => ({ ini, m, t, a, bb: i === arr.length - 1 ? 'transparent' : '#EEF2F0' }));
+    const G = [['Today', '− 26,162.75', [['AB', 'Al Baik · Olaya', '+ 86.25'], ['JB', 'Jarir Bookstore', '− 1,249.00'], ['NT', 'Nour Trading', '− 25,000.00']]], ['Yesterday', '+ 381.50', [['CA', 'Careem', '− 38.50'], ['OS', 'Online store #2041', '+ 420.00']]]];
+    const mgroups = G.map(([d, sum, rs]) => ({ d, sum, rows: rs.map(([ini, m, a], i) => ({ ini, m, a, bb: i === rs.length - 1 ? 'transparent' : '#DDE6E2' })) }));
+    const sc = !!this.state.sc;
+    const edge = { bd: sc ? '#C9D4D0' : 'transparent', state: sc ? 'line visible' : 'at top, no line', onScroll: e => { const v = e.target.scrollTop > 4; if (v !== sc) this.setState({ sc: v }); },
+      items: ['Al Baik · Olaya', 'Jarir Bookstore', 'Nour Trading', 'Careem', 'Online store', 'STC Pay', 'Panda', 'Tamimi', 'Uber', 'Aramex'].map((m, i) => ({ m, a: (i % 3 ? '− ' : '+ ') + (80 + i * 37.5).toFixed(2) })) };
+    const spacing = [['Label and its field', '6', '6', '6%'], ['Rows inside a group', '0 + line', '0 + line', '0%'], ['Cards in a grid', '12', '8', '12%'], ['Groups on a page', '24', '24', '24%'], ['Page sections', '56', '32', '56%']].map(([k, w, m, bar]) => ({ k, w: w + (/\d$/.test(w) ? ' px' : ''), m: m + (/\d$/.test(m) ? ' pt' : ''), bar }));
+    const rules = [[1, 'Try space first, then cards, then a line. Use one method per group.'], [1, 'Inset list lines to the text, not the icon. No line after the last row.'], [1, 'Use 1 px on web and 0.5 pt hairlines on mobile.'], [1, 'Label a divider when it marks a change: a date, "or", unread.'], [0, 'Don\'t put a line under a card edge or around every card.'], [0, 'Don\'t use dividers thicker than 1 px or in brand green.'], [0, 'Don\'t separate a heading from its content with a line.'], [0, 'Don\'t stack two lines; a section break replaces the row line.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { ladder, lines, rows, mgroups, edge, spacing, rules };
+  }
+}
+</script>
+</body>
+</html>

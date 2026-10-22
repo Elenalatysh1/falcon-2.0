@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button,input{font-family:inherit}input::placeholder{color:#9AACA6}a{color:#0B8F6E;text-decoration:none}a:hover{color:#066A51}@keyframes hFade{from{opacity:0;transform:translateY(4px)}}@keyframes hPulse{0%{box-shadow:0 0 0 0 rgba(11,143,110,.45)}70%{box-shadow:0 0 0 10px rgba(11,143,110,0)}100%{box-shadow:0 0 0 0 rgba(11,143,110,0)}}@keyframes hShake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}@keyframes hBlink{50%{opacity:0}}@media (prefers-reduced-motion:reduce){*{animation-duration:1ms!important}}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 28px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">FALCON 2.0 · FINTECH CORE</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Money components</h1>
+  <p style="margin:0;max-width:820px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">The eight components behind "Money first" and "Say what happens": how amounts look, how they're typed, how a payment is reviewed, approved, confirmed and tracked. Teams build on these instead of making their own. Every example with a "Live" tag works, and many are connected: the amount you type flows into the review and the approval rule.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px"><sc-for list="{{ toc }}" as="t" hint-placeholder-count="8"><a href="{{ t.h }}" style="height:32px;padding:0 12px;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13px;display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="font:500 11px 'IBM Plex Mono',monospace;color:#0B8F6E">{{ t.n }}</span>{{ t.l }}</a></sc-for></div>
+</header>
+
+<div style="position:sticky;top:0;z-index:6;background:rgba(238,243,241,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #DDE6E2">
+  <div style="max-width:1240px;margin:0 auto;padding:10px 32px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+    <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">PAGE SETTINGS</span>
+    <div style="display:inline-flex;padding:3px;border-radius:999px;background:#E1E8E5"><sc-for list="{{ curModes }}" as="m" hint-placeholder-count="2"><button onClick="{{ m.pick }}" style="height:30px;padding:0 12px;border:0;border-radius:999px;background:{{ m.bg }};box-shadow:{{ m.sh }};font-size:12.5px;font-weight:{{ m.fw }};color:{{ m.fg }};cursor:pointer;white-space:nowrap">{{ m.l }}</button></sc-for></div>
+    <button onClick="{{ toggleHide }}" aria-pressed="{{ hidePressed }}" style="height:36px;padding:0 12px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:12.5px;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ hideIcon }}"></path></svg>{{ hideLabel }}</button>
+    <span style="font-size:12px;color:#5E7770;display:flex;align-items:center;gap:6px"><img src="assets/sar-symbol.svg" alt="" style="width:14px;height:14px"/>Official Saudi Riyal sign (U+20C1, SAMA 2025) · <span style="font-family:'IBM Plex Mono',monospace">assets/sar-symbol*.svg</span></span>
+  </div>
+</div>
+
+<section id="c1" style="max-width:1240px;margin:0 auto;padding:40px 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">01</span><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">Amount display</h2><p style="margin:0;max-width:820px;font-size:15px;line-height:1.55;color:#4A615A">The single way money renders. IBM Plex Mono with tabular figures, a true minus sign (−), thousands separators, always two decimals, and the currency before the number. Five sizes.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+    <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="5">
+      <div style="display:grid;grid-template-columns:minmax(140px,170px) minmax(0,1fr) minmax(0,260px);gap:24px;align-items:center;padding:20px 0;border-top:1px solid {{ z.bdr }}">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">{{ z.name }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ z.spec }}</span></div>
+        <div style="display:flex;align-items:baseline;gap:{{ z.gap }};font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;color:#0C1F1A;min-width:0">
+          <sc-if value="{{ cur.code }}" hint-placeholder-val="{{ true }}"><span style="font-size:{{ z.cfs }};font-weight:500;color:#5E7770">SAR</span></sc-if>
+          <sc-if value="{{ cur.sym }}" hint-placeholder-val="{{ false }}"><img src="assets/sar-symbol-muted.svg" alt="SAR" style="height:{{ z.sym }};width:{{ z.sym }};align-self:center"/></sc-if>
+          <span style="font-size:{{ z.fs }};font-weight:{{ z.fw }};letter-spacing:{{ z.ls }};white-space:nowrap">{{ z.int }}<span style="font-size:{{ z.dfs }};color:{{ z.dc }}">{{ z.dec }}</span></span>
+        </div>
+        <span style="font-size:13px;line-height:1.5;color:#5E7770">{{ z.use }}</span>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px">
+    <sc-for list="{{ variants }}" as="v" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ v.k }}</span><span style="display:flex;align-items:center;gap:6px;font:500 18px 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;color:{{ v.c }};text-decoration:{{ v.td }};white-space:nowrap">{{ v.v }}<sc-if value="{{ v.hasTag }}" hint-placeholder-val="{{ false }}"><span style="font:600 11px 'IBM Plex Sans',sans-serif;padding:2px 8px;border-radius:999px;background:{{ v.tbg }};color:{{ v.tfg }};text-decoration:none">{{ v.tag }}</span></sc-if></span><span style="font-size:12.5px;line-height:1.45;color:#5E7770">{{ v.d }}</span></div></sc-for>
+  </div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:28px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">SAUDI RIYAL SIGN · U+20C1</span>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <span style="width:88px;height:88px;border-radius:20px;background:#F4F7F6;display:flex;align-items:center;justify-content:center"><img src="assets/sar-symbol.svg" alt="Saudi Riyal sign" style="width:48px;height:48px"/></span>
+        <span style="width:88px;height:88px;border-radius:20px;background:#E3F6EF;display:flex;align-items:center;justify-content:center"><img src="assets/sar-symbol-green.svg" alt="" style="width:48px;height:48px"/></span>
+        <span style="width:88px;height:88px;border-radius:20px;background:#0C1F1A;display:flex;align-items:center;justify-content:center"><img src="assets/sar-symbol-white.svg" alt="" style="width:48px;height:48px"/></span>
+        <span style="width:88px;height:88px;border-radius:20px;background:linear-gradient(135deg,#0F3D33,#0A7559 60%,#2C957A);display:flex;align-items:center;justify-content:center"><img src="assets/sar-symbol-white.svg" alt="" style="width:48px;height:48px"/></span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:8px;font-family:'IBM Plex Mono',monospace"><img src="assets/sar-symbol.svg" alt="SAR" style="width:22px;height:22px;align-self:center"/><span style="font-size:34px;font-weight:600;letter-spacing:-.02em">25,000.00</span></div>
+      <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">Files: sar-symbol.svg (ink) · -muted · -green · -white</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0">
+      <sc-for list="{{ symRules }}" as="x" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid {{ x.bdr }};font-size:13.5px;line-height:1.5"><span style="font-weight:600">{{ x.k }}</span><span style="color:#4A615A">{{ x.v }}</span></div></sc-for>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:8px 24px"><sc-for list="{{ fmtRules }}" as="f" hint-placeholder-count="7"><div style="display:grid;grid-template-columns:130px minmax(0,1fr) minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid {{ f.bdr }};font-size:13.5px;align-items:baseline"><span style="font-weight:600">{{ f.k }}</span><span style="font-family:'IBM Plex Mono',monospace;color:#0B6F56">{{ f.ok }}</span><span style="font-family:'IBM Plex Mono',monospace;color:#C81E1E;text-decoration:line-through">{{ f.no }}</span></div></sc-for></div>
+    <div dir="rtl" style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;font-family:'IBM Plex Sans Arabic',sans-serif">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;direction:ltr;text-align:right">ARABIC · RTL</span>
+      <span style="font-size:14px;color:#5E7770">الرصيد المتاح</span>
+      <bdi dir="ltr" style="align-self:flex-end;display:flex;align-items:baseline;gap:8px;font-family:'IBM Plex Mono',monospace"><sc-if value="{{ cur.code }}" hint-placeholder-val="{{ true }}"><span style="font-size:16px;color:#5E7770">SAR</span></sc-if><sc-if value="{{ cur.sym }}" hint-placeholder-val="{{ false }}"><img src="assets/sar-symbol.svg" alt="SAR" style="width:22px;height:22px;align-self:center"/></sc-if><span style="font-size:34px;font-weight:600;letter-spacing:-.02em">{{ heroAr }}</span></bdi>
+      <span style="font-size:13.5px;line-height:1.7;color:#5E7770">المبالغ تبقى بالأرقام اللاتينية ومن اليسار إلى اليمين داخل <span style="font-family:'IBM Plex Mono',monospace;direction:ltr">&lt;bdi dir="ltr"&gt;</span>، والعملة قبل الرقم.</span>
+    </div>
+  </div>
+</section>
+
+<section id="c2" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">02</span><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">Amount input</h2><p style="margin:0;max-width:820px;font-size:15px;line-height:1.55;color:#4A615A">A separate currency field, not a text input. It adds separators as you type, limits to two decimals, shows the available balance, and warns before limits. Web and mobile share the same value; try both.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">WEB · TRANSFER AMOUNT</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · TYPE</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="min-height:76px;border:{{ ai.bw }} solid {{ ai.bd }};border-radius:10px;padding:10px 16px;display:flex;flex-direction:column;gap:2px;background:{{ ai.bg }};box-shadow:{{ ai.ring }};transition:border-color .15s,box-shadow .15s;cursor:text">
+          <span style="font-size:11px;color:{{ ai.lc }}">Amount</span>
+          <div style="display:flex;align-items:baseline;gap:10px"><sc-if value="{{ cur.code }}" hint-placeholder-val="{{ true }}"><span style="font:500 18px 'IBM Plex Mono',monospace;color:#5E7770">SAR</span></sc-if><sc-if value="{{ cur.sym }}" hint-placeholder-val="{{ false }}"><img src="assets/sar-symbol.svg" alt="SAR" style="width:20px;height:20px;align-self:center"/></sc-if><input value="{{ ai.v }}" onChange="{{ ai.set }}" onFocus="{{ ai.focus }}" onBlur="{{ ai.blur }}" inputMode="decimal" placeholder="0.00" aria-invalid="{{ ai.inv }}" aria-describedby="amt-help" style="flex:1;min-width:0;border:0;outline:0;background:transparent;padding:0;font:600 28px 'IBM Plex Mono',monospace;letter-spacing:-.01em;color:#0C1F1A;font-variant-numeric:tabular-nums"/></div>
+        </label>
+        <div id="amt-help" style="display:flex;justify-content:space-between;gap:12px;font-size:13px;min-height:20px"><span style="color:{{ ai.hc }};display:flex;gap:6px;align-items:flex-start;line-height:1.45">{{ ai.msg }}</span><span style="font-family:'IBM Plex Mono',monospace;color:#5E7770;white-space:nowrap">Available {{ ai.avail }}</span></div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ ai.chips }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.pick }}" style="height:34px;padding:0 14px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font:500 13px 'IBM Plex Mono',monospace;cursor:pointer;white-space:nowrap">{{ c.l }}</button></sc-for></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:4px"><sc-for list="{{ ai.states }}" as="s" hint-placeholder-count="4"><div style="border-radius:14px;background:{{ s.bg }};padding:10px 12px;display:flex;flex-direction:column;gap:2px"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:{{ s.c }}">{{ s.k }}</span><span style="font-size:12.5px;line-height:1.45;color:#4A615A">{{ s.v }}</span></div></sc-for></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">MOBILE · KEYPAD</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · TAP</span></div>
+      <div style="border-radius:32px;background:#F4F7F6;padding:18px 16px 16px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:15px;font-weight:600;text-align:center">To Nour Trading</span>
+        <div style="display:flex;justify-content:center;align-items:baseline;gap:8px;min-height:56px;animation:{{ ai.shake }}"><sc-if value="{{ cur.code }}" hint-placeholder-val="{{ true }}"><span style="font:500 18px 'IBM Plex Mono',monospace;color:#5E7770">SAR</span></sc-if><sc-if value="{{ cur.sym }}" hint-placeholder-val="{{ false }}"><img src="assets/sar-symbol.svg" alt="SAR" style="width:24px;height:24px;align-self:center"/></sc-if><span style="font:600 44px 'IBM Plex Mono',monospace;letter-spacing:-.03em;color:{{ ai.mc }};white-space:nowrap">{{ ai.mv }}</span><span style="width:2px;height:36px;background:#0B8F6E;align-self:center;animation:hBlink 1s steps(1) infinite"></span></div>
+        <span style="text-align:center;font-size:13px;color:{{ ai.hc }};min-height:20px;padding:0 8px;line-height:1.4">{{ ai.mmsg }}</span>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><sc-for list="{{ ai.keys }}" as="k" hint-placeholder-count="12"><button onClick="{{ k.press }}" aria-label="{{ k.aria }}" style="height:54px;border:0;border-radius:16px;background:transparent;font:500 24px 'IBM Plex Mono',monospace;color:#0C1F1A;cursor:pointer" style-active="background:#E3EAE7">{{ k.l }}</button></sc-for></div>
+        <button style="height:52px;border:0;border-radius:999px;background:{{ ai.cbg }};color:{{ ai.cfg }};font-size:16px;font-weight:600;cursor:{{ ai.ccur }}">{{ ai.cta }}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="c3" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">03</span><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">Transaction row</h2><p style="margin:0;max-width:820px;font-size:15px;line-height:1.55;color:#4A615A">The most repeated element in Hala. Counterparty avatar or bank tile, description, method and time, status only when it isn't settled, and the signed amount right-aligned. Click a row to select it.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:12px 20px 16px;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 4px 10px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">WEB · 64 PX ROW</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · HOVER, CLICK</span></div>
+    <div style="display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr) 40px;gap:16px;padding:10px 12px;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#6B827B;border-bottom:1px solid #EEF2F0"><span>DESCRIPTION</span><span>METHOD</span><span>STATUS</span><span style="text-align:right">AMOUNT · SAR</span><span></span></div>
+    <sc-for list="{{ txs }}" as="t" hint-placeholder-count="6">
+      <button onClick="{{ t.pick }}" aria-pressed="{{ t.sel }}" style="display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr) 40px;gap:16px;align-items:center;min-height:64px;padding:0 12px;border:0;border-bottom:1px solid #F2F5F4;border-radius:12px;background:{{ t.bg }};text-align:left;cursor:pointer;color:#0C1F1A;width:100%" style-hover="background:{{ t.hbg }}">
+        <div style="display:flex;align-items:center;gap:12px;min-width:0"><span style="position:relative;width:40px;height:40px;border-radius:{{ t.r }};background:{{ t.abg }};color:{{ t.afg }};font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">{{ t.ini }}<sc-if value="{{ t.hasDir }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:-3px;bottom:-3px;width:18px;height:18px;border-radius:50%;background:{{ t.dbg }};border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:10px;height:10px" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.dir }}"></path></svg></span></sc-if></span><div style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:14.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.name }}</span><span style="font-size:12.5px;color:#5E7770;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.sub }}</span></div></div>
+        <span style="font-size:13.5px;color:#4A615A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.method }}</span>
+        <span><sc-if value="{{ t.hasSt }}" hint-placeholder-val="{{ false }}"><span style="height:22px;padding:0 9px;border-radius:999px;background:{{ t.sbg }};color:{{ t.sfg }};font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;white-space:nowrap">{{ t.st }}</span></sc-if></span>
+        <span style="text-align:right;font:500 15px 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;color:{{ t.ac }};text-decoration:{{ t.td }};white-space:nowrap">{{ t.amt }}</span>
+        <span style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#5E7770"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg></span>
+      </button>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">MOBILE · 72 PT ROW</span>
+      <div style="border-radius:28px;background:#F4F7F6;padding:14px 12px;display:flex;flex-direction:column;gap:6px">
+        <span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6B827B;padding:4px 6px">TODAY</span>
+        <div style="border-radius:20px;background:#FFFFFF;padding:0 14px"><sc-for list="{{ txm }}" as="t" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:12px;min-height:72px;border-top:1px solid {{ t.bdr }}"><span style="width:44px;height:44px;border-radius:{{ t.r }};background:{{ t.abg }};color:{{ t.afg }};font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">{{ t.ini }}</span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:15.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.name }}</span><span style="font-size:13px;color:#5E7770;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.msub }}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none"><span style="font:500 15.5px 'IBM Plex Mono',monospace;color:{{ t.ac }};text-decoration:{{ t.td }};white-space:nowrap">{{ t.amt }}</span><sc-if value="{{ t.hasSt }}" hint-placeholder-val="{{ false }}"><span style="height:20px;padding:0 8px;border-radius:999px;background:{{ t.sbg }};color:{{ t.sfg }};font-size:11px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ t.st }}</span></sc-if></div></div></sc-for></div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">ANATOMY AND RULES</span>
+      <sc-for list="{{ txRules }}" as="r" hint-placeholder-count="7"><div style="display:grid;grid-template-columns:24px 130px minmax(0,1fr);gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid {{ r.bdr }}"><span style="width:20px;height:20px;border-radius:50%;background:#0C1F1A;color:#FFFFFF;font:600 10.5px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center">{{ r.n }}</span><span style="font-size:13.5px;font-weight:600">{{ r.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ r.v }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="c4" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">04</span><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">Review summary</h2><p style="margin:0;max-width:820px;font-size:15px;line-height:1.55;color:#4A615A">The "check before you send" block: a key–value list with the total set apart and the arrival time stated plainly. The amount comes from the input in section 02; change it there and this updates.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:20px;font-weight:700">Review transfer</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · LINKED TO 02</span></div>
+      <div style="border-radius:18px;border:1px solid #EEF2F0;padding:4px 18px">
+        <sc-for list="{{ rv.rows }}" as="r" hint-placeholder-count="7">
+          <div style="display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 0;border-top:1px solid {{ r.bdr }}">
+            <span style="font-size:13.5px;color:#5E7770">{{ r.k }}</span>
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:14.5px;font-weight:{{ r.fw }};font-family:{{ r.ff }};color:{{ r.c }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.v }}</span><sc-if value="{{ r.hasSub }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;color:#5E7770;font-family:{{ r.sff }}">{{ r.sub }}</span></sc-if></div>
+            <sc-if value="{{ r.hasAct }}" hint-placeholder-val="{{ false }}"><button onClick="{{ r.act }}" style="border:0;background:transparent;padding:4px 2px;font-size:13px;font-weight:600;color:#0E7C62;cursor:pointer;white-space:nowrap">{{ r.al }}</button></sc-if>
+          </div>
+        </sc-for>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 0 14px;border-top:1.5px solid #0C1F1A"><span style="font-size:15px;font-weight:700">Total debited</span><span style="font:600 26px 'IBM Plex Mono',monospace;letter-spacing:-.02em;white-space:nowrap">{{ rv.total }}</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:{{ rv.nbg }};color:{{ rv.nfg }};font-size:13.5px;line-height:1.45"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ rv.nIcon }}"></path></svg>{{ rv.note }}</div>
+      <div style="display:flex;justify-content:flex-end;gap:8px"><a href="#c2" style="height:44px;padding:0 18px;border:1px solid #D7E0DC;border-radius:999px;font-size:14.5px;color:#0C1F1A;display:flex;align-items:center">Edit</a><span style="height:44px;padding:0 22px;border-radius:999px;background:{{ rv.pbg }};color:{{ rv.pfg }};font-size:14.5px;font-weight:600;display:flex;align-items:center;white-space:nowrap;box-shadow:{{ rv.psh }}">{{ rv.cta }}</span></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">MOBILE · SHEET</span>
+      <div style="border-radius:32px;background:rgba(12,31,26,.42);padding:80px 0 0;overflow:hidden">
+        <div style="background:#FFFFFF;border-radius:28px 28px 0 0;padding:10px 16px 22px;display:flex;flex-direction:column;gap:14px">
+          <span style="align-self:center;width:40px;height:5px;border-radius:3px;background:#C9D4D0"></span>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0"><span style="font-size:13.5px;color:#5E7770">You're sending</span><span style="font:600 34px 'IBM Plex Mono',monospace;letter-spacing:-.02em;white-space:nowrap">{{ rv.amtM }}</span><span style="font-size:14px;white-space:nowrap">to <b style="font-weight:600">Nour Trading</b></span></div>
+          <div style="border-radius:18px;background:#F4F7F6;padding:2px 14px"><sc-for list="{{ rv.mrows }}" as="r" hint-placeholder-count="5"><div style="display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid {{ r.bdr }};font-size:14.5px"><span style="color:#5E7770;white-space:nowrap">{{ r.k }}</span><span style="font-family:{{ r.ff }};font-weight:{{ r.fw }};text-align:right;white-space:nowrap">{{ r.v }}</span></div></sc-for></div>
+          <span style="height:52px;border-radius:999px;background:{{ rv.pbg }};color:{{ rv.pfg }};font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ rv.ctaM }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="c5" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">05</span><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">Payment status timeline</h2><p style="margin:0;max-width:820px;font-size:15px;line-height:1.55;color:#4A615A">Created → approved → sent → received, each with a time and who did it. The headline always says what happens next in plain words. Step through it or simulate a return.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;color:#5E7770">Transfer TRF-88213 · SAR 25,000.00 to Nour Trading</span><span style="font-size:20px;font-weight:700;color:{{ tl.hc }}">{{ tl.head }}</span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ tl.adv }}" disabled="{{ tl.noAdv }}" style="height:38px;padding:0 14px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:13.5px;font-weight:600;cursor:pointer;opacity:{{ tl.aOp }};white-space:nowrap">Next event</button><button onClick="{{ tl.failIt }}" style="height:38px;padding:0 14px;border:1px solid #F5C2C2;border-radius:999px;background:#FFFFFF;color:#C81E1E;font-size:13.5px;font-weight:500;cursor:pointer;white-space:nowrap">Simulate return</button><button onClick="{{ tl.reset }}" style="height:38px;padding:0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;cursor:pointer;white-space:nowrap">Reset</button></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr))">
+      <sc-for list="{{ tl.steps }}" as="t" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+          <div style="display:flex;align-items:center"><span style="width:28px;height:28px;border-radius:50%;flex:none;background:{{ t.bg }};border:2px solid {{ t.bd }};display:flex;align-items:center;justify-content:center;color:#FFFFFF;animation:{{ t.anim }}"><svg viewBox="0 0 24 24" style="width:13px;height:13px;display:{{ t.ic }}" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg><span style="width:8px;height:8px;border-radius:50%;background:{{ t.dot }};display:{{ t.dd }}"></span></span><span style="flex:1;height:2px;background:{{ t.line }};margin:0 8px;visibility:{{ t.lv }}"></span></div>
+          <div style="display:flex;flex-direction:column;gap:2px;padding-right:12px"><span style="font-size:14.5px;font-weight:600;color:{{ t.tc }}">{{ t.t }}</span><span style="font-size:12.5px;color:#5E7770">{{ t.who }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:{{ t.timec }}">{{ t.time }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">MOBILE · VERTICAL</span>
+      <div style="border-radius:28px;background:#F4F7F6;padding:18px 16px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center"><span style="font:600 26px 'IBM Plex Mono',monospace">− 25,000.00</span><span style="font-size:14px;font-weight:600;color:{{ tl.hc }}">{{ tl.head }}</span></div>
+        <div style="border-radius:20px;background:#FFFFFF;padding:16px">
+          <sc-for list="{{ tl.steps }}" as="t" hint-placeholder-count="4"><div style="display:flex;gap:12px"><div style="display:flex;flex-direction:column;align-items:center"><span style="width:24px;height:24px;border-radius:50%;flex:none;background:{{ t.bg }};border:2px solid {{ t.bd }};display:flex;align-items:center;justify-content:center;color:#FFFFFF;animation:{{ t.anim }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;display:{{ t.ic }}" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg><span style="width:7px;height:7px;border-radius:50%;background:{{ t.dot }};display:{{ t.dd }}"></span></span><span style="width:2px;flex:1;min-height:20px;background:{{ t.line }};margin:4px 0;visibility:{{ t.lv }}"></span></div><div style="flex:1;display:flex;justify-content:space-between;gap:8px;padding-bottom:16px"><div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:600;color:{{ t.tc }}">{{ t.t }}</span><span style="font-size:13px;color:#5E7770">{{ t.who }}</span></div><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:{{ t.timec }};white-space:nowrap">{{ t.time }}</span></div></div></sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">STEP STATES</span>
+      <sc-for list="{{ tlStates }}" as="x" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid {{ x.bdr }}"><span style="width:24px;height:24px;border-radius:50%;flex:none;background:{{ x.bg }};border:2px solid {{ x.bd }};display:flex;align-items:center;justify-content:center"><span style="width:7px;height:7px;border-radius:50%;background:{{ x.dot }}"></span></span><span style="font-size:14px;font-weight:600;width:110px;flex:none">{{ x.k }}</span><span style="font-size:13px;color:#5E7770;line-height:1.45">{{ x.v }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+<section id="c6" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">06</span><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">Approval chain</h2><p style="margin:0;max-width:820px;font-size:15px;line-height:1.55;color:#4A615A">Who has approved, whose turn it is, and what happens after. The rule that triggered the approval is always shown. Act as the current approver to see each state.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:18px;font-weight:700">Approvals · 2 required</span><span style="font-size:13px;color:#5E7770">Rule: transfers over SAR 20,000 need Finance, then Owner.</span></div><span style="height:26px;padding:0 10px;border-radius:999px;background:{{ apv.sbg }};color:{{ apv.sfg }};font-size:12px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ apv.status }}</span></div>
+      <div style="display:flex;align-items:flex-start;overflow-x:auto;scrollbar-width:none;padding:14px 8px 6px;margin:-14px -8px 0">
+        <sc-for list="{{ apv.nodes }}" as="a" hint-placeholder-count="4">
+          <div style="display:flex;align-items:flex-start;flex:1;min-width:150px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;width:120px;text-align:center;flex:none">
+              <span style="position:relative;width:52px;height:52px;border-radius:{{ a.r }};background:{{ a.bg }};color:{{ a.fg }};font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #FFFFFF,0 0 0 5px {{ a.ring }};animation:{{ a.anim }}">{{ a.ini }}<span style="position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:{{ a.bdg }};border:2px solid #FFFFFF;display:{{ a.bdd }};align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:11px;height:11px" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg></span></span>
+              <div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:14px;font-weight:600">{{ a.n }}</span><span style="font-size:12px;color:#5E7770">{{ a.role }}</span></div>
+              <span style="height:22px;padding:0 9px;border-radius:999px;background:{{ a.sbg }};color:{{ a.sfg }};font-size:11px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ a.st }}</span>
+              <span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770;min-height:16px">{{ a.time }}</span>
+            </div>
+            <sc-if value="{{ a.arrow }}" hint-placeholder-val="{{ true }}"><span style="flex:1;height:2px;margin-top:26px;background:{{ a.line }};min-width:20px"></span></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ apv.hasComment }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:10px;padding:12px 14px;border-radius:14px;background:#FFF8F8;font-size:13.5px;line-height:1.5"><span style="width:28px;height:28px;border-radius:50%;background:#DCE5FF;color:#1E3A9E;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">AA</span><div style="display:flex;flex-direction:column;gap:2px"><b style="font-weight:600">Abdulaziz Ali rejected</b><span style="color:#4A615A">"Please attach the signed invoice and resubmit."</span></div></div></sc-if>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid #EEF2F0">
+        <span style="font-size:13px;color:#5E7770">{{ apv.hint }}</span>
+        <div style="display:flex;gap:8px"><sc-if value="{{ apv.canAct }}" hint-placeholder-val="{{ true }}"><button onClick="{{ apv.reject }}" style="height:42px;padding:0 16px;border:0;border-radius:999px;background:#FDECEC;color:#C81E1E;font-size:14px;font-weight:600;cursor:pointer">Reject</button><button onClick="{{ apv.approve }}" style="height:42px;padding:0 20px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer">Approve as Abdulaziz</button></sc-if><sc-if value="{{ apv.done }}" hint-placeholder-val="{{ false }}"><button onClick="{{ apv.reset }}" style="height:42px;padding:0 16px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:14px;cursor:pointer">Reset</button></sc-if></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">COMPACT · IN TABLES AND ROWS</span>
+        <sc-for list="{{ apv.compact }}" as="c" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:12px;padding:6px 0"><div style="display:flex">{{ c.none }}<sc-for list="{{ c.av }}" as="v" hint-placeholder-count="2"><span style="width:28px;height:28px;border-radius:50%;background:{{ v.bg }};color:{{ v.fg }};font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-left:{{ v.ml }};box-shadow:0 0 0 2px #FFFFFF,0 0 0 3.5px {{ v.ring }}">{{ v.ini }}</span></sc-for></div><span style="font-size:13.5px;flex:1">{{ c.l }}</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:{{ c.c }};white-space:nowrap">{{ c.k }}</span></div></sc-for>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:8px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">CHAIN TYPES</span>
+        <sc-for list="{{ apTypes }}" as="t" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:2px;padding:8px 0;border-top:1px solid {{ t.bdr }}"><span style="font-size:14px;font-weight:600">{{ t.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ t.v }}</span></div></sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="c7" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">07</span><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">OTP, PIN and Nafath</h2><p style="margin:0;max-width:820px;font-size:15px;line-height:1.55;color:#4A615A">Six segmented digits, auto-submit on the last one, paste and SMS autofill, a resend timer, errors with attempts left, and lockout after 3 wrong codes. Nafath app approval is the alternative for high-risk actions.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;min-height:460px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div style="display:inline-flex;padding:3px;border-radius:999px;background:#E9EFEC"><sc-for list="{{ otp.modes }}" as="m" hint-placeholder-count="2"><button onClick="{{ m.pick }}" style="height:32px;padding:0 14px;border:0;border-radius:999px;background:{{ m.bg }};box-shadow:{{ m.sh }};font-size:13px;font-weight:{{ m.fw }};color:{{ m.fg }};cursor:pointer;white-space:nowrap">{{ m.l }}</button></sc-for></div><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56;white-space:nowrap">LIVE · CODE 123456</span></div>
+      <sc-if value="{{ otp.isSms }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center;padding:10px 0">
+          <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:20px;font-weight:700">{{ otp.title }}</span><span style="font-size:14px;color:#5E7770">Sent to <span style="font-family:'IBM Plex Mono',monospace">+966 50 •• ••26</span> to confirm SAR 25,000.00 to Nour Trading</span></div>
+          <div style="position:relative;display:flex;gap:8px;animation:{{ otp.shake }}">
+            <sc-for list="{{ otp.boxes }}" as="b" hint-placeholder-count="6"><span style="width:52px;height:60px;border-radius:12px;border:{{ b.bw }} solid {{ b.bd }};background:{{ b.bg }};box-shadow:{{ b.ring }};display:flex;align-items:center;justify-content:center;font:600 24px 'IBM Plex Mono',monospace;color:{{ b.c }};margin-right:{{ b.mr }}">{{ b.ch }}<sc-if value="{{ b.caret }}" hint-placeholder-val="{{ false }}"><span style="width:2px;height:26px;background:#0C1F1A;animation:hBlink 1s steps(1) infinite"></span></sc-if></span></sc-for>
+            <input value="{{ otp.v }}" onChange="{{ otp.set }}" onFocus="{{ otp.focus }}" onBlur="{{ otp.blur }}" disabled="{{ otp.locked }}" inputMode="numeric" autoComplete="one-time-code" maxLength="6" aria-label="6-digit code" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;border:0;cursor:text;font-size:16px"/>
+          </div>
+          <span style="font-size:13.5px;color:{{ otp.mc }};min-height:20px;display:flex;align-items:center;gap:6px">{{ otp.msg }}</span>
+          <div style="display:flex;align-items:center;gap:6px;font-size:13.5px;color:#5E7770"><span>Didn't get it?</span><button onClick="{{ otp.resend }}" disabled="{{ otp.noResend }}" style="border:0;background:transparent;padding:0;font-size:13.5px;font-weight:600;color:{{ otp.rc }};cursor:{{ otp.rcur }};font-variant-numeric:tabular-nums">{{ otp.rl }}</button></div>
+          <sc-if value="{{ otp.done }}" hint-placeholder-val="{{ false }}"><button onClick="{{ otp.reset }}" style="height:38px;padding:0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:13.5px;color:#0C1F1A;cursor:pointer">Try again</button></sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ otp.isNaf }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;padding:6px 0">
+          <div style="width:56px;height:56px;border-radius:16px;border:1.5px dashed #9AACA6;display:flex;align-items:center;justify-content:center;font:500 9.5px 'IBM Plex Mono',monospace;color:#5E7770;line-height:1.2">NAFATH<br/>LOGO</div>
+          <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:20px;font-weight:700">{{ naf.title }}</span><span style="font-size:14px;line-height:1.5;color:#5E7770;max-width:360px">{{ naf.sub }}</span></div>
+          <sc-if value="{{ naf.waiting }}" hint-placeholder-val="{{ true }}"><span style="width:96px;height:96px;border-radius:28px;background:#0C1F1A;color:#FFFFFF;font:600 44px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px #E3F6EF">42</span></sc-if>
+          <sc-if value="{{ naf.ok }}" hint-placeholder-val="{{ false }}"><span style="width:72px;height:72px;border-radius:50%;background:linear-gradient(90deg,#0A7559,#2C957A);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(11,143,110,.12)"><svg viewBox="0 0 24 24" style="width:34px;height:34px" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></sc-if>
+          <div style="width:100%;max-width:320px;display:flex;flex-direction:column;gap:6px"><span style="display:block;height:6px;border-radius:3px;background:#E3F6EF;overflow:hidden"><span style="display:block;height:100%;width:{{ naf.pct }};background:{{ naf.bar }};transition:width 1s linear"></span></span><span style="font:500 12px 'IBM Plex Mono',monospace;color:{{ naf.tc }}">{{ naf.timer }}</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><button onClick="{{ naf.approve }}" style="height:42px;padding:0 18px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer;display:{{ naf.ad }}">Approve in Nafath (demo)</button><button onClick="{{ naf.restart }}" style="height:42px;padding:0 16px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:14px;color:#0C1F1A;cursor:pointer">{{ naf.rl }}</button></div>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">STATES</span>
+        <sc-for list="{{ otpStates }}" as="x" hint-placeholder-count="6"><div style="display:flex;align-items:center;gap:14px;padding:6px 0;border-top:1px solid {{ x.bdr }};flex-wrap:wrap"><div style="display:flex;gap:4px;flex:none"><sc-for list="{{ x.b }}" as="c" hint-placeholder-count="6"><span style="width:26px;height:32px;border-radius:7px;border:1.5px solid {{ x.bd }};background:{{ x.bg }};display:flex;align-items:center;justify-content:center;font:600 13px 'IBM Plex Mono',monospace;color:{{ x.c }};opacity:{{ x.op }}">{{ c }}</span></sc-for></div><div style="display:flex;flex-direction:column;gap:1px;min-width:140px;flex:1"><span style="font-size:13.5px;font-weight:600">{{ x.k }}</span><span style="font-size:12.5px;color:#5E7770;line-height:1.4">{{ x.v }}</span></div></div></sc-for>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">CARD PIN · MOBILE · 4 DIGITS</span>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap"><div style="display:flex;gap:16px"><span style="width:16px;height:16px;border-radius:50%;background:#0C1F1A"></span><span style="width:16px;height:16px;border-radius:50%;background:#0C1F1A"></span><span style="width:16px;height:16px;border-radius:50%;border:2px solid #9AACA6"></span><span style="width:16px;height:16px;border-radius:50%;border:2px solid #9AACA6"></span></div><span style="font-size:13px;line-height:1.5;color:#5E7770;flex:1;min-width:180px">Dots, never digits. Custom keypad with Face ID key. Re-enter to confirm. Block 1234, 0000 and birth years.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="c8" style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B8F6E">08</span><h2 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">IBAN and account field</h2><p style="margin:0;max-width:820px;font-size:15px;line-height:1.55;color:#4A615A">Saudi IBANs are SA + 22 digits. The field groups them in fours, detects the bank from digits 5–6, checks the mod-97 checksum when you leave the field, and masks the number on review screens. Try the samples.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">NEW BENEFICIARY</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · TYPE OR PASTE</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label style="min-height:64px;border:{{ ib.bw }} solid {{ ib.bd }};border-radius:8px;padding:0 12px 0 14px;display:flex;align-items:center;gap:12px;background:{{ ib.bg }};box-shadow:{{ ib.ring }};transition:border-color .15s;cursor:text">
+          <sc-if value="{{ ib.hasBank }}" hint-placeholder-val="{{ false }}"><span title="{{ ib.bank }}" style="width:36px;height:36px;border-radius:10px;background:{{ ib.bbg }};color:#FFFFFF;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;animation:hFade .2s ease-out">{{ ib.bini }}</span></sc-if>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:{{ ib.lc }}">IBAN</span><input value="{{ ib.v }}" onChange="{{ ib.set }}" onFocus="{{ ib.focus }}" onBlur="{{ ib.blur }}" placeholder="SA00 0000 0000 0000 0000 0000" spellCheck="false" autoCapitalize="characters" aria-invalid="{{ ib.inv }}" style="border:0;outline:0;background:transparent;padding:0;font:400 16px 'IBM Plex Mono',monospace;letter-spacing:.02em;color:#0C1F1A;width:100%"/></div>
+          <sc-if value="{{ ib.ok }}" hint-placeholder-val="{{ false }}"><span style="width:22px;height:22px;border-radius:50%;background:#0B8F6E;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></sc-if>
+          <span style="font:400 12px 'IBM Plex Mono',monospace;color:#8A9C96;white-space:nowrap">{{ ib.count }}</span>
+        </label>
+        <span style="font-size:13px;line-height:1.45;color:{{ ib.hc }};min-height:19px">{{ ib.msg }}</span>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span style="font-size:12.5px;color:#5E7770;margin-right:4px">Samples:</span><sc-for list="{{ ib.samples }}" as="x" hint-placeholder-count="4"><button onClick="{{ x.pick }}" style="height:30px;padding:0 12px;border-radius:999px;border:1px solid #D7E0DC;background:#FFFFFF;font-size:12.5px;color:#0C1F1A;cursor:pointer;white-space:nowrap">{{ x.l }}</button></sc-for></div>
+      <sc-if value="{{ ib.ok }}" hint-placeholder-val="{{ false }}">
+        <div style="border-radius:16px;background:#F4F7F6;padding:14px 16px;display:flex;align-items:center;gap:12px;animation:hFade .2s ease-out;flex-wrap:wrap">
+          <span style="width:40px;height:40px;border-radius:12px;background:{{ ib.bbg }};color:#FFFFFF;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">{{ ib.bini }}</span>
+          <div style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:2px"><span style="font-size:14.5px;font-weight:600">{{ ib.bank }}</span><span style="font:400 13.5px 'IBM Plex Mono',monospace;color:#4A615A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ ib.shown }}</span></div>
+          <button onClick="{{ ib.toggleMask }}" aria-label="{{ ib.maskL }}" title="{{ ib.maskL }}" style="width:36px;height:36px;border:1px solid #D7E0DC;border-radius:10px;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ ib.maskIcon }}"></path></svg></button>
+          <button onClick="{{ ib.copy }}" style="height:36px;padding:0 12px;border:1px solid #D7E0DC;border-radius:10px;background:{{ ib.cbg }};cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px;color:{{ ib.cfg }};white-space:nowrap"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8h12v12H8zM4 16V4h12"></path></svg>{{ ib.cl }}</button>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">STRUCTURE</span>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;font:500 14px 'IBM Plex Mono',monospace"><sc-for list="{{ ibParts }}" as="p" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:4px;align-items:center"><span style="padding:6px 8px;border-radius:8px;background:{{ p.bg }};color:{{ p.c }};white-space:nowrap">{{ p.v }}</span><span style="font:400 10.5px 'IBM Plex Sans',sans-serif;color:#5E7770;white-space:nowrap">{{ p.k }}</span></div></sc-for></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:8px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">BANK CODES DETECTED</span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px"><sc-for list="{{ banks }}" as="b" hint-placeholder-count="10"><div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="width:26px;height:26px;border-radius:8px;background:{{ b.c }};color:#FFFFFF;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">{{ b.i }}</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ b.code }}</span><span style="font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.n }}</span></div></sc-for></div>
+        <span style="font-size:12px;line-height:1.5;color:#5E7770">Initials tiles are placeholders. Use each bank's approved logo files, and confirm the code list against SAMA before launch.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:16px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px"><sc-for list="{{ rules }}" as="r" hint-placeholder-count="10"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for></div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { cur: 'sym', hide: false, amt: '25000', af: false, at: false, shk: 0, d: 1, fail: false, ap: ['approved', 'pending'], otp: '', tries: 0, lockUntil: 0, resendAt: 0, otpOk: false, otpErr: false, mode: 'sms', nafAt: 0, nafOk: false, iban: '', ibf: false, ibt: false, mask: true, copied: '' };
+  componentDidMount() { this.setState({ resendAt: Date.now() + 30000, nafAt: Date.now() }); this.tk = setInterval(() => { const s = this.state, n = Date.now(); if (s.resendAt > n || s.lockUntil > n || (s.mode === 'nafath' && !s.nafOk)) this.forceUpdate(); }, 1000); }
+  componentWillUnmount() { clearInterval(this.tk); clearTimeout(this.ct); }
+  num(v) { return parseFloat(v) || 0; }
+  fmt(n, dec = 2) { return Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }); }
+  clean(raw) { let v = String(raw).replace(/[^0-9.]/g, ''); const i = v.indexOf('.'); if (i >= 0) v = v.slice(0, i + 1) + v.slice(i + 1).replace(/\./g, '').slice(0, 2); let [a, b] = v.split('.'); a = (a || '').replace(/^0+(?=\d)/, '').slice(0, 9); return b !== undefined ? (a || '0') + '.' + b : a; }
+  pretty(v) { if (v === '') return ''; const [a, b] = v.split('.'); const ai = (a || '0').replace(/\B(?=(\d{3})+(?!\d))/g, ','); return b !== undefined ? ai + '.' + b : ai; }
+  copy(k, t) { try { navigator.clipboard && navigator.clipboard.writeText(t); } catch (e) {} this.setState({ copied: k }); clearTimeout(this.ct); this.ct = setTimeout(() => this.setState({ copied: '' }), 1400); }
+  part1() {
+    const s = this.state, H = s.hide, mk = v => H ? '••••••' : v;
+    const toc = [['01', 'Amount display', '#c1'], ['02', 'Amount input', '#c2'], ['03', 'Transaction row', '#c3'], ['04', 'Review summary', '#c4'], ['05', 'Status timeline', '#c5'], ['06', 'Approval chain', '#c6'], ['07', 'OTP and Nafath', '#c7'], ['08', 'IBAN field', '#c8']].map(([n, l, h]) => ({ n, l, h }));
+    const curModes = [['Riyal symbol', 'sym'], ['SAR code', 'code']].map(([l, k]) => { const on = s.cur === k; return { l, bg: on ? '#FFFFFF' : 'transparent', sh: on ? '0 1px 3px rgba(12,31,26,.14)' : 'none', fw: on ? 600 : 500, fg: on ? '#0C1F1A' : '#5E7770', pick: () => this.setState({ cur: k }) }; });
+    const cur = { code: s.cur === 'code', sym: s.cur === 'sym' };
+    const SZ = [['Hero', 'Mono 44 / 600 · decimals 26', '175,000', '.00', '44px', '26px', 600, '-.03em', '18px', '28px', '10px', '#5E7770', 'Account balance on Home and account pages. One per screen.'], ['Large', 'Mono 28 / 600', '25,000', '.00', '28px', '28px', 600, '-.02em', '15px', '20px', '8px', '#0C1F1A', 'Review totals, success screens, card spend.'], ['Medium', 'Mono 18 / 500', '1,249', '.00', '18px', '18px', 500, '-.01em', '13px', '15px', '6px', '#0C1F1A', 'KPI cards, list totals, chart tooltips.'], ['Row', 'Mono 15 / 500', '86', '.25', '15px', '15px', 500, '0', '12px', '13px', '5px', '#0C1F1A', 'Transaction rows and table cells. Currency often in the column header instead.'], ['Inline', 'Mono 14 / 500 in Sans text', '38', '.50', '14px', '14px', 500, '0', '12px', '12px', '4px', '#0C1F1A', 'Inside sentences: "You sent SAR 38.50 to Careem."']];
+    const sizes = SZ.map(([name, spec, int, dec, fs, dfs, fw, ls, cfs, sym, gap, dc, use], i) => ({ name, spec, int: mk(int), dec: H ? '' : dec, fs, dfs, fw, ls, cfs, sym, gap, dc, use, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const V = [['MONEY IN', '+ 86.25', '#0B7A5F', 'none', '', '', '', 'Green and a plus sign. The only time amounts are colored.'], ['MONEY OUT', '− 1,249.00', '#0C1F1A', 'none', '', '', '', 'Ink with a true minus (U+2212). Never red for normal spending.'], ['PENDING', '− 25,000.00', '#5E7770', 'none', 'Pending', '#FFF4E0', '#7A4508', 'Muted until it settles; balance shows "incl. pending".'], ['DECLINED', '− 420.00', '#9AACA6', 'line-through', 'Declined', '#FDECEC', '#8A1414', 'Struck through: it never left the account.'], ['REFUND', '+ 38.50', '#0B7A5F', 'none', 'Refund', '#F2F6F4', '#2E403B', 'Money in, labelled so it isn\'t mistaken for income.'], ['FOREIGN', 'USD 1,200.00', '#0C1F1A', 'none', '≈ SAR 4,503.00', '#F2F6F4', '#2E403B', 'Original currency first, SAR equivalent beside it.'], ['HIDDEN', '••••••', '#0C1F1A', 'none', '', '', '', 'After "Hide balances" or in screenshots. Width stays fixed.'], ['ZERO', '0.00', '#5E7770', 'none', '', '', '', 'Show 0.00, not a dash, when a total is truly zero.']];
+    const variants = V.map(([k, v, c, td, tag, tbg, tfg, d]) => ({ k, v: k === 'HIDDEN' ? v : mk(v), c, td, tag, hasTag: !!tag, tbg, tfg, d }));
+    const fmtRules = [['Sign', '− 1,249.00', '-1249.00'], ['Decimals', '25,000.00', '25000'], ['Separators', '175,000.00', '175.000,00'], ['Currency', 'Riyal sign or SAR, before', '86.25 SR · ﷼ 86.25'], ['Large values', 'SAR 1.2M (charts only)', 'SAR 1,2 million'], ['Figures', 'tabular-nums', 'proportional'], ['Copy', '"Send SAR 25,000.00"', '"Send money"']].map(([k, ok, no], i) => ({ k, ok, no, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const symRules = [['Size', 'Height ≈ the number\'s cap height: 0.75–0.8× the font size. Hero 28 px, Large 20, Row 13.'], ['Spacing', 'Space equal to ~0.25 em between sign and number. Never touching.'], ['Color', 'Same as the number, or muted (#5E7770) next to hero balances. Green only with money in.'], ['Placement', 'Before the number, like SAR, in English and Arabic. Confirm against SAMA\'s usage guide.'], ['Fallback', 'Use "SAR" in SMS, plain-text email, CSV exports and anywhere SVG can\'t render. U+20C1 once fonts support it.'], ['Don\'t', 'Use the old ﷼ ligature, redraw, rotate or outline the sign, or mix sign and SAR on one screen.']].map(([k, v], i) => ({ k, v, bdr: i ? '#EEF2F0' : 'transparent' }));
+    // amount input
+    const AV = 45000, LIM = 20000, v = s.amt, n = this.num(v), over = n > AV, appr = !over && n > LIM, zero = n <= 0, showErr = over && (s.at || !s.af);
+    const msg = over ? `Above your available balance by SAR ${this.fmt(n - AV)}. Lower the amount or add money.` : appr ? `Above SAR ${this.fmt(LIM)} needs approval from Abdulaziz Ali.` : zero ? 'Enter an amount to continue.' : 'Free · arrives within minutes via sarie.';
+    const hc = over ? '#C81E1E' : appr ? '#7A4508' : '#5E7770';
+    const setV = nv => this.setState({ amt: this.clean(nv), at: false });
+    const press = k => () => { if (k === '⌫') return setV(v.slice(0, -1)); const nv = this.clean(v + k); if (nv === v && k !== '.') this.setState({ shk: s.shk + 1 }); setV(nv); };
+    const chips = [['1,000', '1000'], ['5,000', '5000'], ['10,000', '10000'], ['Max', String(AV)]].map(([l, val]) => { const on = v === val; return { l, bd: on ? '#0C1F1A' : '#D7E0DC', bg: on ? '#0C1F1A' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0C1F1A', pick: () => this.setState({ amt: val, at: true }) }; });
+    const ai = { v: this.pretty(v), set: e => setV(e.target.value), focus: () => this.setState({ af: true }), blur: () => this.setState({ af: false, at: true }),
+      bw: s.af || showErr ? '1.5px' : '1px', bd: showErr ? '#E02424' : s.af ? '#0C1F1A' : '#D9D9D9', bg: showErr ? '#FFFBFB' : '#FFFFFF', ring: s.af ? (showErr ? '0 0 0 3px rgba(224,36,36,.12)' : '0 0 0 3px rgba(12,31,26,.06)') : 'none', lc: showErr ? '#E02424' : '#0C1F1A', inv: showErr ? 'true' : 'false',
+      msg, hc, avail: H ? 'SAR ••••••' : `SAR ${this.fmt(AV)}`, chips,
+      mv: v === '' ? '0' : this.pretty(v), mc: over ? '#C81E1E' : v === '' ? '#B9C8C2' : '#0C1F1A', mmsg: msg, shake: s.shk ? `hShake .3s ${s.shk % 2 ? '' : ' '}` : 'none',
+      keys: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', '⌫'].map(l => ({ l, aria: l === '⌫' ? 'Delete' : l === '.' ? 'Decimal point' : l, press: press(l) })),
+      cbg: over || zero ? '#E6ECE9' : 'linear-gradient(90deg,#0A7559,#2C957A)', cfg: over || zero ? '#9AACA6' : '#FFFFFF', ccur: over || zero ? 'not-allowed' : 'pointer', cta: over ? 'Not enough balance' : zero ? 'Enter amount' : appr ? 'Continue · needs approval' : 'Continue',
+      states: [['FORMAT', '#0B6F56', '#F3FBF8', 'Separators as you type; max 2 decimals, 9 digits.'], ['APPROVAL', '#7A4508', '#FFF8EC', `Over ${this.fmt(LIM, 0)}: amber note, still allowed.`], ['ERROR', '#8A1414', '#FFF8F8', 'Over balance: red after blur; button disabled.'], ['PASTE', '#1E3A8A', '#F6F8FF', '"SAR 1,250.5" pastes as 1,250.50.']].map(([k, c, bg, v2]) => ({ k, c, bg, v: v2 })) };
+    return { symRules, toc, curModes, cur, sizes, variants, fmtRules, heroAr: mk('175,000.00'), ai, toggleHide: () => this.setState({ hide: !H }), hidePressed: H ? 'true' : 'false', hideLabel: H ? 'Show balances' : 'Hide balances', hideIcon: H ? 'M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' : 'M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6A17 17 0 0 0 2 12s3.6 7 10 7a10 10 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2' };
+  }
+  part2() {
+    const s = this.state, H = s.hide, mk = v => H ? '••••••' : v;
+    const ST = { Pending: ['#FFF4E0', '#7A4508'], Declined: ['#FDECEC', '#8A1414'], Refunded: ['#F2F6F4', '#2E403B'], Scheduled: ['#F0ECFF', '#3F2A8C'] };
+    const T = [
+      ['Al Baik · Olaya', 'POS sale · Terminal T-0412', 'mada •• 3301', 'Today, 12:41', '', 86.25, 'AB', '#FFE2C4', '#7A4508', '50%', 'in'],
+      ['Jarir Bookstore', 'Card purchase · Marketing', 'Visa •• 4417', 'Today, 11:08', '', -1249, 'JB', '#FDECEC', '#8A1414', '50%', ''],
+      ['Nour Trading', 'Transfer · Invoice INV-2041', 'Al Rajhi · SA03 •• 7519', 'Today, 09:30', 'Pending', -25000, 'AR', '#0C1F1A', '#FFFFFF', '12px', 'out'],
+      ['Careem', 'Card purchase · Operations', 'Visa •• 2086', 'Today, 08:15', 'Refunded', 38.5, 'CA', '#E3F6EF', '#0B6F56', '50%', 'in'],
+      ['Amazon.sa', 'Online purchase', 'Visa •• 4417', 'Today, 07:52', 'Declined', -420, 'AM', '#FFF4E0', '#7A4508', '50%', ''],
+      ['Payroll · October', '42 employees · WPS', 'SNB · SA44 •• 1230', 'Sun, 18 Oct', 'Scheduled', -186400, 'PR', '#DCE5FF', '#1E3A9E', '12px', 'out']
+    ];
+    const sel = s.txSel ?? 2;
+    const row = ([name, sub, method, time, st, a, ini, abg, afg, r, dir], i) => ({ name, sub, method, ini, abg, afg, r, st, hasSt: !!st, sbg: st ? ST[st][0] : '', sfg: st ? ST[st][1] : '', msub: `${time.replace('Today, ', '')} · ${method.split(' · ')[0]}`,
+      amt: mk((a > 0 ? '+ ' : '− ') + this.fmt(a)), ac: st === 'Declined' ? '#9AACA6' : st === 'Pending' || st === 'Scheduled' ? '#5E7770' : a > 0 ? '#0B7A5F' : '#0C1F1A', td: st === 'Declined' ? 'line-through' : 'none',
+      hasDir: !!dir, dir: dir === 'in' ? 'M17 7 7 17M16 17H7V8' : 'M7 17 17 7M8 7h9v9', dbg: dir === 'in' ? '#0B8F6E' : '#0C1F1A', bdr: i ? '#EEF2F0' : 'transparent',
+      sel: sel === i ? 'true' : 'false', bg: sel === i ? '#F3FBF8' : 'transparent', hbg: sel === i ? '#EAF7F1' : '#F7FAF9', pick: () => this.setState({ txSel: i }) });
+    const txs = T.map((t, i) => ({ ...row(t, i), sub: `${t[1]} · ${t[3]}` }));
+    const txm = T.slice(0, 5).map(row);
+    const txRules = [['1', 'Leading tile', 'Person or merchant: circle with initials or logo. Bank or account: rounded square. Small arrow badge for transfers in/out.'], ['2', 'Title', 'Counterparty name, 15 / 500, one line, truncated.'], ['3', 'Subtitle', 'What it was + time. On mobile: time · method.'], ['4', 'Status', 'Only for exceptions: Pending, Declined, Refunded, Scheduled. Settled shows nothing.'], ['5', 'Amount', 'Mono, signed, right-aligned. Green only for money in; muted when pending; struck through when declined.'], ['6', 'Hit area', 'Whole row opens details: drawer on web, pushed screen on mobile.'], ['7', 'Grouping', 'Group by day with mono captions: TODAY, YESTERDAY, 14 OCT.']].map(([n, k, v], i) => ({ n, k, v, bdr: i ? '#EEF2F0' : 'transparent' }));
+    // review
+    const n = this.num(s.amt), over = n > 45000, appr = n > 20000, zero = n <= 0;
+    const amtS = 'SAR ' + this.fmt(n);
+    const rows = [['From', 'Main account', 'SA57 •• 1951 · balance ' + (H ? '••••••' : 'SAR 45,000.00'), 0, 1, '', null], ['To', 'Nour Trading Co', 'Al Rajhi Bank · SA03 •• 7519', 0, 1, 'Change', () => this.setState({ copied: 'to' })], ['Amount', amtS, '', 1, 0, 'Edit', () => { const el = document.getElementById('c2'); el && window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); }], ['Fee', 'Free', 'Local transfer via sarie', 0, 0, '', null], ['VAT', 'SAR 0.00', '15% on fees', 1, 0, '', null], ['Arrives', appr ? 'After approval, within minutes' : 'Today, within minutes', appr ? 'Abdulaziz Ali approves first' : 'Sun–Thu 24/7 via sarie', 0, 0, '', null], ['Reference', 'TRF-88213', s.copied === 'ref' ? 'Copied ✓' : 'Invoice INV-2041', 1, 0, 'Copy', () => this.copy('ref', 'TRF-88213')]];
+    const rv = { rows: rows.map(([k, v, sub, mono, sm, al, act], i) => ({ k, v, sub, hasSub: !!sub, ff: mono ? "'IBM Plex Mono',monospace" : 'inherit', sff: sm ? "'IBM Plex Mono',monospace" : 'inherit', fw: k === 'Amount' ? 600 : 500, c: k === 'Fee' ? '#0B7A5F' : over && k === 'Amount' ? '#C81E1E' : '#0C1F1A', al, hasAct: !!al, act: act || (() => {}), bdr: i ? '#EEF2F0' : 'transparent' })),
+      total: amtS, amtM: this.fmt(n),
+      note: over ? 'Amount is above your available balance. Edit the amount to continue.' : appr ? 'This transfer needs approval. We\'ll send it as soon as Abdulaziz approves.' : 'Transfers can\'t be cancelled once sent. Check the IBAN before you continue.',
+      nbg: over ? '#FFF8F8' : appr ? '#FFF8EC' : '#F4F7F6', nfg: over ? '#8A1414' : appr ? '#7A4508' : '#4A615A', nIcon: over ? 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01' : appr ? 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' : 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 16v-4M12 8h.01',
+      pbg: over || zero ? '#E6ECE9' : 'linear-gradient(90deg,#0A7559,#2C957A)', pfg: over || zero ? '#9AACA6' : '#FFFFFF', psh: over || zero ? 'none' : '0 10px 22px -12px rgba(10,117,89,.8)',
+      cta: over ? 'Not enough balance' : appr ? 'Send for approval' : `Send ${amtS}`, ctaM: over ? 'Not enough balance' : appr ? 'Send for approval' : 'Confirm with OTP',
+      mrows: [['From', 'Main •• 1951', 1], ['Bank', 'Al Rajhi Bank', 0], ['IBAN', 'SA03 •• 7519', 1], ['Fee', 'Free', 0], ['Arrives', appr ? 'After approval' : 'Within minutes', 0]].map(([k, v, mono], i) => ({ k, v, ff: mono ? "'IBM Plex Mono',monospace" : 'inherit', fw: 500, bdr: i ? '#EEF2F0' : 'transparent' })) };
+    // timeline
+    const d = s.d, F = s.fail;
+    const TS = [['Created', 'Omar Bakr', '09:30'], ['Approved', 'Abdulaziz Ali', '09:42'], ['Sent to bank', 'via sarie', '09:43'], ['Received', 'Nour Trading · Al Rajhi', '09:44']];
+    const steps = TS.map(([t, who, time], i) => { const failed = F && i === 2, done = !failed && i < d && !(F && i > 2), curr = !F && i === d, last = i === TS.length - 1;
+      return { t: failed ? 'Returned' : t, who: failed ? 'Beneficiary bank rejected it' : who, time: done || failed ? time : curr ? 'In progress' : '—', tc: failed ? '#C81E1E' : done || curr ? '#0C1F1A' : '#8A9C96', timec: curr ? '#0B6F56' : '#5E7770',
+        bg: failed ? '#E02424' : done ? '#0B8F6E' : '#FFFFFF', bd: failed ? '#E02424' : done || curr ? '#0B8F6E' : '#D7E0DC', ic: done || failed ? 'block' : 'none', icon: failed ? 'M18 6 6 18M6 6l12 12' : 'M20 6 9 17l-5-5', dd: done || failed ? 'none' : 'block', dot: curr ? '#0B8F6E' : 'transparent', anim: curr ? 'hPulse 1.6s infinite' : 'none',
+        line: done && i + 1 < d && !F ? '#0B8F6E' : done && F && i < 1 ? '#0B8F6E' : '#E1E8E5', lv: last ? 'hidden' : 'visible' }; });
+    const HEAD = ['', 'Waiting for Abdulaziz to approve', 'Approved · sending to Al Rajhi Bank', 'Sent · arrives within minutes', 'Received by Nour Trading at 09:44'];
+    const tl = { steps, head: F ? 'Returned · SAR 25,000.00 is back in your account' : HEAD[d], hc: F ? '#C81E1E' : d === 4 ? '#0B6F56' : '#0C1F1A', noAdv: F || d >= 4, aOp: F || d >= 4 ? .4 : 1,
+      adv: () => this.setState({ d: Math.min(4, d + 1) }), failIt: () => this.setState({ fail: true, d: Math.max(d, 2) }), reset: () => this.setState({ d: 1, fail: false }) };
+    const tlStates = [['Done', 'Green fill + check, time shown.', '#0B8F6E', '#0B8F6E', '#FFFFFF'], ['Current', 'Green ring, pulsing dot, "In progress".', '#FFFFFF', '#0B8F6E', '#0B8F6E'], ['Upcoming', 'Gray ring, gray text, no time.', '#FFFFFF', '#D7E0DC', 'transparent'], ['Failed', 'Red fill + ×, reason in the subtitle, headline says where the money is.', '#E02424', '#E02424', '#FFFFFF'], ['Scheduled', 'Future date in the first step; "Sends Sun 18 Oct, 09:00".', '#FFFFFF', '#6D4CD3', '#6D4CD3']].map(([k, v, bg, bd, dot], i) => ({ k, v, bg, bd, dot, bdr: i ? '#EEF2F0' : 'transparent' }));
+    return { txs, txm, txRules, rv, tl, tlStates };
+  }
+  static BANKS = { '05': ['Alinma Bank', 'AL', '#7A4A1C'], '10': ['Saudi National Bank', 'SNB', '#0B5E3B'], '15': ['Bank AlBilad', 'BB', '#B45309'], '20': ['Riyad Bank', 'RB', '#1E3A8A'], '30': ['Arab National Bank', 'ANB', '#0E5A7A'], '45': ['SAB', 'SAB', '#B91C1C'], '55': ['Banque Saudi Fransi', 'BSF', '#2F3B8C'], '60': ['Bank AlJazira', 'BJ', '#0F6E6E'], '65': ['Saudi Investment Bank', 'SAIB', '#3A4A9C'], '80': ['Al Rajhi Bank', 'AR', '#1D4ED8'] };
+  ibanCheck(bban) { const d = (bban + 'SA00').replace(/[A-Z]/g, c => String(c.charCodeAt(0) - 55)); let m = 0; for (const ch of d) m = (m * 10 + +ch) % 97; return String(98 - m).padStart(2, '0'); }
+  ibanValid(ib) { if (!/^SA\d{22}$/.test(ib)) return false; const d = (ib.slice(4) + ib.slice(0, 4)).replace(/[A-Z]/g, c => String(c.charCodeAt(0) - 55)); let m = 0; for (const ch of d) m = (m * 10 + +ch) % 97; return m === 1; }
+  part3() {
+    const s = this.state, now = Date.now();
+    // approvals
+    const [sara, abd] = s.ap, rej = abd === 'rejected', ok = abd === 'approved';
+    const AC = { approved: ['Approved', '#E3F6EF', '#0B4F3E', '#0B8F6E', 'M20 6 9 17l-5-5'], pending: ['Waiting', '#FFF4E0', '#7A4508', '#E59A1A', ''], rejected: ['Rejected', '#FDECEC', '#8A1414', '#E02424', 'M18 6 6 18M6 6l12 12'], submitted: ['Submitted', '#F2F6F4', '#2E403B', '#0C1F1A', 'M20 6 9 17l-5-5'], upcoming: ['Next', '#F2F6F4', '#5E7770', '#D7E0DC', ''], cancelled: ['Cancelled', '#F2F6F4', '#5E7770', '#9AACA6', 'M18 6 6 18M6 6l12 12'] };
+    const N = [['Omar Bakr', 'Requester', 'OB', '#FFE2C4', '#7A4508', 'submitted', '09:30', '50%'], ['Sara Al-Qahtani', 'Finance manager', 'SQ', '#F0ECFF', '#3F2A8C', sara, '09:42', '50%'], ['Abdulaziz Ali', 'Owner', 'AA', '#DCE5FF', '#1E3A9E', abd, ok || rej ? 'Just now' : 'Since 09:42', '50%'], ['Hala', ok ? 'Sent via sarie' : rej ? 'Not sent' : 'Sends the transfer', 'H', '#0C1F1A', '#FFFFFF', ok ? 'approved' : rej ? 'cancelled' : 'upcoming', ok ? 'Just now' : '', '14px']];
+    const apv = { nodes: N.map(([n, role, ini, bg, fg, st, time, r], i) => { const c = AC[st], cur = st === 'pending'; return { n, role, ini, bg, fg, r, st: i === 3 && st === 'approved' ? 'Sent' : c[0], sbg: c[1], sfg: c[2], ring: cur ? '#E59A1A' : st === 'upcoming' ? '#E6ECE9' : c[3], bdg: c[3], bdd: c[4] ? 'flex' : 'none', icon: c[4], time, anim: cur ? 'hPulse 1.8s infinite' : 'none', arrow: i < 3, line: (i === 0) || (i === 1 && (ok || rej)) || (i === 2 && ok) ? '#0B8F6E' : '#E1E8E5' }; }),
+      status: ok ? 'Approved · sent' : rej ? 'Rejected' : '1 of 2 approved', sbg: ok ? '#E3F6EF' : rej ? '#FDECEC' : '#FFF4E0', sfg: ok ? '#0B4F3E' : rej ? '#8A1414' : '#7A4508',
+      hint: ok ? 'Omar and Sara were notified. The transfer was sent at once.' : rej ? 'Omar was notified with the reason and can edit and resubmit.' : 'Abdulaziz has been waiting 2 h. Reminders go out after 4 h.',
+      canAct: !ok && !rej, done: ok || rej, hasComment: rej, approve: () => this.setState({ ap: [sara, 'approved'], d: Math.max(s.d, 2) }), reject: () => this.setState({ ap: [sara, 'rejected'] }), reset: () => this.setState({ ap: ['approved', 'pending'] }),
+      compact: [['Transfer · SAR 25,000', ok ? 'Approved' : rej ? 'Rejected' : '1 of 2', ok ? '#0B6F56' : rej ? '#C81E1E' : '#7A4508', [['SQ', '#F0ECFF', '#3F2A8C', '#0B8F6E'], ['AA', '#DCE5FF', '#1E3A9E', ok ? '#0B8F6E' : rej ? '#E02424' : '#E59A1A']]], ['Card limit · SAR 10,000', 'Waiting', '#7A4508', [['AA', '#DCE5FF', '#1E3A9E', '#E59A1A']]], ['Payroll · October', '2 of 2', '#0B6F56', [['SQ', '#F0ECFF', '#3F2A8C', '#0B8F6E'], ['AA', '#DCE5FF', '#1E3A9E', '#0B8F6E']]]].map(([l, k, c, av]) => ({ l, k, c, none: null, av: av.map(([ini, bg, fg, ring], j) => ({ ini, bg, fg, ring, ml: j ? '-6px' : '0' })) })) };
+    const apTypes = [['Sequential', 'Finance, then Owner. Each sees it only when it\'s their turn. Used above SAR 20,000.'], ['Any of a group', '"Any 1 of 2 finance managers." Show the group as one step with stacked avatars.'], ['Self-approval blocked', 'The requester can never approve their own request, even if they have the role.']].map(([k, v], i) => ({ k, v, bdr: i ? '#EEF2F0' : 'transparent' }));
+    // OTP
+    const locked = s.lockUntil > now, lockS = Math.ceil((s.lockUntil - now) / 1000), rs = Math.max(0, Math.ceil((s.resendAt - now) / 1000));
+    const v = s.otp, err = s.otpErr, okk = s.otpOk;
+    const setOtp = e => { if (locked || okk) return; const nv = e.target.value.replace(/\D/g, '').slice(0, 6); if (nv.length < 6) return this.setState({ otp: nv, otpErr: false }); if (nv === '123456') return this.setState({ otp: nv, otpOk: true, otpErr: false }); const t = s.tries + 1; this.setState({ otp: nv, otpErr: true, tries: t, lockUntil: t >= 3 ? Date.now() + 300000 : 0 }); setTimeout(() => this.state.otpErr && this.setState({ otp: '' }), 900); };
+    const boxes = Array.from({ length: 6 }, (_, i) => { const ch = v[i] || '', act = s.of && !okk && !locked && i === Math.min(v.length, 5) && !err; return { ch, caret: act && !ch, mr: i === 2 ? '10px' : '0', bw: act || err || okk ? '1.5px' : '1px', bd: okk ? '#0B8F6E' : err ? '#E02424' : act ? '#0C1F1A' : locked ? '#E6ECE9' : '#D9D9D9', bg: okk ? '#F3FBF8' : err ? '#FFFBFB' : locked ? '#F7FAF9' : '#FFFFFF', ring: act ? '0 0 0 3px rgba(12,31,26,.06)' : 'none', c: err ? '#C81E1E' : '#0C1F1A' }; });
+    const left = 3 - s.tries;
+    const otp = { isSms: s.mode === 'sms', isNaf: s.mode === 'nafath', v, set: setOtp, focus: () => this.setState({ of: true }), blur: () => this.setState({ of: false }), locked, boxes,
+      title: okk ? 'Confirmed' : locked ? 'Too many attempts' : 'Enter the 6-digit code', shake: err ? 'hShake .35s' : 'none',
+      msg: okk ? '✓ Transfer confirmed. Sending now.' : locked ? `Try again in ${Math.floor(lockS / 60)}:${String(lockS % 60).padStart(2, '0')}, or use Nafath instead.` : err ? `Wrong code. ${left} attempt${left === 1 ? '' : 's'} left.` : 'Code expires in 5 minutes.',
+      mc: okk ? '#0B6F56' : locked || err ? '#C81E1E' : '#5E7770',
+      noResend: rs > 0 || locked, rl: rs > 0 ? `Resend in 0:${String(rs).padStart(2, '0')}` : 'Resend code', rc: rs > 0 || locked ? '#8A9C96' : '#0E7C62', rcur: rs > 0 || locked ? 'default' : 'pointer',
+      resend: () => this.setState({ resendAt: Date.now() + 30000, otp: '', otpErr: false }), done: okk || locked, reset: () => this.setState({ otp: '', tries: 0, lockUntil: 0, otpOk: false, otpErr: false, resendAt: Date.now() + 30000 }),
+      modes: [['SMS code', 'sms'], ['Nafath app', 'nafath']].map(([l, k]) => { const on = s.mode === k; return { l, bg: on ? '#FFFFFF' : 'transparent', sh: on ? '0 1px 3px rgba(12,31,26,.14)' : 'none', fw: on ? 600 : 500, fg: on ? '#0C1F1A' : '#5E7770', pick: () => this.setState({ mode: k, nafAt: Date.now(), nafOk: false }) }; }) };
+    const nl = Math.max(0, 60 - Math.floor((now - s.nafAt) / 1000)), exp = nl === 0 && !s.nafOk;
+    const naf = { waiting: !s.nafOk && !exp, ok: s.nafOk, title: s.nafOk ? 'Approved in Nafath' : exp ? 'Request expired' : 'Approve in the Nafath app', sub: s.nafOk ? 'Identity confirmed for Abdulaziz Ali. Sending the transfer now.' : exp ? 'No approval within 60 seconds. Send a new request.' : 'Open Nafath on your phone and choose the number below.',
+      pct: s.nafOk ? '100%' : (nl / 60 * 100) + '%', bar: s.nafOk ? '#0B8F6E' : exp ? '#E02424' : nl < 15 ? '#E59A1A' : '#0B8F6E', timer: s.nafOk ? 'Done' : exp ? 'Expired' : `0:${String(nl).padStart(2, '0')} left`, tc: exp ? '#C81E1E' : '#5E7770',
+      ad: s.nafOk || exp ? 'none' : 'flex', approve: () => this.setState({ nafOk: true }), restart: () => this.setState({ nafAt: Date.now(), nafOk: false }), rl: exp || s.nafOk ? 'Send new request' : 'Send again' };
+    const otpStates = [['Empty', 'Focus on the first box; numeric keypad.', ['', '', '', '', '', ''], '#D9D9D9', '#FFFFFF', '#0C1F1A', 1], ['Typing', 'Focus moves on; backspace moves back.', ['4', '8', '2', '', '', ''], '#0C1F1A', '#FFFFFF', '#0C1F1A', 1], ['Verifying', 'Auto-submits on the 6th digit; inline spinner.', ['4', '8', '2', '9', '1', '3'], '#D9D9D9', '#FFFFFF', '#0C1F1A', .6], ['Error', 'Red, shake, clears after 0.9 s; attempts left.', ['1', '1', '1', '1', '1', '1'], '#E02424', '#FFFBFB', '#C81E1E', 1], ['Success', 'Green, then the screen moves on.', ['1', '2', '3', '4', '5', '6'], '#0B8F6E', '#F3FBF8', '#0C1F1A', 1], ['Locked', '5 minutes after 3 wrong codes; offer Nafath.', ['', '', '', '', '', ''], '#E6ECE9', '#F7FAF9', '#0C1F1A', .6]].map(([k, v2, b, bd, bg, c, op], i) => ({ k, v: v2, b, bd, bg, c, op, bdr: i ? '#EEF2F0' : 'transparent' }));
+    // IBAN
+    const raw = s.iban, B = Component.BANKS, code = raw.slice(4, 6), bank = raw.length >= 6 ? B[code] : null;
+    const full = raw.length === 24, valid = this.ibanValid(raw), showErr = s.ibt && raw.length > 2 && !valid;
+    const grp = x => x.replace(/(.{4})/g, '$1 ').trim();
+    const ibMsg = valid ? `${bank ? bank[0] : 'Bank'} · account holder name is checked on the next step.` : !s.ibt || raw.length <= 2 ? (bank ? bank[0] : 'Starts with SA, then 22 digits. Paste works with or without spaces.') : !raw.startsWith('SA') ? 'Saudi IBANs start with SA.' : !full ? `Too short: ${raw.length} of 24 characters.` : 'This IBAN doesn\'t pass the check. Look for a mistyped digit.';
+    const mkIban = (bk, acct) => { const bban = bk + acct; return 'SA' + this.ibanCheck(bban) + bban; };
+    const good1 = mkIban('80', '000000608010167519'), good2 = mkIban('10', '000012345678901234');
+    const masked = valid ? raw.slice(0, 4) + ' •••• •••• •••• •••• ' + raw.slice(20) : '';
+    const ib = { v: grp(raw), set: e => { let x = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); if (x && !/^[A-Z]/.test(x)) x = 'SA' + x; this.setState({ iban: x.slice(0, 24), ibt: false }); }, focus: () => this.setState({ ibf: true }), blur: () => this.setState({ ibf: false, ibt: true }),
+      bw: s.ibf || showErr ? '1.5px' : '1px', bd: showErr ? '#E02424' : s.ibf ? '#0C1F1A' : '#D9D9D9', bg: showErr ? '#FFFBFB' : '#FFFFFF', ring: s.ibf ? '0 0 0 3px rgba(12,31,26,.06)' : 'none', lc: showErr ? '#E02424' : '#0C1F1A', inv: showErr ? 'true' : 'false',
+      hasBank: !!bank, bank: bank ? bank[0] : '', bini: bank ? bank[1] : '', bbg: bank ? bank[2] : '#9AACA6', ok: valid, count: `${raw.length} / 24`, msg: ibMsg, hc: showErr ? '#C81E1E' : valid ? '#0B6F56' : '#5E7770',
+      shown: s.mask ? masked : grp(raw), toggleMask: () => this.setState({ mask: !s.mask }), maskL: s.mask ? 'Show full IBAN' : 'Hide IBAN', maskIcon: s.mask ? 'M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' : 'M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6A17 17 0 0 0 2 12s3.6 7 10 7a10 10 0 0 0 5.4-1.6',
+      copy: () => this.copy('iban', raw), cl: s.copied === 'iban' ? 'Copied' : 'Copy', cbg: s.copied === 'iban' ? '#E3F6EF' : '#FFFFFF', cfg: s.copied === 'iban' ? '#0B6F56' : '#0C1F1A',
+      samples: [['Al Rajhi · valid', good1], ['SNB · valid', good2], ['Wrong digit', good1.slice(0, 23) + ((+good1[23] + 1) % 10)], ['Too short', good1.slice(0, 15)], ['Clear', '']].map(([l, val]) => ({ l, pick: () => this.setState({ iban: val, ibt: true }) })) };
+    const ibParts = [['Country', 'SA', '#E3F6EF', '#0B4F3E'], ['Check', '03', '#FFF4E0', '#7A4508'], ['Bank', '80', '#E8F0FF', '#1E3A8A'], ['Account · 18 digits', '0000 0060 8010 1675 19', '#F2F6F4', '#0C1F1A']].map(([k, v2, bg, c]) => ({ k, v: v2, bg, c }));
+    const banks = Object.entries(B).map(([code, [n, i, c]]) => ({ code, n, i, c }));
+    const rules = [[1, 'Render every amount with the Amount component, never with ad-hoc text.'], [1, 'Show the available balance next to any amount the user types.'], [1, 'Every money movement ends with a review summary showing total, fees and arrival time.'], [1, 'Say what happens next in the status headline, in plain words.'], [1, 'Show who approves and why, before the user submits.'], [1, 'Mask IBANs and card numbers on review and history; full only on demand.'], [0, 'Don\'t color normal spending red; red means a problem.'], [0, 'Don\'t clear an OTP the user can still correct; clear only after a wrong full code.'], [0, 'Don\'t let the requester approve their own request.'], [0, 'Don\'t accept an IBAN without the checksum check.']].map(([ok2, t]) => ({ t, mk: ok2 ? '✓' : '×', bg: ok2 ? '#E3F6EF' : '#FDECEC', fg: ok2 ? '#0B6F56' : '#C81E1E' }));
+    return { apv, apTypes, otp, naf, otpStates, ib, ibParts, banks, rules };
+  }
+  renderVals() { return { ...this.part1(), ...this.part2(), ...this.part3() }; }
+}
+</script>
+</body>
+</html>

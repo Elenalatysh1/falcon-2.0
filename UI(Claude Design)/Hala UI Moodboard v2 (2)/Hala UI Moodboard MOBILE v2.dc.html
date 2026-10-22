@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#E7ECEA;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#0B8F6E}a:hover{color:#066A51}button{font-family:inherit}.dv-turn{padding:56px 60px 72px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#0C1F1A;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 'IBM Plex Sans',sans-serif}.dv-grp{display:flex;align-items:baseline;gap:14px;font:600 24px/1.2 'IBM Plex Sans',sans-serif;letter-spacing:-0.01em;margin:64px 0 22px}.dv-grp small{font:400 14px 'IBM Plex Sans',sans-serif;color:#5E7770;letter-spacing:0}.dv-opts{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:12px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#0C1F1A;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 12.5px/1.3 'IBM Plex Sans',sans-serif;color:rgba(0,0,0,.58)}.dv-opt:target .dv-oid{background:#0B8F6E;color:#fff}.scr::-webkit-scrollbar{display:none}.scr>*{flex-shrink:0}</style>
+</helmet>
+<section class="dv-turn" id="t4">
+<div class="dv-thd"><a class="dv-tid" href="#t4">4</a><span class="dv-tname">Hala mobile v2 · neutral canvas, web card system, new Hurr collection</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;max-width:1260px;align-items:end">
+  <h1 style="margin:0;font-size:56px;line-height:1.02;font-weight:600;letter-spacing:-.035em">Money stays the hero.<br><span style="color:#0B8F6E">Colour lives on the cards.</span></h1>
+  <p style="margin:0;font-size:15px;line-height:1.6;color:#4A615A;max-width:520px">The green hero background is gone. Screens sit on a quiet neutral canvas, with ink type and one teal accent for actions. Colour and texture come only from the card art (the web 2o / 2p cards plus the new Hurr set), so cards read as objects, not decoration. Touch targets are 44pt or larger, and actions use labelled icons and one floating tab bar.</p>
+</div>
+<div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
+  <sc-for list="{{ swatches }}" as="s" hint-placeholder-count="8"><div style="display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:#FFFFFF"><span style="width:28px;height:28px;border-radius:50%;background:{{ s.c }};border:1px solid rgba(12,31,26,.08)"></span><div style="display:flex;flex-direction:column;line-height:1.2"><span style="font-size:12.5px;font-weight:600">{{ s.n }}</span><span style="font:400 10.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ s.h }}</span></div></div></sc-for>
+</div>
+
+<div class="dv-grp">Card system<small>One chassis: 16px radius, ISO 1.586 ratio, logo top-right, number bottom-left, network bottom-right</small></div>
+<div class="dv-opts">
+  <div class="dv-opt" id="4a"><div class="dv-olabel"><a class="dv-oid" href="#4a">4a</a>Hala cards · from web 2o (ink + teal glow) and 2p (green weave), plus the SDB co-brand rebuilt on the same chassis</div>
+    <div style="display:grid;grid-template-columns:repeat(4,300px);gap:24px">
+      <sc-for list="{{ hala }}" as="c" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="position:relative;aspect-ratio:1.586;border-radius:16px;overflow:hidden;background:{{ c.bg }};color:{{ c.ink }};box-shadow:0 26px 40px -24px rgba(12,31,26,.55),inset 0 1px 0 rgba(255,255,255,.14)">
+            <div style="position:absolute;inset:0;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-size:11px;font-weight:500;opacity:.85">{{ c.tl }}</span><div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span style="font:300 22px 'IBM Plex Sans',sans-serif;letter-spacing:.08em;line-height:1;color:{{ c.logo }}">HALA</span><span style="font-size:7.5px;font-weight:600;letter-spacing:.16em;color:{{ c.logo }}">{{ c.sub }}</span></div></div>
+              <span style="width:36px;height:27px;border-radius:6px;background:linear-gradient(135deg,#E4E4E4,#A3A3A3);opacity:.9;display:{{ c.chip }}"></span>
+              <div style="display:flex;justify-content:space-between;align-items:flex-end"><span style="font:500 12.5px 'IBM Plex Mono',monospace;letter-spacing:.1em">{{ c.pan }}</span><span style="display:flex;flex-direction:column;align-items:flex-end;line-height:1"><span style="font-size:19px;font-weight:800;font-style:italic">VISA</span><span style="font-size:8.5px;opacity:.85">Business</span></span></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;padding:0 4px"><span style="font-size:14.5px;font-weight:600">{{ c.name }}</span><span style="font-size:12.5px;color:#5E7770">{{ c.note }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div class="dv-opt" id="4b"><div class="dv-olabel"><a class="dv-oid" href="#4b">4b</a>Hurr Business collection · same heritage mood, simpler motifs: one band or one silhouette per card, matte grounds, gold-foil line work</div>
+    <div style="display:grid;grid-template-columns:repeat(4,300px);gap:24px">
+      <sc-for list="{{ hurrList }}" as="c" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="position:relative;aspect-ratio:1.586;border-radius:16px;overflow:hidden;background:{{ c.bg }};color:{{ c.ink }};box-shadow:0 26px 40px -24px rgba(42,30,18,.6),inset 0 1px 0 rgba(255,255,255,.12)">
+            <div style="position:absolute;inset:0;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-size:10px;font-weight:600;letter-spacing:.18em;color:{{ c.ink }}">HALA</span><div style="display:flex;flex-direction:column;align-items:flex-end;line-height:1"><span style="font:600 30px 'IBM Plex Sans Arabic',sans-serif;line-height:.9;color:{{ c.foil }}">حُر</span><span style="font-size:7.5px;font-weight:600;letter-spacing:.2em;color:{{ c.foil }};margin-top:3px">HURR BUSINESS</span></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-end"><span style="font:500 12.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:{{ c.ink }}">•••• 7710</span><span style="font-size:17px;font-weight:800;font-style:italic;color:{{ c.ink }}">VISA</span></div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 4px;gap:8px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14.5px;font-weight:600">{{ c.name }}</span><span style="font-size:12.5px;color:#5E7770">{{ c.place }}</span></div><span style="font:500 14px 'IBM Plex Sans Arabic',sans-serif;color:#7A5C36">{{ c.ar }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div class="dv-grp">Screens<small>All three scroll and respond to taps</small></div>
+<div class="dv-opts">
+
+  <div class="dv-opt" id="4c"><div class="dv-olabel"><a class="dv-oid" href="#4c">4c</a>Home · same content as today, on a neutral canvas: balance first, labelled actions, card carousel, floating tab bar</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F3F5F4;display:flex;flex-direction:column">
+        <div style="position:absolute;top:0;left:0;right:0;height:50px;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600;background:linear-gradient(#FFFFFF 70%,rgba(255,255,255,0))"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <div class="scr" style="flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;padding-bottom:120px">
+          <div style="background:#FFFFFF;border-radius:0 0 32px 32px;padding:56px 20px 22px;display:flex;flex-direction:column;gap:22px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <svg viewBox="0 0 28 28" style="width:30px;height:30px;flex:none" fill="none" stroke="#0C1F1A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v22M5 14h11M16 3l6 11-6 11"></path></svg>
+              <span style="height:30px;padding:0 12px;border-radius:999px;background:#F2F6F4;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px">Business<svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              <span style="flex:1"></span>
+              <sc-for list="{{ topIcons }}" as="t" hint-placeholder-count="3"><button aria-label="{{ t.label }}" style="position:relative;width:42px;height:42px;border-radius:50%;border:1px solid #E6ECE9;background:#FFFFFF;color:#0C1F1A;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg><span style="position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:#E5484D;border:2px solid #FFFFFF;display:{{ t.dot }}"></span></button></sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:14px;color:#5E7770">Hala Business · Muhammad</span>
+              <div style="display:flex;align-items:center;gap:10px"><div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:17px;font-weight:500;color:#5E7770">SAR</span><span style="font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1">{{ bal.main }}</span><span style="font-size:22px;font-weight:500;color:#8A9C96">{{ bal.dec }}</span></div><button onClick="{{ toggleBal }}" aria-label="Show or hide balance" style="width:36px;height:36px;border-radius:50%;border:0;background:#F2F6F4;color:#0C1F1A;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ bal.eye }}"></path></svg></button></div>
+              <span style="font-size:13px;color:#0B8F6E;font-weight:600">▲ SAR 2,530 received today</span>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button style="flex:1;height:48px;border-radius:999px;border:1px solid #D7E0DC;background:#FFFFFF;font-size:15px;font-weight:500;color:#0C1F1A;display:flex;align-items:center;justify-content:center;gap:8px"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ ic.bank }}"></path></svg>Account</button>
+              <button style="flex:1;height:48px;border-radius:999px;border:0;background:#0C1F1A;font-size:15px;font-weight:500;color:#FFFFFF;display:flex;align-items:center;justify-content:center;gap:8px"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Top up</button>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding-top:18px;border-top:1px solid #EEF2F0">
+              <sc-for list="{{ quick }}" as="q" hint-placeholder-count="4"><button style="border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;color:#0C1F1A"><span style="width:56px;height:56px;border-radius:18px;background:{{ q.bg }};color:{{ q.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;display:{{ q.svgD }}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ q.icon }}"></path></svg><span style="font:600 14px 'IBM Plex Sans Arabic',sans-serif;display:{{ q.arD }}">سداد</span></span><span style="font-size:12.5px;font-weight:500;text-align:center;line-height:1.25">{{ q.label }}</span></button></sc-for>
+            </div>
+          </div>
+
+          <div class="scr" style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:18px 20px 4px;scroll-snap-type:x mandatory">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="4"><button style="flex:none;width:118px;height:112px;scroll-snap-align:start;border:0;border-radius:20px;background:#FFFFFF;padding:14px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;cursor:pointer;color:#0C1F1A;text-align:left"><span style="font-size:14.5px;font-weight:600">{{ s.label }}</span><div style="width:100%;display:flex;justify-content:space-between;align-items:flex-end"><span style="font-size:11.5px;color:#5E7770">{{ s.meta }}</span><span style="width:40px;height:40px;border-radius:13px;background:{{ s.bg }};color:{{ s.fg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ s.icon }}"></path></svg></span></div></button></sc-for>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:22px 24px 10px"><span style="font-size:18px;font-weight:600">My cards</span><span style="font-size:13.5px;font-weight:600;color:#0B8F6E">See all</span></div>
+          <div class="scr" style="display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:0 20px 18px;scroll-snap-type:x mandatory">
+            <sc-for list="{{ homeCards }}" as="c" hint-placeholder-count="3">
+              <div style="position:relative;flex:none;width:286px;aspect-ratio:1.586;scroll-snap-align:center;border-radius:16px;overflow:hidden;background:{{ c.bg }};color:{{ c.ink }};box-shadow:0 22px 34px -24px rgba(12,31,26,.6)">
+                <div style="position:absolute;inset:0;padding:15px 17px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-size:10.5px;font-weight:500;opacity:.85">{{ c.tl }}</span><div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span style="font:300 21px 'IBM Plex Sans',sans-serif;letter-spacing:.08em;line-height:1;color:{{ c.logo }}">HALA</span><span style="font-size:7px;font-weight:600;letter-spacing:.16em;color:{{ c.logo }}">{{ c.sub }}</span></div></div>
+                  <div style="display:flex;flex-direction:column;gap:1px;display:{{ c.balD }}"><span style="font-size:10.5px;opacity:.8">Balance</span><span style="font:600 18px 'IBM Plex Mono',monospace">{{ c.bal }}</span></div>
+                  <button style="align-self:flex-start;height:34px;padding:0 16px;border:0;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;font-weight:600;display:{{ c.actD }};align-items:center;gap:6px;box-shadow:0 6px 14px -6px rgba(0,0,0,.4)"><span style="width:7px;height:7px;border-radius:50%;background:#E07B12"></span>Activate card</button>
+                  <div style="display:flex;justify-content:space-between;align-items:flex-end"><span style="font:500 12.5px 'IBM Plex Mono',monospace;letter-spacing:.1em">{{ c.pan }}</span><span style="display:flex;flex-direction:column;align-items:flex-end;line-height:1"><span style="font-size:18px;font-weight:800;font-style:italic">VISA</span><span style="font-size:8px;opacity:.85">Business</span></span></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="margin:4px 20px 0;position:relative;overflow:hidden;border-radius:24px;background:#0C1F1A;color:#FFFFFF;padding:20px;display:flex;flex-direction:column;gap:14px">
+            <span style="position:absolute;right:-80px;bottom:-110px;width:280px;height:220px;border-radius:50%;background:radial-gradient(closest-side,rgba(34,201,151,.5),rgba(34,201,151,0))"></span>
+            <span style="position:relative;align-self:flex-start;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;padding:4px 8px;border-radius:6px;background:rgba(75,227,182,.14);color:#7FE3BF">NEW</span>
+            <span style="position:relative;font-size:21px;font-weight:600;line-height:1.2;letter-spacing:-.01em">Hala Payment Gateway<br><span style="color:#7FE3BF">is now live</span></span>
+            <div style="position:relative;align-self:flex-start;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:#FFFFFF;color:#0C1F1A;box-shadow:0 14px 26px -14px rgba(0,0,0,.6)"><span style="width:26px;height:26px;border-radius:50%;background:#0B8F6E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:13px">✓</span><div style="display:flex;flex-direction:column;line-height:1.25"><span style="font-size:11px;color:#5E7770">Payment received · settled instantly</span><span style="font:600 14px 'IBM Plex Mono',monospace;color:#0B8F6E">SAR 2,530.00</span></div></div>
+            <button style="position:relative;align-self:flex-start;height:44px;padding:0 18px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px">Get started<svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:24px 24px 10px"><span style="font-size:18px;font-weight:600">Branches &amp; team</span><span style="font-size:13.5px;font-weight:600;color:#0B8F6E">Manage</span></div>
+          <div style="margin:0 20px;background:#FFFFFF;border-radius:20px;padding:4px 16px">
+            <sc-for list="{{ manage }}" as="m" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid {{ m.bd }}"><span style="width:40px;height:40px;border-radius:12px;background:#F2F6F4;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ m.icon }}"></path></svg></span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500">{{ m.t }}</span><span style="font-size:12.5px;color:#5E7770">{{ m.s }}</span></div><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#8A9C96" stroke-width="2" stroke-linecap="round"><path d="{{ m.chev }}"></path></svg></div></sc-for>
+          </div>
+        </div>
+        <div style="position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:4;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(12,31,26,.06);box-shadow:0 18px 40px -16px rgba(12,31,26,.4)">
+          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4"><button onClick="{{ n.pick }}" aria-label="{{ n.label }}" style="height:52px;min-width:52px;padding:0 {{ n.px }};border:0;border-radius:999px;background:{{ n.bg }};color:{{ n.fg }};display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-size:14px;font-weight:600;transition:all .25s cubic-bezier(.2,.9,.2,1)"><svg viewBox="0 0 24 24" style="width:22px;height:22px;flex:none" fill="none" stroke="currentColor" stroke-width="{{ n.sw }}" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg><span style="display:{{ n.lblD }}">{{ n.label }}</span></button></sc-for>
+        </div>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#0C1F1A;z-index:5"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-opt" id="4d"><div class="dv-olabel"><a class="dv-oid" href="#4d">4d</a>Cards · fanned stack from web 2q (tap the stack to bring the next card forward), details follow the front card</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F3F5F4;display:flex;flex-direction:column">
+        <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <div class="scr" style="flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;padding:4px 20px 120px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:30px;font-weight:700;letter-spacing:-.02em">Cards</span><button aria-label="Issue card" style="height:40px;padding:0 14px;border-radius:999px;border:0;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Issue</button></div>
+          <button onClick="{{ nextCard }}" aria-label="Next card" style="position:relative;height:250px;margin-top:10px;border:0;background:transparent;padding:0;cursor:pointer">
+            <span style="position:absolute;left:50%;bottom:6px;width:260px;height:60px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,{{ stackGlow }},transparent);filter:blur(8px)"></span>
+            <sc-for list="{{ stack }}" as="c" hint-placeholder-count="3">
+              <div style="position:absolute;left:50%;top:22px;width:300px;margin-left:-150px;aspect-ratio:1.586;border-radius:16px;overflow:hidden;background:{{ c.bg }};color:{{ c.ink }};z-index:{{ c.z }};transform:{{ c.tf }};transition:transform .5s cubic-bezier(.2,.9,.2,1),filter .5s;filter:{{ c.fl }};box-shadow:0 24px 40px -22px rgba(12,31,26,.6);text-align:left">
+                <div style="position:absolute;inset:0;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-size:10.5px;font-weight:500;opacity:.85">{{ c.tl }}</span><div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span style="font:300 22px 'IBM Plex Sans',sans-serif;letter-spacing:.08em;line-height:1;color:{{ c.logo }}">HALA</span><span style="font-size:7.5px;font-weight:600;letter-spacing:.16em;color:{{ c.logo }}">{{ c.sub }}</span></div></div>
+                  <span style="width:36px;height:27px;border-radius:6px;background:linear-gradient(135deg,#E4E4E4,#A3A3A3);opacity:.9;display:{{ c.chip }}"></span>
+                  <div style="display:flex;justify-content:space-between;align-items:flex-end"><span style="font:500 12.5px 'IBM Plex Mono',monospace;letter-spacing:.1em">{{ c.pan }}</span><span style="font-size:19px;font-weight:800;font-style:italic">VISA</span></div>
+                </div>
+              </div>
+            </sc-for>
+          </button>
+          <div style="display:flex;justify-content:center;gap:6px;margin-top:4px"><sc-for list="{{ dots }}" as="d" hint-placeholder-count="3"><span style="width:{{ d.w }};height:6px;border-radius:3px;background:{{ d.c }};transition:all .3s"></span></sc-for></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:16px"><span style="font-size:18px;font-weight:600">{{ front.name }}</span><span style="font-size:13px;color:#5E7770">{{ front.holder }}</span></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:18px">
+            <sc-for list="{{ cardActions }}" as="a" hint-placeholder-count="4"><button onClick="{{ a.pick }}" style="border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;color:#0C1F1A"><span style="width:54px;height:54px;border-radius:50%;background:{{ a.bg }};color:{{ a.fg }};border:1px solid #E6ECE9;display:flex;align-items:center;justify-content:center;transition:all .2s"><svg viewBox="0 0 24 24" style="width:21px;height:21px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg></span><span style="font-size:12.5px;font-weight:500">{{ a.label }}</span></button></sc-for>
+          </div>
+          <div style="margin-top:20px;background:#FFFFFF;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#5E7770">Spent this month</span><span style="font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:{{ front.sbg }};color:{{ front.sfg }}">{{ front.status }}</span></div>
+            <div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:26px;font-weight:700;letter-spacing:-.01em">SAR {{ front.spent }}</span><span style="font:400 13px 'IBM Plex Mono',monospace;color:#8A9C96">/ {{ front.limit }}</span></div>
+            <div style="height:8px;border-radius:999px;background:#EEF2F0;overflow:hidden"><div style="width:{{ front.w }};height:100%;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);transition:width .4s"></div></div>
+            <span style="font-size:12.5px;color:#5E7770">{{ front.note }}</span>
+          </div>
+          <div style="margin-top:12px;background:#FFFFFF;border-radius:20px;padding:4px 16px">
+            <sc-for list="{{ cardTx }}" as="r" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid {{ r.bd }}"><span style="width:40px;height:40px;border-radius:12px;background:#F2F6F4;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;font-weight:600">{{ r.ini }}</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14.5px;font-weight:500">{{ r.t }}</span><span style="font-size:12.5px;color:#8A9C96">{{ r.s }}</span></div><span style="font:500 13.5px 'IBM Plex Mono',monospace">{{ r.a }}</span></div></sc-for>
+          </div>
+        </div>
+        <div style="position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:4;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(12,31,26,.06);box-shadow:0 18px 40px -16px rgba(12,31,26,.4)">
+          <sc-for list="{{ nav2 }}" as="n" hint-placeholder-count="4"><span style="height:52px;min-width:52px;padding:0 {{ n.px }};border-radius:999px;background:{{ n.bg }};color:{{ n.fg }};display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600"><svg viewBox="0 0 24 24" style="width:22px;height:22px;flex:none" fill="none" stroke="currentColor" stroke-width="{{ n.sw }}" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg><span style="display:{{ n.lblD }}">{{ n.label }}</span></span></sc-for>
+        </div>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#0C1F1A;z-index:5"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-opt" id="4e"><div class="dv-olabel"><a class="dv-oid" href="#4e">4e</a>Hurr · choose a design: big preview, the story behind each motif, thumbnails to switch</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F5F1EA;display:flex;flex-direction:column;color:#241B12">
+        <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <div style="height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 12px"><button aria-label="Back" style="width:44px;height:44px;border:0;background:transparent;color:#241B12;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button><span style="flex:1;font-size:17px;font-weight:600">Hurr Business Card</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#7A6A55;padding-right:10px">{{ hurrPos }}</span></div>
+        <div class="scr" style="flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;padding:0 20px 20px">
+          <div style="position:relative;display:flex;justify-content:center;padding:18px 0 30px">
+            <span style="position:absolute;left:50%;bottom:14px;width:270px;height:50px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,{{ hurrSel.glow }},transparent);filter:blur(6px);transition:background .4s"></span>
+            <div style="position:relative;width:320px;aspect-ratio:1.586;border-radius:18px;overflow:hidden;background:{{ hurrSel.bg }};color:{{ hurrSel.ink }};box-shadow:0 30px 46px -26px rgba(36,27,18,.7),inset 0 1px 0 rgba(255,255,255,.12);transition:background .35s">
+              <div style="position:absolute;inset:0;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-size:11px;font-weight:600;letter-spacing:.18em">HALA</span><div style="display:flex;flex-direction:column;align-items:flex-end;line-height:1"><span style="font:600 34px 'IBM Plex Sans Arabic',sans-serif;line-height:.9;color:{{ hurrSel.foil }}">حُر</span><span style="font-size:8px;font-weight:600;letter-spacing:.2em;color:{{ hurrSel.foil }};margin-top:3px">HURR BUSINESS</span></div></div>
+                <div style="display:flex;justify-content:space-between;align-items:flex-end"><span style="font:500 13.5px 'IBM Plex Mono',monospace;letter-spacing:.1em">•••• 7710</span><span style="font-size:19px;font-weight:800;font-style:italic">VISA</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:22px;font-weight:700;letter-spacing:-.01em">{{ hurrSel.name }}</span><span style="font-size:13.5px;color:#7A6A55">{{ hurrSel.place }}</span></div><span style="font:500 17px 'IBM Plex Sans Arabic',sans-serif;color:#7A5C36">{{ hurrSel.ar }}</span></div>
+          <p style="margin:12px 0 0;font-size:14.5px;line-height:1.6;color:#4E4234">{{ hurrSel.story }}</p>
+          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><sc-for list="{{ hurrSel.tags }}" as="t" hint-placeholder-count="2"><span style="height:30px;padding:0 12px;border-radius:999px;background:#FFFFFF;border:1px solid rgba(36,27,18,.08);font-size:12.5px;font-weight:500;display:flex;align-items:center">{{ t }}</span></sc-for></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px">
+            <sc-for list="{{ hurrThumbs }}" as="h" hint-placeholder-count="4"><button onClick="{{ h.pick }}" aria-label="{{ h.name }}" style="border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:#241B12"><span style="width:100%;aspect-ratio:1.586;border-radius:8px;background:{{ h.bg }};outline:2px solid {{ h.ol }};outline-offset:3px;transition:outline-color .2s"></span><span style="font-size:11.5px;font-weight:{{ h.fw }};color:{{ h.c }}">{{ h.short }}</span></button></sc-for>
+          </div>
+        </div>
+        <div style="flex:none;padding:12px 20px 38px;background:#F5F1EA;border-top:1px solid rgba(36,27,18,.07);display:flex;flex-direction:column;gap:8px"><button style="height:52px;border:0;border-radius:999px;background:#241B12;color:#F5E6C8;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px">Choose {{ hurrSel.short }}<span style="font:500 15px 'IBM Plex Sans Arabic',sans-serif;color:#C8A46A">حُر</span></button><span style="font-size:12px;color:#7A6A55;text-align:center">Same fees and limits on every design</span></div>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#241B12"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dv-grp">More screens<small>Card detail, sending money, sales, transactions, inbox</small></div>
+<div class="dv-opts">
+
+  <div class="dv-opt" id="4f"><div class="dv-olabel"><a class="dv-oid" href="#4f">4f</a>Card detail · card on canvas, actions, Overview / Limits / Settings tabs</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F3F5F4;display:flex;flex-direction:column">
+        <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <div style="height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 12px"><button aria-label="Back" style="width:44px;height:44px;border:0;background:transparent;color:#0C1F1A;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button><span style="flex:1;font-size:17px;font-weight:600">Purchase Card</span><button aria-label="More" style="width:44px;height:44px;border:0;border-radius:50%;background:#FFFFFF;color:#0C1F1A;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="currentColor"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button></div>
+        <div class="scr" style="flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;padding:0 20px 28px">
+          <div style="position:relative;display:flex;justify-content:center;padding:10px 0 28px">
+            <span style="position:absolute;left:50%;bottom:12px;width:260px;height:50px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(46,138,114,.55),transparent);filter:blur(6px)"></span>
+            <div style="position:relative;width:310px;aspect-ratio:1.586;border-radius:18px;overflow:hidden;background:radial-gradient(120% 90% at 100% 100%,#2E8A72 0%,#1F4A40 35%,#13201C 72%);color:#FFFFFF;box-shadow:0 28px 44px -24px rgba(12,31,26,.7),inset 0 1px 0 rgba(255,255,255,.14);filter:{{ cd.filter }};transition:filter .3s">
+              <div style="position:absolute;inset:0;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font:400 11px 'IBM Plex Mono',monospace;opacity:.75">{{ cd.top }}</span><div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px"><span style="font:300 24px 'IBM Plex Sans',sans-serif;letter-spacing:.08em;line-height:1;color:#4BE3B6">HALA</span><span style="font-size:8px;font-weight:600;letter-spacing:.16em;color:#4BE3B6">PURCHASE CARD</span></div></div>
+                <span style="width:38px;height:28px;border-radius:6px;background:linear-gradient(135deg,#E4E4E4,#A3A3A3);opacity:.9"></span>
+                <div style="display:flex;justify-content:space-between;align-items:flex-end"><span style="font:500 14px 'IBM Plex Mono',monospace;letter-spacing:.1em">{{ cd.pan }}</span><span style="display:flex;flex-direction:column;align-items:flex-end;line-height:1"><span style="font-size:21px;font-weight:800;font-style:italic">VISA</span><span style="font-size:9px;opacity:.85">Business</span></span></div>
+              </div>
+              <sc-if value="{{ cd.frozen }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:rgba(220,232,255,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px"><svg viewBox="0 0 24 24" style="width:30px;height:30px" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"><path d="{{ ic.snow }}"></path></svg><span style="font-size:14px;font-weight:600">Card frozen</span></div></sc-if>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;gap:6px"><span style="height:28px;padding:0 11px;border-radius:999px;background:#FFFFFF;border:1px solid #E6ECE9;font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:50%;background:{{ cd.dot }}"></span>{{ cd.status }}</span><span style="height:28px;padding:0 11px;border-radius:999px;background:#FFFFFF;border:1px solid #E6ECE9;font-size:12.5px;font-weight:500;display:flex;align-items:center">Digital</span><span style="height:28px;padding:0 11px;border-radius:999px;background:#FFFFFF;border:1px solid #E6ECE9;font:500 12.5px 'IBM Plex Mono',monospace;display:flex;align-items:center">•• 3399</span></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:20px">
+            <sc-for list="{{ cdActions }}" as="a" hint-placeholder-count="4"><button onClick="{{ a.pick }}" style="border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;color:#0C1F1A"><span style="width:54px;height:54px;border-radius:50%;background:{{ a.bg }};color:{{ a.fg }};border:1px solid #E6ECE9;display:flex;align-items:center;justify-content:center;transition:all .2s"><svg viewBox="0 0 24 24" style="width:21px;height:21px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg></span><span style="font-size:12.5px;font-weight:500">{{ a.label }}</span></button></sc-for>
+          </div>
+          <button style="margin-top:20px;height:50px;border:0;border-radius:14px;background:#000000;color:#FFFFFF;font-size:15px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:10px"><span style="width:26px;height:19px;border-radius:4px;overflow:hidden;display:flex;flex-direction:column"><span style="flex:1;background:#4C8DF6"></span><span style="flex:1;background:#F5B731"></span><span style="flex:1;background:#E8584B"></span></span>Add to Apple Wallet</button>
+          <div style="display:flex;background:#E6ECE9;border-radius:12px;padding:3px;margin-top:20px">
+            <sc-for list="{{ cdTabs }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.pick }}" style="flex:1;height:36px;border:0;border-radius:10px;font-size:14px;font-weight:{{ t.fw }};background:{{ t.bg }};color:{{ t.fg }};box-shadow:{{ t.sh }};cursor:pointer;transition:all .15s">{{ t.label }}</button></sc-for>
+          </div>
+          <sc-if value="{{ cdTab0 }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+              <div style="background:#FFFFFF;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:#5E7770">Cashback earned</span><span style="font-size:26px;font-weight:700;letter-spacing:-.01em">SAR 1,240.00</span></div><span style="font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:999px;background:#E3F6EF;color:#0B6F56">1.5%</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:500">Spend SAR 9,000 to earn SAR 170</span><span style="color:#5E7770">20 days</span></div>
+                <div style="height:8px;border-radius:999px;background:#EEF2F0;overflow:hidden"><div style="width:71%;height:100%;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A)"></div></div>
+                <div style="display:flex;justify-content:space-between;font:400 12px 'IBM Plex Mono',monospace;color:#5E7770"><span>6,400 spent</span><span>2,600 to go</span></div>
+              </div>
+              <div style="background:#FFFFFF;border-radius:20px;padding:4px 16px">
+                <sc-for list="{{ cdRecent }}" as="r" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid {{ r.bd }}"><span style="width:40px;height:40px;border-radius:12px;background:#F2F6F4;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px;font-weight:600">{{ r.ini }}</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14.5px;font-weight:500">{{ r.t }}</span><span style="font-size:12.5px;color:#8A9C96">{{ r.s }}</span></div><span style="font:500 13.5px 'IBM Plex Mono',monospace">{{ r.a }}</span></div></sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ cdTab1 }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:12px;background:#FFFFFF;border-radius:20px;padding:4px 18px 8px">
+              <sc-for list="{{ limits }}" as="l" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column;gap:8px;padding:14px 0;border-top:1px solid {{ l.bd }}">
+                  <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:14.5px;font-weight:500">{{ l.name }}</span><span style="font:500 13.5px 'IBM Plex Mono',monospace">{{ l.used }}<span style="color:#8A9C96"> / {{ l.max }}</span></span></div>
+                  <div style="height:6px;border-radius:999px;background:#EEF2F0;overflow:hidden"><div style="width:{{ l.w }};height:100%;border-radius:999px;background:{{ l.c }}"></div></div>
+                  <div style="display:flex;justify-content:space-between;font-size:12px;color:#5E7770"><span style="color:{{ l.tc }};font-weight:{{ l.fw }}">{{ l.left }}</span><span>Resets in 20 days</span></div>
+                </div>
+              </sc-for>
+              <button style="width:100%;height:46px;margin-top:4px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:14.5px;font-weight:500">Request a limit change</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ cdTab2 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+              <div style="background:#FFFFFF;border-radius:20px;padding:4px 16px">
+                <sc-for list="{{ cdToggles }}" as="w" hint-placeholder-count="3"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid {{ w.bd }}"><div style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500">{{ w.t }}</span><span style="font-size:12.5px;color:#5E7770">{{ w.s }}</span></div><button onClick="{{ w.flip }}" aria-label="{{ w.t }}" style="flex:none;width:51px;height:31px;border-radius:999px;border:0;padding:2px;cursor:pointer;display:flex;justify-content:{{ w.j }};background:{{ w.bg }};transition:background .2s"><span style="width:27px;height:27px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 4px rgba(12,31,26,.25)"></span></button></div></sc-for>
+              </div>
+              <div style="background:#FFFFFF;border-radius:20px;padding:4px 16px">
+                <sc-for list="{{ cdDanger }}" as="d" hint-placeholder-count="2"><div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid {{ d.bd }}"><span style="width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:{{ d.bg }};color:{{ d.c }}"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ d.icon }}"></path></svg></span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14.5px;font-weight:600;color:{{ d.tc }}">{{ d.t }}</span><span style="font-size:12.5px;color:#5E7770">{{ d.s }}</span></div><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#8A9C96" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg></div></sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#0C1F1A"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-opt" id="4g"><div class="dv-olabel"><a class="dv-oid" href="#4g">4g</a>Send money · recent recipients, amount keypad, inline balance check</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#FFFFFF;display:flex;flex-direction:column">
+        <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <div style="height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 12px"><button aria-label="Close" style="width:44px;height:44px;border:0;border-radius:50%;background:#F2F6F4;color:#0C1F1A;font-size:22px;display:flex;align-items:center;justify-content:center">×</button><span style="flex:1;text-align:center;font-size:17px;font-weight:600;margin-right:44px">Send money</span></div>
+        <div style="flex:none;display:flex;flex-direction:column;gap:10px;padding:8px 0 0">
+          <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:#5E7770;padding:0 22px">TO</span>
+          <div class="scr" style="display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding:0 20px 4px">
+            <button style="flex:none;width:62px;border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;gap:6px;color:#0C1F1A"><span style="width:52px;height:52px;border-radius:50%;border:1.5px dashed #9AACA6;display:flex;align-items:center;justify-content:center;color:#4A615A"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span><span style="font-size:11.5px;font-weight:500">New</span></button>
+            <sc-for list="{{ bens }}" as="b" hint-placeholder-count="4"><button onClick="{{ b.pick }}" style="flex:none;width:62px;border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:#0C1F1A"><span style="position:relative;width:52px;height:52px;border-radius:50%;background:{{ b.bg }};color:{{ b.fg }};display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;outline:2px solid {{ b.ol }};outline-offset:2px;transition:outline-color .15s">{{ b.ini }}<span style="position:absolute;right:-2px;bottom:-2px;width:18px;height:18px;border-radius:50%;background:#0B8F6E;color:#FFFFFF;border:2px solid #FFFFFF;font-size:10px;display:{{ b.chk }};align-items:center;justify-content:center">✓</span></span><span style="font-size:11.5px;font-weight:{{ b.fw }};text-align:center;line-height:1.2">{{ b.short }}</span></button></sc-for>
+          </div>
+          <span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770;padding:0 22px;min-height:16px">{{ benLine }}</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:0 20px">
+          <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:20px;font-weight:500;color:#8A9C96">SAR</span><span style="font:600 52px 'IBM Plex Mono',monospace;letter-spacing:-.04em;color:{{ amtC }}">{{ amtShow }}</span></div>
+          <span style="font-size:13.5px;color:{{ amtNoteC }};font-weight:{{ amtNoteW }}">{{ amtNote }}</span>
+          <div style="display:flex;gap:8px;margin-top:6px"><sc-for list="{{ quickAmts }}" as="q" hint-placeholder-count="3"><button onClick="{{ q.pick }}" style="height:34px;padding:0 14px;border-radius:999px;border:0;background:#F2F6F4;font:500 13px 'IBM Plex Mono',monospace;color:#0C1F1A;cursor:pointer">{{ q.label }}</button></sc-for></div>
+        </div>
+        <div style="flex:none;padding:0 20px 10px"><button onClick="{{ goReview }}" style="width:100%;height:52px;border:0;border-radius:999px;background:{{ sendBtn.bg }};color:{{ sendBtn.fg }};font-size:16px;font-weight:600;cursor:{{ sendBtn.cur }};box-shadow:{{ sendBtn.sh }};transition:all .2s">{{ sendBtn.label }}</button></div>
+        <div style="flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px 20px 38px">
+          <sc-for list="{{ amtKeys }}" as="k" hint-placeholder-count="12"><button onClick="{{ k.press }}" style="height:56px;border:0;border-radius:14px;background:transparent;font:500 26px 'IBM Plex Sans',sans-serif;color:#0C1F1A;cursor:pointer" style-active="background:#F2F6F4">{{ k.n }}</button></sc-for>
+        </div>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#0C1F1A"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-opt" id="4h"><div class="dv-olabel"><a class="dv-oid" href="#4h">4h</a>Review &amp; approve · receipt-style summary, Face ID confirm, success state</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F3F5F4;display:flex;flex-direction:column">
+        <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <sc-if value="{{ rvForm }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+            <div style="height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 12px"><button aria-label="Back" style="width:44px;height:44px;border:0;background:transparent;color:#0C1F1A;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button><span style="flex:1;font-size:17px;font-weight:600">Review transfer</span></div>
+            <div class="scr" style="flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;padding:6px 20px 20px;gap:12px">
+              <div style="background:#FFFFFF;border-radius:24px;padding:24px 20px 6px;display:flex;flex-direction:column;align-items:center;text-align:center">
+                <span style="width:60px;height:60px;border-radius:50%;background:#FFF1DE;color:#B45309;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">AS</span>
+                <span style="margin-top:12px;font-size:16px;font-weight:600">Almarai Supply Co.</span>
+                <span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#5E7770;margin-top:2px">SA44 2000 •••• 8812 · Al Rajhi</span>
+                <span style="margin-top:18px;font:600 40px 'IBM Plex Mono',monospace;letter-spacing:-.03em">8,250.00</span>
+                <span style="font-size:13px;color:#5E7770">Saudi riyal · arrives instantly via sarie</span>
+                <div style="width:calc(100% + 40px);margin:22px -20px 0;border-top:1.5px dashed #D7E0DC;position:relative"><span style="position:absolute;left:-10px;top:-11px;width:20px;height:20px;border-radius:50%;background:#F3F5F4"></span><span style="position:absolute;right:-10px;top:-11px;width:20px;height:20px;border-radius:50%;background:#F3F5F4"></span></div>
+                <div style="width:100%;display:flex;flex-direction:column;padding:8px 0">
+                  <sc-for list="{{ rvRows }}" as="r" hint-placeholder-count="5"><div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:14px;text-align:left"><span style="color:#5E7770">{{ r.k }}</span><span style="font-weight:500;font-family:{{ r.ff }};color:{{ r.c }}">{{ r.v }}</span></div></sc-for>
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:#E8F0FF;color:#1E3A8A"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none;margin-top:1px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg><span style="font-size:13px;line-height:1.45">Over SAR 5,000, so a second approver (Faisal A.) is notified once you confirm.</span></div>
+            </div>
+            <div style="flex:none;padding:12px 20px 38px;background:#F3F5F4"><button onClick="{{ rvConfirm }}" style="width:100%;height:56px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="#4BE3B6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2M9 9v1.5M15 9v1.5M12 9v4h-1M9.5 16a3.5 3.5 0 0 0 5 0"></path></svg>{{ rvBtn }}</button></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ rvDone }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px;text-align:center;background:radial-gradient(420px 320px at 50% 38%,rgba(61,245,176,.2),transparent 70%)">
+            <span style="width:92px;height:92px;border-radius:50%;background:linear-gradient(135deg,#0A7559,#2C957A);color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 14px rgba(11,143,110,.12),0 0 0 30px rgba(11,143,110,.06)"><svg viewBox="0 0 24 24" style="width:42px;height:42px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
+            <span style="margin-top:34px;font-size:15px;color:#4A615A">Sent to Almarai Supply Co.</span>
+            <span style="margin-top:4px;font:600 40px 'IBM Plex Mono',monospace;letter-spacing:-.03em">SAR 8,250.00</span>
+            <span style="margin-top:10px;font-size:13.5px;color:#5E7770">Reference 504116701288 · 12 Oct, 10:42</span>
+            <div style="display:flex;gap:10px;margin-top:28px"><button style="height:44px;padding:0 18px;border-radius:999px;border:1px solid #D7E0DC;background:#FFFFFF;font-size:14px;font-weight:500;color:#0C1F1A">Share receipt</button><button style="height:44px;padding:0 18px;border-radius:999px;border:1px solid #D7E0DC;background:#FFFFFF;font-size:14px;font-weight:500;color:#0C1F1A">Save as template</button></div>
+          </div>
+          <div style="flex:none;padding:12px 20px 38px"><button onClick="{{ rvReset }}" style="width:100%;height:52px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;cursor:pointer">Done</button></div>
+        </sc-if>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#0C1F1A"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-opt" id="4i"><div class="dv-olabel"><a class="dv-oid" href="#4i">4i</a>Sales · range switch, tap a bar, card schemes, top branches</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F3F5F4;display:flex;flex-direction:column">
+        <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <div class="scr" style="flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:12px;padding:4px 20px 120px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:30px;font-weight:700;letter-spacing:-.02em">Sales</span><button style="height:38px;padding:0 12px;border-radius:999px;border:1px solid #D7E0DC;background:#FFFFFF;font-size:13px;font-weight:500;color:#0C1F1A;display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="#4A615A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ ic.branch }}"></path></svg>All branches</button></div>
+          <div style="display:flex;background:#E6ECE9;border-radius:12px;padding:3px"><sc-for list="{{ salesRanges }}" as="r" hint-placeholder-count="3"><button onClick="{{ r.pick }}" style="flex:1;height:36px;border:0;border-radius:10px;font-size:14px;font-weight:{{ r.fw }};background:{{ r.bg }};color:{{ r.fg }};box-shadow:{{ r.sh }};cursor:pointer;transition:all .15s">{{ r.label }}</button></sc-for></div>
+          <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:#5E7770">{{ salesSel.label }}</span><span style="font-size:32px;font-weight:700;letter-spacing:-.02em">SAR {{ salesSel.val }}</span><span style="font-size:13px;font-weight:600;color:#0B8F6E">{{ salesSel.sub }}</span></div>
+            <div style="position:relative;display:flex;align-items:flex-end;gap:{{ salesGap }};height:160px;border-bottom:1px solid #EEF2F0">
+              <span style="position:absolute;left:0;right:0;bottom:{{ salesAvg }};border-top:1.5px dashed rgba(12,31,26,.3)"></span>
+              <sc-for list="{{ salesBars }}" as="b" hint-placeholder-count="7"><button onClick="{{ b.pick }}" aria-label="{{ b.lbl }}" style="flex:1;height:100%;border:0;padding:0;background:transparent;display:flex;align-items:flex-end;cursor:pointer"><span style="width:100%;height:{{ b.h }};border-radius:7px 7px 2px 2px;background:{{ b.c }};transition:height .3s,background .15s"></span></button></sc-for>
+            </div>
+            <div style="display:flex;gap:{{ salesGap }}"><sc-for list="{{ salesBars }}" as="b" hint-placeholder-count="7"><span style="flex:1;text-align:center;font:400 10.5px 'IBM Plex Mono',monospace;color:{{ b.lc }}">{{ b.lbl }}</span></sc-for></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid #EEF2F0"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#5E7770">Transactions</span><span style="font:500 16px 'IBM Plex Mono',monospace">{{ salesTx }}</span></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#5E7770">Average sale</span><span style="font:500 16px 'IBM Plex Mono',monospace">SAR 52.50</span></div></div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+            <span style="font-size:16px;font-weight:600">By card scheme</span>
+            <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px"><sc-for list="{{ schemes }}" as="s" hint-placeholder-count="4"><span style="width:{{ s.w }};background:{{ s.c }}"></span></sc-for></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 16px"><sc-for list="{{ schemes }}" as="s" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:8px;font-size:13.5px"><span style="width:9px;height:9px;border-radius:3px;background:{{ s.c }}"></span><span style="flex:1">{{ s.n }}</span><span style="font-family:'IBM Plex Mono',monospace;color:#4A615A">{{ s.p }}</span></div></sc-for></div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:24px;padding:8px 20px">
+            <div style="display:flex;justify-content:space-between;align-items:center;height:46px"><span style="font-size:16px;font-weight:600">Top branches</span><span style="font-size:13px;font-weight:600;color:#0B8F6E">See all</span></div>
+            <sc-for list="{{ topLocs }}" as="l" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:1px solid #EEF2F0"><div style="display:flex;justify-content:space-between;font-size:14px"><span>{{ l.n }}</span><span style="font:500 13px 'IBM Plex Mono',monospace">{{ l.v }}</span></div><span style="height:5px;border-radius:999px;background:#EEF2F0;display:block"><span style="display:block;width:{{ l.w }};height:100%;border-radius:999px;background:#2C957A"></span></span></div></sc-for>
+          </div>
+        </div>
+        <div style="position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:4;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(12,31,26,.06);box-shadow:0 18px 40px -16px rgba(12,31,26,.4)">
+          <sc-for list="{{ nav3 }}" as="n" hint-placeholder-count="4"><span style="height:52px;min-width:52px;padding:0 {{ n.px }};border-radius:999px;background:{{ n.bg }};color:{{ n.fg }};display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600"><svg viewBox="0 0 24 24" style="width:22px;height:22px;flex:none" fill="none" stroke="currentColor" stroke-width="{{ n.sw }}" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg><span style="display:{{ n.lblD }}">{{ n.label }}</span></span></sc-for>
+        </div>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#0C1F1A;z-index:5"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-opt" id="4j"><div class="dv-olabel"><a class="dv-oid" href="#4j">4j</a>Transactions · search, status chips, day groups, detail sheet on tap</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F3F5F4;display:flex;flex-direction:column">
+        <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <div style="flex:none;padding:4px 20px 10px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:30px;font-weight:700;letter-spacing:-.02em">Activity</span><button aria-label="Export" style="width:40px;height:40px;border-radius:50%;border:1px solid #E6ECE9;background:#FFFFFF;color:#0C1F1A;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg></button></div>
+          <div style="height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #E6ECE9;display:flex;align-items:center;gap:8px;padding:0 14px;color:#6B827B;font-size:15px"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#0C1F1A" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>Amount, merchant or reference</div>
+          <div class="scr" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:0 20px">
+            <sc-for list="{{ txChips }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.pick }}" style="flex:none;height:36px;padding:0 14px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-size:13.5px;font-weight:500;cursor:pointer">{{ c.label }}</button></sc-for>
+          </div>
+        </div>
+        <div class="scr" style="flex:1;overflow-y:auto;scrollbar-width:none;padding:0 20px 120px;display:flex;flex-direction:column;gap:16px">
+          <sc-for list="{{ txGroups }}" as="g" hint-placeholder-count="2">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;padding:0 6px;font-size:12px;color:#5E7770"><span style="font-weight:600;letter-spacing:.08em">{{ g.day }}</span><span style="font-family:'IBM Plex Mono',monospace">{{ g.total }}</span></div>
+              <div style="background:#FFFFFF;border-radius:20px;padding:2px 14px">
+                <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3"><button onClick="{{ r.open }}" style="width:100%;border:0;background:transparent;display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid {{ r.bd }};cursor:pointer;text-align:left;color:#0C1F1A"><span style="width:40px;height:40px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;background:{{ r.ibg }};color:{{ r.ifg }}"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ r.icon }}"></path></svg></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.t }}</span><span style="font-size:12.5px;color:#8A9C96">{{ r.s }}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span style="font:500 13.5px 'IBM Plex Mono',monospace;color:{{ r.ac }}">{{ r.amt }}</span><span style="font-size:11px;font-weight:600;padding:2px 7px;border-radius:999px;background:{{ r.sbg }};color:{{ r.sfg }}">{{ r.st }}</span></div></button></sc-for>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ txEmpty }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:48px 20px;text-align:center"><span style="width:56px;height:56px;border-radius:50%;background:#E3F6EF;color:#0B8F6E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></span><span style="font-size:16px;font-weight:600">Nothing here yet</span><span style="font-size:13.5px;color:#5E7770">Try another filter.</span></div></sc-if>
+        </div>
+        <div style="position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:4;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(12,31,26,.06);box-shadow:0 18px 40px -16px rgba(12,31,26,.4)">
+          <sc-for list="{{ nav0 }}" as="n" hint-placeholder-count="4"><span style="height:52px;min-width:52px;padding:0 {{ n.px }};border-radius:999px;background:{{ n.bg }};color:{{ n.fg }};display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600"><svg viewBox="0 0 24 24" style="width:22px;height:22px;flex:none" fill="none" stroke="currentColor" stroke-width="{{ n.sw }}" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg><span style="display:{{ n.lblD }}">{{ n.label }}</span></span></sc-for>
+        </div>
+        <sc-if value="{{ txSheet }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ closeTx }}" style="position:absolute;inset:0;background:rgba(12,31,26,.4);z-index:6"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;z-index:7;background:#FFFFFF;border-radius:28px 28px 0 0;padding:10px 20px 38px;display:flex;flex-direction:column;gap:14px;box-shadow:0 -20px 40px -20px rgba(12,31,26,.4)">
+            <span style="align-self:center;width:38px;height:5px;border-radius:3px;background:#D7E0DC"></span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:4px;text-align:center"><span style="width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:{{ txD.ibg }};color:{{ txD.ifg }}"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ txD.icon }}"></path></svg></span><span style="font-size:15px;color:#4A615A">{{ txD.t }}</span><span style="font:600 30px 'IBM Plex Mono',monospace;letter-spacing:-.02em;color:{{ txD.ac }}">{{ txD.amt }}</span><span style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:{{ txD.sbg }};color:{{ txD.sfg }}">{{ txD.st }}</span></div>
+            <div style="display:flex;flex-direction:column;border-radius:16px;background:#F3F5F4;padding:4px 14px"><sc-for list="{{ txD.rows }}" as="k" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid {{ k.bd }};font-size:14px"><span style="color:#5E7770">{{ k.k }}</span><span style="font-weight:500;font-family:{{ k.ff }}">{{ k.v }}</span></div></sc-for></div>
+            <div style="display:flex;gap:10px"><button style="flex:1;height:50px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:15px;font-weight:500;color:#0C1F1A">Share receipt</button><button onClick="{{ closeTx }}" style="flex:1;height:50px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:15px;font-weight:500;cursor:pointer">Done</button></div>
+          </div>
+        </sc-if>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#0C1F1A;z-index:8"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-opt" id="4k"><div class="dv-olabel"><a class="dv-oid" href="#4k">4k</a>Inbox · tasks stay until dismissed, updates tab, empty state</div>
+    <div style="width:390px;height:844px;border-radius:56px;padding:10px;background:#0C1F1A;box-shadow:0 50px 90px -40px rgba(12,31,26,.6)">
+      <div style="position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#F3F5F4;display:flex;flex-direction:column">
+        <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 36px;font-size:15px;font-weight:600"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="4.6" width="3" height="6.4" rx="1"></rect><rect x="9.2" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1"></rect></svg><svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x=".5" y=".5" width="20" height="10" rx="3" stroke="currentColor" opacity=".4"></rect><rect x="2" y="2" width="15" height="7" rx="1.6" fill="currentColor"></rect></svg></span></div>
+        <div style="height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 12px"><button aria-label="Back" style="width:44px;height:44px;border:0;background:transparent;color:#0C1F1A;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button><span style="flex:1;font-size:17px;font-weight:600">Inbox</span><sc-if value="{{ showMarkRead }}" hint-placeholder-val="{{ false }}"><button onClick="{{ markRead }}" style="border:0;background:transparent;color:#0B8F6E;font-size:14px;font-weight:600;padding:0 10px;cursor:pointer">Mark all read</button></sc-if></div>
+        <div style="flex:none;display:flex;gap:4px;padding:0 20px;border-bottom:1px solid #E6ECE9">
+          <sc-for list="{{ inTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="height:44px;padding:0 6px;margin-right:14px;border:0;background:transparent;border-bottom:2px solid {{ t.bd }};font-size:15px;font-weight:{{ t.fw }};color:{{ t.fg }};display:flex;align-items:center;gap:8px;cursor:pointer">{{ t.label }}<span style="min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:{{ t.cbg }};color:{{ t.cfg }};font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ t.count }}</span></button></sc-for>
+        </div>
+        <div class="scr" style="flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:10px;padding:16px 20px 24px">
+          <sc-if value="{{ inTasksTab }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ tasks }}" as="t" hint-placeholder-count="3">
+                <div style="position:relative;background:#FFFFFF;border-radius:20px;padding:16px;display:flex;gap:12px">
+                  <span style="width:40px;height:40px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:{{ t.ibg }};color:{{ t.ifg }}"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg></span>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:3px;padding-right:24px"><span style="font-size:15px;font-weight:600">{{ t.title }}</span><span style="font-size:13.5px;line-height:1.45;color:#5E7770">{{ t.desc }}</span><button style="align-self:flex-start;margin-top:10px;height:36px;padding:0 14px;border:0;border-radius:999px;background:{{ t.cbg }};color:{{ t.cfg }};font-size:13.5px;font-weight:600">{{ t.cta }}</button></div>
+                  <button onClick="{{ t.close }}" aria-label="Dismiss" style="position:absolute;top:8px;right:8px;width:36px;height:36px;border:0;border-radius:12px;background:transparent;color:#6B827B;font-size:19px;cursor:pointer">×</button>
+                </div>
+              </sc-for>
+              <sc-if value="{{ noTasks }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:72px 24px 24px;text-align:center">
+                  <span style="width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#E9FBF4,#D2F2E6);color:#0B8F6E;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px #F4FBF8"><svg viewBox="0 0 24 24" style="width:32px;height:32px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></span>
+                  <span style="margin-top:14px;font-size:18px;font-weight:600">You're all caught up</span>
+                  <span style="font-size:14px;line-height:1.5;color:#5E7770;max-width:260px">Approvals, setup steps and offers will appear here.</span>
+                  <button onClick="{{ restoreTasks }}" style="margin-top:8px;border:0;background:transparent;color:#0B8F6E;font-size:14px;font-weight:600;cursor:pointer">Restore demo tasks</button>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+          <sc-if value="{{ inUpdatesTab }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#FFFFFF;border-radius:20px;padding:2px 16px">
+              <sc-for list="{{ updates }}" as="n" hint-placeholder-count="4"><div style="display:flex;gap:12px;padding:14px 0;border-top:1px solid {{ n.bd }}"><span style="width:8px;height:8px;border-radius:50%;margin-top:7px;flex:none;background:{{ n.dot }}"></span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14.5px;font-weight:{{ n.fw }}">{{ n.t }}</span><span style="font-size:13px;color:#5E7770">{{ n.s }}</span></div><span style="font-size:12px;color:#8A9C96">{{ n.time }}</span></div></sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <span style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#0C1F1A"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<p style="margin:44px 0 0;font-size:13px;color:#5E7770">Earlier mobile set: <a href="Hala UI Moodboard MOBILE.dc.html">Hala UI Moodboard MOBILE</a>.</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { bal: true, nav: 0, front: 0, frozen: {}, hurr: 0, cdFrozen: false, cdReveal: false, cdTab: 0, cdTg: [true, false, true], ben: 0, amt: '', rv: false, range: '7D', bar: -1, txf: 'All', tx: null, inTab: 0, closed: {}, unread: 2 };
+  more(ic, mkNav) {
+    const s = this.state, ink = '#0C1F1A', teal = '#0B8F6E';
+    const fmt = n => Math.round(n).toLocaleString('en-US');
+    const money = a => `${a < 0 ? '−' : '+'}${Math.abs(a).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+    const BAL = 45000;
+    const bens = [['Almarai Supply Co.', 'Almarai', 'AS', 'SA44 2000 •••• 8812 · Al Rajhi', '#FFF1DE', '#B45309'], ['STC Business', 'STC', 'ST', 'SA12 1000 •••• 4410 · SNB', '#F2EEFF', '#6941C6'], ['Khamis Trading', 'Khamis', 'KT', 'SA03 8000 •••• 2433 · Hala', '#E3F6EF', teal], ['Faisal Alharbi', 'Faisal', 'FA', 'SA90 0500 •••• 7781 · ANB', '#E8F0FF', '#2F5BD3']];
+    const amtN = parseFloat(s.amt || '0') || 0, over = amtN > BAL, okSend = amtN > 0 && !over;
+    const amtShow = s.amt ? (() => { const [i, d] = s.amt.split('.'); return Number(i || 0).toLocaleString('en-US') + (d !== undefined ? '.' + d : ''); })() : '0';
+    const R = { '7D': { total: 288410, tx: '5,494', lbls: ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu'], w: [52, 64, 58, 40, 44, 49, 72] }, '30D': { total: 1236900, tx: '23,560', lbls: ['W1', '', 'W2', '', 'W3', '', 'W4', '', 'W5', ''], w: [40, 46, 42, 55, 50, 58, 54, 66, 62, 74] }, '12M': { total: 13600000, tx: '259,050', lbls: ['N', 'D', 'J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O'], w: [30, 36, 33, 46, 52, 48, 60, 66, 62, 76, 86, 94] } }[s.range];
+    const wsum = R.w.reduce((a, b) => a + b, 0), wmax = Math.max(...R.w) * 1.1, bi = s.bar >= 0 && s.bar < R.w.length ? s.bar : -1;
+    const st = { Settled: ['#E3F6EF', '#0B6F56'], Pending: ['#FFF1DE', '#94550A'], Refunded: ['#EEF2F0', '#4A615A'], Declined: ['#FDECEC', '#C81E1E'] };
+    const pos = ic.pos, web = 'M3 5h18v14H3zM3 9h18', refund = 'M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5';
+    const txAll = [
+      { day: 'TODAY', t: 'Olaya · Terminal 04', s: 'mada •• 3391 · 14:22', amt: 1240, st: 'Settled', icon: pos, rrn: '504217883012' },
+      { day: 'TODAY', t: 'Web checkout', s: 'Visa •• 8812 · 14:09', amt: 389.5, st: 'Pending', icon: web, rrn: '504217882270' },
+      { day: 'TODAY', t: 'Al Malqa · Terminal 07', s: 'Apple Pay · 13:51', amt: 76.25, st: 'Settled', icon: pos, rrn: '504217880914' },
+      { day: 'YESTERDAY', t: 'Olaya · Terminal 02', s: 'Mastercard •• 0045 · 21:40', amt: 2150, st: 'Declined', icon: pos, rrn: '504116730551' },
+      { day: 'YESTERDAY', t: 'Jeddah Corniche · T01', s: 'mada •• 7720 · 20:12', amt: -148, st: 'Refunded', icon: refund, rrn: '504116729903' },
+      { day: 'YESTERDAY', t: 'Almarai Supply Co.', s: 'IBAN transfer · 10:42', amt: -8250, st: 'Settled', icon: ic.transfer, rrn: '504116701288' }
+    ];
+    const txF = s.txf === 'All' ? txAll : txAll.filter(t => t.st === s.txf);
+    const txRow = (t, i) => ({ ...t, amt: money(t.amt), ac: t.amt < 0 ? ink : t.st === 'Declined' ? '#8A9C96' : teal, sbg: st[t.st][0], sfg: st[t.st][1], ibg: t.amt < 0 ? '#F2F6F4' : '#E3F6EF', ifg: t.amt < 0 ? ink : teal, bd: i ? '#EEF2F0' : 'transparent', open: () => this.setState({ tx: t }) });
+    const groups = ['TODAY', 'YESTERDAY'].map(d => { const r = txF.filter(t => t.day === d); return { day: d, total: `SAR ${money(r.filter(t => t.st !== 'Declined').reduce((a, t) => a + t.amt, 0))}`, rows: r.map(txRow) }; }).filter(g => g.rows.length);
+    const T = s.tx;
+    const alert = 'M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z';
+    const taskDefs = [
+      { id: 'ap', icon: ic.transfer, ibg: '#E8F0FF', ifg: '#2F5BD3', cbg: '#0C1F1A', cfg: '#FFFFFF', title: '3 transfers need your approval', desc: 'SAR 61,400 in total, requested by Omar B.', cta: 'Review' },
+      { id: 'ad', icon: alert, ibg: '#FDECEC', ifg: '#D92D20', cbg: '#FDECEC', cfg: '#C81E1E', title: 'Add your national address', desc: 'Required to finish company verification.', cta: 'Add details' },
+      { id: 'fin', icon: 'M3 17l6-6 4 4 8-8M15 7h6v6', ibg: '#E3F6EF', ifg: teal, cbg: '#E3F6EF', cfg: '#0B6F56', title: 'Grow with Hala Financing', desc: 'Up to SAR 350,000, repaid automatically from daily POS sales.', cta: 'Check eligibility' }
+    ].filter(t => !s.closed[t.id]);
+    const cdF = s.cdFrozen;
+    return {
+      cd: { frozen: cdF, filter: cdF ? 'grayscale(.7) brightness(.9)' : 'none', pan: s.cdReveal ? '4532 8890 1123 3399' : '•••• 3399', top: s.cdReveal ? 'EXP 09/29 · CVV 412' : '', status: cdF ? 'Frozen' : 'Active', dot: cdF ? '#2F5BD3' : '#0FA37F' },
+      cdActions: [[cdF ? 'Unfreeze' : 'Freeze', ic.snow, () => this.setState({ cdFrozen: !cdF }), cdF, '#2F5BD3'], [s.cdReveal ? 'Hide' : 'Details', ic.eye, () => this.setState({ cdReveal: !s.cdReveal }), s.cdReveal, ink], ['PIN', ic.lock, () => {}, false, ink], ['Limits', ic.sliders, () => this.setState({ cdTab: 1 }), false, ink]].map(([label, icon, pick, on, c]) => ({ label, icon, pick, bg: on ? c : '#FFFFFF', fg: on ? '#FFFFFF' : ink })),
+      cdTabs: ['Overview', 'Limits', 'Settings'].map((label, i) => { const on = s.cdTab === i; return { label, fw: on ? 600 : 500, bg: on ? '#FFFFFF' : 'transparent', fg: on ? ink : '#5E7770', sh: on ? '0 1px 3px rgba(12,31,26,.12)' : 'none', pick: () => this.setState({ cdTab: i }) }; }),
+      cdTab0: s.cdTab === 0, cdTab1: s.cdTab === 1, cdTab2: s.cdTab === 2,
+      cdRecent: [['Almarai Supply Co.', 'Today · 10:42', '− 1,240.00', 'AS'], ['Saudia Airlines', 'Yesterday', '− 3,860.00', 'SA'], ['Jarir Bookstore', '9 Oct', '− 1,300.00', 'JB']].map(([t, sub, a, ini], i) => ({ t, s: sub, a, ini, bd: i ? '#EEF2F0' : 'transparent' })),
+      limits: [['ATM cash withdrawal', 2000, 5000], ['POS purchases', 41200, 50000], ['E-commerce', 6150, 20000]].map(([name, u, m], i) => { const p = u / m, hot = p >= 0.8; return { name, used: fmt(u), max: fmt(m), w: p * 100 + '%', c: hot ? '#E07B12' : 'linear-gradient(90deg,#0A7559,#2C957A)', left: hot ? `Only ${Math.round((1 - p) * 100)}% left` : `${Math.round((1 - p) * 100)}% remaining`, tc: hot ? '#94550A' : '#5E7770', fw: hot ? 600 : 400, bd: i ? '#EEF2F0' : 'transparent' }; }),
+      cdToggles: [['Online payments', 'E-commerce and in-app'], ['International use', 'Spend outside Saudi Arabia'], ['Contactless', 'Tap to pay up to SAR 300']].map(([t, sub], i) => ({ t, s: sub, bd: i ? '#EEF2F0' : 'transparent', j: s.cdTg[i] ? 'flex-end' : 'flex-start', bg: s.cdTg[i] ? teal : '#D7E0DC', flip: () => this.setState(st2 => { const g = [...st2.cdTg]; g[i] = !g[i]; return { cdTg: g }; }) })),
+      cdDanger: [['Report lost or stolen', 'Block and get a replacement', 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01', '#FFF1DE', '#C2410C', ink], ['Cancel card', 'Permanently close this card', 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM15 9l-6 6M9 9l6 6', '#FDECEC', '#D92D20', '#C81E1E']].map(([t, sub, icon, bg, c, tc], i) => ({ t, s: sub, icon, bg, c, tc, bd: i ? '#EEF2F0' : 'transparent' })),
+      bens: bens.map(([name, short, ini, iban, bg, fg], i) => { const on = s.ben === i; return { short, ini, bg, fg, ol: on ? ink : 'transparent', chk: on ? 'flex' : 'none', fw: on ? 600 : 500, pick: () => this.setState({ ben: i }) }; }),
+      benLine: s.ben >= 0 ? bens[s.ben][3] : '',
+      amtShow, amtC: over ? '#C81E1E' : s.amt ? ink : '#C2CEC9',
+      amtNote: over ? `Exceeds your balance of SAR ${fmt(BAL)}` : `Available SAR ${fmt(BAL - amtN)}.00`, amtNoteC: over ? '#C81E1E' : '#5E7770', amtNoteW: over ? 600 : 400,
+      quickAmts: ['1,000', '5,000', '10,000'].map(l => ({ label: l, pick: () => this.setState({ amt: l.replace(',', '') }) })),
+      amtKeys: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', '⌫'].map(n => ({ n, press: () => this.setState(st2 => { let a = st2.amt; if (n === '⌫') return { amt: a.slice(0, -1) }; if (n === '.') return a.includes('.') ? null : { amt: (a || '0') + '.' }; if (a.includes('.') && a.split('.')[1].length >= 2) return null; if (!a.includes('.') && a.replace('.', '').length >= 7) return null; return { amt: a === '0' ? n : a + n }; }) })),
+      sendBtn: okSend ? { bg: 'linear-gradient(90deg,#0A7559,#2C957A)', fg: '#FFFFFF', cur: 'pointer', sh: '0 10px 22px -12px rgba(10,117,89,.8)', label: `Review · SAR ${amtShow}` } : { bg: '#EEF2F0', fg: '#9AACA6', cur: 'not-allowed', sh: 'none', label: 'Enter an amount' },
+      goReview: () => {},
+      rvForm: !s.rv, rvDone: s.rv, rvBtn: 'Confirm with Face ID', rvConfirm: () => this.setState({ rv: true }), rvReset: () => this.setState({ rv: false }),
+      rvRows: [['From', 'Hala Business •• 1951', 'inherit', ink], ['Purpose', 'Supplier payment', 'inherit', ink], ['Note', 'Invoice #4471', 'inherit', ink], ['Fee', 'Free', 'inherit', teal], ['Balance after', 'SAR 36,750.00', "'IBM Plex Mono',monospace", ink]].map(([k, v, ff, c]) => ({ k, v, ff, c })),
+      salesRanges: ['7D', '30D', '12M'].map(r => { const on = s.range === r; return { label: { '7D': '7 days', '30D': '30 days', '12M': '12 months' }[r], fw: on ? 600 : 500, bg: on ? '#FFFFFF' : 'transparent', fg: on ? ink : '#5E7770', sh: on ? '0 1px 3px rgba(12,31,26,.12)' : 'none', pick: () => this.setState({ range: r, bar: -1 }) }; }),
+      salesSel: bi >= 0 ? { label: `${R.lbls[bi] || 'Mid-week'} · sales value`, val: fmt(R.total * R.w[bi] / wsum), sub: `${Math.round(R.w[bi] / wsum * 100)}% of the period · tap again to clear` } : { label: 'Total sales value', val: R.total >= 1e7 ? (R.total / 1e6).toFixed(1) + 'M' : fmt(R.total), sub: '▲ 6.2% vs previous period' },
+      salesGap: R.w.length > 10 ? '5px' : '8px', salesAvg: (wsum / R.w.length) / wmax * 100 + '%', salesTx: R.tx,
+      salesBars: R.w.map((w, i) => ({ h: w / wmax * 100 + '%', lbl: R.lbls[i], lc: i === bi ? ink : '#8A9C96', c: i === bi ? ink : bi >= 0 ? '#CDEFE3' : i === R.w.length - 1 ? 'linear-gradient(180deg,#2C957A,#0A7559)' : '#9ADFC8', pick: () => this.setState({ bar: bi === i ? -1 : i }) })),
+      schemes: [['mada', '#0B8F6E', 38.8], ['Visa', '#0C1F1A', 27.4], ['Mastercard', '#4BC9A2', 21.6], ['Other', '#C2CEC9', 12.2]].map(([n, c, p]) => ({ n, c, w: p + '%', p: p + '%' })),
+      topLocs: [['Olaya, Riyadh', '412.6k', 100], ['Al Malqa, Riyadh', '318.0k', 77], ['Jeddah Corniche', '264.3k', 64]].map(([n, v, w]) => ({ n, v: 'SAR ' + v, w: w + '%' })),
+      nav3: mkNav(2, false), nav0: mkNav(0, false),
+      txChips: ['All', 'Settled', 'Pending', 'Refunded', 'Declined'].map(c => { const on = s.txf === c; return { label: c, bg: on ? ink : '#FFFFFF', fg: on ? '#FFFFFF' : ink, bd: on ? ink : '#D7E0DC', pick: () => this.setState({ txf: c }) }; }),
+      txGroups: groups, txEmpty: groups.length === 0, txSheet: !!T, closeTx: () => this.setState({ tx: null }),
+      txD: T ? { t: T.t, amt: `SAR ${money(T.amt)}`, ac: T.amt < 0 ? ink : teal, st: T.st, sbg: st[T.st][0], sfg: st[T.st][1], icon: T.icon, ibg: T.amt < 0 ? '#F2F6F4' : '#E3F6EF', ifg: T.amt < 0 ? ink : teal, rows: [['Date', (T.day === 'TODAY' ? '12 Oct 2026' : '11 Oct 2026') + ', ' + T.s.split('· ').pop()], ['Payment method', T.s.split(' · ')[0]], ['Reference', T.rrn, "'IBM Plex Mono',monospace"], ['Settles to', 'SA57 •• 1951', "'IBM Plex Mono',monospace"]].map(([k, v, ff], i) => ({ k, v, ff: ff || 'inherit', bd: i ? '#E6ECE9' : 'transparent' })) } : { rows: [] },
+      inTabs: [['Tasks', taskDefs.length], ['Updates', s.unread]].map(([label, c], i) => { const on = s.inTab === i; return { label, count: String(c), bd: on ? ink : 'transparent', fw: on ? 600 : 500, fg: on ? ink : '#6B827B', cbg: c ? (on ? ink : '#E6ECE9') : '#EEF2F0', cfg: c ? (on ? '#FFFFFF' : '#4A615A') : '#9AACA6', pick: () => this.setState({ inTab: i }) }; }),
+      inTasksTab: s.inTab === 0, inUpdatesTab: s.inTab === 1, showMarkRead: s.inTab === 1 && s.unread > 0, markRead: () => this.setState({ unread: 0 }),
+      tasks: taskDefs.map(t => ({ ...t, close: () => this.setState(st2 => ({ closed: { ...st2.closed, [t.id]: true } })) })), noTasks: taskDefs.length === 0, restoreTasks: () => this.setState({ closed: {} }),
+      updates: [['Settlement sent', 'SAR 21,384.50 to IBAN •• 1951', '2h'], ['Transfer approved', 'Almarai Supply Co. · SAR 8,250.00', '1d'], ['Card delivered', 'Physical Purchase Card •• 3399', '3d'], ['New: Payment Gateway', 'Accept cards on your website', '5d']].map(([t, sub, time], i) => ({ t, s: sub, time, bd: i ? '#EEF2F0' : 'transparent', dot: i < s.unread ? teal : 'transparent', fw: i < s.unread ? 600 : 500 }))
+    };
+  }
+  u(s) { return `url("data:image/svg+xml,${encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 316 200' preserveAspectRatio='xMidYMid slice'>" + s + '</svg>')}") center/cover no-repeat`; }
+  hurr() {
+    const G = '#C8A46A';
+    let zig = 'M0 128', dia = '', dots = '';
+    for (let x = 0; x <= 316; x += 12) zig += ` L${x + 6} ${(x / 12) % 2 ? 128 : 154} L${x + 12} 128`;
+    for (let x = 6; x < 316; x += 24) dia += `<path d='M${x} 141 l6 -6 6 6 -6 6z' fill='#B5512F'/>`;
+    for (let x = 4; x < 316; x += 8) dots += `<circle cx='${x}' cy='112' r='1' fill='${G}' opacity='.55'/>`;
+    const sadu = this.u(`<rect y='120' width='316' height='42' fill='#35271C'/><path d='M0 120h316M0 162h316' stroke='${G}' stroke-width='1'/><path d='${zig}' fill='none' stroke='${G}' stroke-width='1.1' opacity='.9'/>${dia}${dots}`) + ', linear-gradient(155deg,#2A221B,#14100C)';
+    let par = 'M0 150', win = '';
+    for (let x = 0; x < 316; x += 20) par += ` L${x + 10} 130 L${x + 20} 150`;
+    par += ' V200 H0Z';
+    for (let x = 18; x < 316; x += 40) win += `<path d='M${x} 186 l6 -10 6 10z' fill='none' stroke='${G}' stroke-width='1'/>`;
+    const najdi = this.u(`<path d='${par}' fill='#4A2216'/><path d='M0 163h316' stroke='${G}' stroke-width='.9' opacity='.8'/>${win}`) + ', linear-gradient(165deg,#93523A,#6A3221 70%)';
+    const dunes = this.u(`<circle cx='248' cy='62' r='24' fill='#FBF1DC'/><path d='M0 118 C80 88 140 132 210 108 S300 94 316 102V200H0Z' fill='#DDBE84'/><path d='M0 150 C70 128 150 162 232 138 S298 132 316 142V200H0Z' fill='#C99F5F'/><path d='M0 176 C90 162 172 186 316 168V200H0Z' fill='#A97C43'/>`) + ', linear-gradient(180deg,#F3E6CA,#E7D2A6)';
+    const pal = ['#B5412D', '#2F7A57', '#D9A23A', '#2D5A86', '#241B12'];
+    let asir = '';
+    for (let r = 0; r < 10; r++) for (let c = 0; c < 6; c++) { const x = 196 + c * 20, y = r * 20, col = pal[(r + c * 2) % 5]; asir += (r + c) % 2 ? `<path d='M${x} ${y + 20} L${x + 10} ${y} L${x + 20} ${y + 20}Z' fill='${col}'/>` : `<path d='M${x} ${y} L${x + 10} ${y + 20} L${x + 20} ${y}Z' fill='${col}'/>`; }
+    asir = this.u(`<rect x='186' width='4' height='200' fill='#241B12'/>${asir}`) + ', #F1E8D8';
+    return [
+      { name: 'Sadu weave', short: 'Sadu', place: 'Najd · Bedouin textile', ar: 'السدو', bg: sadu, ink: '#EFE3CB', foil: G, glow: 'rgba(36,27,18,.55)', story: 'One woven band across a matte charcoal ground. The zigzag and red diamonds come from the Sadu tent weavings of the Najd tribes; everything else is left quiet.', tags: ['Matte charcoal', 'Gold foil', 'UNESCO-listed craft'] },
+      { name: 'Najdi parapet', short: 'Najdi', place: 'Diriyah · mud-brick architecture', ar: 'الدرعية', bg: najdi, ink: '#F6E4D2', foil: '#E9C98E', glow: 'rgba(122,58,36,.5)', story: 'The stepped triangle crown of At-Turaif rooftops, set low on the card like a skyline at dusk. Small gold triangles echo the ventilation openings in Najdi walls.', tags: ['Terracotta', 'Gold foil'] },
+      { name: 'Nafud dunes', short: 'Nafud', place: 'Empty Quarter · desert', ar: 'الربع الخالي', bg: dunes, ink: '#3A2B18', foil: '#7A5C36', glow: 'rgba(169,124,67,.5)', story: 'Three tonal dune ridges under a low sun. The lightest design in the set, made for businesses that want a calmer card.', tags: ['Sand', 'Bronze ink'] },
+      { name: 'Al-Qatt Al-Asiri', short: 'Asiri', place: 'Asir · painted interiors', ar: 'القط العسيري', bg: asir, ink: '#241B12', foil: '#B5412D', glow: 'rgba(181,65,45,.35)', story: 'A single column of the painted triangles that women in Asir use on home interiors. Bold colour kept to one edge so the card still reads clearly.', tags: ['Cream', 'Four-colour print', 'UNESCO-listed craft'] }
+    ];
+  }
+  renderVals() {
+    const s = this.state, ink = '#0C1F1A', teal = '#0B8F6E';
+    const ic = {
+      bank: 'M3 10h18M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18M12 3l9 5H3z',
+      transfer: 'M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4', payroll: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v12', link: 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7',
+      pos: 'M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8v4H8zM8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01', card: 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20', box: 'M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8', user: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+      headset: 'M3 14v-2a9 9 0 0 1 18 0v2M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2zM18 17a4 4 0 0 1-4 4h-2', gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1', bell: 'M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0',
+      eye: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', eyeOff: 'M17.9 17.9A10 10 0 0 1 12 20c-7 0-11-8-11-8a18 18 0 0 1 5-5.9M9.9 4.2A9 9 0 0 1 12 4c7 0 11 8 11 8a18 18 0 0 1-2.2 3.2M1 1l22 22',
+      branch: 'M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6', addB: 'M3 21h18M5 21V7l7-4 7 4v14M12 10v6M9 13h6', addU: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM19 8v6M16 11h6',
+      hala: 'M5 3v18M5 12h9M14 3l5 9-5 9', cart: 'M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 1.9-1.6L22 7H5.1M9 21h.01M19 21h.01', chart: 'M4 20V10M10 20V4M16 20v-7M2 20h20',
+      snow: 'M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18', lock: 'M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1zM8 11V7a4 4 0 0 1 8 0v4', sliders: 'M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6'
+    };
+    const corp = 'radial-gradient(120% 90% at 100% 100%,#2E8A72 0%,#1F4A40 35%,#13201C 72%)';
+    const exp = 'repeating-linear-gradient(120deg,rgba(255,255,255,.07) 0 2px,transparent 2px 22px), linear-gradient(135deg,#1D8F55,#3DB06A 60%,#7ACB6A)';
+    const sdb = this.u("<path d='M120 200 C150 130 230 110 316 120 V200Z' fill='#2A9D84'/><path d='M0 150 C40 140 80 160 120 200 H0Z' fill='#1B8FA6'/><path d='M180 0 C220 40 260 50 316 40 V0Z' fill='#16305A'/>") + ', linear-gradient(140deg,#12284D,#0E1F3D)';
+    const ink2 = 'linear-gradient(140deg,#24302C,#0C1F1A)';
+    const halaCards = [
+      { name: 'Purchase Card', note: 'Web 2o · ink + teal glow', bg: corp, ink: '#FFFFFF', logo: '#4BE3B6', sub: 'PURCHASE CARD', tl: 'Digital', pan: '•••• 3399', chip: 'block' },
+      { name: 'Expense Card', note: 'Web 2p · green weave', bg: exp, ink: '#FFFFFF', logo: '#FFFFFF', sub: 'EXPENSE CARD', tl: 'Operations team', pan: '•••• 7710', chip: 'block' },
+      { name: 'SDB co-brand', note: 'Social Development Bank · navy + teal', bg: sdb, ink: '#FFFFFF', logo: '#FFFFFF', sub: 'BUSINESS', tl: 'بنك التنمية الاجتماعية', pan: '•••• 1239', chip: 'none' },
+      { name: 'Corporate Card', note: 'Ink · for executives', bg: ink2, ink: '#FFFFFF', logo: '#C9F07A', sub: 'CORPORATE', tl: 'Faisal A.', pan: '•••• 2433', chip: 'block' }
+    ];
+    const hb = this.hurr();
+    const N = 3, f = s.front;
+    const stackCards = [
+      { ...halaCards[0], holder: 'Muhammad A. · Digital', spent: '6,400', limit: '50,000', p: 12.8, status: 'Active', note: 'Resets in 20 days · 1.5% cashback' },
+      { ...halaCards[2], holder: 'SDB financing · Physical', spent: '12,750', limit: '45,000', p: 28.3, status: 'Active', note: 'Balance SAR 45,000.00 available' },
+      { ...halaCards[1], holder: 'Operations team · 6 holders', spent: '3,920', limit: '15,000', p: 26.1, status: 'Active', note: 'Receipts missing on 2 transactions' }
+    ];
+    const fc = stackCards[f], frozen = !!s.frozen[f];
+    const navDefs = [['Home', ic.hala, 3], ['Cards', ic.card, 1.7], ['Sales', ic.chart, 1.7], ['Store', ic.cart, 1.7]];
+    const mkNav = (active, pickable) => navDefs.map(([label, icon, sw], i) => { const on = i === active; return { label, icon, sw: on ? (i === 0 ? 3 : 2) : sw === 3 ? 2.4 : sw, bg: on ? '#0C1F1A' : 'transparent', fg: on ? '#FFFFFF' : '#4A615A', px: on ? '18px' : '0', lblD: on ? 'inline' : 'none', pick: pickable ? () => this.setState({ nav: i }) : null }; });
+    const H = hb[s.hurr];
+    return {
+      ...this.more(ic, mkNav),
+      ic,
+      swatches: [['Ink', '#0C1F1A'], ['Canvas', '#F3F5F4'], ['Surface', '#FFFFFF'], ['Teal action', '#0B8F6E'], ['Mint', '#E3F6EF'], ['Glow', '#2E8A72'], ['Hurr gold', '#C8A46A'], ['Hurr sand', '#F5F1EA']].map(([n, h]) => ({ n, h, c: h })),
+      hala: halaCards,
+      hurrList: hb,
+      topIcons: [['Support', ic.headset, 'none'], ['Settings', ic.gear, 'none'], ['Notifications', ic.bell, 'block']].map(([label, icon, dot]) => ({ label, icon, dot })),
+      bal: s.bal ? { main: '45,000', dec: '.00', eye: ic.eye } : { main: '••••••', dec: '', eye: ic.eyeOff },
+      toggleBal: () => this.setState({ bal: !s.bal }),
+      quick: [['Transfer', ic.transfer, false], ['SADAD', '', true], ['Payroll', ic.payroll, false], ['Online invoicing', ic.link, false]].map(([label, icon, ar], i) => ({ label, icon, svgD: ar ? 'none' : 'block', arD: ar ? 'block' : 'none', bg: i === 0 ? '#0C1F1A' : '#F2F6F4', fg: i === 0 ? '#FFFFFF' : ink })),
+      services: [['POS', '12 terminals', ic.pos, '#E3F6EF', teal], ['Cards', '3 active', ic.card, '#E8F0FF', '#2F5BD3'], ['Suppliers', '8 saved', ic.box, '#FFF1DE', '#B45309'], ['Operators', '5 cashiers', ic.user, '#F2EEFF', '#6941C6']].map(([label, meta, icon, bg, fg]) => ({ label, meta, icon, bg, fg })),
+      homeCards: [
+        { ...halaCards[2], balD: 'flex', bal: s.bal ? 'SAR 45,000.00' : 'SAR ••••••', actD: 'none' },
+        { ...halaCards[0], balD: 'none', bal: '', actD: 'flex' },
+        { ...halaCards[1], balD: 'none', bal: '', actD: 'none' }
+      ],
+      manage: [['Branches', '12 locations · 3 regions', ic.branch], ['Add branch', 'Register a new location', ic.addB], ['Add cashier', 'Invite to a branch POS', ic.addU]].map(([t, sub, icon], i) => ({ t, s: sub, icon, bd: i ? '#EEF2F0' : 'transparent', chev: 'm9 6 6 6-6 6' })),
+      nav: mkNav(s.nav, true), nav2: mkNav(1, false),
+      nextCard: () => this.setState({ front: (f + 1) % N }),
+      stack: stackCards.map((c, i) => { const pos = (i - f + N) % N; const tf = ['translate(0,34px) rotate(0)', 'translate(26px,10px) rotate(6deg) scale(.93)', 'translate(-26px,0) rotate(-6deg) scale(.86)'][pos]; return { ...c, z: String(3 - pos), tf, fl: (pos ? 'saturate(.7) brightness(.92)' : 'none') + (i === f && frozen ? ' grayscale(.8)' : '') }; }),
+      stackGlow: ['rgba(46,138,114,.55)', 'rgba(42,157,132,.5)', 'rgba(61,176,106,.55)'][f],
+      dots: stackCards.map((c, i) => ({ w: i === f ? '18px' : '6px', c: i === f ? ink : '#C2CEC9' })),
+      front: { name: fc.name, holder: fc.holder, spent: fc.spent, limit: fc.limit, w: fc.p + '%', note: fc.note, status: frozen ? 'Frozen' : fc.status, sbg: frozen ? '#E8F0FF' : '#E3F6EF', sfg: frozen ? '#2F5BD3' : '#0B6F56' },
+      cardActions: [[frozen ? 'Unfreeze' : 'Freeze', ic.snow, () => this.setState({ frozen: { ...s.frozen, [f]: !frozen } }), frozen], ['Details', ic.eye, () => {}, false], ['PIN', ic.lock, () => {}, false], ['Limits', ic.sliders, () => {}, false]].map(([label, icon, pick, on]) => ({ label, icon, pick, bg: on ? '#2F5BD3' : '#FFFFFF', fg: on ? '#FFFFFF' : ink })),
+      cardTx: [[['Almarai Supply Co.', 'Today · 10:42', '− 1,240.00', 'AS'], ['Saudia Airlines', 'Yesterday', '− 3,860.00', 'SA'], ['Jarir Bookstore', '9 Oct', '− 1,300.00', 'JB']], [['Equipment lease', 'Today', '− 9,500.00', 'EL'], ['SASO certification', '8 Oct', '− 3,250.00', 'SC'], ['Wathq', '2 Oct', '− 0.00', 'WQ']], [['ADNOC Fuel', 'Today · 07:15', '− 220.00', 'AD'], ['Careem Business', 'Yesterday', '− 86.50', 'CB'], ['Panda Retail', '10 Oct', '− 412.75', 'PR']]][f].map(([t, sub, a, ini], i) => ({ t, s: sub, a, ini, bd: i ? '#EEF2F0' : 'transparent' })),
+      hurrSel: H, hurrPos: `${s.hurr + 1} / ${hb.length}`,
+      hurrThumbs: hb.map((h, i) => { const on = i === s.hurr; return { name: h.name, short: h.short, bg: h.bg, ol: on ? '#241B12' : 'transparent', fw: on ? 600 : 500, c: on ? '#241B12' : '#7A6A55', pick: () => this.setState({ hurr: i }) }; })
+    };
+  }
+}
+</script>
+</body>
+</html>

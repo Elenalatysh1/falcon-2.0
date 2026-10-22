@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E;text-decoration:none}a:hover{color:#066A51}</style>
+</helmet>
+<section style="background:radial-gradient(60% 70% at 90% 120%,rgba(61,245,176,.25),rgba(61,245,176,0) 70%),#0C1F1A;color:#FFFFFF">
+  <div style="max-width:1240px;margin:0 auto;padding:36px 32px 64px;display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><a href="Falcon 2.0.dc.html" style="display:flex;align-items:center;gap:10px;color:#FFFFFF"><span style="width:32px;height:32px;border-radius:9px;background:#009A78;display:flex;align-items:center;justify-content:center"><img src="assets/hala-mark-white.svg" alt="" style="width:20px;height:20px"/></span><span style="font-size:14.5px;font-weight:600">Falcon 2.0</span><span style="font-size:14px;color:#A9B8B3">/ How to use</span></a><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#A9B8B3">Guide · v2.0</span></div>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:820px"><h1 style="margin:0;font-size:60px;line-height:1.02;font-weight:700;letter-spacing:-.04em">How to use Falcon 2.0</h1><p style="margin:0;font-size:19px;line-height:1.55;color:#CFE1DB;text-wrap:pretty">Practical setup for the three groups who build with Falcon: engineers writing the code, AI coding assistants like Cursor and Claude Code, and designers working in Figma. Copy the snippets as they are.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
+      <sc-for list="{{ jump }}" as="j" hint-placeholder-count="4"><a href="{{ j.h }}" style="border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:16px 18px;display:flex;align-items:center;gap:14px;color:#FFFFFF" style-hover="background:rgba(255,255,255,.12)"><span style="width:40px;height:40px;border-radius:12px;background:rgba(94,224,181,.16);color:#5EE0B5;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ j.icon }}"></path></svg></span><div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:15.5px;font-weight:600">{{ j.k }}</span><span style="font-size:12.5px;color:#A9B8B3">{{ j.v }}</span></div></a></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:64px 32px 24px;display:flex;flex-direction:column;gap:16px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">FOR EVERYONE · THE 5 THINGS THAT MATTER MOST</span>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px"><sc-for list="{{ golden }}" as="g" hint-placeholder-count="5"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:6px"><span style="font:600 13px 'IBM Plex Mono',monospace;color:#0B8F6E">{{ g.n }}</span><span style="font-size:15px;font-weight:600">{{ g.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ g.v }}</span></div></sc-for></div>
+</section>
+
+<section id="dev" style="max-width:1240px;margin:0 auto;padding:56px 32px 24px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:760px"><span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">01 · DEVELOPERS</span><h2 style="margin:0;font-size:36px;font-weight:700;letter-spacing:-.025em">Set up once, then use tokens everywhere</h2><p style="margin:0;font-size:15.5px;line-height:1.6;color:#4A615A">Tokens come first. Components only reference tokens, never hex values, so a theme change or Arabic layout needs no component changes.</p></div>
+  <sc-for list="{{ dev }}" as="d" hint-placeholder-count="4">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:flex-start;gap:10px"><span style="width:26px;height:26px;border-radius:50%;background:#0C1F1A;color:#FFFFFF;font:600 12px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center;flex:none">{{ d.n }}</span><span style="font-size:17px;font-weight:700;line-height:1.3;padding-top:2px">{{ d.k }}</span></div><span style="font-size:14px;line-height:1.6;color:#4A615A">{{ d.v }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ d.file }}</span></div>
+      <div style="position:relative;min-width:0"><pre style="margin:0;border-radius:16px;background:#0C1F1A;color:#CFEDE3;padding:16px 18px;font:400 12.5px/1.7 'IBM Plex Mono',monospace;white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto">{{ d.code }}</pre><button onClick="{{ d.copy }}" style="position:absolute;top:10px;right:10px;height:30px;padding:0 12px;border:0;border-radius:999px;background:{{ d.cbg }};color:#FFFFFF;font-size:12.5px;font-weight:600;cursor:pointer">{{ d.cl }}</button></div>
+    </div>
+  </sc-for>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+    <div style="background:#FFFFFF;border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:10px"><span style="font-size:15px;font-weight:700">Component checklist</span><sc-for list="{{ checklist }}" as="c" hint-placeholder-count="8"><button onClick="{{ c.toggle }}" style="border:0;background:transparent;padding:0;display:flex;gap:10px;align-items:flex-start;text-align:left;cursor:pointer;color:#0C1F1A"><span style="width:18px;height:18px;border-radius:5px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:#FFFFFF;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px">{{ c.mk }}</span><span style="font-size:13.5px;line-height:1.45;text-decoration:{{ c.td }};color:{{ c.fg }}">{{ c.t }}</span></button></sc-for><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B6F56">{{ checkSum }}</span></div>
+    <div style="background:#FFFFFF;border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:10px"><span style="font-size:15px;font-weight:700">Platform mapping</span><sc-for list="{{ platforms }}" as="p" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;font-size:13px;padding:6px 0;border-top:1px solid {{ p.bdr }}"><span style="font-weight:600">{{ p.k }}</span><span style="color:#4A615A;line-height:1.45">{{ p.v }}</span></div></sc-for></div>
+  </div>
+</section>
+
+<section id="ai" style="max-width:1240px;margin:0 auto;padding:56px 32px 24px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:780px"><span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">02 · AI ASSISTANTS</span><h2 style="margin:0;font-size:36px;font-weight:700;letter-spacing:-.025em">Teach Cursor and Claude Code the system</h2><p style="margin:0;font-size:15.5px;line-height:1.6;color:#4A615A">AI tools follow the rules you give them. Put the Falcon rules file in the repo, link the token file, and ask for one component at a time. Then review the result against the checklist.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:17px;font-weight:700;white-space:nowrap">Rules file</span><div style="display:inline-flex;padding:3px;border-radius:999px;background:#E9EFEC"><sc-for list="{{ ai.tools }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.pick }}" style="height:32px;padding:0 14px;border:0;border-radius:999px;background:{{ t.bg }};box-shadow:{{ t.sh }};font-size:13px;font-weight:{{ t.fw }};color:{{ t.fg }};cursor:pointer;white-space:nowrap">{{ t.l }}</button></sc-for></div></div>
+    <div style="display:flex;align-items:center;gap:8px;font:400 12.5px 'IBM Plex Mono',monospace;color:#4A615A"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7ZM14 2v4a2 2 0 0 0 2 2h4"></path></svg>{{ ai.path }}</div>
+    <div style="position:relative"><pre style="margin:0;border-radius:16px;background:#0C1F1A;color:#CFEDE3;padding:18px 20px;font:400 12.5px/1.7 'IBM Plex Mono',monospace;white-space:pre-wrap;word-break:break-word;max-height:440px;overflow:auto">{{ ai.rules.code }}</pre><button onClick="{{ ai.rules.copy }}" style="position:absolute;top:10px;right:10px;height:30px;padding:0 12px;border:0;border-radius:999px;background:{{ ai.rules.cbg }};color:#FFFFFF;font-size:12.5px;font-weight:600;cursor:pointer">{{ ai.rules.cl }}</button></div>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+      <span style="font-size:17px;font-weight:700">Prompt templates</span>
+      <sc-for list="{{ ai.prompts }}" as="p" hint-placeholder-count="4"><div style="border-radius:16px;background:#F4F7F6;padding:14px 16px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="font-size:14px;font-weight:600">{{ p.k }}</span><button onClick="{{ p.copy }}" style="height:28px;padding:0 12px;border:1px solid #D7E0DC;border-radius:999px;background:{{ p.bbg }};color:{{ p.bfg }};font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none">{{ p.cl }}</button></div><span style="font:400 12.5px/1.6 'IBM Plex Mono',monospace;color:#2E403B;white-space:pre-wrap">{{ p.code }}</span></div></sc-for>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:10px"><span style="font-size:15px;font-weight:700">Give the AI this context</span><sc-for list="{{ ai.ctx }}" as="c" hint-placeholder-count="5"><div style="display:flex;gap:10px;align-items:baseline;font-size:13.5px;line-height:1.5;padding:4px 0;border-top:1px solid {{ c.bdr }}"><span style="font:500 12px 'IBM Plex Mono',monospace;color:#0B6F56;white-space:nowrap">{{ c.k }}</span><span style="color:#4A615A">{{ c.v }}</span></div></sc-for></div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:10px"><span style="font-size:15px;font-weight:700">Review AI output for</span><sc-for list="{{ ai.review }}" as="r" hint-placeholder-count="6"><div style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5"><span style="width:20px;height:20px;border-radius:50%;background:#FDECEC;color:#C81E1E;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">!</span>{{ r }}</div></sc-for></div>
+    </div>
+  </div>
+</section>
+
+<section id="design" style="max-width:1240px;margin:0 auto;padding:56px 32px 24px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:760px"><span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">03 · DESIGNERS</span><h2 style="margin:0;font-size:36px;font-weight:700;letter-spacing:-.025em">Work in Figma the way the code works</h2><p style="margin:0;font-size:15.5px;line-height:1.6;color:#4A615A">Use Figma variables with the same names as the code tokens, and components with the same properties, so handoff is mostly a name check.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px"><span style="font-size:17px;font-weight:700">Library setup</span><sc-for list="{{ ds.setup }}" as="x" hint-placeholder-count="5"><div style="display:flex;gap:12px;align-items:flex-start"><span style="width:24px;height:24px;border-radius:50%;background:#E3F6EF;color:#0B6F56;font:600 11.5px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center;flex:none">{{ x.n }}</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">{{ x.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ x.v }}</span></div></div></sc-for></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px"><span style="font-size:17px;font-weight:700">File structure</span><pre style="margin:0;border-radius:14px;background:#F4F7F6;padding:14px 16px;font:400 12.5px/1.75 'IBM Plex Mono',monospace;color:#2E403B;white-space:pre-wrap">{{ ds.tree }}</pre><span style="font-size:12.5px;line-height:1.5;color:#5E7770">Component names match code: Button/Primary/Large, Input/Text/Error.</span></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px"><span style="font-size:17px;font-weight:700">Handoff checklist</span><sc-for list="{{ ds.handoff }}" as="h" hint-placeholder-count="8"><div style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45"><svg viewBox="0 0 24 24" style="width:16px;height:16px;flex:none;margin-top:2px" fill="none" stroke="#0B8F6E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{ h }}</div></sc-for></div>
+  </div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:12px">
+    <span style="font-size:17px;font-weight:700">When to make something new</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px"><sc-for list="{{ ds.flow }}" as="f" hint-placeholder-count="4"><div style="border-radius:16px;background:{{ f.bg }};padding:14px 16px;display:flex;flex-direction:column;gap:4px"><span style="font:600 12px 'IBM Plex Mono',monospace;color:{{ f.c }}">{{ f.n }}</span><span style="font-size:14.5px;font-weight:600">{{ f.k }}</span><span style="font-size:13px;line-height:1.5;color:#4A615A">{{ f.v }}</span></div></sc-for></div>
+  </div>
+</section>
+
+<section id="content" style="max-width:1240px;margin:0 auto;padding:56px 32px 24px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:760px"><span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">04 · PRODUCT AND CONTENT</span><h2 style="margin:0;font-size:36px;font-weight:700;letter-spacing:-.025em">Words and formats</h2></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:8px 24px"><sc-for list="{{ fmt }}" as="f" hint-placeholder-count="7"><div style="display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid {{ f.bdr }};font-size:13.5px;align-items:baseline"><span style="font-weight:600">{{ f.k }}</span><span style="font-family:'IBM Plex Mono',monospace;color:#0B6F56;overflow-wrap:anywhere;min-width:0">{{ f.ok }}</span><span style="font-family:'IBM Plex Mono',monospace;color:#C81E1E;text-decoration:line-through;overflow-wrap:anywhere;min-width:0">{{ f.no }}</span></div></sc-for></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:8px 24px"><sc-for list="{{ copyRules }}" as="c" hint-placeholder-count="6"><div style="display:flex;flex-direction:column;gap:4px;padding:12px 0;border-top:1px solid {{ c.bdr }}"><span style="font-size:14px;font-weight:600">{{ c.k }}</span><div style="display:flex;gap:12px;flex-wrap:wrap;font-size:13px"><span style="color:#0B6F56">✓ {{ c.ok }}</span><span style="color:#8A1414">× {{ c.no }}</span></div></div></sc-for></div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:56px 32px 80px">
+  <div style="border-radius:24px;background:#0C1F1A;color:#FFFFFF;padding:28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px;max-width:640px"><span style="font-size:22px;font-weight:700">Need something Falcon doesn't have?</span><span style="font-size:14.5px;line-height:1.6;color:#CFE1DB">Check Patterns first. If it's still missing, share the use case, a screenshot and which platforms need it with the design team. New components ship with every state, web and mobile versions, and rules.</span></div><a href="Falcon 2.0.dc.html" style="height:48px;padding:0 22px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:15px;font-weight:600;display:flex;align-items:center;white-space:nowrap">Back to Falcon 2.0</a></div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { copied: null, chk: {} };
+  copy(id, text) { try { navigator.clipboard && navigator.clipboard.writeText(text); } catch (e) {} this.setState({ copied: id }); clearTimeout(this.ct); this.ct = setTimeout(() => this.setState({ copied: null }), 1500); }
+  block(id, code) { const on = this.state.copied === id; return { code, cl: on ? 'Copied ✓' : 'Copy', cbg: on ? '#0B8F6E' : 'rgba(255,255,255,.14)', copy: () => this.copy(id, code) }; }
+  renderVals() {
+    const s = this.state;
+    const jump = [['Developers', 'Tokens, fonts, icons, RTL', '#dev', 'M16 18l6-6-6-6M8 6l-6 6 6 6'], ['AI assistants', 'Cursor, Claude Code, Copilot', '#ai', 'M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2zM19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z'], ['Designers', 'Figma setup, handoff, review', '#design', 'M12 19l7-7 3 3-7 7zM18 13l-1.5-7.5L2 2l3.5 14.5L13 18zM2 2l7.6 7.6M11 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'], ['Product and content', 'Copy, formats, requests', '#content', 'M4 6h16M4 12h16M4 18h10']].map(([k, v, h, icon]) => ({ k, v, h, icon }));
+    const golden = [['1', 'Tokens, not values', 'Use brand/600, never #0B8F6E.'], ['2', 'One primary per screen', 'The gradient button is the single next step.'], ['3', 'Money in Mono', '"− 25,000.00" with sign and two decimals.'], ['4', 'RTL from day one', 'Logical properties, mirrored arrows, Arabic font.'], ['5', 'Every state', 'Default, hover, focus, error, disabled, loading, empty.']].map(([n, k, v]) => ({ n, k, v }));
+    const TOK = `:root {
+  /* brand */
+  --brand-500: #009A78;  --brand-600: #0B8F6E;
+  --brand-700: #0A7559;  --brand-800: #0E7C62;
+  --brand-100: #E3F6EF;  --brand-50: #F3FBF8;
+  --gradient-primary: linear-gradient(90deg,#0A7559,#2C957A);
+  /* text */
+  --text-primary: #0C1F1A;  --text-secondary: #4A615A;
+  --text-tertiary: #5E7770; --text-disabled: #9AACA6;
+  /* surfaces + borders */
+  --surface-canvas: #EEF3F1; --surface-card: #FFFFFF;
+  --surface-subtle: #F4F7F6; --surface-inverse: #0C1F1A;
+  --border-subtle: #EEF2F0;  --border-control: #D7E0DC;
+  --border-input: #D9D9D9;
+  /* status */
+  --success: #0B8F6E; --warning: #B45309; --error: #E02424;
+  --danger: #C81E1E;  --info: #2F5BD3;
+  /* shape + depth */
+  --radius-s: 8px; --radius-m: 12px; --radius-xl: 20px;
+  --radius-2xl: 24px; --radius-pill: 999px;
+  --shadow-2: 0 18px 36px -16px rgba(12,31,26,.35);
+  --shadow-brand: 0 10px 22px -12px rgba(10,117,89,.8);
+  /* motion */
+  --ease: cubic-bezier(.2,.9,.2,1);
+  --dur-fast: 160ms; --dur-standard: 240ms;
+  /* type */
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
+}
+[dir="rtl"] body { font-family: var(--font-arabic); }`;
+    const FONTS = `<!-- index.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+/* amounts, IBANs, card digits, dates */
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }`;
+    const ICON = `// npm i lucide-react@0.453.0
+import { Send } from 'lucide-react';
+
+export const Icon = ({ as: I, size = 20, ...p }) =>
+  <I size={size} strokeWidth={1.7} aria-hidden {...p} />;
+
+// usage
+<Icon as={Send} />            // default 20
+<Icon as={Send} size={16} />  // inline`;
+    const RTL = `/* use logical properties, never left/right */
+.row   { padding-inline: 16px; margin-inline-start: 8px; }
+.badge { inset-inline-end: 0; }
+
+/* mirror direction icons only */
+[dir="rtl"] .icon-dir { transform: scaleX(-1); }
+
+/* numbers always read left to right */
+<bdi dir="ltr" class="num">SA57 •• 1951</bdi>
+
+/* money */
+const sar = n => (n < 0 ? '− ' : '+ ') +
+  Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2 });`;
+    const dev = [['1', 'Add the tokens', 'Paste into your global CSS. On mobile, mirror the same names in your theme file (Swift Color extension, Compose Color object, Flutter ThemeData).', 'styles/falcon-tokens.css', 'tok', TOK], ['2', 'Load the fonts', 'Three families. Use Mono with tabular numbers for anything people compare or copy.', 'index.html', 'fonts', FONTS], ['3', 'Wrap the icons', 'Lucide with Hala defaults. Only use icons from the approved set on the Icons page.', 'components/Icon.tsx', 'icon', ICON], ['4', 'Support Arabic and money formats', 'Logical CSS properties, flipped direction icons, and one shared money formatter.', 'styles/rtl.css · lib/format.ts', 'rtl', RTL]].map(([n, k, v, file, id, code]) => ({ n, k, v, file, ...this.block(id, code) }));
+    const CL = ['Uses tokens only, no raw hex or px', 'Hover, focus-visible, active, disabled states', 'Error and empty states with clear copy', 'Loading uses skeletons, not spinners on content', 'Keyboard: Tab order, Enter/Space, Esc closes', 'Touch targets ≥ 44 pt on mobile', 'Works in RTL with Arabic text', 'Respects prefers-reduced-motion'];
+    const checklist = CL.map((t, i) => { const on = !!s.chk[i]; return { t, mk: on ? '✓' : '', bd: on ? '#0B8F6E' : '#9AACA6', bg: on ? '#0B8F6E' : '#FFFFFF', td: on ? 'line-through' : 'none', fg: on ? '#8A9C96' : '#0C1F1A', toggle: () => this.setState({ chk: { ...s.chk, [i]: !on } }) }; });
+    const nDone = CL.filter((_, i) => s.chk[i]).length;
+    const platforms = [['Web', 'React + CSS variables from falcon-tokens.css. lucide-react.'], ['iOS', 'SwiftUI. Tokens as Color/Font extensions. Lucide SVGs in the asset catalog, sheets for overlays.'], ['Android', 'Jetpack Compose. Tokens in a FalconTheme object. Lucide as vector drawables, Material 3 pickers.'], ['Flutter', 'ThemeData + ThemeExtension for tokens. lucide_icons_flutter or flutter_svg.'], ['Email / PDF', 'Inline styles with the same hex values; Plex with system fallback.']].map(([k, v], i) => ({ k, v, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const RULES = `# Falcon 2.0 — Hala design system rules
+
+You are building UI for Hala Business (Saudi business banking).
+Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
+
+## Tokens
+- Use CSS variables from styles/falcon-tokens.css. Never hard-code hex, px radius or shadows.
+- Canvas var(--surface-canvas), cards var(--surface-card), radius var(--radius-xl) for cards.
+- Primary action = var(--gradient-primary), pill radius, var(--shadow-brand). ONE per screen.
+- Secondary = white, 1px var(--border-control). Destructive = #FDECEC bg, var(--danger) text.
+
+## Type
+- IBM Plex Sans for UI, IBM Plex Mono for amounts/IBANs/card digits/dates/codes.
+- Arabic: IBM Plex Sans Arabic, +1–2px size, line-height 1.6–1.75, no letter-spacing.
+- Money: "− 25,000.00" / "+ 86.25", "SAR" before the number, 2 decimals, tabular-nums.
+
+## Icons
+- lucide-react only, strokeWidth 1.7, sizes 16/20/22/28. Use the approved list in Hala Icons.
+- Icon-only buttons need aria-label and a tooltip.
+
+## Layout and behavior
+- Inputs: 60px, floating label, 8px radius, error text below. Validate on blur.
+- Tables: amounts right-aligned, one visible row action, sticky header.
+- Overlays: modal for decisions, drawer for details, bottom sheet on mobile. Never stack modals.
+- Feedback: toast for routine success, inline alert for problems.
+- Every component: hover, focus-visible, active, disabled, loading, empty, error.
+
+## RTL and a11y
+- Logical properties only (padding-inline, inset-inline-start). Mirror direction icons.
+- Wrap numbers in <bdi dir="ltr">. Touch targets ≥ 44px. Respect prefers-reduced-motion.
+
+## Saudi specifics
+- Week starts Sunday. Banks closed Fri–Sat. Show VAT 15%. Times in Riyadh (GMT+3).
+- Dates DD/MM/YYYY. 12h in English by default.
+
+## Don't
+- No new colors, gradients, emoji, or fonts. No zebra tables. No red for normal spending.`;
+    const at = s.at ?? 0;
+    const TOOLS = [['Cursor', '.cursor/rules/falcon.mdc', '---\ndescription: Falcon 2.0 design system\nglobs: ["**/*.tsx","**/*.css"]\nalwaysApply: true\n---\n\n'], ['Claude Code', 'CLAUDE.md', ''], ['Copilot / others', '.github/copilot-instructions.md', '']];
+    const prompts = [['Build a component', 'Build a <TransferAmountInput> using Falcon 2.0.\nRead .cursor/rules/falcon.mdc and styles/falcon-tokens.css.\nInclude: default, focus, filled, error ("Amount is above your daily limit"), disabled.\nAmount in Mono, SAR prefix, RTL support. Show me all states in a story.'], ['Build a screen', 'Build the "Order POS terminals" step 1 screen, web.\nUse Falcon components only: selection cards with quantity steppers, a live order summary with VAT 15%, one primary button.\nNo new colors. List any component you had to invent.'], ['Review my code', 'Review this file against Falcon 2.0 rules.\nList: hard-coded values, missing states, RTL issues, a11y issues, more than one primary button.\nSuggest fixes as a diff.'], ['Mobile version', 'Convert this web table to the Falcon mobile pattern:\nlist rows (two lines left, amount + status right), swipe actions Approve/Later, 64pt rows, 16pt margins.']].map(([k, code], i) => { const on = s.copied === 'p' + i; return { k, code, cl: on ? 'Copied ✓' : 'Copy', bbg: on ? '#0B8F6E' : '#FFFFFF', bfg: on ? '#FFFFFF' : '#0C1F1A', copy: () => this.copy('p' + i, code) }; });
+    const ai = { path: TOOLS[at][1], rules: this.block('rules' + at, TOOLS[at][2] + RULES),
+      tools: TOOLS.map(([l], i) => { const on = at === i; return { l, bg: on ? '#FFFFFF' : 'transparent', sh: on ? '0 1px 3px rgba(12,31,26,.14)' : 'none', fw: on ? 600 : 500, fg: on ? '#0C1F1A' : '#5E7770', pick: () => this.setState({ at: i }) }; }),
+      prompts, ctx: [['@rules', 'falcon.mdc or CLAUDE.md, always on'], ['@tokens', 'styles/falcon-tokens.css'], ['@component', 'An existing Falcon component as an example'], ['@screenshot', 'The Falcon page for that component'], ['@data', 'Real field names and sample values']].map(([k, v], i) => ({ k, v, bdr: i ? '#EEF2F0' : 'transparent' })),
+      review: ['Hard-coded colors or sizes instead of tokens', 'Two gradient buttons on one screen', 'Amounts not in Mono or missing decimals', 'left / right instead of logical properties', 'Missing focus, disabled or error states', 'Invented icons or icons outside the approved set'] };
+    const ds = {
+      setup: [['Enable the library', 'Turn on "Falcon 2.0" in Assets. Don\'t detach components.'], ['Use variables', 'Colors, radius and spacing as variables with code names (brand/600, radius/xl).'], ['Use text styles', 'heading/xl, body/m, amount/m… same names as the type scale.'], ['Set modes', 'Light, plus Arabic mode that swaps the font and mirrors auto layout.'], ['Start from templates', 'Web page with sidebar, mobile screen with tab bar, modal, drawer, sheet.']].map(([k, v], i) => ({ n: String(i + 1), k, v })),
+      tree: `Falcon 2.0 (library)
+├─ 00 Cover
+├─ 01 Foundations   color · type · space · radius · shadow · motion
+├─ 02 Icons         Lucide 1.7 · approved set
+├─ 03 Components    Button · Input · Table · Overlay …
+├─ 04 Patterns      do / don't
+└─ 05 Templates     web page · mobile screen
+
+Product file
+├─ 🟢 Ready for dev
+├─ 🟡 In review
+└─ ⚪ Exploration`,
+      handoff: ['Every state designed, including empty, error and loading', 'Web and mobile frames, or a note saying why not', 'Arabic frame for any new layout', 'Only library components and variables (no detached instances)', 'Real copy, real amounts with SAR and decimals', 'Interactions noted: what opens, what closes, what animates', 'Edge cases: long names, 0 results, limit reached', 'Linked to the ticket and moved to "Ready for dev"'],
+      flow: [['1', 'Reuse', 'An existing component covers it. Use it as is.', '#E3F6EF', '#0B6F56'], ['2', 'Configure', 'Same component, different props or content.', '#E3F6EF', '#0B6F56'], ['3', 'Compose', 'Combine components following Patterns.', '#E8F0FF', '#1E3A8A'], ['4', 'Propose', 'Truly new: share the use case with the design team before building.', '#FFF4E0', '#7A4508']].map(([n, k, v, bg, c]) => ({ n, k, v, bg, c })) };
+    const fmt = [['Money', 'SAR 25,000.00', '25000 SR'], ['Signed amount', '− 1,249.00', '-1249'], ['Date', '14/10/2026', '10/14/2026'], ['Relative date', 'Today, 12:41', '14 Oct 2026 12:41:07'], ['Time', '04:00 PM', '16:00:00'], ['IBAN', 'SA57 •• 1951', 'SA5700000000001951'], ['Card', '•• 4417', 'XXXX-XXXX-XXXX-4417']].map(([k, ok, no], i) => ({ k, ok, no, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const copyRules = [['Buttons are verbs', 'Send SAR 25,000', 'OK'], ['Errors say how to fix', 'Saudi IBANs have 24 characters', 'Invalid input'], ['Say what happens next', 'Arrives next business day', 'Success!'], ['Sentence case', 'Add beneficiary', 'Add Beneficiary'], ['Use names, not IDs', 'Freeze Marketing card?', 'Freeze card #2086?'], ['No blame', 'We couldn\'t reach the bank', 'You entered wrong data']].map(([k, ok, no], i) => ({ k, ok, no, bdr: i ? '#EEF2F0' : 'transparent' }));
+    return { jump, golden, dev, checklist, checkSum: `${nDone} of ${CL.length} done`, platforms, ai, ds, fmt, copyRules };
+  }
+}
+</script>
+</body>
+</html>

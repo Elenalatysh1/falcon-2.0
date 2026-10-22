@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#EEF3F1}body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#0B8F6E;text-decoration:none}a:hover{color:#066A51}input,select,button{font-family:inherit}</style>
+</helmet>
+<div style="min-height:100vh;display:flex;align-items:flex-start;background:radial-gradient(900px 600px at 0% 0%,rgba(61,245,176,.16),transparent 60%),#EEF3F1">
+
+<aside style="position:sticky;top:14px;z-index:25;width:{{ sbW }};flex:none;margin:14px 0 14px 14px;height:calc(100vh - 28px);border-radius:24px;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.9);box-shadow:0 24px 60px -28px rgba(12,60,48,.28),0 1px 3px rgba(12,31,26,.05);display:flex;flex-direction:column;overflow:hidden;transition:width .22s ease">
+  <div style="padding:20px 16px 0;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;justify-content:{{ sbHeadJustify }};min-height:36px;padding:0 6px">
+      <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}"><span style="font-size:26px;font-weight:700;letter-spacing:.14em;background:linear-gradient(100deg,#07785C,#0FA37F 55%,#22C997);-webkit-background-clip:text;background-clip:text;color:transparent">HALA</span></sc-if>
+      <button onClick="{{ toggleSb }}" aria-label="{{ sbToggleLabel }}" title="{{ sbToggleLabel }}" style="width:32px;height:32px;border:0;border-radius:10px;background:transparent;color:#5E7770;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(12,31,26,.06);color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M9 4v16"></path><path d="{{ sbToggleIcon }}"></path></svg></button>
+    </div>
+    <button onClick="{{ openAcct }}" title="{{ acctName }}" aria-haspopup="listbox" style="display:flex;align-items:center;gap:12px;padding:{{ acctPad }};justify-content:{{ sbJustify }};border-radius:14px;border:1px solid rgba(12,31,26,.07);background:#F7FAF9;cursor:pointer;text-align:left" style-hover="border-color:rgba(15,163,127,.35)">
+      <span style="width:36px;height:36px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0FA37F,#0A5C4A);color:#EFFFF9;font-weight:700;font-size:16px">H</span>
+      <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14px;font-weight:600;color:#0C1F1A">{{ acctName }}</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#5E7770">{{ acctSub }}</span></div><svg viewBox="0 0 24 24" style="width:16px;height:16px;flex:none" fill="none" stroke="#5E7770" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5M7 9l5-5 5 5"></path></svg></sc-if>
+    </button>
+  </div>
+  <sc-if value="{{ popAcct }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:{{ popLeft }};top:{{ acctPopTop }};z-index:40;width:250px;background:#FFFFFF;border:1px solid rgba(12,31,26,.08);border-radius:14px;box-shadow:0 18px 40px -12px rgba(12,31,26,.25);padding:6px">
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:.08em;color:#6B827B;padding:8px 10px 6px">SWITCH ACCOUNT</span>
+      <sc-for list="{{ accounts }}" as="a" hint-placeholder-count="2"><button onClick="{{ a.pick }}" style="width:100%;border:0;background:{{ a.bg }};border-radius:10px;padding:10px;display:flex;align-items:center;gap:10px;cursor:pointer;text-align:left" style-hover="background:#F2F6F4"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:500;color:#0C1F1A">{{ a.name }}</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#5E7770">{{ a.sub }}</span></div><span style="color:#0B8F6E;font-size:14px">{{ a.mark }}</span></button></sc-for>
+    </div>
+  </sc-if>
+
+  <nav aria-label="Main" style="flex:1;overflow-y:auto;scrollbar-width:none;padding:8px 12px 12px;display:flex;flex-direction:column">
+    <sc-for list="{{ sections }}" as="g" hint-placeholder-count="4">
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-if value="{{ g.x }}" hint-placeholder-val="{{ true }}"><span style="padding:16px 12px 6px;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6B827B">{{ g.label }}</span></sc-if>
+        <sc-if value="{{ g.c }}" hint-placeholder-val="{{ false }}"><span style="height:1px;background:rgba(12,31,26,.07);margin:12px 10px"></span></sc-if>
+        <sc-for list="{{ g.items }}" as="n" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column">
+            <button onClick="{{ n.pick }}" title="{{ n.tip }}" aria-current="{{ n.cur }}" style="position:relative;height:42px;border:0;border-radius:12px;padding:0 12px;display:flex;align-items:center;gap:12px;justify-content:{{ n.j }};cursor:pointer;background:{{ n.bg }};color:{{ n.fg }};font-size:14px;font-weight:{{ n.fw }};text-align:left;transition:background .15s" style-hover="background:{{ n.hbg }}">
+              <span style="position:absolute;left:-12px;top:11px;bottom:11px;width:3px;border-radius:0 3px 3px 0;background:{{ n.bar }}"></span>
+              <svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg>
+              <sc-if value="{{ n.x }}" hint-placeholder-val="{{ true }}"><span style="flex:1">{{ n.label }}</span></sc-if>
+              <sc-if value="{{ n.isNew }}" hint-placeholder-val="{{ false }}"><span style="font:500 9.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;padding:3px 6px;border-radius:6px;color:#0B6F56;background:#E3F6EF">NEW</span></sc-if>
+              <sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span title="{{ n.badgeTip }}" style="min-width:20px;height:20px;padding:0 6px;border-radius:999px;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;background:#FFF1DE;color:#94550A;position:{{ n.bPos }};top:1px;right:2px">{{ n.badge }}</span></sc-if>
+              <sc-if value="{{ n.dot }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:9px;right:12px;width:7px;height:7px;border-radius:50%;background:#0FA37F;border:1.5px solid #FFFFFF"></span></sc-if>
+              <sc-if value="{{ n.chev }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px;flex:none;opacity:.6;transform:{{ n.rot }};transition:transform .3s cubic-bezier(.2,.9,.2,1)" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></sc-if>
+            </button>
+            <sc-if value="{{ n.hasKids }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-rows:{{ n.rows }};transition:grid-template-rows .3s cubic-bezier(.2,.9,.2,1)">
+                <div style="overflow:hidden;min-height:0">
+                  <div style="position:relative;display:flex;flex-direction:column;gap:1px;padding:2px 0 6px 34px">
+                    <span style="position:absolute;left:21px;top:4px;bottom:10px;width:1px;background:rgba(12,31,26,.09)"></span>
+                    <sc-for list="{{ n.kids }}" as="k" hint-placeholder-count="2"><button onClick="{{ k.pick }}" aria-current="{{ k.cur }}" style="height:34px;border:0;border-radius:10px;padding:0 12px;text-align:left;cursor:pointer;font-size:13.5px;background:{{ k.bg }};color:{{ k.fg }};font-weight:{{ k.fw }}" style-hover="color:#0C1F1A;background:rgba(12,31,26,.04)">{{ k.label }}</button></sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </nav>
+
+  <div style="padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(12,31,26,.06)">
+    <sc-for list="{{ footLinks }}" as="l" hint-placeholder-count="2"><button onClick="{{ l.pick }}" title="{{ l.tip }}" style="height:38px;border:0;border-radius:12px;padding:0 12px;display:flex;align-items:center;gap:12px;justify-content:{{ l.j }};cursor:pointer;background:{{ l.bg }};color:{{ l.fg }};font-size:13.5px;text-align:left" style-hover="background:rgba(12,31,26,.04)"><svg viewBox="0 0 24 24" style="width:19px;height:19px;flex:none" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ l.icon }}"></path></svg><sc-if value="{{ l.x }}" hint-placeholder-val="{{ true }}"><span>{{ l.label }}</span></sc-if></button></sc-for>
+    <button onClick="{{ openUser }}" title="Abdulaziz Ali" style="margin-top:6px;display:flex;align-items:center;gap:12px;padding:{{ userPad }};justify-content:{{ sbJustify }};border-radius:16px;border:1px solid rgba(12,31,26,.07);background:{{ userBg }};cursor:pointer;text-align:left" style-hover="border-color:rgba(15,163,127,.3)">
+      <span style="position:relative;width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#1E3A9E;background:linear-gradient(135deg,#DCE5FF,#B9C9FF)">AA<span style="position:absolute;right:-1px;bottom:-1px;width:11px;height:11px;border-radius:50%;background:#0FA37F;border:2px solid #FFFFFF"></span></span>
+      <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14px;font-weight:600;color:#0C1F1A">Abdulaziz Ali</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#5E7770;letter-spacing:.04em">MANAGER</span></div><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none" fill="#5E7770"><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></svg></sc-if>
+    </button>
+  </div>
+  <sc-if value="{{ popUser }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:{{ popLeft }};bottom:86px;z-index:40;width:250px;background:#FFFFFF;border:1px solid rgba(12,31,26,.08);border-radius:14px;box-shadow:0 18px 40px -12px rgba(12,31,26,.25);padding:6px">
+      <div style="padding:10px 10px 12px;border-bottom:1px solid #EEF2F0;margin-bottom:4px;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">Abdulaziz Ali</span><span style="font-size:12px;color:#5E7770">abdulaziz@khamis.sa</span></div>
+      <sc-for list="{{ userMenu }}" as="u" hint-placeholder-count="3"><button onClick="{{ u.pick }}" style="width:100%;height:38px;border:0;border-radius:8px;background:transparent;padding:0 10px;text-align:left;cursor:pointer;font-size:14px;color:{{ u.fg }}" style-hover="background:#F2F6F4">{{ u.label }}</button></sc-for>
+    </div>
+  </sc-if>
+</aside>
+
+<main style="flex:1;min-width:0;padding:14px 28px 48px 24px;display:flex;flex-direction:column;gap:20px">
+  <header style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-height:64px">
+    <div style="display:flex;flex-direction:column;gap:2px;margin-right:auto"><h1 style="margin:0;font-size:24px;font-weight:700;letter-spacing:-.01em">{{ pageTitle }}</h1><span style="font-size:13px;color:#5E7770">{{ pageSub }}</span></div>
+    <button onClick="{{ openCmd }}" style="flex:0 1 340px;min-width:200px;height:42px;border:1px solid rgba(12,31,26,.08);border-radius:12px;background:#FFFFFF;display:flex;align-items:center;gap:10px;padding:0 12px;cursor:pointer;color:#6B827B;font-size:14px" style-hover="border-color:rgba(15,163,127,.4)"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none" fill="none" stroke="#0C1F1A" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><span style="flex:1;text-align:left">Search pages and actions</span><span style="font:500 11px 'IBM Plex Mono',monospace;padding:2px 6px;border:1px solid rgba(12,31,26,.1);border-radius:6px;color:#5E7770">⌘K</span></button>
+    <div style="position:relative;display:flex;gap:10px">
+      <button onClick="{{ openBell }}" aria-label="Notifications and tasks" title="Notifications and tasks" style="position:relative;width:42px;height:42px;border:1px solid rgba(12,31,26,.08);border-radius:12px;background:{{ bellBg }};cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0C1F1A" style-hover="border-color:rgba(15,163,127,.4)"><svg viewBox="0 0 24 24" style="width:19px;height:19px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"></path></svg><sc-if value="{{ hasBell }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#E5484D;color:#FFFFFF;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;border:2px solid #EEF3F1">{{ bellCount }}</span></sc-if></button>
+      <button onClick="{{ openQuick }}" style="height:42px;padding:0 16px;border:0;border-radius:12px;background:linear-gradient(90deg,#0A7559,#2C957A);display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:500;color:#FFFFFF;box-shadow:0 8px 18px -10px rgba(10,117,89,.7)" style-hover="filter:brightness(1.08)"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Quick action<svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg></button>
+      <sc-if value="{{ popBell }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;right:0;top:52px;z-index:30;width:390px;background:#FFFFFF;border:1px solid rgba(12,31,26,.08);border-radius:16px;box-shadow:0 22px 50px -14px rgba(12,31,26,.3);overflow:hidden">
+          <div style="display:flex;align-items:center;gap:4px;padding:10px 10px 0;border-bottom:1px solid #EEF2F0">
+            <sc-for list="{{ bellTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="height:40px;padding:0 12px;border:0;background:transparent;cursor:pointer;font-size:14px;font-weight:{{ t.fw }};color:{{ t.fg }};border-bottom:2px solid {{ t.bd }};display:flex;align-items:center;gap:6px">{{ t.label }}<span style="font-size:11px;font-weight:600;padding:1px 6px;border-radius:999px;background:{{ t.cbg }};color:{{ t.cfg }}">{{ t.count }}</span></button></sc-for>
+            <sc-if value="{{ showMarkRead }}" hint-placeholder-val="{{ false }}"><button onClick="{{ markRead }}" style="margin-left:auto;border:0;background:transparent;color:#0B8F6E;font-size:13px;font-weight:500;cursor:pointer;padding:0 6px">Mark all as read</button></sc-if>
+          </div>
+          <sc-if value="{{ tabTasks }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;padding:6px">
+              <sc-for list="{{ tasks }}" as="t" hint-placeholder-count="2">
+                <div style="display:flex;gap:12px;padding:12px 10px;border-radius:12px" style-hover="background:#F7FAF9">
+                  <span style="width:32px;height:32px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:{{ t.ibg }};color:{{ t.ifg }}"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg></span>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:3px"><span style="font-size:14px;font-weight:600">{{ t.title }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ t.desc }}</span><button onClick="{{ t.act }}" style="align-self:flex-start;margin-top:4px;border:0;background:transparent;padding:0;font-size:13px;font-weight:600;color:{{ t.ac }};cursor:pointer;text-decoration:underline;text-underline-offset:3px">{{ t.cta }}</button></div>
+                  <button onClick="{{ t.close }}" aria-label="Dismiss task" style="width:26px;height:26px;border:0;border-radius:8px;background:transparent;color:#6B827B;cursor:pointer;font-size:16px;flex:none" style-hover="background:#EEF2F0">×</button>
+                </div>
+              </sc-for>
+              <sc-if value="{{ noTasks }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:36px 28px 32px;text-align:center">
+                  <span style="width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#E9FBF4,#D2F2E6);color:#0B8F6E;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px #F4FBF8"><svg viewBox="0 0 24 24" style="width:26px;height:26px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"></path></svg></span>
+                  <span style="margin-top:8px;font-size:16px;font-weight:600">You're all caught up</span>
+                  <span style="font-size:13px;line-height:1.5;color:#5E7770;max-width:260px">New tasks and offers will show up here and as a notification.</span>
+                  <button onClick="{{ restoreTasks }}" style="margin-top:6px;border:0;background:transparent;color:#0B8F6E;font-size:13px;font-weight:500;cursor:pointer">Restore demo tasks</button>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+          <sc-if value="{{ tabUpdates }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;padding:6px">
+              <sc-for list="{{ notifs }}" as="n" hint-placeholder-count="3"><div style="display:flex;gap:12px;padding:12px 10px;border-radius:12px;background:{{ n.bg }}"><span style="width:8px;height:8px;border-radius:50%;margin-top:7px;flex:none;background:{{ n.dot }}"></span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:500">{{ n.t }}</span><span style="font-size:13px;color:#5E7770">{{ n.s }}</span></div><span style="font-size:12px;color:#8A9C96">{{ n.time }}</span></div></sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ popQuick }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;right:0;top:52px;z-index:30;width:250px;background:#FFFFFF;border:1px solid rgba(12,31,26,.08);border-radius:14px;box-shadow:0 22px 50px -14px rgba(12,31,26,.3);padding:6px">
+          <sc-for list="{{ quick }}" as="q" hint-placeholder-count="6"><button onClick="{{ q.pick }}" style="width:100%;height:40px;border:0;border-radius:8px;background:transparent;display:flex;align-items:center;gap:10px;padding:0 10px;cursor:pointer;font-size:14px;color:#0C1F1A;text-align:left" style-hover="background:#F2F6F4"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none" fill="none" stroke="#0B8F6E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ q.icon }}"></path></svg>{{ q.label }}</button></sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </header>
+
+  <sc-if value="{{ isOther }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#FFFFFF;border:1px solid rgba(12,31,26,.06);border-radius:20px;padding:64px 32px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+      <span style="width:56px;height:56px;border-radius:16px;background:#E3F6EF;color:#0B8F6E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:26px;height:26px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ otherIcon }}"></path></svg></span>
+      <span style="font-size:20px;font-weight:600">{{ pageTitle }}</span>
+      <span style="font-size:14px;color:#5E7770;max-width:380px">This page isn't part of the prototype yet. The dashboard is fully interactive.</span>
+      <button onClick="{{ goDash }}" style="margin-top:8px;height:44px;padding:0 22px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:500;cursor:pointer">Back to dashboard</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+    <div style="flex:1 1 620px;min-width:0;display:flex;flex-direction:column;gap:20px">
+
+      <section style="position:relative;overflow:hidden;border-radius:20px;padding:26px 28px;background:#0C1F1A;color:#FFFFFF;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end">
+        <div style="position:absolute;right:-120px;bottom:-160px;width:460px;height:360px;border-radius:50%;background:radial-gradient(closest-side,rgba(34,201,151,.45),rgba(34,201,151,0));pointer-events:none"></div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;color:#A9C2B9">Account balance</span><button onClick="{{ toggleHide }}" aria-label="{{ hideLabel }}" title="{{ hideLabel }}" style="width:28px;height:28px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(255,255,255,.16)"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ eyeIcon }}"></path></svg></button></div>
+          <div style="display:flex;align-items:baseline;gap:10px"><span style="font-size:18px;font-weight:500;color:#A9C2B9">SAR</span><span style="font-size:50px;font-weight:600;letter-spacing:-.02em;line-height:1">{{ balMain }}</span><span style="font-size:22px;font-weight:500;color:#A9C2B9">{{ balDec }}</span></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:2px"><span style="font:400 13px 'IBM Plex Mono',monospace;color:#A9C2B9">SA57 3010 **** 1951</span><button onClick="{{ copyIban }}" title="Copy IBAN" style="height:26px;padding:0 10px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:transparent;color:#FFFFFF;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px" style-hover="background:rgba(255,255,255,.1)"><svg viewBox="0 0 24 24" style="width:13px;height:13px" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>Copy</button></div>
+        </div>
+        <div style="position:relative;display:flex;gap:10px">
+          <button onClick="{{ openTransfer }}" style="height:46px;padding:0 22px;border:0;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#E3F6EF"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="#0B8F6E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"></path></svg>Transfer</button>
+          <button onClick="{{ openSadad }}" style="height:46px;padding:0 22px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.06);color:#FFFFFF;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:rgba(255,255,255,.14)"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5"></path></svg>Pay bill</button>
+        </div>
+      </section>
+
+      <section style="background:#FFFFFF;border:1px solid rgba(12,31,26,.06);border-radius:20px;padding:24px 26px;display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:2px"><h2 style="margin:0;font-size:20px;font-weight:700">Sales insights</h2><span style="font-size:13px;color:#5E7770">POS and eCommerce · updated 27 Feb 2025</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="position:relative">
+              <button onClick="{{ openLoc }}" style="height:38px;padding:0 12px;border:1px solid rgba(12,31,26,.1);border-radius:10px;background:#FFFFFF;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13.5px;font-weight:500;color:#0C1F1A" style-hover="border-color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="#5E7770" stroke-width="1.7"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>{{ locLabel }}<svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"></path></svg></button>
+              <sc-if value="{{ popLoc }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;left:0;top:44px;z-index:30;width:260px;max-height:320px;overflow-y:auto;background:#FFFFFF;border:1px solid rgba(12,31,26,.08);border-radius:12px;box-shadow:0 22px 50px -14px rgba(12,31,26,.3);padding:6px">
+                  <sc-for list="{{ locOpts }}" as="o" hint-placeholder-count="6"><button onClick="{{ o.pick }}" style="width:100%;height:38px;border:0;border-radius:8px;background:{{ o.bg }};display:flex;align-items:center;justify-content:space-between;padding:0 10px;cursor:pointer;font-size:14px;color:{{ o.fg }};font-weight:{{ o.fw }}" style-hover="background:#F2F6F4"><span>{{ o.name }}</span><span style="font-size:12px;color:#8A9C96">{{ o.meta }}</span></button></sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <div style="position:relative">
+              <button onClick="{{ openRange }}" style="height:38px;padding:0 12px;border:1px solid rgba(12,31,26,.1);border-radius:10px;background:#FFFFFF;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13.5px;font-weight:500;color:#0C1F1A" style-hover="border-color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="#5E7770" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>{{ rangeLabel }}<svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l6 6 6-6"></path></svg></button>
+              <sc-if value="{{ popRange }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;right:0;top:44px;z-index:30;width:220px;background:#FFFFFF;border:1px solid rgba(12,31,26,.08);border-radius:12px;box-shadow:0 22px 50px -14px rgba(12,31,26,.3);padding:6px">
+                  <sc-for list="{{ rangeOpts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" style="width:100%;height:38px;border:0;border-radius:8px;background:{{ o.bg }};padding:0 10px;cursor:pointer;font-size:14px;color:{{ o.fg }};font-weight:{{ o.fw }};text-align:left" style-hover="background:#F2F6F4">{{ o.label }}</button></sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <div role="tablist" style="display:flex;background:#F2F6F4;border-radius:10px;padding:3px;height:38px">
+              <sc-for list="{{ grans }}" as="g" hint-placeholder-count="3"><button onClick="{{ g.pick }}" title="{{ g.title }}" style="height:32px;padding:0 12px;border:0;border-radius:8px;font-size:13px;font-weight:500;cursor:{{ g.cur }};background:{{ g.bg }};color:{{ g.fg }};box-shadow:{{ g.sh }}">{{ g.label }}</button></sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div role="tablist" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border:1px solid #EDF1EF;border-radius:14px;overflow:hidden">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="3">
+            <button onClick="{{ k.pick }}" aria-selected="{{ k.sel }}" style="position:relative;text-align:left;padding:16px 18px;cursor:pointer;border:0;border-right:1px solid #EDF1EF;background:{{ k.bg }};display:flex;flex-direction:column;gap:6px;color:#0C1F1A" style-hover="background:#F7FAF9">
+              <span style="position:absolute;left:0;right:0;bottom:0;height:2px;background:{{ k.bar }}"></span>
+              <span style="font-size:13px;color:#5E7770">{{ k.label }}</span>
+              <span style="font-size:22px;font-weight:700;letter-spacing:-.01em">{{ k.val }}</span>
+              <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6B827B"><span style="font-weight:600;color:{{ k.dc }}">{{ k.delta }}</span>vs previous {{ prevLabel }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap"><span style="font-size:14px;font-weight:600">{{ chartTitle }}</span><span style="display:flex;align-items:center;gap:8px;font-size:12px;color:#5E7770"><span style="width:16px;border-top:1.5px dashed #0C1F1A"></span>Average {{ chartAvg }}</span></div>
+          <div style="position:relative;height:230px;padding-left:46px" onMouseLeave="{{ clearHover }}">
+            <sc-for list="{{ yTicks }}" as="y" hint-placeholder-count="4"><div style="position:absolute;left:0;right:0;bottom:{{ y.b }};display:flex;align-items:center;gap:8px;pointer-events:none"><span style="width:38px;text-align:right;font:400 11px 'IBM Plex Mono',monospace;color:#8A9C96">{{ y.t }}</span><span style="flex:1;border-top:1px solid #F0F3F2"></span></div></sc-for>
+            <div style="position:absolute;left:46px;right:0;bottom:{{ avgB }};border-top:1.5px dashed rgba(12,31,26,.6);pointer-events:none;z-index:2"></div>
+            <div style="position:relative;height:100%;display:flex;align-items:flex-end;justify-content:space-around;gap:{{ barGap }}">
+              <sc-for list="{{ bars }}" as="b" hint-placeholder-count="40"><div onMouseEnter="{{ b.hover }}" style="flex:1;max-width:72px;height:100%;display:flex;align-items:flex-end;cursor:pointer"><div style="width:100%;height:{{ b.h }};border-radius:4px 4px 1px 1px;background:{{ b.bg }};transition:height .25s,background .15s"></div></div></sc-for>
+            </div>
+            <sc-if value="{{ tip.show }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:-6px;left:{{ tip.left }};transform:{{ tip.tx }};z-index:5;background:#0C1F1A;color:#FFFFFF;border-radius:10px;padding:8px 12px;display:flex;flex-direction:column;gap:2px;pointer-events:none;white-space:nowrap;box-shadow:0 8px 20px -6px rgba(0,0,0,.35)"><span style="font-size:12px;color:#A9C2B9">{{ tip.title }}</span><span style="font:500 14px 'IBM Plex Mono',monospace">{{ tip.main }}</span><span style="font-size:12px;color:#A9C2B9">{{ tip.sub }}</span></div>
+            </sc-if>
+          </div>
+          <div style="display:flex;justify-content:space-around;gap:{{ barGap }};padding-left:46px;height:16px">
+            <sc-for list="{{ xLabels }}" as="x" hint-placeholder-count="40"><div style="flex:1;max-width:72px;position:relative"><span style="position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;font:400 11px 'IBM Plex Mono',monospace;color:#8A9C96">{{ x }}</span></div></sc-for>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;padding-top:20px;border-top:1px solid #EFF3F1">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="font-size:14px;font-weight:600">By card scheme</span>
+              <div style="display:flex;background:#F2F6F4;border-radius:8px;padding:3px"><sc-for list="{{ schemeModes }}" as="m" hint-placeholder-count="2"><button onClick="{{ m.pick }}" style="height:26px;padding:0 10px;border:0;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;background:{{ m.bg }};color:{{ m.fg }};box-shadow:{{ m.sh }}">{{ m.label }}</button></sc-for></div>
+            </div>
+            <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px"><sc-for list="{{ schemes }}" as="s" hint-placeholder-count="5"><span onMouseEnter="{{ s.hover }}" style="width:{{ s.w }};background:{{ s.c }};opacity:{{ s.op }};transition:opacity .15s"></span></sc-for></div>
+            <div style="display:flex;flex-direction:column" onMouseLeave="{{ clearScheme }}">
+              <sc-for list="{{ schemes }}" as="s" hint-placeholder-count="5"><div onMouseEnter="{{ s.hover }}" style="display:grid;grid-template-columns:10px 1fr auto 48px;gap:12px;align-items:center;padding:8px;border-radius:8px;background:{{ s.rowBg }}"><span style="width:10px;height:10px;border-radius:3px;background:{{ s.c }}"></span><span style="font-size:14px">{{ s.name }}</span><span style="font:500 13px 'IBM Plex Mono',monospace">{{ s.amt }}</span><span style="font-size:13px;color:#5E7770;text-align:right">{{ s.pct }}</span></div></sc-for>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;height:32px"><span style="font-size:14px;font-weight:600">Top locations</span><span style="font-size:12px;color:#6B827B">Select to filter</span></div>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <sc-for list="{{ topLocs }}" as="l" hint-placeholder-count="5"><button onClick="{{ l.pick }}" style="border:0;background:{{ l.bg }};border-radius:8px;padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:6px;text-align:left;color:#0C1F1A" style-hover="background:#F7FAF9"><span style="display:flex;justify-content:space-between;font-size:14px;width:100%"><span style="font-weight:{{ l.fw }}">{{ l.name }}</span><span style="font:500 13px 'IBM Plex Mono',monospace">{{ l.amt }}</span></span><span style="width:100%;height:5px;border-radius:999px;background:#F0F3F2;display:block"><span style="display:block;width:{{ l.w }};height:100%;border-radius:999px;background:{{ l.c }}"></span></span></button></sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div style="flex:1 1 300px;max-width:380px;min-width:0;display:flex;flex-direction:column;gap:20px">
+      <section style="background:#FFFFFF;border:1px solid rgba(12,31,26,.06);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;flex-direction:column;gap:2px"><h2 style="margin:0;font-size:16px;font-weight:700">Assets snapshot</h2><span style="font-size:13px;color:#5E7770">Your connected ecosystem in numbers</span></div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ assets }}" as="a" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid #F0F3F2">
+              <span style="width:36px;height:36px;border-radius:10px;background:#F2F6F4;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#0C1F1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg></span>
+              <div style="flex:1;display:flex;align-items:baseline;gap:6px"><span style="font-size:18px;font-weight:700">{{ a.n }}</span><span style="font-size:13px;color:#5E7770">{{ a.label }}</span></div>
+              <button onClick="{{ a.pick }}" style="height:30px;padding:0 12px;border:1px solid rgba(12,31,26,.1);border-radius:999px;background:#FFFFFF;color:#0B8F6E;font-size:12.5px;font-weight:600;cursor:pointer" style-hover="border-color:#0B8F6E">{{ a.cta }}</button>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+      <section style="background:#FFFFFF;border:1px solid rgba(12,31,26,.06);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><h2 style="margin:0;font-size:16px;font-weight:700">Recent activity</h2><button onClick="{{ goTx }}" style="border:0;background:transparent;color:#0B8F6E;font-size:13px;font-weight:600;cursor:pointer">View all</button></div>
+        <sc-for list="{{ recent }}" as="r" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 0">
+            <span style="width:36px;height:36px;border-radius:50%;flex:none;background:{{ r.ibg }};color:{{ r.ifg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ r.arrow }}"></path></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.t }}</span><span style="font-size:12px;color:#8A9C96">{{ r.s }}</span></div>
+            <span style="font:500 13px 'IBM Plex Mono',monospace;color:{{ r.ac }};white-space:nowrap">{{ r.amt }}</span>
+          </div>
+        </sc-for>
+      </section>
+    </div>
+  </div>
+  </sc-if>
+</main>
+</div>
+
+<sc-if value="{{ anyPop }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closePop }}" style="position:fixed;inset:0;z-index:20"></div></sc-if>
+
+<sc-if value="{{ hasStack }}" hint-placeholder-val="{{ false }}">
+  <div onMouseEnter="{{ stackIn }}" onMouseLeave="{{ stackOut }}" aria-live="polite" style="position:fixed;right:24px;bottom:24px;z-index:45;width:380px;max-width:calc(100vw - 48px);height:{{ stackH }};transition:height .3s cubic-bezier(.2,.9,.2,1)">
+    <div style="position:absolute;left:0;right:0;top:-30px;display:flex;justify-content:space-between;align-items:center;opacity:{{ stackHeadOp }};transition:opacity .2s;pointer-events:{{ stackHeadPe }}"><span style="font-size:12px;font-weight:600;color:#5E7770;letter-spacing:.04em">{{ stackLabel }}</span><button onClick="{{ closeAllTasks }}" style="border:0;background:#FFFFFF;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;color:#0C1F1A;cursor:pointer;box-shadow:0 2px 6px rgba(12,31,26,.1)">Close all</button></div>
+    <sc-for list="{{ stack }}" as="t" hint-placeholder-count="2">
+      <div role="status" style="position:absolute;left:0;right:0;bottom:0;height:128px;z-index:{{ t.z }};transform:{{ t.tf }};transform-origin:bottom center;opacity:{{ t.op }};transition:transform .3s cubic-bezier(.2,.9,.2,1),opacity .3s;background:#FFFFFF;border:1px solid rgba(12,31,26,.08);border-radius:16px;box-shadow:0 18px 40px -14px rgba(12,31,26,.3);padding:16px;display:flex;gap:12px;overflow:hidden">
+        <span style="width:36px;height:36px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:{{ t.ibg }};color:{{ t.ifg }}"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg></span>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding-right:18px">
+          <span style="font-size:14px;font-weight:600;color:#0C1F1A">{{ t.title }}</span>
+          <span style="font-size:13px;line-height:1.45;color:#5E7770;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ t.desc }}</span>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:8px;font-size:13px">
+            <button onClick="{{ t.act }}" style="border:0;background:transparent;padding:0;font-size:13px;font-weight:600;color:{{ t.ac }};cursor:pointer;text-decoration:underline;text-underline-offset:3px">{{ t.cta }}</button>
+            <span style="color:#C2CEC9">·</span>
+            <button onClick="{{ t.close }}" style="border:0;background:transparent;padding:0;font-size:13px;font-weight:500;color:#5E7770;cursor:pointer">Dismiss</button>
+          </div>
+        </div>
+        <button onClick="{{ t.close }}" aria-label="Close" style="position:absolute;top:10px;right:10px;width:26px;height:26px;border:0;border-radius:8px;background:transparent;color:#6B827B;cursor:pointer;font-size:17px;line-height:1" style-hover="background:#EEF2F0;color:#0C1F1A">×</button>
+      </div>
+    </sc-for>
+  </div>
+</sc-if>
+
+<sc-if value="{{ cmdOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeCmd }}" style="position:fixed;inset:0;z-index:55;background:rgba(12,31,26,.35);display:flex;justify-content:center;align-items:flex-start;padding:12vh 20px 20px">
+    <div onClick="{{ stop }}" role="dialog" aria-label="Search" style="width:100%;max-width:560px;background:#FFFFFF;border-radius:16px;box-shadow:0 24px 60px -12px rgba(0,0,0,.35);overflow:hidden">
+      <div style="display:flex;align-items:center;gap:10px;padding:0 16px;border-bottom:1px solid #EEF2F0"><svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="#0C1F1A" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input ref="{{ cmdRef }}" value="{{ cmdQ }}" onChange="{{ onCmdQ }}" onKeyDown="{{ cmdKey }}" placeholder="Search pages and actions" style="flex:1;height:56px;border:0;outline:0;font-size:16px;color:#0C1F1A;background:transparent"><span style="font:500 11px 'IBM Plex Mono',monospace;padding:2px 6px;border:1px solid rgba(12,31,26,.1);border-radius:6px;color:#5E7770">Esc</span></div>
+      <div style="max-height:380px;overflow-y:auto;padding:6px">
+        <sc-for list="{{ cmdResults }}" as="r" hint-placeholder-count="6"><button onClick="{{ r.pick }}" onMouseEnter="{{ r.hover }}" style="width:100%;height:44px;border:0;border-radius:8px;background:{{ r.bg }};display:flex;align-items:center;gap:12px;padding:0 12px;cursor:pointer;text-align:left;font-size:14px;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:18px;height:18px;flex:none" fill="none" stroke="#0B8F6E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ r.icon }}"></path></svg><span style="flex:1">{{ r.label }}</span><span style="font-size:12px;color:#8A9C96">{{ r.kind }}</span></button></sc-for>
+        <sc-if value="{{ cmdEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:28px;text-align:center;font-size:14px;color:#5E7770">No results. Try "transfer" or "POS".</div></sc-if>
+      </div>
+      <div style="display:flex;gap:16px;padding:10px 16px;border-top:1px solid #EEF2F0;font-size:12px;color:#8A9C96"><span>↑ ↓ to move</span><span>Enter to open</span></div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:50;background:rgba(12,31,26,.45);display:flex;align-items:center;justify-content:center;padding:20px">
+    <div onClick="{{ stop }}" role="dialog" aria-modal="true" style="width:100%;max-width:480px;max-height:calc(100vh - 40px);overflow-y:auto;background:#FFFFFF;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:16px;position:relative">
+      <button onClick="{{ closeModal }}" aria-label="Close" style="position:absolute;top:16px;right:16px;width:34px;height:34px;border:0;border-radius:50%;background:#F2F6F4;cursor:pointer;font-size:18px;color:#0C1F1A">×</button>
+      <div style="display:flex;flex-direction:column;gap:4px;padding-right:40px"><span style="font-size:12px;font-weight:500;color:#0B8F6E;letter-spacing:.04em">{{ mStepLabel }}</span><span style="font-size:22px;font-weight:700">{{ mTitle }}</span><span style="font-size:14px;color:#5E7770">{{ mSub }}</span></div>
+      <sc-if value="{{ mTransferForm }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="position:relative"><span style="position:absolute;left:14px;top:9px;font-size:11px;color:{{ e.benC }};pointer-events:none">{{ e.benL }}</span><select value="{{ f.ben }}" onChange="{{ on.ben }}" style="width:100%;height:60px;border:1px solid {{ e.benB }};border-radius:8px;padding:22px 14px 6px;font-size:16px;background:#FFFFFF;color:#0C1F1A;appearance:none;outline:0;cursor:pointer" style-focus="border-color:#0C1F1A"><option value="">Select beneficiary</option><sc-for list="{{ bens }}" as="b" hint-placeholder-count="3"><option value="{{ b.id }}">{{ b.name }}</option></sc-for></select><svg viewBox="0 0 24 24" style="position:absolute;right:14px;top:20px;width:20px;height:20px;pointer-events:none" fill="none" stroke="#0C1F1A" stroke-width="1.6"><path d="M6 9l6 6 6-6"></path></svg></div><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ benIban }}</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="position:relative"><span style="position:absolute;left:14px;top:9px;font-size:11px;color:{{ e.amtC }};pointer-events:none">{{ e.amtL }}</span><input inputMode="decimal" placeholder="0.00" value="{{ f.amount }}" onChange="{{ on.amount }}" style="width:100%;height:60px;border:1px solid {{ e.amtB }};border-radius:8px;padding:22px 60px 6px 14px;font:400 16px 'IBM Plex Mono',monospace;color:#0C1F1A;outline:0" style-focus="border-color:#0C1F1A"><span style="position:absolute;right:14px;top:30px;font-size:14px;color:#5E7770">SAR</span></div><span style="font-size:12px;color:#5E7770">Available: SAR {{ balFull }}</span></div>
+          <div style="position:relative"><span style="position:absolute;left:14px;top:9px;font-size:11px;color:{{ e.purC }};pointer-events:none">{{ e.purL }}</span><select value="{{ f.purpose }}" onChange="{{ on.purpose }}" style="width:100%;height:60px;border:1px solid {{ e.purB }};border-radius:8px;padding:22px 14px 6px;font-size:16px;background:#FFFFFF;color:#0C1F1A;appearance:none;outline:0;cursor:pointer" style-focus="border-color:#0C1F1A"><option value="">Select purpose</option><option value="Supplier payment">Supplier payment</option><option value="Salaries">Salaries</option><option value="Rent">Rent</option><option value="Utilities">Utilities</option><option value="Other">Other</option></select><svg viewBox="0 0 24 24" style="position:absolute;right:14px;top:20px;width:20px;height:20px;pointer-events:none" fill="none" stroke="#0C1F1A" stroke-width="1.6"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position:relative"><span style="position:absolute;left:14px;top:9px;font-size:11px;pointer-events:none">Note (optional)</span><input value="{{ f.note }}" onChange="{{ on.note }}" placeholder="e.g. Invoice #4471" style="width:100%;height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:22px 14px 6px;font-size:16px;color:#0C1F1A;outline:0" style-focus="border-color:#0C1F1A"></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mSadadForm }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="position:relative"><span style="position:absolute;left:14px;top:9px;font-size:11px;color:{{ e.bilC }};pointer-events:none">{{ e.bilL }}</span><select value="{{ f.biller }}" onChange="{{ on.biller }}" style="width:100%;height:60px;border:1px solid {{ e.bilB }};border-radius:8px;padding:22px 14px 6px;font-size:16px;background:#FFFFFF;color:#0C1F1A;appearance:none;outline:0;cursor:pointer" style-focus="border-color:#0C1F1A"><option value="">Select biller</option><sc-for list="{{ billers }}" as="b" hint-placeholder-count="4"><option value="{{ b.id }}">{{ b.name }}</option></sc-for></select><svg viewBox="0 0 24 24" style="position:absolute;right:14px;top:20px;width:20px;height:20px;pointer-events:none" fill="none" stroke="#0C1F1A" stroke-width="1.6"><path d="M6 9l6 6 6-6"></path></svg></div>
+          <div style="position:relative"><span style="position:absolute;left:14px;top:9px;font-size:11px;color:{{ e.billC }};pointer-events:none">{{ e.billL }}</span><input inputMode="numeric" value="{{ f.billNo }}" onChange="{{ on.billNo }}" placeholder="8–14 digits" style="width:100%;height:60px;border:1px solid {{ e.billB }};border-radius:8px;padding:22px 14px 6px;font:400 16px 'IBM Plex Mono',monospace;color:#0C1F1A;outline:0" style-focus="border-color:#0C1F1A"></div>
+          <sc-if value="{{ hasDue }}" hint-placeholder-val="{{ false }}"><div style="display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:10px;background:#F3FAF7;border:1px solid #CDEFE3"><span style="font-size:14px">Amount due</span><span style="font:500 16px 'IBM Plex Mono',monospace">SAR {{ dueAmt }}</span></div></sc-if>
+          <sc-if value="{{ dueErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#E02424">Insufficient balance to pay this bill.</span></sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mDetailsForm }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <sc-for list="{{ addrFields }}" as="a" hint-placeholder-count="5"><div style="position:relative;grid-column:{{ a.span }}"><span style="position:absolute;left:14px;top:9px;font-size:11px;color:{{ a.lc }};pointer-events:none">{{ a.label }}</span><input value="{{ a.v }}" onChange="{{ a.set }}" placeholder="{{ a.ph }}" style="width:100%;height:60px;border:1px solid {{ a.b }};border-radius:8px;padding:22px 14px 6px;font-size:16px;color:#0C1F1A;outline:0" style-focus="border-color:#0C1F1A"></div></sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mReview }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;border:1px solid #E6ECE9;border-radius:12px"><sc-for list="{{ reviewRows }}" as="r" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 14px;border-bottom:1px solid #F0F3F2;font-size:14px"><span style="color:#5E7770">{{ r.k }}</span><span style="font-weight:500;text-align:right">{{ r.v }}</span></div></sc-for></div>
+      </sc-if>
+      <sc-if value="{{ mDone }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 0;text-align:center"><span style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0A7559,#2C957A);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:28px">✓</span><span style="font:500 26px 'IBM Plex Mono',monospace">SAR {{ doneAmt }}</span><span style="font-size:14px;color:#5E7770">New balance: SAR {{ balFull }}</span></div>
+      </sc-if>
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <sc-if value="{{ mShowBack }}" hint-placeholder-val="{{ false }}"><button onClick="{{ mBack }}" style="flex:1;height:52px;border:1px solid #D9D9D9;border-radius:999px;background:#FFFFFF;font-size:15px;font-weight:500;color:#0C1F1A;cursor:pointer">Back</button></sc-if>
+        <button onClick="{{ mPrimary }}" style="flex:2;height:52px;border:0;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);font-size:15px;font-weight:500;color:#FFFFFF;cursor:pointer" style-hover="filter:brightness(1.08)">{{ mPrimaryLabel }}</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:60;background:#0C1F1A;color:#FFFFFF;border-radius:14px;padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:14px;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)"><span style="width:22px;height:22px;border-radius:50%;background:#2C957A;display:flex;align-items:center;justify-content:center;font-size:12px">✓</span>{{ toast }}</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const C = (cx, cy, r) => `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0`;
+class Component extends DCLogic {
+  I = {
+    dash: 'M3.34 19a10 10 0 1 1 17.32 0M12 14l4-4' + C(12, 14, 1.2), tx: 'M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4',
+    pay: 'M14.5 21.7a.5.5 0 0 0 .9 0l6.5-19a.5.5 0 0 0-.6-.6l-19 6.5a.5.5 0 0 0 0 .9l7.9 3.2a2 2 0 0 1 1.1 1.1zM21.9 2.1 10.9 13.1',
+    payroll: 'M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM16 2v4M8 2v4M3 10h18M7 14h3v3H7z',
+    card: 'M2 10h20v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zM2 14h20M4 10l11-6 3 6',
+    sadad: 'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7ZM14 2v4a2 2 0 0 0 2 2h4M8 13h8v4H8z',
+    pos: 'M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8v4H8zM8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01',
+    cart: 'M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 1.9-1.6L22 7H5.1' + C(8, 21, 1) + C(19, 21, 1),
+    invoice: 'M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1ZM8 8h8M8 12h8M8 16h5',
+    food: 'M3 11h18M4 11a8 6 0 0 1 16 0M3 15h18M5 15v2a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-2',
+    loc: 'M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0' + C(12, 10, 3),
+    users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' + C(9, 7, 4) + 'M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8',
+    docs: 'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7ZM14 2v4a2 2 0 0 0 2 2h4M16 13H8M16 17H8M10 9H8',
+    gear: C(12, 12, 3) + 'M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1',
+    help: C(12, 12, 10) + 'M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01',
+    eye: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z' + C(12, 12, 3),
+    eyeOff: 'M17.9 17.9A10 10 0 0 1 12 20c-7 0-11-8-11-8a18 18 0 0 1 5-5.9M9.9 4.2A9 9 0 0 1 12 4c7 0 11 8 11 8a18 18 0 0 1-2.2 3.2M1 1l22 22',
+    alert: 'M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z',
+    spark: 'M3 17l6-6 4 4 8-8M15 7h6v6', flag: 'M4 22V4a1 1 0 0 1 1-1h12l-2 4 2 4H5'
+  };
+  SECTIONS = [
+    { label: 'MAIN', items: [{ k: 'Dashboard', icon: 'dash' }, { k: 'Transactions', icon: 'tx' }] },
+    { label: 'PAY', items: [{ k: 'Transfers', icon: 'pay', kids: ['Local transfer', 'International', 'Beneficiaries'], badge: '3', badgeTip: '3 transfers awaiting approval' }, { k: 'Payrolls', icon: 'payroll' }, { k: 'Cards', icon: 'card' }, { k: 'SADAD', icon: 'sadad' }] },
+    { label: 'ACCEPT PAYMENTS', items: [{ k: 'POS', icon: 'pos', kids: ['Terminals', 'Settlements'] }, { k: 'eCommerce', icon: 'cart', isNew: true }, { k: 'Invoicing', icon: 'invoice' }, { k: 'Food delivery', icon: 'food', isNew: true }] },
+    { label: 'MANAGE', items: [{ k: 'Locations', icon: 'loc' }, { k: 'Users', icon: 'users' }, { k: 'Documents', icon: 'docs', kids: ['Statements', 'Contracts'] }] }
+  ];
+  NAV = this.SECTIONS.flatMap(g => g.items);
+  cmdRef = React.createRef();
+  LOCS = [['Olaya, Riyadh', .19, 24], ['Al Malqa, Riyadh', .14, 16], ['Jeddah Corniche', .12, 13], ['Khobar Mall', .10, 12], ['Tahlia, Jeddah', .08, 10], ['King Fahd Rd, Riyadh', .07, 9], ['Dammam Corniche', .06, 8], ['Madinah Central', .06, 8], ['Makkah Aziziyah', .05, 7], ['Abha Plaza', .05, 7], ['Buraidah, Qassim', .04, 6], ['eCommerce', .04, 0]].map(([name, share, pos]) => ({ name, share, pos }));
+  RANGES = [{ k: '7', label: 'Last 7 days', short: '21 – 27 Feb', n: 7 }, { k: '30', label: 'Last 30 days', short: '29 Jan – 27 Feb', n: 30 }, { k: 'all', label: '1 Jan – 27 Feb 2025', short: '1 Jan – 27 Feb', n: 58 }];
+  SCHEMES = [['mada', '#0B8F6E', 38.8, 52.3], ['Visa', '#0C1F1A', 27.4, 21.0], ['Mastercard', '#4BC9A2', 21.6, 17.2], ['GCCNet', '#9ADFC8', 8.1, 7.6], ['American Express', '#C2CEC9', 4.1, 1.9]];
+  BENS = [{ id: '0', name: 'Almarai Supply Co.', iban: 'SA44 2000 •••• •••• 8812 · Al Rajhi Bank' }, { id: '1', name: 'STC Business', iban: 'SA12 1000 •••• •••• 4410 · SNB' }, { id: '2', name: 'Khamis Arabia Trading Co', iban: 'SA03 8000 •••• •••• 2433 · Hala' }];
+  BILLERS = [{ id: '0', name: 'Saudi Electricity Co.', due: 1284.6 }, { id: '1', name: 'STC', due: 642.3 }, { id: '2', name: 'National Water Co.', due: 218.75 }, { id: '3', name: 'Mobily', due: 395 }];
+  MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  days = this.build();
+  blankForm = { ben: '', amount: '', purpose: '', note: '', biller: '', billNo: '', bno: '', street: '', district: '', city: '', postal: '' };
+  state = {
+    page: 'Dashboard', sub: null, open: {}, pop: null, bellTab: 'tasks', acct: 0, hide: false,
+    collapsed: (() => { try { return localStorage.getItem('hala.v2.sb') === '1'; } catch (e) { return false; } })(),
+    cmd: false, cmdQ: '', cmdIdx: 0,
+    loc: 'all', range: 'all', gran: 'days', metric: 'value', hover: -1, schemeMode: 'value', schemeHover: -1,
+    attention: true, closed: {}, finApplied: false, stackHover: false, balance: 12000, unread: 2,
+    modal: null, step: 'form', tried: false, f: { ...this.blankForm }, last: null, toast: '',
+    recent: [
+      { t: 'POS settlement · Olaya', s: '27 Feb, 00:14 · Settlement', amt: 21384.5 },
+      { t: 'Almarai Supply Co.', s: '26 Feb, 10:42 · IBAN transfer', amt: -8250 },
+      { t: 'STC Business', s: '25 Feb · SADAD', amt: -3120 },
+      { t: 'POS settlement · Al Malqa', s: '25 Feb, 00:12 · Settlement', amt: 15302.85 },
+      { t: 'Payroll · February', s: '24 Feb · Payroll', amt: -46400 }
+    ]
+  };
+  build() {
+    let a = 20250227;
+    const r = () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+    const N = 116, end = new Date(2025, 1, 27), out = [], wk = [0.95, 0.9, 0.92, 1.0, 1.28, 1.15, 1.05];
+    for (let i = 0; i < N; i++) { const d = new Date(end); d.setDate(end.getDate() - (N - 1 - i)); const vol = 2140 * wk[d.getDay()] * (0.8 + 0.2 * i / N) * (0.72 + r() * 0.56); out.push({ d, vol, val: vol * 52.5 * (0.88 + r() * 0.24) }); }
+    const cur = out.slice(-58), sv = cur.reduce((s, x) => s + x.vol, 0), sl = cur.reduce((s, x) => s + x.val, 0);
+    out.forEach(x => { x.vol = Math.round(x.vol * 124121 / sv); x.val = Math.round(x.val * 6516352.5 / sl * 100) / 100; });
+    const c2 = out.slice(-58);
+    out[N - 1].vol += 124121 - c2.reduce((s, x) => s + x.vol, 0);
+    out[N - 1].val = Math.round((out[N - 1].val + 6516352.5 - c2.reduce((s, x) => s + x.val, 0)) * 100) / 100;
+    return out;
+  }
+  componentDidMount() {
+    this.kd = e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); this.setState(s => ({ cmd: !s.cmd, cmdQ: '', cmdIdx: 0, pop: null })); } else if (e.key === 'Escape') this.setState({ cmd: false, pop: null, modal: null }); };
+    window.addEventListener('keydown', this.kd);
+  }
+  componentDidUpdate(pp, ps) { if (this.state.cmd && !ps.cmd) setTimeout(() => this.cmdRef.current && this.cmdRef.current.focus(), 0); }
+  componentWillUnmount() { clearTimeout(this.tt); window.removeEventListener('keydown', this.kd); }
+  fmt2(n) { return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  fmt0(n) { return Math.round(n).toLocaleString('en-US'); }
+  compact(n) { return n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(n >= 1e4 ? 0 : 1) + 'k' : n.toFixed(n < 10 ? 1 : 0); }
+  dl(d) { return `${d.getDate()} ${this.MON[d.getMonth()]}`; }
+  showToast(t) { clearTimeout(this.tt); this.setState({ toast: t }); this.tt = setTimeout(() => this.setState({ toast: '' }), 2800); }
+  go(page, sub = null) { this.setState(st => ({ page, sub, pop: null, open: sub ? { ...st.open, [page]: true } : st.open })); }
+  openModal(m) { this.setState({ modal: m, step: 'form', tried: false, f: { ...this.blankForm }, pop: null }); }
+  setF(k) { return e => { const v = e.target.value; this.setState(s => ({ f: { ...s.f, [k]: v } })); }; }
+  closeTask(id) { this.setState(s => ({ closed: { ...s.closed, [id]: true } })); }
+  runCmd(r) { this.setState({ cmd: false }); r.run(); }
+  cmdKey(e) {
+    const n = (this._cmdRes || []).length; if (!n) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); this.setState(s => ({ cmdIdx: (Math.min(s.cmdIdx, n - 1) + 1) % n })); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); this.setState(s => ({ cmdIdx: (Math.min(s.cmdIdx, n - 1) - 1 + n) % n })); }
+    else if (e.key === 'Enter') { e.preventDefault(); this.runCmd(this._cmdRes[Math.min(this.state.cmdIdx, n - 1)]); }
+  }
+  errors() {
+    const s = this.state, f = s.f, e = {};
+    if (s.modal === 'transfer') { const amt = parseFloat(f.amount.replace(/,/g, '')); if (f.ben === '') e.ben = 'Select a beneficiary'; if (!(amt > 0)) e.amount = 'Enter an amount'; else if (amt > s.balance) e.amount = 'Exceeds available balance'; if (!f.purpose) e.purpose = 'Select a purpose'; }
+    else if (s.modal === 'sadad') { if (f.biller === '') e.biller = 'Select a biller'; if (!/^\d{8,14}$/.test(f.billNo)) e.billNo = 'Bill number must be 8–14 digits'; if (f.biller !== '' && this.BILLERS[+f.biller].due > s.balance) e.due = true; }
+    else if (s.modal === 'details') { if (!/^\d{4}$/.test(f.bno)) e.bno = 'Building number must be 4 digits'; if (!f.street.trim()) e.street = 'Enter street'; if (!f.district.trim()) e.district = 'Enter district'; if (!f.city.trim()) e.city = 'Enter city'; if (!/^\d{5}$/.test(f.postal)) e.postal = 'Postal code must be 5 digits'; }
+    return e;
+  }
+  primary() {
+    const s = this.state, e = this.errors();
+    if (s.step === 'done') return this.setState({ modal: null });
+    if (s.step === 'form') {
+      if (Object.keys(e).length) return this.setState({ tried: true });
+      if (s.modal === 'details') { this.setState({ modal: null, attention: false }); return this.showToast('National address saved. Verification complete.'); }
+      return this.setState({ step: 'review' });
+    }
+    const f = s.f, now = '12 Oct, ' + new Date().toTimeString().slice(0, 5);
+    const amt = s.modal === 'transfer' ? parseFloat(f.amount.replace(/,/g, '')) : this.BILLERS[+f.biller].due;
+    const name = s.modal === 'transfer' ? this.BENS[+f.ben].name : this.BILLERS[+f.biller].name;
+    this.setState(st => ({ step: 'done', balance: Math.round((st.balance - amt) * 100) / 100, last: amt, recent: [{ t: name, s: `${now} · ${st.modal === 'transfer' ? 'IBAN transfer' : 'SADAD'}`, amt: -amt }, ...st.recent].slice(0, 5) }));
+    this.showToast(s.modal === 'transfer' ? `SAR ${this.fmt2(amt)} sent to ${name}` : `${name} bill paid`);
+  }
+  taskList() {
+    const s = this.state, I = this.I;
+    const steps = [['Create account', true, null], ['Business details', true, null], ['Add national address', !s.attention, () => this.openModal('details')], ['Order POS terminals', false, () => this.go('POS', 'Terminals')], ['Invite your team', false, () => this.go('Users')]];
+    const next = steps.find(t => !t[1]), done = steps.filter(t => t[1]).length;
+    const out = [];
+    if (s.attention && !s.closed.attention) out.push({ id: 'attention', icon: I.alert, ibg: '#FDECEC', ifg: '#D92D20', ac: '#D92D20', title: 'Something needs your attention', desc: "Your company's national address is missing. Add it to complete verification.", cta: 'Add details', run: () => this.openModal('details') });
+    if (next && !s.closed.setup) out.push({ id: 'setup', icon: I.flag, ibg: '#E8F0FF', ifg: '#2F5BD3', ac: '#2F5BD3', title: `Finish setting up · ${done} of ${steps.length}`, desc: `Next step: ${next[0].toLowerCase()}.`, cta: 'Continue', run: () => next[2] && next[2]() });
+    if (!s.closed.fin) out.push({ id: 'fin', icon: I.spark, ibg: '#E3F6EF', ifg: '#0B8F6E', ac: '#0B8F6E', title: 'Grow your business', desc: 'With Hala Financing, repayments are automatically deducted from your daily POS transactions.', cta: s.finApplied ? 'Application started' : 'Apply now', run: () => { this.setState({ finApplied: true }); this.showToast('Financing application started. We\u2019ll reply within 24 hours.'); } });
+    return out;
+  }
+  renderVals() {
+    const s = this.state, ink = '#0C1F1A', teal = '#0B8F6E', I = this.I, x = !s.collapsed, j = x ? 'flex-start' : 'center';
+    const R = this.RANGES.find(r => r.k === s.range), n = R.n;
+    const share = s.loc === 'all' ? 1 : this.LOCS[s.loc].share;
+    const sc = d => ({ d: d.d, vol: d.vol * share, val: d.val * share });
+    const cur = this.days.slice(-n).map(sc), prev = this.days.slice(-2 * n, -n).map(sc);
+    const sum = (a, k) => a.reduce((t, d) => t + d[k], 0);
+    const tv = sum(cur, 'val'), tvol = sum(cur, 'vol'), pv = sum(prev, 'val'), pvol = sum(prev, 'vol');
+    const allowed = { days: true, weeks: n >= 14, months: n >= 45 }, gran = allowed[s.gran] ? s.gran : 'days';
+    let buckets = [];
+    if (gran === 'days') buckets = cur.map(d => ({ label: this.dl(d.d), title: d.d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }), val: d.val, vol: d.vol }));
+    else if (gran === 'weeks') { for (let i = 0; i < cur.length; i += 7) { const c = cur.slice(i, i + 7); buckets.push({ label: this.dl(c[0].d), title: `${this.dl(c[0].d)} – ${this.dl(c[c.length - 1].d)}`, val: sum(c, 'val'), vol: sum(c, 'vol') }); } }
+    else { const m = {}; cur.forEach(d => { const k = d.d.getMonth(); m[k] = m[k] || { label: this.MON[k], title: `${this.MON[k]} 2025 (to date)`, val: 0, vol: 0 }; m[k].val += d.val; m[k].vol += d.vol; }); buckets = Object.values(m); }
+    const mv = b => s.metric === 'value' ? b.val : s.metric === 'volume' ? b.vol : b.val / b.vol;
+    const vals = buckets.map(mv), max = Math.max(...vals) * 1.12, mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+    const mfmt = v => s.metric === 'volume' ? this.fmt0(v) : `SAR ${this.fmt2(v)}`;
+    const hv = s.hover >= 0 && s.hover < buckets.length ? s.hover : -1, step = Math.max(1, Math.ceil(buckets.length / 7));
+    const pct = (a, b) => { const d = (a - b) / b * 100; return { t: `${d >= 0 ? '▲' : '▼'} ${Math.abs(d).toFixed(1)}%`, up: d >= 0 }; };
+    const kd = [['value', 'Total sales value', `SAR ${this.fmt2(tv)}`, pct(tv, pv)], ['volume', 'Total sales volume', this.fmt0(tvol), pct(tvol, pvol)], ['avg', 'Average sale value', `SAR ${this.fmt2(tv / tvol)}`, pct(tv / tvol, pv / pvol)]];
+    const metricName = { value: 'Sales value', volume: 'Sales volume', avg: 'Average sale value' }[s.metric];
+    const base = this.days.slice(-n), locTotals = this.LOCS.map((l, i) => ({ ...l, i, v: (s.schemeMode === 'value' ? sum(base, 'val') : sum(base, 'vol')) * l.share })).sort((a, b) => b.v - a.v).slice(0, 5);
+    const schemeTotal = s.schemeMode === 'value' ? tv : tvol;
+    const f = s.f, e = s.tried ? this.errors() : {};
+    const fe = (k, lbl) => ({ L: e[k] || lbl, C: e[k] ? '#E02424' : ink, B: e[k] ? '#E02424' : '#D9D9D9' });
+    const errs = {}; [['ben', 'ben', 'Beneficiary'], ['amt', 'amount', 'Amount'], ['pur', 'purpose', 'Purpose'], ['bil', 'biller', 'Biller'], ['bill', 'billNo', 'Bill / account number']].forEach(([p, k, lbl]) => { const r = fe(k, lbl); errs[p + 'L'] = r.L; errs[p + 'C'] = r.C; errs[p + 'B'] = r.B; });
+    const M = s.modal, st = s.step;
+    const titles = { transfer: ['Transfer money', 'Send to a saved beneficiary'], sadad: ['Pay a bill', 'Pay SADAD bills from your Hala account'], details: ['National address', 'Required to complete company verification'] };
+    const amtNum = parseFloat((f.amount || '0').replace(/,/g, '')) || 0;
+    const reviewRows = M === 'transfer' && f.ben !== '' ? [{ k: 'To', v: this.BENS[+f.ben].name }, { k: 'IBAN', v: this.BENS[+f.ben].iban }, { k: 'Amount', v: `SAR ${this.fmt2(amtNum)}` }, { k: 'Purpose', v: f.purpose }, { k: 'Fee', v: 'Free' }, { k: 'Balance after', v: `SAR ${this.fmt2(s.balance - amtNum)}` }]
+      : M === 'sadad' && f.biller !== '' ? [{ k: 'Biller', v: this.BILLERS[+f.biller].name }, { k: 'Bill number', v: f.billNo }, { k: 'Amount', v: `SAR ${this.fmt2(this.BILLERS[+f.biller].due)}` }, { k: 'Balance after', v: `SAR ${this.fmt2(s.balance - this.BILLERS[+f.biller].due)}` }] : [];
+    const isDash = s.page === 'Dashboard';
+    const pageIcon = (this.NAV.find(it => it.k === s.page) || { icon: s.page === 'Help & support' ? 'help' : 'gear' }).icon;
+    const balParts = this.fmt2(s.balance).split('.');
+    const tipLeft = hv >= 0 ? (hv + 0.5) / buckets.length : 0;
+    const tasks = this.taskList(), nT = tasks.length, ex = s.stackHover && nT > 1;
+    const popLeft = x ? '30px' : '96px';
+    const pages = [];
+    this.NAV.forEach(it => it.kids ? it.kids.forEach(k => pages.push({ label: k, kind: it.k, icon: I[it.icon], run: () => this.go(it.k, k) })) : pages.push({ label: it.k, kind: 'Page', icon: I[it.icon], run: () => this.go(it.k) }));
+    pages.push({ label: 'Settings & Preferences', kind: 'Page', icon: I.gear, run: () => this.go('Settings & Preferences') }, { label: 'Help & support', kind: 'Page', icon: I.help, run: () => this.go('Help & support') });
+    const quickDefs = [['Transfer money', I.pay, () => this.openModal('transfer')], ['Pay a bill (SADAD)', I.sadad, () => this.openModal('sadad')], ['Run payroll', I.payroll, () => this.go('Payrolls')], ['Order POS terminals', I.pos, () => this.go('POS', 'Terminals')], ['Invite a user', I.users, () => this.go('Users')], ['Add a location', I.loc, () => this.go('Locations')]];
+    const acts = [...quickDefs, [s.hide ? 'Show balance' : 'Hide balance', I.eye, () => this.setState({ hide: !this.state.hide })]];
+    if (s.attention) acts.unshift(['Add national address', I.alert, () => this.openModal('details')]);
+    const all = [...acts.map(([label, icon, run]) => ({ label, icon, run, kind: 'Action' })), ...pages];
+    const q = s.cmdQ.trim().toLowerCase(), res = (q ? all.filter(r => (r.label + ' ' + r.kind).toLowerCase().includes(q)) : all).slice(0, 9);
+    this._cmdRes = res; const ci = Math.min(s.cmdIdx, Math.max(0, res.length - 1));
+    const bellCount = nT + s.unread;
+    return {
+      expanded: x, sbW: x ? '272px' : '80px', sbJustify: j, sbHeadJustify: x ? 'space-between' : 'center',
+      toggleSb: () => { const c = !s.collapsed; try { localStorage.setItem('hala.v2.sb', c ? '1' : '0'); } catch (er) {} this.setState({ collapsed: c, pop: null }); },
+      sbToggleLabel: x ? 'Collapse sidebar' : 'Expand sidebar', sbToggleIcon: x ? 'M16 9l-3 3 3 3' : 'M13 9l3 3-3 3',
+      acctPad: x ? '10px 12px' : '8px', userPad: x ? '10px' : '6px', popLeft, acctPopTop: x ? '146px' : '146px',
+      acctName: ['Corporate Account', 'Business Account'][s.acct], acctSub: ['SA •• 1951 · CR 2346041544', 'SA •• 2433 · CR 4030548330'][s.acct],
+      openAcct: () => this.setState({ pop: s.pop === 'acct' ? null : 'acct' }), popAcct: s.pop === 'acct',
+      accounts: [['Corporate Account', 'CR 2346041544'], ['Business Account', 'CR 4030548330']].map(([name, sub], i) => ({ name, sub, mark: i === s.acct ? '✓' : '', bg: i === s.acct ? '#F3FAF7' : 'transparent', pick: () => { this.setState({ acct: i, pop: null }); this.showToast(`Switched to ${name}`); } })),
+      sections: this.SECTIONS.map((g, gi) => ({ label: g.label, x, c: !x && gi > 0, items: g.items.map(it => {
+        const on = s.page === it.k, open = !!it.kids && !!s.open[it.k] && x, sel = on && (!it.kids || !x);
+        return {
+          label: it.k, icon: I[it.icon], x, tip: x ? '' : it.k, cur: on && !s.sub ? 'page' : 'false', j,
+          bg: sel ? 'rgba(15,163,127,.1)' : 'transparent', hbg: sel ? 'rgba(15,163,127,.13)' : 'rgba(12,31,26,.04)', fg: on ? '#07372B' : '#4A615A', fw: on ? 600 : 500, bar: on ? '#0FA37F' : 'transparent',
+          isNew: x && !!it.isNew, dot: !x && !!it.isNew, hasBadge: !!it.badge, badge: it.badge || '', badgeTip: it.badgeTip || '', bPos: x ? 'static' : 'absolute',
+          chev: x && !!it.kids, rot: open ? 'rotate(180deg)' : 'none', hasKids: !!it.kids, rows: open ? '1fr' : '0fr',
+          pick: () => it.kids ? this.setState(st2 => ({ collapsed: false, open: { ...st2.open, [it.k]: x ? !st2.open[it.k] : true } })) : this.go(it.k),
+          kids: (it.kids || []).map(k => { const a = on && s.sub === k; return { label: k, cur: a ? 'page' : 'false', bg: a ? 'rgba(15,163,127,.1)' : 'transparent', fg: a ? '#07372B' : '#5E7770', fw: a ? 600 : 400, pick: () => this.go(it.k, k) }; })
+        };
+      }) })),
+      footLinks: [['Help & support', I.help], ['Settings & Preferences', I.gear]].map(([label, icon]) => ({ label, icon, x, j, tip: x ? '' : label, bg: s.page === label ? 'rgba(15,163,127,.1)' : 'transparent', fg: s.page === label ? '#07372B' : '#4A615A', pick: () => this.go(label) })),
+      openUser: () => this.setState({ pop: s.pop === 'user' ? null : 'user' }), popUser: s.pop === 'user', userBg: s.pop === 'user' ? '#FFFFFF' : '#F7FAF9',
+      userMenu: [['Profile & security', () => this.go('Profile & security')], ['Switch to العربية', () => { this.setState({ pop: null }); this.showToast('Arabic (RTL) layout is next on the roadmap'); }], ['Log out', () => { this.setState({ pop: null }); this.showToast('Logged out (prototype)'); }]].map(([label, pick], i) => ({ label, pick, fg: i === 2 ? '#C81E1E' : ink })),
+      pageTitle: s.sub || s.page, pageSub: isDash ? 'Good morning, Abdulaziz' : (s.sub ? s.page : 'Hala Corporate'),
+      isDash, isOther: !isDash, otherIcon: I[pageIcon], goDash: () => this.go('Dashboard'), goTx: () => this.go('Transactions'),
+      openCmd: () => this.setState({ cmd: true, cmdQ: '', cmdIdx: 0, pop: null }), closeCmd: () => this.setState({ cmd: false }), cmdOpen: s.cmd,
+      cmdRef: this.cmdRef, cmdQ: s.cmdQ, onCmdQ: ev => this.setState({ cmdQ: ev.target.value, cmdIdx: 0 }), cmdKey: ev => this.cmdKey(ev), cmdEmpty: res.length === 0,
+      cmdResults: res.map((r, i) => ({ label: r.label, kind: r.kind, icon: r.icon, bg: i === ci ? '#F2F6F4' : 'transparent', hover: () => this.setState({ cmdIdx: i }), pick: () => this.runCmd(r) })),
+      openBell: () => this.setState({ pop: s.pop === 'bell' ? null : 'bell' }), popBell: s.pop === 'bell', bellBg: s.pop === 'bell' ? '#F3FAF7' : '#FFFFFF', hasBell: bellCount > 0, bellCount,
+      bellTabs: [['tasks', 'Tasks', nT], ['updates', 'Updates', s.unread]].map(([k, label, c]) => { const on = s.bellTab === k; return { label, count: String(c), fw: on ? 600 : 500, fg: on ? ink : '#6B827B', bd: on ? ink : 'transparent', cbg: c ? (on ? ink : '#EEF2F0') : '#F2F6F4', cfg: c ? (on ? '#FFFFFF' : '#4A615A') : '#8A9C96', pick: () => this.setState({ bellTab: k }) }; }),
+      tabTasks: s.bellTab === 'tasks', tabUpdates: s.bellTab === 'updates', showMarkRead: s.bellTab === 'updates' && s.unread > 0, markRead: () => this.setState({ unread: 0 }),
+      notifs: [['Settlement sent', 'SAR 21,384.50 to IBAN ••1951', '2h'], ['Transfer approved', 'Almarai Supply Co. · SAR 8,250.00', '1d'], ['New: eCommerce gateway', 'Accept card payments on your website', '3d']].map(([t, sub, time], i) => ({ t, s: sub, time, bg: i < s.unread ? '#F3FAF7' : '#FFFFFF', dot: i < s.unread ? teal : 'transparent' })),
+      tasks: tasks.map(t => ({ ...t, act: () => { this.setState({ pop: null }); t.run(); }, close: () => this.closeTask(t.id) })), noTasks: nT === 0,
+      restoreTasks: () => this.setState({ closed: {}, attention: true, finApplied: false }),
+      hasStack: nT > 0, stackIn: () => this.setState({ stackHover: true }), stackOut: () => this.setState({ stackHover: false }),
+      stackH: ex ? `${nT * 138 - 10}px` : `${128 + (nT - 1) * 10}px`, stackHeadOp: ex ? 1 : 0, stackHeadPe: ex ? 'auto' : 'none', stackLabel: `${nT} TASKS`,
+      closeAllTasks: () => this.setState(st2 => ({ closed: { ...st2.closed, attention: true, setup: true, fin: true }, stackHover: false })),
+      stack: tasks.map((t, i) => ({ ...t, z: String(10 - i), op: !ex && i > 2 ? 0 : 1, tf: ex ? `translateY(-${i * 138}px)` : `translateY(-${i * 10}px) scale(${1 - i * 0.05})`, act: () => t.run(), close: () => this.closeTask(t.id) })),
+      openQuick: () => this.setState({ pop: s.pop === 'quick' ? null : 'quick' }), popQuick: s.pop === 'quick',
+      quick: quickDefs.map(([label, icon, pick]) => ({ label, icon, pick })),
+      anyPop: !!s.pop && s.pop !== 'acct' && s.pop !== 'user' ? true : !!s.pop, closePop: () => this.setState({ pop: null }),
+      toggleHide: () => this.setState({ hide: !s.hide }), hideLabel: s.hide ? 'Show balance' : 'Hide balance', eyeIcon: s.hide ? I.eyeOff : I.eye,
+      balMain: s.hide ? '••••••' : balParts[0], balDec: s.hide ? '' : '.' + balParts[1], balFull: this.fmt2(s.balance),
+      copyIban: () => { try { navigator.clipboard.writeText('SA5730100000000000001951'); } catch (er) {} this.showToast('IBAN copied'); },
+      openTransfer: () => this.openModal('transfer'), openSadad: () => this.openModal('sadad'),
+      openLoc: () => this.setState({ pop: s.pop === 'loc' ? null : 'loc' }), popLoc: s.pop === 'loc', locLabel: s.loc === 'all' ? 'All locations' : this.LOCS[s.loc].name,
+      locOpts: [{ name: 'All locations', meta: '12', k: 'all' }, ...this.LOCS.map((l, i) => ({ name: l.name, meta: l.pos ? `${l.pos} POS` : 'Online', k: i }))].map(o => ({ ...o, bg: s.loc === o.k ? '#F3FAF7' : 'transparent', fg: s.loc === o.k ? teal : ink, fw: s.loc === o.k ? 600 : 400, pick: () => this.setState({ loc: o.k, pop: null, hover: -1 }) })),
+      openRange: () => this.setState({ pop: s.pop === 'range' ? null : 'range' }), popRange: s.pop === 'range', rangeLabel: R.short,
+      rangeOpts: this.RANGES.map(o => ({ label: o.label, bg: s.range === o.k ? '#F3FAF7' : 'transparent', fg: s.range === o.k ? teal : ink, fw: s.range === o.k ? 600 : 400, pick: () => this.setState({ range: o.k, pop: null, hover: -1 }) })),
+      grans: [['days', 'Days'], ['weeks', 'Weeks'], ['months', 'Months']].map(([k, label]) => { const ok = allowed[k], on = gran === k; return { label, title: ok ? '' : 'Select a longer date range', cur: ok ? 'pointer' : 'not-allowed', bg: on ? '#FFFFFF' : 'transparent', fg: on ? ink : ok ? '#5E7770' : '#B5C2BD', sh: on ? '0 1px 3px rgba(12,31,26,.1)' : 'none', pick: () => ok && this.setState({ gran: k, hover: -1 }) }; }),
+      prevLabel: `${n} days`,
+      kpis: kd.map(([k, label, val, d]) => { const on = s.metric === k; return { label, val, delta: d.t, dc: d.up ? teal : '#C81E1E', bg: on ? '#F7FBF9' : '#FFFFFF', bar: on ? teal : 'transparent', sel: on ? 'true' : 'false', pick: () => this.setState({ metric: k }) }; }),
+      chartTitle: `${metricName} · ${R.short}`, chartAvg: mfmt(mean),
+      yTicks: [0, 1, 2, 3].map(i => ({ b: `${i * 33.33}%`, t: this.compact(max * i / 3) })), avgB: `${mean / max * 100}%`,
+      barGap: gran === 'days' ? (n > 30 ? '3px' : '8px') : '16px',
+      bars: vals.map((v, i) => ({ h: `${v / max * 100}%`, bg: i === hv ? ink : (hv >= 0 ? '#BFE8DA' : '#2C957A'), hover: () => this.setState({ hover: i }) })),
+      clearHover: () => this.setState({ hover: -1 }),
+      tip: { show: hv >= 0, left: `calc(46px + (100% - 46px) * ${tipLeft})`, tx: tipLeft < 0.15 ? 'translateX(-10%)' : tipLeft > 0.85 ? 'translateX(-90%)' : 'translateX(-50%)', title: hv >= 0 ? buckets[hv].title : '', main: hv >= 0 ? mfmt(vals[hv]) : '', sub: hv >= 0 ? (s.metric === 'volume' ? `SAR ${this.fmt2(buckets[hv].val)} value` : `${this.fmt0(buckets[hv].vol)} transactions`) : '' },
+      xLabels: buckets.map((b, i) => (i % step === 0 ? b.label : '')),
+      schemeModes: [['value', 'Value'], ['volume', 'Volume']].map(([k, label]) => { const on = s.schemeMode === k; return { label, bg: on ? '#FFFFFF' : 'transparent', fg: on ? ink : '#5E7770', sh: on ? '0 1px 3px rgba(12,31,26,.1)' : 'none', pick: () => this.setState({ schemeMode: k }) }; }),
+      schemes: this.SCHEMES.map(([name, c, pv2, pc], i) => { const p = s.schemeMode === 'value' ? pv2 : pc, amt = schemeTotal * p / 100; return { name, c, w: `${p}%`, pct: `${p.toFixed(1)}%`, amt: s.schemeMode === 'value' ? `SAR ${this.fmt2(amt)}` : this.fmt0(amt), op: s.schemeHover < 0 || s.schemeHover === i ? 1 : 0.3, rowBg: s.schemeHover === i ? '#F7FAF9' : 'transparent', hover: () => this.setState({ schemeHover: i }) }; }),
+      clearScheme: () => this.setState({ schemeHover: -1 }),
+      topLocs: locTotals.map(l => { const on = s.loc === l.i; return { name: l.name, amt: s.schemeMode === 'value' ? `SAR ${this.compact(l.v)}` : this.fmt0(l.v), w: `${l.v / locTotals[0].v * 100}%`, c: on ? ink : '#2C957A', bg: on ? '#F3FAF7' : 'transparent', fw: on ? 600 : 400, pick: () => this.setState({ loc: on ? 'all' : l.i, hover: -1 }) }; }),
+      assets: [[I.pos, '120', 'POS terminals', 'Issue more', () => this.go('POS', 'Terminals')], [I.loc, '12', 'Locations', 'Create new', () => this.go('Locations')], [I.users, '7', 'Users', 'Invite new', () => this.go('Users')]].map(([icon, nn, label, cta, pick]) => ({ icon, n: nn, label, cta, pick })),
+      recent: s.recent.map(r => ({ t: r.t, s: r.s, amt: `${r.amt > 0 ? '+' : '−'} ${this.fmt2(Math.abs(r.amt))}`, ac: r.amt > 0 ? teal : ink, arrow: r.amt > 0 ? 'M12 5v14M19 12l-7 7-7-7' : 'M12 19V5M5 12l7-7 7 7', ibg: r.amt > 0 ? '#E3F6EF' : '#F2F6F4', ifg: r.amt > 0 ? teal : ink })),
+      modalOpen: !!M, closeModal: () => this.setState({ modal: null }), stop: ev => ev.stopPropagation(),
+      mStepLabel: M === 'details' ? 'VERIFICATION' : st === 'form' ? 'STEP 1 OF 2' : st === 'review' ? 'STEP 2 OF 2' : 'DONE',
+      mTitle: M ? (st === 'done' ? (M === 'transfer' ? 'Transfer sent' : 'Bill paid') : st === 'review' ? 'Review and confirm' : titles[M][0]) : '', mSub: M ? (st === 'done' ? 'You can find it in Recent activity.' : st === 'review' ? 'Check the details before you confirm.' : titles[M][1]) : '',
+      mTransferForm: M === 'transfer' && st === 'form', mSadadForm: M === 'sadad' && st === 'form', mDetailsForm: M === 'details' && st === 'form', mReview: st === 'review', mDone: st === 'done',
+      f, e: errs, on: { ben: this.setF('ben'), amount: this.setF('amount'), purpose: this.setF('purpose'), note: this.setF('note'), biller: this.setF('biller'), billNo: this.setF('billNo') },
+      bens: this.BENS, benIban: f.ben !== '' ? this.BENS[+f.ben].iban : ' ', billers: this.BILLERS,
+      hasDue: f.biller !== '', dueAmt: f.biller !== '' ? this.fmt2(this.BILLERS[+f.biller].due) : '', dueErr: !!e.due,
+      addrFields: [['bno', 'Building number', '1234', '1'], ['postal', 'Postal code', '12345', '2'], ['street', 'Street', 'King Fahd Rd', '1 / span 2'], ['district', 'District', 'Al Olaya', '1'], ['city', 'City', 'Riyadh', '2']].map(([k, label, ph, span]) => ({ label: e[k] || label, lc: e[k] ? '#E02424' : ink, b: e[k] ? '#E02424' : '#D9D9D9', v: f[k], set: this.setF(k), ph, span })),
+      reviewRows, doneAmt: s.last != null ? this.fmt2(s.last) : '',
+      mShowBack: st === 'review', mBack: () => this.setState({ step: 'form' }), mPrimary: () => this.primary(),
+      mPrimaryLabel: st === 'done' ? 'Done' : st === 'review' ? (M === 'transfer' ? 'Confirm transfer' : 'Pay bill') : M === 'details' ? 'Save address' : 'Continue',
+      hasToast: !!s.toast, toast: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

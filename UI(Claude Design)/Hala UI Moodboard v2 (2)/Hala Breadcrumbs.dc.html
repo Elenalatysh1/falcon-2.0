@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}@keyframes hPop{from{opacity:0;transform:translateY(-6px) scale(.97)}}@keyframes hFade{from{opacity:0}}@keyframes hSlideL{from{opacity:0;transform:translateX(24px)}}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Breadcrumbs</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Breadcrumbs show where a page sits and let people go back up one or more levels. On web they appear on detail pages two or more levels deep. Mobile apps use a back button instead. Every example with a "Live" tag works.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Anatomy and states</h2><p style="margin:0;font-size:15px;color:#4A615A">14 px Plex Sans. Links in tertiary text, the current page in ink and not clickable. Chevron separators at 14 px, 6 px gap on each side.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:22px">
+    <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14px">
+      <span style="display:flex;align-items:center;gap:6px;color:#5E7770"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Dashboard</span>
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+      <span style="color:#5E7770">Cards</span>
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+      <span aria-current="page" style="color:#0C1F1A;font-weight:600">Marketing card •• 4417</span>
+    </nav>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px">
+      <sc-for list="{{ parts }}" as="p" hint-placeholder-count="5"><div style="border-radius:14px;background:#F7FAF9;padding:14px;display:flex;flex-direction:column;gap:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ p.k }}</span><span style="align-self:flex-start;font-size:14px;color:{{ p.fg }};font-weight:{{ p.fw }};text-decoration:{{ p.td }};text-underline-offset:3px;padding:2px 4px;margin:-2px -4px;border-radius:6px;box-shadow:{{ p.ring }};background:{{ p.bg }}">{{ p.s }}</span><span style="font-size:12px;line-height:1.4;color:#5E7770">{{ p.v }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">In the page header · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Above the page title, 12 px gap. Click any crumb to move up; the page below changes with it.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:flex-end"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+    <div style="border-radius:18px;background:#EEF3F1;padding:24px 28px;display:flex;flex-direction:column;gap:12px;min-height:280px">
+      <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14px">
+        <sc-for list="{{ live.crumbs }}" as="c" hint-placeholder-count="4"><span style="display:flex;align-items:center;gap:6px"><sc-if value="{{ c.sep }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg></sc-if><button onClick="{{ c.go }}" aria-current="{{ c.cur }}" style="border:0;background:transparent;padding:2px 4px;margin:-2px -4px;border-radius:6px;font-size:14px;font-weight:{{ c.fw }};color:{{ c.fg }};cursor:{{ c.cursor }};white-space:nowrap" style-hover="{{ c.hover }}">{{ c.l }}</button></span></sc-for>
+      </nav>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;animation:hFade .2s ease-out"><div style="display:flex;flex-direction:column;gap:4px"><h3 style="margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em">{{ live.title }}</h3><span style="font-size:14px;color:#5E7770">{{ live.sub }}</span></div><span style="height:40px;padding:0 18px;border-radius:999px;background:{{ live.abg }};color:{{ live.afg }};border:{{ live.abd }};font-size:14px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ live.action }}</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:6px"><sc-for list="{{ live.items }}" as="i" hint-placeholder-count="3"><button onClick="{{ i.go }}" style="border:0;text-align:left;background:#FFFFFF;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:3px;cursor:{{ i.cur }};color:#0C1F1A;animation:hFade .25s ease-out" style-hover="box-shadow:0 10px 24px -14px rgba(12,31,26,.35)"><span style="font-size:14.5px;font-weight:600">{{ i.t }}</span><span style="font-size:12.5px;color:#5E7770">{{ i.s }}</span></button></sc-for></div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Long paths and long names</h2><p style="margin:0;font-size:15px;color:#4A615A">With more than 4 levels, keep the first and the last two and collapse the middle into "…", which opens a menu. Long names are truncated at 200 px with a tooltip; the current page is never truncated.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px;min-height:240px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">COLLAPSED MIDDLE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <nav aria-label="Breadcrumb" style="position:relative;display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14px">
+        <span style="color:#5E7770">Dashboard</span>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+        <button onClick="{{ col.toggle }}" aria-label="Show hidden levels" aria-expanded="{{ col.exp }}" style="height:26px;min-width:30px;padding:0 6px;border:0;border-radius:8px;background:{{ col.bg }};color:#0C1F1A;font-size:14px;cursor:pointer;letter-spacing:.1em" style-hover="background:#E1E8E5">…</button>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+        <span style="color:#5E7770">Jeddah Corniche</span>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+        <span style="color:#0C1F1A;font-weight:600">Terminal T-0412</span>
+        <sc-if value="{{ col.open }}" hint-placeholder-val="{{ false }}"><div role="menu" style="position:absolute;left:70px;top:32px;width:220px;background:#FFFFFF;border-radius:14px;border:1px solid #E6ECE9;box-shadow:0 18px 36px -16px rgba(12,31,26,.35);padding:6px;z-index:2;display:flex;flex-direction:column;gap:2px;animation:hPop .16s cubic-bezier(.2,.9,.2,1);transform-origin:top left"><sc-for list="{{ col.hidden }}" as="h" hint-placeholder-count="2"><button onClick="{{ col.toggle }}" role="menuitem" style="height:40px;border:0;border-radius:9px;background:transparent;padding:0 10px;text-align:left;font-size:14px;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;gap:10px;padding-left:{{ h.pl }}" style-hover="background:#F4F7F6"><svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#9AACA6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6v6a3 3 0 0 0 3 3h6"></path></svg>{{ h.l }}</button></sc-for></div></sc-if>
+      </nav>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Full path: Dashboard › Accept payments › POS › Jeddah Corniche › Terminal T-0412</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">TRUNCATED NAME</span>
+      <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;font-size:14px;min-width:0">
+        <span style="color:#5E7770;flex:none">Transfers</span>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2;flex:none" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+        <span title="Khamis Arabia Trading and Contracting Company" style="color:#5E7770;max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Khamis Arabia Trading and Contracting Company</span>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2;flex:none" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+        <span style="color:#0C1F1A;font-weight:600;white-space:nowrap">TRF-88213</span>
+      </nav>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Hover the middle crumb to see the full name.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Narrow web and Arabic</h2><p style="margin:0;font-size:15px;color:#4A615A">Below 600 px, show only a back link to the parent. In Arabic the order runs right to left and the chevrons point left.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">&lt; 600 PX · PARENT ONLY</span>
+      <div style="max-width:360px;border-radius:16px;background:#F7FAF9;padding:16px;display:flex;flex-direction:column;gap:8px"><span style="display:flex;align-items:center;gap:4px;font-size:14px;color:#0E7C62;font-weight:500"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 18-6-6 6-6"></path></svg>Cards</span><span style="font-size:24px;font-weight:700;letter-spacing:-.01em">Marketing card</span></div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Link color, leading chevron-left 16 px. The label is the parent name, not "Back".</span>
+    </div>
+    <div dir="rtl" style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px;font-family:'IBM Plex Sans Arabic',sans-serif">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;direction:ltr;text-align:right">ARABIC · RTL</span>
+      <nav aria-label="مسار التنقل" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:15px">
+        <span style="color:#5E7770">الرئيسية</span>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2;transform:scaleX(-1)" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+        <span style="color:#5E7770">البطاقات</span>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;color:#B9C8C2;transform:scaleX(-1)" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg>
+        <span style="color:#0C1F1A;font-weight:600">بطاقة التسويق <bdi dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-weight:500">•• 4417</bdi></span>
+      </nav>
+      <span style="font-size:13.5px;line-height:1.7;color:#5E7770">الأرقام تبقى من اليسار إلى اليمين داخل المسار.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">No breadcrumbs. The back button carries the parent's name on iOS and an arrow on Android. Tap the rows to go deeper and back to see the title change.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:start">
+    <sc-for list="{{ mob }}" as="m" hint-placeholder-count="2">
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">{{ m.k }}</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="height:460px;border-radius:32px;background:#F4F7F6;overflow:hidden;display:flex;flex-direction:column">
+          <div style="height:56px;padding:0 8px;display:flex;align-items:center;gap:4px;justify-content:{{ m.hj }}">
+            <sc-if value="{{ m.hasBack }}" hint-placeholder-val="{{ true }}"><button onClick="{{ m.back }}" aria-label="Back to {{ m.parent }}" style="height:44px;min-width:44px;padding:0 8px 0 4px;border:0;background:transparent;display:flex;align-items:center;gap:2px;color:{{ m.bc }};font-size:16px;cursor:pointer;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ m.bIcon }}"></path></svg>{{ m.bl }}</button></sc-if>
+            <span style="font-size:17px;font-weight:{{ m.tw }};flex:{{ m.tf }};text-align:{{ m.ta }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 8px">{{ m.bar }}</span>
+            <sc-if value="{{ m.iosPad }}" hint-placeholder-val="{{ false }}"><span style="width:70px"></span></sc-if>
+          </div>
+          <div style="padding:4px 16px 16px;display:flex;flex-direction:column;gap:12px;animation:hSlideL .26s cubic-bezier(.2,.9,.2,1)">
+            <sc-if value="{{ m.large }}" hint-placeholder-val="{{ false }}"><span style="font-size:32px;font-weight:700;letter-spacing:-.02em;padding:0 4px">{{ m.title }}</span></sc-if>
+            <div style="border-radius:18px;background:#FFFFFF;padding:0 14px"><sc-for list="{{ m.rows }}" as="r" hint-placeholder-count="3"><button onClick="{{ r.go }}" style="width:100%;min-height:56px;border:0;border-top:1px solid {{ r.bdr }};background:transparent;display:flex;align-items:center;gap:12px;padding:0;text-align:left;cursor:{{ r.cur }};color:#0C1F1A"><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:16px;font-weight:500">{{ r.t }}</span><span style="font-size:13px;color:#5E7770">{{ r.s }}</span></div><sc-if value="{{ r.more }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:18px;height:18px;color:#9AACA6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg></sc-if></button></sc-for></div>
+          </div>
+        </div>
+        <span style="font-size:12.5px;line-height:1.5;color:#5E7770">{{ m.note }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="10"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lv: 3, col: false };
+  renderVals() {
+    const s = this.state;
+    const parts = [['LINK', 'Cards', 'Earlier level. Tertiary #5E7770.', '#5E7770', 400, 'none', 'none', 'transparent'], ['HOVER', 'Cards', 'Ink text, underline.', '#0C1F1A', 400, 'underline', 'none', 'transparent'], ['FOCUS', 'Cards', 'Keyboard ring around the link.', '#0C1F1A', 400, 'none', '0 0 0 3px rgba(11,143,110,.35)', 'transparent'], ['CURRENT', 'Marketing card', 'Ink, 600, not a link. aria-current="page".', '#0C1F1A', 600, 'none', 'none', 'transparent'], ['SEPARATOR', '›', 'Lucide chevron-right 14 px, #B9C8C2. Decorative, hidden from screen readers.', '#B9C8C2', 400, 'none', 'none', 'transparent']].map(([k, s2, v, fg, fw, td, ring, bg]) => ({ k, s: s2, v, fg, fw, td, ring, bg }));
+    const L = [
+      { l: 'Dashboard', title: 'Good morning, Abdulaziz', sub: 'Khamis Arabia Trading Co', action: 'New transfer', items: [['Cards', '5 cards · 1 frozen', 1], ['Transactions', '248 this month'], ['POS', '9 terminals']] },
+      { l: 'Cards', title: 'Cards', sub: '5 cards · SAR 42,000 monthly limit', action: 'Create card', items: [['Marketing card', '•• 4417 · Omar Bakr', 2], ['Operations card', '•• 2086 · Frozen'], ['Travel card', '•• 7731 · Omar Bakr']] },
+      { l: 'Marketing card', title: 'Marketing card', sub: '•• 4417 · Omar Bakr · Active', action: 'Freeze card', items: [['Transactions', '38 this month', 3], ['Limits', 'SAR 5,000 / month'], ['Settings', 'Online, ATM, abroad']] },
+      { l: 'Transactions', title: 'Transactions', sub: 'Marketing card •• 4417 · October', action: 'Export', items: [['Careem', '− 38.50 · Yesterday'], ['Jarir Bookstore', '− 1,249.00 · Today'], ['Google Ads', '− 2,000.00 · 12 Oct']] }
+    ];
+    const lv = s.lv, cur = L[lv];
+    const live = { title: cur.title, sub: cur.sub, action: cur.action, abg: lv === 0 ? 'linear-gradient(90deg,#0A7559,#2C957A)' : '#FFFFFF', afg: lv === 0 ? '#FFFFFF' : '#0C1F1A', abd: lv === 0 ? '0' : '1px solid #D7E0DC',
+      crumbs: lv === 0 ? [{ l: 'Dashboard', sep: false, cur: 'page', fw: 600, fg: '#0C1F1A', cursor: 'default', hover: '', go: () => {} }] : L.slice(0, lv + 1).map((c, i) => { const last = i === lv; return { l: c.l, sep: i > 0, cur: last ? 'page' : 'false', fw: last ? 600 : 400, fg: last ? '#0C1F1A' : '#5E7770', cursor: last ? 'default' : 'pointer', hover: last ? '' : 'color:#0C1F1A;text-decoration:underline;text-underline-offset:3px', go: () => !last && this.setState({ lv: i }) }; }),
+      items: cur.items.map(([t, s2, to]) => ({ t, s: s2, cur: to ? 'pointer' : 'default', go: () => to && this.setState({ lv: to }) })) };
+    const col = { open: s.col, exp: s.col ? 'true' : 'false', bg: s.col ? '#E1E8E5' : '#F2F6F4', toggle: () => this.setState({ col: !s.col }), hidden: [['Accept payments', '10px'], ['POS', '22px']].map(([l, pl]) => ({ l, pl })) };
+    const ml = s.ml ?? 1;
+    const ML = [{ t: 'Cards', rows: [['Marketing card', '•• 4417 · Active', 1], ['Operations card', '•• 2086 · Frozen'], ['Travel card', '•• 7731 · Active']] }, { t: 'Marketing card', rows: [['Transactions', '38 this month', 2], ['Limits', 'SAR 5,000 / month'], ['Card settings', 'Online, ATM, abroad']] }, { t: 'Transactions', rows: [['Careem', '− 38.50 · Yesterday'], ['Jarir Bookstore', '− 1,249.00 · Today'], ['Google Ads', '− 2,000.00 · 12 Oct']] }];
+    const cm = ML[ml], parent = ml > 0 ? ML[ml - 1].t : '';
+    const rows = cm.rows.map(([t, s2, to], i) => ({ t, s: s2, more: !!to, cur: to ? 'pointer' : 'default', bdr: i ? '#EEF2F0' : 'transparent', go: () => to && this.setState({ ml: to }) }));
+    const back = () => ml > 0 && this.setState({ ml: ml - 1 });
+    const mob = [
+      { k: 'IOS · BACK WITH PARENT NAME', hasBack: ml > 0, back, parent, bl: parent.length > 12 ? 'Back' : parent, bc: '#0B8F6E', bIcon: 'm15 18-6-6 6-6', bar: ml === 0 ? '' : cm.t, tw: 600, tf: '1', ta: 'center', iosPad: ml > 0, hj: 'space-between', large: ml === 0, title: cm.t, rows, note: 'Parent name next to the chevron; switch to "Back" if it is longer than 12 characters. Swipe from the left edge also goes back.' },
+      { k: 'ANDROID · TOP APP BAR', hasBack: ml > 0, back, parent, bl: '', bc: '#0C1F1A', bIcon: 'M19 12H5M12 19l-7-7 7-7', bar: cm.t, tw: 500, tf: '1', ta: 'left', iosPad: false, hj: 'flex-start', large: false, title: cm.t, rows, note: 'Arrow-left icon, title left-aligned beside it. System back gesture and button do the same.' }
+    ];
+    const rules = [[1, 'Use on web pages two or more levels deep: detail pages, settings sub-pages.'], [1, 'Start from the section root (Dashboard, Cards), not from "Home" plus the company name.'], [1, 'Use the same names as the sidebar and page titles.'], [1, 'Make every crumb a link except the current page.'], [1, 'Collapse the middle with "…" after 4 levels.'], [1, 'On narrow web, show only the parent as a back link.'], [0, 'Don\'t use breadcrumbs for steps in a flow; use a progress bar.'], [0, 'Don\'t show breadcrumbs on top-level pages; the sidebar already says where you are.'], [0, 'Don\'t add breadcrumbs in the mobile app; use the back button.'], [0, 'Don\'t truncate the current page name.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { parts, live, col, mob, rules };
+  }
+}
+</script>
+</body>
+</html>

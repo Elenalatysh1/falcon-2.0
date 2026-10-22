@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button,input,select{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}@keyframes hFade{from{opacity:0}}@keyframes hUp{from{opacity:0;transform:translateY(6px)}}@keyframes hSpin{to{transform:rotate(360deg)}}@keyframes hShim{0%{background-position:-200px 0}100%{background-position:200px 0}}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Pagination</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">How long lists are split into pages. Web tables use numbered pages, so people can export, compare and come back to the same spot. Mobile lists load more as you scroll. Every example with a "Live" tag works.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Which pattern to use</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+    <sc-for list="{{ guide }}" as="g" hint-placeholder-count="5"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:6px"><span style="font-size:15px;font-weight:600">{{ g.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ g.v }}</span><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#0B6F56;margin-top:auto">{{ g.e }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Page button states</h2><p style="margin:0;font-size:15px;color:#4A615A">36 × 36 on web, Mono numbers, 4 px gap. The current page is an ink pill. The page buttons don't change on hover; only the arrows show they can be clicked.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px">
+    <sc-for list="{{ btnStates }}" as="b" hint-placeholder-count="7"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;border-radius:14px;background:#F7FAF9"><span style="min-width:36px;height:36px;padding:0 8px;border-radius:10px;border:{{ b.bd }};background:{{ b.bg }};color:{{ b.fg }};font:{{ b.fw }} 14px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center;box-shadow:{{ b.ring }};opacity:{{ b.op }}">{{ b.n }}</span><span style="font-size:13px;font-weight:600">{{ b.k }}</span><span style="font-size:11.5px;color:#5E7770;text-align:center;line-height:1.35">{{ b.v }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Table pagination · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Under the table: the range shown on the left, page numbers in the middle, rows per page on the right. Changing rows per page keeps the first visible row in view.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:18px;font-weight:700">Transactions</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+    <div style="border:1px solid #EEF2F0;border-radius:16px;overflow:hidden;position:relative">
+      <div style="display:grid;grid-template-columns:70px minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);gap:12px;padding:10px 16px;background:#FAFCFB;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#6B827B"><span>#</span><span>MERCHANT</span><span>DATE</span><span style="text-align:right">AMOUNT</span></div>
+      <sc-for list="{{ tb.rows }}" as="r" hint-placeholder-count="10"><div style="display:grid;grid-template-columns:70px minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);gap:12px;padding:11px 16px;border-top:1px solid #F2F5F4;font-size:14px;align-items:center;opacity:{{ tb.op }};transition:opacity .15s"><span style="font:400 12px 'IBM Plex Mono',monospace;color:#8A9C96">{{ r.n }}</span><span style="font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.m }}</span><span style="color:#5E7770;font-size:13px">{{ r.d }}</span><span style="font-family:'IBM Plex Mono',monospace;text-align:right;color:{{ r.ac }}">{{ r.a }}</span></div></sc-for>
+      <sc-if value="{{ tb.loading }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:50%;top:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;border:3px solid #E3F6EF;border-top-color:#0B8F6E;animation:hSpin .7s linear infinite"></div></sc-if>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="font-size:13.5px;color:#4A615A;white-space:nowrap"><b style="font:600 13.5px 'IBM Plex Mono',monospace;color:#0C1F1A">{{ tb.from }}–{{ tb.to }}</b> of <span style="font-family:'IBM Plex Mono',monospace">{{ tb.total }}</span></span>
+      <nav aria-label="Pagination" style="flex:1;display:flex;justify-content:center;align-items:center;gap:4px">
+        <button onClick="{{ tb.prev }}" disabled="{{ tb.atFirst }}" aria-label="Previous page" style="width:36px;height:36px;border:1px solid #D7E0DC;border-radius:10px;background:#FFFFFF;color:#0C1F1A;cursor:{{ tb.pc }};opacity:{{ tb.po }};display:flex;align-items:center;justify-content:center" style-hover="background:#F4F7F6"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+        <sc-for list="{{ tb.pages }}" as="p" hint-placeholder-count="7"><button onClick="{{ p.go }}" aria-current="{{ p.cur }}" disabled="{{ p.gap }}" style="min-width:36px;height:36px;padding:0 6px;border:0;border-radius:10px;background:{{ p.bg }};color:{{ p.fg }};font:{{ p.fw }} 14px 'IBM Plex Mono',monospace;cursor:{{ p.c }};transition:background .15s" style-hover="background:{{ p.hbg }}">{{ p.l }}</button></sc-for>
+        <button onClick="{{ tb.next }}" disabled="{{ tb.atLast }}" aria-label="Next page" style="width:36px;height:36px;border:1px solid #D7E0DC;border-radius:10px;background:#FFFFFF;color:#0C1F1A;cursor:{{ tb.nc }};opacity:{{ tb.no }};display:flex;align-items:center;justify-content:center" style-hover="background:#F4F7F6"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
+      </nav>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#4A615A;white-space:nowrap">Rows per page<div style="display:inline-flex;padding:3px;border-radius:999px;background:#E9EFEC"><sc-for list="{{ tb.sizes }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" style="height:28px;padding:0 10px;border:0;border-radius:999px;background:{{ o.bg }};box-shadow:{{ o.sh }};font:500 12.5px 'IBM Plex Mono',monospace;color:{{ o.fg }};cursor:pointer">{{ o.l }}</button></sc-for></div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#5E7770;flex-wrap:wrap"><span>Go to page</span><input value="{{ tb.jump }}" onChange="{{ tb.setJump }}" onKeyDown="{{ tb.jumpKey }}" inputMode="numeric" aria-label="Page number" style="width:64px;height:34px;border:1px solid {{ tb.jbd }};border-radius:8px;padding:0 10px;font:400 14px 'IBM Plex Mono',monospace;color:#0C1F1A;outline:none"/><button onClick="{{ tb.doJump }}" style="height:34px;padding:0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:13px;font-weight:500;color:#0C1F1A;cursor:pointer">Go</button><span style="color:{{ tb.jmc }}">{{ tb.jmsg }}</span></div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Variants · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Smaller versions for cards, drawers and narrow widths.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">COMPACT · INSIDE A CARD</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="border-radius:16px;background:#F7FAF9;padding:4px 14px"><sc-for list="{{ cp.rows }}" as="r" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid {{ r.bdr }};font-size:14px;animation:hFade .2s"><span>{{ r.m }}</span><span style="font-family:'IBM Plex Mono',monospace;color:{{ r.ac }}">{{ r.a }}</span></div></sc-for></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ cp.label }}</span><div style="display:flex;gap:4px"><button onClick="{{ cp.prev }}" aria-label="Previous" style="width:32px;height:32px;border:1px solid #D7E0DC;border-radius:50%;background:#FFFFFF;cursor:pointer;opacity:{{ cp.po }};display:flex;align-items:center;justify-content:center;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 18-6-6 6-6"></path></svg></button><button onClick="{{ cp.next }}" aria-label="Next" style="width:32px;height:32px;border:1px solid #D7E0DC;border-radius:50%;background:#FFFFFF;cursor:pointer;opacity:{{ cp.no }};display:flex;align-items:center;justify-content:center;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg></button></div></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">LOAD MORE · DASHBOARD FEED</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="display:flex;flex-direction:column"><sc-for list="{{ lm.rows }}" as="r" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid {{ r.bdr }};animation:hUp .22s ease-out"><span style="width:34px;height:34px;border-radius:50%;background:#F2F6F4;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none">{{ r.ini }}</span><span style="flex:1;font-size:14px">{{ r.m }}</span><span style="font:500 14px 'IBM Plex Mono',monospace;color:{{ r.ac }}">{{ r.a }}</span></div></sc-for></div>
+      <sc-if value="{{ lm.more }}" hint-placeholder-val="{{ true }}"><button onClick="{{ lm.load }}" style="height:40px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:14px;font-weight:500;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">{{ lm.label }}<sc-if value="{{ lm.busy }}" hint-placeholder-val="{{ false }}"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #DDE6E2;border-top-color:#0B8F6E;animation:hSpin .7s linear infinite"></span></sc-if></button></sc-if>
+      <sc-if value="{{ lm.end }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:#8A9C96"><span style="flex:1;height:1px;background:#EEF2F0"></span>That's everything from this week<span style="flex:1;height:1px;background:#EEF2F0"></span></div></sc-if>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">PREVIOUS / NEXT · DETAIL VIEW</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="border-radius:16px;background:#F7FAF9;padding:16px;display:flex;flex-direction:column;gap:4px;animation:hFade .2s"><span style="font-size:13px;color:#5E7770">{{ pn.m }}</span><span style="font:600 24px 'IBM Plex Mono',monospace;color:{{ pn.ac }}">{{ pn.a }}</span><span style="font-size:12.5px;color:#5E7770">{{ pn.d }}</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><button onClick="{{ pn.prev }}" style="height:38px;padding:0 14px 0 10px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:13.5px;cursor:pointer;color:#0C1F1A;opacity:{{ pn.po }};display:flex;align-items:center;gap:4px;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 18-6-6 6-6"></path></svg>Newer</button><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ pn.pos }}</span><button onClick="{{ pn.next }}" style="height:38px;padding:0 10px 0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:13.5px;cursor:pointer;color:#0C1F1A;opacity:{{ pn.no }};display:flex;align-items:center;gap:4px;white-space:nowrap">Older<svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 18 6-6-6-6"></path></svg></button></div>
+      <span style="font-size:12.5px;color:#5E7770">Keyboard: J / K or ← / →.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Responsive table pagination</h2><p style="margin:0;font-size:15px;color:#4A615A">As the width shrinks, drop parts in this order: page jump → rows per page → page numbers. Arrows and the range always stay.</p></div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <sc-for list="{{ resp }}" as="r" hint-placeholder-count="3"><div style="background:#FFFFFF;border-radius:20px;padding:16px 20px;display:flex;flex-direction:column;gap:10px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ r.k }}</span><div style="max-width:{{ r.w }};display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:#F7FAF9"><span style="font:500 12.5px 'IBM Plex Mono',monospace;white-space:nowrap">{{ r.range }}</span><div style="flex:1;display:flex;justify-content:center;align-items:center;gap:4px"><span style="width:32px;height:32px;border-radius:9px;border:1px solid #D7E0DC;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px">‹</span><sc-for list="{{ r.pages }}" as="p" hint-placeholder-count="5"><span style="min-width:32px;height:32px;border-radius:9px;background:{{ p.bg }};color:{{ p.fg }};font:{{ p.fw }} 13px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center">{{ p.l }}</span></sc-for><sc-if value="{{ r.compact }}" hint-placeholder-val="{{ false }}"><span style="font:500 13px 'IBM Plex Mono',monospace;padding:0 8px;white-space:nowrap">5 / 25</span></sc-if><span style="width:32px;height:32px;border-radius:9px;border:1px solid #D7E0DC;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px">›</span></div><sc-if value="{{ r.rpp }}" hint-placeholder-val="{{ true }}"><span style="font-size:12.5px;color:#5E7770;white-space:nowrap">10 per page ▾</span></sc-if></div></div></sc-for>
+  </div>
+</section>
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">No page numbers on mobile. The next batch loads automatically about 5 rows before the end, with skeleton rows while it loads. If it fails, show a Retry row in place.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">INFINITE SCROLL</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · SCROLL</span></div>
+      <div style="position:relative;height:620px;border-radius:32px;background:#F4F7F6;overflow:hidden;display:flex;flex-direction:column">
+        <div style="padding:18px 16px 8px;display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:28px;font-weight:700;letter-spacing:-.02em">Activity</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770;white-space:nowrap;flex:none">{{ inf.count }}</span></div>
+        <div onScroll="{{ inf.onScroll }}" ref="{{ inf.ref }}" style="flex:1;overflow-y:auto;padding:0 16px 16px;scrollbar-width:none">
+          <div style="border-radius:18px;background:#FFFFFF;padding:0 14px">
+            <sc-for list="{{ inf.rows }}" as="r" hint-placeholder-count="12"><div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid {{ r.bdr }};min-height:64px"><span style="width:40px;height:40px;border-radius:50%;background:#F2F6F4;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none">{{ r.ini }}</span><div style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.m }}</span><span style="font-size:12.5px;color:#5E7770">{{ r.d }}</span></div><span style="font:500 15px 'IBM Plex Mono',monospace;color:{{ r.ac }};white-space:nowrap">{{ r.a }}</span></div></sc-for>
+            <sc-if value="{{ inf.loading }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ inf.skel }}" as="k" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #EEF2F0;min-height:64px"><span style="width:40px;height:40px;border-radius:50%;background:linear-gradient(90deg,#EEF2F0,#F7FAF9,#EEF2F0);background-size:400px 100%;animation:hShim 1.2s linear infinite;flex:none"></span><div style="flex:1;display:flex;flex-direction:column;gap:6px"><span style="height:12px;width:60%;border-radius:6px;background:linear-gradient(90deg,#EEF2F0,#F7FAF9,#EEF2F0);background-size:400px 100%;animation:hShim 1.2s linear infinite"></span><span style="height:10px;width:35%;border-radius:5px;background:#EEF2F0"></span></div><span style="height:12px;width:60px;border-radius:6px;background:#EEF2F0"></span></div></sc-for></sc-if>
+            <sc-if value="{{ inf.failed }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid #EEF2F0"><span style="flex:1;font-size:14px;color:#8A1414">Couldn't load more. Check your connection.</span><button onClick="{{ inf.retry }}" style="height:36px;padding:0 14px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:14px;font-weight:600;color:#0C1F1A;cursor:pointer">Retry</button></div></sc-if>
+            <sc-if value="{{ inf.end }}" hint-placeholder-val="{{ false }}"><div style="padding:18px 0;border-top:1px solid #EEF2F0;text-align:center;font-size:13px;color:#8A9C96">You've reached the start of your account</div></sc-if>
+          </div>
+        </div>
+        <sc-if value="{{ inf.showTop }}" hint-placeholder-val="{{ false }}"><button onClick="{{ inf.top }}" style="position:absolute;left:50%;bottom:20px;transform:translateX(-50%);height:40px;padding:0 16px 0 12px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 12px 24px -10px rgba(12,31,26,.5);animation:hUp .2s ease-out"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m18 15-6-6-6 6"></path></svg>Back to top</button></sc-if>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Batch 20 rows. The third batch fails once in this demo so you can see Retry. After 2 screens, "Back to top" appears.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">MOBILE LIST END STATES</span>
+        <sc-for list="{{ ends }}" as="e" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:1px solid {{ e.bdr }}"><span style="font-size:14px;font-weight:600">{{ e.k }}</span><div style="border-radius:14px;background:#F7FAF9;padding:12px 14px;font-size:13.5px;color:{{ e.c }};display:flex;align-items:center;justify-content:{{ e.j }};gap:10px"><span style="flex:1;min-width:0">{{ e.v }}</span><sc-if value="{{ e.btn }}" hint-placeholder-val="{{ false }}"><span style="white-space:nowrap;flex:none;height:32px;padding:0 12px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:13px;font-weight:600;color:#0C1F1A;display:flex;align-items:center">{{ e.bl }}</span></sc-if></div></div></sc-for>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">SPECS</span>
+        <sc-for list="{{ specs }}" as="p" hint-placeholder-count="7"><div style="display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:3px 0"><span>{{ p.k }}</span><span style="font:400 12.5px 'IBM Plex Mono',monospace;color:#4A615A;text-align:right">{{ p.v }}</span></div></sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="10"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { page: 1, size: 10, jump: '', loading: false };
+  M = ['Al Baik · Olaya', 'Jarir Bookstore', 'Nour Trading', 'Careem', 'Online store #2041', 'Hungerstation', 'STC Pay top-up', 'Panda', 'Tamimi Markets', 'Extra', 'Starbucks · Malqa', 'Uber', 'Noon', 'Kudu', 'Danube'];
+  row(i) { const m = this.M[(i * 7) % this.M.length], a = ((i * 937) % 4000) / 10 + 12, inn = i % 3 === 0; const d = new Date(2026, 9, 15 - Math.floor(i / 9)); return { n: i + 1, m, d: d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }), a: (inn ? '+ ' : '− ') + a.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), ac: inn ? '#0B7A5F' : '#0C1F1A' }; }
+  pageList(cur, last) {
+    if (last <= 7) return Array.from({ length: last }, (_, i) => i + 1);
+    if (cur <= 4) return [1, 2, 3, 4, 5, '…', last];
+    if (cur >= last - 3) return [1, '…', last - 4, last - 3, last - 2, last - 1, last];
+    return [1, '…', cur - 1, cur, cur + 1, '…', last];
+  }
+  go(p) { this.setState({ loading: true }); clearTimeout(this.lt); this.lt = setTimeout(() => this.setState({ page: p, loading: false }), 220); }
+  renderVals() {
+    const s = this.state;
+    const guide = [['Numbered pages', 'Tables on web. Users jump, compare and come back to page 7.', 'Transactions, statements, users'], ['Load more', 'Short feeds where totals matter less. Button at the end.', 'Activity on dashboard, comments'], ['Infinite scroll', 'Mobile lists. Loads the next batch before the end.', 'Mobile activity, notifications'], ['Previous / next only', 'Step through items one by one.', 'Transaction detail, receipts'], ['Steps', 'Not pagination. Use a progress bar for flows.', 'Onboarding, card request']].map(([k, v, e]) => ({ k, v, e }));
+    const btnStates = [['Default', 'Page you can open', '4', '0', 'transparent', '#0C1F1A', '400', 'none', 1], ['Hover', 'Web only', '4', '0', '#F2F6F4', '#0C1F1A', '400', 'none', 1], ['Current', 'Ink pill, semibold', '5', '0', '#0C1F1A', '#FFFFFF', '600', 'none', 1], ['Focus', 'Keyboard ring', '6', '0', 'transparent', '#0C1F1A', '400', '0 0 0 3px rgba(11,143,110,.35)', 1], ['Arrow', 'Outlined, 1 px control border', '›', '1px solid #D7E0DC', '#FFFFFF', '#0C1F1A', '500', 'none', 1], ['Arrow disabled', 'On the first or last page', '‹', '1px solid #E6ECE9', '#FFFFFF', '#9AACA6', '500', 'none', .5], ['Gap', 'Not clickable', '…', '0', 'transparent', '#8A9C96', '400', 'none', 1]].map(([k, v, n, bd, bg, fg, fw, ring, op]) => ({ k, v, n, bd, bg, fg, fw, ring, op }));
+    const total = 248, last = Math.ceil(total / s.size), cur = Math.min(s.page, last), start = (cur - 1) * s.size;
+    const rows = Array.from({ length: Math.min(s.size, total - start) }, (_, i) => this.row(start + i));
+    const jv = parseInt(s.jump, 10), jBad = s.jump !== '' && (!jv || jv < 1 || jv > last);
+    const tb = { rows, total, from: start + 1, to: start + rows.length, loading: s.loading, op: s.loading ? .45 : 1,
+      atFirst: cur === 1, atLast: cur === last, pc: cur === 1 ? 'not-allowed' : 'pointer', po: cur === 1 ? .45 : 1, nc: cur === last ? 'not-allowed' : 'pointer', no: cur === last ? .45 : 1,
+      prev: () => cur > 1 && this.go(cur - 1), next: () => cur < last && this.go(cur + 1),
+      pages: this.pageList(cur, last).map(p => { const gap = p === '…', on = p === cur; return { l: p, gap, cur: on ? 'page' : 'false', bg: on ? '#0C1F1A' : 'transparent', fg: on ? '#FFFFFF' : gap ? '#8A9C96' : '#0C1F1A', fw: on ? '600' : '400', c: gap ? 'default' : 'pointer', hbg: on ? '#0C1F1A' : gap ? 'transparent' : '#F2F6F4', go: () => !gap && !on && this.go(p) }; }),
+      sizes: [10, 25, 50].map(n => { const on = s.size === n; return { l: String(n), bg: on ? '#FFFFFF' : 'transparent', sh: on ? '0 1px 3px rgba(12,31,26,.14)' : 'none', fg: on ? '#0C1F1A' : '#5E7770', pick: () => this.setState({ size: n, page: Math.floor(start / n) + 1 }) }; }),
+      jump: s.jump, setJump: e => this.setState({ jump: e.target.value.replace(/\D/g, '') }), jbd: jBad ? '#E02424' : '#D9D9D9',
+      doJump: () => { if (!jBad && jv) { this.go(jv); this.setState({ jump: '' }); } }, jumpKey: e => { if (e.key === 'Enter' && !jBad && jv) { this.go(jv); this.setState({ jump: '' }); } },
+      jmsg: jBad ? `Enter 1–${last}` : `${last} pages`, jmc: jBad ? '#C81E1E' : '#5E7770' };
+    const cpP = s.cp ?? 0, cpLast = 2, cpStart = cpP * 4;
+    const cp = { rows: Array.from({ length: 4 }, (_, i) => { const r = this.row(cpStart + i + 3); return { ...r, bdr: i ? '#EEF2F0' : 'transparent' }; }), label: `${cpStart + 1}–${cpStart + 4} of 12`, po: cpP === 0 ? .4 : 1, no: cpP === cpLast ? .4 : 1, prev: () => cpP > 0 && this.setState({ cp: cpP - 1 }), next: () => cpP < cpLast && this.setState({ cp: cpP + 1 }) };
+    const lmN = s.lm ?? 4, lmMax = 10;
+    const lm = { rows: Array.from({ length: lmN }, (_, i) => { const r = this.row(i + 20); return { ...r, ini: r.m.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase(), bdr: i ? '#EEF2F0' : 'transparent' }; }), more: lmN < lmMax, end: lmN >= lmMax, busy: !!s.lmBusy, label: s.lmBusy ? 'Loading' : `Show ${Math.min(3, lmMax - lmN)} more`,
+      load: () => { if (s.lmBusy) return; this.setState({ lmBusy: true }); setTimeout(() => this.setState({ lm: Math.min(lmMax, (this.state.lm ?? 4) + 3), lmBusy: false }), 500); } };
+    const pnI = s.pn ?? 0, pnR = this.row(pnI + 40);
+    const pn = { m: pnR.m, a: pnR.a, ac: pnR.ac, d: pnR.d + ' · mada •• 3301', pos: `${pnI + 1} of 248`, po: pnI === 0 ? .4 : 1, no: 1, prev: () => pnI > 0 && this.setState({ pn: pnI - 1 }), next: () => this.setState({ pn: pnI + 1 }) };
+    const pg = (arr, cur) => arr.map(l => ({ l, bg: l === cur ? '#0C1F1A' : 'transparent', fg: l === cur ? '#FFFFFF' : l === '…' ? '#8A9C96' : '#0C1F1A', fw: l === cur ? '600' : '400' }));
+    const resp = [['≥ 900 PX · FULL', '100%', '41–50 of 248', pg([1, '…', 4, 5, 6, '…', 25], 5), false, true], ['600–899 PX · NO ROWS PER PAGE', '640px', '41–50 of 248', pg([1, '…', 5, '…', 25], 5), false, false], ['< 600 PX · COMPACT', '380px', '41–50', [], true, false]].map(([k, w, range, pages, compact, rpp]) => ({ k, w, range, pages, compact, rpp }));
+    const iN = s.iN ?? 20, iMax = 100;
+    const loadMore = () => { const st = this.state; if (st.iLoad || st.iFail || (st.iN ?? 20) >= iMax) return; this.setState({ iLoad: true }); setTimeout(() => { const n = this.state.iN ?? 20; if (n === 40 && !this.state.iFailedOnce) this.setState({ iLoad: false, iFail: true, iFailedOnce: true }); else this.setState({ iLoad: false, iN: Math.min(iMax, n + 20) }); }, 700); };
+    const inf = { ref: this.infRef || (this.infRef = React.createRef()), rows: Array.from({ length: iN }, (_, i) => { const r = this.row(i); return { ...r, ini: r.m.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase(), bdr: i ? '#EEF2F0' : 'transparent' }; }),
+      skel: [0, 1, 2], loading: !!s.iLoad, failed: !!s.iFail, end: iN >= iMax, count: `${iN} of ${iMax}`, showTop: !!s.iTop,
+      onScroll: e => { const el = e.target, nearEnd = el.scrollHeight - el.scrollTop - el.clientHeight < 5 * 64; if (nearEnd) loadMore(); const t = el.scrollTop > el.clientHeight * 2; if (t !== !!this.state.iTop) this.setState({ iTop: t }); },
+      retry: () => { this.setState({ iFail: false }); setTimeout(loadMore, 0); }, top: () => { const el = this.infRef.current; if (el) el.scrollTo({ top: 0, behavior: 'smooth' }); } };
+    const ends = [['Loading next batch', '3 skeleton rows at the end of the list', '#5E7770', 'flex-start', false, ''], ['Failed', 'Couldn\'t load more.', '#8A1414', 'space-between', true, 'Retry'], ['End of list', 'You\'ve reached the start of your account', '#8A9C96', 'center', false, ''], ['Filtered end', 'No more results for these filters', '#5E7770', 'space-between', true, 'Clear filters']].map(([k, v, c, j, btn, bl], i) => ({ k, v, c, j, btn, bl, bdr: i ? '#EEF2F0' : 'transparent' }));
+    const specs = [['Web page size', '10 · 25 · 50 (default 10)'], ['Mobile batch', '20 rows'], ['Prefetch', '5 rows before the end'], ['Page button', '36 × 36 · radius 10 · gap 4'], ['Mobile row', '≥ 64 pt tall'], ['Max visible pages', '7 incl. ellipses'], ['URL', '?page=5&size=25']].map(([k, v]) => ({ k, v }));
+    const rules = [[1, 'Show the range and total: "41–50 of 248".'], [1, 'Keep the page in the URL so Back and shared links work.'], [1, 'Reset to page 1 when filters or search change.'], [1, 'Keep the first visible row in view when rows per page changes.'], [1, 'On mobile, prefetch before the end and show skeleton rows.'], [1, 'Show "Back to top" after two screens of scrolling.'], [0, 'Don\'t use infinite scroll for web tables that people export or audit.'], [0, 'Don\'t put pagination above and below the same table.'], [0, 'Don\'t hide the arrows on the first or last page; disable them.'], [0, 'Don\'t lose scroll position when someone opens a row and comes back.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { guide, btnStates, tb, cp, lm, pn, resp, inf, ends, specs, rules };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}button,input,textarea{font-family:inherit}input::placeholder,textarea::placeholder{color:#8A9C96}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<div style="max-width:1240px;margin:0 auto;padding:56px 32px 96px;display:flex;flex-direction:column;gap:56px">
+  <header style="display:flex;flex-direction:column;gap:12px;max-width:720px">
+    <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+    <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Inputs</h1>
+    <p style="margin:0;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Floating-label fields from the sign-up flow, extended to every state and input type. Web and mobile share the same field; dashboards use the compact sizes. Every example with a "Live" tag works.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Anatomy</h2><p style="margin:0;font-size:15px;color:#4A615A">The label sits inside the field as a placeholder and moves up when the field is focused or filled.</p></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:32px 28px;display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:40px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="position:relative;height:60px;border:1.5px solid #0C1F1A;border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:10px;box-shadow:0 0 0 3px rgba(12,31,26,.06)">
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Settlement IBAN</span><span style="font:400 16px 'IBM Plex Mono',monospace;display:flex;align-items:center">SA03 8000 0000 6080<span style="width:1.5px;height:20px;background:#0B8F6E;margin-left:2px"></span></span></div>
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;color:#5E7770" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>
+          <span style="position:absolute;left:-6px;top:-30px;font:500 11px 'IBM Plex Mono',monospace;color:#0B8F6E">① ②</span>
+          <span style="position:absolute;right:4px;top:-30px;font:500 11px 'IBM Plex Mono',monospace;color:#0B8F6E">④</span>
+          <span style="position:absolute;left:150px;bottom:-30px;font:500 11px 'IBM Plex Mono',monospace;color:#0B8F6E">③</span>
+        </div>
+        <span style="font-size:13px;color:#5C5C5C;margin-top:24px">⑤ Must match the CR owner's bank account.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px 24px">
+        <sc-for list="{{ anatomy }}" as="a" hint-placeholder-count="5"><div style="display:flex;gap:10px"><span style="font:500 13px 'IBM Plex Mono',monospace;color:#0B8F6E">{{ a.n }}</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">{{ a.k }}</span><span style="font-size:13px;line-height:1.45;color:#5E7770">{{ a.v }}</span></div></div></sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Text field states</h2><p style="margin:0;font-size:15px;color:#4A615A">The helper line is replaced by the error message, never shown together with it.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px">
+      <sc-for list="{{ states }}" as="f" hint-placeholder-count="8">
+        <div style="background:#FFFFFF;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ f.name }}</span><span style="font:400 11px 'IBM Plex Mono',monospace;color:#8A9C96">{{ f.spec }}</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="height:60px;border:{{ f.bw }} solid {{ f.bd }};border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:10px;background:{{ f.bg }};box-shadow:{{ f.sh }}">
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                <sc-if value="{{ f.float }}" hint-placeholder-val="{{ true }}"><span style="font-size:11px;color:{{ f.lc }}">{{ f.label }}</span></sc-if>
+                <span style="font-size:16px;color:{{ f.vc }};display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.text }}<sc-if value="{{ f.caret }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;vertical-align:middle;width:1.5px;height:20px;background:#0B8F6E;margin-left:2px"></span></sc-if></span>
+              </div>
+              <sc-if value="{{ f.ok }}" hint-placeholder-val="{{ false }}"><span style="width:22px;height:22px;border-radius:50%;background:#0B8F6E;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></sc-if>
+              <sc-if value="{{ f.err }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:20px;height:20px;color:#E02424" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg></sc-if>
+              <sc-if value="{{ f.lock }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:18px;height:18px;color:#8A9C96" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></sc-if>
+            </div>
+            <span style="font-size:13px;color:{{ f.hc }};min-height:18px">{{ f.help }}</span>
+          </div>
+          <span style="font-size:12.5px;line-height:1.45;color:#5E7770;border-top:1px solid #EEF2F0;padding-top:10px">{{ f.note }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:40px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div onClick="{{ lf.focus }}" style="height:60px;border:{{ lf.bw }} solid {{ lf.bd }};border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px;cursor:text;box-shadow:{{ lf.sh }};transition:border-color .15s,box-shadow .15s" style-hover="border-color:{{ lf.hbd }}">
+          <span style="font-size:{{ lf.ls }};color:{{ lf.lc }};transition:font-size .15s">Company name (English)</span>
+          <input ref="{{ lf.ref }}" value="{{ lf.v }}" onChange="{{ lf.set }}" onFocus="{{ lf.onF }}" onBlur="{{ lf.onB }}" style="border:0;outline:0;padding:0;height:{{ lf.ih }};font-size:16px;color:#0C1F1A;background:transparent;transition:height .15s"/>
+        </div>
+        <span style="font-size:13px;color:{{ lf.hc }}">{{ lf.help }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="align-self:flex-start;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span><span style="font-size:14px;line-height:1.5;color:#4A615A">Click the field, type, then click away. Leave it with fewer than 3 characters to see the error; it checks on blur, not while typing.</span></div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Password</h2><p style="margin:0;font-size:15px;color:#4A615A">Show/hide toggle, a 4-step strength meter and a live checklist of rules.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <span style="align-self:flex-start;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span>
+        <div style="height:60px;border:1.5px solid #0C1F1A;border-radius:8px;padding:0 8px 0 14px;display:flex;align-items:center;gap:8px;box-shadow:0 0 0 3px rgba(12,31,26,.06)">
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Create password</span><input type="{{ pw.type }}" value="{{ pw.v }}" onChange="{{ pw.set }}" placeholder="At least 8 characters" style="border:0;outline:0;padding:0;font-size:16px;letter-spacing:{{ pw.ls }};color:#0C1F1A;background:transparent"/></div>
+          <button onClick="{{ pw.toggle }}" aria-label="{{ pw.aria }}" style="width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:#4A615A;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#F2F6F4"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ pw.eye }}"></path></svg></button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px"><div style="flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:4px"><sc-for list="{{ pw.bars }}" as="b" hint-placeholder-count="4"><span style="height:4px;border-radius:2px;background:{{ b }};transition:background .2s"></span></sc-for></div><span style="font-size:13px;font-weight:600;color:{{ pw.sc }};min-width:56px;text-align:right">{{ pw.strength }}</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <sc-for list="{{ pw.rules }}" as="r" hint-placeholder-count="4"><span style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:{{ r.c }}"><span style="width:16px;height:16px;border-radius:50%;flex:none;background:{{ r.bg }};border:1.5px solid {{ r.bd }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;transition:all .2s"><svg viewBox="0 0 24 24" style="width:10px;height:10px" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>{{ r.t }}</span></sc-for>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">SIGN-IN · HIDDEN, ERROR, CONFIRM</span>
+        <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 8px 0 14px;display:flex;align-items:center;gap:8px"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Password</span><span style="font-size:16px;letter-spacing:.2em">••••••••••</span></div><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#4A615A"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path></svg></span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:60px;border:1px solid #E02424;border-radius:8px;padding:0 8px 0 14px;display:flex;align-items:center;gap:8px;background:#FFFBFB"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:#E02424">Confirm password</span><span style="font-size:16px;letter-spacing:.2em">•••••••</span></div><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#4A615A"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path></svg></span></div><span style="font-size:13px;color:#E02424">Passwords don't match</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#5E7770">3 attempts left before a 15-minute lock</span><span style="font-size:14px;font-weight:600;color:#0E7C62;text-decoration:underline;text-underline-offset:3px">Forgot password?</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">OTP code</h2><p style="margin:0;font-size:15px;color:#4A615A">Six boxes, numeric keyboard, auto-advance, backspace goes back, paste fills all. Submits on the sixth digit.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#8A9C96;white-space:nowrap">demo code 123456</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:20px;font-weight:700">Enter the code</span><span style="font-size:14px;color:#4A615A">Sent by SMS to +966 50 ••• •• 26</span></div>
+        <div style="display:flex;gap:10px">
+          <sc-for list="{{ otp.boxes }}" as="o" hint-placeholder-count="6"><input ref="{{ o.ref }}" value="{{ o.v }}" onChange="{{ o.set }}" onKeyDown="{{ o.key }}" onPaste="{{ o.paste }}" onFocus="{{ o.focus }}" onBlur="{{ otp.blur }}" inputMode="numeric" maxLength="6" aria-label="{{ o.aria }}" style="width:70px;height:80px;flex:none;border:{{ o.bw }} solid {{ o.bd }};border-radius:12px;text-align:center;font:500 32px 'IBM Plex Mono',monospace;color:#0C1F1A;background:{{ o.bg }};outline:0;box-shadow:{{ o.sh }};transition:all .15s"/></sc-for>
+        </div>
+        <span style="font-size:13.5px;font-weight:500;color:{{ otp.mc }};min-height:20px">{{ otp.msg }}</span>
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#5E7770">Didn't get it?<sc-if value="{{ otp.canResend }}" hint-placeholder-val="{{ false }}"><button onClick="{{ otp.resend }}" style="border:0;background:transparent;padding:0;font-size:14px;font-weight:600;color:#0E7C62;cursor:pointer;text-decoration:underline;text-underline-offset:3px">Resend code</button></sc-if><sc-if value="{{ otp.waiting }}" hint-placeholder-val="{{ true }}"><span style="font-family:'IBM Plex Mono',monospace;color:#0C1F1A">Resend in {{ otp.timer }}</span></sc-if></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">STATES</span>
+        <sc-for list="{{ otpStates }}" as="s" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:16px">
+            <span style="width:76px;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E7770">{{ s.name }}</span>
+            <div style="display:flex;gap:10px"><sc-for list="{{ s.boxes }}" as="b" hint-placeholder-count="6"><span style="width:70px;height:80px;flex:none;border:{{ b.bw }} solid {{ b.bd }};border-radius:12px;background:{{ b.bg }};box-shadow:{{ b.sh }};display:flex;align-items:center;justify-content:center;font:500 32px 'IBM Plex Mono',monospace;color:{{ b.c }}">{{ b.v }}<sc-if value="{{ b.caret }}" hint-placeholder-val="{{ false }}"><span style="width:2px;height:34px;background:#0B8F6E"></span></sc-if></span></sc-for></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Dropdowns</h2><p style="margin:0;font-size:15px;color:#4A615A">Select for short lists, a searchable combobox for long lists (banks, cities), multi-select for filters. On mobile all three open as a bottom sheet.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px;min-height:430px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">SELECT</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="position:relative">
+          <button onClick="{{ sel.toggle }}" aria-expanded="{{ sel.exp }}" style="width:100%;height:60px;border:{{ sel.bw }} solid {{ sel.bd }};border-radius:8px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;cursor:pointer;text-align:left;color:#0C1F1A;box-shadow:{{ sel.sh }}" style-hover="border-color:{{ sel.hbd }}"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Transfer purpose</span><span style="font-size:16px">{{ sel.v }}</span></div><svg viewBox="0 0 24 24" style="width:20px;height:20px;transform:{{ sel.rot }};transition:transform .2s" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+          <sc-if value="{{ sel.open }}" hint-placeholder-val="{{ false }}">
+            <div role="listbox" style="position:absolute;z-index:5;left:0;right:0;top:66px;background:#FFFFFF;border-radius:12px;border:1px solid #E6ECE9;box-shadow:0 18px 40px -16px rgba(12,31,26,.3);padding:6px;display:flex;flex-direction:column;gap:2px">
+              <sc-for list="{{ sel.opts }}" as="o" hint-placeholder-count="5"><button onClick="{{ o.pick }}" disabled="{{ o.dis }}" style="height:42px;border:0;border-radius:8px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;background:{{ o.bg }};color:{{ o.fg }};font-size:15px;font-weight:{{ o.fw }};cursor:{{ o.cur }};text-align:left" style-hover="background:{{ o.hbg }}"><span>{{ o.label }}</span><sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px;color:#0B8F6E" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if><sc-if value="{{ o.dis }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px">Not for this account</span></sc-if></button></sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:12.5px;color:#5E7770;border-top:1px solid #EEF2F0;padding-top:12px"><span><b style="color:#0C1F1A;font-weight:600">Hover</b> · #F2F6F4</span><span><b style="color:#0C1F1A;font-weight:600">Selected</b> · tint + check</span><span><b style="color:#0C1F1A;font-weight:600">Disabled</b> · gray + reason</span><span><b style="color:#0C1F1A;font-weight:600">Keys</b> · ↑ ↓ Enter Esc</span></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px;min-height:430px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">SEARCHABLE COMBOBOX</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="height:60px;border:1.5px solid #0C1F1A;border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:10px;box-shadow:0 0 0 3px rgba(12,31,26,.06)">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;color:#5E7770;flex:none" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Beneficiary bank</span><input value="{{ cb.q }}" onChange="{{ cb.set }}" placeholder="Search banks" style="border:0;outline:0;padding:0;font-size:16px;color:#0C1F1A;background:transparent"/></div>
+          <sc-if value="{{ cb.hasQ }}" hint-placeholder-val="{{ false }}"><button onClick="{{ cb.clear }}" aria-label="Clear" style="width:28px;height:28px;border:0;border-radius:50%;background:#F2F6F4;color:#4A615A;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></sc-if>
+        </div>
+        <div style="border:1px solid #E6ECE9;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:2px;box-shadow:0 18px 40px -20px rgba(12,31,26,.25)">
+          <sc-for list="{{ cb.list }}" as="b" hint-placeholder-count="4"><button onClick="{{ b.pick }}" style="height:48px;border:0;border-radius:8px;padding:0 10px;display:flex;align-items:center;gap:12px;background:{{ b.bg }};color:#0C1F1A;cursor:pointer;text-align:left" style-hover="background:#F2F6F4"><span style="width:32px;height:32px;border-radius:8px;background:{{ b.c }};color:#FFFFFF;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">{{ b.ab }}</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14.5px;font-weight:500">{{ b.name }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ b.code }}</span></div><sc-if value="{{ b.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px;color:#0B8F6E" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></button></sc-for>
+          <sc-if value="{{ cb.empty }}" hint-placeholder-val="{{ false }}"><div style="padding:22px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center"><span style="font-size:14.5px;font-weight:600">No banks match "{{ cb.q }}"</span><span style="font-size:13px;color:#5E7770">Check the spelling or enter the IBAN; we'll find the bank.</span></div></sc-if>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:14px;min-height:430px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">MULTI-SELECT</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+        <div style="min-height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:8px 14px;display:flex;flex-direction:column;gap:6px;justify-content:center">
+          <span style="font-size:11px">Branches</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ ms.chips }}" as="c" hint-placeholder-count="2"><span style="height:28px;padding:0 4px 0 10px;border-radius:999px;background:#E3F6EF;color:#0B6F56;font-size:13px;font-weight:500;display:flex;align-items:center;gap:4px">{{ c.label }}<button onClick="{{ c.remove }}" aria-label="Remove" style="width:20px;height:20px;border:0;border-radius:50%;background:transparent;color:#0B6F56;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#C2E8DA"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></span></sc-for>
+            <sc-if value="{{ ms.none }}" hint-placeholder-val="{{ false }}"><span style="font-size:16px;color:#8A9C96">All branches</span></sc-if>
+          </div>
+        </div>
+        <div style="border:1px solid #E6ECE9;border-radius:12px;padding:6px;display:flex;flex-direction:column;gap:2px">
+          <sc-for list="{{ ms.opts }}" as="o" hint-placeholder-count="5"><button onClick="{{ o.toggle }}" style="height:42px;border:0;border-radius:8px;padding:0 10px;display:flex;align-items:center;gap:12px;background:transparent;color:#0C1F1A;font-size:14.5px;cursor:pointer;text-align:left" style-hover="background:#F2F6F4"><span style="width:18px;height:18px;border-radius:5px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;flex:none;transition:all .15s"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="flex:1">{{ o.label }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ o.n }}</span></button></sc-for>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><button onClick="{{ ms.clear }}" style="border:0;background:transparent;padding:0;font-size:14px;font-weight:600;color:#0E7C62;cursor:pointer">Clear all</button><span style="font-size:13px;color:#5E7770">{{ ms.count }}</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Specialised fields</h2><p style="margin:0;font-size:15px;color:#4A615A">Formatted while typing so the value is easy to check. Numbers use IBM Plex Mono.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px">
+      <div style="background:#FFFFFF;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">PHONE · LIVE</span>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:60px;border:1px solid {{ ph.bd }};border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:12px"><span style="display:flex;align-items:center;gap:6px;font:500 16px 'IBM Plex Mono',monospace;padding-right:12px;border-right:1px solid #E6E6E6">+966<svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:{{ ph.lc }}">Mobile number</span><input value="{{ ph.v }}" onChange="{{ ph.set }}" inputMode="numeric" placeholder="5X XXX XXXX" style="border:0;outline:0;padding:0;font:400 16px 'IBM Plex Mono',monospace;color:#0C1F1A;background:transparent"/></div><sc-if value="{{ ph.ok }}" hint-placeholder-val="{{ false }}"><span style="width:22px;height:22px;border-radius:50%;background:#0B8F6E;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></sc-if></div><span style="font-size:13px;color:{{ ph.hc }}">{{ ph.help }}</span></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">IBAN · LIVE</span>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:10px"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">IBAN</span><input value="{{ ib.v }}" onChange="{{ ib.set }}" placeholder="SA00 0000 0000 0000 0000 0000" style="border:0;outline:0;padding:0;font:400 16px 'IBM Plex Mono',monospace;color:#0C1F1A;background:transparent;width:100%"/></div><sc-if value="{{ ib.hasBank }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;font-weight:600;padding:4px 8px;border-radius:6px;background:#F2F6F4;color:#0C1F1A;white-space:nowrap">{{ ib.bank }}</span></sc-if></div><span style="font-size:13px;color:#5C5C5C">{{ ib.help }}</span></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">AMOUNT · LIVE</span>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="height:60px;border:1px solid {{ am.bd }};border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:10px"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:{{ am.lc }}">Amount</span><input value="{{ am.v }}" onChange="{{ am.set }}" inputMode="decimal" placeholder="0.00" style="border:0;outline:0;padding:0;font:500 18px 'IBM Plex Mono',monospace;color:#0C1F1A;background:transparent;width:100%"/></div><span style="font:500 14px 'IBM Plex Mono',monospace;color:#5E7770">SAR</span></div><span style="font-size:13px;color:{{ am.hc }}">{{ am.help }}</span></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">DATE</span>
+        <div style="height:60px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:10px"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Date of birth</span><span style="font:400 16px 'IBM Plex Mono',monospace">12 / 12 / 1991</span></div><svg viewBox="0 0 24 24" style="width:20px;height:20px;color:#4A615A" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></div>
+        <span style="font-size:13px;color:#5C5C5C">DD / MM / YYYY · Gregorian or Hijri toggle in the picker</span>
+      </div>
+      <div style="background:#FFFFFF;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">TEXTAREA · LIVE</span>
+        <div style="display:flex;flex-direction:column;gap:6px"><div style="border:1px solid #D9D9D9;border-radius:8px;padding:10px 14px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px">Note to beneficiary</span><textarea value="{{ ta.v }}" onChange="{{ ta.set }}" rows="3" maxLength="140" placeholder="Visible on their statement" style="border:0;outline:0;padding:0;resize:none;font-size:15px;line-height:1.45;color:#0C1F1A;background:transparent"></textarea></div><span style="font:400 12px 'IBM Plex Mono',monospace;color:{{ ta.cc }};align-self:flex-end">{{ ta.count }}</span></div>
+      </div>
+      <div style="background:#FFFFFF;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">FILE UPLOAD · EMPTY, UPLOADING, DONE</span>
+        <div style="border:1.5px dashed #B9C8C2;border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px;background:#FAFCFB"><span style="width:36px;height:36px;border-radius:10px;background:#E3F6EF;color:#0B6F56;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"></path></svg></span><div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:500">Drop CR document or <span style="color:#0E7C62;font-weight:600;text-decoration:underline">browse</span></span><span style="font-size:12px;color:#5E7770">PDF, JPG · up to 10 MB</span></div></div>
+        <div style="border:1px solid #D9D9D9;border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;font-size:13.5px"><span style="font-weight:500">VAT-certificate.pdf</span><span style="font-family:'IBM Plex Mono',monospace;color:#5E7770">64%</span></div><span style="height:4px;border-radius:2px;background:#E6ECE9;overflow:hidden;display:flex"><span style="width:64%;background:linear-gradient(90deg,#0A7559,#2C957A)"></span></span></div>
+        <div style="border:1px solid #D9D9D9;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:50%;background:#0B8F6E;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="flex:1;font-size:13.5px;font-weight:500">CR-2346041544.pdf <span style="font-weight:400;color:#5E7770">· 1.2 MB</span></span><span style="font-size:13px;font-weight:600;color:#C81E1E">Remove</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Compact fields · web dashboard</h2><p style="margin:0;font-size:15px;color:#4A615A">No floating label; the context gives the meaning. Used in toolbars and table filters.</p></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <div style="height:40px;width:300px;max-width:100%;border:1px solid #D7E0DC;border-radius:999px;padding:0 14px;display:flex;align-items:center;gap:8px;background:#FFFFFF"><svg viewBox="0 0 24 24" style="width:16px;height:16px;color:#5E7770" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input placeholder="Search transactions" style="flex:1;border:0;outline:0;padding:0;font-size:14px;color:#0C1F1A;background:transparent;min-width:0"/><span style="font:500 11px 'IBM Plex Mono',monospace;padding:2px 6px;border-radius:5px;border:1px solid #D7E0DC;color:#5E7770">⌘K</span></div>
+        <div style="height:40px;border:1px solid #D7E0DC;border-radius:999px;padding:0 12px 0 14px;display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:#5E7770">Status</span><span style="font-weight:600">Settled</span><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></div>
+        <div style="height:40px;border:1px solid #D7E0DC;border-radius:999px;padding:0 12px 0 14px;display:flex;align-items:center;gap:8px;font-size:14px"><span style="color:#5E7770">Terminal</span><span style="font-weight:600">All</span><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></div>
+        <div style="height:40px;border:1.5px solid #0C1F1A;border-radius:999px;padding:0 14px;display:flex;align-items:center;gap:8px;font:400 14px 'IBM Plex Mono',monospace;box-shadow:0 0 0 3px rgba(12,31,26,.06)"><span style="font-family:'IBM Plex Sans',sans-serif;color:#5E7770">Min</span>SAR 500<span style="width:1.5px;height:16px;background:#0B8F6E"></span></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <div style="height:36px;width:240px;border:1px solid #D7E0DC;border-radius:10px;padding:0 12px;display:flex;align-items:center;gap:8px;font-size:13.5px;color:#8A9C96"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>Filter by name or IBAN</div>
+        <div style="height:36px;width:140px;border:1px solid #E02424;border-radius:10px;padding:0 12px;display:flex;align-items:center;font:400 13.5px 'IBM Plex Mono',monospace;background:#FFFBFB">SAR -20</div>
+        <div style="height:36px;width:140px;border:1px solid #E6ECE9;border-radius:10px;padding:0 12px;display:flex;align-items:center;font-size:13.5px;color:#9AACA6;background:#F4F6F5">Disabled</div>
+        <span style="font-size:12.5px;color:#5E7770">S 36 · radius 10 · in tables and side panels</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Selection controls</h2><p style="margin:0;font-size:15px;color:#4A615A">Visible boxes are 18 px; the tap area includes the label.</p></div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:12px 28px">
+      <sc-for list="{{ controls }}" as="r" hint-placeholder-count="3">
+        <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;align-items:center;padding:16px 0;border-top:1px solid {{ r.bd }}">
+          <span style="font-size:15px;font-weight:600">{{ r.name }}</span>
+          <div style="display:flex;flex-wrap:wrap;gap:28px">
+            <sc-for list="{{ r.items }}" as="c" hint-placeholder-count="5"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;min-width:70px"><span style="width:{{ c.w }};height:{{ c.h }};border-radius:{{ c.r }};border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:#FFFFFF;display:flex;align-items:center;justify-content:{{ c.j }};padding:{{ c.p }};box-shadow:{{ c.sh }}"><sc-if value="{{ c.check }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:12px;height:12px" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if><sc-if value="{{ c.dash }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:2px;border-radius:1px;background:#FFFFFF"></span></sc-if><sc-if value="{{ c.dot }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:8px;border-radius:50%;background:{{ c.dotC }}"></span></sc-if><sc-if value="{{ c.knob }}" hint-placeholder-val="{{ false }}"><span style="width:18px;height:18px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,.2)"></span></sc-if></span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E7770">{{ c.label }}</span></div></sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Usage</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+      <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lfV: '', lfF: false, lfT: false, pw: 'Hala2026', pwShow: false, otp: ['', '', '', '', '', ''], otpF: -1, otpT: 42, sel: 'Supplier payment', selO: false, cbQ: '', cbSel: 'SNB', ms: { Olaya: true, 'Al Malqa': true }, ph: '50 333 12', ib: 'SA03 8000 0000 6080 1016 7519', am: '25,000.00', ta: 'Invoice INV-2041, September supplies' };
+  lfRef = React.createRef();
+  otpRefs = [0, 1, 2, 3, 4, 5].map(() => React.createRef());
+  componentDidMount() { this.tick = setInterval(() => this.setState(s => (s.otpT > 0 ? { otpT: s.otpT - 1 } : null)), 1000); }
+  componentWillUnmount() { clearInterval(this.tick); }
+  setOtp(arr, focus) {
+    this.setState({ otp: arr });
+    if (focus != null && this.otpRefs[focus] && this.otpRefs[focus].current) this.otpRefs[focus].current.focus();
+  }
+  renderVals() {
+    const s = this.state, ink = '#0C1F1A', teal = '#0B8F6E', red = '#E02424';
+    const anatomy = [['①', 'Container', 'H 60 · radius 8 · 1 px #D9D9D9'], ['②', 'Label', '11 px when floating, 16 px as placeholder'], ['③', 'Value', '16 px · numbers in IBM Plex Mono'], ['④', 'Trailing slot', 'Copy, clear, show/hide, status icon'], ['⑤', 'Helper / error', '13 px · one line where possible']].map(([n, k, v]) => ({ n, k, v }));
+    const F = (o) => ({ bw: '1px', bd: '#D9D9D9', bg: '#FFFFFF', sh: 'none', float: true, lc: ink, vc: ink, caret: false, ok: false, err: false, lock: false, hc: '#5C5C5C', help: '', ...o });
+    const states = [
+      F({ name: 'EMPTY', spec: 'border #D9D9D9', float: false, text: 'Company name (English)', vc: '#6B6B6B', help: 'As written on your CR', note: 'Label sits inside as the placeholder.' }),
+      F({ name: 'HOVER', spec: 'border #A9B5B0', bd: '#A9B5B0', float: false, text: 'Company name (English)', vc: '#6B6B6B', help: 'As written on your CR', note: 'Web only. Cursor changes to text.' }),
+      F({ name: 'FOCUS', spec: '1.5 px ink + ring', bw: '1.5px', bd: ink, sh: '0 0 0 3px rgba(12,31,26,.06)', label: 'Company name (English)', text: 'Khamis Ara', caret: true, help: 'As written on your CR', note: 'Label floats up, caret in brand green.' }),
+      F({ name: 'FILLED', spec: 'border #D9D9D9', label: 'Company name (English)', text: 'Khamis Arabia Trading Co', note: 'Resting state after input.' }),
+      F({ name: 'ERROR', spec: 'border + label #E02424', bd: red, bg: '#FFFBFB', lc: red, label: 'Mobile number', text: '50 333 12', err: true, hc: red, help: 'Enter 9 digits starting with 5', note: 'Shown on blur or submit. Says how to fix it.' }),
+      F({ name: 'SUCCESS', spec: 'check icon', label: 'CR number', text: '2346041544', ok: true, hc: teal, help: 'Verified with Wathq', note: 'Only after a server check, not for format.' }),
+      F({ name: 'DISABLED', spec: 'fill #F4F6F5', bd: '#E6ECE9', bg: '#F4F6F5', lc: '#9AACA6', vc: '#9AACA6', label: 'Number of locations', text: '3–10', help: 'Turn off "Apply to all CRs" to edit', hc: '#8A9C96', note: 'Explain why it is locked.' }),
+      F({ name: 'READ-ONLY', spec: 'no border change', bd: '#E6ECE9', bg: '#FAFCFB', label: 'Commercial registration', text: 'Khamis Arabia Trading Co', lock: true, help: 'From Wathq · contact support to change', note: 'Selectable and copyable, not editable.' })
+    ];
+    const lfE = s.lfT && s.lfV.trim().length > 0 && s.lfV.trim().length < 3, lfUp = s.lfF || s.lfV.length > 0;
+    const lf = { ref: this.lfRef, v: s.lfV, set: e => this.setState({ lfV: e.target.value }), onF: () => this.setState({ lfF: true }), onB: () => this.setState({ lfF: false, lfT: true }), focus: () => this.lfRef.current && this.lfRef.current.focus(),
+      bw: s.lfF ? '1.5px' : '1px', bd: lfE ? red : s.lfF ? ink : '#D9D9D9', hbd: lfE ? red : s.lfF ? ink : '#A9B5B0', sh: s.lfF ? (lfE ? '0 0 0 3px rgba(224,36,36,.1)' : '0 0 0 3px rgba(12,31,26,.06)') : 'none',
+      ls: lfUp ? '11px' : '16px', lc: lfE ? red : lfUp ? ink : '#6B6B6B', ih: lfUp ? '22px' : '0px', hc: lfE ? red : '#5C5C5C', help: lfE ? 'Name must be at least 3 characters' : 'As written on your CR' };
+    const p = s.pw, rl = [[p.length >= 8, '8+ characters'], [/[A-Z]/.test(p), 'One uppercase'], [/\d/.test(p), 'One number'], [/[^A-Za-z0-9]/.test(p), 'One symbol']];
+    const score = rl.filter(r => r[0]).length, SC = ['#E02424', '#E02424', '#D97706', '#0B8F6E', '#0B8F6E'];
+    const pw = { v: p, set: e => this.setState({ pw: e.target.value }), type: s.pwShow ? 'text' : 'password', ls: s.pwShow ? '0' : '.15em', toggle: () => this.setState({ pwShow: !s.pwShow }), aria: s.pwShow ? 'Hide password' : 'Show password',
+      eye: s.pwShow ? 'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' : 'M10.7 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-2.2 3.2M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7c1.9 0 3.6-.6 5-1.5M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20',
+      bars: [0, 1, 2, 3].map(i => (p && i < Math.max(1, score) ? SC[score] : '#E6ECE9')), strength: p ? ['Weak', 'Weak', 'Fair', 'Good', 'Strong'][score] : '', sc: SC[score],
+      rules: rl.map(([ok, t]) => ({ t, c: ok ? ink : '#5E7770', bg: ok ? teal : '#FFFFFF', bd: ok ? teal : '#B9C8C2' })) };
+    const code = s.otp.join(''), full = code.length === 6, good = full && code === '123456', bad = full && !good;
+    const otp = { blur: () => this.setState({ otpF: -1 }), msg: good ? 'Code verified' : bad ? 'Wrong code. 2 attempts left.' : '', mc: good ? teal : red, timer: `0:${String(s.otpT).padStart(2, '0')}`, waiting: s.otpT > 0, canResend: s.otpT === 0,
+      resend: () => { this.setState({ otpT: 59, otp: ['', '', '', '', '', ''] }); this.otpRefs[0].current && this.otpRefs[0].current.focus(); },
+      boxes: s.otp.map((v, i) => { const f = s.otpF === i; return { v, ref: this.otpRefs[i], aria: `Digit ${i + 1}`,
+        bw: f || bad || good ? '1.5px' : '1px', bd: bad ? red : good ? teal : f ? ink : v ? '#A9B5B0' : '#D9D9D9', bg: bad ? '#FFFBFB' : good ? '#F0FAF6' : '#FFFFFF', sh: f ? '0 0 0 3px rgba(12,31,26,.06)' : 'none',
+        focus: e => { this.setState({ otpF: i }); e.target.select(); },
+        set: e => { const d = e.target.value.replace(/\D/g, ''); const a = [...s.otp]; if (d.length > 1) { d.slice(0, 6 - i).split('').forEach((c, k) => { a[i + k] = c; }); this.setOtp(a, Math.min(5, i + d.length)); } else { a[i] = d; this.setOtp(a, d && i < 5 ? i + 1 : null); } },
+        key: e => { if (e.key === 'Backspace' && !s.otp[i] && i > 0) { const a = [...s.otp]; a[i - 1] = ''; this.setOtp(a, i - 1); e.preventDefault(); } if (e.key === 'ArrowLeft' && i > 0) this.otpRefs[i - 1].current.focus(); if (e.key === 'ArrowRight' && i < 5) this.otpRefs[i + 1].current.focus(); },
+        paste: e => { const d = (e.clipboardData.getData('text') || '').replace(/\D/g, '').slice(0, 6); if (d) { e.preventDefault(); const a = ['', '', '', '', '', '']; d.split('').forEach((c, k) => { a[k] = c; }); this.setOtp(a, Math.min(5, d.length)); } } }; }) };
+    const OB = (vals, mode, cur) => vals.map((v, i) => ({ v, caret: i === cur, bw: mode === 'idle' && i !== cur ? '1px' : '1.5px', bd: mode === 'err' ? red : mode === 'ok' ? teal : i === cur ? ink : mode === 'dis' ? '#E6ECE9' : v ? '#A9B5B0' : '#D9D9D9', bg: mode === 'err' ? '#FFFBFB' : mode === 'ok' ? '#F0FAF6' : mode === 'dis' ? '#F4F6F5' : '#FFFFFF', c: mode === 'dis' ? '#9AACA6' : ink, sh: i === cur ? '0 0 0 3px rgba(12,31,26,.06)' : 'none' }));
+    const otpStates = [['EMPTY', ['', '', '', '', '', ''], 'idle', -1], ['ACTIVE', ['4', '8', '2', '', '', ''], 'idle', 3], ['ERROR', ['4', '8', '2', '9', '1', '0'], 'err', -1], ['SUCCESS', ['4', '8', '2', '9', '1', '3'], 'ok', -1], ['LOCKED', ['', '', '', '', '', ''], 'dis', -1]].map(([name, v, m, c]) => ({ name, boxes: OB(v, m, c) }));
+    const SO = [['Supplier payment'], ['Salaries'], ['Rent'], ['Family support', true], ['Other']];
+    const sel = { v: s.sel, open: s.selO, exp: s.selO ? 'true' : 'false', toggle: () => this.setState({ selO: !s.selO }), rot: s.selO ? 'rotate(180deg)' : 'none', bw: s.selO ? '1.5px' : '1px', bd: s.selO ? ink : '#D9D9D9', hbd: s.selO ? ink : '#A9B5B0', sh: s.selO ? '0 0 0 3px rgba(12,31,26,.06)' : 'none',
+      opts: SO.map(([label, dis]) => { const on = s.sel === label; return { label, on, dis: !!dis, bg: on ? '#EEF8F4' : 'transparent', hbg: dis ? 'transparent' : on ? '#E3F6EF' : '#F2F6F4', fg: dis ? '#9AACA6' : ink, fw: on ? 600 : 400, cur: dis ? 'not-allowed' : 'pointer', pick: () => !dis && this.setState({ sel: label, selO: false }) }; }) };
+    const BANKS = [['SNB', 'Saudi National Bank', 'NCBKSAJE', '#00594F'], ['RJHI', 'Al Rajhi Bank', 'RJHISARI', '#1A3E8C'], ['RIBL', 'Riyad Bank', 'RIBLSARI', '#2C6BB0'], ['SABB', 'Saudi Awwal Bank', 'SABBSARI', '#C8102E'], ['ALBI', 'Bank Albilad', 'ALBISARI', '#A0742B'], ['INMA', 'Alinma Bank', 'INMASARI', '#6D4C2F']];
+    const q = s.cbQ.trim().toLowerCase(), found = BANKS.filter(b => !q || b[1].toLowerCase().includes(q) || b[2].toLowerCase().includes(q)).slice(0, 4);
+    const cb = { q: s.cbQ, hasQ: !!s.cbQ, set: e => this.setState({ cbQ: e.target.value }), clear: () => this.setState({ cbQ: '' }), empty: found.length === 0,
+      list: found.map(([k, name, code, c]) => ({ name, code, c, ab: k.slice(0, 2), on: s.cbSel === k, bg: s.cbSel === k ? '#EEF8F4' : 'transparent', pick: () => this.setState({ cbSel: k, cbQ: name }) })) };
+    const BR = [['Olaya', 4], ['Al Malqa', 2], ['Jeddah Corniche', 3], ['Khobar Mall', 1], ['Online store', 0]];
+    const chosen = BR.filter(b => s.ms[b[0]]);
+    const ms = { none: chosen.length === 0, count: chosen.length ? `${chosen.length} of ${BR.length} selected` : 'Showing all', clear: () => this.setState({ ms: {} }),
+      chips: chosen.map(([label]) => ({ label, remove: () => this.setState({ ms: { ...s.ms, [label]: false } }) })),
+      opts: BR.map(([label, n]) => { const on = !!s.ms[label]; return { label, n: `${n} POS`, bd: on ? teal : '#B9C8C2', bg: on ? teal : '#FFFFFF', toggle: () => this.setState({ ms: { ...s.ms, [label]: !on } }) }; }) };
+    const phD = s.ph.replace(/\D/g, ''), phOk = /^5\d{8}$/.test(phD), phE = phD.length > 0 && !phOk && (phD[0] !== '5' || phD.length >= 9);
+    const ph = { v: s.ph, ok: phOk, bd: phE ? red : '#D9D9D9', lc: phE ? red : ink, hc: phE ? red : phOk ? teal : '#5C5C5C', help: phE ? 'Enter 9 digits starting with 5' : phOk ? 'Matches Absher record' : `${9 - phD.length} digits to go`,
+      set: e => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); this.setState({ ph: [d.slice(0, 2), d.slice(2, 5), d.slice(5, 7), d.slice(7, 9)].filter(Boolean).join(' ') }); } };
+    const ibR = s.ib.replace(/\s/g, '').toUpperCase(), bankCode = ibR.slice(4, 6), BK = { '80': 'Al Rajhi', '10': 'SNB', '20': 'Riyad Bank', '45': 'SAB', '15': 'Albilad', '05': 'Alinma' };
+    const ib = { v: s.ib, hasBank: !!BK[bankCode], bank: BK[bankCode] || '', help: ibR.length === 24 ? '24 characters · bank detected from the IBAN' : `${ibR.length}/24 characters`,
+      set: e => { const r = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 24); this.setState({ ib: r.replace(/(.{4})/g, '$1 ').trim() }); } };
+    const amN = parseFloat(s.am.replace(/,/g, '')) || 0, over = amN > 175000;
+    const am = { v: s.am, bd: over ? red : '#D9D9D9', lc: over ? red : ink, hc: over ? red : '#5C5C5C', help: over ? 'More than your available SAR 175,000.00' : 'Available SAR 175,000.00',
+      set: e => { const raw = e.target.value.replace(/[^\d.]/g, ''); const [i, d] = raw.split('.'); const int = (i || '').replace(/^0+(?=\d)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ','); this.setState({ am: d !== undefined ? `${int}.${d.slice(0, 2)}` : int }); } };
+    const ta = { v: s.ta, set: e => this.setState({ ta: e.target.value }), count: `${s.ta.length}/140`, cc: s.ta.length > 120 ? '#D97706' : '#8A9C96' };
+    const CB = (label, o) => ({ label, w: '18px', h: '18px', r: '5px', j: 'center', p: '0', bd: '#8A9C96', bg: '#FFFFFF', sh: 'none', check: false, dash: false, dot: false, knob: false, dotC: '#FFFFFF', ...o });
+    const controls = [
+      { name: 'Checkbox', items: [CB('OFF'), CB('ON', { bd: teal, bg: teal, check: true }), CB('MIXED', { bd: teal, bg: teal, dash: true }), CB('FOCUS', { bd: teal, bg: teal, check: true, sh: '0 0 0 3px #FFFFFF,0 0 0 5px #0B8F6E' }), CB('ERROR', { bd: red, bg: '#FFFBFB' }), CB('DISABLED', { bd: '#D7E0DC', bg: '#F4F6F5' })] },
+      { name: 'Radio', items: [CB('OFF', { r: '50%' }), CB('ON', { r: '50%', bd: teal, dot: true, dotC: teal }), CB('FOCUS', { r: '50%', bd: teal, dot: true, dotC: teal, sh: '0 0 0 3px #FFFFFF,0 0 0 5px #0B8F6E' }), CB('DISABLED', { r: '50%', bd: '#D7E0DC', bg: '#F4F6F5', dot: true, dotC: '#C3D0CB' })] },
+      { name: 'Toggle', items: [CB('OFF', { w: '44px', h: '26px', r: '999px', j: 'flex-start', p: '0 2px', bd: '#D9D9D9', bg: '#D9D9D9', knob: true }), CB('ON', { w: '44px', h: '26px', r: '999px', j: 'flex-end', p: '0 2px', bd: '#0B8F6E', bg: 'linear-gradient(90deg,#0A7559,#2C957A)', knob: true }), CB('DISABLED', { w: '44px', h: '26px', r: '999px', j: 'flex-end', p: '0 2px', bd: '#C3D0CB', bg: '#C3D0CB', knob: true })] }
+    ].map((r, i) => ({ ...r, bd: i ? '#EEF2F0' : 'transparent' }));
+    const rules = [
+      [1, 'Keep labels short and visible. The floating label replaces a separate placeholder.'], [1, 'Validate on blur or submit, not on every keystroke. Clear the error as soon as the value is valid.'],
+      [1, 'Error text says how to fix it: "Enter 9 digits starting with 5".'], [1, 'Use the right keyboard on mobile: numeric for OTP, phone and amount.'],
+      [0, 'Don\'t disable a field without a helper line explaining why.'], [0, 'Don\'t split IBAN or phone into several fields. Format one field as the user types.']
+    ].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { anatomy, states, lf, pw, otp, otpStates, sel, cb, ms, ph, ib, am, ta, controls, rules };
+  }
+}
+</script>
+</body>
+</html>

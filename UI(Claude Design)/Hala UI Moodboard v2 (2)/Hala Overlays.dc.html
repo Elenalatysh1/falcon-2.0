@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+<style>@keyframes hFadeIn{from{opacity:0}}@keyframes hFadeOut{to{opacity:0}}@keyframes hDrIn{from{opacity:0;transform:translateX(32px)}}@keyframes hDrOut{to{opacity:0;transform:translateX(32px)}}@keyframes hMdIn{from{opacity:0;transform:translate(-50%,-50%) translateY(12px) scale(.96)}}@keyframes hMdOut{to{opacity:0;transform:translate(-50%,-50%) translateY(8px) scale(.97)}}@keyframes hPopIn{from{opacity:0;transform:translateY(-6px) scale(.97)}}@keyframes hPopOut{to{opacity:0;transform:translateY(-4px) scale(.98)}}@keyframes hSheetIn{from{transform:translateY(100%)}}@keyframes hAlIn{from{opacity:0;transform:translateY(-50%) scale(.9)}}@keyframes hUp{from{opacity:0;transform:translateY(24px)}}@media (prefers-reduced-motion:reduce){*{animation-duration:1ms!important}}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Modals, drawers and popups</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Layers that appear above the page. Each one interrupts a different amount, so choosing the right one matters more than how it looks. Every example with a "Live" tag works.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Which one to use</h2><p style="margin:0;font-size:15px;color:#4A615A">Start from the least interruptive option. Only block the page when the user must decide before doing anything else.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px;overflow-x:auto">
+    <div style="display:grid;grid-template-columns:150px minmax(220px,1.6fr) 110px minmax(130px,1fr) 110px;gap:16px;padding:14px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770"><span>COMPONENT</span><span>USE WHEN</span><span>BLOCKS PAGE</span><span>CLOSES BY</span><span>PLATFORM</span></div>
+    <sc-for list="{{ guide }}" as="g" hint-placeholder-count="8"><div style="display:grid;grid-template-columns:150px minmax(220px,1.6fr) 110px minmax(130px,1fr) 110px;gap:16px;padding:14px 0;border-top:1px solid #EEF2F0;font-size:14px;align-items:baseline"><span style="font-weight:600">{{ g.k }}</span><span style="color:#4A615A;line-height:1.45">{{ g.use }}</span><span style="display:flex;align-items:center;gap:6px;font-size:13px"><span style="width:8px;height:8px;border-radius:50%;background:{{ g.bc }}"></span>{{ g.block }}</span><span style="color:#4A615A;font-size:13px">{{ g.close }}</span><span style="color:#4A615A;font-size:13px">{{ g.plat }}</span></div></sc-for>
+  </div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px;display:flex;flex-direction:column;gap:14px">
+    <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">QUICK DECISION</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+      <sc-for list="{{ decide }}" as="d" hint-placeholder-count="6"><div style="border-radius:14px;background:#F4F7F6;padding:14px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13.5px;color:#4A615A">{{ d.q }}</span><span style="font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:6px">→ {{ d.a }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Modal dialog · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Centered, with a dimmed page behind. For short focused tasks and decisions. Three widths; content longer than the screen scrolls between a fixed header and footer.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56;white-space:nowrap">LIVE</span><div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ modalBtns }}" as="b" hint-placeholder-count="6"><button onClick="{{ b.open }}" style="height:34px;padding:0 14px;border:1px solid {{ b.bd }};border-radius:999px;background:{{ b.bg }};color:{{ b.fg }};font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap">{{ b.label }}</button></sc-for></div></div>
+    <div style="position:relative;height:520px;border-radius:18px;background:#EEF3F1;overflow:hidden">
+      <div style="position:absolute;inset:20px;display:flex;flex-direction:column;gap:10px"><span style="height:14px;width:30%;border-radius:7px;background:#DDE6E2"></span><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><span style="height:80px;border-radius:14px;background:#FFFFFF"></span><span style="height:80px;border-radius:14px;background:#FFFFFF"></span><span style="height:80px;border-radius:14px;background:#FFFFFF"></span></div><span style="height:200px;border-radius:14px;background:#FFFFFF"></span></div>
+      <sc-if value="{{ md.open }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ md.close }}" style="position:absolute;inset:0;background:rgba(12,31,26,.45);animation:{{ md.bA }}"></div>
+        <div role="dialog" aria-modal="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);animation:{{ md.pA }};width:{{ md.w }};max-width:calc(100% - 40px);max-height:calc(100% - 40px);background:#FFFFFF;border-radius:20px;box-shadow:0 30px 60px -20px rgba(12,31,26,.5);display:flex;flex-direction:column;overflow:hidden">
+          <div style="padding:20px 20px 14px;display:flex;gap:14px;align-items:flex-start;border-bottom:1px solid {{ md.hbd }}">
+            <sc-if value="{{ md.hasIcon }}" hint-placeholder-val="{{ false }}"><span style="width:40px;height:40px;border-radius:12px;flex:none;background:{{ md.ibg }};color:{{ md.ifg }};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ md.icon }}"></path></svg></span></sc-if>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px"><span style="font-size:18px;font-weight:700">{{ md.title }}</span><span style="font-size:14px;line-height:1.5;color:#4A615A">{{ md.desc }}</span></div>
+            <button onClick="{{ md.close }}" aria-label="Close" style="width:32px;height:32px;border:0;border-radius:10px;background:#F2F6F4;color:#4A615A;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+          </div>
+          <sc-if value="{{ md.hasBody }}" hint-placeholder-val="{{ false }}"><div style="flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px">
+            <sc-if value="{{ md.err }}" hint-placeholder-val="{{ false }}"><div style="border-radius:12px;background:#FDECEC;color:#8A1414;padding:10px 12px;font-size:13.5px;display:flex;gap:8px;align-items:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px;flex:none;color:#C81E1E" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>The bank rejected this IBAN. Check it and try again.</div></sc-if>
+            <sc-for list="{{ md.fields }}" as="f" hint-placeholder-count="3"><div style="height:56px;border:1px solid {{ f.bd }};border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center;gap:2px"><span style="font-size:11px;color:{{ f.lc }}">{{ f.l }}</span><span style="font-size:15px">{{ f.v }}</span></div></sc-for>
+          </div></sc-if>
+          <div style="padding:14px 20px 18px;display:flex;gap:10px;justify-content:flex-end;border-top:1px solid {{ md.fbd }}">
+            <button onClick="{{ md.close }}" style="height:44px;padding:0 20px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:14.5px;font-weight:500;cursor:pointer;white-space:nowrap">{{ md.cancel }}</button>
+            <button onClick="{{ md.submit }}" style="height:44px;padding:0 22px;border:0;border-radius:999px;background:{{ md.pbg }};color:{{ md.pfg }};font-size:14.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:120px;justify-content:center"><sc-if value="{{ md.loading }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M21 12a9 9 0 0 0-9-9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"></animateTransform></path></svg></sc-if>{{ md.primary }}</button>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ md.closed }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="padding:10px 16px;border-radius:999px;background:#FFFFFF;font-size:13.5px;color:#5E7770">Pick a modal above</span></div></sc-if>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">
+      <sc-for list="{{ modalSpecs }}" as="t" hint-placeholder-count="5"><div style="border-radius:14px;background:#F4F7F6;padding:12px 14px;display:flex;flex-direction:column;gap:3px"><span style="font-size:13.5px;font-weight:600">{{ t.k }}</span><span style="font-size:12.5px;line-height:1.45;color:#5E7770">{{ t.v }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Drawer · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Slides in from the right, 480 px (640 px for editing). The page behind is dimmed lightly so the list stays readable. Closing with unsaved changes asks first.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56;white-space:nowrap">LIVE · CLICK A ROW</span><span style="font-size:13px;color:#5E7770">Edit the note, then try to close the drawer.</span></div>
+    <div style="position:relative;height:520px;border-radius:18px;background:#EEF3F1;overflow:hidden">
+      <div style="position:absolute;inset:20px;background:#FFFFFF;border-radius:16px;padding:8px 16px">
+        <sc-for list="{{ dr.rows }}" as="r" hint-placeholder-count="6"><button onClick="{{ r.open }}" style="width:100%;border:0;border-bottom:1px solid #F2F5F4;background:{{ r.bg }};padding:14px 8px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#0C1F1A;cursor:pointer;text-align:left;border-radius:8px" style-hover="background:#F4F7F6"><span style="font-weight:500">{{ r.m }}</span><span style="font-family:'IBM Plex Mono',monospace">{{ r.a }}</span></button></sc-for>
+      </div>
+      <sc-if value="{{ dr.open }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ dr.tryClose }}" style="position:absolute;inset:0;background:rgba(12,31,26,.22);animation:{{ dr.bA }}"></div>
+        <div role="dialog" aria-modal="true" style="position:absolute;top:12px;right:12px;bottom:12px;animation:{{ dr.pA }};width:440px;max-width:calc(90% - 24px);background:#FFFFFF;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px -28px rgba(12,60,48,.45),0 1px 3px rgba(12,31,26,.06);display:flex;flex-direction:column">
+          <div style="padding:18px 20px 0;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid #EEF2F0">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:17px;font-weight:700">Transaction</span><button onClick="{{ dr.tryClose }}" aria-label="Close" style="width:32px;height:32px;border:0;border-radius:10px;background:#F2F6F4;color:#4A615A;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div>
+            <div style="display:flex;gap:18px"><sc-for list="{{ dr.tabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.pick }}" style="border:0;background:transparent;padding:0 0 10px;font-size:14px;font-weight:{{ t.fw }};color:{{ t.fg }};border-bottom:2px solid {{ t.bd }};margin-bottom:-1px;cursor:pointer">{{ t.label }}</button></sc-for></div>
+          </div>
+          <div style="flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;color:#5E7770">{{ dr.m }}</span><span style="font:600 28px 'IBM Plex Mono',monospace;letter-spacing:-.02em">{{ dr.a }}</span><span style="align-self:flex-start;height:24px;padding:0 10px;border-radius:999px;background:#E3F6EF;color:#0B4F3E;font-size:12px;font-weight:600;display:flex;align-items:center;white-space:nowrap">Settled</span></div>
+            <div style="border-radius:14px;background:#F4F7F6;padding:4px 14px"><div style="display:flex;justify-content:space-between;padding:12px 0;font-size:13.5px;border-bottom:1px solid #E6ECE9"><span style="color:#5E7770">Date</span><span>Today, 12:41</span></div><div style="display:flex;justify-content:space-between;padding:12px 0;font-size:13.5px"><span style="color:#5E7770">Method</span><span>mada •• 3301</span></div></div>
+            <div style="border:1px solid {{ dr.nbd }};border-radius:8px;padding:10px 14px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px">Note</span><textarea value="{{ dr.note }}" onChange="{{ dr.setNote }}" rows="2" style="border:0;outline:0;padding:0;resize:none;font:400 15px 'IBM Plex Sans',sans-serif;color:#0C1F1A;background:transparent"></textarea></div>
+          </div>
+          <div style="padding:14px 20px;border-top:1px solid #EEF2F0;display:flex;gap:10px"><button style="flex:1;height:44px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:14px;font-weight:500;cursor:pointer">Download receipt</button><button onClick="{{ dr.save }}" style="flex:1;height:44px;border:0;border-radius:999px;background:{{ dr.sbg }};color:{{ dr.sfg }};font-size:14px;font-weight:600;cursor:pointer">Save note</button></div>
+          <sc-if value="{{ dr.ask }}" hint-placeholder-val="{{ false }}"><div style="animation:hFadeIn .16s ease-out;position:absolute;inset:0;background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;padding:20px"><div style="width:100%;border-radius:18px;background:#FFFFFF;box-shadow:0 24px 48px -20px rgba(12,31,26,.45);padding:18px;display:flex;flex-direction:column;gap:8px;border:1px solid #EEF2F0"><span style="font-size:16px;font-weight:700">Discard your note?</span><span style="font-size:13.5px;color:#4A615A">Your changes to the note aren't saved yet.</span><div style="display:flex;gap:8px;margin-top:6px"><button onClick="{{ dr.keep }}" style="flex:1;height:40px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;color:#0C1F1A;font-size:13.5px;cursor:pointer">Keep editing</button><button onClick="{{ dr.discard }}" style="flex:1;height:40px;border:0;border-radius:999px;background:#FDECEC;color:#C81E1E;font-size:13.5px;font-weight:600;cursor:pointer">Discard</button></div></div></div></sc-if>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">
+      <sc-for list="{{ drawerSpecs }}" as="t" hint-placeholder-count="5"><div style="border-radius:14px;background:#F4F7F6;padding:12px 14px;display:flex;flex-direction:column;gap:3px"><span style="font-size:13.5px;font-weight:600">{{ t.k }}</span><span style="font-size:12.5px;line-height:1.45;color:#5E7770">{{ t.v }}</span></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Popover, menu and tooltip · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Anchored to the element that opened them. They don't dim the page and close when you click elsewhere.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px;min-height:300px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">ROW MENU</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56;white-space:nowrap">LIVE</span></div>
+      <div style="position:relative;border-radius:12px;background:#F4F7F6;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-size:14px"><span>Marketing card •• 4417</span><button onClick="{{ menu.toggle }}" aria-label="More actions" aria-expanded="{{ menu.exp }}" style="width:32px;height:32px;border:0;border-radius:10px;background:{{ menu.bbg }};cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0C1F1A"><svg viewBox="0 0 24 24" style="width:17px;height:17px" fill="currentColor"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+        <sc-if value="{{ menu.open }}" hint-placeholder-val="{{ false }}"><div role="menu" style="animation:{{ menu.a }};transform-origin:top right;position:absolute;right:8px;top:52px;width:210px;background:#FFFFFF;border-radius:14px;border:1px solid #E6ECE9;box-shadow:0 18px 36px -16px rgba(12,31,26,.35);padding:6px;display:flex;flex-direction:column;gap:2px;z-index:2"><sc-for list="{{ menu.items }}" as="i" hint-placeholder-count="4"><button onClick="{{ menu.toggle }}" role="menuitem" style="height:38px;border:0;border-radius:9px;background:transparent;padding:0 10px;display:flex;align-items:center;gap:10px;font-size:14px;color:{{ i.c }};cursor:pointer;text-align:left;border-top:{{ i.sep }}" style-hover="background:{{ i.h }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ i.icon }}"></path></svg>{{ i.label }}</button></sc-for></div></sc-if>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px;min-height:300px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">POPOVER · DATE RANGE</span>
+      <span style="align-self:flex-start;height:38px;padding:0 14px;border:1.5px solid #0C1F1A;border-radius:999px;font-size:13.5px;display:flex;align-items:center;gap:6px;white-space:nowrap">1 – 14 Oct ▴</span>
+      <div style="border-radius:16px;border:1px solid #E6ECE9;box-shadow:0 18px 36px -16px rgba(12,31,26,.3);padding:12px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="height:28px;padding:0 10px;border-radius:999px;background:#F2F6F4;font-size:12.5px;display:flex;align-items:center">Today</span><span style="height:28px;padding:0 10px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:12.5px;display:flex;align-items:center">This month</span><span style="height:28px;padding:0 10px;border-radius:999px;background:#F2F6F4;font-size:12.5px;display:flex;align-items:center">Last 90 days</span></div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font:400 11px 'IBM Plex Mono',monospace;text-align:center"><sc-for list="{{ cal }}" as="d" hint-placeholder-count="14"><span style="height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:{{ d.bg }};color:{{ d.fg }}">{{ d.n }}</span></sc-for></div>
+        <div style="display:flex;justify-content:flex-end;gap:6px"><span style="height:32px;padding:0 12px;border-radius:999px;font-size:13px;display:flex;align-items:center">Cancel</span><span style="height:32px;padding:0 14px;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:13px;font-weight:600;display:flex;align-items:center">Apply</span></div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px;min-height:300px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">TOOLTIP · HOVER THE ICON</span>
+      <div style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:76px">Available balance <span style="position:relative;display:inline-flex" title="Balance minus pending card holds"><span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #8A9C96;color:#5E7770;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">i</span><span style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:200px;border-radius:10px;background:#0C1F1A;color:#FFFFFF;padding:8px 10px;font-size:12.5px;line-height:1.4;text-align:center">Balance minus pending card holds.<span style="position:absolute;left:50%;bottom:-5px;width:10px;height:10px;background:#0C1F1A;transform:translateX(-50%) rotate(45deg)"></span></span></span></div>
+      <span style="font-size:13px;line-height:1.5;color:#5E7770;margin-top:auto">Dark ink, max 240 px, one or two lines. Appears after 300 ms on hover or on keyboard focus. Never put links or buttons in a tooltip.</span>
+    </div>
+  </div>
+</section>
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Mobile replaces centered modals with sheets that rise from the bottom, within thumb reach. Centered dialogs are only for short alerts.</p></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56;white-space:nowrap">LIVE</span><div style="display:flex;gap:2px;padding:3px;border-radius:999px;background:#E1E8E5"><sc-for list="{{ mob.tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.pick }}" style="height:32px;padding:0 14px;border:0;border-radius:999px;background:{{ t.bg }};color:{{ t.fg }};font-size:13px;font-weight:{{ t.fw }};cursor:pointer;box-shadow:{{ t.sh }};white-space:nowrap">{{ t.label }}</button></sc-for></div></div>
+  <div style="display:grid;grid-template-columns:380px minmax(0,1fr);gap:12px;align-items:start">
+    <div style="position:relative;height:680px;border-radius:32px;background:#F4F7F6;overflow:hidden;border:1px solid #E1E8E5">
+      <div style="position:absolute;inset:20px 16px;display:flex;flex-direction:column;gap:10px"><span style="font-size:20px;font-weight:700">Cards</span><span style="height:120px;border-radius:20px;background:linear-gradient(135deg,#0F3D33,#0A7559 60%,#2C957A)"></span><span style="height:60px;border-radius:16px;background:#FFFFFF"></span><span style="height:60px;border-radius:16px;background:#FFFFFF"></span></div>
+      <div style="position:absolute;inset:0;background:rgba(12,31,26,.42)"></div>
+      <sc-if value="{{ mob.isSheet }}" hint-placeholder-val="{{ true }}">
+        <div style="animation:hSheetIn .32s cubic-bezier(.2,.9,.2,1);position:absolute;left:0;right:0;bottom:0;height:{{ mob.h }};background:#FFFFFF;border-radius:28px 28px 0 0;display:flex;flex-direction:column;transition:height .3s cubic-bezier(.2,.9,.2,1)">
+          <button onClick="{{ mob.cycle }}" aria-label="Resize sheet" style="align-self:center;border:0;background:transparent;padding:10px 30px;cursor:pointer"><span style="display:block;width:40px;height:5px;border-radius:3px;background:#C9D4D0"></span></button>
+          <div style="padding:0 20px 8px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:19px;font-weight:700">Pay from</span><span style="font:500 11px 'IBM Plex Mono',monospace;color:#5E7770">{{ mob.snap }}</span></div>
+          <div style="flex:1;overflow-y:auto;padding:0 16px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ mob.accts }}" as="a" hint-placeholder-count="4"><div style="min-height:64px;border-radius:16px;border:1.5px solid {{ a.bd }};background:{{ a.bg }};padding:0 14px;display:flex;align-items:center;gap:12px;flex:none"><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">{{ a.n }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ a.b }}</span></div><span style="width:20px;height:20px;border-radius:50%;border:2px solid {{ a.rb }};display:flex;align-items:center;justify-content:center"><span style="width:9px;height:9px;border-radius:50%;background:{{ a.dot }}"></span></span></div></sc-for>
+          </div>
+          <div style="padding:12px 16px 26px"><span style="height:52px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">Confirm</span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mob.isAction }}" hint-placeholder-val="{{ false }}">
+        <div style="animation:hUp .28s cubic-bezier(.2,.9,.2,1);position:absolute;left:10px;right:10px;bottom:26px;display:flex;flex-direction:column;gap:8px">
+          <div style="border-radius:20px;background:#FFFFFF;overflow:hidden"><span style="display:block;padding:14px;text-align:center;font-size:13px;color:#5E7770;border-bottom:1px solid #EEF2F0">Marketing card •• 4417</span><sc-for list="{{ mob.actions }}" as="a" hint-placeholder-count="4"><span style="display:flex;align-items:center;justify-content:center;height:54px;font-size:16px;color:{{ a.c }};font-weight:{{ a.fw }};border-top:{{ a.bt }}">{{ a.l }}</span></sc-for></div>
+          <span style="height:54px;border-radius:20px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600">Cancel</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mob.isFull }}" hint-placeholder-val="{{ false }}">
+        <div style="animation:hSheetIn .34s cubic-bezier(.2,.9,.2,1);position:absolute;inset:0;top:30px;background:#FFFFFF;border-radius:24px 24px 0 0;display:flex;flex-direction:column">
+          <div style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #EEF2F0"><span style="width:36px;height:36px;border-radius:50%;background:#F2F6F4;display:flex;align-items:center;justify-content:center;font-size:15px">×</span><span style="font-size:16px;font-weight:700">New transfer</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#5E7770">1/3</span></div>
+          <div style="flex:1;padding:18px 16px;display:flex;flex-direction:column;gap:12px"><div style="height:56px;border:1px solid #D9D9D9;border-radius:8px;padding:0 14px;display:flex;flex-direction:column;justify-content:center"><span style="font-size:11px">Beneficiary</span><span style="font-size:15px">Nour Trading</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:20px 0"><span style="font-size:14px;color:#5E7770">Amount</span><span style="font:600 38px 'IBM Plex Mono',monospace">25,000</span><span style="font-size:13px;color:#5E7770">Available SAR 175,000.00</span></div></div>
+          <div style="padding:12px 16px 26px"><span style="height:52px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">Continue</span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mob.isAlert }}" hint-placeholder-val="{{ false }}">
+        <div style="animation:hAlIn .22s cubic-bezier(.2,.9,.2,1);position:absolute;left:36px;right:36px;top:50%;transform:translateY(-50%);border-radius:24px;background:#FFFFFF;padding:22px 20px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><span style="width:44px;height:44px;border-radius:14px;background:#FDECEC;color:#C81E1E;display:flex;align-items:center;justify-content:center;font-weight:700">!</span><span style="font-size:17px;font-weight:700">Freeze this card?</span><span style="font-size:14px;line-height:1.5;color:#4A615A">Payments on •• 4417 stop right away.</span><span style="align-self:stretch;margin-top:8px;height:48px;border-radius:999px;background:#FDECEC;color:#C81E1E;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center">Freeze card</span><span style="align-self:stretch;height:44px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500">Keep active</span></div>
+      </sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:17px;font-weight:700">{{ mob.title }}</span><span style="font-size:14px;line-height:1.55;color:#4A615A">{{ mob.desc }}</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+        <sc-for list="{{ mob.specs }}" as="t" hint-placeholder-count="4"><div style="background:#FFFFFF;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:3px"><span style="font-size:13.5px;font-weight:600">{{ t.k }}</span><span style="font-size:12.5px;line-height:1.45;color:#5E7770">{{ t.v }}</span></div></sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2><p style="margin:0;font-size:15px;color:#4A615A">Behaviour and accessibility that apply to every overlay.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+    <sc-for list="{{ behave }}" as="t" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-size:14px;font-weight:600">{{ t.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ t.v }}</span></div></sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { modal: 'm', drawer: false, dTab: 0, dDirty: false, dAsk: false, menu: false, sheet: 1, msheet: 'sheet' };
+  out(k, next, ms = 180) { if (this.state['x_' + k]) return; this.setState({ ['x_' + k]: true }); setTimeout(() => this.setState({ ...next, ['x_' + k]: false }), ms); }
+  renderVals() {
+    const s = this.state, G = 'linear-gradient(90deg,#0A7559,#2C957A)';
+    const guide = [
+      ['Modal dialog', 'A short task or decision that must be finished first: add beneficiary, rename card.', 'Yes', '#E5484D', 'Cancel, ×, Esc, backdrop', 'Web'],
+      ['Confirmation', 'Before an irreversible or costly action: delete, freeze all cards, send above limit.', 'Yes', '#E5484D', 'Explicit button only', 'Web + mobile'],
+      ['Drawer', 'Details or editing while keeping the list visible: transaction detail, filters, card settings.', 'Partly', '#E59A1A', '×, Esc, backdrop', 'Web'],
+      ['Popover / menu', 'A few options tied to one element: row actions, date range, column picker.', 'No', '#0B8F6E', 'Click outside, Esc, select', 'Web'],
+      ['Tooltip', 'One-line explanation of an icon or term. Never actions or essential info.', 'No', '#0B8F6E', 'Mouse leaves, blur', 'Web'],
+      ['Bottom sheet', 'Choices or short forms on mobile: pick account, filters, share IBAN.', 'Partly', '#E59A1A', 'Swipe down, ×, backdrop', 'Mobile'],
+      ['Full-screen modal', 'Multi-step or long tasks on mobile: new transfer, card request, KYB upload.', 'Yes', '#E5484D', 'Back / ×, asks if unsaved', 'Mobile'],
+      ['Action sheet', '2–6 actions on one item on mobile: freeze, rename, report card.', 'Yes', '#E5484D', 'Select, Cancel, swipe', 'Mobile']
+    ].map(([k, use, block, bc, close, plat]) => ({ k, use, block, bc, close, plat }));
+    const decide = [['Must the user decide before continuing?', 'Modal or confirmation'], ['Is it irreversible or about money above a limit?', 'Confirmation'], ['Do they need the list in view while reading?', 'Drawer'], ['Is it 2–6 actions on one row or card?', 'Menu (web) · action sheet (mobile)'], ['Is it a choice on mobile?', 'Bottom sheet'], ['Is it reversible?', 'No dialog: snackbar with Undo']].map(([q, a]) => ({ q, a }));
+    const MD = {
+      s: { label: 'Small · 400', w: '400px', title: 'Rename card', desc: 'Only your team sees this name.', fields: [['Card name', 'Marketing team']], primary: 'Save', icon: '' },
+      m: { label: 'Medium · 560', w: '560px', title: 'Add beneficiary', desc: 'We check the IBAN with the bank before saving.', fields: [['Full name', 'Khalid Al-Harbi'], ['IBAN', 'SA44 2000 0001 2345 6789 7519'], ['Nickname (optional)', 'Khalid · supplier']], primary: 'Add beneficiary' },
+      l: { label: 'Large · 720', w: '720px', title: 'Export statement', desc: 'Choose the account, period and format.', fields: [['Account', 'SA57 •• 1951 · Main'], ['Period', '1 Sep – 30 Sep 2026'], ['Format', 'PDF'], ['Language', 'English'], ['Send copy to', 'finance@khamis.sa']], primary: 'Export' },
+      err: { label: 'With error', w: '560px', title: 'Add beneficiary', desc: 'We check the IBAN with the bank before saving.', fields: [['Full name', 'Khalid Al-Harbi'], ['IBAN', 'SA44 2000 0001 2345 6789 7510', 1]], primary: 'Try again', err: true },
+      load: { label: 'Submitting', w: '560px', title: 'Add beneficiary', desc: 'We check the IBAN with the bank before saving.', fields: [['Full name', 'Khalid Al-Harbi'], ['IBAN', 'SA44 2000 0001 2345 6789 7519']], primary: 'Checking…', loading: true },
+      del: { label: 'Destructive', w: '420px', title: 'Delete beneficiary?', desc: 'Khalid Al-Harbi will be removed. Scheduled transfers to him are cancelled.', fields: [], primary: 'Delete', danger: true, icon: 'M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6', cancel: 'Keep' }
+    };
+    const cur = MD[s.modal];
+    const modalBtns = Object.entries(MD).map(([k, v]) => ({ label: v.label, bd: s.modal === k ? '#0C1F1A' : '#D7E0DC', bg: s.modal === k ? '#0C1F1A' : '#FFFFFF', fg: s.modal === k ? '#FFFFFF' : '#0C1F1A', open: () => this.setState({ modal: k }) }));
+    const md = cur ? { open: true, closed: false, w: cur.w, title: cur.title, desc: cur.desc, primary: cur.primary, cancel: cur.cancel || 'Cancel', loading: !!cur.loading, err: !!cur.err,
+      hasBody: cur.fields.length > 0 || !!cur.err, hasIcon: !!cur.icon, icon: cur.icon || '', ibg: '#FDECEC', ifg: '#C81E1E',
+      hbd: cur.fields.length > 2 ? '#EEF2F0' : 'transparent', fbd: cur.fields.length > 2 ? '#EEF2F0' : 'transparent',
+      pbg: cur.danger ? '#FDECEC' : cur.loading ? '#5FAF98' : G, pfg: cur.danger ? '#C81E1E' : '#FFFFFF',
+      fields: cur.fields.map(([l, v, e]) => ({ l: e ? 'IBAN not found at the bank' : l, v, bd: e ? '#E02424' : '#D9D9D9', lc: e ? '#E02424' : '#0C1F1A' })),
+      close: () => this.out('md', { modal: null }), submit: () => this.out('md', { modal: null }), bA: s.x_md ? 'hFadeOut .16s ease-in forwards' : 'hFadeIn .16s ease-out', pA: s.x_md ? 'hMdOut .16s ease-in forwards' : 'hMdIn .24s cubic-bezier(.2,.9,.2,1)' } : { open: false, closed: true, fields: [] };
+    const modalSpecs = [['Widths', 'S 400 for one field or a confirmation · M 560 default · L 720 for forms with 4+ fields.'], ['Structure', 'Title + one-line description, body, footer with Cancel left of the primary.'], ['Scrolling', 'Only the body scrolls. Header and footer get a divider when content scrolls.'], ['Errors', 'Keep the modal open, show an inline alert on top and the field error.'], ['Loading', 'Primary shows a spinner and stays the same width; Cancel stays enabled.']].map(([k, v]) => ({ k, v }));
+    const DR = [['Al Baik · Olaya', '+ 86.25'], ['Jarir Bookstore', '− 1,249.00'], ['Nour Trading', '− 25,000.00'], ['Careem', '− 38.50'], ['Online store #2041', '+ 420.00'], ['STC Pay top-up', '+ 5,000.00']];
+    const di = s.drawer === false ? -1 : s.drawer;
+    const note = s.dNote ?? '', dirty = note !== (s.dSaved ?? '');
+    const dr = { open: di >= 0, m: di >= 0 ? DR[di][0] : '', a: di >= 0 ? DR[di][1] : '', note, ask: s.dAsk,
+      rows: DR.map(([m, a], i) => ({ m, a, bg: i === di ? '#F3FBF8' : 'transparent', open: () => this.setState({ drawer: i, dNote: '', dSaved: '', dAsk: false }) })),
+      tabs: ['Details', 'Activity'].map((label, i) => ({ label, fw: s.dTab === i ? 600 : 500, fg: s.dTab === i ? '#0C1F1A' : '#5E7770', bd: s.dTab === i ? '#0C1F1A' : 'transparent', pick: () => this.setState({ dTab: i }) })),
+      setNote: e => this.setState({ dNote: e.target.value }), nbd: dirty ? '#0C1F1A' : '#D9D9D9',
+      sbg: dirty ? G : '#EEF2F0', sfg: dirty ? '#FFFFFF' : '#9AACA6', save: () => this.setState({ dSaved: note }),
+      tryClose: () => dirty ? this.setState({ dAsk: true }) : this.out('dr', { drawer: false }), keep: () => this.setState({ dAsk: false }), discard: () => this.out('dr', { drawer: false, dAsk: false }), bA: s.x_dr ? 'hFadeOut .18s ease-in forwards' : 'hFadeIn .16s ease-out', pA: s.x_dr ? 'hDrOut .18s ease-in forwards' : 'hDrIn .26s cubic-bezier(.2,.9,.2,1)' };
+    const drawerSpecs = [['Widths', '480 px to read · 640 px to edit. Full height, attached to the right edge.'], ['Backdrop', '22% ink. Clicking it closes, unless there are unsaved changes.'], ['Footer', 'Fixed at the bottom; primary on the right. Disabled until something changes.'], ['One at a time', 'Opening another row replaces the content; never stack drawers.'], ['Motion', '240 ms slide with ease-out; backdrop fades in 160 ms.']].map(([k, v]) => ({ k, v }));
+    const menu = { open: s.menu, exp: s.menu ? 'true' : 'false', bbg: s.menu ? '#E1E8E5' : 'transparent', toggle: () => s.menu ? this.out('menu', { menu: false }, 120) : this.setState({ menu: true }), a: s.x_menu ? 'hPopOut .12s ease-in forwards' : 'hPopIn .16s cubic-bezier(.2,.9,.2,1)',
+      items: [['View details', 'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'], ['Rename', 'M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z'], ['Change limit', 'M3 3v18h18M7 15l4-4 3 3 5-6'], ['Freeze card', 'M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1 19.1 4.9', true]].map(([label, icon, d]) => ({ label, icon, c: d ? '#C81E1E' : '#0C1F1A', h: d ? '#FDECEC' : '#F2F6F4', sep: d ? '1px solid #EEF2F0' : '0' })) };
+    const cal = Array.from({ length: 14 }, (_, i) => { const n = i + 1, inR = n <= 14, edge = n === 1 || n === 14; return { n, bg: edge ? '#0C1F1A' : inR ? '#E3F6EF' : 'transparent', fg: edge ? '#FFFFFF' : '#0C1F1A' }; });
+    const mk = s.msheet;
+    const SNAP = [['Peek', '38%'], ['Half', '58%'], ['Full', '92%']];
+    const MT = {
+      sheet: ['Bottom sheet', 'For choices and short forms. Three heights: peek, half and full. Tap the handle to try the heights. Swipe down or tap outside to close.', [['Handle', '40 × 5 at the top; drag or tap to resize. Also a × for accessibility.'], ['Heights', 'Peek 38% · half 58% · full 92%. Opens at the height its content needs.'], ['Action', 'Primary button fixed at the bottom, above the home indicator.'], ['Keyboard', 'Sheet moves up with the keyboard; never covers the focused field.']]],
+      action: ['Action sheet', 'For 2–6 actions on one item. The title names the item; destructive actions are red and last; Cancel is separate.', [['Order', 'Most used first, destructive last.'], ['Cancel', 'Always present, separate block, bold.'], ['iOS / Android', 'Same design on both; Android back button acts as Cancel.'], ['Not for', 'Choosing values. Use a bottom sheet with radios instead.']]],
+      full: ['Full-screen modal', 'For tasks with several steps or a keyboard: new transfer, card request, uploading documents.', [['Header', '× on the left, title in the middle, step count on the right.'], ['Leaving', '× with typed data asks "Discard transfer?" first.'], ['Steps', 'Each step is a screen inside the modal; Back goes to the previous step.'], ['Motion', 'Slides up 320 ms; the page behind scales to 96%.']]],
+      alert: ['Alert dialog', 'Centered and small. Only for confirmations and critical errors. Two buttons stacked full width.', [['Buttons', 'Stacked: action on top, Cancel below as a text button.'], ['Copy', 'Title is the question; one sentence on the result.'], ['Never', 'Forms, lists or more than two buttons.'], ['Backdrop', 'Tapping outside does nothing; the user must choose.']]]
+    }[mk];
+    const sel = s.acct ?? 0;
+    const mob = { isSheet: mk === 'sheet', isAction: mk === 'action', isFull: mk === 'full', isAlert: mk === 'alert', title: MT[0], desc: MT[1], specs: MT[2].map(([k, v]) => ({ k, v })),
+      h: SNAP[s.sheet][1], snap: SNAP[s.sheet][0].toUpperCase(), cycle: () => this.setState({ sheet: (s.sheet + 1) % 3 }),
+      tabs: [['sheet', 'Bottom sheet'], ['action', 'Action sheet'], ['full', 'Full screen'], ['alert', 'Alert']].map(([k, label]) => { const on = mk === k; return { label, bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0C1F1A' : '#5E7770', fw: on ? 600 : 500, sh: on ? '0 1px 3px rgba(12,31,26,.12)' : 'none', pick: () => this.setState({ msheet: k }) }; }),
+      accts: [['Main account', 'SA57 •• 1951 · SAR 175,000'], ['Payroll', 'SA12 •• 2433 · SAR 82,400'], ['Savings', 'SA88 •• 0412 · SAR 310,000'], ['Branch Jeddah', 'SA30 •• 7710 · SAR 12,900']].map(([n, b], i) => ({ n, b, bd: i === sel ? '#0B8F6E' : '#E1E6E3', bg: i === sel ? '#F3FBF8' : '#FFFFFF', rb: i === sel ? '#0B8F6E' : '#B9C8C2', dot: i === sel ? '#0B8F6E' : 'transparent' })),
+      actions: [['Show card details', '#0C1F1A', 400], ['Change limit', '#0C1F1A', 400], ['Rename', '#0C1F1A', 400], ['Freeze card', '#C81E1E', 500]].map(([l, c, fw]) => ({ l, c, fw, bt: '1px solid #EEF2F0' })) };
+    const behave = [['Focus', 'Move focus into the overlay on open, keep it there, return it to the trigger on close.'], ['Escape', 'Esc closes modals, drawers and menus. Android back does the same on mobile.'], ['Scroll lock', 'The page behind doesn\'t scroll while a modal or sheet is open.'], ['Labels', 'role="dialog", aria-modal and aria-labelledby on the title.'], ['Motion', 'Modal 200 ms fade + scale 96→100%. Drawer 240 ms slide. Sheet 320 ms spring. Respect reduced motion.'], ['Backdrop', 'Modal 45% ink · drawer 22% · sheet 42%. Never blur the page behind.']].map(([k, v]) => ({ k, v }));
+    const rules = [[1, 'Use the least interruptive layer that works; most actions need none.'], [1, 'One overlay at a time. Confirmations inside a drawer replace its footer.'], [1, 'Primary action names the result: "Add beneficiary", not "OK".'], [1, 'Keep typed data when an error happens; never close the modal on failure.'], [0, 'Don\'t open a modal from a modal, or a sheet from a sheet.'], [0, 'Don\'t use a modal just to show a success message; use a toast or success screen.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { guide, decide, modalBtns, md, modalSpecs, dr, drawerSpecs, menu, cal, mob, behave, rules };
+  }
+}
+</script>
+</body>
+</html>

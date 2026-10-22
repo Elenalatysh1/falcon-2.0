@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button,input{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Date pickers</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">For scheduling transfers, filtering transactions and choosing statement periods. Dates show as DD/MM/YYYY, and weeks start on Sunday as in Saudi Arabia. Every example with a "Live" tag works; today is 15 Oct 2026.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Field states</h2><p style="margin:0;font-size:15px;color:#4A615A">The date field uses the same 60 px floating-label input as the rest of Hala, with a calendar icon on the right. People can type the date or pick it.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+    <sc-for list="{{ fields }}" as="f" hint-placeholder-count="6"><div style="background:#FFFFFF;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ f.name }}</span><div style="height:60px;border:{{ f.bw }} solid {{ f.bd }};border-radius:8px;padding:0 12px 0 14px;display:flex;align-items:center;gap:10px;background:{{ f.bg }};box-shadow:{{ f.ring }};opacity:{{ f.op }}"><div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:11px;color:{{ f.lc }}">{{ f.label }}</span><span style="font:400 16px 'IBM Plex Mono',monospace;color:{{ f.vc }};white-space:nowrap">{{ f.v }}</span></div><svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="{{ f.ic }}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4"></path></svg></div><span style="font-size:12.5px;color:{{ f.hc }};min-height:18px">{{ f.help }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Single date · web</h2><p style="margin:0;font-size:15px;color:#4A615A">Example: scheduling a transfer. Past dates and Fridays–Saturdays are disabled because banks don't process transfers then.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px;min-height:520px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">SCHEDULE TRANSFER</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="position:relative;max-width:360px">
+        <button onClick="{{ sd.toggle }}" aria-expanded="{{ sd.exp }}" style="width:100%;height:60px;border:{{ sd.bw }} solid {{ sd.bd }};border-radius:8px;padding:0 12px 0 14px;display:flex;align-items:center;gap:10px;background:#FFFFFF;cursor:pointer;text-align:left;box-shadow:{{ sd.ring }};color:#0C1F1A"><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px">Transfer date</span><span style="font:400 16px 'IBM Plex Mono',monospace">{{ sd.value }}</span></div><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="#0C1F1A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4"></path></svg></button>
+        <span style="display:block;margin-top:6px;font-size:12.5px;color:#5E7770">{{ sd.help }}</span>
+        <sc-if value="{{ sd.open }}" hint-placeholder-val="{{ false }}">
+          <div role="dialog" aria-label="Choose date" style="position:absolute;left:0;top:68px;width:328px;background:#FFFFFF;border-radius:20px;border:1px solid #E6ECE9;box-shadow:0 24px 48px -20px rgba(12,31,26,.4);padding:16px;z-index:3;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><button onClick="{{ sd.prev }}" aria-label="Previous month" style="width:34px;height:34px;border:0;border-radius:10px;background:#F2F6F4;cursor:pointer;font-size:16px;color:#0C1F1A">‹</button><span style="font-size:15px;font-weight:600">{{ sd.title }}</span><button onClick="{{ sd.next }}" aria-label="Next month" style="width:34px;height:34px;border:0;border-radius:10px;background:#F2F6F4;cursor:pointer;font-size:16px;color:#0C1F1A">›</button></div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px"><sc-for list="{{ wk }}" as="w" hint-placeholder-count="7"><span style="height:28px;display:flex;align-items:center;justify-content:center;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#6B827B">{{ w }}</span></sc-for>
+              <sc-for list="{{ sd.cells }}" as="c" hint-placeholder-count="35"><button onClick="{{ c.pick }}" disabled="{{ c.dis }}" aria-label="{{ c.aria }}" style="height:40px;border:0;border-radius:12px;background:{{ c.bg }};color:{{ c.fg }};font:{{ c.fw }} 14px 'IBM Plex Mono',monospace;cursor:{{ c.cur }};box-shadow:{{ c.ring }};text-decoration:{{ c.td }};opacity:{{ c.op }}" style-hover="background:{{ c.hbg }}">{{ c.n }}</button></sc-for>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid #EEF2F0"><button onClick="{{ sd.today }}" style="border:0;background:transparent;padding:0;font-size:13.5px;font-weight:600;color:#0E7C62;cursor:pointer">Next business day</button><button onClick="{{ sd.toggle }}" style="height:36px;padding:0 16px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:13.5px;font-weight:600;cursor:pointer">Done</button></div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">DAY CELL STATES · 40 × 40</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px">
+        <sc-for list="{{ cellStates }}" as="c" hint-placeholder-count="8"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;border-radius:14px;background:#F7FAF9"><span style="width:40px;height:40px;border-radius:{{ c.r }};background:{{ c.bg }};color:{{ c.fg }};font:{{ c.fw }} 14px 'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center;box-shadow:{{ c.ring }};text-decoration:{{ c.td }};opacity:{{ c.op }}">{{ c.n }}</span><span style="font-size:12.5px;font-weight:600">{{ c.k }}</span><span style="font-size:11.5px;color:#5E7770;text-align:center;line-height:1.35">{{ c.v }}</span></div></sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Date range · web</h2><p style="margin:0;font-size:15px;color:#4A615A">For filters and statements. Presets come first, since most people want "This month". The first click sets the start, the second sets the end, and hovering previews the range.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">TRANSACTIONS FILTER</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+    <span style="align-self:flex-start;height:40px;padding:0 14px;border:1.5px solid #0C1F1A;border-radius:999px;font-size:14px;display:flex;align-items:center;gap:8px;white-space:nowrap"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4"></path></svg>{{ rg.label }} ▴</span>
+    <div style="border-radius:20px;border:1px solid #E6ECE9;box-shadow:0 24px 48px -24px rgba(12,31,26,.35);display:grid;grid-template-columns:180px minmax(0,1fr);overflow:hidden">
+      <div style="border-right:1px solid #EEF2F0;padding:12px;display:flex;flex-direction:column;gap:2px;background:#FAFCFB"><sc-for list="{{ rg.presets }}" as="p" hint-placeholder-count="7"><button onClick="{{ p.pick }}" style="height:38px;border:0;border-radius:10px;padding:0 12px;text-align:left;font-size:14px;font-weight:{{ p.fw }};background:{{ p.bg }};color:#0C1F1A;cursor:pointer;white-space:nowrap" style-hover="background:#EEF3F1">{{ p.l }}</button></sc-for></div>
+      <div style="padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px">
+          <sc-for list="{{ rg.months }}" as="mo" hint-placeholder-count="2">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;justify-content:space-between;height:34px"><button onClick="{{ mo.prev }}" aria-label="Previous month" style="width:34px;height:34px;border:0;border-radius:10px;background:{{ mo.pbg }};cursor:pointer;font-size:16px;color:#0C1F1A;visibility:{{ mo.pv }}">‹</button><span style="font-size:15px;font-weight:600">{{ mo.title }}</span><button onClick="{{ mo.next }}" aria-label="Next month" style="width:34px;height:34px;border:0;border-radius:10px;background:#F2F6F4;cursor:pointer;font-size:16px;color:#0C1F1A;visibility:{{ mo.nv }}">›</button></div>
+              <div style="display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px"><sc-for list="{{ wk }}" as="w" hint-placeholder-count="7"><span style="height:26px;display:flex;align-items:center;justify-content:center;font:500 10.5px 'IBM Plex Mono',monospace;color:#6B827B">{{ w }}</span></sc-for>
+                <sc-for list="{{ mo.cells }}" as="c" hint-placeholder-count="35"><div style="height:38px;background:{{ c.band }};border-radius:{{ c.br }}"><button onClick="{{ c.pick }}" onMouseEnter="{{ c.hover }}" disabled="{{ c.dis }}" style="width:100%;height:38px;border:0;border-radius:11px;background:{{ c.bg }};color:{{ c.fg }};font:{{ c.fw }} 13.5px 'IBM Plex Mono',monospace;cursor:{{ c.cur }};box-shadow:{{ c.ring }}">{{ c.n }}</button></div></sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:12px;border-top:1px solid #EEF2F0">
+          <div style="display:flex;align-items:center;gap:8px"><span style="height:40px;min-width:120px;padding:0 12px;border:1px solid {{ rg.sbd }};border-radius:8px;font:400 14px 'IBM Plex Mono',monospace;display:flex;align-items:center;white-space:nowrap">{{ rg.s }}</span><span style="color:#8A9C96">–</span><span style="height:40px;min-width:120px;padding:0 12px;border:1px solid {{ rg.ebd }};border-radius:8px;font:400 14px 'IBM Plex Mono',monospace;display:flex;align-items:center;white-space:nowrap;color:{{ rg.ec }}">{{ rg.e }}</span></div>
+          <span style="font-size:13px;color:#5E7770;white-space:nowrap">{{ rg.days }}</span>
+          <div style="margin-left:auto;display:flex;gap:8px"><button onClick="{{ rg.clear }}" style="height:40px;padding:0 16px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:14px;color:#0C1F1A;cursor:pointer">Clear</button><button style="height:40px;padding:0 18px;border:0;border-radius:999px;background:{{ rg.abg }};color:{{ rg.afg }};font-size:14px;font-weight:600;cursor:pointer">Apply</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · iOS and Android</h2><p style="margin:0;font-size:15px;color:#4A615A">Calendars open in a bottom sheet with 44 pt day cells. Dates far in the past, like a date of birth, use a wheel instead.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">SHEET · SCHEDULE</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="position:relative;height:600px;border-radius:32px;background:#F4F7F6;overflow:hidden">
+        <div style="position:absolute;inset:18px 16px;display:flex;flex-direction:column;gap:10px;opacity:.5"><span style="font-size:20px;font-weight:700">New transfer</span><span style="height:60px;border-radius:16px;background:#FFFFFF"></span></div>
+        <div style="position:absolute;inset:0;background:rgba(12,31,26,.42)"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#FFFFFF;border-radius:28px 28px 0 0;padding:10px 16px 24px;display:flex;flex-direction:column;gap:12px">
+          <span style="align-self:center;width:40px;height:5px;border-radius:3px;background:#C9D4D0"></span>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:19px;font-weight:700">Send on</span><span style="font:500 13px 'IBM Plex Mono',monospace;color:#0B6F56">{{ ms.value }}</span></div>
+          <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none"><sc-for list="{{ ms.quick }}" as="q" hint-placeholder-count="3"><button onClick="{{ q.pick }}" style="height:36px;padding:0 14px;border-radius:999px;border:1px solid {{ q.bd }};background:{{ q.bg }};color:{{ q.fg }};font-size:14px;font-weight:500;white-space:nowrap;cursor:pointer;flex:none">{{ q.l }}</button></sc-for></div>
+          <div style="display:flex;align-items:center;justify-content:space-between"><button onClick="{{ ms.prev }}" aria-label="Previous month" style="width:44px;height:44px;border:0;border-radius:50%;background:#F2F6F4;font-size:18px;cursor:pointer;color:#0C1F1A">‹</button><span style="font-size:16px;font-weight:600">{{ ms.title }}</span><button onClick="{{ ms.next }}" aria-label="Next month" style="width:44px;height:44px;border:0;border-radius:50%;background:#F2F6F4;font-size:18px;cursor:pointer;color:#0C1F1A">›</button></div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px"><sc-for list="{{ wk1 }}" as="w" hint-placeholder-count="7"><span style="height:24px;display:flex;align-items:center;justify-content:center;font:500 11px 'IBM Plex Mono',monospace;color:#6B827B">{{ w }}</span></sc-for><sc-for list="{{ ms.cells }}" as="c" hint-placeholder-count="35"><button onClick="{{ c.pick }}" disabled="{{ c.dis }}" style="height:44px;border:0;border-radius:50%;background:{{ c.bg }};color:{{ c.fg }};font:{{ c.fw }} 15px 'IBM Plex Mono',monospace;cursor:{{ c.cur }};box-shadow:{{ c.ring }};text-decoration:{{ c.td }}">{{ c.n }}</button></sc-for></div>
+          <span style="height:52px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">Confirm date</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">WHEEL · DATE OF BIRTH</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE · SCROLL</span></div>
+      <div style="position:relative;height:600px;border-radius:32px;background:#F4F7F6;overflow:hidden">
+        <div style="position:absolute;inset:18px 16px;display:flex;flex-direction:column;gap:10px;opacity:.5"><span style="font-size:20px;font-weight:700">Owner details</span><span style="height:60px;border-radius:16px;background:#FFFFFF"></span></div>
+        <div style="position:absolute;inset:0;background:rgba(12,31,26,.42)"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#FFFFFF;border-radius:28px 28px 0 0;padding:10px 16px 24px;display:flex;flex-direction:column;gap:14px">
+          <span style="align-self:center;width:40px;height:5px;border-radius:3px;background:#C9D4D0"></span>
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:19px;font-weight:700">Date of birth</span><span style="font:500 13px 'IBM Plex Mono',monospace;color:#0B6F56">{{ wh.value }}</span></div>
+          <div style="position:relative;height:220px;display:grid;grid-template-columns:1fr 1.6fr 1.2fr;gap:4px">
+            <span style="position:absolute;left:0;right:0;top:88px;height:44px;border-radius:12px;background:#F2F6F4;pointer-events:none"></span>
+            <sc-for list="{{ wh.cols }}" as="col" hint-placeholder-count="3"><div ref="{{ col.ref }}" onScroll="{{ col.onScroll }}" style="position:relative;height:220px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-mask-image:linear-gradient(transparent,#000 35%,#000 65%,transparent);mask-image:linear-gradient(transparent,#000 35%,#000 65%,transparent)"><div style="height:88px"></div><sc-for list="{{ col.items }}" as="it" hint-placeholder-count="10"><div style="height:44px;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;font:{{ it.fw }} 18px 'IBM Plex Mono',monospace;color:{{ it.c }}">{{ it.l }}</div></sc-for><div style="height:88px"></div></div></sc-for>
+          </div>
+          <span style="font-size:12.5px;color:#5E7770;text-align:center">{{ wh.note }}</span>
+          <span style="height:52px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">Done</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Which picker to use</h2></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px;overflow-x:auto">
+    <div style="display:grid;grid-template-columns:minmax(170px,1fr) minmax(170px,1fr) minmax(170px,1fr) minmax(200px,1.3fr);gap:16px;padding:14px 0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770"><span>CASE</span><span>WEB</span><span>MOBILE</span><span>EXAMPLE</span></div>
+    <sc-for list="{{ which }}" as="w" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:minmax(170px,1fr) minmax(170px,1fr) minmax(170px,1fr) minmax(200px,1.3fr);gap:16px;padding:13px 0;border-top:1px solid #EEF2F0;font-size:14px"><span style="font-weight:600">{{ w.k }}</span><span style="color:#4A615A">{{ w.web }}</span><span style="color:#4A615A">{{ w.mob }}</span><span style="color:#5E7770;font-size:13px">{{ w.ex }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { sdOpen: true, sdM: 9, sdY: 2026, sd: [2026, 9, 18] };
+  wr = [React.createRef(), React.createRef(), React.createRef()];
+  componentDidMount() { setTimeout(() => { const d = this.state.dob || [1991, 11, 12], v = [d[2] - 1, d[1], 2008 - d[0]]; this.wr.forEach((r, i) => { if (r.current) r.current.scrollTop = v[i] * 44; }); }, 300); }
+  static MN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  cells(y, m) {
+    const first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate(), out = [];
+    for (let i = 0; i < first; i++) out.push(null);
+    for (let d = 1; d <= days; d++) out.push(d);
+    while (out.length % 7) out.push(null);
+    return out;
+  }
+  fmt(a) { return a ? `${String(a[2]).padStart(2, '0')}/${String(a[1] + 1).padStart(2, '0')}/${a[0]}` : ''; }
+  renderVals() {
+    const s = this.state, T = [2026, 9, 15], key = a => a[0] * 10000 + a[1] * 100 + a[2], tk = key(T);
+    const wk = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+    const fields = [
+      ['EMPTY', 'Date of birth', 'DD/MM/YYYY', '1px', '#D9D9D9', '#FFFFFF', 'none', 1, '#0C1F1A', '#9AACA6', '#0C1F1A', 'Type or pick', '#5E7770'],
+      ['FOCUSED · TYPING', 'Date of birth', '12/12/19', '1.5px', '#0C1F1A', '#FFFFFF', '0 0 0 3px rgba(12,31,26,.06)', 1, '#0C1F1A', '#0C1F1A', '#0C1F1A', 'Slashes are added for you', '#5E7770'],
+      ['FILLED', 'Transfer date', '18/10/2026', '1px', '#D9D9D9', '#FFFFFF', 'none', 1, '#0C1F1A', '#0C1F1A', '#0C1F1A', 'Sunday', '#5E7770'],
+      ['ERROR', 'Transfer date', '17/10/2026', '1px', '#E02424', '#FFFBFB', 'none', 1, '#E02424', '#0C1F1A', '#E02424', 'Saturday: banks are closed. Pick Sun–Thu.', '#E02424'],
+      ['DISABLED', 'Statement date', '30/09/2026', '1px', '#E6ECE9', '#F7FAF9', 'none', .6, '#5E7770', '#5E7770', '#9AACA6', 'Set by the bank', '#8A9C96'],
+      ['READ ONLY', 'Account opened', '03/03/2024', '1px', 'transparent', '#F4F7F6', 'none', 1, '#5E7770', '#0C1F1A', 'transparent', '', '#5E7770']
+    ].map(([name, label, v, bw, bd, bg, ring, op, lc, vc, ic, help, hc]) => ({ name, label, v, bw, bd, bg, ring, op, lc, vc, ic, help, hc }));
+    const { sdM: m, sdY: y } = s, sel = s.sd;
+    const sdCells = this.cells(y, m).map((n, i) => {
+      if (!n) return { n: '', dis: true, bg: 'transparent', fg: 'transparent', fw: '400', cur: 'default', ring: 'none', td: 'none', op: 1, hbg: 'transparent', aria: '', pick: () => {} };
+      const k = key([y, m, n]), dow = new Date(y, m, n).getDay(), past = k < tk, wknd = dow === 5 || dow === 6, dis = past || wknd, isSel = sel && k === key(sel), isT = k === tk;
+      return { n, dis, aria: `${n} ${Component.MN[m]}`, bg: isSel ? '#0C1F1A' : 'transparent', fg: isSel ? '#FFFFFF' : dis ? '#B9C8C2' : '#0C1F1A', fw: isSel || isT ? '600' : '400', cur: dis ? 'not-allowed' : 'pointer', ring: isT && !isSel ? 'inset 0 0 0 1.5px #0B8F6E' : 'none', td: past ? 'line-through' : 'none', op: 1, hbg: isSel ? '#0C1F1A' : dis ? 'transparent' : '#E3F6EF', pick: () => !dis && this.setState({ sd: [y, m, n] }) };
+    });
+    const shift = d => { let nm = m + d, ny = y; if (nm < 0) { nm = 11; ny--; } if (nm > 11) { nm = 0; ny++; } this.setState({ sdM: nm, sdY: ny }); };
+    const selDow = sel ? new Date(sel[0], sel[1], sel[2]).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }) : '';
+    const sd = { open: s.sdOpen, exp: s.sdOpen ? 'true' : 'false', toggle: () => this.setState({ sdOpen: !s.sdOpen }), value: this.fmt(sel), help: sel ? `${selDow} · arrives the same day` : 'Pick a date',
+      bw: s.sdOpen ? '1.5px' : '1px', bd: s.sdOpen ? '#0C1F1A' : '#D9D9D9', ring: s.sdOpen ? '0 0 0 3px rgba(12,31,26,.06)' : 'none',
+      title: `${Component.MN[m]} ${y}`, cells: sdCells, prev: () => shift(-1), next: () => shift(1), today: () => this.setState({ sd: [2026, 9, 18], sdM: 9, sdY: 2026 }) };
+    const cellStates = [
+      ['Default', 'Available day', '12', 'transparent', '#0C1F1A', '400', 'none', 'none', 1, '12px'],
+      ['Hover', 'Web only', '12', '#E3F6EF', '#0C1F1A', '400', 'none', 'none', 1, '12px'],
+      ['Today', 'Green ring, semibold', '15', 'transparent', '#0C1F1A', '600', 'inset 0 0 0 1.5px #0B8F6E', 'none', 1, '12px'],
+      ['Selected', 'Ink fill, white text', '18', '#0C1F1A', '#FFFFFF', '600', 'none', 'none', 1, '12px'],
+      ['Focus', 'Keyboard ring', '19', 'transparent', '#0C1F1A', '400', '0 0 0 3px rgba(11,143,110,.35)', 'none', 1, '12px'],
+      ['In range', 'Between start and end', '21', '#E3F6EF', '#0B4F3E', '400', 'none', 'none', 1, '0'],
+      ['Past', 'Struck through', '9', 'transparent', '#B9C8C2', '400', 'none', 'line-through', 1, '12px'],
+      ['Unavailable', 'Weekend or holiday', '23', 'transparent', '#B9C8C2', '400', 'none', 'none', 1, '12px']
+    ].map(([k, v, n, bg, fg, fw, ring, td, op, r]) => ({ k, v, n, bg, fg, fw, ring, td, op, r }));
+    // range
+    const D = (y2, m2, d2) => [y2, m2, d2], rs = s.rs === undefined ? D(2026, 9, 1) : s.rs, re = s.re === undefined ? D(2026, 9, 14) : s.re, hv = s.hv || null;
+    const rm = s.rm ?? 8, ry = 2026;
+    const endK = re ? key(re) : hv && rs ? key(hv) : null, stK = rs ? key(rs) : null;
+    const lo = stK && endK ? Math.min(stK, endK) : stK, hi = stK && endK ? Math.max(stK, endK) : stK;
+    const mk = (yy, mm, idx) => ({ title: `${Component.MN[mm]} ${yy}`, pv: idx === 0 ? 'visible' : 'hidden', nv: idx === 1 ? 'visible' : 'hidden', pbg: '#F2F6F4',
+      prev: () => this.setState({ rm: rm - 1 }), next: () => this.setState({ rm: Math.min(rm + 1, 9) }),
+      cells: this.cells(yy, mm).map((n, i) => {
+        if (!n) return { n: '', dis: true, band: 'transparent', br: '0', bg: 'transparent', fg: 'transparent', fw: '400', cur: 'default', ring: 'none', pick: () => {}, hover: () => {} };
+        const k = key([yy, mm, n]), fut = k > tk, edge = k === lo || k === hi, inR = lo && hi && k > lo && k < hi, dow = i % 7;
+        const band = (inR || (edge && lo !== hi)) ? '#E3F6EF' : 'transparent';
+        const br = k === lo && lo !== hi ? '11px 0 0 11px' : k === hi && lo !== hi ? '0 11px 11px 0' : inR && dow === 0 ? '11px 0 0 11px' : inR && dow === 6 ? '0 11px 11px 0' : '0';
+        return { n, dis: fut, band, br, bg: edge ? '#0C1F1A' : 'transparent', fg: edge ? '#FFFFFF' : fut ? '#C9D4D0' : inR ? '#0B4F3E' : '#0C1F1A', fw: edge || k === tk ? '600' : '400', cur: fut ? 'not-allowed' : 'pointer', ring: k === tk && !edge ? 'inset 0 0 0 1.5px #0B8F6E' : 'none',
+          pick: () => { if (fut) return; if (!rs || re) this.setState({ rs: [yy, mm, n], re: null, preset: null }); else { const a = key(rs) <= k ? [rs, [yy, mm, n]] : [[yy, mm, n], rs]; this.setState({ rs: a[0], re: a[1], hv: null, preset: null }); } },
+          hover: () => { if (rs && !re) this.setState({ hv: [yy, mm, n] }); } };
+      }) });
+    const m0 = ((rm % 12) + 12) % 12, y0 = ry + Math.floor(rm / 12), m1 = (m0 + 1) % 12, y1 = m0 === 11 ? y0 + 1 : y0;
+    const PR = [['Today', D(2026, 9, 15), D(2026, 9, 15)], ['Yesterday', D(2026, 9, 14), D(2026, 9, 14)], ['Last 7 days', D(2026, 9, 9), D(2026, 9, 15)], ['This month', D(2026, 9, 1), D(2026, 9, 15)], ['Last month', D(2026, 8, 1), D(2026, 8, 30)], ['Last 90 days', D(2026, 6, 18), D(2026, 9, 15)], ['Custom', null, null]];
+    const cur = s.preset ?? null;
+    const nd = rs && re ? Math.round((new Date(re[0], re[1], re[2]) - new Date(rs[0], rs[1], rs[2])) / 864e5) + 1 : 0;
+    const short = a => a ? new Date(a[0], a[1], a[2]).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '';
+    const rg = { months: [mk(y0, m0, 0), mk(y1, m1, 1)], s: rs ? this.fmt(rs) : 'Start', e: re ? this.fmt(re) : rs ? 'Pick end date' : 'End',
+      sbd: rs && !re ? '#D9D9D9' : rs ? '#D9D9D9' : '#0C1F1A', ebd: rs && !re ? '#0C1F1A' : '#D9D9D9', ec: re ? '#0C1F1A' : '#8A9C96',
+      days: nd ? `${nd} day${nd > 1 ? 's' : ''}` : '', label: cur && cur !== 'Custom' ? cur : rs && re ? `${short(rs)} – ${short(re)}` : 'Pick dates',
+      abg: rs && re ? 'linear-gradient(90deg,#0A7559,#2C957A)' : '#EEF2F0', afg: rs && re ? '#FFFFFF' : '#9AACA6',
+      clear: () => this.setState({ rs: null, re: null, preset: 'Custom' }),
+      presets: PR.map(([l, a, b]) => { const on = cur ? cur === l : (rs && re && a && key(a) === key(rs) && key(b) === key(re)); return { l, fw: on ? 600 : 400, bg: on ? '#E3F6EF' : 'transparent', pick: () => a ? this.setState({ rs: a, re: b, preset: l, rm: a[1] === 9 ? 8 : a[1] + (a[0] - 2026) * 12 }) : this.setState({ preset: 'Custom', rs: null, re: null }) }; }) };
+    // mobile sheet
+    const mm2 = s.msM ?? 9, msel = s.msel || [2026, 9, 18];
+    const ms = { title: `${Component.MN[mm2]} 2026`, value: this.fmt(msel), prev: () => this.setState({ msM: Math.max(9, mm2 - 1) }), next: () => this.setState({ msM: Math.min(11, mm2 + 1) }),
+      quick: [['Next business day', [2026, 9, 18]], ['In a week', [2026, 9, 22]], ['End of month', [2026, 9, 29]]].map(([l, d]) => { const on = key(d) === key(msel); return { l, bd: on ? '#0C1F1A' : '#D7E0DC', bg: on ? '#0C1F1A' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0C1F1A', pick: () => this.setState({ msel: d, msM: d[1] }) }; }),
+      cells: this.cells(2026, mm2).map(n => { if (!n) return { n: '', dis: true, bg: 'transparent', fg: 'transparent', fw: '400', cur: 'default', ring: 'none', td: 'none', pick: () => {} }; const k = key([2026, mm2, n]), dow = new Date(2026, mm2, n).getDay(), past = k < tk, dis = past || dow === 5 || dow === 6, on = k === key(msel); return { n, dis, bg: on ? '#0C1F1A' : 'transparent', fg: on ? '#FFFFFF' : dis ? '#C9D4D0' : '#0C1F1A', fw: on || k === tk ? '600' : '400', cur: dis ? 'default' : 'pointer', ring: k === tk && !on ? 'inset 0 0 0 1.5px #0B8F6E' : 'none', td: past ? 'line-through' : 'none', pick: () => !dis && this.setState({ msel: [2026, mm2, n] }) }; }) };
+    // wheel
+    const dob = s.dob || [1991, 11, 12];
+    const days = Array.from({ length: 31 }, (_, i) => String(i + 1).padStart(2, '0')), mons = Component.MN.map(x => x.slice(0, 3)), yrs = Array.from({ length: 80 }, (_, i) => String(2008 - i));
+    const vals = [dob[2] - 1, dob[1], 2008 - dob[0]];
+    const age = 2026 - dob[0] - (dob[1] > 9 || (dob[1] === 9 && dob[2] > 15) ? 1 : 0);
+    const wh = { value: this.fmt(dob), note: `Age ${age}. Must be 18 or older to own a business account.`,
+      cols: [days, mons, yrs].map((arr, ci) => ({ ref: this.wr[ci], items: arr.map((l, i) => ({ l, fw: i === vals[ci] ? '600' : '400', c: i === vals[ci] ? '#0C1F1A' : '#8A9C96' })),
+        onScroll: e => { const i = Math.round(e.target.scrollTop / 44); if (i === vals[ci]) return; const nd2 = [...dob]; if (ci === 0) nd2[2] = i + 1; if (ci === 1) nd2[1] = i; if (ci === 2) nd2[0] = 2008 - i; this.setState({ dob: nd2 }); } })) };
+    const which = [['One date, near future', 'Popover calendar', 'Sheet calendar + quick chips', 'Schedule transfer, invoice due date'], ['Date range', 'Presets + two months', 'Preset chips, then sheet calendar', 'Transaction filter, statement period'], ['Far past date', 'Typed field with mask', 'Wheel in a sheet', 'Date of birth, CR issue date'], ['Month only', 'Month grid popover', 'Month wheel', 'Statements, payroll month'], ['Exact known date', 'Typed field', 'Typed field, numeric keyboard', 'ID expiry from a document']].map(([k, web, mob, ex]) => ({ k, web, mob, ex }));
+    const rules = [[1, 'Always allow typing as well as picking. Format DD/MM/YYYY.'], [1, 'Disable dates that can\'t work (past, weekends, holidays) and explain why in helper text.'], [1, 'Mark today with a ring, not a fill, so it doesn\'t look selected.'], [1, 'Show the weekday next to the chosen date: "Sunday, 18 October".'], [0, 'Don\'t use a calendar for date of birth; it takes dozens of taps.'], [0, 'Don\'t make people pick a range when a preset covers it.'], [0, 'Don\'t mix Hijri and Gregorian in one picker. Show Hijri as a secondary line if needed.'], [0, 'Don\'t close the range picker after the first click.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { fields, wk, wk1: wk.map(w => w[0]), sd, cellStates, rg, ms, wh, which, rules };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}@keyframes hFade{from{opacity:0;transform:translateY(6px)}}@media (prefers-reduced-motion:reduce){*{animation-duration:1ms!important}}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 32px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · WORKFLOWS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Workflows</h1>
+  <p style="margin:0;max-width:800px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">End-to-end journeys in Hala Business: who does what, on which screen, with which Falcon components, and what happens when something goes wrong. Pick a workflow, then click any step for details.</p>
+</header>
+
+<div style="position:sticky;top:0;z-index:5;background:rgba(238,243,241,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #DDE6E2">
+  <div style="max-width:1240px;margin:0 auto;padding:12px 32px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6"><button onClick="{{ t.pick }}" aria-pressed="{{ t.sel }}" style="height:40px;padding:0 14px 0 10px;border-radius:999px;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};font-size:14px;font-weight:{{ t.fw }};cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;flex:none"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg>{{ t.l }}</button></sc-for>
+  </div>
+</div>
+
+<section style="max-width:1240px;margin:0 auto;padding:28px 32px 24px;display:flex;flex-direction:column;gap:16px;animation:hFade .25s ease-out">
+  <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:12px"><span style="width:44px;height:44px;border-radius:14px;background:#E3F6EF;color:#0B8F6E;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ wf.icon }}"></path></svg></span><h2 style="margin:0;font-size:28px;font-weight:700;letter-spacing:-.02em">{{ wf.name }}</h2></div>
+      <p style="margin:0;font-size:15px;line-height:1.6;color:#4A615A">{{ wf.goal }}</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><sc-for list="{{ wf.meta }}" as="m" hint-placeholder-count="4"><span style="height:30px;padding:0 12px;border-radius:999px;background:#F2F6F4;font-size:12.5px;display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="color:#5E7770">{{ m.k }}</span><b style="font-weight:600">{{ m.v }}</b></span></sc-for></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">ACTORS</span>
+      <sc-for list="{{ wf.actors }}" as="a" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:10px"><span style="width:32px;height:32px;border-radius:50%;background:{{ a.bg }};color:{{ a.fg }};font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">{{ a.ini }}</span><div style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ a.n }}</span><span style="font-size:12.5px;color:#5E7770">{{ a.d }}</span></div></div></sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 24px;display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 style="margin:0;font-size:20px;font-weight:700">Flow</h3><div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12.5px;color:#5E7770"><sc-for list="{{ legend }}" as="l" hint-placeholder-count="4"><span style="display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="width:12px;height:12px;border-radius:{{ l.r }};background:{{ l.c }};transform:{{ l.tf }}"></span>{{ l.k }}</span></sc-for></div></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:20px;overflow-x:auto">
+    <div style="display:flex;align-items:stretch;gap:0;min-width:max-content">
+      <sc-for list="{{ wf.steps }}" as="s" hint-placeholder-count="7">
+        <div style="display:flex;align-items:center">
+          <button onClick="{{ s.pick }}" aria-pressed="{{ s.sel }}" style="position:relative;width:168px;min-height:150px;border:{{ s.bw }} solid {{ s.bd }};border-radius:{{ s.r }};background:{{ s.bg }};padding:14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px;color:#0C1F1A;box-shadow:{{ s.sh }};transition:box-shadow .2s,border-color .2s" style-hover="box-shadow:0 14px 28px -18px rgba(12,31,26,.45)">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:600 11.5px 'IBM Plex Mono',monospace;color:{{ s.nc }}">{{ s.n }}</span><span style="height:20px;padding:0 7px;border-radius:999px;background:{{ s.abg }};color:{{ s.afg }};font-size:10.5px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ s.actor }}</span></div>
+            <span style="font-size:14px;font-weight:600;line-height:1.3">{{ s.t }}</span>
+            <span style="font-size:12px;line-height:1.45;color:#5E7770">{{ s.d }}</span>
+            <div style="margin-top:auto;display:flex;gap:4px;flex-wrap:wrap"><sc-for list="{{ s.plats }}" as="p" hint-placeholder-count="2"><span style="font:500 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;padding:2px 6px;border-radius:5px;background:#F2F6F4;color:#4A615A">{{ p }}</span></sc-for></div>
+          </button>
+          <sc-if value="{{ s.arrow }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 40 20" style="width:36px;height:18px;flex:none" fill="none" stroke="#9AACA6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10h34M30 4l6 6-6 6"></path></svg></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 24px">
+  <div style="background:#FFFFFF;border-radius:24px;padding:24px 28px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;animation:hFade .2s ease-out">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="font:600 12px 'IBM Plex Mono',monospace;color:#0B8F6E">STEP {{ st.n }}</span><span style="height:22px;padding:0 8px;border-radius:999px;background:{{ st.abg }};color:{{ st.afg }};font-size:11px;font-weight:600;display:flex;align-items:center">{{ st.actor }}</span><span style="font:400 12px 'IBM Plex Mono',monospace;color:#5E7770">{{ st.screen }}</span></div>
+      <h3 style="margin:0;font-size:22px;font-weight:700;letter-spacing:-.01em">{{ st.t }}</h3>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#4A615A">{{ st.long }}</p>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">COMPONENTS</span><div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ st.comps }}" as="c" hint-placeholder-count="4"><span style="height:28px;padding:0 10px;border-radius:999px;border:1px solid #D7E0DC;font-size:12.5px;display:flex;align-items:center;white-space:nowrap">{{ c }}</span></sc-for></div></div>
+      <div style="display:flex;gap:8px;margin-top:8px"><button onClick="{{ st.prev }}" disabled="{{ st.noPrev }}" style="height:40px;padding:0 16px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;font-size:14px;color:#0C1F1A;cursor:pointer;opacity:{{ st.pOp }}">← Previous</button><button onClick="{{ st.next }}" disabled="{{ st.noNext }}" style="height:40px;padding:0 18px;border:0;border-radius:999px;background:#0C1F1A;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer;opacity:{{ st.nOp }}">Next step →</button></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="border-radius:16px;background:#F7FAF9;padding:14px 16px;display:flex;flex-direction:column;gap:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#0B6F56">VALIDATION AND RULES</span><sc-for list="{{ st.rules }}" as="r" hint-placeholder-count="3"><span style="display:flex;gap:8px;font-size:13.5px;line-height:1.45"><svg viewBox="0 0 24 24" style="width:15px;height:15px;flex:none;margin-top:2px" fill="none" stroke="#0B8F6E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{ r }}</span></sc-for></div>
+      <div style="border-radius:16px;background:#FFF8F8;padding:14px 16px;display:flex;flex-direction:column;gap:8px"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8A1414">ERRORS AND EDGE CASES</span><sc-for list="{{ st.errs }}" as="e" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13.5px;font-weight:600">{{ e.k }}</span><span style="font-size:13px;line-height:1.45;color:#4A615A">{{ e.v }}</span></div></sc-for></div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px"><span style="font-size:16px;font-weight:700">Statuses</span><sc-for list="{{ wf.statuses }}" as="x" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-top:1px solid {{ x.bdr }}"><span style="height:22px;padding:0 9px;border-radius:999px;background:{{ x.bg }};color:{{ x.fg }};font-size:11.5px;font-weight:600;display:flex;align-items:center;white-space:nowrap;flex:none">{{ x.k }}</span><span style="font-size:13px;color:#4A615A;line-height:1.4">{{ x.v }}</span></div></sc-for></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px"><span style="font-size:16px;font-weight:700">Notifications sent</span><sc-for list="{{ wf.notifs }}" as="x" hint-placeholder-count="4"><div style="display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-top:1px solid {{ x.bdr }}"><span style="font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;padding:3px 6px;border-radius:5px;background:#E8F0FF;color:#1E3A8A;white-space:nowrap;flex:none;margin-top:1px">{{ x.ch }}</span><div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:13.5px;font-weight:600">{{ x.k }}</span><span style="font-size:12.5px;color:#5E7770">To {{ x.to }}</span></div></div></sc-for></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px"><span style="font-size:16px;font-weight:700">Permissions</span><sc-for list="{{ wf.perms }}" as="x" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid {{ x.bdr }};font-size:13.5px"><span>{{ x.k }}</span><span style="font-weight:600;color:#0B6F56;white-space:nowrap">{{ x.v }}</span></div></sc-for></div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:24px 32px 96px;display:flex;flex-direction:column;gap:16px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules for every workflow</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px"><sc-for list="{{ rules }}" as="r" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font:600 12px 'IBM Plex Mono',monospace;color:#0B8F6E">{{ r.n }}</span><span style="font-size:14.5px;font-weight:600">{{ r.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ r.v }}</span></div></sc-for></div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: 0, s: 0 };
+  static A = { Employee: ['#FFE2C4', '#7A4508', 'EM'], Manager: ['#DCE5FF', '#1E3A9E', 'MG'], Admin: ['#E3F6EF', '#0B6F56', 'AD'], Owner: ['#E3F6EF', '#0B6F56', 'OW'], Hala: ['#0C1F1A', '#FFFFFF', 'H'], 'New user': ['#F0ECFF', '#3F2A8C', 'NU'], Courier: ['#F2F6F4', '#2E403B', 'CR'], Finance: ['#DCE5FF', '#1E3A9E', 'FI'] };
+  static ST = { Draft: ['#F4F6F5', '#4A615A'], Pending: ['#FFF4E0', '#7A4508'], Approved: ['#E3F6EF', '#0B4F3E'], Rejected: ['#FDECEC', '#8A1414'], Processing: ['#E6F4F1', '#0B4F3E'], Shipped: ['#E8F0FF', '#1E3A8A'], Active: ['#E3F6EF', '#0B4F3E'], Frozen: ['#E8F0FF', '#1E3A8A'], Invited: ['#F0ECFF', '#3F2A8C'], Expired: ['#F7EFEF', '#6B3A3A'], Sent: ['#E3F6EF', '#0B4F3E'], Scheduled: ['#F0ECFF', '#3F2A8C'], Failed: ['#FDECEC', '#8A1414'], Delivered: ['#E8F0FF', '#1E3A8A'], Blocked: ['#FDECEC', '#8A1414'] };
+  data() {
+    const W = ['WEB'], B = ['WEB', 'MOBILE'];
+    const st = (t, d, actor, p, screen, c, long, rules, errs, type) => ({ t, d, actor, p, screen, c, long, rules, errs, type });
+    return [
+      { name: 'Request a card', icon: 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20', goal: 'An employee asks for a company card with a limit; a manager approves; Hala issues it and the employee activates it.', meta: [['Time', '2 min + approval'], ['Steps', '7'], ['Approval', '1 level'], ['Platforms', 'Web, iOS, Android']],
+        actors: [['Employee', 'Requests and activates'], ['Manager', 'Approves or rejects'], ['Hala', 'Issues and ships']],
+        steps: [
+          st('Choose card type', 'Virtual or physical', 'Employee', B, 'Cards › Request', ['Selection cards', 'Progress bar'], 'Two selection cards. Virtual is ready instantly; physical arrives in 3–5 business days.', ['Virtual preselected', 'Physical needs a delivery address'], [['Card limit reached', 'Company has the maximum number of cards; banner with link to Settings.']]),
+          st('Set limit and purpose', 'Amount chips + reason', 'Employee', B, 'Cards › Request › Limit', ['Amount input', 'Chips', 'Text area'], 'Monthly limit with chips (5k, 10k, 25k) and a short reason the approver will read.', ['Limit ≤ company policy', 'Reason required above SAR 10,000'], [['Above policy', 'Amber note: "Needs Owner approval".']]),
+          st('Review and submit', 'Check details', 'Employee', B, 'Review', ['Review summary', 'Primary button'], 'Card type, holder, limit, merchant categories and who will approve.', ['Shows approver by name'], [['Network error', 'Keep draft; retry button.']]),
+          st('Approve?', 'Manager decides', 'Manager', B, 'Approvals', ['Approval chain', 'Drawer', 'Text area'], 'Manager gets a push and sees the request in Approvals with the reason.', ['Reject needs a reason', 'Cannot approve own request'], [['No response 24 h', 'Reminder, then escalate to Owner.']], 'decision'),
+          st('Issue card', 'Hala creates it', 'Hala', B, '—', ['Status timeline'], 'Virtual card is created in seconds; physical card is produced and handed to courier.', ['Card frozen until activation'], [['Issuer down', 'Status "Delayed", notify both.']]),
+          st('Activate', 'Set PIN, add to wallet', 'Employee', ['MOBILE'], 'Cards › Activate', ['OTP input', 'PIN input'], 'Confirm with OTP, set a 4-digit PIN, offer Apple Pay / Google Pay.', ['PIN not 1234 / 0000'], [['Wrong OTP 3×', 'Locked 5 min; Nafath option.']]),
+          st('Card active', 'Ready to use', 'Hala', B, 'Cards › Detail', ['Badge', 'Toast'], 'Card shows Active; employee and manager are notified.', [], [], 'end')
+        ],
+        statuses: [['Draft', 'Saved, not submitted'], ['Pending', 'Waiting for approval'], ['Rejected', 'With reason; can resubmit'], ['Processing', 'Being issued'], ['Shipped', 'Physical card on the way'], ['Active', 'Ready to use']],
+        notifs: [['Card request to approve', 'Manager', 'PUSH'], ['Card approved', 'Employee', 'PUSH'], ['Card shipped', 'Employee', 'SMS'], ['Card active', 'Employee, Manager', 'IN-APP']],
+        perms: [['Request', 'Any employee'], ['Approve', 'Manager, Owner'], ['Set limits above policy', 'Owner'], ['Freeze / cancel', 'Holder, Admin']] },
+      { name: 'Order POS terminal', icon: 'M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8v4H8zM8 14h.01M12 14h.01M16 14h.01', goal: 'A business orders terminals, picks a plan, assigns them to branches and pays; Hala delivers and installs them.', meta: [['Time', '4 min'], ['Steps', '7'], ['Delivery', '3–5 days'], ['Platforms', 'Web, iOS, Android']],
+        actors: [['Admin', 'Orders and pays'], ['Hala', 'Delivers and activates'], ['Courier', 'Installs on site']],
+        steps: [
+          st('Choose terminals', 'Model + quantity', 'Admin', B, 'POS › Order', ['Selection cards', 'Stepper', 'Order summary'], 'Smart POS, Mini, Tap on Phone with quantity steppers and a live summary.', ['At least 1 terminal', 'Total with VAT always visible'], [['Out of stock', 'Card shows "Back in 2 weeks"; still orderable.']]),
+          st('Pick a plan', 'Rent or buy', 'Admin', B, 'POS › Order › Plan', ['Radio cards', 'Toggle'], 'Monthly, annual (20% less) or buy; instant settlement toggle.', ['Fees shown per terminal'], []),
+          st('Assign branches', 'Where each goes', 'Admin', B, 'POS › Order › Branches', ['Stepper', 'Inline alert'], 'Spread terminals across branches; on-site contact and delivery window.', ['Sum must equal ordered quantity'], [['Mismatch', 'Amber alert; Continue disabled with reason.']]),
+          st('Review and pay', 'Agree to terms', 'Admin', B, 'POS › Order › Review', ['Review summary', 'Checkbox', 'OTP input'], 'Full order, fees, VAT, payment account; confirm with OTP.', ['Terms must be accepted'], [['Low balance', 'Error with "Add money".']]),
+          st('Prepare and ship', 'Configured per branch', 'Hala', B, 'POS › Orders', ['Status timeline'], 'Terminals are configured with branch names and shipped.', [], [['Delay', 'New date and reason shown on the order.']]),
+          st('Install', 'On-site activation', 'Courier', ['MOBILE'], '—', ['SMS'], 'Courier texts the contact, installs and runs a test transaction.', ['Contact confirms with code'], [['Nobody on site', 'Reschedule link by SMS.']]),
+          st('Terminals live', 'Accepting payments', 'Hala', B, 'POS › Terminals', ['Badge', 'Notification'], 'Each terminal shows Active and its first sale.', [], [], 'end')
+        ],
+        statuses: [['Draft', 'Order not placed'], ['Processing', 'Being prepared'], ['Shipped', 'With courier'], ['Delivered', 'Installed'], ['Active', 'Taking payments']],
+        notifs: [['Order placed', 'Admin', 'EMAIL'], ['Out for delivery', 'Branch contact', 'SMS'], ['Terminal active', 'Admin', 'PUSH']],
+        perms: [['Order terminals', 'Admin, Owner'], ['Assign to branch', 'Admin'], ['Pay', 'Owner, Finance']] },
+      { name: 'Add a user', icon: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM19 8v6M22 11h-6', goal: 'An admin invites a team member with a role and limits; the person accepts, verifies identity and gets access.', meta: [['Time', '1 min + invitee'], ['Steps', '6'], ['Invite valid', '7 days'], ['Platforms', 'Web']],
+        actors: [['Admin', 'Invites and sets role'], ['New user', 'Accepts and verifies'], ['Hala', 'Checks identity']],
+        steps: [
+          st('Enter details', 'Name, mobile, email', 'Admin', W, 'Users › Invite', ['Inputs', 'Phone input'], 'Full name, Saudi mobile and work email.', ['Mobile +966 5XXXXXXXX', 'No duplicate users'], [['Already a user', 'Inline error with link to their profile.']]),
+          st('Choose role', 'Permissions preset', 'Admin', W, 'Users › Invite › Role', ['Radio cards', 'Accordion'], 'Viewer, Employee, Manager, Admin; expand to see exactly what each can do.', ['Only Owner can add Admins'], []),
+          st('Set limits', 'Spending and approvals', 'Admin', W, 'Users › Invite › Limits', ['Amount input', 'Toggle'], 'Daily transfer limit, card request rights, approval rights.', ['Limit ≤ inviter\'s limit'], []),
+          st('Confirm', 'OTP for admin action', 'Admin', W, 'Review', ['Review summary', 'OTP input'], 'Review and confirm with OTP; invite is sent.', ['New Admin role needs Nafath'], [['Wrong OTP', 'Attempts left; lockout after 3.']]),
+          st('Accept invite', 'Verify with Nafath', 'New user', B, 'Invite link', ['Nafath', 'Password'], 'Opens link, verifies with Nafath, sets password and Face ID.', ['Name must match national ID'], [['Expired link', 'Ask admin to resend.'], ['Name mismatch', 'Admin is asked to correct.']], 'decision'),
+          st('User active', 'Access granted', 'Hala', B, 'Users', ['Badge', 'Toast'], 'User shows Active; admin is notified.', [], [], 'end')
+        ],
+        statuses: [['Invited', 'Waiting for the person'], ['Expired', 'Link older than 7 days'], ['Active', 'Can sign in'], ['Blocked', 'Access removed']],
+        notifs: [['Invitation', 'New user', 'SMS'], ['Invite accepted', 'Admin', 'IN-APP'], ['New admin added', 'Owner', 'EMAIL']],
+        perms: [['Invite users', 'Admin, Owner'], ['Add Admins', 'Owner'], ['Remove users', 'Admin, Owner']] },
+      { name: 'Send a transfer', icon: 'M22 2 11 13M22 2l-7 20-4-9-9-4z', goal: 'A user sends money to a beneficiary; large amounts go through approval; the recipient receives it.', meta: [['Time', '1 min'], ['Steps', '6'], ['Approval', 'Over SAR 20,000'], ['Platforms', 'Web, iOS, Android']],
+        actors: [['Employee', 'Creates transfer'], ['Finance', 'Approves'], ['Hala', 'Sends via sarie']],
+        steps: [
+          st('Pick beneficiary', 'Saved or new IBAN', 'Employee', B, 'Transfers › New', ['Search', 'IBAN field'], 'Recent and saved beneficiaries; add new with IBAN and bank detection.', ['IBAN checksum', 'New beneficiary needs OTP'], [['Invalid IBAN', 'Inline error, keep input.']]),
+          st('Enter amount', 'With available balance', 'Employee', B, 'Transfers › Amount', ['Amount input'], 'Amount, reference and optional note.', ['≤ available balance', '≤ daily limit'], [['Over balance', 'Red error; button disabled.']]),
+          st('Review', 'Fees and arrival', 'Employee', B, 'Review', ['Review summary'], 'From, to, amount, fee, VAT, arrival time.', ['Shows approver when needed'], []),
+          st('Approve?', 'Over SAR 20,000', 'Finance', B, 'Approvals', ['Approval chain'], 'Sequential approval with reasons on reject.', ['Requester cannot approve'], [['Rejected', 'Requester edits and resubmits.']], 'decision'),
+          st('Send', 'Via sarie', 'Hala', B, '—', ['Status timeline'], 'Sent instantly Sun–Thu, 24/7 via sarie.', [], [['Returned', 'Funds back; reason shown.']]),
+          st('Received', 'Confirmed', 'Hala', B, 'Transactions', ['Toast', 'Receipt'], 'Status Sent; downloadable receipt.', [], [], 'end')
+        ],
+        statuses: [['Draft', 'Not submitted'], ['Pending', 'Waiting for approval'], ['Scheduled', 'Will send later'], ['Sent', 'Delivered to bank'], ['Failed', 'Returned with reason']],
+        notifs: [['Transfer to approve', 'Finance', 'PUSH'], ['Transfer sent', 'Employee', 'PUSH'], ['Receipt', 'Employee', 'EMAIL']],
+        perms: [['Create transfer', 'Employee and up'], ['Approve', 'Finance, Owner'], ['Add beneficiary', 'Manager and up']] }
+    ];
+  }
+  renderVals() {
+    const W = this.data(), s = this.state, wf0 = W[s.w], A = Component.A, ST = Component.ST;
+    const tabs = W.map((w, i) => { const on = i === s.w; return { l: w.name, icon: w.icon, sel: on ? 'true' : 'false', bd: on ? '#0C1F1A' : '#D7E0DC', bg: on ? '#0C1F1A' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0C1F1A', fw: on ? 600 : 500, pick: () => this.setState({ w: i, s: 0 }) }; });
+    const actorChip = a => ({ abg: (A[a] || A.Hala)[0], afg: (A[a] || A.Hala)[1] });
+    const steps = wf0.steps.map((x, i) => { const on = i === s.s, type = x.type || 'step', dec = type === 'decision', end = type === 'end', sys = x.actor === 'Hala';
+      return { n: String(i + 1).padStart(2, '0'), t: x.t, d: x.d, actor: x.actor, ...actorChip(x.actor), plats: x.p || ['WEB', 'MOBILE'], arrow: i < wf0.steps.length - 1, sel: on ? 'true' : 'false',
+        r: dec ? '22px 6px 22px 6px' : '16px', bw: on ? '2px' : '1px', bd: on ? '#0C1F1A' : dec ? '#F5D9A8' : end ? '#BFE6D6' : sys ? '#C9D7FB' : '#E1E8E5',
+        bg: dec ? '#FFFBF3' : end ? '#F3FBF8' : sys ? '#F6F8FF' : '#FFFFFF', nc: dec ? '#B45309' : end ? '#0B8F6E' : '#5E7770', sh: on ? '0 14px 28px -18px rgba(12,31,26,.45)' : 'none', pick: () => this.setState({ s: i }) }; });
+    const x = wf0.steps[s.s];
+    const st = { n: String(s.s + 1).padStart(2, '0'), t: x.t, long: x.long || x.d, actor: x.actor, ...actorChip(x.actor), screen: x.screen || '', comps: x.c || [], rules: x.rules || [], errs: (x.errs || []).map(([k, v]) => ({ k, v })),
+      noPrev: s.s === 0, noNext: s.s === wf0.steps.length - 1, pOp: s.s === 0 ? .4 : 1, nOp: s.s === wf0.steps.length - 1 ? .4 : 1,
+      prev: () => this.setState({ s: Math.max(0, s.s - 1) }), next: () => this.setState({ s: Math.min(wf0.steps.length - 1, s.s + 1) }) };
+    const wf = { name: wf0.name, icon: wf0.icon, goal: wf0.goal, meta: wf0.meta.map(([k, v]) => ({ k, v })), steps,
+      actors: wf0.actors.map(([n, d]) => ({ n, d, bg: (A[n] || A.Hala)[0], fg: (A[n] || A.Hala)[1], ini: (A[n] || A.Hala)[2] })),
+      statuses: wf0.statuses.map(([k, v], i) => ({ k, v, bg: (ST[k] || ST.Draft)[0], fg: (ST[k] || ST.Draft)[1], bdr: i ? '#EEF2F0' : 'transparent' })),
+      notifs: wf0.notifs.map(([k, to, ch], i) => ({ k, to, ch, bdr: i ? '#EEF2F0' : 'transparent' })),
+      perms: wf0.perms.map(([k, v], i) => ({ k, v, bdr: i ? '#EEF2F0' : 'transparent' })) };
+    const legend = [['Person does it', '#FFFFFF', '4px', 'none'], ['Hala does it', '#C9D7FB', '4px', 'none'], ['Decision', '#F5D9A8', '3px', 'rotate(45deg)'], ['End state', '#BFE6D6', '50%', 'none']].map(([k, c, r, tf]) => ({ k, c, r, tf }));
+    const rules = [['01', 'Show progress', 'Every flow over 2 steps has a progress bar and a clear step name.'], ['02', 'Review before commit', 'Money, cards, users: always a review step before the final action.'], ['03', 'Approval is visible', 'Requester sees who must approve and the status, any time.'], ['04', 'Save drafts', 'Leaving mid-flow keeps a draft; closing asks only if something was entered.'], ['05', 'OTP for risk', 'New beneficiary, limit increase, new admin: confirm with OTP.'], ['06', 'Notify both sides', 'Requester and approver get push + in-app; email for final results.'], ['07', 'Recoverable errors', 'Explain the reason and the fix; keep what was entered.'], ['08', 'Same flow, both platforms', 'Same steps and names on web and mobile; only layout changes.']].map(([n, k, v]) => ({ n, k, v }));
+    return { tabs, wf, st, legend, rules };
+  }
+}
+</script>
+</body>
+</html>

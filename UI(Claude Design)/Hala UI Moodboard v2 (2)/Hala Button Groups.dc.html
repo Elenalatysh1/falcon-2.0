@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#EEF3F1;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#0C1F1A;-webkit-font-smoothing:antialiased;padding-top:56px}*{box-sizing:border-box}button{font-family:inherit}a{color:#0B8F6E}a:hover{color:#066A51}</style>
+</helmet>
+<header style="max-width:1240px;margin:0 auto;padding:0 32px 48px;display:flex;flex-direction:column;gap:12px">
+  <span style="font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0B8F6E">HALA UI · COMPONENTS</span>
+  <h1 style="margin:0;font-size:48px;font-weight:700;letter-spacing:-.03em">Button groups</h1>
+  <p style="margin:0;max-width:760px;font-size:17px;line-height:1.55;color:#4A615A;text-wrap:pretty">Related buttons shown together: switching views, picking one or several options, and pairing actions. Every example with a "Live" tag works.</p>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Which group to use</h2><p style="margin:0;font-size:15px;color:#4A615A">They look alike but behave differently. Choose by what a tap does.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+    <sc-for list="{{ guide }}" as="g" hint-placeholder-count="5"><div style="background:#FFFFFF;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:6px"><span style="font-size:15px;font-weight:600">{{ g.k }}</span><span style="font-size:13px;line-height:1.5;color:#5E7770">{{ g.v }}</span><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#0B6F56;margin-top:auto">{{ g.e }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Segmented control</h2><p style="margin:0;font-size:15px;color:#4A615A">Pick one of 2–5 views of the same content. The selected segment is a white pill that slides on a mint-gray track. It switches immediately; there is no Apply.</p></div>
+  <div style="background:#FFFFFF;border-radius:24px;padding:8px 28px">
+    <sc-for list="{{ segSizes }}" as="z" hint-placeholder-count="3">
+      <div style="display:grid;grid-template-columns:minmax(140px,180px) minmax(0,1fr) minmax(0,240px);gap:24px;align-items:center;padding:20px 0;border-top:1px solid {{ z.bdr }}">
+        <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">{{ z.name }}</span><span style="font:400 11.5px 'IBM Plex Mono',monospace;color:#5E7770">{{ z.spec }}</span></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div role="tablist" style="position:relative;display:inline-flex;padding:3px;border-radius:999px;background:#E9EFEC">
+            <span style="position:absolute;top:3px;bottom:3px;left:3px;width:{{ z.w }};border-radius:999px;background:#FFFFFF;box-shadow:0 1px 3px rgba(12,31,26,.14);transform:translateX({{ z.x }});transition:transform .28s cubic-bezier(.2,.9,.2,1)"></span>
+            <sc-for list="{{ z.opts }}" as="o" hint-placeholder-count="3"><button role="tab" aria-selected="{{ o.sel }}" onClick="{{ o.pick }}" style="position:relative;width:{{ z.w }};height:{{ z.h }};border:0;background:transparent;border-radius:999px;font-size:{{ z.fs }};font-weight:{{ o.fw }};color:{{ o.fg }};cursor:pointer;white-space:nowrap;transition:color .2s">{{ o.l }}</button></sc-for>
+          </div>
+        </div>
+        <span style="font-size:13px;line-height:1.5;color:#5E7770">{{ z.use }}</span>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px">
+    <sc-for list="{{ segStates }}" as="s" hint-placeholder-count="5"><div style="background:#FFFFFF;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;align-items:flex-start"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770">{{ s.name }}</span><div style="display:inline-flex;padding:3px;border-radius:999px;background:#E9EFEC;opacity:{{ s.op }}"><span style="height:32px;padding:0 14px;border-radius:999px;background:#FFFFFF;box-shadow:0 1px 3px rgba(12,31,26,.14);font-size:13px;font-weight:600;display:flex;align-items:center">Day</span><span style="height:32px;padding:0 14px;border-radius:999px;background:{{ s.bg }};box-shadow:{{ s.ring }};font-size:13px;font-weight:500;color:{{ s.fg }};display:flex;align-items:center">Week</span></div><span style="font-size:12px;color:#5E7770;white-space:nowrap">{{ s.note }}</span></div></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Toggle and chip groups</h2><p style="margin:0;font-size:15px;color:#4A615A">For choosing values, not views. Chips wrap onto new lines; toggles stay on one line.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">SINGLE CHOICE · AMOUNT CHIPS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0"><span style="font-size:13px;color:#5E7770">Monthly card limit</span><span style="font:600 32px 'IBM Plex Mono',monospace;letter-spacing:-.02em;white-space:nowrap">SAR {{ amt.v }}</span></div>
+      <div role="radiogroup" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"><sc-for list="{{ amt.opts }}" as="o" hint-placeholder-count="5"><button role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.pick }}" style="height:40px;padding:0 16px;border-radius:999px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font:500 14px 'IBM Plex Mono',monospace;cursor:pointer;white-space:nowrap;transition:all .15s" style-hover="border-color:#0C1F1A">{{ o.l }}</button></sc-for></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">MULTI CHOICE · FILTER CHIPS</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <span style="font-size:13px;color:#5E7770">Payment methods · {{ chips.count }}</span>
+      <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ chips.opts }}" as="o" hint-placeholder-count="6"><button aria-pressed="{{ o.sel }}" onClick="{{ o.pick }}" style="height:36px;padding:0 14px 0 {{ o.pl }};border-radius:999px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all .15s"><sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:14px;height:14px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{ o.l }}</button></sc-for></div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">ICON TOGGLES · VIEW AND CHART</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <div style="display:inline-flex;padding:3px;border-radius:12px;background:#E9EFEC;gap:2px"><sc-for list="{{ icons.opts }}" as="o" hint-placeholder-count="3"><button aria-label="{{ o.l }}" title="{{ o.l }}" aria-pressed="{{ o.sel }}" onClick="{{ o.pick }}" style="width:40px;height:36px;border:0;border-radius:9px;background:{{ o.bg }};color:{{ o.fg }};box-shadow:{{ o.sh }};cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ o.icon }}"></path></svg></button></sc-for></div>
+        <span style="font-size:13px;color:#5E7770">{{ icons.label }}</span>
+      </div>
+      <div style="height:90px;border-radius:14px;background:#F4F7F6;padding:10px;display:flex;align-items:flex-end;gap:6px"><sc-for list="{{ icons.bars }}" as="b" hint-placeholder-count="8"><span style="flex:1;height:{{ b.h }};border-radius:{{ b.r }};background:{{ b.c }};transition:all .3s"></span></sc-for></div>
+      <span style="font-size:12.5px;color:#5E7770">Icon-only groups always have a tooltip and aria-label.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Attached buttons and split button</h2><p style="margin:0;font-size:15px;color:#4A615A">Outline buttons that share borders. Use them in toolbars and table headers. A split button puts the main action and its alternatives in one control.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">ATTACHED · TOOLBAR</span>
+      <div style="display:inline-flex;align-self:flex-start;border:1px solid #D7E0DC;border-radius:999px;overflow:hidden">
+        <button style="height:40px;padding:0 16px;border:0;border-right:1px solid #D7E0DC;background:#FFFFFF;font-size:14px;font-weight:500;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F4F7F6"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Edit</button>
+        <button style="height:40px;padding:0 16px;border:0;border-right:1px solid #D7E0DC;background:#FFFFFF;font-size:14px;font-weight:500;color:#0C1F1A;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F4F7F6"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8h12v12H8zM4 16V4h12"></path></svg>Duplicate</button>
+        <button style="height:40px;padding:0 16px;border:0;background:#FFFFFF;font-size:14px;font-weight:500;color:#C81E1E;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#FDECEC"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>Delete</button>
+      </div>
+      <div style="display:inline-flex;align-self:flex-start;border:1px solid #D7E0DC;border-radius:12px;overflow:hidden">
+        <button aria-label="Previous" style="width:40px;height:36px;border:0;border-right:1px solid #D7E0DC;background:#FFFFFF;cursor:pointer;color:#0C1F1A">‹</button>
+        <span style="height:36px;padding:0 14px;display:flex;align-items:center;font:500 13px 'IBM Plex Mono',monospace;border-right:1px solid #D7E0DC;white-space:nowrap">Oct 2026</span>
+        <button aria-label="Next" style="width:40px;height:36px;border:0;background:#FFFFFF;cursor:pointer;color:#0C1F1A">›</button>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Max 3 buttons with labels, 5 icon-only. Destructive is last and red. More than that: use a "More" menu.</span>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:16px;min-height:280px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">SPLIT BUTTON · EXPORT</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="position:relative;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
+        <div style="display:inline-flex;border-radius:999px;overflow:hidden;box-shadow:0 10px 22px -14px rgba(10,117,89,.8)">
+          <button onClick="{{ split.main }}" style="height:44px;padding:0 18px 0 20px;border:0;background:linear-gradient(90deg,#0A7559,#1E8A6E);color:#FFFFFF;font-size:14.5px;font-weight:600;cursor:pointer;white-space:nowrap">Export {{ split.fmt }}</button>
+          <span style="width:1px;background:rgba(255,255,255,.35)"></span>
+          <button onClick="{{ split.toggle }}" aria-label="More export formats" aria-expanded="{{ split.exp }}" style="width:44px;height:44px;border:0;background:#2C957A;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px;transform:{{ split.rot }};transition:transform .2s" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+        </div>
+        <div style="display:inline-flex;border:1px solid #D7E0DC;border-radius:999px;overflow:hidden"><span style="height:42px;padding:0 16px;display:flex;align-items:center;font-size:14px;font-weight:500;white-space:nowrap">Save draft</span><span style="width:1px;background:#D7E0DC"></span><span style="width:42px;height:42px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+        <sc-if value="{{ split.open }}" hint-placeholder-val="{{ false }}"><div role="menu" style="position:absolute;left:0;top:52px;width:240px;background:#FFFFFF;border-radius:14px;border:1px solid #E6ECE9;box-shadow:0 18px 36px -16px rgba(12,31,26,.35);padding:6px;z-index:2;display:flex;flex-direction:column;gap:2px"><sc-for list="{{ split.opts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" role="menuitem" style="height:44px;border:0;border-radius:9px;background:{{ o.bg }};padding:0 10px;display:flex;align-items:center;gap:10px;font-size:14px;color:#0C1F1A;cursor:pointer;text-align:left" style-hover="background:#F2F6F4"><span style="flex:1;display:flex;flex-direction:column"><span style="font-weight:500">{{ o.l }}</span><span style="font-size:12px;color:#5E7770">{{ o.d }}</span></span><sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="#0B8F6E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></button></sc-for></div></sc-if>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770;margin-top:auto">{{ split.msg }}</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Action pairs · web and mobile</h2><p style="margin:0;font-size:15px;color:#4A615A">On web the primary is on the right, where the eye ends. On mobile the buttons stack full width with the primary on top, within thumb reach.</p></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">WEB · DIALOG, DRAWER, FORM FOOTER</span>
+      <sc-for list="{{ pairs }}" as="p" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:16px;padding:14px 16px;border-radius:14px;background:#F4F7F6;flex-wrap:wrap"><span style="flex:1;min-width:140px;font-size:13px;color:#4A615A">{{ p.ctx }}</span><div style="display:flex;gap:10px;align-items:center"><sc-if value="{{ p.hasTer }}" hint-placeholder-val="{{ false }}"><span style="height:40px;padding:0 6px;display:flex;align-items:center;font-size:14px;font-weight:600;color:#0E7C62;white-space:nowrap;margin-right:8px">{{ p.ter }}</span></sc-if><span style="height:40px;padding:0 18px;border:1px solid #D7E0DC;border-radius:999px;background:#FFFFFF;display:flex;align-items:center;font-size:14px;font-weight:500;white-space:nowrap">{{ p.sec }}</span><span style="height:40px;padding:0 20px;border-radius:999px;background:{{ p.pbg }};color:{{ p.pfg }};display:flex;align-items:center;font-size:14px;font-weight:600;white-space:nowrap">{{ p.pri }}</span></div></div></sc-for>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">MOBILE · BOTTOM OF SCREEN</span>
+      <div style="border-radius:28px;background:#F4F7F6;padding:18px 16px 22px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:18px;font-weight:700">Review transfer</span>
+        <div style="border-radius:18px;background:#FFFFFF;padding:4px 16px"><div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F2F5F4;font-size:14.5px"><span style="color:#5E7770;flex:none">To</span><span style="white-space:nowrap">Nour Trading</span></div><div style="display:flex;justify-content:space-between;padding:12px 0;font-size:14.5px"><span style="color:#5E7770;flex:none">Amount</span><span style="font-family:'IBM Plex Mono',monospace;white-space:nowrap">25,000.00</span></div></div>
+        <span style="height:24px"></span>
+        <span style="height:52px;border-radius:999px;background:linear-gradient(90deg,#0A7559,#2C957A);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">Send SAR 25,000</span>
+        <span style="height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500">Edit details</span>
+      </div>
+      <span style="font-size:12.5px;line-height:1.5;color:#5E7770">Primary 52 pt, secondary as a 48 pt text button. Gap 10 pt. 16 pt side margins, above the home indicator.</span>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 56px;display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Mobile · segmented and split</h2><p style="margin:0;font-size:15px;color:#4A615A">Segments fill the width with equal sizes. On mobile, a split button's extra options open in an action sheet.</p></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;align-items:start">
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">FULL-WIDTH SEGMENTED</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="border-radius:28px;background:#F4F7F6;padding:18px 16px;display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:20px;font-weight:700">New transfer</span>
+        <div style="position:relative;display:grid;grid-template-columns:repeat(3,1fr);padding:4px;border-radius:999px;background:#E3EAE7">
+          <span style="position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 3);border-radius:999px;background:#FFFFFF;box-shadow:0 1px 3px rgba(12,31,26,.14);transform:translateX({{ mseg.x }});transition:transform .28s cubic-bezier(.2,.9,.2,1)"></span>
+          <sc-for list="{{ mseg.opts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" role="tab" aria-selected="{{ o.sel }}" style="position:relative;height:44px;border:0;background:transparent;border-radius:999px;font-size:15px;font-weight:{{ o.fw }};color:{{ o.fg }};cursor:pointer">{{ o.l }}</button></sc-for>
+        </div>
+        <div style="border-radius:18px;background:#FFFFFF;padding:16px;display:flex;flex-direction:column;gap:4px"><span style="font-size:15px;font-weight:600">{{ mseg.t }}</span><span style="font-size:13.5px;color:#5E7770">{{ mseg.d }}</span></div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5E7770;white-space:nowrap">SPLIT → ACTION SHEET</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;padding:3px 8px;border-radius:6px;background:#E3F6EF;color:#0B6F56">LIVE</span></div>
+      <div style="position:relative;height:300px;border-radius:28px;background:#F4F7F6;overflow:hidden;padding:18px 16px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:20px;font-weight:700">Statement</span><span style="font-size:13.5px;color:#5E7770">September 2026 · Main account</span>
+        <div style="margin-top:auto;display:flex;border-radius:999px;overflow:hidden"><span style="flex:1;height:52px;background:linear-gradient(90deg,#0A7559,#1E8A6E);color:#FFFFFF;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center">Download PDF</span><span style="width:1px;background:rgba(255,255,255,.35)"></span><button onClick="{{ msplit.toggle }}" aria-label="More formats" style="width:56px;height:52px;border:0;background:#2C957A;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button></div>
+        <sc-if value="{{ msplit.open }}" hint-placeholder-val="{{ false }}"><div onClick="{{ msplit.toggle }}" style="position:absolute;inset:0;background:rgba(12,31,26,.42)"></div><div style="position:absolute;left:10px;right:10px;bottom:12px;display:flex;flex-direction:column;gap:8px"><div style="border-radius:18px;background:#FFFFFF;overflow:hidden"><span style="display:flex;height:50px;align-items:center;justify-content:center;font-size:16px">Download CSV</span><span style="display:flex;height:50px;align-items:center;justify-content:center;font-size:16px;border-top:1px solid #EEF2F0">Send by email</span></div><button onClick="{{ msplit.toggle }}" style="height:50px;border:0;border-radius:18px;background:#FFFFFF;font-size:16px;font-weight:600;color:#0C1F1A;cursor:pointer">Cancel</button></div></sc-if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 32px 96px;display:flex;flex-direction:column;gap:20px">
+  <h2 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em">Rules</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ rules }}" as="r" hint-placeholder-count="8"><div style="background:#FFFFFF;border-radius:18px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;flex:none;background:{{ r.bg }};color:{{ r.fg }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ r.mk }}</span><span style="font-size:14px;line-height:1.5">{{ r.t }}</span></div></sc-for>
+  </div>
+</section></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { seg: { s: 0, m: 1, l: 0 }, amt: 1, chips: { mada: true, Visa: true }, icon: 0, msplit: false, split: false, mseg: 0 };
+  renderVals() {
+    const s = this.state;
+    const guide = [['Segmented control', 'Switches between views of the same content. One always selected.', 'Day · Week · Month'], ['Single-choice chips', 'Pick one value from a short set. Works like a radio group.', 'SAR 5k · 10k · 25k'], ['Filter chips', 'Turn several options on or off. Any number, including none.', 'mada · Visa · Apple Pay'], ['Attached buttons', 'Separate actions on one object, grouped to save space.', 'Edit · Duplicate · Delete'], ['Action pair', 'Primary and secondary action at the end of a form or dialog.', 'Cancel · Save']].map(([k, v, e]) => ({ k, v, e }));
+    const SZ = [['s', 'Small', 'H 32 · 13 px · 72 w', '32px', '72px', '13px', ['Day', 'Week', 'Month'], 'Chart headers, inside cards and tables.'], ['m', 'Medium', 'H 40 · 14 px · 104 w', '40px', '104px', '14px', ['Overview', 'Activity', 'Statements'], 'Default. Page sections and drawers.'], ['l', 'Large', 'H 48 · 15 px · 130 w', '48px', '130px', '15px', ['Local', 'International'], 'Mobile and key choices, e.g. transfer type.']];
+    const segSizes = SZ.map(([k, name, spec, h, w, fs, opts, use], i) => ({ name, spec, h, w, fs, use, bdr: i ? '#EEF2F0' : 'transparent', x: `calc(${w} * ${s.seg[k]})`, opts: opts.map((l, j) => { const on = s.seg[k] === j; return { l, sel: on ? 'true' : 'false', fw: on ? 600 : 500, fg: on ? '#0C1F1A' : '#5E7770', pick: () => this.setState({ seg: { ...s.seg, [k]: j } }) }; }) }));
+    const segStates = [['DEFAULT', 'transparent', '#5E7770', 'none', 1, 'Unselected segment'], ['HOVER', 'rgba(255,255,255,.55)', '#0C1F1A', 'none', 1, 'Web only'], ['FOCUS', 'transparent', '#0C1F1A', '0 0 0 3px rgba(11,143,110,.3)', 1, 'Arrow keys move'], ['PRESSED', 'rgba(255,255,255,.8)', '#0C1F1A', 'none', 1, 'Mobile tap'], ['DISABLED', 'transparent', '#5E7770', 'none', .45, 'Whole group only']].map(([name, bg, fg, ring, op, note]) => ({ name, bg, fg, ring, op, note }));
+    const AM = ['5,000', '10,000', '25,000', '50,000', 'Custom'];
+    const amt = { v: AM[s.amt] === 'Custom' ? '—' : AM[s.amt], opts: AM.map((l, i) => { const on = s.amt === i; return { l: l === 'Custom' ? l : l.replace(',000', 'k'), sel: on ? 'true' : 'false', bd: on ? '#0C1F1A' : '#D7E0DC', bg: on ? '#0C1F1A' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0C1F1A', pick: () => this.setState({ amt: i }) }; }) };
+    const CH = ['mada', 'Visa', 'Mastercard', 'Apple Pay', 'STC Pay', 'Tap on Phone'];
+    const n = CH.filter(c => s.chips[c]).length;
+    const chips = { count: n ? `${n} selected` : 'All methods', opts: CH.map(l => { const on = !!s.chips[l]; return { l, on, sel: on ? 'true' : 'false', pl: on ? '10px' : '14px', bd: on ? '#0B8F6E' : '#D7E0DC', bg: on ? '#E3F6EF' : '#FFFFFF', fg: on ? '#0B4F3E' : '#0C1F1A', pick: () => this.setState({ chips: { ...s.chips, [l]: !on } }) }; }) };
+    const IC = [['Bar chart', 'M4 20V10M10 20V4M16 20v-8M22 20H2'], ['Line chart', 'M3 17l6-6 4 4 8-8'], ['Table', 'M3 5h18v14H3zM3 10h18M3 15h18M9 5v14']];
+    const H = [40, 62, 48, 80, 56, 90, 70, 84];
+    const icons = { label: IC[s.icon][0], opts: IC.map(([l, icon], i) => { const on = s.icon === i; return { l, icon, sel: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0C1F1A' : '#5E7770', sh: on ? '0 1px 3px rgba(12,31,26,.14)' : 'none', pick: () => this.setState({ icon: i }) }; }),
+      bars: H.map(h => s.icon === 0 ? { h: h + '%', r: '5px', c: '#0B8F6E' } : s.icon === 1 ? { h: '4px', r: '2px', c: '#0B8F6E' } : { h: '12px', r: '3px', c: '#DDE6E2' }) };
+    const FM = [['PDF', 'Statement layout, signed'], ['CSV', 'For Excel and accounting'], ['MT940', 'For ERP import']];
+    const fi = s.fmt ?? 0;
+    const split = { fmt: FM[fi][0], open: s.split, exp: s.split ? 'true' : 'false', rot: s.split ? 'rotate(180deg)' : 'none', toggle: () => this.setState({ split: !s.split }), main: () => this.setState({ split: false, done: FM[fi][0] }),
+      msg: s.done ? `Exported as ${s.done}. The main button remembers the last format.` : 'The main part runs the default; the arrow opens alternatives.',
+      opts: FM.map(([l, d], i) => ({ l, d, on: i === fi, bg: i === fi ? '#F3FBF8' : 'transparent', pick: () => this.setState({ fmt: i, split: false }) })) };
+    const G = 'linear-gradient(90deg,#0A7559,#2C957A)';
+    const pairs = [['Form or dialog', 'Cancel', 'Save changes', G, '#FFFFFF'], ['Destructive confirmation', 'Keep card', 'Freeze card', '#FDECEC', '#C81E1E'], ['Drawer with approval', 'Reject', 'Approve', '#0C1F1A', '#FFFFFF'], ['Multi-step flow', 'Back', 'Continue', G, '#FFFFFF', 'Save draft']].map(([ctx, sec, pri, pbg, pfg, ter]) => ({ ctx, sec, pri, pbg, pfg, ter: ter || '', hasTer: !!ter }));
+    const MS = [['Local', 'To any Saudi bank', 'Arrives within minutes via sarie.'], ['International', 'SWIFT, 40+ currencies', 'Arrives in 1–3 business days.'], ['Own', 'Between your accounts', 'Instant and free.']];
+    const mseg = { x: `calc(100% * ${s.mseg})`, t: MS[s.mseg][1], d: MS[s.mseg][2], opts: MS.map(([l], i) => { const on = s.mseg === i; return { l, sel: on ? 'true' : 'false', fw: on ? 600 : 500, fg: on ? '#0C1F1A' : '#5E7770', pick: () => this.setState({ mseg: i }) }; }) };
+    const msplit = { open: s.msplit, toggle: () => this.setState({ msplit: !s.msplit }) };
+    const rules = [[1, 'Keep labels short and parallel: "Day · Week · Month".'], [1, 'Segments in one group are the same width.'], [1, 'One primary per group at most. Everything else is outline or text.'], [1, 'Show the selected count on filter chips and a way to clear them.'], [0, 'Don\'t use a segmented control for actions; it only switches views.'], [0, 'Don\'t put more than 5 segments; use tabs or a dropdown.'], [0, 'Don\'t mix gradient and outline buttons inside one attached group.'], [0, 'Don\'t place Cancel on the right on web or the bottom-first on mobile.']].map(([ok, t]) => ({ t, mk: ok ? '✓' : '×', bg: ok ? '#E3F6EF' : '#FDECEC', fg: ok ? '#0B6F56' : '#C81E1E' }));
+    return { guide, segSizes, segStates, amt, chips, icons, split, pairs, mseg, msplit, rules };
+  }
+}
+</script>
+</body>
+</html>
