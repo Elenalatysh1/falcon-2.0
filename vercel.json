@@ -1,7 +1,7 @@
 {
   "framework": null,
   "buildCommand": "",
-  "rewrites": [
-    { "source": "/", "destination": "/documentation/index.html" }
+  "redirects": [
+    { "source": "/", "destination": "/documentation/", "permanent": false }
   ]
 }
