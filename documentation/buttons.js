@@ -282,6 +282,37 @@
     );
   }
 
+  function fillArabic() {
+    page.querySelectorAll('[data-button="arabic"]').forEach((root) => {
+      const buttons = el("div", "btn-row");
+      buttons.append(
+        createButton({ label: "تأكيد", variant: "primary", size: "lg" }),
+        createButton({ label: "تصدير", variant: "secondary", size: "lg", icon: "download" }),
+        createButton({ label: "التالي", variant: "tonal", size: "lg", icon: "forward", iconPosition: "trailing" }),
+        createButton({ label: "تخطي", variant: "ghost", size: "lg" }),
+        createButton({ label: "تجميد", variant: "destructive", size: "lg" })
+      );
+
+      const arrows = el("div", "btn-row");
+      arrows.append(
+        createButton({ variant: "primary", size: "lg", shape: "wide", icon: "forward", iconOnly: true, ariaLabel: "الخطوة التالية" }),
+        createButton({ variant: "secondary", size: "lg", shape: "wide", icon: "back", iconOnly: true, ariaLabel: "رجوع" })
+      );
+
+      const chips = el("div", "btn-row");
+      [["مُسدَّد", true], ["معلّق", false], ["مسترد", false], ["مدى", false]].forEach(([label, selected]) => {
+        chips.append(createButton({ label, variant: "secondary", size: "xs", role: "chip", selected }));
+      });
+
+      const quick = el("div", "btn-quick");
+      [["تحويل", "transfers", "primary"], ["الفواتير", "file", "tonal"], ["شحن", "add", "tonal"]].forEach(([label, icon, variant]) => {
+        quick.append(createButton({ label, icon, variant, size: "lg", stack: true }));
+      });
+
+      root.append(buttons, arrows, chips, quick);
+    });
+  }
+
   function fillRules() {
     const root = mount("rules");
     rules.forEach(([ok, text]) => {
@@ -306,5 +337,6 @@
   fillTopbar();
   fillAmounts();
   fillMobileInline();
+  fillArabic();
   fillRules();
 })();

@@ -11,7 +11,7 @@
 (function () {
   const catalog = {
     add: "plus",
-    back: "arrow-left",
+    back: "line-arrow-left",
     calendar: "calendar",
     cards: "credit-card",
     close: "x",
@@ -21,7 +21,7 @@
     expand: "chevron-down",
     file: "file",
     filter: "list-filter",
-    forward: "arrow-right",
+    forward: "line-arrow-right",
     hide: "eye-off",
     more: "ellipsis",
     next: "chevron-right",
@@ -45,7 +45,7 @@
     delivery: "truck",
   };
 
-  const mirror = new Set(["arrow-left", "arrow-right", "chevron-left", "chevron-right", "send"]);
+  const mirror = new Set(["line-arrow-left", "line-arrow-right", "arrow-left", "arrow-right", "chevron-left", "chevron-right", "send"]);
 
   function pascal(kebab) {
     return kebab
