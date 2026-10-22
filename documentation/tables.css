@@ -41,7 +41,7 @@
   gap: var(--space-3);
   padding: var(--space-1) 0;
   border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="tables"] .tbl-spec:first-child {
@@ -50,7 +50,7 @@
 
 [data-page="tables"] .tbl-spec span:last-child {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   color: var(--text-secondary);
   text-align: end;
 }
@@ -77,7 +77,7 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-bold);
 }
 

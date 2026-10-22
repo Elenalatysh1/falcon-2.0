@@ -42,7 +42,7 @@
 
 [data-page="time-picker"] .tp-which-row span {
   color: var(--text-secondary);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -69,7 +69,7 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-bold);
 }
 

@@ -79,7 +79,12 @@
           <span class="docs-chevron" aria-hidden="true"></span>
         </button>
         <div class="docs-group-list">
-        <a class="docs-link" href="#styles">Styles</a>
+        <a class="docs-link" href="#colors">Colors</a>
+        <a class="docs-link" href="#color-roles">Color roles</a>
+        <a class="docs-link" href="#typography">Typography</a>
+        <a class="docs-link" href="#space">Space, radius, size &amp; stroke</a>
+        <a class="docs-link" href="#shadows">Shadows</a>
+        <a class="docs-link" href="#motion">Motion</a>
         <a class="docs-link" href="#icons">Icons</a>
         <a class="docs-link" href="#logo">Hala logo</a>
         </div>
@@ -131,56 +136,100 @@
         <button class="docs-menu" type="button" data-menu>Menu</button>
         <article class="doc-page" data-page="introduction" hidden></article>
         <article class="doc-page" data-page="how-to-use" hidden></article>
-        <article class="doc-page" data-page="styles" hidden>
-<header class="wrap head">
-    <p class="kicker">Hala UI · Foundations</p>
-    <h1 class="type-display">Styles</h1>
-    <p class="lede type-body-l">The tokens behind every Hala screen: color, type in English and Arabic, spacing, radius, shadows and motion. Names match the values used across the component pages. Click any swatch to copy its hex.</p>
-    <nav class="nav" aria-label="Foundations">
-      <a href="#color">Color</a>
-      <a href="#type">Typography</a>
-      <a href="#arabic">Arabic</a>
-      <a href="#space">Spacing</a>
-      <a href="#radius">Radius</a>
-      <a href="#shadow">Elevation</a>
-      <a href="#motion">Motion</a>
-      <a href="#grid">Icons &amp; grid</a>
-    </nav>
+        <article class="doc-page" data-page="colors" hidden>
+  <header class="wrap head">
+    <p class="kicker">Hala DNA · Foundations</p>
+    <h1 class="type-display">Color</h1>
+    <p class="lede type-body-l">Hala green is for brand and primary actions only. Ink carries text and strong UI. Surfaces are white on a mint-gray canvas. Status colors are used only to show status.</p>
   </header>
 
   <main>
-    <section id="color" class="wrap">
+    <section id="color-modes" class="wrap">
       <div class="section-head">
         <div class="titles">
-          <h2 class="doc-h2">Color</h2>
-          <p class="sub type-body-m">Hala green is for brand and primary actions only. Ink carries text and strong UI. Surfaces are white on a mint-gray canvas. Status colors are used only to show status.</p>
+          <h2 class="doc-h2">Light and Dark</h2>
+          <p class="sub type-body-m">The main colors, in the same order in each mode. Each swatch shows the Figma variable, the CSS variable and the hex. Click a swatch to copy its hex.</p>
         </div>
-        <span class="copied" data-copied></span>
+        <div class="nav" role="group" aria-label="Color mode" data-mode-switch>
+          <button type="button" aria-pressed="true" data-mode="light">Light</button>
+          <button type="button" aria-pressed="false" data-mode="dark">Dark</button>
+        </div>
       </div>
-      <div data-palettes></div>
-      <div class="panel-grid">
-        <div class="panel">
-          <span class="kicker quiet">Gradients · use sparingly</span>
-          <div data-grads></div>
-        </div>
-        <div class="panel">
-          <span class="kicker quiet">Contrast · checked pairs</span>
-          <div data-pairs></div>
-        </div>
+      <span class="copied" data-copied></span>
+      <div class="mode-board" data-palettes></div>
+    </section>
+
+    <section id="color-gradients" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Gradients</h2>
+        <p class="sub type-body-m">Use sparingly. Same in both modes.</p>
+      </div>
+      <div class="panel">
+        <div data-grads></div>
       </div>
     </section>
 
-    <section id="type" class="wrap">
+    <section id="color-card-art" class="wrap">
       <div class="titles">
-        <h2 class="doc-h2">Typography</h2>
-        <p class="sub type-body-m">IBM Plex Sans for interface text, IBM Plex Mono for numbers, amounts, IBANs and labels, and IBM Plex Sans Arabic for Arabic. All three share the same proportions, so mixed text lines up.</p>
+        <h2 class="doc-h2">Card art</h2>
+        <p class="sub type-body-m">Physical card surfaces. Same value in Light and Dark — cards never theme. The other card designs in Figma (Expense, Cash, SDB and Hurr) are added with the Payment cards page.</p>
+      </div>
+      <div class="card-art" data-card-art></div>
+    </section>
+
+    <section id="color-rules" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Use / Don’t</h2>
+        <p class="sub type-body-m">Three habits that keep color meaningful.</p>
+      </div>
+      <div class="dd-list" data-rules="colors"></div>
+    </section>
+  </main>
+        </article>
+        <article class="doc-page" data-page="color-roles" hidden>
+  <header class="wrap head">
+    <p class="kicker">Hala DNA · Foundations</p>
+    <h1 class="type-display">Color roles</h1>
+    <p class="lede type-body-l">How the colors on the Colors page work together in real UI, shown in Light and Dark.</p>
+  </header>
+
+  <main>
+    <section id="roles-samples" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Role samples</h2>
+        <p class="sub type-body-m">Everyday combinations, each in Light and Dark with the same tokens.</p>
+      </div>
+      <div class="stack" data-roles></div>
+    </section>
+
+    <section id="roles-rules" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Use / Don’t</h2>
+        <p class="sub type-body-m">Three habits that keep each color doing its one job.</p>
+      </div>
+      <div class="dd-list" data-rules="roles"></div>
+    </section>
+  </main>
+        </article>
+        <article class="doc-page" data-page="typography" hidden>
+  <header class="wrap head">
+    <p class="kicker">Hala DNA · Foundations</p>
+    <h1 class="type-display">Typography</h1>
+    <p class="lede type-body-l">Hala DS Font for interface text in English and Arabic, and Hala Mono for numbers, amounts, IBANs and codes. They share the same proportions, so mixed text lines up.</p>
+  </header>
+
+  <main>
+    <section id="type-scale" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Type scale</h2>
+        <p class="sub type-body-m">Sizes come from the Responsive collection, so Web and Mobile switch with the screen. Arabic is covered below. Until the Hala font files are added, the samples render in IBM Plex.</p>
       </div>
       <div class="families" data-families></div>
       <div class="table-card" data-scale></div>
       <div class="auto-grid" data-type-rules></div>
     </section>
 
-    <section id="arabic" class="wrap">
+    <section id="type-arabic" class="wrap">
       <div class="titles">
         <h2 class="doc-h2">Arabic and RTL</h2>
         <p class="sub type-body-m">Arabic text is set 1–2 px larger than English with taller line height, because Arabic letters look smaller at the same size. Numbers stay Western (0–9) and Mono, read left to right.</p>
@@ -221,7 +270,32 @@
       <div class="auto-grid" data-rtl></div>
     </section>
 
-    <section id="space" class="wrap">
+    <section id="type-tokens" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">All tokens</h2>
+        <p class="sub type-body-m">Every text style in the four Responsive modes. Bright values change from Web; dimmed values match it. Arabic modes have no letter spacing.</p>
+      </div>
+      <div class="table-card" data-type-modes></div>
+    </section>
+
+    <section id="type-rules" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Use / Don’t</h2>
+        <p class="sub type-body-m">Three habits that keep type consistent between Figma and code.</p>
+      </div>
+      <div class="dd-list" data-rules="type"></div>
+    </section>
+  </main>
+        </article>
+        <article class="doc-page" data-page="space" hidden>
+  <header class="wrap head">
+    <p class="kicker">Hala DNA · Foundations</p>
+    <h1 class="type-display">Space, radius, size &amp; stroke</h1>
+    <p class="lede type-body-l">The measurements behind every Hala screen: spacing, radius, stroke and size. Figma names carry the value (space/16, radius/8), and each one maps to a CSS variable (--space-4).</p>
+  </header>
+
+  <main>
+    <section id="space-spacing" class="wrap">
       <div class="titles">
         <h2 class="doc-h2">Spacing</h2>
         <p class="sub type-body-m">A 4 px base. Small steps inside components, large steps between them. On mobile, the screen margin is 16 pt.</p>
@@ -241,43 +315,15 @@
       </div>
     </section>
 
-    <section id="radius" class="wrap">
+    <section id="space-radius" class="wrap">
       <div class="titles">
         <h2 class="doc-h2">Radius</h2>
-        <p class="sub type-body-m">Soft, generous corners. Buttons and chips are always pills. A container's radius is its child's radius plus the padding between them.</p>
+        <p class="sub type-body-m">Soft, generous corners. Buttons and chips are always pills. A container’s radius is its child’s radius plus the padding between them.</p>
       </div>
       <div class="radius-grid" data-radius></div>
     </section>
 
-    <section id="shadow" class="wrap">
-      <div class="titles">
-        <h2 class="doc-h2">Elevation</h2>
-        <p class="sub type-body-m">Shadows are tinted with ink and pulled in with a negative spread, so they read soft and green-gray rather than black. Most cards have no shadow; elevation means something floats above the page.</p>
-      </div>
-      <div class="stage" data-shadows></div>
-      <div class="rule">
-        <strong>Backdrops</strong>
-        <span class="use">Modal rgba(12,31,26,.45) · Bottom sheet .42 · Command menu .35 · Drawer .22. No blur behind overlays.</span>
-      </div>
-    </section>
-
-    <section id="motion" class="wrap">
-      <div class="section-head">
-        <div class="titles">
-          <h2 class="doc-h2">Motion</h2>
-          <p class="sub type-body-m">Quick and calm. One standard curve for almost everything. Respect "reduce motion": swap movement for a short fade.</p>
-        </div>
-        <button class="play" type="button" data-play>Play all</button>
-      </div>
-      <div class="table-card" data-motion></div>
-      <div class="notes">
-        <span><b>Standard</b> <span class="mono mono-strong">cubic-bezier(.2,.9,.2,1)</span></span>
-        <span><b>Exit</b> <span class="mono mono-strong">ease-in, 70% of enter time</span></span>
-        <span><b>Mobile sheets</b> <span class="mono mono-strong">spring 320 ms</span></span>
-      </div>
-    </section>
-
-    <section id="grid" class="wrap">
+    <section id="space-layout" class="wrap">
       <div class="titles">
         <h2 class="doc-h2">Icons, layout and breakpoints</h2>
       </div>
@@ -296,6 +342,130 @@
           <div data-layout></div>
         </div>
       </div>
+    </section>
+
+    <section id="space-steps" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Component space steps</h2>
+        <p class="sub type-body-m">Off-scale steps that exist for one component. Use them only there.</p>
+      </div>
+      <div class="table-card" data-steps></div>
+    </section>
+
+    <section id="space-stroke" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Stroke</h2>
+        <p class="sub type-body-m">Line weights for borders, rings and icons. Older components may use the aliases stroke/default (stroke/1) and stroke/focus (stroke/2).</p>
+      </div>
+      <div class="stroke-grid" data-stroke></div>
+    </section>
+
+    <section id="space-sizes" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Sizes</h2>
+        <p class="sub type-body-m">Fixed heights and widths. --size-control switches from 44 on web to 52 on mobile, so use it on buttons and controls.</p>
+      </div>
+      <div class="table-card" data-sizes></div>
+    </section>
+
+    <section id="space-platform" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Platform</h2>
+        <p class="sub type-body-m">Native sizes that differ between iOS (pt) and Android (dp). Same names on both platforms.</p>
+      </div>
+      <div class="table-card" data-platform></div>
+    </section>
+
+    <section id="space-rules" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Use / Don’t</h2>
+        <p class="sub type-body-m">Three habits that keep spacing, height and corners in step with the code.</p>
+      </div>
+      <div class="dd-list" data-rules="space"></div>
+    </section>
+  </main>
+        </article>
+        <article class="doc-page" data-page="shadows" hidden>
+  <header class="wrap head">
+    <p class="kicker">Hala DNA · Foundations</p>
+    <h1 class="type-display">Elevation</h1>
+    <p class="lede type-body-l">Shadows are tinted with ink and pulled in with a negative spread, so they read soft and green-gray rather than black. Most cards have no shadow; elevation means something floats above the page.</p>
+  </header>
+
+  <main>
+    <section id="shadow-levels" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Levels</h2>
+        <p class="sub type-body-m">Five levels plus the brand glow, card lift and floating tab bar, in each mode. Light uses ink-tinted shadows. Dark uses deeper black shadows with a faint edge, because ink shadows disappear on a dark background.</p>
+      </div>
+      <div class="shadow-boards" data-shadows></div>
+    </section>
+
+    <section id="shadow-rules" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Use / Don’t</h2>
+        <p class="sub type-body-m">Four habits that keep elevation meaningful.</p>
+      </div>
+      <div class="dd-list" data-rules="shadows"></div>
+    </section>
+  </main>
+        </article>
+        <article class="doc-page" data-page="motion" hidden>
+  <header class="wrap head">
+    <p class="kicker">Hala DNA · Foundations</p>
+    <h1 class="type-display">Motion</h1>
+    <p class="lede type-body-l">Calm and smooth, like iOS. Small feedback (hover, press) stays instant; big surfaces glide on smooth springs and settle without overshoot. Exits take about 65% of the enter time. Respect reduce motion: swap movement for a short fade.</p>
+  </header>
+
+  <main>
+    <section id="motion-durations" class="wrap">
+      <div class="section-head">
+        <div class="titles">
+          <h2 class="doc-h2">Durations</h2>
+          <p class="sub type-body-m">Seven durations. Each dot moves on the standard curve at its token’s time.</p>
+        </div>
+        <button class="play" type="button" data-play>Play all</button>
+      </div>
+      <div class="table-card" data-motion></div>
+    </section>
+
+    <section id="motion-curves" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Curves</h2>
+        <p class="sub type-body-m">Smooth springs for entering and moving; the same spring at about 65% of the time for exits; a light spring with a hint of bounce for mobile sheets.</p>
+      </div>
+      <div class="auto-grid" data-curves></div>
+    </section>
+
+    <section id="motion-styles" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Animation styles</h2>
+        <p class="sub type-body-m">Reusable styles saved in Figma. Backdrops fade first; panels follow 50 ms later.</p>
+      </div>
+      <div class="table-card" data-anim></div>
+    </section>
+
+    <section id="motion-reduce" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Reduce motion</h2>
+        <p class="sub type-body-m">When the system asks for reduced motion, nothing moves: every entrance becomes a 200 ms fade (Motion/Reduced/In). Spinners stop; progress stays.</p>
+      </div>
+      <div class="auto-grid" data-reduce></div>
+    </section>
+
+    <section id="motion-rtl" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Arabic and RTL</h2>
+        <p class="sub type-body-m">Direction follows the reading start: in Arabic the drawer enters from the left (Motion/Drawer/In · RTL). Vertical motion — sheets, toasts, tooltips — is the same in both directions.</p>
+      </div>
+    </section>
+
+    <section id="motion-rules" class="wrap">
+      <div class="titles">
+        <h2 class="doc-h2">Use / Don’t</h2>
+        <p class="sub type-body-m">Four habits that keep motion calm and useful.</p>
+      </div>
+      <div class="dd-list" data-rules="motion"></div>
     </section>
   </main>
         </article>

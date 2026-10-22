@@ -58,13 +58,13 @@
 
 .dd-quiet {
   color: var(--text-secondary);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
 .dd-meta {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
@@ -73,7 +73,7 @@
   align-items: center;
   gap: var(--space-2);
   color: var(--status-danger);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .dd-mono {
@@ -164,7 +164,7 @@
 }
 
 .dd-spark[data-tone="flat"] path {
-  stroke: var(--text-tertiary);
+  stroke: var(--docs-text-tertiary);
 }
 
 .dd-spark .dd-area {
@@ -178,7 +178,7 @@
 }
 
 .dd-spark[data-tone="flat"] .dd-area {
-  fill: var(--text-tertiary);
+  fill: var(--docs-text-tertiary);
 }
 
 .dd-bone[data-w="label"] {
@@ -201,7 +201,7 @@
   grid-template-columns: var(--size-segment-sm) minmax(0, 1fr);
   gap: var(--space-3);
   padding-block: var(--space-1);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 .dd-chart-head {
@@ -255,9 +255,9 @@
   justify-content: space-between;
   padding-bottom: var(--space-6);
   text-align: end;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 .dd-plot-body {
@@ -303,9 +303,9 @@
   border: 0;
   border-radius: var(--radius-compact);
   background: transparent;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   cursor: default;
 }
 
@@ -335,7 +335,7 @@
   max-width: var(--space-4);
   border-radius: var(--radius-check) var(--radius-check) var(--radius-xs) var(--radius-xs);
   transform-origin: bottom;
-  animation: dd-grow var(--motion-emphasis) var(--ease-standard);
+  animation: dd-grow var(--docs-motion-emphasis) var(--ease-standard);
 }
 
 .dd-bar[data-series="in"] {
@@ -375,7 +375,7 @@
 }
 
 .dd-tip-row {
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 .dd-tip-row span:last-child {
@@ -438,7 +438,7 @@
 }
 
 .dd-line-svg .dd-threshold {
-  stroke: var(--status-warning-solid);
+  stroke: var(--docs-status-warning-solid);
   stroke-width: var(--border-width);
   stroke-dasharray: 5 5;
   vector-effect: non-scaling-stroke;
@@ -452,7 +452,7 @@
   background: var(--surface-card);
   color: var(--status-warning-text);
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
 }
 
@@ -460,7 +460,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  border-inline-start: var(--border-width) solid var(--text-tertiary);
+  border-inline-start: var(--border-width) solid var(--docs-text-tertiary);
   pointer-events: none;
 }
 
@@ -500,9 +500,9 @@
   bottom: 0;
   display: flex;
   justify-content: space-between;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 .dd-delta[data-tone="up"] {
@@ -534,7 +534,7 @@
 .dd-change {
   text-align: end;
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -547,7 +547,7 @@
 }
 
 .dd-change[data-tone="flat"] {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 .dd-meter {

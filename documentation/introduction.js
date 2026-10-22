@@ -4,10 +4,10 @@
   if (!page || page.childElementCount) return;
 
   const routes = {
-    "Hala Foundations.dc.html": "#styles",
-    "Hala Foundations.dc.html#space": "#styles/space",
-    "Hala Foundations.dc.html#radius": "#styles/radius",
-    "Hala Foundations.dc.html#motion": "#styles/motion",
+    "Hala Foundations.dc.html": "#colors",
+    "Hala Foundations.dc.html#space": "#space",
+    "Hala Foundations.dc.html#radius": "#space/space-radius",
+    "Hala Foundations.dc.html#motion": "#motion",
     "Hala Logo.dc.html": "#logo",
     "Hala Icons.dc.html": "#icons",
     "Hala Buttons.dc.html": "#button",
@@ -84,7 +84,7 @@
   const start = window.createButton
     ? window.createButton({ label: "Start with foundations", variant: "primary", size: "md" })
     : el("a", "", "Start with foundations");
-  start.addEventListener("click", () => { location.hash = "#styles"; });
+  start.addEventListener("click", () => { location.hash = "#colors"; });
   const browse = window.createButton
     ? window.createButton({ label: "Browse components", variant: "secondary", size: "md" })
     : el("a", "", "Browse components");
@@ -146,7 +146,7 @@
   blocks.append(el("p", "gs-kicker", "03 · Foundations at a glance"), el("h2", "", "The building blocks"));
   const foundTop = el("div", "gs-found");
   const color = el("a", "gs-card");
-  color.href = "#styles/color";
+  color.href = "#colors";
   const colorHead = el("div", "gs-spread");
   colorHead.append(el("strong", "", "Color"), el("span", "gs-open", "Open →"));
   const swatches = el("div", "gs-swatches");
@@ -164,7 +164,7 @@
   });
   color.append(colorHead, swatches, dots, el("span", "gs-note", "Brand, ink, surfaces, borders, status and chart colors, with contrast checked."));
   const type = el("a", "gs-card");
-  type.href = "#styles/type";
+  type.href = "#typography";
   const typeHead = el("div", "gs-spread");
   typeHead.append(el("strong", "", "Typography"), el("span", "gs-open", "Open →"));
   const sample = el("div", "gs-type-sample");
@@ -173,9 +173,9 @@
   foundTop.append(color, type);
   const foundGrid = el("div", "gs-grid");
   [
-    ["Spacing", "Spacing and layout", "4 px base, 11 steps, 12-column grid, breakpoints.", "#styles/space"],
-    ["Shape", "Radius and elevation", "Soft corners, pill buttons, tinted shadows.", "#styles/radius"],
-    ["Motion", "Motion", "One curve, five durations, reduced motion.", "#styles/motion"],
+    ["Spacing", "Spacing and layout", "4 px base, 11 steps, 12-column grid, breakpoints.", "#space"],
+    ["Shape", "Radius and elevation", "Soft corners, pill buttons, tinted shadows.", "#space/space-radius"],
+    ["Motion", "Motion", "Smooth springs, seven durations, reduced motion.", "#motion"],
     ["Brand", "Logo", "Wordmark, symbol, app icons, favicons.", "#logo"],
     ["Icons", "Icons", "Lucide at 1.7 stroke, 85 approved icons.", "#icons"],
     ["Art", "Illustrations", "Glass spot illustrations for every state.", ""],
@@ -265,7 +265,7 @@
   const refs = card();
   refs.id = "introduction-screens";
   refs.append(el("p", "gs-kicker", "07 · Reference screens"), el("h2", "", "Reference screens"));
-  [["Dashboard · web", "Sidebar, KPIs, charts, tasks", ""], ["UI moodboard · web", "Charts, forms, cards, onboarding, POS flow", ""], ["UI moodboard · mobile", "Home, cards, order a card", ""], ["Foundations", "All tokens in one place", "#styles"], ["Logo", "Brand mark usage", "#logo"]].forEach(([name, copy, href]) => {
+  [["Dashboard · web", "Sidebar, KPIs, charts, tasks", ""], ["UI moodboard · web", "Charts, forms, cards, onboarding, POS flow", ""], ["UI moodboard · mobile", "Home, cards, order a card", ""], ["Foundations", "All tokens in one place", "#colors"], ["Logo", "Brand mark usage", "#logo"]].forEach(([name, copy, href]) => {
     const row = href ? el("a", "gs-ref") : el("div", "gs-ref");
     if (href) row.href = href;
     const text = el("div", "");

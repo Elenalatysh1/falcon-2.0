@@ -58,7 +58,7 @@ body.docs {
   border-radius: var(--radius-s);
   background: transparent;
   color: var(--text-secondary);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   text-align: left;
@@ -92,7 +92,7 @@ body.docs {
 .docs-sub {
   margin: var(--space-3) 0 0;
   padding: 0 var(--space-3);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   color: var(--text-label);
 }
 
@@ -103,7 +103,7 @@ body.docs {
   padding: 0 var(--space-3);
   border-radius: var(--radius-s);
   color: var(--text-secondary);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   text-decoration: none;
 }
 
@@ -184,8 +184,8 @@ body.docs {
 }
 
 .docs-toc a {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
   text-decoration: none;
 }
@@ -236,7 +236,7 @@ body.docs {
     background: var(--surface-card);
     color: var(--text-primary);
     font: inherit;
-    font-size: var(--type-body-s-size);
+    font-size: var(--docs-type-body-s-size);
     cursor: pointer;
   }
 }

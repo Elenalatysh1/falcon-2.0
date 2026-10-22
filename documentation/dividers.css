@@ -107,7 +107,7 @@
 
 [data-page="dividers"] .dv-index {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
   color: var(--brand-600);
 }
@@ -123,8 +123,8 @@
 [data-page="dividers"] .dv-note,
 [data-page="dividers"] .dv-line > p {
   margin: 0;
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
@@ -161,7 +161,7 @@
 
 [data-page="dividers"] .dv-spec {
   display: block;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-size: var(--type-overline-size);
   font-weight: var(--font-weight-regular);
   letter-spacing: 0;
@@ -212,7 +212,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   white-space: nowrap;
 }
 
@@ -260,7 +260,7 @@
 [data-page="dividers"] .dv-avatar-sm {
   width: var(--size-avatar-sm);
   height: var(--size-avatar-sm);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 [data-page="dividers"] .dv-row-main,
@@ -310,8 +310,8 @@
 }
 
 [data-page="dividers"] .dv-sub {
-  font-size: var(--type-caption-size);
-  color: var(--text-tertiary);
+  font-size: var(--docs-type-caption-size);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="dividers"] .dv-amount {
@@ -364,7 +364,7 @@
 
 [data-page="dividers"] .dv-bleed-head span,
 [data-page="dividers"] .dv-muted {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="dividers"] .dv-bleed-body {
@@ -372,7 +372,7 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-3) var(--space-4);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="dividers"] .dv-bleed-body div,
@@ -436,7 +436,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--icon-gap-inline);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-size: var(--type-hint-size);
 }
 
@@ -452,8 +452,8 @@
 }
 
 [data-page="dividers"] .dv-stat span {
-  font-size: var(--type-caption-size);
-  color: var(--text-tertiary);
+  font-size: var(--docs-type-caption-size);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="dividers"] .dv-stat b {
@@ -531,7 +531,7 @@
 }
 
 [data-page="dividers"] .dv-setting-meta {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   display: flex;
   align-items: center;
   gap: var(--space-1);
@@ -566,9 +566,9 @@
 }
 
 [data-page="dividers"] .dv-sum {
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="dividers"] .dv-activity {
@@ -653,7 +653,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="dividers"] .dv-space + .dv-space {

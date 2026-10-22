@@ -31,7 +31,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   text-align: center;
 }
 
@@ -59,14 +59,14 @@
 [data-page="selection"] .sel-name span,
 [data-page="selection"] .sel-help {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-regular);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="selection"] .sel-help {
   font-family: var(--font-sans);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -108,7 +108,7 @@
 }
 
 [data-page="selection"] .sel-spec strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="selection"] .sel-rule,
@@ -116,7 +116,7 @@
   flex-direction: row;
   align-items: flex-start;
   gap: var(--space-3);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -125,7 +125,7 @@
 }
 
 [data-page="selection"] .sel-note strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="selection"] .sel-mark {
@@ -136,7 +136,7 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-bold);
 }
 
@@ -213,7 +213,7 @@
 
 [data-page="selection"] .sel-error {
   color: var(--status-error);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -244,9 +244,9 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 [data-page="selection"] .sel-states {
@@ -378,8 +378,8 @@
 [data-page="selection"] .sel-tile > span,
 [data-page="selection"] .sel-plan .choice-copy > span,
 [data-page="selection"] .sel-price > span {
-  color: var(--text-tertiary);
-  font-size: var(--type-body-s-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="selection"] .sel-tile {
@@ -438,8 +438,8 @@
 }
 
 [data-page="selection"] .sel-caption {
-  font-size: var(--type-body-s-size);
-  color: var(--text-tertiary);
+  font-size: var(--docs-type-body-s-size);
+  color: var(--docs-text-tertiary);
   text-align: center;
 }
 
@@ -451,7 +451,7 @@
   color: var(--text-on-inverse);
   border-radius: var(--radius-m);
   padding: var(--space-2) var(--space-3);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="selection"] .sel-toast button {
@@ -523,7 +523,7 @@
   color: var(--brand-600);
   border-radius: var(--radius-pill);
   padding: 0 var(--space-2);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-semibold);
 }
 

@@ -95,7 +95,7 @@
   display: grid;
   place-items: center;
   flex: none;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -109,7 +109,7 @@
 .bk-quiet,
 .bk-sub {
   color: var(--text-secondary);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 .bk-person-copy strong,
@@ -193,7 +193,7 @@
 .bk-meter-foot,
 .bk-limit span {
   color: var(--text-secondary);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 .bk-actions {
@@ -249,7 +249,7 @@
 .bk-meter-fill[data-tone="success"],
 .bk-seg[data-tone="success"] { background: var(--status-success); }
 .bk-meter-fill[data-tone="warning"],
-.bk-seg[data-tone="warning"] { background: var(--status-warning-solid); }
+.bk-seg[data-tone="warning"] { background: var(--docs-status-warning-solid); }
 .bk-meter-fill[data-tone="error"],
 .bk-seg[data-tone="error"] { background: var(--status-danger); }
 .bk-seg[data-tone="info"] { background: var(--chart-2); }
@@ -269,7 +269,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .bk-swatch {
@@ -282,7 +282,7 @@
 .bk-swatch[data-tone="success"] { background: var(--status-success); }
 .bk-swatch[data-tone="info"] { background: var(--chart-2); }
 .bk-swatch[data-tone="scheduled"] { background: var(--chart-4); }
-.bk-swatch[data-tone="warning"] { background: var(--status-warning-solid); }
+.bk-swatch[data-tone="warning"] { background: var(--docs-status-warning-solid); }
 .bk-swatch[data-tone="neutral"] { background: var(--chart-grid); }
 
 .bk-ring {
@@ -331,7 +331,7 @@
   min-height: var(--size-control);
   background: var(--surface-subtle);
   color: var(--text-secondary);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -464,7 +464,7 @@
 
 .bk-error {
   border-top: var(--border-width) solid var(--status-error-tint);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .bk-error .bk-fix {
@@ -487,7 +487,7 @@
 .bk-fee-line {
   padding-block: var(--space-3);
   border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .bk-fee-rows .bk-fee-line:first-child {
@@ -603,8 +603,8 @@
   text-align: center;
   background: var(--surface-card);
   border-top: var(--border-width) solid var(--border-subtle);
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
 }
 
 .bk-tabbar [data-on="true"] {

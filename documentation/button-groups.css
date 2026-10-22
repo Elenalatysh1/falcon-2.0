@@ -40,16 +40,16 @@
 
 [data-page="button-groups"] .grp-spec {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-regular);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button-groups"] .grp-use,
 [data-page="button-groups"] .grp-quiet {
   font-size: var(--type-hint-size);
   line-height: var(--type-hint-line);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button-groups"] .grp-sample {
@@ -85,7 +85,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button-groups"] .grp-guide {
@@ -109,7 +109,7 @@
   margin: 0;
   font-size: var(--type-hint-size);
   line-height: var(--type-hint-line);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button-groups"] .grp-example {
@@ -205,8 +205,8 @@
   border-radius: var(--radius-check);
   background: var(--chart-1);
   transition:
-    height var(--motion-emphasis) var(--ease-standard),
-    background var(--motion-emphasis) var(--ease-standard);
+    height var(--docs-motion-emphasis) var(--ease-standard),
+    background var(--docs-motion-emphasis) var(--ease-standard);
 }
 
 [data-page="button-groups"] .grp-chart[data-view="line"] .grp-bar {
@@ -221,9 +221,9 @@
 }
 
 [data-page="button-groups"] .grp-hint {
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button-groups"] .grp-splits {
@@ -314,7 +314,7 @@
 }
 
 [data-page="button-groups"] .grp-summary-row span:first-child {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button-groups"] .grp-mono {
@@ -338,8 +338,8 @@
 }
 
 [data-page="button-groups"] .grp-note span {
-  font-size: var(--type-body-s-size);
-  color: var(--text-tertiary);
+  font-size: var(--docs-type-body-s-size);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button-groups"] .grp-rules {
@@ -364,7 +364,7 @@
   width: var(--icon-nav);
   height: var(--icon-nav);
   border-radius: var(--radius-pill);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-bold);
 }
 

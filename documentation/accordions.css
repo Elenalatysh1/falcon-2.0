@@ -54,14 +54,14 @@
 
 [data-page="accordions"] .ac-note-row strong {
   display: block;
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-semibold);
 }
 
 [data-page="accordions"] .ac-note-row div span {
   display: block;
-  color: var(--text-tertiary);
-  font-size: var(--type-body-s-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -129,15 +129,15 @@
 }
 
 [data-page="accordions"] .ac-state .ac-spec-label {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
 }
 
 [data-page="accordions"] .ac-state > p,
 [data-page="accordions"] .ac-caption {
   margin: 0;
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
@@ -194,7 +194,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="accordions"] .ac-live {
@@ -256,7 +256,7 @@
 }
 
 [data-page="accordions"] .ac-party {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-size: var(--type-body-m-size);
 }
 
@@ -268,18 +268,18 @@
 }
 
 [data-page="accordions"] .ac-spec strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="accordions"] .ac-spec span,
 [data-page="accordions"] .ac-card span {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
 [data-page="accordions"] .ac-card strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -295,7 +295,7 @@
   grid-template-columns: minmax(160px, 1fr) repeat(3, minmax(110px, 1fr));
   gap: var(--space-4);
   padding: var(--space-3) 0;
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="accordions"] .ac-size + .ac-size {
@@ -306,12 +306,12 @@
   font-size: var(--type-overline-size);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="accordions"] .ac-size span {
   color: var(--text-secondary);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="accordions"] .ac-rule {
@@ -348,7 +348,7 @@
 }
 
 [data-page="accordions"] .ac-rule span {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 

@@ -140,12 +140,12 @@
 [data-page="command-menu"] .cm-phone-card > .cm-kicker,
 [data-page="command-menu"] .cm-live-head .cm-kicker,
 [data-page="command-menu"] .cm-specs-card > .cm-kicker {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="command-menu"] .cm-copy,
 [data-page="command-menu"] .cm-note {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
   color: var(--text-secondary);
 }
@@ -274,7 +274,7 @@
 }
 
 [data-page="command-menu"] .cm-spec strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="command-menu"] .cm-rules {
@@ -289,7 +289,7 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-bold);
 }
 

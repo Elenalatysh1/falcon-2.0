@@ -39,9 +39,9 @@
 
 .spec .sub {
   max-width: none;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 .pair {
@@ -107,7 +107,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--icon-gap-default);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -143,9 +143,9 @@
 
 .stroke-meta {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   white-space: nowrap;
 }
 
@@ -214,7 +214,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 .search input {
@@ -222,7 +222,7 @@
   border: 0;
   outline: 0;
   background: transparent;
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   color: var(--text-primary);
 }
 
@@ -255,9 +255,9 @@
   padding: 0 var(--space-3);
   border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
 }
 
@@ -337,7 +337,7 @@
 }
 
 .icon-cell .label {
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
   color: var(--text-primary);
 }
@@ -345,7 +345,7 @@
 .icon-cell .code {
   font-family: var(--font-mono);
   font-size: var(--type-overline-size);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   max-width: 100%;
   text-align: center;
   overflow-wrap: anywhere;
@@ -356,8 +356,8 @@
   border-radius: var(--radius-xl);
   padding: var(--space-7);
   text-align: center;
-  font-size: var(--type-body-s-size);
-  color: var(--text-tertiary);
+  font-size: var(--docs-type-body-s-size);
+  color: var(--docs-text-tertiary);
 }
 
 .tile-grid {
@@ -384,13 +384,13 @@
 }
 
 .tile strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-semibold);
 }
 
 .tile p {
   margin: 0;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
@@ -436,7 +436,7 @@
 .btn-secondary {
   padding: 0 var(--space-4) 0 var(--space-3);
   border-radius: var(--radius-pill);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-medium);
   gap: var(--gap-button-icon);
 }
@@ -489,8 +489,8 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--text-tertiary);
-  font-size: var(--type-body-s-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .field span {
@@ -501,7 +501,7 @@
   height: var(--size-badge);
   padding: 0 var(--pad-badge-x) 0 var(--space-2);
   border-radius: var(--radius-pill);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-semibold);
   display: flex;
   align-items: center;
@@ -541,7 +541,7 @@
   gap: var(--space-1);
   font-size: var(--type-overline-size);
   font-weight: var(--font-weight-medium);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 .tab.is-on {
@@ -550,9 +550,9 @@
 }
 
 .hint {
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 .mirror-grid {
@@ -570,7 +570,7 @@
   align-items: center;
   gap: var(--space-2);
   color: var(--text-primary);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 .mirror-pair {
@@ -581,7 +581,7 @@
 
 .arrow {
   color: var(--text-disabled);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 .hala-icon.is-flipped {
@@ -626,7 +626,7 @@
   width: var(--icon-nav);
   height: var(--icon-nav);
   border-radius: var(--radius-pill);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-bold);
   display: flex;
   align-items: center;
@@ -645,7 +645,7 @@
 
 .do-card p {
   margin: 0;
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-caption-line);
 }
 
@@ -658,7 +658,7 @@
 .tip-bubble {
   background: var(--surface-inverse);
   color: var(--text-on-inverse);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-s);
 }
@@ -689,7 +689,7 @@
   color: var(--brand-300);
   padding: var(--pad-row-y) var(--space-4);
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;

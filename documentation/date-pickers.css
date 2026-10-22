@@ -38,7 +38,7 @@
 }
 
 [data-page="date-pickers"] .dp-kicker {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   text-transform: uppercase;
 }
 
@@ -88,13 +88,13 @@
 }
 
 [data-page="date-pickers"] .dp-cell > strong {
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
 }
 
 [data-page="date-pickers"] .dp-cell > span:not(.date-cell) {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-size: var(--type-overline-size);
   line-height: var(--type-caption-line);
   text-align: center;
@@ -196,6 +196,6 @@
 
 [data-page="date-pickers"] .dp-copy {
   color: var(--text-secondary);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }

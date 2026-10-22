@@ -23,7 +23,7 @@
   font-weight: var(--type-overline-weight);
   letter-spacing: var(--type-overline-tracking);
   text-transform: var(--type-overline-transform);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="badges"] .bd-live {
@@ -112,21 +112,21 @@
 [data-page="badges"] .bd-use,
 [data-page="badges"] .bd-cols p,
 [data-page="badges"] .bd-help {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-weight: var(--font-weight-regular);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
 [data-page="badges"] .bd-spec {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-regular);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="badges"] .bd-use {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -204,7 +204,7 @@
   min-width: var(--size-switch-sm);
   text-align: center;
   font-family: var(--font-mono);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-medium);
 }
 
@@ -212,8 +212,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2) var(--space-4);
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
 }
 
 [data-page="badges"] .bd-nav {
@@ -232,7 +232,7 @@
   gap: var(--space-3);
   color: var(--text-secondary);
   font-weight: var(--font-weight-medium);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="badges"] .bd-nav-row[data-on="true"] {
@@ -263,7 +263,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-1);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-size: var(--type-overline-size);
   font-weight: var(--font-weight-medium);
 }
@@ -295,8 +295,8 @@
 }
 
 [data-page="badges"] .bd-kpi {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
 }
 
 [data-page="badges"] .bd-company {
@@ -312,12 +312,12 @@
 
 [data-page="badges"] .bd-company strong {
   display: block;
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="badges"] .bd-company div span {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   color: var(--border-strong);
 }
 
@@ -360,7 +360,7 @@
 [data-page="badges"] .bd-art b {
   font-family: var(--font-mono);
   font-weight: var(--font-weight-medium);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="badges"] .bd-table-head,
@@ -389,7 +389,7 @@
 [data-page="badges"] .bd-table-row {
   padding: var(--space-3) 0;
   border-bottom: var(--border-width) solid var(--surface-sunken);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="badges"] .bd-merchant {
@@ -452,7 +452,7 @@
 [data-page="badges"] .bd-person .bd-anchor {
   width: calc(var(--size-control-web) - var(--space-1));
   height: calc(var(--size-control-web) - var(--space-1));
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="badges"] .bd-copy {
@@ -468,8 +468,8 @@
 }
 
 [data-page="badges"] .bd-copy > span {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
 }
 
 [data-page="badges"] .bd-side {
@@ -503,7 +503,7 @@
 
 [data-page="badges"] .bd-hero .bd-amount span {
   font-size: var(--type-body-l-size);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="badges"] .bd-meta {
@@ -527,7 +527,7 @@
 }
 
 [data-page="badges"] .bd-meta-row > span:first-child {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-weight: var(--font-weight-regular);
 }
 
@@ -611,7 +611,7 @@
 [data-page="badges"] .bd-empty {
   padding: var(--pad-card-y) 0;
   text-align: center;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="badges"] .bd-card-row {
@@ -655,8 +655,8 @@
 
 [data-page="badges"] .bd-card-copy > span {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
-  color: var(--text-tertiary);
+  font-size: var(--docs-type-caption-size);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="badges"] .bd-profile {
@@ -689,14 +689,14 @@
   padding: 0 var(--space-1);
   color: var(--brand-800);
   font-family: var(--font-sans);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
 }
 
 [data-page="badges"] .bd-muted {
   color: var(--control-border);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="badges"] .bd-rules {

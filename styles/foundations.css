@@ -1,9 +1,10 @@
 /**
  * Hala foundations — Falcon 2.0
- * Source: Hala Foundations.html
+ * Source: Figma HALA DNA 0.2 (variables, text styles, effect styles)
  *
  * Import this file once at the app root. Components use these variables.
  * Do not copy hex, px, shadows, or font stacks into component styles.
+ * Dark mode: set data-theme="dark" on any container.
  */
 
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap");
@@ -23,8 +24,9 @@
   /* Text — never pure black */
   --text-primary: #0C1F1A;
   --text-secondary: #4A615A;
-  --text-tertiary: #5E7770;
+  --text-tertiary: #4A615A;
   --text-label: #6B827B;
+  --text-selected: #0A7559;
   --text-disabled: #9AACA6;
   --text-placeholder: #6B6B6B;
   --text-hint: #5C5C5C;
@@ -54,7 +56,8 @@
   --surface-input-readonly: #FAFCFB;
   --surface-input-error: #FFFBFB;
   --surface-input-success: #F0FAF6;
-  --surface-selected: #EEF8F4;
+  --surface-selected: #F3FBF8;
+  --surface-disabled: #EEF2F0;
   --overlay-scrim: rgba(12, 31, 26, 0.42);
 
   /* Borders — 1px on web, 0.5px hairline on mobile */
@@ -65,6 +68,8 @@
   --control-border: #8A9C96;
   --control-on-pressed: #086A51;
   --control-track-pressed: #BFC9C5;
+  --control-track-hover: #C9D4D0;
+  --control-knob: #FFFFFF;
   --border-subtle: #EEF2F0;
   --border-default: #E1E8E5;
   --border-control: #D7E0DC;
@@ -86,7 +91,7 @@
   --status-success-border: #BFE6D6;
   --status-success-on-inverse: #5EE0B5;
   --status-warning: #B45309;
-  --status-warning-solid: #D97706;
+  --status-warning-solid: #B45309;
   --status-warning-tint: #FFF4E0;
   --status-warning-text: #7A4508;
   --status-warning-border: #F5D9A8;
@@ -97,6 +102,7 @@
   --status-error-tint-hover: #FBDCDC;
   --status-error-tint-pressed: #F8CACA;
   --status-error-text: #8A1414;
+  --status-error-border: #F3C4C4;
   --status-danger: #C81E1E;
   --status-info: #2F5BD3;
   --status-info-tint: #E8F0FF;
@@ -106,10 +112,17 @@
   --status-scheduled-tint: #F0ECFF;
   --status-scheduled-text: #3F2A8C;
   --status-scheduled-border: #D8CEFA;
+  --status-processing: #0E7C62;
+  --status-processing-solid: #0E7C62;
   --status-processing-tint: #E6F4F1;
   --status-processing-border: #BFE0D8;
+  --status-neutral-solid: #4A5A55;
   --status-neutral-text: #2E403B;
   --status-neutral-border: #DDE4E1;
+  --status-draft-solid: #5E7770;
+  --status-frozen-tint: var(--status-info-tint);
+  --status-frozen-text: var(--status-info-text);
+  --status-frozen-border: var(--status-info-border);
   --status-expired: #9A6A6A;
   --status-expired-solid: #8A5A5A;
   --status-expired-tint: #F7EFEF;
@@ -117,6 +130,18 @@
   --status-expired-border: #E8D5D5;
   --status-online: #0FA37F;
   --status-count: #E5484D;
+
+  /* Avatars — decorative initials, not status */
+  --avatar-tint-1: var(--status-warning-tint);
+  --avatar-text-1: var(--status-warning-text);
+  --avatar-tint-2: var(--status-scheduled-tint);
+  --avatar-text-2: var(--status-scheduled-text);
+  --avatar-tint-3: var(--status-success-tint);
+  --avatar-text-3: var(--status-success-text);
+  --avatar-tint-4: var(--status-info-tint);
+  --avatar-text-4: var(--status-info-text);
+  --avatar-tint-5: #E1E8E5;
+  --avatar-text-5: var(--text-secondary);
 
   /* Charts — green, then blue, amber, purple */
   --chart-1: #0B8F6E;
@@ -143,10 +168,10 @@
   --gradient-card-metal: linear-gradient(135deg, #C9D6E8, #9FB4D3);
   --gradient-card-ink: linear-gradient(135deg, #1A1A1A, #3A4A45);
 
-  /* Type families */
-  --font-sans: "IBM Plex Sans", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
-  --font-arabic: "IBM Plex Sans Arabic", sans-serif;
+  /* Type families — Hala DS Font and Hala Mono. IBM Plex until the font files ship. */
+  --font-sans: "Hala DS Font", "IBM Plex Sans", sans-serif;
+  --font-mono: "Hala Mono", "IBM Plex Mono", monospace;
+  --font-arabic: "Hala DS Font", "IBM Plex Sans Arabic", sans-serif;
   --font-weight-wordmark: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -205,8 +230,12 @@
   --type-body-m-tracking: 0;
   --type-body-m-transform: none;
 
+  --type-body-medium-size: 16px;
+  --type-body-medium-line: 22px;
+  --type-body-medium-weight: 500;
+
   --type-body-s-family: var(--font-sans);
-  --type-body-s-size: 13.5px;
+  --type-body-s-size: 14px;
   --type-body-s-line: 20px;
   --type-body-s-weight: 400;
   --type-body-s-tracking: 0;
@@ -219,12 +248,21 @@
   --type-label-m-tracking: 0;
   --type-label-m-transform: none;
 
+  --type-label-regular-size: 14px;
+  --type-label-regular-line: 20px;
+  --type-label-regular-weight: 400;
+  --type-label-badge-size: 11px;
+  --type-label-badge-line: 14px;
+  --type-label-badge-weight: 600;
+
   --type-caption-family: var(--font-sans);
-  --type-caption-size: 12.5px;
+  --type-caption-size: 13px;
   --type-caption-line: 16px;
   --type-caption-weight: 400;
   --type-caption-tracking: 0;
   --type-caption-transform: none;
+  --type-caption-large-size: 13px;
+  --type-caption-large-line: 18px;
 
   --type-input-size: 16px;
   --type-input-line: 22px;
@@ -236,6 +274,7 @@
   --type-menu-line: 20px;
   --type-title-size: 20px;
   --type-title-line: 26px;
+  --type-title-weight: 600;
   --tracking-mask: 0.15em;
   --tracking-mask-strong: 0.2em;
 
@@ -265,7 +304,13 @@
   --type-amount-m-tracking: 0;
   --type-amount-m-transform: none;
   --type-amount-drawer: 28px;
+  --type-amount-drawer-line: 32px;
   --type-amount-transfer: 38px;
+  --type-amount-transfer-line: 42px;
+  --type-amount-keypad: 26px;
+  --type-amount-keypad-line: 32px;
+  --type-mono-caption-size: 13px;
+  --type-mono-caption-line: 18px;
 
   /* Space */
   --space-1: 4px;
@@ -310,6 +355,17 @@
   --size-sm: 32px;
   --size-md: 40px;
   --size-avatar-sm: 38px;
+  --size-avatar-xs: 24px;
+  --size-avatar-s: 32px;
+  --size-avatar-m: var(--size-avatar-sm);
+  --size-avatar-l: 56px;
+  --size-avatar-xl: 64px;
+  --size-card-full-width: 343px;
+  --size-card-full-height: 216px;
+  --size-card-medium-width: 280px;
+  --size-card-medium-height: 176px;
+  --size-card-mini-width: 56px;
+  --size-card-mini-height: 35px;
   --size-segment-sm: 72px;
   --size-segment-md: 104px;
   --size-segment-lg: 130px;
@@ -353,6 +409,8 @@
   --shadow-3: 0 24px 60px -28px rgba(12, 60, 48, 0.28), 0 1px 3px rgba(12, 31, 26, 0.05);
   --shadow-4: 0 40px 80px -30px rgba(12, 31, 26, 0.6);
   --shadow-brand: 0 10px 22px -12px rgba(10, 117, 89, 0.8);
+  --shadow-card: 0 2px 6px rgba(12, 31, 26, 0.12), 0 14px 28px -10px rgba(12, 31, 26, 0.38);
+  --shadow-tabbar: 0 1px 2px rgba(12, 31, 26, 0.06), 0 10px 28px rgba(12, 31, 26, 0.14);
   --shadow-control: 0 0 0 6px rgba(11, 143, 110, 0.14);
   --shadow-control-hover: 0 0 0 var(--space-1) rgba(12, 31, 26, 0.05);
   --shadow-focus: 0 0 0 3px rgba(11, 143, 110, 0.25);
@@ -368,10 +426,16 @@
   --ease-standard: cubic-bezier(0.2, 0.9, 0.2, 1);
   --ease-sheet: cubic-bezier(0.32, 1.2, 0.4, 1);
   --motion-instant: 100ms;
-  --motion-fast: 160ms;
-  --motion-standard: 240ms;
-  --motion-emphasis: 300ms;
-  --motion-sheet: 320ms;
+  --motion-fast: 200ms;
+  --motion-standard: 300ms;
+  --motion-emphasis: 350ms;
+  --motion-drawer: 380ms;
+  --motion-sheet: 480ms;
+  --motion-modal-exit: 200ms;
+  --motion-drawer-exit: 250ms;
+  --motion-sheet-exit: 310ms;
+  --motion-backdrop-exit: 130ms;
+  --motion-stagger: 50ms;
   --motion-spin: 800ms;
   --motion-skeleton: 1400ms;
   --motion-dots: 1200ms;
@@ -465,10 +529,144 @@
   --sheet-half: 58%;
   --sheet-full: 92%;
   --overlay-scale: 0.96;
-  --motion-modal: 200ms;
+  --motion-modal: 320ms;
   --z-overlay: 80;
   --tracking-kicker: 0.14em;
   --tracking-weekday: 0.06em;
+
+  /* Documentation site — the docs layout keeps these values when product tokens change */
+  --docs-type-body-s-size: 13.5px;
+  --docs-type-caption-size: 12.5px;
+  --docs-text-tertiary: #5E7770;
+  --docs-surface-selected: #EEF8F4;
+  --docs-status-warning-solid: #D97706;
+  --docs-motion-fast: 160ms;
+  --docs-motion-standard: 240ms;
+  --docs-motion-emphasis: 300ms;
+  --docs-motion-sheet: 320ms;
+  --docs-motion-modal: 200ms;
+}
+
+/* Dark mode — Figma Color collection, Dark */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #E5E5E5;
+  --text-tertiary: #A9B8B3;
+  --text-label: #A3A3A3;
+  --text-disabled: #737373;
+  --text-placeholder: #9A9A9A;
+  --text-hint: #A3A3A3;
+  --text-selected: #9DD3C2;
+  --text-on-inverse: #171717;
+
+  --surface-canvas: #000000;
+  --surface-card: #171717;
+  --surface-subtle: #262626;
+  --surface-sunken: #1F1F1F;
+  --surface-hover: #262626;
+  --surface-pressed: #333333;
+  --surface-selected: #1A3A30;
+  --surface-disabled: #2A2A2A;
+  --surface-inverse: #F5F5F5;
+  --surface-inverse-hover: #E5E5E5;
+  --surface-input-disabled: #222624;
+  --surface-input-readonly: #1C1F1E;
+  --surface-input-error: #2A1A1C;
+  --surface-input-success: #12261F;
+  --overlay-scrim: rgba(0, 0, 0, 0.55);
+  --overlay-scrim-modal: rgba(0, 0, 0, 0.6);
+  --overlay-scrim-drawer: rgba(0, 0, 0, 0.4);
+  --overlay-scrim-menu: rgba(0, 0, 0, 0.5);
+
+  --control-border: #7C8984;
+  --control-on-pressed: #4FBF9E;
+  --control-track-pressed: #4A4F4D;
+  --control-track-hover: #5A5A5A;
+  --control-knob: #F2F2F2;
+  --brand-100-hover: #22493C;
+  --brand-100-pressed: #2A5848;
+  --border-subtle: #262626;
+  --border-default: #737373;
+  --border-control: #737373;
+  --border-control-hover: #A3A3A3;
+  --border-input: #737373;
+  --border-input-hover: #6E7A76;
+  --border-input-muted: #2E3331;
+  --border-input-quiet: #5A6662;
+  --border-input-divider: #333333;
+  --border-strong: #FFFFFF;
+  --border-tint: #171717;
+  --border-on-inverse: rgba(12, 31, 26, 0.12);
+  --border-danger: #5A2A2E;
+
+  --status-success: #4ADE80;
+  --status-success-tint: #10302A;
+  --status-success-text: #7FE0C0;
+  --status-success-border: #1F4A3F;
+  --status-warning: #FBBF24;
+  --status-warning-solid: #A84D08;
+  --status-warning-tint: #3A2A12;
+  --status-warning-text: #F5C46B;
+  --status-warning-border: #5A4220;
+  --status-error: #FF7171;
+  --status-error-track: #5A2A2E;
+  --status-error-tint: #3A1A1D;
+  --status-error-tint-hover: #5A1F25;
+  --status-error-tint-pressed: #6B242B;
+  --status-error-text: #F7A1A1;
+  --status-error-border: #5A2A2E;
+  --status-danger: #FF7171;
+  --status-info: #60A5FA;
+  --status-info-tint: #18233F;
+  --status-info-text: #A9C1FF;
+  --status-info-border: #2C3A66;
+  --status-scheduled-tint: #26203F;
+  --status-scheduled-text: #C4B5FD;
+  --status-scheduled-border: #3E3366;
+  --status-processing: #5EC9A6;
+  --status-processing-tint: #12302B;
+  --status-processing-border: #1F4A42;
+  --status-neutral-solid: #4A5250;
+  --status-neutral-text: #D0D6D4;
+  --status-neutral-border: #3A3F3D;
+  --status-draft-solid: #56625E;
+  --status-expired: #C79A9A;
+  --status-expired-tint: #33262A;
+  --status-expired-text: #E3C1C1;
+  --status-expired-border: #4A3639;
+  --status-online: #2BC59B;
+  --status-count: #FF7171;
+  --status-frozen-tint: var(--status-info-tint);
+  --status-frozen-text: var(--status-info-text);
+  --status-frozen-border: var(--status-info-border);
+  --avatar-tint-1: var(--status-warning-tint);
+  --avatar-text-1: var(--status-warning-text);
+  --avatar-tint-2: var(--status-scheduled-tint);
+  --avatar-text-2: var(--status-scheduled-text);
+  --avatar-tint-3: var(--status-success-tint);
+  --avatar-text-3: var(--status-success-text);
+  --avatar-tint-4: var(--status-info-tint);
+  --avatar-text-4: var(--status-info-text);
+  --avatar-tint-5: #262626;
+  --avatar-text-5: var(--text-secondary);
+
+  --chart-1: #40B39A;
+  --chart-grid: #262626;
+
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-2: 0 18px 36px -16px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-3: 0 24px 60px -28px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-4: 0 40px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-brand: 0 10px 22px -12px rgba(10, 117, 89, 0.6);
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.4), 0 14px 28px -10px rgba(0, 0, 0, 0.6);
+  --shadow-tabbar: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px rgba(0, 0, 0, 0.5);
+  --shadow-inset: inset 0 0 0 var(--border-width) var(--border-default);
+
+  --docs-text-tertiary: var(--text-tertiary);
+  --docs-surface-selected: var(--surface-selected);
+  --docs-status-warning-solid: var(--status-warning-solid);
 }
 
 /* Mobile type and density */
@@ -506,6 +704,8 @@
     --layout-page-padding: var(--space-4);
     --pad-card-y: var(--pad-card-mobile);
     --pad-card-x: var(--pad-card-mobile);
+    --docs-type-body-s-size: 14px;
+    --docs-type-caption-size: 13px;
   }
 }
 
@@ -519,14 +719,15 @@
   --type-heading-m-line: 28px;
   --type-body-m-size: 16px;
   --type-body-m-line: 28px;
-  --type-body-s-size: 14.5px;
+  --type-body-s-size: 15px;
   --type-body-s-line: 24px;
+  --docs-type-body-s-size: 14.5px;
   --type-label-m-size: 16px;
   --type-label-m-line: 24px;
   --type-overline-family: var(--font-arabic);
   --type-overline-size: 12px;
   --type-overline-line: 16px;
-  --type-overline-weight: 600;
+  --type-overline-weight: 500;
   --type-overline-tracking: 0;
   --type-overline-transform: none;
 }

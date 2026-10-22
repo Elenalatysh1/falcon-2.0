@@ -19,6 +19,7 @@ function pageTitle(route) {
 }
 
 const aliases = {
+  styles: { page: "colors", section: "" },
   checkbox: { page: "selection", section: "" },
   radio: { page: "selection", section: "selection-radio" },
   switch: { page: "selection", section: "selection-toggle" },

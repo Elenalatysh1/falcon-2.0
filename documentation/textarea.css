@@ -40,7 +40,7 @@
   gap: var(--space-3);
   padding: var(--space-2) 0;
   border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="textarea"] .ta-which-row:first-of-type {
@@ -79,7 +79,7 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-bold);
 }
 

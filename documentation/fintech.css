@@ -31,8 +31,8 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
@@ -83,7 +83,7 @@
 }
 
 .ft-code {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-family: var(--font-mono);
   font-weight: var(--font-weight-medium);
 }
@@ -93,7 +93,7 @@
 }
 
 .ft-num[data-tone="muted"] {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 .ft-num[data-tone="disabled"] {
@@ -126,7 +126,7 @@
 
 .ft-inline {
   font-family: var(--font-mono);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-medium);
 }
 
@@ -152,8 +152,8 @@
 .ft-use,
 .ft-quiet {
   margin: 0;
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
@@ -162,7 +162,7 @@
 }
 
 .ft-use {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -241,7 +241,7 @@
   align-items: baseline;
   padding-block: var(--space-3);
   border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -349,8 +349,8 @@
   margin: 0;
   text-align: center;
   min-height: var(--type-body-s-line);
-  color: var(--text-tertiary);
-  font-size: var(--type-body-s-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -457,7 +457,7 @@
   flex: none;
   background: var(--ft-avatar-bg, var(--surface-sunken));
   color: var(--ft-avatar-fg, var(--text-primary));
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-bold);
 }
 
@@ -531,7 +531,7 @@
 
 .ft-who-copy strong,
 .ft-mobile-name {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
   overflow: hidden;
@@ -542,7 +542,7 @@
 .ft-method,
 .ft-mobile-sub {
   color: var(--text-secondary);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -598,8 +598,8 @@
 }
 
 .ft-review-key {
-  color: var(--text-tertiary);
-  font-size: var(--type-body-s-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .ft-review-value {
@@ -607,7 +607,7 @@
   flex-direction: column;
   gap: var(--space-1);
   min-width: 0;
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-medium);
 }
 
@@ -621,8 +621,8 @@
 
 .ft-review-value span,
 .ft-review-sub {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-regular);
 }
 
@@ -678,7 +678,7 @@
   gap: var(--space-3);
   padding-block: var(--space-3);
   border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .ft-sheet-list .ft-sheet-row:first-child {
@@ -686,7 +686,7 @@
 }
 
 .ft-sheet-row span:first-child {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 .ft-track {
@@ -768,13 +768,13 @@
 }
 
 .ft-step-copy strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .ft-step-copy span,
 .ft-time {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
 }
 
 .ft-time {
@@ -865,12 +865,12 @@
 }
 
 .ft-person strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 .ft-person span {
-  color: var(--text-tertiary);
-  font-size: var(--type-caption-size);
+  color: var(--docs-text-tertiary);
+  font-size: var(--docs-type-caption-size);
 }
 
 .ft-compact {
@@ -1016,7 +1016,7 @@
 }
 
 .ft-part span {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-family: var(--font-sans);
   font-size: var(--type-overline-size);
   font-weight: var(--font-weight-regular);

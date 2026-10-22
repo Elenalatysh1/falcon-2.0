@@ -36,9 +36,9 @@
 [data-page="button"] .btn-spec,
 [data-page="button"] .btn-caption {
   font-family: var(--font-mono);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-regular);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button"] .btn-row,
@@ -51,9 +51,9 @@
 
 [data-page="button"] .btn-use,
 [data-page="button"] .btn-help {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="button"] .btn-state-head,
@@ -74,7 +74,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   text-align: center;
 }
 
@@ -141,7 +141,7 @@
 
 [data-page="button"] .btn-spec-card strong,
 [data-page="button"] .btn-rule {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
 }
@@ -162,7 +162,7 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-bold);
 }
 

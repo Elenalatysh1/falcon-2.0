@@ -80,7 +80,7 @@
 
 [data-page="overlays"] .ov-q strong {
   color: var(--brand-action);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="overlays"] .ov-stage {
@@ -164,7 +164,7 @@
 }
 
 [data-page="overlays"] .ov-kicker {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   text-transform: var(--type-overline-transform);
 }
 
@@ -199,7 +199,7 @@
 
 [data-page="overlays"] .ov-copy {
   color: var(--text-secondary);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   line-height: var(--type-body-s-line);
 }
 
@@ -269,9 +269,9 @@
 }
 
 [data-page="overlays"] .ov-merchant strong {
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-regular);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="overlays"] .ov-merchant em {
@@ -330,7 +330,7 @@
   border-top: 0;
   border-bottom: var(--border-width) solid var(--border-subtle);
   padding: var(--space-3) 0;
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="overlays"] .ov-facts .overlay-kv-row:last-child {
@@ -398,7 +398,7 @@
   min-height: var(--size-avatar-sm);
   border-width: var(--border-check);
   border-color: var(--text-primary);
-  font-size: var(--type-body-s-size);
+  font-size: var(--docs-type-body-s-size);
 }
 
 [data-page="overlays"] .ov-cal-chips .button,
@@ -433,7 +433,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
 }
 
 [data-page="overlays"] .ov-day[data-edge="true"] {

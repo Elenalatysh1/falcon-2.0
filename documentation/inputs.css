@@ -35,7 +35,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
 }
 
 [data-page="inputs"] .in-choice-name {
@@ -184,7 +184,7 @@
 [data-page="inputs"] .in-note,
 [data-page="inputs"] .in-legend,
 [data-page="inputs"] .in-caption {
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-size: var(--type-hint-size);
   font-weight: var(--font-weight-regular);
   line-height: var(--type-hint-line);
@@ -194,7 +194,7 @@
   margin: 0;
   padding-top: var(--pad-badge-x);
   border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
@@ -218,7 +218,7 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--space-3);
-  color: var(--text-tertiary);
+  color: var(--docs-text-tertiary);
   font-size: var(--type-hint-size);
 }
 
@@ -246,7 +246,7 @@
   gap: var(--icon-gap-inline) var(--pad-row-y);
   padding-top: var(--space-3);
   border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--type-caption-size);
+  font-size: var(--docs-type-caption-size);
   line-height: var(--type-caption-line);
 }
 
