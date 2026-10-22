@@ -359,6 +359,16 @@
   --pad-row-y: 14px;
   --inset-row: 52px;
 
+  /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
+  --gap-tabs: 18px;
+  --gap-tab-underline: var(--icon-gap-default);
+  --gap-tab-counter: var(--icon-gap-inline);
+  --pad-tab-top: var(--space-3);
+  --pad-tab-x: var(--space-1);
+  --pad-tab-counter-x: var(--space-1);
+  --size-tab-underline: var(--border-width-emphasis);
+  --size-tab-counter: var(--space-5);
+
   /* Control heights */
   --size-badge: 24px;
   --size-badge-lg: var(--space-7);

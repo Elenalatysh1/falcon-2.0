@@ -1,0 +1,163 @@
+/* Tabs. Underline tabs on a quiet rail. Hug on web, Fill on mobile. */
+
+.tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--gap-tabs);
+  min-width: 0;
+  border-bottom: var(--border-width) solid var(--border-subtle);
+  font-family: var(--font-sans);
+}
+
+.tabs[data-fit="fill"] {
+  gap: 0;
+}
+
+.tabs[data-scroll="true"] {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs[data-scroll="true"]::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--gap-tab-underline);
+  min-height: var(--target-web);
+  margin: 0 0 calc(var(--border-width) * -1);
+  padding: var(--pad-tab-top) var(--pad-tab-x) 0;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--text-tertiary);
+  font: inherit;
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-line);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--motion-fast) var(--ease-standard);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tabs[data-fit="fill"] .tab {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.tabs[data-scroll="true"] .tab {
+  flex: none;
+}
+
+.tab-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-tab-counter);
+}
+
+.tab-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-tab-counter);
+  height: var(--size-tab-counter);
+  padding: 0 var(--pad-tab-counter-x);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  color: var(--text-secondary);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.tab-underline {
+  display: block;
+  height: var(--size-tab-underline);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  transition: background var(--motion-fast) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .tab:not([aria-selected="true"]):not(:disabled):hover {
+    color: var(--text-secondary);
+  }
+}
+
+.tab[data-state="hover"] {
+  color: var(--text-secondary);
+}
+
+.tab[aria-selected="true"],
+.tab[data-state="active"],
+.tab[data-state="pressed"] {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.tab[aria-selected="true"] .tab-underline,
+.tab[data-state="active"] .tab-underline {
+  background: var(--text-primary);
+}
+
+.tab:not([aria-selected="true"]):not(:disabled):active,
+.tab[data-state="pressed"] {
+  color: var(--text-primary);
+}
+
+.tab:not([aria-selected="true"]):not(:disabled):active .tab-underline,
+.tab[data-state="pressed"] .tab-underline {
+  background: var(--border-strong);
+}
+
+.tab:focus-visible,
+.tab[data-state="focus"] {
+  outline: var(--border-width-emphasis) solid var(--text-primary);
+  outline-offset: var(--border-width-emphasis);
+}
+
+.tabs[data-scroll="true"] .tab:focus-visible {
+  outline-offset: calc(var(--border-width-emphasis) * -1);
+}
+
+.tab:disabled,
+.tab[data-state="disabled"] {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.tab:disabled .tab-counter,
+.tab[data-state="disabled"] .tab-counter {
+  color: var(--text-disabled);
+}
+
+.tab[data-state] {
+  cursor: default;
+}
+
+.tab-panel[hidden] {
+  display: none;
+}
+
+:lang(ar) .tabs {
+  font-family: var(--font-arabic);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab,
+  .tab-underline {
+    transition: none;
+  }
+}
