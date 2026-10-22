@@ -248,6 +248,19 @@
   }
 }
 
+[data-page="button"] .btn-variant[data-surface] .btn-cell {
+  padding: var(--space-2);
+  border-radius: var(--radius-l);
+}
+
+[data-page="button"] .btn-variant[data-surface="glass"] .btn-cell {
+  background: var(--brand-100);
+}
+
+[data-page="button"] .btn-variant[data-surface="media"] .btn-cell {
+  background: var(--gradient-card);
+}
+
 [data-page="button"] .btn-modes {
   display: flex;
   flex-direction: column;

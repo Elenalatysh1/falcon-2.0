@@ -205,6 +205,42 @@
   background: var(--status-error-tint-pressed);
 }
 
+.button[data-variant="glass"],
+.button[data-variant="glass-media"] {
+  background: var(--glass-fill);
+  color: var(--text-primary);
+  border: var(--border-width) solid var(--glass-stroke);
+  box-shadow: var(--shadow-glass-highlight);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.button[data-variant="glass-media"] {
+  background: var(--glass-media-fill);
+  color: var(--glass-on-media-text);
+  box-shadow: var(--shadow-0);
+}
+
+.button[data-variant="glass"]:hover,
+.button[data-variant="glass"][data-state="hover"] {
+  background: linear-gradient(var(--glass-hover), var(--glass-hover)), var(--glass-fill);
+}
+
+.button[data-variant="glass"]:active,
+.button[data-variant="glass"][data-state="pressed"] {
+  background: linear-gradient(var(--glass-pressed), var(--glass-pressed)), var(--glass-fill);
+}
+
+.button[data-variant="glass-media"]:hover,
+.button[data-variant="glass-media"][data-state="hover"] {
+  background: linear-gradient(var(--glass-hover), var(--glass-hover)), var(--glass-media-fill);
+}
+
+.button[data-variant="glass-media"]:active,
+.button[data-variant="glass-media"][data-state="pressed"] {
+  background: linear-gradient(var(--glass-pressed), var(--glass-pressed)), var(--glass-media-fill);
+}
+
 .button:active:not(:disabled),
 .button[data-state="pressed"] {
   transform: scale(0.97);
@@ -461,6 +497,22 @@
   transform: none;
   cursor: not-allowed;
   outline: none;
+}
+
+.button[data-variant="glass"]:disabled,
+.button[data-variant="glass"]:disabled:hover,
+.button[data-variant="glass"]:disabled:active {
+  background: var(--glass-fill);
+  color: var(--text-secondary);
+  border-color: var(--glass-stroke);
+}
+
+.button[data-variant="glass-media"]:disabled,
+.button[data-variant="glass-media"]:disabled:hover,
+.button[data-variant="glass-media"]:disabled:active {
+  background: var(--glass-media-fill);
+  color: var(--glass-on-media-text);
+  border-color: var(--glass-stroke);
 }
 
 @keyframes button-spin {

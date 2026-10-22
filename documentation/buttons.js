@@ -18,6 +18,8 @@
     ["Tonal", "tonal", "Top up", "Helpful actions inside cards: Top up, Add CR."],
     ["Ghost", "ghost", "Skip", "Low emphasis: View all, Skip, Edit."],
     ["Destructive", "destructive", "Freeze", "Freeze card, delete, cancel order. Ask to confirm first."],
+    ["Glass", "glass", "Filter", "Floating controls over cards, charts and maps. Frosted, blurs what is behind."],
+    ["Glass on media", "glass-media", "View", "Controls over photos, card art and video."],
   ];
 
   const states = ["Default", "Hover", "Pressed", "Focus", "Loading", "Disabled"];
@@ -71,6 +73,7 @@
     const root = mount("variants");
     variants.forEach(([name, variant, label, use]) => {
       const row = el("div", "btn-variant");
+      if (variant.startsWith("glass")) row.dataset.surface = variant === "glass" ? "glass" : "media";
       const copy = el("div", "btn-variant-copy");
       copy.append(el("strong", "", name), el("span", "btn-help", use));
       row.append(copy);

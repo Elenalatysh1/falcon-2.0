@@ -44,6 +44,17 @@
   --surface-inverse-hover: #1D332D;
   --surface-inverse-raised: #0F2620;
   --surface-inverse-glass: rgba(255, 255, 255, 0.07);
+
+  /* Glass — buttons over cards, maps and media */
+  --glass-fill: rgba(255, 255, 255, 0.80);
+  --glass-stroke: rgba(12, 31, 26, 0.08);
+  --glass-hover: rgba(12, 31, 26, 0.08);
+  --glass-pressed: rgba(12, 31, 26, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-media-fill: rgba(0, 0, 0, 0.55);
+  --glass-on-media-text: #FFFFFF;
+  --glass-blur: 16px;
+  --shadow-glass-highlight: inset 0 1px 0 var(--glass-highlight);
   --surface-inverse-chip: rgba(255, 255, 255, 0.1);
   --surface-inverse-button: rgba(255, 255, 255, 0.14);
   --surface-mint-chip: rgba(94, 224, 181, 0.16);
@@ -566,6 +577,11 @@
 
   --surface-canvas: #000000;
   --surface-card: #171717;
+  --glass-fill: rgba(23, 23, 23, 0.72);
+  --glass-stroke: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+  --glass-pressed: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.12);
   --surface-subtle: #262626;
   --surface-sunken: #1F1F1F;
   --surface-hover: #262626;
