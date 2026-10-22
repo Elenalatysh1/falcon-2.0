@@ -37,7 +37,7 @@
 }
 
 [data-page="breadcrumbs"] .bc-rule-mark[data-ok="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
 }
 

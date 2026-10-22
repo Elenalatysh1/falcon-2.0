@@ -72,9 +72,49 @@ function buildToc(page, pageId) {
   headings.forEach((heading) => watcher.observe(heading));
 }
 
+const themeKey = "falcon-docs-theme";
+const themedPages = new Set(
+  [...document.querySelectorAll(".docs-group")]
+    .filter((group) => /^(All Components|Patterns)$/.test(group.querySelector(".docs-group-btn span")?.textContent.trim()))
+    .flatMap((group) => [...group.querySelectorAll(".docs-link")].map((link) => link.getAttribute("href").slice(1).split("/")[0]))
+);
+let theme = localStorage.getItem(themeKey) === "dark" ? "dark" : "light";
+
+function applyTheme(pageId) {
+  if (themedPages.has(pageId)) scroll.dataset.theme = theme;
+  else delete scroll.dataset.theme;
+  document.querySelectorAll("[data-theme-switch] button").forEach((button) => {
+    button.setAttribute("aria-pressed", button.dataset.mode === theme ? "true" : "false");
+  });
+}
+
+themedPages.forEach((pageId) => {
+  const head = pages.get(pageId)?.querySelector(".head");
+  if (!head) return;
+  const group = document.createElement("div");
+  group.className = "nav";
+  group.setAttribute("role", "group");
+  group.setAttribute("aria-label", "Theme");
+  group.dataset.themeSwitch = "";
+  [["light", "Light"], ["dark", "Dark"]].forEach(([mode, label]) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.mode = mode;
+    button.textContent = label;
+    button.addEventListener("click", () => {
+      theme = mode;
+      localStorage.setItem(themeKey, mode);
+      applyTheme(pageId);
+    });
+    group.append(button);
+  });
+  head.append(group);
+});
+
 function show() {
   const route = resolve(location.hash);
   const page = pages.get(route.page);
+  applyTheme(route.page);
   pages.forEach((item) => {
     item.hidden = item !== page;
   });

@@ -63,7 +63,7 @@
   height: var(--size-switch);
   padding: 0 var(--icon-gap-inline) 0 var(--icon-gap-default);
   border-radius: var(--radius-s);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
   font-size: var(--type-caption-size);
   font-weight: var(--font-weight-semibold);
@@ -120,7 +120,7 @@
   display: none;
   width: var(--icon-inline);
   height: var(--icon-inline);
-  color: var(--brand-600);
+  color: var(--action-primary);
   animation: command-menu-spin var(--motion-emphasis) linear infinite;
 }
 
@@ -223,7 +223,7 @@
 }
 
 .command-menu-tile[data-tone="brand"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
 }
 
@@ -297,7 +297,7 @@
 
 .command-menu-hit {
   font-weight: var(--font-weight-bold);
-  background: var(--brand-100);
+  background: var(--action-soft);
   border-radius: var(--radius-xs);
 }
 
@@ -449,7 +449,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font: inherit;
   font-size: var(--type-body-m-size);
   font-weight: var(--font-weight-semibold);

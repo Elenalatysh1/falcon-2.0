@@ -59,8 +59,8 @@
   text-transform: uppercase;
   padding: var(--gap-input-label) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
 }
 
 [data-page="inputs"] .in-card-top,
@@ -131,7 +131,7 @@
   font-family: var(--font-mono);
   font-size: var(--type-overline-size);
   font-weight: var(--font-weight-medium);
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 [data-page="inputs"] .in-mark-label {
@@ -168,7 +168,7 @@
 }
 
 [data-page="inputs"] .in-part b {
-  color: var(--brand-600);
+  color: var(--action-primary);
   font-family: var(--font-mono);
   font-size: var(--type-hint-size);
   font-weight: var(--font-weight-medium);
@@ -223,7 +223,7 @@
 }
 
 [data-page="inputs"] .in-link {
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-size: var(--type-compact-size);
   font-weight: var(--font-weight-semibold);
   text-decoration: underline;
@@ -359,8 +359,8 @@
 }
 
 [data-page="inputs"] .in-mark-icon[data-ok="true"] {
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
 }
 
 [data-page="inputs"] .in-mark-icon[data-ok="false"] {

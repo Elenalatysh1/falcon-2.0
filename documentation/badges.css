@@ -34,8 +34,8 @@
   text-transform: uppercase;
   padding: var(--gap-input-label) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
 }
 
 [data-page="badges"] .bd-title {
@@ -269,7 +269,7 @@
 }
 
 [data-page="badges"] .bd-tab[data-on="true"] {
-  color: var(--brand-600);
+  color: var(--action-primary);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -418,7 +418,7 @@
 }
 
 [data-page="badges"] .bd-amt[data-in="true"] {
-  color: var(--brand-700);
+  color: var(--text-selected);
 }
 
 [data-page="badges"] .bd-cycle {
@@ -482,7 +482,7 @@
 }
 
 [data-page="badges"] .bd-side[data-in="true"] {
-  color: var(--brand-700);
+  color: var(--text-selected);
 }
 
 [data-page="badges"] .bd-hero {
@@ -673,7 +673,7 @@
 }
 
 [data-page="badges"] .bd-profile .bd-copy > span {
-  color: var(--brand-700);
+  color: var(--text-selected);
   font-weight: var(--font-weight-medium);
 }
 
@@ -687,7 +687,7 @@
   border: 0;
   background: transparent;
   padding: 0 var(--space-1);
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-family: var(--font-sans);
   font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-semibold);
@@ -729,7 +729,7 @@
 
 [data-page="badges"] .bd-mark[data-ok="true"] {
   background: var(--status-success-tint);
-  color: var(--brand-700);
+  color: var(--text-selected);
 }
 
 [data-page="badges"] .bd-mark[data-ok="false"] {

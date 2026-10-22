@@ -134,7 +134,7 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 [data-page="command-menu"] .cm-phone-card > .cm-kicker,
@@ -196,7 +196,7 @@
 [data-page="command-menu"] .cm-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
   font-family: var(--font-mono);
   font-size: var(--type-overline-size);
@@ -243,7 +243,7 @@
   border-radius: var(--radius-pill);
   background: var(--surface-card);
   color: var(--control-border);
-  box-shadow: 0 0 0 var(--border-width-emphasis) var(--brand-600);
+  box-shadow: 0 0 0 var(--border-width-emphasis) var(--action-primary);
 }
 
 [data-page="command-menu"] .cm-hero {
@@ -294,7 +294,7 @@
 }
 
 [data-page="command-menu"] .cm-mark[data-ok="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
 }
 

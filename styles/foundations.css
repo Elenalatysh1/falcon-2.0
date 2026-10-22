@@ -21,6 +21,11 @@
   --brand-100-pressed: #C2E8DA;
   --brand-50: #F3FBF8;
 
+  /* Action — brand roles that change in Dark */
+  --action-primary: var(--brand-600);
+  --action-soft: var(--brand-100);
+  --action-ghost-text: var(--brand-800);
+
   /* Text — never pure black */
   --text-primary: #0C1F1A;
   --text-secondary: #4A615A;
@@ -583,6 +588,7 @@
   --glass-pressed: rgba(255, 255, 255, 0.12);
   --glass-highlight: rgba(255, 255, 255, 0.12);
   --surface-subtle: #262626;
+  --surface-sticky: rgba(38, 38, 38, 0.92);
   --surface-sunken: #1F1F1F;
   --surface-hover: #262626;
   --surface-pressed: #333333;
@@ -604,6 +610,10 @@
   --control-track-pressed: #4A4F4D;
   --control-track-hover: #5A5A5A;
   --control-knob: #F2F2F2;
+  --action-primary: #40B39A;
+  --action-soft: #1A3A30;
+  --action-ghost-text: #9DD3C2;
+  --brand-action: #9DD3C2;
   --brand-100-hover: #22493C;
   --brand-100-pressed: #2A5848;
   --border-subtle: #262626;

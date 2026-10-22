@@ -41,7 +41,7 @@
 .tbl-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
   font-family: var(--font-mono);
   font-size: var(--type-badge-feature-size);
@@ -224,7 +224,7 @@
 }
 
 .tbl-menu button[aria-checked="true"] {
-  background: var(--brand-50);
+  background: var(--surface-selected);
 }
 
 .tbl-menu button:disabled {
@@ -264,8 +264,8 @@
 }
 
 .tbl-tick[data-on="true"] {
-  border-color: var(--brand-600);
-  background: var(--brand-600);
+  border-color: var(--action-primary);
+  background: var(--action-primary);
 }
 
 .tbl-tick[data-on="true"][data-lock="true"] {
@@ -368,7 +368,7 @@
 }
 
 .tbl-entry[data-selected="true"] {
-  background: var(--brand-50);
+  background: var(--surface-selected);
 }
 
 .tbl-entry[data-open="true"] {
@@ -385,7 +385,7 @@
 }
 
 .tbl-entry[data-selected="true"] .tbl-line:hover {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 .tbl-table[data-density="compact"] {
@@ -697,7 +697,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-family: var(--font-sans);
   font-size: var(--type-body-s-size);
   font-weight: var(--font-weight-semibold);
@@ -1263,7 +1263,7 @@
 
 .tbl-spark path {
   fill: none;
-  stroke: var(--brand-600);
+  stroke: var(--action-primary);
   stroke-width: var(--icon-stroke);
   stroke-linecap: round;
   stroke-linejoin: round;

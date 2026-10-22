@@ -5,7 +5,7 @@ const sizeKeys = ["inline", "default", "nav", "feature"];
 const colors = [
   ["Ink", "var(--text-primary)", "default"],
   ["Tertiary", "var(--text-tertiary)", ""],
-  ["Green 600", "var(--brand-600)", ""],
+  ["Green 600", "var(--action-primary)", ""],
   ["Danger", "var(--status-danger)", ""],
 ];
 
@@ -340,8 +340,8 @@ function toolbar() {
 function tiles() {
   const rows = [
     ["Neutral tile", "Default for list rows and quick actions", "var(--surface-sunken)", "var(--text-primary)", "account", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
-    ["Brand tile", "Selected item, promoted feature", "var(--brand-100)", "var(--brand-600)", "sparkles", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
-    ["Success", "Settled, verified, done", "var(--brand-100)", "var(--brand-600)", "success", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
+    ["Brand tile", "Selected item, promoted feature", "var(--action-soft)", "var(--action-primary)", "sparkles", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
+    ["Success", "Settled, verified, done", "var(--action-soft)", "var(--action-primary)", "success", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
     ["Warning", "Pending, needs action", "var(--status-warning-tint)", "var(--status-warning)", "pending", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
     ["Error", "Declined, failed", "var(--status-error-tint)", "var(--status-danger)", "error", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
     ["Info", "Frozen, information", "var(--status-info-tint)", "var(--status-info)", "freeze", "var(--surface-card)", "var(--text-primary)", "var(--text-tertiary)"],
@@ -458,7 +458,7 @@ function practice() {
       draw("notifications"),
     ]],
     [true, "Color icons with the text color or a status color.", () => [
-      tinted("var(--brand-600)", draw("success", { px: "var(--size-badge)" })),
+      tinted("var(--action-primary)", draw("success", { px: "var(--size-badge)" })),
       tinted("var(--status-danger)", draw("error", { px: "var(--size-badge)" })),
     ]],
     [false, "Use status colors for decoration.", () => [

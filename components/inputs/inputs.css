@@ -212,7 +212,7 @@ button.input-box {
   font: inherit;
   font-size: var(--type-input-size);
   line-height: var(--type-input-line);
-  caret-color: var(--brand-600);
+  caret-color: var(--action-primary);
 }
 
 .input[data-size="md"] .input-value {
@@ -270,7 +270,7 @@ button.input-box {
   width: var(--border-check);
   height: var(--icon-default);
   margin-left: var(--gap-input-label);
-  background: var(--brand-600);
+  background: var(--action-primary);
   flex: none;
 }
 
@@ -434,7 +434,7 @@ button.input-box {
   width: var(--size-badge-feature);
   height: var(--size-badge-feature);
   border-radius: var(--radius-pill);
-  background: var(--brand-600);
+  background: var(--action-primary);
   color: var(--text-on-brand);
 }
 
@@ -460,7 +460,7 @@ button.input-box {
 }
 
 .input[data-success="true"] .input-hint {
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .input[data-warning="true"] .input-hint {
@@ -513,7 +513,7 @@ button.input-box {
 
 .input-bar[data-level="good"],
 .input-bar[data-level="strong"] {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .input-strength {
@@ -534,7 +534,7 @@ button.input-box {
 
 .input-strength[data-level="good"],
 .input-strength[data-level="strong"] {
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .input-rules {
@@ -570,8 +570,8 @@ button.input-box {
 }
 
 .input-rule[data-ok="true"] .input-tick {
-  border-color: var(--brand-600);
-  background: var(--brand-600);
+  border-color: var(--action-primary);
+  background: var(--action-primary);
 }
 
 .input-rule:not([data-ok="true"]) .input-tick .hala-icon {
@@ -655,7 +655,7 @@ button.input-box {
 }
 
 .input-option[aria-selected="true"]:hover {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 .input-option:disabled {
@@ -721,7 +721,7 @@ button.input-box {
 .input-mark[data-mark="alinma"] { background: var(--mark-alinma); }
 
 .input-check {
-  color: var(--brand-600);
+  color: var(--action-primary);
   display: inline-flex;
 }
 
@@ -739,8 +739,8 @@ button.input-box {
 }
 
 .input-box-check[data-on="true"] {
-  border-color: var(--brand-600);
-  background: var(--brand-600);
+  border-color: var(--action-primary);
+  background: var(--action-primary);
 }
 
 .input-empty {
@@ -779,8 +779,8 @@ button.input-box {
   height: var(--size-badge-lg);
   padding: 0 var(--space-1) 0 var(--pad-badge-x);
   border-radius: var(--radius-pill);
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
   font-size: var(--type-hint-size);
   font-weight: var(--font-weight-medium);
   display: inline-flex;
@@ -797,7 +797,7 @@ button.input-box {
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--brand-700);
+  color: var(--text-selected);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -828,7 +828,7 @@ button.input-box {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font: inherit;
   font-size: var(--type-compact-size);
   font-weight: var(--font-weight-semibold);
@@ -887,7 +887,7 @@ button.input-box {
   font-weight: var(--font-weight-medium);
   line-height: var(--type-amount-xl-line);
   text-align: center;
-  caret-color: var(--brand-600);
+  caret-color: var(--action-primary);
 }
 
 .otp-box[data-filled="true"] {
@@ -910,7 +910,7 @@ button.input-box {
 
 .otp[data-status="success"] .otp-box {
   border-width: var(--border-check);
-  border-color: var(--brand-600);
+  border-color: var(--action-primary);
   background: var(--surface-input-success);
   box-shadow: var(--shadow-0);
 }
@@ -953,7 +953,7 @@ button.input-box {
 .otp-caret {
   width: var(--border-width-emphasis);
   height: var(--size-switch-sm);
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .otp-msg {
@@ -965,7 +965,7 @@ button.input-box {
 }
 
 .otp-msg[data-tone="success"] {
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .otp-msg[data-tone="error"] {
@@ -986,7 +986,7 @@ button.input-box {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font: inherit;
   font-weight: var(--font-weight-semibold);
   text-decoration: underline;
@@ -1034,8 +1034,8 @@ button.input-box {
   width: var(--icon-tile-default);
   height: var(--icon-tile-default);
   border-radius: var(--radius-compact);
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1055,7 +1055,7 @@ button.input-box {
 }
 
 .file-upload-link {
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-weight: var(--font-weight-semibold);
   text-decoration: underline;
   text-underline-offset: var(--space-1);

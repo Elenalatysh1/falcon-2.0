@@ -476,7 +476,7 @@
 }
 
 .button-group-option[data-selected="true"] {
-  background: var(--brand-50);
+  background: var(--surface-selected);
 }
 
 .button-group-option:hover,
@@ -512,7 +512,7 @@
   display: inline-flex;
   flex: none;
   margin-left: auto;
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .button-group-mark[hidden] {

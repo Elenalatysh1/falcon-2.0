@@ -53,7 +53,7 @@
 
 [data-page="overlays"] .ov-dot[data-tone="danger"] { background: var(--status-count); }
 [data-page="overlays"] .ov-dot[data-tone="partial"] { background: var(--status-partial); }
-[data-page="overlays"] .ov-dot[data-tone="brand"] { background: var(--brand-600); }
+[data-page="overlays"] .ov-dot[data-tone="brand"] { background: var(--action-primary); }
 
 [data-page="overlays"] .ov-decide {
   display: flex;
@@ -159,7 +159,7 @@
 [data-page="overlays"] .ov-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
 }
 
@@ -231,7 +231,7 @@
 
 [data-page="overlays"] .ov-tx[aria-current="true"],
 [data-page="overlays"] .ov-tx[aria-current="true"]:hover {
-  background: var(--brand-50);
+  background: var(--surface-selected);
 }
 
 [data-page="overlays"] .ov-tx:focus-visible {
@@ -442,7 +442,7 @@
 }
 
 [data-page="overlays"] .ov-day[data-in="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 [data-page="overlays"] .ov-tip-row {
@@ -530,7 +530,7 @@
 }
 
 [data-page="overlays"] .ov-mark[data-ok="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
 }
 

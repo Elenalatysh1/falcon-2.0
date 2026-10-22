@@ -56,7 +56,7 @@
 .tp-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
   font-family: var(--font-mono);
   font-size: var(--type-badge-feature-size);
@@ -284,7 +284,7 @@ span.tp-clock {
 }
 
 .tp-option[aria-selected="true"] {
-  background: var(--brand-50);
+  background: var(--surface-selected);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -463,7 +463,7 @@ span.tp-clock {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-family: var(--font-sans);
   font-size: var(--type-body-s-size);
   font-weight: var(--font-weight-semibold);
@@ -597,7 +597,7 @@ span.tp-clock {
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-family: var(--font-sans);
   font-size: var(--type-caption-size);
   font-weight: var(--font-weight-semibold);
@@ -813,7 +813,7 @@ span.tp-clock {
 }
 
 .tp-big[aria-pressed="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
 }
 
@@ -851,7 +851,7 @@ span.tp-clock {
 }
 
 .tp-ampm button[aria-pressed="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
 }
 
@@ -870,7 +870,7 @@ span.tp-clock {
   bottom: 50%;
   width: calc(var(--border-width) * 2);
   height: 40%;
-  background: var(--brand-600);
+  background: var(--action-primary);
   transform-origin: center bottom;
   transition: transform var(--motion-emphasis) var(--ease-standard);
 }
@@ -883,7 +883,7 @@ span.tp-clock {
   height: var(--space-2);
   margin: calc(var(--space-2) / -2) 0 0 calc(var(--space-2) / -2);
   border-radius: var(--radius-pill);
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .tp-num {
@@ -902,7 +902,7 @@ span.tp-clock {
 }
 
 .tp-num[aria-selected="true"] {
-  background: var(--brand-600);
+  background: var(--action-primary);
   color: var(--text-on-brand);
 }
 
@@ -932,7 +932,7 @@ span.tp-clock {
   padding: 0 var(--pad-input-x);
   display: flex;
   align-items: center;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-size: var(--type-compact-size);
   font-weight: var(--font-weight-semibold);
 }

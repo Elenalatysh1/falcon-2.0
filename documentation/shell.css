@@ -113,8 +113,8 @@ body.docs {
 }
 
 .docs-link[aria-current="page"] {
-  background: var(--brand-50);
-  color: var(--brand-600);
+  background: var(--surface-selected);
+  color: var(--action-primary);
   font-weight: var(--font-weight-medium);
 }
 
@@ -140,6 +140,11 @@ body.docs {
 .docs-scroll {
   overflow: auto;
   height: 100vh;
+}
+
+.docs-scroll[data-theme] {
+  background: var(--surface-canvas);
+  color: var(--text-primary);
 }
 
 .docs-menu {

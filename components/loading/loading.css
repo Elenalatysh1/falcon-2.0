@@ -55,7 +55,7 @@
 .ld-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
   font-family: var(--font-mono);
   font-size: var(--type-badge-feature-size);
@@ -346,7 +346,7 @@
 
 .ld-chart-line {
   fill: none;
-  stroke: var(--brand-600);
+  stroke: var(--action-primary);
   stroke-width: var(--border-width-emphasis);
 }
 
@@ -526,8 +526,8 @@
   width: var(--icon-default);
   height: var(--icon-default);
   border-radius: var(--radius-pill);
-  border: var(--border-width-emphasis) solid color-mix(in srgb, var(--brand-600) 18%, transparent);
-  border-top-color: var(--brand-600);
+  border: var(--border-width-emphasis) solid color-mix(in srgb, var(--action-primary) 18%, transparent);
+  border-top-color: var(--action-primary);
   animation: ld-spin var(--motion-spin) linear infinite;
   flex: none;
   box-sizing: border-box;
@@ -584,7 +584,7 @@
   width: var(--size-badge-dot-lg);
   height: var(--size-badge-dot-lg);
   border-radius: var(--radius-pill);
-  background: var(--brand-600);
+  background: var(--action-primary);
   animation: ld-dot var(--motion-dots) var(--ease-standard) infinite;
   animation-delay: calc(var(--ld-i, 0) * var(--motion-fast));
 }
@@ -646,7 +646,7 @@
   width: var(--icon-default);
   height: var(--icon-default);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 .ld-bar {
@@ -999,7 +999,7 @@
 .ld-tick[data-tone="border"] i { background: var(--status-success-border); }
 .ld-tick[data-tone="soft"] i { background: var(--brand-300); }
 .ld-tick[data-tone="mid"] i { background: var(--status-online); }
-.ld-tick[data-tone="strong"] i { background: var(--brand-600); }
+.ld-tick[data-tone="strong"] i { background: var(--action-primary); }
 
 .ld-tick strong {
   font-family: var(--font-mono);

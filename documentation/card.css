@@ -96,7 +96,7 @@
 }
 
 .bcard-kicker {
-  color: var(--brand-700);
+  color: var(--text-selected);
   font-family: var(--font-mono);
   font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
@@ -191,7 +191,7 @@
 .bcard-status[data-tone="neutral"] { color: var(--text-secondary); }
 
 .bcard-cta {
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-semibold);
 }
@@ -263,7 +263,7 @@
 }
 
 .bcard-auth .hala-icon {
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .bcard-foot,
@@ -290,7 +290,7 @@
   width: var(--size-switch-sm);
   height: var(--size-switch-sm);
   border-radius: var(--radius-pill);
-  background: conic-gradient(var(--brand-600) var(--pct, 0%), var(--status-success-tint) 0);
+  background: conic-gradient(var(--action-primary) var(--pct, 0%), var(--status-success-tint) 0);
   flex: none;
 }
 
@@ -371,8 +371,8 @@
 
 .bcard-mark[data-first="true"] {
   min-width: var(--size-mada-min);
-  border-color: var(--brand-600);
-  color: var(--brand-700);
+  border-color: var(--action-primary);
+  color: var(--text-selected);
 }
 
 .bcard-mark[data-small="true"] {

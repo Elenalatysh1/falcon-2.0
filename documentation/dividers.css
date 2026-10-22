@@ -96,7 +96,7 @@
 }
 
 [data-page="dividers"] .dv-bar[data-bg="brand"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 [data-page="dividers"] .dv-name {
@@ -109,7 +109,7 @@
   font-family: var(--font-mono);
   font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 [data-page="dividers"] .dv-name strong,
@@ -697,8 +697,8 @@
 }
 
 [data-page="dividers"] .dv-mark[data-ok="true"] {
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
 }
 
 [data-page="dividers"] .dv-mark[data-ok="false"] {

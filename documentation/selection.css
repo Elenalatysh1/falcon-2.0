@@ -141,8 +141,8 @@
 }
 
 [data-page="selection"] .sel-mark[data-ok="true"] {
-  background: var(--brand-100);
-  color: var(--brand-600);
+  background: var(--action-soft);
+  color: var(--action-primary);
 }
 
 [data-page="selection"] .sel-mark[data-ok="false"] {
@@ -170,8 +170,8 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--brand-600);
-  background: var(--brand-100);
+  color: var(--action-primary);
+  background: var(--action-soft);
   border-radius: var(--radius-s);
   padding: var(--space-1) var(--space-2);
 }
@@ -218,7 +218,7 @@
 }
 
 [data-page="selection"] .sel-link {
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   text-decoration: underline;
 }
 
@@ -275,9 +275,9 @@
 }
 
 [data-page="selection"] .sel-mini[data-on="true"] {
-  border-color: var(--brand-600);
-  background: var(--brand-50);
-  box-shadow: 0 0 0 var(--border-width) var(--brand-600);
+  border-color: var(--action-primary);
+  background: var(--surface-selected);
+  box-shadow: 0 0 0 var(--border-width) var(--action-primary);
 }
 
 [data-page="selection"] .sel-mini[data-state="focus"] {
@@ -306,7 +306,7 @@
 }
 
 [data-page="selection"] .sel-mini[data-on="true"] .sel-well {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 [data-page="selection"] .sel-well .hala-icon {
@@ -342,9 +342,9 @@
 
 [data-page="selection"] .sel-photo[aria-checked="true"],
 [data-page="selection"] .sel-tile[aria-checked="true"] {
-  border-color: var(--brand-600);
-  background: var(--brand-50);
-  box-shadow: 0 0 0 var(--border-width) var(--brand-600);
+  border-color: var(--action-primary);
+  background: var(--surface-selected);
+  box-shadow: 0 0 0 var(--border-width) var(--action-primary);
 }
 
 [data-page="selection"] .sel-photo[disabled],
@@ -362,7 +362,7 @@
   position: relative;
 }
 
-[data-page="selection"] .sel-art[data-art="soft"] { background: linear-gradient(135deg, var(--brand-100), var(--brand-300)); }
+[data-page="selection"] .sel-art[data-art="soft"] { background: linear-gradient(135deg, var(--action-soft), var(--brand-300)); }
 [data-page="selection"] .sel-art[data-art="ink"] { background: var(--surface-inverse); }
 [data-page="selection"] .sel-art[data-art="approved"] { background: var(--gradient-approved); }
 
@@ -393,7 +393,7 @@
 }
 
 [data-page="selection"] .sel-tile[aria-checked="true"] .sel-well {
-  background: var(--brand-600);
+  background: var(--action-primary);
   color: var(--text-on-brand);
 }
 
@@ -480,9 +480,9 @@
 }
 
 [data-page="selection"] .sel-plan[aria-checked="true"] {
-  border-color: var(--brand-600);
-  background: var(--brand-50);
-  box-shadow: 0 0 0 var(--border-width) var(--brand-600);
+  border-color: var(--action-primary);
+  background: var(--surface-selected);
+  box-shadow: 0 0 0 var(--border-width) var(--action-primary);
 }
 
 [data-page="selection"] .sel-plan .choice,
@@ -519,8 +519,8 @@
 }
 
 [data-page="selection"] .sel-tag {
-  background: var(--brand-100);
-  color: var(--brand-600);
+  background: var(--action-soft);
+  color: var(--action-primary);
   border-radius: var(--radius-pill);
   padding: 0 var(--space-2);
   font-size: var(--docs-type-caption-size);

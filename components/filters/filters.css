@@ -74,7 +74,7 @@ button.flt-more:hover:not([data-applied="true"]) {
 .flt-pill[data-applied="true"],
 .flt-more[data-applied="true"] {
   border-color: var(--status-success-border);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
   font-weight: var(--font-weight-semibold);
 }
@@ -256,7 +256,7 @@ button.flt-more[data-applied="true"]:hover {
 }
 
 .flt-option[data-single="true"][aria-selected="true"] {
-  background: var(--brand-50);
+  background: var(--surface-selected);
 }
 
 .flt-option-label {
@@ -282,8 +282,8 @@ button.flt-more[data-applied="true"]:hover {
 }
 
 .flt-mark[data-on="true"] {
-  border-color: var(--brand-600);
-  background: var(--brand-600);
+  border-color: var(--action-primary);
+  background: var(--action-primary);
 }
 
 .flt-mark .hala-icon {
@@ -318,14 +318,14 @@ button.flt-more[data-applied="true"]:hover {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-size: var(--type-body-s-size);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
 }
 
 .flt-text:hover {
-  color: var(--brand-700);
+  color: var(--text-selected);
 }
 
 .flt-presets,
@@ -382,7 +382,7 @@ button.flt-more[data-applied="true"]:hover {
 }
 
 .flt-fill {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .flt-thumb {
@@ -390,7 +390,7 @@ button.flt-more[data-applied="true"]:hover {
   top: 0;
   width: var(--size-badge-sm);
   height: var(--size-badge-sm);
-  border: var(--border-width-emphasis) solid var(--brand-600);
+  border: var(--border-width-emphasis) solid var(--action-primary);
   border-radius: var(--radius-pill);
   background: var(--surface-card);
 }
@@ -488,8 +488,8 @@ button.flt-more[data-applied="true"]:hover {
 }
 
 .flt-chip[data-on="true"] {
-  border-color: var(--brand-600);
-  background: var(--brand-100);
+  border-color: var(--action-primary);
+  background: var(--action-soft);
   color: var(--status-success-text);
 }
 
@@ -543,7 +543,7 @@ button.flt-more[data-applied="true"]:hover {
 .flt-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
   font-family: var(--font-mono);
   font-size: var(--type-badge-feature-size);
@@ -1130,7 +1130,7 @@ button.flt-more[data-applied="true"]:hover {
   position: absolute;
   top: calc(var(--space-1) * -1);
   inset-inline-end: calc(var(--space-1) * -1);
-  background: var(--brand-600);
+  background: var(--action-primary);
   border: var(--border-width-emphasis) solid var(--surface-subtle);
 }
 

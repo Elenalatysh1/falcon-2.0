@@ -108,8 +108,8 @@
 .accordion-meta {
   height: var(--size-badge-feature);
   padding: 0 var(--space-2);
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
   font-size: var(--type-caption-size);
 }
 
@@ -129,7 +129,7 @@
 .accordion-spinner {
   width: var(--icon-inline);
   height: var(--icon-inline);
-  color: var(--brand-600);
+  color: var(--action-primary);
   display: flex;
   flex: none;
 }

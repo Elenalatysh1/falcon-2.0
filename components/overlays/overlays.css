@@ -497,8 +497,8 @@
 }
 
 .overlay-account[aria-checked="true"] {
-  border: var(--border-check) solid var(--brand-600);
-  background: var(--brand-50);
+  border: var(--border-check) solid var(--action-primary);
+  background: var(--surface-selected);
 }
 
 .overlay-account:focus-visible {
@@ -536,7 +536,7 @@
 }
 
 .overlay-account[aria-checked="true"] .overlay-radio {
-  border-color: var(--brand-600);
+  border-color: var(--action-primary);
 }
 
 .overlay-radio i {
@@ -547,7 +547,7 @@
 }
 
 .overlay-account[aria-checked="true"] .overlay-radio i {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .overlay-sheet-list,

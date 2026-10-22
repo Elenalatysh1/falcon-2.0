@@ -148,7 +148,7 @@
 
 .date-cell:hover:not(:disabled):not([data-selected="true"]),
 .date-cell[data-state="hover"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 .date-cell[data-today="true"]:not([data-selected="true"]),
@@ -169,7 +169,7 @@
 }
 
 .date-cell[data-state="range"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
   border-radius: 0;
 }
@@ -209,7 +209,7 @@
   border: 0;
   background: transparent;
   box-shadow: var(--shadow-0);
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-size: var(--type-body-s-size);
   font-weight: var(--font-weight-semibold);
 }
@@ -269,7 +269,7 @@
 }
 
 .date-preset[aria-pressed="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -278,7 +278,7 @@
 }
 
 .date-preset[aria-pressed="true"]:hover {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 .date-preset:focus-visible {
@@ -308,17 +308,17 @@
 .date-band[data-edge="start"] {
   border-start-start-radius: var(--radius-range);
   border-end-start-radius: var(--radius-range);
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 .date-band[data-edge="end"] {
   border-start-end-radius: var(--radius-range);
   border-end-end-radius: var(--radius-range);
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 .date-band[data-in="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 .date-band[data-round="start"] {

@@ -135,7 +135,7 @@
   font-size: var(--type-overline-size);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 [data-page="illustrations"] .il-pair-card[data-kind="dont"] .il-pair-label {

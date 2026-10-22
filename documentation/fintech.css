@@ -214,8 +214,8 @@
 }
 
 .ft-sign[data-tone="brand"] {
-  background: var(--brand-100);
-  color: var(--brand-600);
+  background: var(--action-soft);
+  color: var(--action-primary);
 }
 
 .ft-sign[data-tone="ink"] {
@@ -275,7 +275,7 @@
 }
 
 .ft-ok {
-  color: var(--brand-700);
+  color: var(--text-selected);
 }
 
 .ft-no {
@@ -342,7 +342,7 @@
 .ft-caret {
   width: var(--border-width-emphasis);
   height: var(--icon-feature);
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .ft-help {
@@ -431,7 +431,7 @@
 }
 
 .ft-tx[aria-pressed="true"] {
-  background: var(--brand-50);
+  background: var(--surface-selected);
 }
 
 .ft-tx:focus-visible {
@@ -476,7 +476,7 @@
 }
 
 .ft-avatar[data-tone="brand"] {
-  --ft-avatar-bg: var(--brand-100);
+  --ft-avatar-bg: var(--action-soft);
   --ft-avatar-fg: var(--status-success-text);
 }
 
@@ -510,7 +510,7 @@
 }
 
 .ft-dir[data-dir="in"] {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .ft-dir[data-dir="out"] {
@@ -713,13 +713,13 @@
 
 .ft-step-mark[data-state="done"],
 .ft-node-mark[data-state="done"] {
-  background: var(--brand-600);
-  border-color: var(--brand-600);
+  background: var(--action-primary);
+  border-color: var(--action-primary);
 }
 
 .ft-step-mark[data-state="current"],
 .ft-node-mark[data-state="current"] {
-  border-color: var(--brand-600);
+  border-color: var(--action-primary);
   box-shadow: var(--shadow-control);
 }
 
@@ -742,7 +742,7 @@
 
 .ft-step-mark[data-state="current"] .ft-dot,
 .ft-node-mark[data-state="current"] .ft-dot {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .ft-step-mark[data-state="scheduled"] .ft-dot {
@@ -757,7 +757,7 @@
 }
 
 .ft-step-line[data-on="true"] {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .ft-step-copy {
@@ -782,7 +782,7 @@
 }
 
 .ft-time[data-tone="now"] {
-  color: var(--brand-700);
+  color: var(--text-selected);
 }
 
 .ft-step-copy[data-state="upcoming"] strong,
@@ -814,7 +814,7 @@
 }
 
 .ft-vline[data-on="true"] {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .ft-chain {
@@ -856,7 +856,7 @@
 }
 
 .ft-node-line[data-on="true"] {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .ft-person {
@@ -976,14 +976,14 @@
 .ft-meter-track {
   height: var(--space-2);
   border-radius: var(--radius-pill);
-  background: var(--brand-100);
+  background: var(--action-soft);
   overflow: hidden;
 }
 
 .ft-meter-fill {
   display: block;
   height: 100%;
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .ft-meter-fill[data-tone="warning"] {
@@ -1040,7 +1040,7 @@
 
 .ft-do-mark[data-ok="true"] {
   background: var(--status-success-tint);
-  color: var(--brand-700);
+  color: var(--text-selected);
 }
 
 .ft-do-mark[data-ok="false"] {

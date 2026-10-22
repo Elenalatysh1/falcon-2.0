@@ -158,8 +158,8 @@
 }
 
 .button[data-variant="tonal"] {
-  background: var(--brand-100);
-  color: var(--brand-600);
+  background: var(--action-soft);
+  color: var(--text-selected);
   box-shadow: var(--shadow-0);
 }
 
@@ -175,7 +175,7 @@
 
 .button[data-variant="ghost"] {
   background: transparent;
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   box-shadow: var(--shadow-0);
 }
 
@@ -347,8 +347,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--brand-100);
-  color: var(--brand-600);
+  background: var(--action-soft);
+  color: var(--action-primary);
 }
 
 .button[data-variant="primary"] .button-disc {
@@ -453,8 +453,8 @@
 .button[data-role="amount"][data-selected="true"],
 .button[data-role="amount"][data-selected="true"]:hover,
 .button[data-role="amount"][data-selected="true"]:active {
-  background: var(--brand-100);
-  color: var(--brand-600);
+  background: var(--action-soft);
+  color: var(--action-primary);
   transform: none;
 }
 
@@ -481,9 +481,9 @@
 .button[data-role="filter"][data-selected="true"],
 .button[data-role="filter"][data-selected="true"]:hover,
 .button[data-role="filter"][data-selected="true"]:active {
-  background: var(--brand-100);
-  color: var(--brand-600);
-  border-color: var(--brand-600);
+  background: var(--action-soft);
+  color: var(--action-primary);
+  border-color: var(--action-primary);
   transform: none;
 }
 

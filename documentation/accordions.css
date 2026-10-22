@@ -200,8 +200,8 @@
 [data-page="accordions"] .ac-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
   font-family: var(--font-mono);
   font-size: var(--type-badge-feature-size);
   font-weight: var(--font-weight-medium);
@@ -333,8 +333,8 @@
 }
 
 [data-page="accordions"] .ac-mark[data-ok="true"] {
-  background: var(--brand-100);
-  color: var(--brand-700);
+  background: var(--action-soft);
+  color: var(--text-selected);
 }
 
 [data-page="accordions"] .ac-mark[data-ok="false"] {

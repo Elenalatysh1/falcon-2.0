@@ -45,7 +45,7 @@
 [data-page="date-pickers"] .dp-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
 }
 
@@ -185,7 +185,7 @@
 }
 
 [data-page="date-pickers"] .dp-mark[data-ok="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
 }
 

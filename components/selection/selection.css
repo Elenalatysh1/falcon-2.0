@@ -93,17 +93,17 @@
 
 .choice[data-kind="checkbox"][data-checked="true"] .choice-box,
 .choice[data-kind="checkbox"][data-mixed="true"] .choice-box {
-  background: var(--brand-600);
-  border-color: var(--brand-600);
+  background: var(--action-primary);
+  border-color: var(--action-primary);
   color: var(--text-on-brand);
 }
 
 .choice[data-kind="radio"][data-checked="true"] .choice-box {
-  border-color: var(--brand-600);
+  border-color: var(--action-primary);
 }
 
 .choice[data-kind="radio"][data-checked="true"] .choice-dot {
-  background: var(--brand-600);
+  background: var(--action-primary);
 }
 
 .choice[data-kind="switch"] .choice-box {
@@ -136,7 +136,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--brand-600);
+  color: var(--action-primary);
   transition: transform var(--motion-fast) var(--ease-out);
 }
 

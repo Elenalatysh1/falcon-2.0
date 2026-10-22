@@ -154,7 +154,7 @@
 }
 
 [data-page="filters"] .flt-area-chip[data-primary="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--status-success-text);
 }
 
@@ -179,7 +179,7 @@
 }
 
 [data-page="filters"] .flt-rule-mark[data-ok="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
 }
 

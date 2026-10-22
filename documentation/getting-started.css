@@ -228,7 +228,7 @@
   font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-kicker);
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .gs-block h2,
@@ -308,7 +308,7 @@
 
 .gs-card .gs-kicker,
 .gs-principle-no {
-  color: var(--brand-600);
+  color: var(--action-primary);
   font-family: var(--font-mono);
   font-weight: var(--font-weight-medium);
 }
@@ -399,7 +399,7 @@
 }
 
 .gs-open {
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-semibold);
 }
@@ -507,7 +507,7 @@
   width: var(--size-badge-lg);
   height: var(--size-badge-lg);
   border-radius: var(--radius-pill);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
   display: inline-flex;
   align-items: center;
@@ -689,8 +689,8 @@
 }
 
 .gs-check-row[data-on="true"] .gs-box {
-  background: var(--brand-600);
-  border-color: var(--brand-600);
+  background: var(--action-primary);
+  border-color: var(--action-primary);
 }
 
 .gs-check-row[data-on="true"] span {
@@ -785,7 +785,7 @@
 }
 
 .gs-flow {
-  background: var(--brand-100);
+  background: var(--action-soft);
   border-radius: var(--radius-l);
   padding: var(--pad-row-y) var(--space-4);
   display: flex;

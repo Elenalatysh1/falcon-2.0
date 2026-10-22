@@ -167,8 +167,8 @@
 }
 
 [data-page="button"] .btn-mark[data-ok="true"] {
-  background: var(--brand-100);
-  color: var(--brand-600);
+  background: var(--action-soft);
+  color: var(--action-primary);
 }
 
 [data-page="button"] .btn-mark[data-ok="false"] {
@@ -254,17 +254,11 @@
 }
 
 [data-page="button"] .btn-variant[data-surface="glass"] .btn-cell {
-  background: var(--brand-100);
+  background: var(--action-soft);
 }
 
 [data-page="button"] .btn-variant[data-surface="media"] .btn-cell {
   background: var(--gradient-card);
-}
-
-[data-page="button"] .btn-modes {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
 }
 
 [data-page="button"] .btn-rtl {

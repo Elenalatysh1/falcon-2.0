@@ -51,7 +51,7 @@
 .bc-live {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-badge);
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
   font-family: var(--font-mono);
   font-size: var(--type-badge-feature-size);
@@ -418,7 +418,7 @@ button.bc-tile:hover {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
-  color: var(--brand-800);
+  color: var(--action-ghost-text);
   font-size: var(--type-compact-size);
   font-weight: var(--font-weight-medium);
 }
@@ -473,7 +473,7 @@ button.bc-tile:hover {
   padding: 0 var(--space-2) 0 var(--space-1);
   border: 0;
   background: transparent;
-  color: var(--brand-600);
+  color: var(--action-primary);
   font-family: inherit;
   font-size: var(--type-input-size);
   display: inline-flex;

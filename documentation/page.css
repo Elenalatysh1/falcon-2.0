@@ -37,7 +37,7 @@ input {
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .lede,
@@ -133,7 +133,7 @@ input {
   font-family: var(--font-mono);
   font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .stack {
@@ -218,7 +218,7 @@ input {
   font-family: var(--font-mono);
   font-size: var(--docs-type-caption-size);
   font-weight: var(--font-weight-medium);
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .mono {
@@ -608,8 +608,8 @@ input {
 
 .radius-shape {
   height: 72px;
-  background: var(--brand-100);
-  border: var(--border-width) solid var(--brand-600);
+  background: var(--action-soft);
+  border: var(--border-width) solid var(--action-primary);
 }
 
 .between {
@@ -679,7 +679,7 @@ input {
   width: var(--icon-default);
   height: var(--icon-default);
   border-radius: var(--radius-pill);
-  background: var(--brand-600);
+  background: var(--action-primary);
   transform: translateX(0);
 }
 
@@ -912,7 +912,7 @@ input {
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--type-overline-tracking);
   text-transform: uppercase;
-  color: var(--brand-600);
+  color: var(--action-primary);
 }
 
 .stroke-grid {

@@ -82,7 +82,7 @@
 }
 
 [data-page="tables"] .tbl-rule-mark[data-ok="true"] {
-  background: var(--brand-100);
+  background: var(--action-soft);
   color: var(--brand-action);
 }
 

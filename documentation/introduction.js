@@ -150,7 +150,7 @@
   const colorHead = el("div", "gs-spread");
   colorHead.append(el("strong", "", "Color"), el("span", "gs-open", "Open →"));
   const swatches = el("div", "gs-swatches");
-  [["var(--brand-500)", "Hala green"], ["var(--surface-inverse)", ""], ["var(--surface-canvas)", ""], ["var(--brand-100)", ""], ["var(--brand-300)", ""]].forEach(([fill, label]) => {
+  [["var(--brand-500)", "Hala green"], ["var(--surface-inverse)", ""], ["var(--surface-canvas)", ""], ["var(--action-soft)", ""], ["var(--brand-300)", ""]].forEach(([fill, label]) => {
     const swatch = el("span", "gs-swatch", label);
     swatch.style.background = fill;
     if (!label) swatch.style.color = "transparent";
