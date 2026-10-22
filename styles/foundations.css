@@ -60,6 +60,12 @@
   --glass-on-media-text: #FFFFFF;
   --glass-blur: 16px;
   --shadow-glass-highlight: inset 0 1px 0 var(--glass-highlight);
+
+  /* Glass bars — iOS top bar (scrolled) and floating tab bar. Android bars stay tonal. */
+  --glass-bar-blur: 24px;
+  --glass-selected-pill: rgba(11, 143, 110, 0.08);
+  --glass-scroll-edge: rgba(238, 243, 241, 0.9);
+  --glass-scroll-edge-end: rgba(238, 243, 241, 0);
   --surface-inverse-chip: rgba(255, 255, 255, 0.1);
   --surface-inverse-button: rgba(255, 255, 255, 0.14);
   --surface-mint-chip: rgba(94, 224, 181, 0.16);
@@ -504,6 +510,19 @@
   --layout-sidebar-rail: 80px;
   --layout-topbar: 72px;
   --layout-tabbar: 84px;
+
+  /* Shell — Platform collection. iOS pt, Android dp. */
+  --size-topbar-ios: 52px;
+  --size-topbar-android: 64px;
+  --size-topbar-large-ios: 96px;
+  --size-topbar-large-android: 112px;
+  --size-tabbar-ios: 58px;
+  --size-tabbar-android: 80px;
+  --size-status-bar: 44px;
+  --size-rail-item: 56px;
+  --device-camera: #000000;
+  --size-search-web: 360px;
+  --size-keycap: 22px;
   --layout-page-padding: var(--space-8);
   --target-web: 44px;
   --target-ios: 44px;
@@ -597,6 +616,9 @@
   --glass-hover: rgba(255, 255, 255, 0.08);
   --glass-pressed: rgba(255, 255, 255, 0.12);
   --glass-highlight: rgba(255, 255, 255, 0.12);
+  --glass-selected-pill: rgba(64, 179, 154, 0.2);
+  --glass-scroll-edge: rgba(0, 0, 0, 0.9);
+  --glass-scroll-edge-end: rgba(0, 0, 0, 0);
   --surface-subtle: #262626;
   --surface-sticky: rgba(38, 38, 38, 0.92);
   --surface-sunken: #1F1F1F;

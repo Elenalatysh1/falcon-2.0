@@ -1,52 +1,127 @@
 /**
- * Navigation. Load vendor/hala-icons.js, then this script.
+ * Navigation and app shell. Load vendor/hala-icons.js, components/button/button.js,
+ * components/button-groups/button-groups.js and components/tabs/tabs.js, then this script.
  *
- * createNavSidebar()
+ * createNavShell({ locale })          Web app shell: Sidebar, Web top bar and the page.
+ *                                     Desktop shows the 272 sidebar, Tablet the 80 rail.
+ * createNavWebTopBar({ locale })      72 tall bar: search, account switcher, notifications, avatar.
+ * createNavMobile({ locale, controls }) Phone app shell: status bar, Mobile top bar, Tab bar.
+ * createNavTopBars()                  Mobile top bar types for iOS and Android.
+ * createNavStates()                   Sidebar item, Tab bar item and large title states.
  * createNavMobileWeb()
  * createNavHeaders()
  * createNavFooters()
- * createNavMobile()
  * createNavGuide()
  *
- * The sidebar remembers expanded, rail, or drawer. Mobile web shares one
- * destination across the two phone specimens. Escape closes drawers and menus.
+ * locale is "en" or "ar". Arabic must sit inside dir="rtl" lang="ar".
+ * In the web shell, G then a letter jumps to a main item (G D, G T, G S, G P, G C).
+ * Escape closes drawers, menus and the notifications panel.
  */
 (function () {
   const WORDMARK = "../media/type=full, color=brand.svg";
   const SYMBOL = "../media/type=short, color=brand.svg";
   const NAMES = {
-    home: "house",
-    transactions: "arrow-left-right",
+    dashboard: "category",
+    transactions: "arrow-swap-horizontal",
     transfers: "send",
+    payroll: "calendar",
     cards: "credit-card",
+    sadad: "receipt",
     pos: "smartphone",
-    ecommerce: "shopping-cart",
-    users: "users",
-    settings: "settings",
+    invoicing: "file-text",
+    locations: "map-pin",
+    team: "people",
     help: "circle-help",
-    search: "search",
-    notifications: "bell",
-    close: "x",
+    settings: "settings",
+    home: "home",
+    payments: "send",
+    inbox: "bell",
+    search: "search-normal",
+    notifications: "notifications",
+    close: "close",
     expand: "chevron-down",
     previous: "chevron-left",
+    next: "chevron-right",
     back: "arrow-left",
     sidebar: "panel-left",
     more: "ellipsis-vertical",
-    sort: "arrow-up-down",
     "sign-out": "log-out",
-    receipt: "receipt",
     menu: "menu",
+    ecommerce: "shopping-cart",
+    users: "users",
+    receipt: "receipt",
     linkedin: "linkedin",
     x: "x",
     instagram: "instagram",
   };
-  const MIRROR = new Set(["arrow-left", "arrow-right", "chevron-left", "chevron-right", "send", "log-out", "undo-2", "panel-left"]);
-  const SECTIONS = [
-    { label: "Main", items: [["Dashboard", "home"], ["Transactions", "transactions"]] },
-    { label: "Pay", items: [["Transfers", "transfers", ["Local", "International", "Beneficiaries"], "3"], ["Payroll", "users"], ["Cards", "cards"]] },
-    { label: "Accept payments", items: [["POS", "pos", ["Terminals", "Order POS", "Settlements"]], ["eCommerce", "ecommerce"], ["Invoicing", "receipt"]] },
-    { label: "Manage", items: [["Settings", "settings"], ["Help", "help"]] },
+  const MIRROR = new Set(["arrow-left", "arrow-right", "chevron-left", "chevron-right", "send", "log-out", "panel-left", "arrow-swap-horizontal"]);
+
+  const SIDEBAR = [
+    { id: "dashboard", group: "main", key: "G D", en: "Dashboard", ar: "لوحة التحكم",
+      enNote: "Balances, sales and what needs your attention.", arNote: "الأرصدة والمبيعات وما يحتاج إلى انتباهك.",
+      enAction: "New transfer", arAction: "تحويل جديد" },
+    { id: "transactions", group: "main", key: "G T", count: "4", en: "Transactions", ar: "العمليات",
+      enNote: "Every payment in and out, with filters and export.", arNote: "كل المدفوعات الواردة والصادرة مع التصفية والتصدير." },
+    { id: "transfers", group: "main", key: "G S", en: "Transfers", ar: "التحويلات",
+      enNote: "Send money, schedule payouts and track approvals.", arNote: "أرسل الأموال وجدول الدفعات وتابع الموافقات.",
+      enAction: "New transfer", arAction: "تحويل جديد" },
+    { id: "payroll", group: "main", key: "G P", en: "Payroll", ar: "الرواتب",
+      enNote: "Pay your team through WPS.", arNote: "ادفع رواتب فريقك عبر نظام حماية الأجور.",
+      enAction: "Run payroll", arAction: "تشغيل الرواتب" },
+    { id: "cards", group: "main", key: "G C", en: "Cards", ar: "البطاقات",
+      enNote: "Corporate and purchase cards, limits and spend.", arNote: "بطاقات الشركة والمشتريات وحدودها والإنفاق.",
+      enAction: "Request card", arAction: "طلب بطاقة" },
+    { id: "sadad", group: "business", en: "SADAD", ar: "سداد",
+      enNote: "Pay government and utility bills.", arNote: "ادفع الفواتير الحكومية وفواتير الخدمات.",
+      enAction: "Pay a bill", arAction: "دفع فاتورة" },
+    { id: "pos", group: "business", count: "4", en: "POS terminals", ar: "نقاط البيع",
+      enNote: "Terminals, orders and settlements.", arNote: "الأجهزة والطلبات والتسويات.",
+      enAction: "Order POS", arAction: "طلب جهاز" },
+    { id: "invoicing", group: "business", en: "Invoicing", ar: "الفواتير",
+      enNote: "Create invoices and payment links.", arNote: "أنشئ الفواتير وروابط الدفع.",
+      enAction: "New invoice", arAction: "فاتورة جديدة" },
+    { id: "locations", group: "business", en: "Locations", ar: "الفروع",
+      enNote: "Branches and their terminals.", arNote: "الفروع والأجهزة التابعة لها.",
+      enAction: "Add location", arAction: "إضافة فرع" },
+    { id: "team", group: "business", en: "Team", ar: "الفريق",
+      enNote: "People, roles and permissions.", arNote: "الأشخاص والأدوار والصلاحيات.",
+      enAction: "Invite member", arAction: "دعوة عضو" },
+    { id: "help", group: "foot", en: "Help", ar: "المساعدة",
+      enNote: "Guides and chat with support.", arNote: "الأدلة والمحادثة مع الدعم.",
+      enAction: "Contact support", arAction: "تواصل مع الدعم" },
+    { id: "settings", group: "foot", en: "Settings", ar: "الإعدادات",
+      enNote: "Company profile, security and notifications.", arNote: "ملف الشركة والأمان والإشعارات." },
   ];
+
+  const TABBAR = [
+    { id: "home", en: "Home", ar: "الرئيسية" },
+    { id: "cards", en: "Cards", ar: "البطاقات" },
+    { id: "payments", en: "Payments", ar: "المدفوعات", count: "4" },
+    { id: "inbox", en: "Inbox", ar: "الوارد", count: "4" },
+  ];
+
+  const COPY = {
+    en: {
+      lang: "en", sidebar: "Hala Business", search: "Search or jump to…", company: "Khamis Arabia Trading", role: "Admin",
+      initials: "KA", user: "MA", userName: "Mona Alharbi", business: "Business", home: "Home", export: "Export",
+      tabs: ["Overview", "Activity", "Settings"], collapse: "Collapse sidebar", expand: "Expand sidebar",
+      notifications: "Notifications", switcher: "Switch account", desktop: "Desktop · 272", tablet: "Tablet · 80 rail",
+      breakpoint: "Breakpoint", back: "Back", close: "Close", done: "Done", tabbar: "App", time: "9:41",
+      markRead: "Mark all read", alerts: [["Transfer needs approval", "Nour Trading · today"], ["Card frozen", "Operations •• 2086"], ["Statement ready", "September 2026"]],
+    },
+    ar: {
+      lang: "ar", sidebar: "حلا للأعمال", search: "ابحث أو انتقل إلى…", company: "خميس العربية للتجارة", role: "مسؤول",
+      initials: "KA", user: "MA", userName: "منى الحربي", business: "الأعمال", home: "الرئيسية", export: "تصدير",
+      tabs: ["نظرة عامة", "النشاط", "الإعدادات"], collapse: "طي الشريط الجانبي", expand: "توسيع الشريط الجانبي",
+      notifications: "الإشعارات", switcher: "تبديل الحساب", desktop: "سطح المكتب · 272", tablet: "الجهاز اللوحي · 80",
+      breakpoint: "نقطة التوقف", back: "رجوع", close: "إغلاق", done: "تم", tabbar: "التطبيق", time: "9:41",
+      markRead: "تحديد الكل كمقروء", alerts: [["تحويل بانتظار الموافقة", "نور للتجارة · اليوم"], ["تم تجميد البطاقة", "العمليات •• 2086"], ["الكشف جاهز", "سبتمبر 2026"]],
+    },
+  };
+
+  function copy(locale) {
+    return COPY[locale === "ar" ? "ar" : "en"];
+  }
 
   function pascal(kebab) {
     return kebab.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join("");
@@ -86,8 +161,10 @@
     return img;
   }
 
-  function avatar(text) {
-    return el("span", "nv-avatar", text);
+  function avatar(text, size) {
+    const node = el("span", "nv-avatar", text);
+    if (size) node.dataset.size = size;
+    return node;
   }
 
   function button(className, label, onClick, key) {
@@ -99,251 +176,587 @@
     return node;
   }
 
+  function iconButton(name, label, onClick, key) {
+    const node = button("nv-icon-btn", "", onClick, key);
+    node.setAttribute("aria-label", label);
+    node.title = label;
+    const glyph = icon(name);
+    if (glyph) node.append(glyph);
+    return node;
+  }
+
+  function counter(value, kind) {
+    const node = el("span", kind === "alert" ? "nv-count" : "nv-pill", value);
+    node.setAttribute("aria-hidden", "true");
+    return node;
+  }
+
   function focusKey(root, key) {
     if (!key) return;
     const node = root.querySelector(`[data-key="${CSS.escape(key)}"]`);
     if (node) node.focus();
   }
 
-  function sections() {
-    return SECTIONS.map((group) => ({
-      label: group.label,
-      items: group.items.map(([label, glyph, kids, badge]) => ({ label, glyph, kids: kids || null, badge: badge || "" })),
-    }));
+  function modeBar(modes, current, onPick, label) {
+    const bar = el("div", "nv-modes");
+    bar.setAttribute("role", "group");
+    bar.setAttribute("aria-label", label);
+    modes.forEach(([id, text]) => {
+      const tab = button("nv-mode", text, () => onPick(id), `mode-${id}`);
+      tab.setAttribute("aria-pressed", id === current ? "true" : "false");
+      tab.dataset.on = id === current ? "true" : "false";
+      bar.append(tab);
+    });
+    return bar;
   }
 
-  function createNavSidebar() {
-    const root = el("div", "nv-stack");
-    let mode = "expanded";
-    let page = "Cards";
-    let sub = null;
-    const open = { Transfers: false, POS: true };
-    let drawer = false;
-    let restore = "";
-    const modes = [
-      ["expanded", "Expanded"],
-      ["rail", "Collapsed rail"],
-      ["drawer", "< 1024 px · drawer"],
-    ];
-    const toolbar = el("div", "nv-toolbar");
-    const modeBar = el("div", "nv-modes");
-    modeBar.setAttribute("role", "tablist");
-    modes.forEach(([id, label]) => {
-      const tab = button("nv-mode", label, () => {
-        mode = id;
-        drawer = false;
-        restore = `mode-${id}`;
-        paint();
-      }, `mode-${id}`);
-      tab.setAttribute("role", "tab");
-      modeBar.append(tab);
+  function paintModes(bar, current) {
+    bar.querySelectorAll(".nv-mode").forEach((tab) => {
+      const on = tab.dataset.key === `mode-${current}`;
+      tab.dataset.on = on ? "true" : "false";
+      tab.setAttribute("aria-pressed", on ? "true" : "false");
     });
-    toolbar.append(live(), modeBar);
+  }
 
-    const stage = el("div", "nv-stage");
-    const side = el("aside", "nv-side");
-    side.setAttribute("aria-label", "Hala Business");
-    const head = el("div", "nv-head");
-    const search = el("div", "nv-search");
-    const nav = el("nav", "nv-nav");
-    const foot = el("div", "nv-foot");
-    side.append(head, search, nav, foot);
-    const canvas = el("div", "nv-canvas");
-    const crumb = el("span", "nv-crumb");
-    const title = el("h3", "nv-title");
-    const cards = el("div", "nv-cards");
-    cards.append(el("span", "nv-bone"), el("span", "nv-bone"), el("span", "nv-bone"));
-    canvas.append(crumb, title, cards, el("span", "nv-bone nv-grow"));
-    const sheet = el("div", "nv-sheet");
-    const sheetBar = el("div", "nv-sheet-bar");
-    const sheetBody = el("div", "nv-sheet-body");
-    const sheetTitle = el("h3", "nv-title");
-    sheetBody.append(sheetTitle, el("span", "nv-bone"), el("span", "nv-bone"));
-    const scrim = el("div", "nv-scrim");
-    const drawerEl = el("div", "nv-drawer");
-    drawerEl.setAttribute("role", "dialog");
-    drawerEl.setAttribute("aria-label", "Menu");
-    sheet.append(sheetBar, sheetBody, scrim, drawerEl);
-    stage.append(side, canvas, sheet);
-
-    function go(nextPage, nextSub, key) {
-      page = nextPage;
-      sub = nextSub || null;
-      drawer = false;
-      restore = key || "";
-      paint();
+  /* Sidebar item: icon, label, counter and shortcut. Rail shows the icon, a red counter and a tooltip. */
+  function sideItem(entry, t, rail, on, onClick, state) {
+    const label = entry[t.lang];
+    const row = button("nv-item", "", onClick, `side-${entry.id}`);
+    row.dataset.on = on ? "true" : "false";
+    if (on) row.setAttribute("aria-current", "page");
+    if (state) {
+      row.dataset.state = state;
+      row.tabIndex = -1;
+      if (state === "disabled") row.setAttribute("aria-disabled", "true");
     }
+    const glyph = icon(entry.id);
+    if (glyph) row.append(glyph);
+    if (rail) {
+      row.dataset.tip = label;
+      row.setAttribute("aria-label", entry.count ? `${label}, ${entry.count}` : label);
+      if (entry.count) row.append(counter(entry.count, "alert"));
+    } else {
+      row.append(el("span", "nv-label", label));
+      if (entry.count) row.append(counter(entry.count));
+      if (entry.key) {
+        const keys = el("span", "nv-shortcut", entry.key);
+        keys.setAttribute("aria-hidden", "true");
+        row.append(keys);
+      }
+    }
+    return row;
+  }
+
+  /* Web top bar: search at the start; account switcher, notifications and avatar at the end. */
+  function createNavWebTopBar(options = {}) {
+    const t = copy(options.locale);
+    const bar = el("header", "nv-webbar");
+    const search = button("nv-websearch", "", null, "search");
+    search.setAttribute("aria-label", `${t.search} ⌘K`);
+    const glyph = icon("search", "inline");
+    if (glyph) search.append(glyph);
+    search.append(el("span", "nv-placeholder", t.search));
+    const keycap = el("kbd", "nv-keycap", "⌘K");
+    keycap.setAttribute("aria-hidden", "true");
+    search.append(keycap);
+
+    const actions = el("div", "nv-webbar-actions");
+    const switcher = button("nv-switcher", "", null, "switcher");
+    switcher.setAttribute("aria-label", `${t.switcher}: ${t.company}`);
+    switcher.append(el("span", "nv-label", t.company));
+    const chev = icon("expand", "inline");
+    if (chev) switcher.append(chev);
+
+    let open = false;
+    let read = false;
+    const wrap = el("div", "nv-bell-wrap");
+    const bell = iconButton("notifications", t.notifications, () => { open = !open; paint(); }, "bell");
+    bell.setAttribute("aria-haspopup", "dialog");
+    const dot = el("i", "nv-dot");
+    dot.setAttribute("aria-hidden", "true");
+    bell.append(dot);
+    const pop = el("div", "nv-pop");
+    pop.setAttribute("role", "dialog");
+    pop.setAttribute("aria-label", t.notifications);
 
     function paint() {
-      stage.dataset.mode = mode;
-      modes.forEach(([id]) => {
-        const tab = modeBar.querySelector(`[data-key="mode-${id}"]`);
-        const on = mode === id;
-        tab.dataset.on = on ? "true" : "false";
-        tab.setAttribute("aria-selected", on ? "true" : "false");
+      bell.dataset.open = open ? "true" : "false";
+      bell.setAttribute("aria-expanded", open ? "true" : "false");
+      dot.hidden = read;
+      pop.hidden = !open;
+      pop.replaceChildren();
+      const head = el("header");
+      head.append(el("strong", "", t.notifications), button("nv-text-btn", t.markRead, () => { read = true; paint(); }));
+      pop.append(head);
+      t.alerts.forEach(([name, detail]) => {
+        const row = el("div", "nv-note-row");
+        row.dataset.unread = read ? "false" : "true";
+        const text = el("div");
+        text.append(el("strong", "", name), el("span", "", detail));
+        row.append(el("i", "nv-pip"), text);
+        pop.append(row);
       });
-      const expanded = mode === "expanded";
-      head.replaceChildren(logo(expanded));
-      if (expanded) {
-        const collapse = button("nv-icon-btn", "", () => { mode = "rail"; restore = "expand"; paint(); }, "collapse");
-        collapse.setAttribute("aria-label", "Collapse sidebar");
-        const glyph = icon("sidebar", "default");
-        if (glyph) collapse.append(glyph);
-        head.append(collapse);
-      }
-      search.replaceChildren();
-      const searchIcon = icon("search", "inline");
-      if (searchIcon) search.append(searchIcon);
-      if (expanded) {
-        search.append(document.createTextNode("Search"), el("span", "nv-kbd", "⌘K"));
-      }
-      search.setAttribute("aria-label", "Search");
-      nav.replaceChildren();
-      sections().forEach((group) => {
-        const block = el("div", "nv-group");
-        block.append(el("span", "nv-kicker", group.label));
-        group.items.forEach((item) => {
-          const on = page === item.label;
-          const opened = expanded && item.kids && open[item.label];
-          const selected = on && (!item.kids || !expanded || !sub);
-          const row = button("nv-item", "", () => {
-            if (item.kids) {
-              if (expanded) open[item.label] = !open[item.label];
-              else { mode = "expanded"; open[item.label] = true; }
-              restore = `item-${item.label}`;
-              paint();
-              return;
-            }
-            go(item.label, null, `item-${item.label}`);
-          }, `item-${item.label}`);
-          row.dataset.on = selected ? "true" : "false";
-          row.dataset.section = on ? "true" : "false";
-          row.setAttribute("aria-current", selected ? "page" : "false");
-          if (!expanded) row.title = item.label;
-          const glyph = icon(item.glyph);
-          if (glyph) row.append(glyph);
-          if (expanded) row.append(el("span", "nv-label", item.label));
-          if (item.badge) row.append(el("span", "nv-count", item.badge));
-          if (expanded && item.kids) {
-            row.setAttribute("aria-expanded", opened ? "true" : "false");
-            const chev = icon("expand", "inline");
-            if (chev) { chev.classList.add("nv-chev"); row.append(chev); }
-          }
-          block.append(row);
-          if (item.kids) {
-            const kids = el("div", "nv-kids");
-            kids.dataset.open = opened ? "true" : "false";
-            const clip = el("div", "nv-kids-clip");
-            item.kids.forEach((name) => {
-              const active = on && sub === name;
-              const child = button("nv-sub", name, () => go(item.label, name, `sub-${item.label}-${name}`), `sub-${item.label}-${name}`);
-              child.dataset.on = active ? "true" : "false";
-              if (active) child.setAttribute("aria-current", "page");
-              clip.append(child);
-            });
-            kids.append(clip);
-            if (!opened) kids.inert = true;
-            block.append(kids);
-          }
-        });
-        nav.append(block);
-      });
-      foot.replaceChildren();
-      if (!expanded) {
-        const expand = button("nv-icon-btn", "", () => { mode = "expanded"; restore = "collapse"; paint(); }, "expand");
-        expand.setAttribute("aria-label", "Expand sidebar");
-        const glyph = icon("sidebar");
-        if (glyph) expand.append(glyph);
-        foot.append(expand);
-      }
-      const user = el("div", "nv-user");
-      user.append(avatar("AA"));
-      const copy = el("div", "nv-user-copy");
-      copy.append(el("strong", "", "Abdulaziz Ali"), el("span", "", "Khamis Arabia · Admin"));
-      user.append(copy);
-      if (expanded) {
-        const sort = icon("sort", "inline");
-        if (sort) user.append(sort);
-      }
-      foot.append(user);
-
-      crumb.textContent = sub ? `${page} › ${sub}` : "Hala Business";
-      title.textContent = sub || page;
-      sheetTitle.textContent = sub || page;
-      sheetBar.replaceChildren();
-      const menu = button("nv-icon-btn", "", () => { drawer = true; restore = "close-menu"; paint(); }, "open-menu");
-      menu.dataset.sunken = "true";
-      menu.setAttribute("aria-label", "Open menu");
-      menu.setAttribute("aria-expanded", drawer ? "true" : "false");
-      const menuIcon = icon("menu");
-      if (menuIcon) menu.append(menuIcon);
-      sheetBar.append(menu, logo(true), avatar("AA"));
-      scrim.dataset.open = drawer ? "true" : "false";
-      drawerEl.dataset.open = drawer ? "true" : "false";
-      drawerEl.inert = !drawer;
-      scrim.onclick = () => { drawer = false; restore = "open-menu"; paint(); };
-      const dHead = el("div", "nv-drawer-head");
-      const close = button("nv-icon-btn", "", () => { drawer = false; restore = "open-menu"; paint(); }, "close-menu");
-      close.dataset.sunken = "true";
-      close.setAttribute("aria-label", "Close menu");
-      const closeIcon = icon("close", "inline");
-      if (closeIcon) close.append(closeIcon);
-      dHead.append(logo(true), close);
-      const dNav = el("nav", "nv-nav");
-      sections().forEach((group) => {
-        group.items.forEach((item) => {
-          const row = button("nv-item", "", () => go(item.label, null, "open-menu"), `drawer-${item.label}`);
-          const selected = page === item.label && !sub;
-          row.dataset.on = selected ? "true" : "false";
-          row.setAttribute("aria-current", selected ? "page" : "false");
-          const glyph = icon(item.glyph);
-          if (glyph) row.append(glyph);
-          row.append(el("span", "nv-label", item.label));
-          dNav.append(row);
-        });
-      });
-      drawerEl.replaceChildren(dHead, dNav);
-      if (restore) focusKey(root, restore);
-      restore = "";
     }
-
-    root.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape" || !drawer) return;
-      drawer = false;
-      restore = "open-menu";
+    wrap.append(bell, pop);
+    wrap.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !open) return;
+      event.stopPropagation();
+      open = false;
+      paint();
+      bell.focus();
+    });
+    document.addEventListener("click", (event) => {
+      if (!open || wrap.contains(event.target)) return;
+      open = false;
       paint();
     });
     paint();
 
-    const states = el("div", "nv-states");
-    [
-      ["Default", "default", "Text secondary"],
-      ["Hover", "hover", "Subtle fill"],
-      ["Active", "active", "Mint fill + 3 px bar"],
-      ["Focus", "focus", "Keyboard ring"],
-      ["Pressed", "pressed", "Darker mint"],
-      ["Disabled", "disabled", "No permission; tooltip says why"],
-    ].forEach(([name, state, caption]) => {
-      const card = el("div", "nv-state");
-      const sample = el("div", "nv-item nv-demo");
-      sample.dataset.state = state;
-      sample.dataset.on = state === "active" ? "true" : "false";
-      if (state === "disabled") sample.title = "You don't have permission to view Cards";
-      const glyph = icon("cards");
-      if (glyph) sample.append(glyph);
-      sample.append(el("span", "nv-label", "Cards"));
-      card.append(el("span", "", name), sample, el("p", "", caption));
-      states.append(card);
+    actions.append(switcher, wrap, avatar(t.user, "md"));
+    bar.append(search, actions);
+    return bar;
+  }
+
+  function createNavShell(options = {}) {
+    const t = copy(options.locale);
+    const root = el("div", "nv-stack");
+    let mode = "desktop";
+    let page = "dashboard";
+    let restore = "";
+    let pending = 0;
+
+    const toolbar = el("div", "nv-toolbar");
+    const modes = modeBar([["desktop", t.desktop], ["tablet", t.tablet]], mode, (id) => {
+      mode = id;
+      restore = `mode-${id}`;
+      paint();
+    }, t.breakpoint);
+    toolbar.append(live(t.lang === "ar" ? "مباشر" : "Live · G then D, T, S, P or C"), modes);
+
+    const stage = el("div", "nv-stage");
+    const side = el("aside", "nv-side");
+    side.setAttribute("aria-label", t.sidebar);
+    const main = el("div", "nv-main");
+    const pageEl = el("div", "nv-page");
+    main.append(createNavWebTopBar(options), pageEl);
+    stage.append(side, main);
+
+    function go(id, key) {
+      page = id;
+      restore = key || `side-${id}`;
+      paint();
+    }
+
+    function paintSide() {
+      const rail = mode === "tablet";
+      side.replaceChildren();
+      const head = el("div", "nv-head");
+      if (rail) {
+        const home = button("nv-logo-btn", "", () => { mode = "desktop"; restore = "collapse"; paint(); }, "expand");
+        home.setAttribute("aria-label", t.expand);
+        home.dataset.tip = t.expand;
+        home.append(logo(false));
+        head.append(home);
+      } else {
+        head.append(logo(true), iconButton("sidebar", t.collapse, () => { mode = "tablet"; restore = "expand"; paint(); }, "collapse"));
+      }
+      const nav = el("nav", "nv-nav");
+      nav.setAttribute("aria-label", t.sidebar);
+      const groups = [["main", ""], ["business", t.business]];
+      groups.forEach(([group, title]) => {
+        const block = el("div", "nv-group");
+        if (title) {
+          const kicker = el("span", "nv-kicker", rail ? "" : title);
+          kicker.setAttribute("role", rail ? "separator" : "presentation");
+          block.append(kicker);
+        }
+        SIDEBAR.filter((entry) => entry.group === group).forEach((entry) => {
+          block.append(sideItem(entry, t, rail, entry.id === page, () => go(entry.id)));
+        });
+        nav.append(block);
+      });
+      const foot = el("div", "nv-group nv-foot-items");
+      SIDEBAR.filter((entry) => entry.group === "foot").forEach((entry) => {
+        foot.append(sideItem(entry, t, rail, entry.id === page, () => go(entry.id)));
+      });
+      const account = button("nv-account-row", "", null, "account");
+      account.setAttribute("aria-label", `${t.switcher}: ${t.company}, ${t.role}`);
+      if (rail) account.dataset.tip = t.company;
+      account.append(avatar(t.initials, "sm"));
+      if (!rail) {
+        const who = el("span", "nv-user-copy");
+        who.append(el("strong", "", t.company), el("span", "", t.role));
+        account.append(who);
+        const chev = icon("expand", "inline");
+        if (chev) account.append(chev);
+      }
+      side.append(head, nav, el("span", "nv-spacer"), foot, account);
+    }
+
+    function paintPage() {
+      const entry = SIDEBAR.find((item) => item.id === page) || SIDEBAR[0];
+      pageEl.replaceChildren();
+      const crumb = el("nav", "nv-crumb");
+      crumb.setAttribute("aria-label", t.lang === "ar" ? "مسار التنقل" : "Breadcrumb");
+      crumb.append(el("span", "", t.home));
+      const sep = icon("next", "inline");
+      if (sep) crumb.append(sep);
+      const here = el("span", "", entry[t.lang]);
+      here.setAttribute("aria-current", "page");
+      crumb.append(here);
+      const header = el("div", "nv-page-head");
+      const titles = el("div", "nv-page-titles");
+      titles.append(el("h3", "nv-title", entry[t.lang]), el("p", "nv-page-note", entry[`${t.lang}Note`]));
+      const actions = el("div", "nv-page-actions");
+      if (window.createButton) {
+        actions.append(createButton({ label: t.export, variant: "secondary", size: "md" }));
+        const action = entry[`${t.lang}Action`];
+        if (action) actions.append(createButton({ label: action, variant: "primary", size: "md" }));
+      }
+      header.append(titles, actions);
+      pageEl.append(crumb, header);
+      if (window.createTabs) pageEl.append(createTabs({ label: entry[t.lang], options: t.tabs, value: t.tabs[0] }));
+      const table = el("div", "nv-table");
+      for (let index = 0; index < 4; index += 1) {
+        const row = el("div", "nv-table-row");
+        row.append(el("span", "nv-bone", ""), el("span", "nv-bone", ""), el("span", "nv-bone", ""), el("span", "nv-bone nv-chip", ""), el("span", "nv-bone", ""));
+        row.querySelectorAll(".nv-bone").forEach((bone) => bone.setAttribute("aria-hidden", "true"));
+        table.append(row);
+      }
+      pageEl.append(table);
+    }
+
+    function paint() {
+      stage.dataset.mode = mode;
+      paintModes(modes, mode);
+      paintSide();
+      paintPage();
+      if (restore) focusKey(root, restore);
+      restore = "";
+    }
+
+    stage.addEventListener("keydown", (event) => {
+      if (event.target.closest("input, textarea") || event.metaKey || event.ctrlKey || event.altKey) return;
+      const letter = event.key.toUpperCase();
+      if (pending && Date.now() - pending < 1200) {
+        pending = 0;
+        const entry = SIDEBAR.find((item) => item.key === `G ${letter}`);
+        if (entry) {
+          event.preventDefault();
+          go(entry.id);
+        }
+        return;
+      }
+      pending = letter === "G" ? Date.now() : 0;
     });
-    root.append(toolbar, stage, states);
+
+    paint();
+    root.append(toolbar, stage);
+    return root;
+  }
+
+  /* Mobile top bar. Standard: back, title, one action. Large title: big title below the bar. Modal: close, title, Done. */
+  function mobileBar(options) {
+    const t = copy(options.locale);
+    const bar = el("div", "nv-appbar");
+    bar.dataset.type = options.type || "standard";
+    bar.dataset.scrolled = options.scrolled ? "true" : "false";
+    bar.dataset.style = options.style || "solid";
+    const edge = el("span", "nv-scroll-edge");
+    edge.setAttribute("aria-hidden", "true");
+    const row = el("div", "nv-appbar-row");
+    const start = el("span", "nv-appbar-slot");
+    if (options.type === "modal") start.append(iconButton("close", t.close));
+    else if (options.back) start.append(iconButton(options.platform === "android" ? "back" : "previous", t.back));
+    const title = el("strong", "nv-appbar-title", options.title);
+    const end = el("span", "nv-appbar-slot");
+    if (options.type === "modal") {
+      end.append(window.createButton ? createButton({ label: t.done, variant: "ghost", size: "sm" }) : el("span", "", t.done));
+    } else {
+      end.append(iconButton("notifications", t.notifications));
+    }
+    row.append(start, title, end);
+    bar.append(edge, row);
+    if (options.type === "large" && options.showLarge) {
+      const large = el("div", "nv-large", options.title);
+      large.setAttribute("aria-hidden", "true");
+      bar.append(large);
+    }
+    return bar;
+  }
+
+  /* Tab bar item. Docked: icon over label. Floating: icon only, the active one is an ink pill with its label. */
+  function tabItem(entry, t, options) {
+    const label = entry[t.lang];
+    const node = button("nv-tabitem", "", options.onClick, options.key);
+    node.dataset.on = options.on ? "true" : "false";
+    if (options.on) node.setAttribute("aria-current", "page");
+    if (options.state) {
+      node.dataset.state = options.state;
+      node.tabIndex = -1;
+    }
+    node.setAttribute("aria-label", entry.count ? `${label}, ${entry.count}` : label);
+    const wrap = el("span", "nv-tabitem-icon");
+    const glyph = icon(entry.id, "nav");
+    if (glyph) wrap.append(glyph);
+    if (entry.count) wrap.append(counter(entry.count, "alert"));
+    node.append(wrap, el("span", "nv-tabitem-label", label));
+    return node;
+  }
+
+  function tabBar(t, options) {
+    const nav = el("nav", "nv-tabbar");
+    nav.dataset.layout = options.layout || "docked";
+    nav.setAttribute("aria-label", t.tabbar);
+    const pill = el("div", "nv-tabbar-pill");
+    TABBAR.forEach((entry) => {
+      pill.append(tabItem(entry, t, {
+        on: entry.id === options.current,
+        key: `${options.prefix || "tab"}-${entry.id}`,
+        onClick: () => options.onPick && options.onPick(entry.id),
+      }));
+    });
+    nav.append(pill);
+    return nav;
+  }
+
+  function statusBar(t) {
+    const bar = el("div", "nv-statusbar");
+    bar.setAttribute("aria-hidden", "true");
+    const signal = el("span", "nv-signal");
+    signal.append(el("i"), el("i"), el("i"), el("i"));
+    bar.append(el("span", "nv-time", t.time), el("span", "nv-island"), el("span", "nv-status-icons"));
+    bar.lastChild.append(signal, el("span", "nv-battery"));
+    return bar;
+  }
+
+  function createPhone(options = {}) {
+    const t = copy(options.locale);
+    const state = {
+      platform: options.platform || "ios",
+      type: options.type || "large",
+      layout: options.layout || "docked",
+      style: options.style || "solid",
+      tab: "cards",
+      scrolled: false,
+    };
+    const device = el("div", "nv-device");
+    const scroller = el("div", "nv-device-scroll");
+    const barHost = el("div", "nv-device-bar");
+    const tabHost = el("div", "nv-device-tabs");
+    const indicator = el("span", "nv-home-indicator");
+    indicator.setAttribute("aria-hidden", "true");
+    device.append(statusBar(t), scroller, barHost, tabHost, indicator);
+    let restore = "";
+
+    function title() {
+      const entry = TABBAR.find((item) => item.id === state.tab);
+      return entry[t.lang];
+    }
+
+    function paintBar() {
+      device.dataset.platform = state.platform;
+      device.dataset.type = state.type;
+      device.dataset.layout = state.layout;
+      device.dataset.style = state.style;
+      device.dataset.scrolled = state.scrolled ? "true" : "false";
+      barHost.replaceChildren(mobileBar({
+        locale: t.lang,
+        platform: state.platform,
+        type: state.type,
+        scrolled: state.scrolled,
+        style: state.style,
+        title: title(),
+      }));
+    }
+
+    function paintContent() {
+      scroller.replaceChildren();
+      if (state.type === "large") scroller.append(el("h3", "nv-large", title()));
+      const list = el("div", "nv-device-list");
+      const rows = { home: 9, cards: 8, payments: 9, inbox: 10 }[state.tab];
+      for (let index = 0; index < rows; index += 1) {
+        const row = el("div", "nv-list-row");
+        row.setAttribute("aria-hidden", "true");
+        const copyCol = el("span", "nv-list-copy");
+        copyCol.append(el("span", "nv-bone"), el("span", "nv-bone nv-short"));
+        row.append(el("span", "nv-bone nv-dot-bone"), copyCol, el("span", "nv-bone nv-end-bone"));
+        list.append(row);
+      }
+      scroller.append(list);
+    }
+
+    function paintTabs() {
+      tabHost.replaceChildren(tabBar(t, {
+        layout: state.layout,
+        current: state.tab,
+        prefix: `phone-${t.lang}`,
+        onPick(id) {
+          if (id === state.tab) {
+            scroller.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+          }
+          state.tab = id;
+          state.scrolled = false;
+          restore = `phone-${t.lang}-${id}`;
+          paint();
+          scroller.scrollTop = 0;
+        },
+      }));
+    }
+
+    function paint() {
+      paintBar();
+      paintContent();
+      paintTabs();
+      if (restore) focusKey(device, restore);
+      restore = "";
+    }
+
+    scroller.addEventListener("scroll", () => {
+      const threshold = state.type === "large" ? scroller.querySelector(".nv-large").offsetHeight : 1;
+      const next = scroller.scrollTop > threshold - 8;
+      if (next === state.scrolled) return;
+      state.scrolled = next;
+      paintBar();
+    });
+
+    paint();
+    device.set = (key, value) => {
+      state[key] = value;
+      state.scrolled = false;
+      paint();
+      scroller.scrollTop = 0;
+    };
+    return device;
+  }
+
+  function createNavMobile(options = {}) {
+    const t = copy(options.locale);
+    const root = el("div", "nv-stack");
+    const phone = createPhone({ locale: t.lang, type: options.type, layout: options.layout, platform: options.platform });
+    if (options.controls === false) {
+      root.append(phone);
+      return root;
+    }
+    const wrap = el("div", "nv-mobile-live");
+    const controls = el("div", "nv-controls");
+    const rows = [
+      ["Platform", "platform", [["iOS", "ios"], ["Android", "android"]], "ios"],
+      ["Top bar", "type", [["Standard", "standard"], ["Large title", "large"]], "large"],
+      ["Tab bar", "layout", [["Docked", "docked"], ["Floating", "floating"]], "docked"],
+      ["Style", "style", [["Solid", "solid"], ["Glass", "glass"]], "solid"],
+    ];
+    rows.forEach(([label, key, values, value]) => {
+      const row = el("div", "nv-control");
+      row.append(el("span", "nv-control-label", label));
+      if (window.createButtonGroup) {
+        row.append(createButtonGroup({
+          kind: "segment",
+          size: "sm",
+          label,
+          options: values.map(([text, id]) => ({ label: text, value: id })),
+          value,
+          onChange: (next) => phone.set(key, next),
+        }));
+      }
+      controls.append(row);
+    });
+    const notes = el("div", "nv-specs");
+    [
+      ["iOS", "Top bar 52 pt, large title 96 pt. Tab bar 58 pt above the home indicator. Centred title, chevron back. VoiceOver reads \"Payments, 4, tab, 3 of 4\"."],
+      ["Android", "Top bar 64 dp, large title 112 dp. Tab bar 80 dp above the system navigation bar. Title at the start, arrow back. contentDescription \"Payments, 4 new\"."],
+      ["Scrolling", "At the top the bar has no fill. Once the list scrolls, it gets the surface and a hairline, and a large title moves into the bar."],
+      ["Glass", "iOS only: a frosted bar with blur 24 and a top highlight, no hairline, and a fade under the bar. Android keeps a tonal bar with no blur and a solid tab bar."],
+    ].forEach(([name, text]) => {
+      const spec = el("div", "nv-spec");
+      spec.append(el("strong", "", name), el("p", "", text));
+      notes.append(spec);
+    });
+    const side = el("div", "nv-stack");
+    side.append(controls, notes);
+    wrap.append(phone, side);
+    root.append(wrap);
+    return root;
+  }
+
+  function createNavTopBars() {
+    const root = el("div", "nv-topbar-grid");
+    const head = el("div", "nv-topbar-head");
+    head.append(el("span", ""), el("span", "", "iOS · 52 pt"), el("span", "", "Android · 64 dp"));
+    root.append(head);
+    [
+      ["Standard · top", { type: "standard", back: true }],
+      ["Standard · scrolled", { type: "standard", back: true, scrolled: true }],
+      ["Large title · top", { type: "large", back: true, showLarge: true }],
+      ["Large title · scrolled", { type: "large", back: true, scrolled: true }],
+      ["Modal", { type: "modal", scrolled: true }],
+      ["Glass · scrolled", { type: "standard", back: true, scrolled: true, style: "glass" }],
+    ].forEach(([caption, spec]) => {
+      const row = el("div", "nv-topbar-line");
+      row.append(el("span", "nv-topbar-caption", caption));
+      ["ios", "android"].forEach((platform) => {
+        const frame = el("div", "nv-bar-frame");
+        frame.dataset.platform = platform;
+        frame.append(mobileBar({ ...spec, platform, title: "Cards" }));
+        row.append(frame);
+      });
+      root.append(row);
+    });
+    return root;
+  }
+
+  function createNavStates() {
+    const t = copy("en");
+    const root = el("div", "nv-stack");
+    const dashboard = SIDEBAR[0];
+    const groups = [
+      ["Sidebar item · expanded", "nv-state-row", [["Default", ""], ["Hover", "hover"], ["Active", "active"], ["Focus", "focus"], ["Disabled", "disabled"]].map(([name, state]) => {
+        const cell = el("div", "nv-state-cell");
+        cell.dataset.wide = "true";
+        cell.append(sideItem({ ...dashboard, count: "" }, t, false, state === "active", null, state || "default"), el("span", "", name));
+        return cell;
+      })],
+      ["Sidebar item · rail", "nv-state-row", [["Default", ""], ["Hover", "hover"], ["Active", "active"], ["Focus", "focus"], ["Disabled", "disabled"]].map(([name, state]) => {
+        const cell = el("div", "nv-state-cell");
+        const rail = el("div", "nv-rail-sample");
+        rail.append(sideItem({ ...dashboard, count: "" }, t, true, state === "active", null, state || "default"));
+        cell.append(rail, el("span", "", name));
+        return cell;
+      })],
+      ["Tab bar item", "nv-state-row", [["Docked · default", "docked", false, ""], ["Docked · active", "docked", true, ""], ["Docked · pressed", "docked", false, "pressed"], ["Floating · default", "floating", false, ""], ["Floating · active", "floating", true, ""], ["Floating · pressed", "floating", false, "pressed"]].map(([name, layout, on, state]) => {
+        const cell = el("div", "nv-state-cell");
+        const nav = el("div", "nv-tabbar nv-tabbar-sample");
+        nav.dataset.layout = layout;
+        nav.append(tabItem({ ...TABBAR[0] }, t, { on, state: state || "default" }));
+        cell.append(nav, el("span", "", name));
+        return cell;
+      })],
+      ["Mobile top bar · large title", "nv-state-row", [["Top of the list", false], ["Scrolled", true]].map(([name, scrolled]) => {
+        const cell = el("div", "nv-state-cell");
+        cell.dataset.wide = "true";
+        const frame = el("div", "nv-bar-frame");
+        frame.dataset.platform = "ios";
+        frame.append(mobileBar({ type: "large", back: true, scrolled, showLarge: !scrolled, title: "Cards" }));
+        cell.append(frame, el("span", "", name));
+        return cell;
+      })],
+    ];
+    groups.forEach(([title, className, cells]) => {
+      const block = el("div", "nv-panel");
+      block.append(el("span", "nv-kicker", title));
+      const row = el("div", className);
+      row.append(...cells);
+      block.append(row);
+      root.append(block);
+    });
     return root;
   }
 
   function createNavMobileWeb() {
+    const t = copy("en");
     const root = el("div", "nv-stack");
-    let page = "Transfers";
-    let sub = "Beneficiaries";
-    const opened = { Transfers: true };
+    let page = "transfers";
     const drawers = [false, false];
     let restore = "";
     const phones = el("div", "nv-phones");
@@ -351,11 +764,10 @@
       ["A · drawer only", false, "Simplest. Everything lives in the drawer; good when people use one or two areas per visit."],
       ["B · drawer + bottom bar", true, "Four most used areas one tap away; Menu opens the same drawer for the rest. Recommended for daily users."],
     ];
-    const tabs = [["Home", "Dashboard", "home"], ["Activity", "Transactions", "transactions"], ["Pay", "Transfers", "transfers"], ["Cards", "Cards", "cards"], ["Menu", null, "menu"]];
+    const tabs = [["Home", "dashboard", "home"], ["Activity", "transactions", "transactions"], ["Pay", "transfers", "transfers"], ["Cards", "cards", "cards"], ["Menu", null, "menu"]];
 
-    function go(next, nextSub, key) {
+    function go(next, key) {
       page = next;
-      sub = nextSub || null;
       drawers[0] = false;
       drawers[1] = false;
       restore = key || "";
@@ -374,43 +786,41 @@
     });
 
     function paint() {
+      const entry = SIDEBAR.find((item) => item.id === page) || SIDEBAR[0];
       frames.forEach((phone, index) => {
         const bottom = variants[index][1];
         const open = drawers[index];
         phone.replaceChildren();
         phone.append(el("span", "nv-url", "business.hala.com"));
         const bar = el("div", "nv-top");
-        const menu = button("nv-icon-btn", "", () => { drawers[index] = true; restore = `close-${index}`; paint(); }, `open-${index}`);
-        menu.setAttribute("aria-label", "Open menu");
+        const menu = iconButton("menu", "Open menu", () => { drawers[index] = true; restore = `close-${index}`; paint(); }, `open-${index}`);
         menu.setAttribute("aria-expanded", open ? "true" : "false");
-        const menuIcon = icon("menu", "nav");
-        if (menuIcon) menu.append(menuIcon);
-        const bell = el("span", "nv-bell");
-        const bellIcon = icon("notifications");
-        if (bellIcon) bell.append(bellIcon);
-        bell.append(el("i", "nv-dot"));
-        bar.append(menu, el("strong", "", sub || page), bell, avatar("AA"));
+        const bell = iconButton("notifications", t.notifications);
+        bar.append(menu, el("strong", "", entry.en), bell, avatar(t.user, "sm"));
         const body = el("div", "nv-phone-body");
-        body.append(el("span", "nv-crumb", sub ? `${page} › ${sub}` : "Hala Business"));
+        body.append(el("span", "nv-crumb", `${t.home} › ${entry.en}`));
         body.append(el("span", "nv-bone"), el("span", "nv-bone nv-short"), el("span", "nv-bone nv-short"), el("span", "nv-bone nv-short"));
         phone.append(bar, body);
         if (bottom) {
-          const nav = el("nav", "nv-tabs");
+          const nav = el("nav", "nv-tabbar");
+          nav.dataset.layout = "docked";
           nav.setAttribute("aria-label", "Primary");
+          const pill = el("div", "nv-tabbar-pill");
           tabs.forEach(([label, dest, glyph]) => {
             const on = Boolean(dest && page === dest);
-            const tab = button("nv-tab", "", () => {
+            const node = button("nv-tabitem", "", () => {
               if (!dest) { drawers[index] = true; restore = `close-${index}`; paint(); return; }
-              go(dest, null, `tab-${index}-${label}`);
+              go(dest, `tab-${index}-${label}`);
             }, `tab-${index}-${label}`);
-            tab.dataset.on = on ? "true" : "false";
-            tab.setAttribute("aria-current", on ? "page" : "false");
-            const wrap = el("span", "nv-tab-icon");
-            const mark = icon(glyph, "inline", on);
+            node.dataset.on = on ? "true" : "false";
+            if (on) node.setAttribute("aria-current", "page");
+            const wrap = el("span", "nv-tabitem-icon");
+            const mark = icon(glyph, "nav");
             if (mark) wrap.append(mark);
-            tab.append(wrap, el("span", "", label));
-            nav.append(tab);
+            node.append(wrap, el("span", "nv-tabitem-label", label));
+            pill.append(node);
           });
+          nav.append(pill);
           phone.append(nav);
         }
         const scrim = el("div", "nv-scrim");
@@ -422,71 +832,29 @@
         drawer.setAttribute("role", "dialog");
         drawer.setAttribute("aria-label", "Menu");
         const dHead = el("div", "nv-drawer-head");
-        const close = button("nv-icon-btn", "", () => { drawers[index] = false; restore = `open-${index}`; paint(); }, `close-${index}`);
-        close.dataset.sunken = "true";
-        close.setAttribute("aria-label", "Close menu");
-        const closeIcon = icon("close", "inline");
-        if (closeIcon) close.append(closeIcon);
+        const close = iconButton("close", "Close menu", () => { drawers[index] = false; restore = `open-${index}`; paint(); }, `close-${index}`);
         dHead.append(logo(true), close);
-        const account = el("div", "nv-account");
-        account.append(el("span", "nv-mark", "K"));
-        const who = el("div", "nv-user-copy");
-        who.append(el("strong", "", "Khamis Arabia Trading"), el("span", "", "SA •• 1951"));
-        account.append(who);
-        const chev = icon("expand", "inline");
-        if (chev) { chev.classList.add("nv-chev"); account.append(chev); }
         const search = el("div", "nv-drawer-search");
         const searchIcon = icon("search", "inline");
         if (searchIcon) search.append(searchIcon);
-        search.append(document.createTextNode("Search"));
+        search.append(document.createTextNode(t.search));
         const nav = el("nav", "nv-nav");
-        sections().forEach((group) => {
+        [["main", ""], ["business", t.business], ["foot", ""]].forEach(([group, title]) => {
           const block = el("div", "nv-group");
-          block.append(el("span", "nv-kicker", group.label));
-          group.items.forEach((item) => {
-            const on = page === item.label;
-            const isOpen = item.kids && opened[item.label];
-            const selected = on && !sub;
-            const row = button("nv-item", "", () => {
-              if (item.kids) { opened[item.label] = !opened[item.label]; restore = `m-${index}-${item.label}`; paint(); return; }
-              go(item.label, null, `open-${index}`);
-            }, `m-${index}-${item.label}`);
-            row.dataset.on = selected ? "true" : "false";
-            row.dataset.section = on ? "true" : "false";
-            if (selected) row.setAttribute("aria-current", "page");
-            const glyph = icon(item.glyph);
-            if (glyph) row.append(glyph);
-            row.append(el("span", "nv-label", item.label));
-            if (item.badge) row.append(el("span", "nv-count", item.badge));
-            if (item.kids) {
-              row.setAttribute("aria-expanded", isOpen ? "true" : "false");
-              const mark = icon("expand", "inline");
-              if (mark) { mark.classList.add("nv-chev"); row.append(mark); }
-            }
+          if (title) block.append(el("span", "nv-kicker", title));
+          SIDEBAR.filter((item) => item.group === group).forEach((item) => {
+            const row = sideItem({ ...item, key: "" }, t, false, item.id === page, () => go(item.id, `open-${index}`));
+            row.dataset.key = `m-${index}-${item.id}`;
             block.append(row);
-            if (item.kids) {
-              const kids = el("div", "nv-kids");
-              kids.dataset.open = isOpen ? "true" : "false";
-              const clip = el("div", "nv-kids-clip");
-              item.kids.forEach((name) => {
-                const active = on && sub === name;
-                const child = button("nv-sub", name, () => go(item.label, name, `open-${index}`), `ms-${index}-${name}`);
-                child.dataset.on = active ? "true" : "false";
-                if (active) child.setAttribute("aria-current", "page");
-                clip.append(child);
-              });
-              kids.append(clip);
-              if (!isOpen) kids.inert = true;
-              block.append(kids);
-            }
           });
           nav.append(block);
         });
-        const sign = el("div", "nv-signout");
-        const out = icon("sign-out", "inline");
-        if (out) sign.append(out);
-        sign.append(avatar("AA"), el("span", "", "Abdulaziz Ali · Admin"), el("span", "", "Sign out"));
-        drawer.append(dHead, account, search, nav, sign);
+        const account = el("div", "nv-account-row");
+        account.append(avatar(t.initials, "sm"));
+        const who = el("span", "nv-user-copy");
+        who.append(el("strong", "", t.company), el("span", "", t.role));
+        account.append(who);
+        drawer.append(dHead, search, nav, account);
         phone.append(scrim, drawer);
       });
       if (restore) focusKey(root, restore);
@@ -505,10 +873,10 @@
 
     const specs = el("div", "nv-specs");
     [
-      ["Breakpoint", "≤ 767 px: drawer. 768–1023 px: collapsed rail. ≥ 1024 px: full sidebar."],
-      ["Top bar", "56 px, white. Menu 44 px left, page title, bell and avatar right."],
+      ["Breakpoint", "Below 600 px: drawer. 600–1023 px: the 80 rail. 1024 px and up: the 272 sidebar."],
+      ["Top bar", "56 px. Menu 44 px at the start, page title, notifications and avatar at the end."],
       ["Drawer", "86% width, max 320 px. Slides from the start edge. Scrim closes it."],
-      ["Rows", "48 px items, 44 px sub-items. Same groups and order as desktop."],
+      ["Rows", "Same Sidebar items, groups and order as desktop. 44 px rows, no nesting."],
       ["Closing", "Closes on item tap, scrim tap, close, or Escape. Focus returns to the menu button."],
       ["Bottom bar", "Optional, 4 areas + Menu. Hidden while typing so the keyboard has room."],
     ].forEach(([name, text]) => {
@@ -522,67 +890,15 @@
 
   function createNavHeaders() {
     const root = el("div", "nv-stack");
-    const grid = el("div", "nv-stack");
 
-    let bell = false;
-    let read = false;
-    const app = el("div", "nv-panel");
-    const appHead = el("header");
-    const appCopy = el("div");
-    appCopy.append(el("h3", "", "App header · 64 px"), el("p", "", "Page title, search, notifications, one primary action. Sticky; gets a border once you scroll."));
-    appHead.append(appCopy, live());
-    const bar = el("div", "nv-appbar");
-    const id = el("div", "nv-id");
-    id.append(el("span", "", "Pay › Transfers"), el("strong", "", "Transfers"));
-    const search = el("span", "nv-search-btn");
-    const searchIcon = icon("search", "inline");
-    if (searchIcon) search.append(searchIcon);
-    search.append(document.createTextNode("Search anything"), el("span", "nv-kbd", "⌘K"));
-    const wrap = el("div", "nv-bell-wrap");
-    const bellBtn = button("nv-icon-btn", "", () => { bell = !bell; paintBell(); });
-    bellBtn.setAttribute("aria-label", "Notifications");
-    const pop = el("div", "nv-pop");
-    pop.hidden = true;
-    function paintBell() {
-      bellBtn.dataset.open = bell ? "true" : "false";
-      bellBtn.setAttribute("aria-expanded", bell ? "true" : "false");
-      bellBtn.replaceChildren();
-      const glyph = icon("notifications");
-      if (glyph) bellBtn.append(glyph);
-      if (!read) bellBtn.append(el("span", "nv-count", "3"));
-      pop.hidden = !bell;
-      pop.replaceChildren();
-      const head = el("header");
-      const mark = button("nv-text-btn", "Mark all read", () => { read = true; paintBell(); });
-      head.append(el("strong", "", "Notifications"), mark);
-      pop.append(head);
-      [
-        ["Transfer needs approval", "Nour Trading · SAR 25,000"],
-        ["Card frozen", "Operations •• 2086"],
-        ["Statement ready", "September 2026"],
-      ].forEach(([name, detail]) => {
-        const row = el("div", "nv-note-row");
-        row.dataset.unread = read ? "false" : "true";
-        const copy = el("div");
-        copy.append(el("strong", "", name), el("span", "", detail));
-        row.append(el("i", "nv-pip"), copy);
-        pop.append(row);
-      });
-    }
-    wrap.append(bellBtn, pop);
-    const cluster = el("div", "nv-cluster");
-    cluster.append(search, wrap, el("span", "nv-primary", "New transfer"));
-    bar.append(id, cluster);
-    app.append(appHead, bar);
-    paintBell();
-    app.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && bell) { bell = false; paintBell(); bellBtn.focus(); }
-    });
-    document.addEventListener("click", (event) => {
-      if (!bell || wrap.contains(event.target)) return;
-      bell = false;
-      paintBell();
-    });
+    const top = el("div", "nv-panel");
+    const topHead = el("header");
+    const topCopy = el("div");
+    topCopy.append(el("h3", "", "Web top bar · 72 px"), el("p", "", "Search (⌘K opens the Command menu) at the start; account switcher, notifications with a dot and the avatar at the end. The page title lives in the page, not the bar."));
+    topHead.append(topCopy, live("Live · open notifications"));
+    const topFrame = el("div", "nv-frame");
+    topFrame.append(createNavWebTopBar());
+    top.append(topHead, topFrame);
 
     let mega = false;
     const market = el("div", "nv-panel");
@@ -626,9 +942,9 @@
       const tile = el("span", "nv-prod-icon");
       const mark = icon(glyph);
       if (mark) tile.append(mark);
-      const copy = el("div");
-      copy.append(el("strong", "", name), el("span", "", detail));
-      prod.append(tile, copy);
+      const text = el("div");
+      text.append(el("strong", "", name), el("span", "", detail));
+      prod.append(tile, text);
       menu.append(prod);
     });
     const feature = el("div", "nv-feature");
@@ -659,30 +975,13 @@
     flowBar.append(close, el("strong", "", "Order POS"), steps, el("span", "nv-quiet", "Need help?"));
     flow.append(flowCopy, flowBar, el("p", "nv-note", "Close asks to confirm if anything was entered. Progress shows steps without labels when space is tight."));
 
-    let tab = "Overview";
     const tabsCard = el("div", "nv-panel");
     const tabsCopy = el("div");
-    tabsCopy.append(el("h3", "", "Section tabs · under the header"), el("p", "", "For sibling views of one object, like a card's details."));
-    const tablist = el("div", "nv-section-tabs");
-    tablist.setAttribute("role", "tablist");
-    const tabButtons = [["Overview"], ["Transactions", "38"], ["Limits"], ["Settings"]].map(([label, count]) => {
-      const node = button("", label, () => { tab = label; paintTabs(); });
-      node.dataset.label = label;
-      node.setAttribute("role", "tab");
-      if (count) node.append(el("span", "nv-pill", count));
-      tablist.append(node);
-      return node;
-    });
-    function paintTabs() {
-      tabButtons.forEach((node) => {
-        node.setAttribute("aria-selected", node.dataset.label === tab ? "true" : "false");
-      });
-    }
-    paintTabs();
-    tabsCard.append(tabsCopy, tablist, el("p", "nv-note", "Ink underline 2 px for the active tab. Scrolls sideways on narrow screens."));
+    tabsCopy.append(el("h3", "", "Section tabs · under the page title"), el("p", "", "For sibling views of one object, like a card's details. These are the Tabs component; see the Tabs page."));
+    tabsCard.append(tabsCopy);
+    if (window.createTabs) tabsCard.append(createTabs({ label: "Purchase card", options: ["Overview", "Limits", "Settings", "Activity"], value: "Overview" }));
 
-    grid.append(app, market, flow, tabsCard);
-    root.append(grid);
+    root.append(top, market, flow, tabsCard);
     return root;
   }
 
@@ -708,10 +1007,10 @@
       ["Company", ["About", "Careers", "Press", "Contact"]],
       ["Resources", ["Help center", "Pricing", "API docs", "Status"]],
       ["Legal", ["Terms", "Privacy", "Complaints", "Security"]],
-    ].forEach(([heading, links]) => {
+    ].forEach(([heading, items]) => {
       const col = el("div", "nv-col");
       col.append(el("strong", "", heading));
-      links.forEach((link) => col.append(el("span", "", link)));
+      items.forEach((link) => col.append(el("span", "", link)));
       top.append(col);
     });
     const legal = el("div", "nv-legal");
@@ -746,132 +1045,6 @@
     return root;
   }
 
-  function createNavMobile() {
-    const root = el("div", "nv-stack");
-    const phoneCard = el("div", "nv-phone-card");
-    const header = el("header");
-    header.append(el("h3", "", "Tab bar + large title"), live("Live · tap tabs"));
-    const phone = el("div", "nv-phone nv-app-phone");
-    let tab = "Cards";
-    const blocks = {
-      Home: ["150", "90", "180"],
-      Cards: ["200", "70", "70"],
-      Pay: ["120", "120", "120"],
-      POS: ["90", "220"],
-      More: ["300"],
-    };
-    const items = [["Home", "home", ""], ["Cards", "cards", ""], ["Pay", "transfers", ""], ["POS", "pos", ""], ["More", "menu", "2"]];
-    const scroller = el("div", "nv-phone-body");
-    function paint() {
-      scroller.replaceChildren(el("div", "nv-large", tab));
-      const list = el("div", "nv-blocks");
-      blocks[tab].forEach((size) => {
-        const block = el("span", "nv-block");
-        block.style.height = size === "300" ? "calc(var(--space-14) * 5 + var(--space-5))"
-          : size === "220" ? "calc(var(--space-14) * 4)"
-          : size === "200" ? "calc(var(--space-14) * 3 + var(--space-8))"
-          : size === "180" ? "calc(var(--space-14) * 3 + var(--space-3))"
-          : size === "150" ? "calc(var(--space-14) * 2 + var(--space-10))"
-          : size === "120" ? "calc(var(--space-14) * 2 + var(--space-2))"
-          : size === "90" ? "calc(var(--space-14) + var(--space-8))"
-          : "calc(var(--space-14) + var(--space-3))";
-        list.append(block);
-      });
-      scroller.append(list);
-      const nav = phone.querySelector(".nv-tabs");
-      if (!nav) return;
-      [...nav.children].forEach((node) => {
-        const on = node.dataset.label === tab;
-        node.dataset.on = on ? "true" : "false";
-        node.setAttribute("aria-current", on ? "page" : "false");
-        const glyph = node.querySelector(".hala-icon");
-        if (glyph) glyph.dataset.active = on ? "true" : "false";
-      });
-    }
-    const nav = el("nav", "nv-tabs");
-    nav.setAttribute("aria-label", "App");
-    items.forEach(([label, glyph, count]) => {
-      const node = button("nv-tab", "", () => {
-        if (tab === label) scroller.scrollTop = 0;
-        tab = label;
-        paint();
-      });
-      node.dataset.label = label;
-      const wrap = el("span", "nv-tab-icon");
-      const mark = icon(glyph, "inline", label === tab);
-      if (mark) wrap.append(mark);
-      node.append(wrap, el("span", "", label));
-      if (count) node.append(el("span", "nv-count", count));
-      nav.append(node);
-    });
-    phone.append(scroller, nav);
-    paint();
-    phoneCard.append(header, phone, el("p", "nv-note", "5 tabs max, icon + label always. Active: mint pill + filled weight. Tapping the active tab scrolls to top."));
-
-    const bars = el("div", "nv-panel");
-    bars.append(el("h3", "", "Top bars"));
-    const list = el("div", "nv-topbars");
-    [
-      ["iOS · pushed screen", false, "start", "previous", "Cards", "Marketing card", "Edit"],
-      ["Android · pushed screen", false, "start-title", "back", "", "Marketing card", "more"],
-      ["Modal / sheet", false, "center", "", "Cancel", "New card", "Next"],
-      ["Flow with progress", false, "center", "close", "", "Step 2 of 3", "Help"],
-      ["Over a dark hero", true, "center", "previous", "", "Card details", ""],
-    ].forEach(([caption, ink, align, glyph, back, title, end]) => {
-      const card = el("div", "nv-topbar-card");
-      const bar = el("div", "nv-topbar");
-      if (ink) bar.dataset.ink = "true";
-      if (align === "start-title") bar.dataset.align = "start";
-      const start = el("span", "nv-side-slot");
-      if (glyph) {
-        const mark = icon(glyph, "inline");
-        if (mark) start.append(mark);
-      }
-      if (back) start.append(document.createTextNode(back));
-      const ending = el("span", "nv-end");
-      if (end === "more") {
-        const mark = icon("more");
-        if (mark) ending.append(mark);
-      } else if (end) ending.textContent = end;
-      bar.append(start, el("strong", "", title), ending);
-      card.append(bar, el("span", "", caption));
-      list.append(card);
-    });
-    bars.append(list);
-
-    const more = el("div", "nv-panel");
-    more.append(el("h3", "", "More screen · everything else"));
-    const sheet = el("div", "nv-more");
-    sheet.append(el("h3", "", "More"));
-    const account = el("div", "nv-account");
-    account.append(el("span", "nv-mark", "K"));
-    const who = el("div", "nv-user-copy");
-    who.append(el("strong", "", "Khamis Arabia Trading"), el("span", "", "CR 2346041544"));
-    account.append(who, el("span", "nv-switch", "Switch"));
-    sheet.append(account);
-    [
-      ["Business", [["Payroll", "users"], ["Invoicing", "receipt"], ["eCommerce", "ecommerce"]]],
-      ["Account", [["Settings", "settings"], ["Notifications", "notifications"]]],
-      ["Support", [["Help and chat", "help"]]],
-    ].forEach(([heading, rows]) => {
-      const group = el("div", "nv-group-list");
-      group.append(el("span", "", heading));
-      const box = el("div", "nv-rows");
-      rows.forEach(([label, glyph]) => {
-        const row = el("div", "nv-row");
-        const mark = icon(glyph);
-        if (mark) row.append(mark);
-        row.append(el("span", "", label));
-        box.append(row);
-      });
-      group.append(box);
-      sheet.append(group);
-    });
-    more.append(sheet, el("p", "nv-note", "No hamburger drawer in the app. Secondary areas live here in grouped lists, account switch on top."));
-    root.append(phoneCard, bars, more);
-    return root;
-  }
-
   function createNavGuide() {
     const root = el("div", "nv-stack");
     const table = el("div");
@@ -879,11 +1052,11 @@
     ["Context", "Web", "Mobile", "Notes"].forEach((label) => head.append(el("span", "", label)));
     table.append(head);
     [
-      ["Hala Business app", "Sidebar + app header", "Tab bar + top bar + More", "Sidebar collapses to rail; drawer below 1024 px"],
+      ["Hala Business app", "Sidebar + web top bar", "Tab bar (4) + mobile top bar", "Sidebar becomes the 80 rail on tablet"],
       ["Marketing site", "Marketing header + full footer", "Header with menu sheet", "Products in a mega menu"],
-      ["Task flow", "Flow header, no sidebar", "Top bar with close + progress", "Remove all other navigation"],
-      ["Object detail", "Breadcrumb + section tabs", "Back + segmented or list", "Tabs for sibling views only"],
-      ["Forms", "Sticky action footer", "Primary button above keyboard", "Appears with unsaved changes"],
+      ["Task flow", "Flow header, no sidebar", "Modal top bar: close, title, Done", "Remove all other navigation"],
+      ["Object detail", "Breadcrumb + Tabs (Hug)", "Back + Tabs (Fill)", "Tabs for sibling views only"],
+      ["Forms", "Sticky action footer", "Action bar above the keyboard", "Appears with unsaved changes"],
       ["Long app page", "Slim app footer", "None", "Legal links and status only"],
     ].forEach(([context, web, mobile, notes]) => {
       const row = el("div", "nv-wrow");
@@ -892,30 +1065,34 @@
     });
     const rules = el("div", "nv-rules");
     [
-      [true, "Keep labels identical across sidebar, tab bar, page titles and breadcrumbs."],
-      [true, "Show where you are: active fill + bar on web, mint pill on mobile."],
-      [true, "Group sidebar items by job (Pay, Accept payments, Manage) with mono captions."],
-      [true, "Tooltips on every item in the collapsed rail."],
-      [true, "One primary action in the header, on the right."],
-      [true, "Tab bar: 5 items max with icon and label."],
-      [false, "Don't use a hamburger menu in the mobile app."],
-      [false, "Don't nest more than one level in the sidebar."],
-      [false, "Don't show app navigation inside task flows."],
-      [false, "Don't hide the account switcher; it belongs on top of More and in the sidebar footer."],
-    ].forEach(([ok, text]) => {
-      const rule = el("div", "nv-rule");
-      rule.dataset.ok = ok ? "true" : "false";
-      rule.append(el("i", "", ok ? "✓" : "×"), el("p", "", text));
-      rules.append(rule);
+      ["Keep 4 tabs in the mobile tab bar and 5–8 main items in the sidebar.", "Add a fifth tab or nest menus inside the sidebar."],
+      ["Collapse to the 80 rail on tablet and show labels as tooltips.", "Hide the sidebar completely on tablet or truncate labels in the rail."],
+      ["Put the sidebar on the right in Arabic and mirror back arrows.", "Mirror the logo, counters, close icons or amounts."],
+      ["Keep labels identical across sidebar, tab bar, page titles and breadcrumbs.", "Show app navigation inside task flows; use the flow header or a modal top bar."],
+    ].forEach(([yes, no], index) => {
+      const card = el("div", "nv-rule");
+      card.append(el("span", "nv-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "nv-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        const textCol = el("div");
+        textCol.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        line.append(el("i", "", ok ? "✓" : "×"), textCol);
+        card.append(line);
+      });
+      rules.append(card);
     });
     root.append(table, rules);
     return root;
   }
 
-  window.createNavSidebar = createNavSidebar;
+  window.createNavShell = createNavShell;
+  window.createNavWebTopBar = createNavWebTopBar;
+  window.createNavMobile = createNavMobile;
+  window.createNavTopBars = createNavTopBars;
+  window.createNavStates = createNavStates;
   window.createNavMobileWeb = createNavMobileWeb;
   window.createNavHeaders = createNavHeaders;
   window.createNavFooters = createNavFooters;
-  window.createNavMobile = createNavMobile;
   window.createNavGuide = createNavGuide;
 })();

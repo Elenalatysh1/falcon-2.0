@@ -1,11 +1,19 @@
 /* Navigation chapter. Patterns come from components/navigation. */
 
+[data-page="navigation"] [data-nav="arabic"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
 @media (max-width: 900px) {
   [data-page="navigation"] .nv-mega,
   [data-page="navigation"] .nv-footer-top,
   [data-page="navigation"] .nv-which,
   [data-page="navigation"] .nv-wrow,
-  [data-page="navigation"] .nv-cards {
+  [data-page="navigation"] .nv-topbar-head,
+  [data-page="navigation"] .nv-topbar-line,
+  [data-page="navigation"] .nv-mobile-live {
     grid-template-columns: 1fr;
   }
 
