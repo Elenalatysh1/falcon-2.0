@@ -1,3 +1,4 @@
+(function () {
 const logoPage = document.querySelector('[data-page="logo"]');
 
 const WORDMARK = "../media/type=full, color=brand.svg";
@@ -18,35 +19,84 @@ function logoImg(kind, className) {
   return img;
 }
 
-function tokenHex(name) {
-  const probe = logoEl("i");
-  probe.style.color = `var(${name})`;
-  probe.hidden = true;
-  logoPage.append(probe);
-  const color = getComputedStyle(probe).color;
-  probe.remove();
-  const parts = color.match(/\d+/g);
-  if (!parts || parts.length < 3) return color;
-  return `#${parts.slice(0, 3).map((part) => Number(part).toString(16).padStart(2, "0")).join("").toUpperCase()}`;
+function logoMark(kind, color, label) {
+  const mark = logoEl("span", "lg-logo");
+  mark.dataset.kind = kind;
+  mark.dataset.color = color;
+  mark.setAttribute("role", "img");
+  mark.setAttribute("aria-label", label || (kind === "word" ? "HALA" : "Hala symbol"));
+  return mark;
 }
 
-function fillSwatches() {
-  const root = logoPage.querySelector("[data-logo='swatches']");
+function fillUses() {
+  const root = logoPage.querySelector("[data-logo='uses']");
   if (!root) return;
-  const swatches = [
-    ["Hala green", "--brand-500", "Logo, app icon"],
-    ["Ink", "--text-primary", "Dark backgrounds"],
-    ["Mint", "--brand-100", "Light tinted backgrounds"],
-    ["White", "--surface-card", "Logo on green, ink, photos"],
-  ];
-  swatches.forEach(([name, token, use]) => {
-    const card = logoEl("div", "lg-swatch");
-    const chip = logoEl("span", "lg-chip");
-    chip.style.background = `var(${token})`;
-    const copy = logoEl("div");
-    copy.append(logoEl("strong", "", name), logoEl("span", "lg-meta", tokenHex(token)), logoEl("span", "", use));
-    card.append(chip, copy);
-    root.append(card);
+  [
+    ["Green on white", "card", "brand", "green/500 on background/primary"],
+    ["White on green", "brand", "white", "background/primary on green/700"],
+    ["White on ink", "ink", "white", "background/primary on text/primary"],
+    ["Green on mint", "mint", "brand-dark", "green/700 on green/100"],
+    ["One color · print only", "card", "ink", "text/primary on background/primary"],
+  ].forEach(([name, ground, color, tokens]) => {
+    const item = logoEl("div", "lg-use-item");
+    const tile = logoEl("div", "lg-use");
+    tile.dataset.ground = ground;
+    tile.append(logoMark("word", color));
+    item.append(tile, logoEl("strong", "", name), logoEl("span", "lg-meta", tokens));
+    root.append(item);
+  });
+}
+
+function fillProduct() {
+  const root = logoPage.querySelector("[data-logo='product']");
+  if (!root) return;
+  [
+    ["Web header", "Wordmark", "24 px", "Left-aligned, links to home"],
+    ["Sidebar · expanded", "Wordmark", "22 px", ""],
+    ["Sidebar · collapsed", "Symbol", "28 px", ""],
+    ["Mobile sign-in", "Wordmark", "32 px", ""],
+    ["Mobile home header", "Symbol", "28 px", ""],
+    ["Launch screen", "Symbol", "64 pt", "Centered. No loading text or tagline"],
+  ].forEach(([place, logo, height, note]) => {
+    const row = logoEl("div", "lg-file");
+    row.append(logoEl("strong", "", place), logoEl("span", "", logo), logoEl("span", "lg-meta", height), logoEl("span", "", note));
+    root.append(row);
+  });
+}
+
+function fillSchemes() {
+  const root = logoPage.querySelector("[data-logo='schemes']");
+  if (!root) return;
+  ["dark", "light"].forEach((surface) => {
+    const panel = logoEl("div", "lg-scheme-panel");
+    panel.dataset.surface = surface;
+    ["mada", "Visa", "Mastercard", "Apple Pay", "Google Pay"].forEach((name) => {
+      const mark = logoEl("span", "lg-scheme", name);
+      mark.dataset.wide = name.length > 4 ? "true" : "false";
+      panel.append(mark);
+    });
+    root.append(panel);
+  });
+}
+
+function fillRules() {
+  const root = logoPage.querySelector("[data-logo='rules']");
+  if (!root) return;
+  [
+    ["Use the supplied logo components and files.", "Redraw, retype, stretch or recolor the logo."],
+    ["Below 80 px wide, switch from the wordmark to the symbol.", "Shrink the wordmark below 80 px."],
+    ["Use green on white or mint, and white on green, ink or photos.", "Put green on a busy photo or on another strong color."],
+    ["Keep at least 2x clear space on every side (x = H stem width).", "Let text or other shapes enter the clear space."],
+  ].forEach(([doText, dontText], index) => {
+    const row = logoEl("div", "lg-pair");
+    row.append(logoEl("span", "lg-pair-index", String(index + 1).padStart(2, "0")));
+    [["do", "Do", doText], ["dont", "Don’t", dontText]].forEach(([kind, label, text]) => {
+      const card = logoEl("div", "lg-pair-card");
+      card.dataset.kind = kind;
+      card.append(logoEl("span", "lg-pair-label", label), logoEl("p", "", text));
+      row.append(card);
+    });
+    root.append(row);
   });
 }
 
@@ -130,27 +180,6 @@ function fillFavs() {
   });
 }
 
-function fillDonts() {
-  const root = logoPage.querySelector("[data-logo='donts']");
-  if (!root) return;
-  [
-    ["Don't stretch or squash", "card", "lg-stretch"],
-    ["Don't rotate", "card", "lg-tilt"],
-    ["Don't change the color", "card", "lg-hue"],
-    ["Don't add shadows or effects", "card", "lg-glow"],
-    ["Don't use green on green or low contrast", "brand", ""],
-    ["Don't outline or box it", "card", "lg-box"],
-  ].forEach(([text, ground, treatment]) => {
-    const card = logoEl("div", "lg-dont");
-    const stage = logoEl("div", "lg-dont-stage");
-    stage.dataset.ground = ground;
-    const img = logoImg("word", treatment);
-    stage.append(img, logoEl("span", "lg-cross", "×"));
-    card.append(stage, logoEl("p", "", text));
-    root.append(card);
-  });
-}
-
 function fillFiles() {
   const root = logoPage.querySelector("[data-logo='files']");
   if (!root) return;
@@ -175,11 +204,14 @@ function fillFiles() {
 }
 
 if (logoPage) {
-  fillSwatches();
+  fillUses();
+  fillProduct();
+  fillSchemes();
+  fillRules();
   fillExports();
   fillHome();
   fillMasks();
   fillFavs();
-  fillDonts();
   fillFiles();
 }
+})();
