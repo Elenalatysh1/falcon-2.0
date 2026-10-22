@@ -386,6 +386,8 @@
   --size-card-hero: 280px;
   --size-mada-min: 60px;
   --size-chart: 240px;
+  --size-illustration: 260px;
+  --size-illustration-slot: 440px;
 
   /* Radius */
   --radius-xs: 4px;

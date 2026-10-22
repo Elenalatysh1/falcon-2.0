@@ -1,0 +1,189 @@
+/* Illustrations documentation. Visual values come from styles/foundations.css. */
+
+[data-page="illustrations"] .il-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--layout-card-min), 1fr));
+  gap: var(--space-3);
+}
+
+[data-page="illustrations"] .il-card {
+  margin: 0;
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  padding: var(--pad-card-y) var(--pad-card-x);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+[data-page="illustrations"] .il-art {
+  display: block;
+  width: 100%;
+  max-width: var(--size-illustration);
+  aspect-ratio: 1;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+[data-page="illustrations"] .il-card figcaption {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+[data-page="illustrations"] .il-card strong {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+[data-page="illustrations"] .il-meta {
+  font-family: var(--font-mono);
+  font-size: var(--docs-type-caption-size);
+  color: var(--docs-text-tertiary);
+}
+
+[data-page="illustrations"] .il-scenes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+[data-page="illustrations"] .il-scene {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="illustrations"] .il-scene-name {
+  margin: 0;
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+[data-page="illustrations"] .il-modes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+[data-page="illustrations"] .il-mode {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-4) var(--pad-card-x) var(--pad-card-x);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-primary);
+}
+
+[data-page="illustrations"] .il-slot {
+  width: 100%;
+  max-width: var(--size-illustration-slot);
+  aspect-ratio: 2 / 1;
+  display: grid;
+  place-items: center;
+  border: var(--border-width) dashed var(--border-strong);
+  border-radius: var(--radius-m);
+  font-family: var(--font-mono);
+  font-size: var(--docs-type-caption-size);
+  color: var(--text-tertiary);
+}
+
+[data-page="illustrations"] .il-pairs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-page="illustrations"] .il-pair {
+  display: grid;
+  grid-template-columns: var(--space-6) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+}
+
+[data-page="illustrations"] .il-pair-index {
+  font-family: var(--font-mono);
+  font-size: var(--docs-type-caption-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--docs-text-tertiary);
+  padding-top: var(--space-4);
+}
+
+[data-page="illustrations"] .il-pair-card {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+[data-page="illustrations"] .il-pair-card p {
+  margin: 0;
+  font-size: var(--docs-type-body-s-size);
+  line-height: var(--type-body-s-line);
+}
+
+[data-page="illustrations"] .il-pair-label {
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  color: var(--brand-600);
+}
+
+[data-page="illustrations"] .il-pair-card[data-kind="dont"] .il-pair-label {
+  color: var(--status-danger);
+}
+
+[data-page="illustrations"] .il-files {
+  background: var(--surface-card);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2) var(--pad-card-x);
+  overflow-x: auto;
+}
+
+[data-page="illustrations"] .il-file {
+  display: grid;
+  grid-template-columns: minmax(var(--size-segment-md), 0.6fr) minmax(var(--size-card-medium-width), 2fr) minmax(var(--size-card-stack), 1fr);
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  align-items: center;
+  font-size: var(--docs-type-body-s-size);
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+
+[data-page="illustrations"] .il-file span:not(:first-child) {
+  font-family: var(--font-mono);
+  font-size: var(--docs-type-caption-size);
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+[data-page="illustrations"] .il-file-head {
+  border-top: 0;
+  font-family: var(--font-mono);
+  font-size: var(--type-overline-size);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+  color: var(--docs-text-tertiary);
+}
+
+[data-page="illustrations"] .il-file-head span:not(:first-child) {
+  font-size: var(--type-overline-size);
+  color: var(--docs-text-tertiary);
+}
+
+@media (max-width: 720px) {
+  [data-page="illustrations"] .il-modes,
+  [data-page="illustrations"] .il-pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
