@@ -487,6 +487,10 @@
   transform: none;
 }
 
+:lang(ar) .button[data-role="amount"] {
+  font-family: var(--font-arabic);
+}
+
 .button:disabled,
 .button:disabled:hover,
 .button:disabled:active {

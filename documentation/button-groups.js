@@ -37,7 +37,7 @@
   const views = [
     { label: "Bar chart", value: "bar", icon: "bar-chart" },
     { label: "Line chart", value: "line", icon: "line-chart" },
-    { label: "Table", value: "table", icon: "table" },
+    { label: "Table", value: "table", icon: "category" },
   ];
 
   const bars = [40, 62, 48, 80, 56, 90, 70, 84];
@@ -303,6 +303,70 @@
     }));
   }
 
+  function fillArabic() {
+    const root = mount("arabic");
+    root.append(createButtonGroup({
+      kind: "segment",
+      size: "md",
+      label: "قسم الصفحة",
+      options: ["نظرة عامة", "النشاط", "الكشوفات"],
+      value: "نظرة عامة",
+    }));
+    root.append(createButtonGroup({
+      kind: "choice",
+      label: "حد البطاقة الشهري",
+      options: [
+        { label: "5 آلاف", value: "5,000" },
+        { label: "10 آلاف", value: "10,000" },
+        { label: "25 ألف", value: "25,000" },
+        { label: "50 ألف", value: "50,000" },
+        { label: "مخصص", value: "custom" },
+      ],
+      value: "10,000",
+    }));
+    const row = el("div", "grp-rtl-row");
+    row.append(
+      createButtonGroup({
+        kind: "attached",
+        label: "إجراءات التحويل",
+        options: [
+          { label: "تعديل" },
+          { label: "تكرار" },
+          { label: "حذف", tone: "danger" },
+        ],
+      }),
+      createButtonGroup({
+        kind: "split",
+        label: "تصدير الكشف",
+        variant: "primary",
+        action: "تصدير",
+        value: "PDF",
+        menuLabel: "صيغ تصدير أخرى",
+        options: [
+          { label: "PDF", value: "PDF", description: "تنسيق الكشف، موقّع" },
+          { label: "CSV", value: "CSV", description: "لبرنامج Excel والمحاسبة" },
+          { label: "MT940", value: "MT940", description: "للاستيراد في نظام ERP" },
+        ],
+      }),
+      createButtonGroup({
+        kind: "split",
+        label: "حفظ كمسودة",
+        variant: "secondary",
+        action: "حفظ كمسودة",
+        menuLabel: "إجراءات أخرى",
+      })
+    );
+    root.append(row);
+    root.append(createButtonGroup({
+      kind: "pair",
+      label: "تذييل النموذج",
+      options: [
+        { label: "إلغاء", variant: "secondary" },
+        { label: "حفظ التغييرات", variant: "primary" },
+      ],
+    }));
+  }
+
   function fillRules() {
     const root = mount("rules");
     rules.forEach(([ok, text]) => {
@@ -324,5 +388,6 @@
   fillSplit();
   fillPairs();
   fillMobile();
+  fillArabic();
   fillRules();
 })();

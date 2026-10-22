@@ -390,3 +390,17 @@
     transition: none;
   }
 }
+
+[data-page="button-groups"] .grp-rtl {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+[data-page="button-groups"] .grp-rtl-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}

@@ -622,6 +622,11 @@
   color: var(--text-primary);
 }
 
+:lang(ar) .button-group-choice,
+:lang(ar) .button-group-readout {
+  font-family: var(--font-arabic);
+}
+
 [dir="rtl"] .button-group-pill {
   transform: translateX(calc(var(--segment-width) * var(--segment-index) * -1));
 }
