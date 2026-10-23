@@ -1,0 +1,486 @@
+/* Falcon Payment cards. Every face measurement is in --card-unit (one Figma pixel of the 336 Full card). */
+
+.pay-card {
+  container-type: inline-size;
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--card-width-full);
+  aspect-ratio: var(--card-aspect);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-l);
+  background: none;
+  color: var(--card-on-dark);
+  font-family: var(--font-sans);
+  text-align: start;
+}
+
+.pay-card[data-size="medium"] {
+  max-inline-size: var(--card-width-medium);
+}
+
+.pay-face {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  border-radius: calc(var(--card-unit) * 16);
+  box-shadow: var(--shadow-card);
+}
+
+.pay-art {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.pay-card[data-product="purchase"] { --pay-text: var(--card-text-purchase); }
+.pay-card[data-product="expense"] { --pay-text: var(--card-text-expense); }
+.pay-card[data-product="corporate"] { --pay-text: var(--card-text-corporate); }
+.pay-card[data-product="cash"] { --pay-text: var(--card-text-cash); }
+.pay-card[data-product="platinum"] { --pay-text: var(--card-text-platinum); }
+.pay-card[data-product="sdb"] { --pay-text: var(--card-text-sdb); }
+.pay-card[data-product="hurr-sadu"] { --pay-text: var(--card-text-hurr-sadu); }
+.pay-card[data-product="hurr-najdi"] { --pay-text: var(--card-text-hurr-najdi); }
+.pay-card[data-product="hurr-nafud"] { --pay-text: var(--card-text-hurr-nafud); }
+.pay-card[data-product="hurr-asiri"] { --pay-text: var(--card-text-hurr-asiri); }
+.pay-card[data-surface="dark"] { --pay-scheme: var(--card-on-dark); }
+.pay-card[data-surface="light"] { --pay-scheme: var(--card-on-light); }
+
+.pay-label,
+.pay-number,
+.pay-scheme,
+.pay-ribbon {
+  position: absolute;
+  white-space: nowrap;
+}
+
+.pay-label {
+  inset-block-start: calc(var(--card-unit) * 18);
+  inset-inline-start: calc(var(--card-unit) * 20);
+  color: var(--pay-text);
+  font-size: calc(var(--card-unit) * 13);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+}
+
+.pay-number {
+  inset-block-start: calc(var(--card-unit) * 172);
+  inset-inline-start: calc(var(--card-unit) * 20);
+  display: flex;
+  gap: calc(var(--card-unit) * 8);
+  color: var(--pay-text);
+  font-family: var(--font-mono);
+  font-size: calc(var(--card-unit) * 15);
+  letter-spacing: calc(var(--card-unit) * 1.5);
+  line-height: 1.3;
+}
+
+.pay-scheme {
+  inset-block-start: calc(var(--card-unit) * 164);
+  inset-inline-start: calc(var(--card-unit) * 268);
+  display: grid;
+  place-items: center;
+  inline-size: calc(var(--card-unit) * 48);
+  block-size: calc(var(--card-unit) * 30);
+  border: calc(var(--card-unit) * 1) dashed var(--pay-scheme);
+  border-radius: calc(var(--card-unit) * 4);
+  color: var(--pay-scheme);
+  font-size: calc(var(--card-unit) * 11);
+  font-weight: var(--font-weight-semibold);
+}
+
+.pay-ribbon {
+  inset-block-start: calc(var(--card-unit) * 119);
+  inset-inline-start: 0;
+  padding: calc(var(--card-unit) * 3) calc(var(--card-unit) * 8) calc(var(--card-unit) * 3) calc(var(--card-unit) * 10);
+  border-start-end-radius: calc(var(--card-unit) * 4);
+  border-end-end-radius: calc(var(--card-unit) * 4);
+  background: var(--card-on-dark);
+  color: var(--card-on-light);
+  font-size: calc(var(--card-unit) * 11);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+}
+
+.pay-tint {
+  position: absolute;
+  inset: 0;
+}
+
+.pay-card[data-state="frozen"] .pay-tint { background: var(--card-tint-frozen); }
+
+.pay-card[data-state="inactive"] .pay-tint { background: var(--card-tint-inactive); }
+.pay-card[data-state="expired"] .pay-tint { background: var(--card-tint-expired); }
+
+.pay-badge {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--card-unit) * 6);
+  padding: calc(var(--card-unit) * 6) calc(var(--card-unit) * 12) calc(var(--card-unit) * 6) calc(var(--card-unit) * 10);
+  border-radius: var(--radius-pill);
+  background: var(--card-on-dark);
+  backdrop-filter: blur(var(--card-badge-blur));
+  box-shadow: var(--shadow-1);
+  color: var(--card-on-light);
+  font-size: calc(var(--card-unit) * 14);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+.pay-badge .hala-icon {
+  inline-size: calc(var(--card-unit) * 16);
+  block-size: calc(var(--card-unit) * 16);
+}
+
+.pay-badge:lang(ar),
+.pay-empty:lang(ar) {
+  font-family: var(--font-arabic);
+  letter-spacing: 0;
+}
+
+/* Placeholder: a button the size of a card. */
+.pay-card[data-state="placeholder"] {
+  cursor: pointer;
+  transition: transform var(--motion-instant) var(--ease-standard);
+}
+
+.pay-card[data-state="placeholder"]:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+.pay-card[data-state="placeholder"]:focus-visible {
+  outline: none;
+}
+
+.pay-card[data-state="placeholder"]:focus-visible .pay-face {
+  box-shadow: var(--focus-ring);
+}
+
+.pay-empty {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-2);
+  border: var(--border-width-step) dashed var(--border-strong);
+  background: var(--surface-subtle);
+  box-shadow: none;
+  color: var(--text-secondary);
+  font-size: var(--type-body-s-size);
+  font-weight: var(--font-weight-semibold);
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+
+.pay-empty .hala-icon {
+  inline-size: var(--space-6);
+  block-size: var(--space-6);
+}
+
+.pay-card[data-state="placeholder"]:hover .pay-empty {
+  background: var(--surface-hover);
+}
+
+/* Card mini: artwork only, for rows, pickers and anything under 120 wide. */
+.pay-mini {
+  container-type: inline-size;
+  position: relative;
+  display: inline-block;
+  flex: none;
+  inline-size: var(--card-mini-m);
+  aspect-ratio: var(--card-aspect);
+  vertical-align: middle;
+}
+
+.pay-mini[data-size="s"] { inline-size: var(--card-mini-s); }
+.pay-mini[data-size="m"] { inline-size: var(--card-mini-m); }
+.pay-mini[data-size="l"] { inline-size: var(--card-mini-l); }
+
+/* Figma mini radius is 1/16 of the width (3, 5, 7). */
+.pay-mini .pay-art {
+  border-radius: calc(var(--card-unit) * 21);
+}
+
+/* Card carousel */
+.pay-carousel {
+  display: grid;
+  gap: var(--space-2);
+  inline-size: 100%;
+}
+
+.pay-carousel[data-style="carousel"] .pay-stage {
+  display: grid;
+  grid-auto-columns: min(calc(100% - var(--card-peek) * 2 - var(--space-3) * 2), var(--card-width-full));
+  grid-auto-flow: column;
+  gap: var(--space-3);
+  padding-block: var(--space-2) var(--space-4);
+  padding-inline: max(var(--card-peek), calc((100% - var(--card-width-full)) / 2));
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  scroll-padding-inline: max(var(--card-peek), calc((100% - var(--card-width-full)) / 2));
+}
+
+.pay-carousel[data-style="carousel"] .pay-stage::-webkit-scrollbar {
+  display: none;
+}
+
+.pay-carousel[data-style="carousel"] .pay-slide {
+  scroll-snap-align: center;
+}
+
+.pay-carousel[data-style="carousel"] .pay-card {
+  max-inline-size: none;
+}
+
+.pay-carousel[data-style="fanned"] .pay-stage {
+  display: grid;
+  justify-items: center;
+  padding-block-start: calc(var(--card-fan-step) * 2);
+  cursor: pointer;
+}
+
+.pay-carousel[data-style="fanned"] .pay-slide {
+  grid-area: 1 / 1;
+  inline-size: min(100%, var(--card-width-full));
+  z-index: calc(10 - var(--pay-depth));
+  transform: translateY(calc(var(--card-fan-step) * var(--pay-depth) * -1)) scale(calc(1 - var(--card-fan-scale) * var(--pay-depth)));
+  transform-origin: 50% 0;
+  transition: transform var(--motion-indicator) var(--ease-spring), opacity var(--motion-fast) var(--ease-standard);
+}
+
+.pay-carousel[data-style="fanned"] .pay-slide:not([data-front="true"]) {
+  pointer-events: none;
+}
+
+.pay-carousel[data-style="fanned"] .pay-slide[data-behind="true"] {
+  opacity: 0;
+}
+
+.pay-dots-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--size-control-web);
+}
+
+.pay-dot {
+  display: grid;
+  place-items: center;
+  inline-size: calc(var(--card-dot) * 2);
+  min-inline-size: calc(var(--card-dot) * 2);
+  block-size: var(--size-control-web);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.pay-dot[aria-selected="true"] {
+  inline-size: calc(var(--card-dot-active) + var(--card-dot));
+}
+
+.pay-dot::before {
+  content: "";
+  inline-size: var(--card-dot);
+  block-size: var(--card-dot);
+  border-radius: var(--radius-pill);
+  background: var(--border-strong);
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+
+.pay-dot[aria-selected="true"]::before {
+  inline-size: var(--card-dot-active);
+  background: var(--text-primary);
+}
+
+.pay-dot:focus-visible {
+  outline: none;
+}
+
+.pay-dot:focus-visible::before {
+  box-shadow: var(--focus-ring);
+}
+
+/* Design option */
+.pay-options {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pay-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--size-control-web);
+  margin: 0;
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-l);
+  background: var(--surface-card);
+  color: var(--text-primary);
+  font: inherit;
+  text-align: start;
+  transition: background-color var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard), transform var(--motion-instant) var(--ease-standard);
+}
+
+button.pay-option {
+  cursor: pointer;
+}
+
+button.pay-option:hover {
+  background: var(--surface-hover);
+}
+
+button.pay-option:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+button.pay-option:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.pay-option[data-state="selected"] {
+  border: var(--border-width-step) solid var(--border-strong);
+  background: var(--surface-subtle);
+}
+
+.pay-option .pay-mini {
+  inline-size: calc(var(--card-mini-m) * 0.82);
+}
+
+.pay-option-copy,
+.pay-offer-name {
+  display: grid;
+  flex: 1;
+  gap: var(--space-1);
+  min-inline-size: 0;
+}
+
+.pay-option-title,
+.pay-offer-title {
+  font-size: var(--type-body-m-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+}
+
+.pay-option-sub,
+.pay-offer-sub {
+  color: var(--text-secondary);
+  font-size: var(--type-caption-size);
+  line-height: 1.3;
+}
+
+.pay-option:lang(ar),
+.pay-offer:lang(ar) {
+  font-family: var(--font-arabic);
+  letter-spacing: 0;
+}
+
+/* Card offer summary */
+.pay-offer {
+  display: grid;
+  gap: var(--space-3);
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding: var(--space-5);
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-xl);
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+.pay-offer-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.pay-offer-head .pay-mini {
+  inline-size: calc(var(--card-mini-m) * 0.82);
+}
+
+.pay-offer-rule {
+  inline-size: 100%;
+  margin: 0;
+  border: 0;
+  border-block-start: var(--border-width) solid var(--border-subtle);
+}
+
+.pay-offer-facts,
+.pay-offer-fees {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.pay-offer-fact,
+.pay-offer-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.pay-offer-fact dt,
+.pay-offer-line dt {
+  color: var(--text-secondary);
+  font-size: var(--type-body-s-size);
+}
+
+.pay-offer-fact dd,
+.pay-offer-line dd {
+  margin: 0;
+  font-size: var(--type-body-s-size);
+  font-weight: var(--font-weight-medium);
+  text-align: end;
+}
+
+.pay-offer-mono {
+  font-family: var(--font-mono);
+}
+
+.pay-offer:lang(ar) .pay-offer-mono {
+  font-family: var(--font-arabic);
+}
+
+.pay-offer-line[data-tone="success"] dt,
+.pay-offer-line[data-tone="success"] .list-amount {
+  color: var(--status-success-text);
+}
+
+.pay-offer-total dt {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.pay-offer-total .list-amount {
+  font-weight: var(--font-weight-semibold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pay-carousel[data-style="fanned"] .pay-slide,
+  .pay-dot::before {
+    transition: none;
+  }
+}
+
+:root[data-reduce-motion="true"] .pay-carousel[data-style="fanned"] .pay-slide,
+:root[data-reduce-motion="true"] .pay-dot::before {
+  transition: none;
+}

@@ -393,6 +393,37 @@
   --progress-height-l: 12px;
   --size-step-marker: 24px;
   --border-width-step: 1.5px;
+  /* Payment cards: one chassis at 1.586. --card-unit is one Figma pixel of the Full card (336 wide),
+     so every size scales from the same layout. Card colours do not change in Dark mode. */
+  --card-aspect: 336 / 212;
+  --card-unit: calc(100cqi / 336);
+  --card-width-full: 336px;
+  --card-width-medium: 264px;
+  --card-mini-s: 48px;
+  --card-mini-m: 88px;
+  --card-mini-l: 120px;
+  --card-on-dark: #FFFFFF;
+  --card-on-light: #0C1F1A;
+  --card-text-purchase: #FFFFFF;
+  --card-text-expense: #0C1F1A;
+  --card-text-corporate: #FFFFFF;
+  --card-text-cash: #0C1F1A;
+  --card-text-platinum: #0C1F1A;
+  --card-text-sdb: #FFFFFF;
+  --card-text-hurr-sadu: #EFE3CB;
+  --card-text-hurr-najdi: #F6E4D2;
+  --card-text-hurr-nafud: #3A2B18;
+  --card-text-hurr-asiri: #241B12;
+  --card-tint-frozen: rgb(255 255 255 / 0.38);
+  --card-tint-inactive: rgb(12 31 26 / 0.45);
+  --card-tint-expired: rgb(255 255 255 / 0.55);
+  /* Figma background blur 12; CSS blur() radius is half the Figma value. */
+  --card-badge-blur: 6px;
+  --card-dot: 6px;
+  --card-dot-active: 18px;
+  --card-peek: 8%;
+  --card-fan-step: 14px;
+  --card-fan-scale: 0.08;
 
   /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
   --gap-tabs: 18px;
