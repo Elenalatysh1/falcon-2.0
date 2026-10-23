@@ -368,6 +368,9 @@
   --pad-modal-footer-bottom: 18px;
   --pad-row-y: 14px;
   --inset-row: 52px;
+  /* Lists: icon tile in a list item, gap between title, subtitle and meta. */
+  --size-list-tile: 36px;
+  --gap-list-lines: 2px;
 
   /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
   --gap-tabs: 18px;

@@ -1,5 +1,5 @@
 /**
- * Tables. Load vendor/hala-icons.js, button.js, badges.js, and selection.js, then this script.
+ * Tables. Load vendor/hala-icons.js, button.js, badges.js, selection.js and lists.js, then this script.
  *
  * createCellTypes()
  * createSpendTable()
@@ -878,7 +878,7 @@
       const phone = el("div", "tbl-phone");
       phone.append(el("h3", "tbl-phone-title", "To review"), el("span", "tbl-overline", "This week"));
       const group = el("div", "tbl-list");
-      list.forEach((row) => {
+      list.forEach((row, index) => {
         const status = state.status[row.id] || row.status;
         const open = state.open === row.id;
         const item = el("div", "tbl-swipe");
@@ -904,12 +904,6 @@
         });
         actions.append(approve, later);
         const face = el("div", "tbl-swipe-face");
-        const logo = el("span", "tbl-logo", initials(row.merchant));
-        logo.dataset.tone = row.tone;
-        const copy = el("div", "tbl-tx-copy");
-        copy.append(el("strong", "tbl-name", row.merchant), el("span", "tbl-sub", `${row.holder.split(" ")[0]} · ${row.card} •• ${row.last}`));
-        const side = el("div", "tbl-tx-side");
-        side.append(el("span", "tbl-amount", `− ${money(row.amount)}`), badge(status, TONE[status]));
         const more = el("button", "tbl-more", "⋯");
         more.type = "button";
         more.dataset.key = `swipe:${row.id}`;
@@ -920,7 +914,16 @@
           state.focus = more.dataset.key;
           paint();
         });
-        face.append(logo, copy, side, more);
+        face.append(createTransactionRow({
+          merchant: row.merchant,
+          detail: `${row.holder.split(" ")[0]} · ${row.card} •• ${row.last}`,
+          initials: initials(row.merchant),
+          tone: index % 5 + 1,
+          amount: row.amount,
+          flow: status === "Declined" ? "declined" : "out",
+          status: { label: status, tone: TONE[status] },
+          end: more,
+        }));
         item.append(actions, face);
         group.append(item);
       });

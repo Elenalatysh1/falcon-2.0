@@ -1,6 +1,6 @@
 (function () {
   const page = document.querySelector('[data-page="fintech"]');
-  if (!page || !window.createButton || !window.createInput || !window.createBadge || !window.createOtp) return;
+  if (!page || !window.createButton || !window.createInput || !window.createBadge || !window.createOtp || !window.createTransactionRow) return;
 
   const AVAILABLE = 45000;
   const APPROVAL = 20000;
@@ -251,15 +251,17 @@
       list.append(row);
 
       if (index < 5) {
-        const mobileRow = el("div", "ft-mobile-row");
-        const mobileFace = avatar(initials, tone, shape);
-        const text = el("div", "ft-who-copy");
-        text.append(el("strong", "ft-mobile-name", name), el("span", "ft-mobile-sub", `${time.replace("Today, ", "")} · ${method.split(" · ")[0]}`));
-        const side = el("div", "ft-side-amount");
-        side.append(amountText(value, "type-amount-m", amountTone, true));
-        if (status) side.append(createBadge({ label: status, tone: statusTone[status], size: "sm" }));
-        mobileRow.append(mobileFace, text, side);
-        mobile.append(mobileRow);
+        mobile.append(createTransactionRow({
+          merchant: name,
+          detail: `${time.replace("Today, ", "")} · ${method.split(" · ")[0]}`,
+          initials,
+          tone: index + 1,
+          amount: value,
+          flow: status === "Declined" ? "declined" : value > 0 ? "in" : "out",
+          status: status ? { label: status, tone: statusTone[status] } : null,
+          masked: store.hide,
+          currency: store.currency,
+        }));
       }
     });
   }
@@ -320,7 +322,7 @@
 
     const hero = el("div", "ft-sheet-hero");
     hero.append(el("span", "ft-quiet", "You're sending"), el("span", "ft-large ft-mono", store.hide ? "••••••" : fmt(value)), el("span", "", "to Nour Trading"));
-    const sheetRows = el("div", "ft-sheet-list");
+    const sheetRows = el("dl", "list-details ft-sheet-list");
     [
       ["From", "Main •• 1951"],
       ["Bank", "Al Rajhi Bank"],
@@ -328,9 +330,7 @@
       ["Fee", "Free"],
       ["Arrives", approve ? "After approval" : "Within minutes"],
     ].forEach(([key, text]) => {
-      const row = el("div", "ft-sheet-row");
-      row.append(el("span", "", key), el("span", key === "IBAN" || key === "From" ? "ft-mono" : "", text));
-      sheetRows.append(row);
+      sheetRows.append(createDetailRow({ label: key, value: text, style: key === "IBAN" || key === "From" ? "mono" : "text" }));
     });
     const confirm = button({
       label: over ? "Not enough balance" : approve ? "Send for approval" : "Confirm with OTP",

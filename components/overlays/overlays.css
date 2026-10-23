@@ -635,19 +635,6 @@
   font-size: var(--type-body-s-size);
 }
 
-.overlay-kv-row {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: var(--space-3) 0;
-  border-top: var(--border-width) solid var(--border-subtle);
-}
-
-.overlay-kv-row b {
-  font-weight: var(--font-weight-medium);
-  color: var(--text-primary);
-}
-
 .overlay[data-open="true"] .overlay-scrim {
   animation: overlay-fade var(--motion-fast) var(--ease-out);
 }

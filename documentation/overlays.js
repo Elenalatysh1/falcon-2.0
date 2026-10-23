@@ -1,6 +1,6 @@
 (function () {
   const page = document.querySelector('[data-page="overlays"]');
-  if (!page || !window.createOverlay) return;
+  if (!page || !window.createOverlay || !window.createDetails) return;
 
   const decide = [
     ["Must the user decide before continuing?", "Modal or confirmation"],
@@ -168,12 +168,11 @@
     const amount = el("em", "");
     merchant.append(name, amount);
     if (window.createBadge) merchant.append(createBadge({ label: "Settled", tone: "settled" }));
-    const facts = el("div", "ov-facts");
-    [["Date", "Today, 12:41"], ["Method", "mada •• 3301"]].forEach(([label, value]) => {
-      const row = el("div", "overlay-kv-row");
-      row.append(el("span", "", label), el("b", "", value));
-      facts.append(row);
-    });
+    const facts = createDetails([
+      { label: "Date", value: "Today, 12:41", style: "mono" },
+      { label: "Method", value: "mada •• 3301", style: "mono" },
+    ]);
+    facts.classList.add("ov-facts");
     const note = el("label", "ov-note");
     note.append(el("span", "", "Note"));
     const area = el("textarea");

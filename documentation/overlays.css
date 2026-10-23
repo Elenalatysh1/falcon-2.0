@@ -326,17 +326,6 @@
   background: var(--surface-subtle);
 }
 
-[data-page="overlays"] .ov-facts .overlay-kv-row {
-  border-top: 0;
-  border-bottom: var(--border-width) solid var(--border-subtle);
-  padding: var(--space-3) 0;
-  font-size: var(--docs-type-body-s-size);
-}
-
-[data-page="overlays"] .ov-facts .overlay-kv-row:last-child {
-  border-bottom: 0;
-}
-
 [data-page="overlays"] .ov-pops {
   grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-modal-s) - var(--space-8)), 1fr));
 }

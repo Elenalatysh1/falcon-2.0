@@ -1025,12 +1025,8 @@
 .tbl-swipe-face {
   position: relative;
   z-index: 1;
-  min-height: calc(var(--space-14) + var(--space-3));
-  padding: var(--space-3) var(--pad-row-y);
+  padding-inline-end: var(--space-2);
   background: var(--surface-card);
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
   transform: translateX(0);
   transition: transform var(--motion-emphasis) var(--ease-standard);
 }
@@ -1039,32 +1035,10 @@
   transform: translateX(calc(var(--space-10) * -4));
 }
 
-.tbl-tx-copy {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-day);
-}
-
-.tbl-tx-copy strong,
-.tbl-tx-copy span {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.tbl-tx-side {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-1);
-}
-
 .tbl-more {
   width: var(--space-7);
   height: var(--target-web);
-  margin-inline-end: calc(var(--space-2) * -1);
+  flex: none;
   border: 0;
   background: transparent;
   color: var(--text-disabled);

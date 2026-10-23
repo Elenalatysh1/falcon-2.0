@@ -522,15 +522,13 @@
   height: var(--icon-badge-sm);
 }
 
-.ft-who-copy,
-.ft-side-amount {
+.ft-who-copy {
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 
-.ft-who-copy strong,
-.ft-mobile-name {
+.ft-who-copy strong {
   font-size: var(--docs-type-body-s-size);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
@@ -539,8 +537,7 @@
 }
 
 .ft-who-copy span,
-.ft-method,
-.ft-mobile-sub {
+.ft-method {
   color: var(--text-secondary);
   font-size: var(--docs-type-caption-size);
   white-space: nowrap;
@@ -550,24 +547,6 @@
 
 .ft-amount-cell {
   justify-content: flex-end;
-}
-
-.ft-mobile-row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: var(--layout-topbar);
-  border-top: var(--border-width) solid var(--border-subtle);
-}
-
-.ft-mobile-list .ft-mobile-row:first-child {
-  border-top-color: transparent;
-}
-
-.ft-side-amount {
-  align-items: flex-end;
-  gap: var(--space-1);
-  flex: none;
 }
 
 .ft-index {
@@ -670,23 +649,6 @@
   align-items: center;
   gap: var(--space-1);
   text-align: center;
-}
-
-.ft-sheet-row {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding-block: var(--space-3);
-  border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--docs-type-body-s-size);
-}
-
-.ft-sheet-list .ft-sheet-row:first-child {
-  border-top-color: transparent;
-}
-
-.ft-sheet-row span:first-child {
-  color: var(--docs-text-tertiary);
 }
 
 .ft-track {
@@ -1080,4 +1042,8 @@
   .ft-bar {
     top: calc(var(--space-4) + var(--size-sm) + var(--space-3));
   }
+}
+
+.card.ft-mobile-list {
+  padding: var(--space-1);
 }

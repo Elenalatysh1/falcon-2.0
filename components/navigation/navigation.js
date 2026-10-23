@@ -1,6 +1,6 @@
 /**
  * Navigation and app shell. Load vendor/hala-icons.js, components/button/button.js,
- * components/button-groups/button-groups.js and components/tabs/tabs.js, then this script.
+ * components/button-groups/button-groups.js, components/tabs/tabs.js and components/lists/lists.js, then this script.
  *
  * createNavShell({ locale })          Web app shell: Sidebar, Web top bar and the page.
  *                                     Desktop shows the 272 sidebar, Tablet the 80 rail.
@@ -332,11 +332,11 @@
       head.append(el("strong", "", t.notifications), button("nv-text-btn", t.markRead, () => { read = true; paint(); }));
       pop.append(head);
       t.alerts.forEach(([name, detail]) => {
-        const row = el("div", "nv-note-row");
+        const pip = el("i", "nv-pip");
+        pip.setAttribute("aria-hidden", "true");
+        const row = createListItem({ title: name, subtitle: detail, leadingNode: pip, density: "compact" });
+        row.classList.add("nv-note-row");
         row.dataset.unread = read ? "false" : "true";
-        const text = el("div");
-        text.append(el("strong", "", name), el("span", "", detail));
-        row.append(el("i", "nv-pip"), text);
         pop.append(row);
       });
     }
