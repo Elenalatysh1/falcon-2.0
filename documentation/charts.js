@@ -108,7 +108,9 @@
     const main = el("div", "chd-main");
     const pageEl = el("div", "chd-page");
     pageEl.append(
-      createChartCard({ platform: "web", state: empty ? "empty" : "default", lang }),
+      !empty && lang !== "ar" && window.createSalesFilters
+        ? createSalesFilters()
+        : createChartCard({ platform: "web", state: empty ? "empty" : "default", lang }),
       schemes(lang),
       branches(lang),
     );

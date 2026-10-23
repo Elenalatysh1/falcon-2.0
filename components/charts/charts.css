@@ -117,18 +117,27 @@
 .ch-bar:active { transform: scaleY(var(--motion-press-scale)); }
 .ch-bar:focus-visible { outline: var(--focus-ring); outline-offset: var(--space-1); }
 
-.ch-fill {
+.ch-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+}
+
+.ch-part {
   display: block;
   width: 100%;
-  height: var(--ch-h, 50%);
-  border-radius: var(--chart-bar-radius) var(--chart-bar-radius) 0 0;
-  background: var(--chart-bar);
   transition: height var(--motion-standard) var(--ease-standard), background-color var(--motion-fast) var(--ease-standard);
 }
 
-.ch-bar[data-state="current"] .ch-fill,
-.ch-bar[data-state="selected"] .ch-fill { background: var(--chart-1); }
-.ch-bar[data-state="muted"] .ch-fill { background: var(--chart-bar-muted); }
+.ch-part[data-series="pos"] { background: var(--chart-1); }
+.ch-part[data-series="online"] {
+  background: var(--chart-2);
+  border-radius: var(--chart-bar-radius) var(--chart-bar-radius) 0 0;
+}
+
+.ch-bar[data-state="muted"] .ch-part { background: var(--chart-bar-muted); }
 
 .ch-tip {
   position: absolute;

@@ -117,7 +117,9 @@
       const button = el("button", "ch-bar");
       button.type = "button";
       const ratio = value / max;
-      button.style.setProperty("--ch-h", `${Math.max(4, Math.round(ratio * 100))}%`);
+      const pos = Math.max(8, Math.round(ratio * 62));
+      const online = Math.max(6, Math.round(ratio * 28));
+      button.style.setProperty("--ch-h", `${pos + online}%`);
       function state() {
         if (selected === index) return "selected";
         if (selected != null) return "muted";
@@ -126,11 +128,18 @@
       button.dataset.state = state();
       button.setAttribute("aria-pressed", selected === index ? "true" : "false");
       button.setAttribute("aria-label", `${labels[index]} ${Math.round(value * 226500)}`);
-      const fill = el("span", "ch-fill");
+      const stack = el("span", "ch-stack");
+      const onlinePart = el("span", "ch-part");
+      onlinePart.dataset.series = "online";
+      onlinePart.style.height = `${online}%`;
+      const posPart = el("span", "ch-part");
+      posPart.dataset.series = "pos";
+      posPart.style.height = `${pos}%`;
+      stack.append(onlinePart, posPart);
       const tip = el("span", "ch-tip");
       tip.append(amount(Math.round(value * 226500), "xs"));
       tip.dir = "ltr";
-      button.append(fill, tip);
+      button.append(stack, tip);
       button.addEventListener("click", () => {
         selected = selected === index ? undefined : index;
         [...cols.children].forEach((child, childIndex) => {
