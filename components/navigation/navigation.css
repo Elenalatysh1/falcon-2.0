@@ -877,9 +877,9 @@
 /* Headers and footers */
 .nv-cards-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 6), 1fr)); gap: var(--space-3); }
 .nv-panel { background: var(--surface-card); border-radius: var(--radius-2xl); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
-.nv-panel header { display: flex; justify-content: space-between; gap: var(--space-3); align-items: flex-start; }
+.nv-panel > header { display: flex; justify-content: space-between; gap: var(--space-3); align-items: flex-start; }
 .nv-panel h3 { margin: 0; font-size: var(--type-body-l-size); font-weight: var(--font-weight-bold); }
-.nv-panel header p, .nv-panel > div > p { margin: var(--gap-day) 0 0; color: var(--text-tertiary); font-size: var(--type-hint-size); }
+.nv-panel > header p, .nv-panel > div > p { margin: var(--gap-day) 0 0; color: var(--text-tertiary); font-size: var(--type-hint-size); }
 .nv-frame { border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-l); }
 .nv-frame .nv-webbar { border-bottom: 0; border-radius: var(--radius-l); }
 .nv-search-btn, .nv-primary, .nv-secondary, .nv-quiet {
