@@ -371,6 +371,20 @@
   /* Lists: icon tile in a list item, gap between title, subtitle and meta. */
   --size-list-tile: 36px;
   --gap-list-lines: 2px;
+  /* Data table: Table density modes (Default, Compact, Comfortable) and column widths. */
+  --table-row-height: 56px;
+  --table-row-height-compact: 44px;
+  --table-row-height-comfortable: 64px;
+  --table-header-height: 40px;
+  --table-header-height-compact: 32px;
+  --table-header-height-comfortable: 44px;
+  --table-cell-padding-x: 16px;
+  --table-cell-padding-x-compact: 12px;
+  --table-cell-padding-x-comfortable: 20px;
+  --table-amount-col-width: 150px;
+  --table-amount-col-width-narrow: 120px;
+  --table-identity-min: 160px;
+  --table-meta-max: 350px;
 
   /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
   --gap-tabs: 18px;

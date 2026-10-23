@@ -23,6 +23,7 @@ const aliases = {
   checkbox: { page: "selection", section: "" },
   radio: { page: "selection", section: "selection-radio" },
   switch: { page: "selection", section: "selection-toggle" },
+  tables: { page: "data-tables", section: "" },
 };
 
 function resolve(hash) {

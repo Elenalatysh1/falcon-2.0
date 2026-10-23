@@ -150,7 +150,7 @@
     }));
     const showStatus = options.status && (!compact || flow === "declined");
     if (showStatus && window.createBadge) {
-      side.append(createBadge({ label: options.status.label, tone: options.status.tone, variant: "subtle", size: "sm" }));
+      side.append(createBadge({ label: options.status.label, tone: options.status.tone, variant: "subtle", size: "sm", icon: Boolean(options.status.icon) }));
     }
     const row = createListItem({
       ...options,
