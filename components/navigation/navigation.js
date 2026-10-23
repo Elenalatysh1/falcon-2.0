@@ -107,7 +107,7 @@
       initials: "KA", user: "MA", userName: "Mona Alharbi", business: "Business", home: "Home", export: "Export",
       tabs: ["Overview", "Activity", "Settings"], collapse: "Collapse sidebar", expand: "Expand sidebar",
       notifications: "Notifications", switcher: "Switch account", desktop: "Desktop · 272", tablet: "Tablet · 80 rail",
-      breakpoint: "Breakpoint", back: "Back", close: "Close", done: "Done", tabbar: "App", time: "9:41", find: "Search",
+      breakpoint: "Breakpoint", back: "Back", close: "Close", done: "Done", tabbar: "App", time: "9:41", find: "Search", main: "Main", manage: "Manage",
       markRead: "Mark all read", alerts: [["Transfer needs approval", "Nour Trading · today"], ["Card frozen", "Operations •• 2086"], ["Statement ready", "September 2026"]],
     },
     ar: {
@@ -115,7 +115,7 @@
       initials: "KA", user: "MA", userName: "منى الحربي", business: "الأعمال", home: "الرئيسية", export: "تصدير",
       tabs: ["نظرة عامة", "النشاط", "الإعدادات"], collapse: "طي الشريط الجانبي", expand: "توسيع الشريط الجانبي",
       notifications: "الإشعارات", switcher: "تبديل الحساب", desktop: "سطح المكتب · 272", tablet: "الجهاز اللوحي · 80",
-      breakpoint: "نقطة التوقف", back: "رجوع", close: "إغلاق", done: "تم", tabbar: "التطبيق", time: "9:41", find: "بحث",
+      breakpoint: "نقطة التوقف", back: "رجوع", close: "إغلاق", done: "تم", tabbar: "التطبيق", time: "9:41", find: "بحث", main: "الرئيسية", manage: "الإدارة",
       markRead: "تحديد الكل كمقروء", alerts: [["تحويل بانتظار الموافقة", "نور للتجارة · اليوم"], ["تم تجميد البطاقة", "العمليات •• 2086"], ["الكشف جاهز", "سبتمبر 2026"]],
     },
   };
@@ -235,16 +235,10 @@
     if (rail) {
       row.dataset.tip = label;
       row.setAttribute("aria-label", entry.count ? `${label}, ${entry.count}` : label);
-      if (entry.count) row.append(counter(entry.count, "alert"));
     } else {
       row.append(el("span", "nv-label", label));
-      if (entry.count) row.append(counter(entry.count));
-      if (entry.key) {
-        const keys = el("span", "nv-shortcut", entry.key);
-        keys.setAttribute("aria-hidden", "true");
-        row.append(keys);
-      }
     }
+    if (entry.count) row.append(counter(entry.count));
     return row;
   }
 
@@ -314,7 +308,12 @@
     paint();
 
     actions.append(switcher, wrap, avatar(t.user, "md"));
-    bar.append(search, actions);
+    if (options.search === false) {
+      bar.dataset.search = "false";
+      bar.append(actions);
+    } else {
+      bar.append(search, actions);
+    }
     return bar;
   }
 
@@ -339,7 +338,7 @@
     side.setAttribute("aria-label", t.sidebar);
     const main = el("div", "nv-main");
     const pageEl = el("div", "nv-page");
-    main.append(createNavWebTopBar(options), pageEl);
+    main.append(createNavWebTopBar({ ...options, search: false }), pageEl);
     stage.append(side, main);
 
     function go(id, key) {
@@ -352,46 +351,58 @@
       const rail = mode === "tablet";
       side.replaceChildren();
       const head = el("div", "nv-head");
+      const brand = el("div", "nv-brand-row");
       if (rail) {
-        const home = button("nv-logo-btn", "", () => { mode = "desktop"; restore = "collapse"; paint(); }, "expand");
+        const home = button("nv-logo-btn", "", () => { mode = "desktop"; restore = "collapse"; paint(); }, "expand-logo");
         home.setAttribute("aria-label", t.expand);
         home.dataset.tip = t.expand;
         home.append(logo(false));
-        head.append(home);
+        brand.append(home);
       } else {
-        head.append(logo(true), iconButton("sidebar", t.collapse, () => { mode = "tablet"; restore = "expand"; paint(); }, "collapse"));
+        brand.append(logo(true), iconButton("sidebar", t.collapse, () => { mode = "tablet"; restore = "expand"; paint(); }, "collapse"));
       }
+      const search = button("nv-side-search", "", null, "side-search");
+      search.setAttribute("aria-label", `${t.find} ⌘K`);
+      if (rail) search.dataset.tip = t.find;
+      const searchIcon = icon("search", "inline");
+      if (searchIcon) search.append(searchIcon);
+      if (!rail) {
+        const keycap = el("kbd", "nv-keycap", "⌘K");
+        keycap.setAttribute("aria-hidden", "true");
+        search.append(el("span", "nv-label", t.find), keycap);
+      }
+      head.append(brand, search);
+
       const nav = el("nav", "nv-nav");
       nav.setAttribute("aria-label", t.sidebar);
-      const groups = [["main", ""], ["business", t.business]];
-      groups.forEach(([group, title]) => {
+      [["main", t.main], ["business", t.business], ["foot", t.manage]].forEach(([group, title]) => {
         const block = el("div", "nv-group");
-        if (title) {
-          const kicker = el("span", "nv-kicker", rail ? "" : title);
-          kicker.setAttribute("role", rail ? "separator" : "presentation");
-          block.append(kicker);
-        }
+        const kicker = el("span", "nv-kicker", rail ? "" : title);
+        kicker.setAttribute("role", rail ? "separator" : "presentation");
+        block.append(kicker);
         SIDEBAR.filter((entry) => entry.group === group).forEach((entry) => {
           block.append(sideItem(entry, t, rail, entry.id === page, () => go(entry.id)));
         });
         nav.append(block);
       });
-      const foot = el("div", "nv-group nv-foot-items");
-      SIDEBAR.filter((entry) => entry.group === "foot").forEach((entry) => {
-        foot.append(sideItem(entry, t, rail, entry.id === page, () => go(entry.id)));
-      });
+
+      const foot = el("div", "nv-side-foot");
+      if (rail) foot.append(iconButton("sidebar", t.expand, () => { mode = "desktop"; restore = "collapse"; paint(); }, "expand"));
       const account = button("nv-account-row", "", null, "account");
-      account.setAttribute("aria-label", `${t.switcher}: ${t.company}, ${t.role}`);
-      if (rail) account.dataset.tip = t.company;
-      account.append(avatar(t.initials, "sm"));
+      account.setAttribute("aria-label", `${t.switcher}: ${t.userName}, ${t.company}, ${t.role}`);
+      if (rail) account.dataset.tip = t.userName;
+      const face = avatar(t.user, "md");
+      face.append(el("i", "nv-online"));
+      account.append(face);
       if (!rail) {
         const who = el("span", "nv-user-copy");
-        who.append(el("strong", "", t.company), el("span", "", t.role));
+        who.append(el("strong", "", t.userName), el("span", "", `${t.company} · ${t.role}`));
         account.append(who);
         const chev = icon("expand", "inline");
         if (chev) account.append(chev);
       }
-      side.append(head, nav, el("span", "nv-spacer"), foot, account);
+      foot.append(account);
+      side.append(head, nav, foot);
     }
 
     function paintPage() {
@@ -839,13 +850,13 @@
     const root = el("div", "nv-stack");
     const dashboard = SIDEBAR[0];
     const groups = [
-      ["Sidebar item · expanded", "nv-state-row", [["Default", ""], ["Hover", "hover"], ["Active", "active"], ["Focus", "focus"], ["Disabled", "disabled"]].map(([name, state]) => {
+      ["Sidebar item · expanded", "nv-state-row", [["Default", ""], ["Hover", "hover"], ["Active", "active"], ["Focus", "focus"], ["Pressed", "pressed"], ["Disabled", "disabled"]].map(([name, state]) => {
         const cell = el("div", "nv-state-cell");
         cell.dataset.wide = "true";
         cell.append(sideItem({ ...dashboard, count: "" }, t, false, state === "active", null, state || "default"), el("span", "", name));
         return cell;
       })],
-      ["Sidebar item · rail", "nv-state-row", [["Default", ""], ["Hover", "hover"], ["Active", "active"], ["Focus", "focus"], ["Disabled", "disabled"]].map(([name, state]) => {
+      ["Sidebar item · rail", "nv-state-row", [["Default", ""], ["Hover", "hover"], ["Active", "active"], ["Focus", "focus"], ["Pressed", "pressed"], ["Disabled", "disabled"]].map(([name, state]) => {
         const cell = el("div", "nv-state-cell");
         const rail = el("div", "nv-rail-sample");
         rail.append(sideItem({ ...dashboard, count: "" }, t, true, state === "active", null, state || "default"));

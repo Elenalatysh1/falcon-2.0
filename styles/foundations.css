@@ -525,6 +525,11 @@
   --size-status-bar: 44px;
   --size-rail-item: 56px;
   --device-camera: #000000;
+  /* Sidebar — mint active and pressed fills, active text, account avatar. */
+  --surface-nav-active: rgba(15, 163, 127, 0.1);
+  --surface-nav-pressed: rgba(15, 163, 127, 0.16);
+  --text-nav-active: #07372B;
+  --gradient-avatar: linear-gradient(135deg, #DCE5FF, #B9C9FF);
   --size-search-web: 360px;
   --size-keycap: 22px;
   --layout-page-padding: var(--space-8);
@@ -625,6 +630,10 @@
   --glass-scroll-edge-end: rgba(0, 0, 0, 0);
   --shadow-glass-control: inset 0 1px 0 var(--glass-highlight), 0 4px 16px rgba(0, 0, 0, 0.4);
   --glass-edge-tint: rgba(0, 0, 0, 0.5);
+  --surface-nav-active: rgba(15, 163, 127, 0.16);
+  --surface-nav-pressed: rgba(15, 163, 127, 0.26);
+  --text-nav-active: #9DD3C2;
+  --gradient-avatar: linear-gradient(135deg, #2A3558, #1E2A4A);
   --surface-subtle: #262626;
   --surface-sticky: rgba(38, 38, 38, 0.92);
   --surface-sunken: #1F1F1F;
