@@ -136,6 +136,10 @@
 .list-amount[data-size="m"] { font-size: var(--type-heading-m-size); line-height: var(--type-heading-m-line); font-weight: var(--font-weight-semibold); }
 .list-amount[data-size="xs"] .list-sar { width: var(--type-mono-caption-size); height: var(--type-mono-caption-size); }
 .list-amount[data-size="m"] .list-sar { width: var(--icon-default); height: var(--icon-default); }
+.list-amount[data-size="l"] { font-size: var(--type-amount-xl-size); line-height: var(--type-amount-xl-line); font-weight: var(--font-weight-semibold); }
+.list-amount[data-size="l"] .list-sar { width: var(--size-amount-sign-l); height: var(--size-amount-sign-l); }
+.list-amount[data-size="xl"] { font-size: var(--type-amount-transfer); line-height: var(--type-amount-transfer-line); font-weight: var(--font-weight-semibold); }
+.list-amount[data-size="xl"] .list-sar { width: var(--size-amount-sign); height: var(--size-amount-sign); }
 .list-amount[data-kind="credit"] { color: var(--status-credit); }
 .list-amount[data-kind="muted"] { color: var(--text-tertiary); }
 .list-item[data-flow="declined"] .list-digits { text-decoration: line-through; }
@@ -233,6 +237,11 @@
   line-height: var(--type-heading-m-line);
   font-weight: var(--type-heading-m-weight);
 }
+.list-detail[data-style="total"] .list-amount {
+  font-size: var(--type-amount-drawer);
+  line-height: var(--type-amount-drawer-line);
+}
+.list-detail[data-style="total"] .list-amount .list-sar { width: var(--size-amount-sign-m); height: var(--size-amount-sign-m); }
 
 /* Skeleton: the loading state keeps the row rhythm. */
 .list-bone {

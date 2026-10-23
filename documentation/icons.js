@@ -97,6 +97,7 @@ const groups = [
     ["Chat", "chat"],
     ["Language", "language"],
     ["Support", "support"],
+    ["24h support", "support-24"],
     ["Gift", "gift"],
   ]],
   ["ARROWS", [

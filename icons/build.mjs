@@ -128,6 +128,7 @@ const catalog = {
   chat: "comment",
   language: "language-square",
   support: "message-question",
+  "support-24": "24-support",
   gift: "gift",
   sparkles: "magic-star",
   back: "arrow-left",

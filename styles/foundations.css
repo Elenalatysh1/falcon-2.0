@@ -341,6 +341,7 @@
   --type-mono-caption-line: 18px;
 
   /* Space */
+  --space-0-5: 2px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -434,6 +435,19 @@
   --size-recipient-check: 18px;
   --width-recipient: 76px;
   --shadow-key: 0 1px 0 rgba(0, 0, 0, 0.12);
+  /* Balance & receipts: Balance hero Card (card/purchase start to mid, the same in Dark), Amount text L and M
+     signs, and the receipt perforation (dashes 6 on 6, 1.5 thick, 20 notches). */
+  --gradient-balance: linear-gradient(135deg, #0F3D33 64%, #0A7559 86%);
+  --card-accent: #7ACB52;
+  --card-on-dark-muted: rgb(255 255 255 / 0.72);
+  --card-on-dark-soft: rgb(255 255 255 / 0.8);
+  --card-on-dark-line: rgb(255 255 255 / 0.14);
+  --card-on-dark-hover: rgb(255 255 255 / 0.1);
+  --size-amount-sign-l: 30px;
+  --size-amount-sign-m: 26px;
+  --size-notch: 20px;
+  --perforation-dash: 6px;
+  --border-width-perforation: 1.5px;
 
   /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
   --gap-tabs: 18px;

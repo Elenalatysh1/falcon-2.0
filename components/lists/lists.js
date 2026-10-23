@@ -13,8 +13,8 @@
  * createListHeader({ label, total, sticky })          Groups rows (by day, by type). total is a signed number.
  * createDetailRow({ label, value, style })            Label and value. style: "text" | "mono" | "amount" | "total".
  * createListSkeleton({ rows, leading })               Loading state: bone rows with the same rhythm.
- * createAmount(value, { signed, kind, size, masked, currency })  Riyal sign (or currency: "code" for SAR), + / − sign,
- *   mono digits that never mirror. masked hides the digits.
+ * createAmount(value, { signed, kind, size, masked, maskedLabel, currency })  Riyal sign (or currency: "code" for SAR),
+ *   + / − sign, mono digits that never mirror. size: "xl" | "l" | "m" | "s" | "xs". masked keeps the sign, hides the digits.
  *
  * state: "default" | "hover" | "pressed" | "focus" | "disabled" | "selected" renders an inert specimen.
  */
@@ -53,16 +53,17 @@
     const kind = options.kind || (options.signed && value > 0 ? "credit" : "plain");
     node.dataset.kind = kind;
     node.dataset.size = options.size || "s";
-    if (options.masked) {
-      node.append(el("span", "list-digits", "••••••"));
-      node.setAttribute("aria-label", "Amount hidden");
-      return node;
-    }
-    const sign = options.signed ? (value > 0 ? "+" : "−") : "";
     let mark;
     if (options.currency === "code") mark = el("span", "list-code", "SAR");
     else mark = el("span", "list-sar");
     mark.setAttribute("aria-hidden", "true");
+    if (options.masked) {
+      node.dataset.masked = "true";
+      node.append(mark, el("span", "list-digits", "••••••"));
+      node.setAttribute("aria-label", options.maskedLabel || "Amount hidden");
+      return node;
+    }
+    const sign = options.signed ? (value > 0 ? "+" : "−") : "";
     node.append(mark, el("span", "list-digits", `${sign}${format(value)}`));
     node.setAttribute("aria-label", `${sign === "−" ? "minus " : sign === "+" ? "plus " : ""}${format(value)} Saudi riyals`);
     return node;
