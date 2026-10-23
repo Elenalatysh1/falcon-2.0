@@ -172,10 +172,53 @@
     return card;
   }
 
+  function kpis(lang) {
+    const ar = lang === "ar";
+    const grid = el("div", "chd-kpis");
+    [
+      [ar ? "إجمالي الرصيد" : "Total balance", 1284530.2, ar ? "+ 4.2%" : "+ 4.2%", "up", [1180, 1195, 1172, 1210, 1236, 1221, 1248, 1262, 1240, 1270, 1284]],
+      [ar ? "وارد" : "Money in", 612000, "+ 3.7%", "up", [520, 498, 540, 565, 512, 590, 612]],
+      [ar ? "صادر" : "Money out", 548200, "+ 5.4%", "down", [470, 488, 455, 510, 530, 520, 548]],
+      [ar ? "بانتظار الموافقة" : "Pending approvals", 6, "71,300.25", "flat", [2, 4, 3, 5, 4, 7, 6], false],
+    ].forEach(([label, value, change, tone, values, currency]) => {
+      const card = el("div", "chd-kpi");
+      const head = el("div", "chd-kpi-head");
+      const delta = el("span", "ch-delta", change);
+      delta.dataset.up = tone === "down" ? "false" : tone === "up" ? "true" : "";
+      if (tone === "flat") delta.className = "ch-kicker";
+      head.append(el("span", "ch-kicker", label), delta);
+      card.append(
+        head,
+        currency === false ? el("span", "ch-stat-value", String(value)) : createAmount(value, { size: "m" }),
+        createSparkline({ values, tone }),
+      );
+      grid.append(card);
+    });
+    return grid;
+  }
+
+  function dashBoard(lang) {
+    const split = el("div", "chd-dash-grid");
+    const sparks = el("article", "ch-dash");
+    sparks.append(el("span", "ch-kicker", lang === "ar" ? "أهم الأطراف" : "Top counterparties"), createSparkRows({ lang }));
+    const meter = el("article", "ch-dash");
+    meter.append(createCategoryMeter({ lang }));
+    split.append(sparks, meter);
+    const stack = el("div", "dtd-stack");
+    stack.append(kpis(lang), createCashFlowChart({ lang }), createBalanceLine({ lang }), split);
+    return stack;
+  }
+
   function fillWeb() {
     mount("web").append(
       block("Analytics · Chart card with a hovered bar, then Share bar and Ranked row.", analytics("en"), "Live · tap a bar"),
       block("The same page with no sales yet.", analytics("en", true)),
+    );
+  }
+
+  function fillDash() {
+    mount("dash").append(
+      block("Cash flow, balance line, sparklines and spend meter — the same charts as Data and dashboards.", dashBoard("en"), "Live · hover a month or a day"),
     );
   }
 
@@ -193,6 +236,10 @@
       specimen("Bar chart", "Comparing a value across days, months or hours.", "Inside Chart card, or on its own in a card.", "7, 12 or 24 bars. Swap one to Selected for tap or hover. Latest period is on the left in Arabic.", createBarChart({ count: 7 })),
       specimen("Share bar", "Showing parts of a whole, like sales by card scheme.", "Under the chart card, or inside a card detail.", "Set each segment width; the last one fills. Max 5 segments; group the rest as Other.", createShareBar()),
       specimen("Ranked row", "Top-N lists such as top branches or merchants.", "Below the share bar, 3 to 5 rows plus See all.", "Leader bar = 100; others are their share of the leader. Amount is Riyal + mono. Reuses Progress bar.", createRankedRow({ label: "Olaya, Riyadh", amount: 412600, share: 100 })),
+      specimen("Cash flow", "Money in against money out over months.", "Dashboard overview, cash position.", "Paired bars, 6 or 12 months. Hover a month for In, Out and Net. Out uses inverse, not a second brand colour.", createCashFlowChart()),
+      specimen("Balance line", "Daily closing balance against a threshold.", "Dashboard, main account.", "30 days. Dashed payroll line at 340,000. Hover a day for the close.", createBalanceLine()),
+      specimen("Sparkline", "A tiny trend next to a figure.", "KPI tiles and counterpart rows.", "Up uses chart/1. Down uses status/danger. Flat uses text/tertiary.", createSparkRows()),
+      specimen("Category meter", "Parts of one spend total.", "Dashboard, spend by category.", "Max five parts. Last is Other. Same chart/1–4 as the share bar.", createCategoryMeter()),
     );
   }
 
@@ -237,11 +284,16 @@
     const ranks = el("div", "chd-col");
     ranks.append(createRankedRow({ lang: "en" }), createRankedRow({ lang: "ar", labelAr: "العليا، الرياض" }));
     host.append(block("Ranked row · LTR + RTL — Progress bar reused", ranks));
+
+    const dashPair = el("div", "chd-dash-grid");
+    dashPair.append(createCashFlowChart({ range: 6 }), createBalanceLine());
+    host.append(block("Cash flow + balance line · hover", dashPair, "Live"));
   }
 
   function fillArabic() {
     mount("arabic").append(
       block("Arabic · latest period on the left; amounts stay LTR.", analytics("ar"), "Live"),
+      block("Arabic · cash flow and balance line. Months follow reading order; amounts stay LTR.", dashBoard("ar"), "Live"),
       phone("المبيعات", salesApp("ar"), "App · Arabic", "ar"),
     );
   }
@@ -267,9 +319,9 @@
   function fillPlatforms() {
     const host = mount("platforms");
     [
-      ["Web", "ChartCard, BarChart, ShareBar, RankedRow", "Chart card sits in App shell Content · hover or click a bar for the value · header is the existing Chart filter (period, compare, series) · amounts use createAmount so digits never mirror"],
-      ["iOS", "Same names", "Compact Chart card under a range switch · tap a bar for its value, tap outside to clear · VoiceOver reads “Thursday, 226,500 Saudi riyals” · 44 pt targets · Honour accessibilityReduceMotion"],
-      ["Android", "Same names", "Same hierarchy · 48 dp targets · contentDescription on each bar and Share segment · amounts set layoutDirection Ltr · Honour the animator duration scale"],
+      ["Web", "ChartCard, BarChart, ShareBar, RankedRow, CashFlowChart, BalanceLine, Sparkline, CategoryMeter", "Sales card uses the Chart filter header · dashboard uses cash flow, balance line, sparklines and the category meter · hover a month or a day · amounts use createAmount so digits never mirror"],
+      ["iOS", "Same names", "Compact Chart card under a range switch · tap a bar or a day for its value, tap outside to clear · VoiceOver reads “Thursday, 226,500 Saudi riyals” · 44 pt targets · Honour accessibilityReduceMotion"],
+      ["Android", "Same names", "Same hierarchy · 48 dp targets · contentDescription on each bar, day and Share segment · amounts set layoutDirection Ltr · Honour the animator duration scale"],
     ].forEach(([platform, api, notes]) => {
       const line = el("div", "lst-platform");
       line.append(el("strong", "", platform), el("span", "lst-mono", api), el("span", "", notes));
@@ -283,6 +335,7 @@
       ["Start bars at zero and keep one colour for past periods; highlight only the latest or tapped bar.", "Cut the axis or colour every bar differently — it exaggerates small changes."],
       ["Group small shares into Other and keep segments to five or fewer.", "Show ten thin segments nobody can read or tap."],
       ["Show the value on hover or tap in Riyal and mono, and the same total in the header.", "Make people estimate values from bar height alone."],
+      ["Pair money in with money out in the same month, and keep out on inverse — not a second brand green.", "Stack income and spend as one mint column or invent a new chart colour."],
     ].forEach(([yes, no], index) => {
       const card = el("div", "lst-rule");
       card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
@@ -297,6 +350,7 @@
   }
 
   fillWeb();
+  fillDash();
   fillMobile();
   fillComponents();
   fillStates();

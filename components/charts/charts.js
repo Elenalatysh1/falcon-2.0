@@ -348,6 +348,344 @@
     return root;
   }
 
+  const FLOW_MONTHS = ["Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+  const FLOW_MONTHS_AR = ["نوفمبر", "ديسمبر", "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر"];
+  const FLOW_IN = [412, 388, 455, 430, 498, 520, 476, 540, 565, 512, 590, 612];
+  const FLOW_OUT = [365, 402, 398, 421, 450, 470, 488, 455, 510, 530, 520, 548];
+
+  function money(value) {
+    return Number(value).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function sparkPath(values, width, height, pad) {
+    const low = Math.min(...values);
+    const high = Math.max(...values);
+    const span = high - low || 1;
+    const points = values.map((value, index) => [
+      (index / (values.length - 1)) * width,
+      pad + (1 - (value - low) / span) * (height - pad * 2),
+    ]);
+    const line = points.map((point, index) => `${index ? "L" : "M"}${point[0].toFixed(1)} ${point[1].toFixed(1)}`).join(" ");
+    return { line, area: `${line} L${width} ${height} L0 ${height} Z` };
+  }
+
+  function createSparkline(options = {}) {
+    const values = options.values && options.values.length ? options.values : [12, 18, 15, 22, 25, 21, 25];
+    const path = sparkPath(values, 200, 44, 4);
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 200 44");
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.classList.add("ch-spark");
+    svg.dataset.tone = options.tone || "up";
+    svg.setAttribute("aria-hidden", "true");
+    const area = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    area.setAttribute("d", path.area);
+    area.classList.add("ch-spark-area");
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    line.setAttribute("d", path.line);
+    svg.append(area, line);
+    return svg;
+  }
+
+  function createCashFlowChart(options = {}) {
+    const lang = options.lang === "ar" ? "ar" : "en";
+    let range = options.range === 6 ? 6 : 12;
+    let hover = null;
+    const root = el("article", "ch-dash ch-flow");
+    root.lang = lang;
+    root.dir = lang === "ar" ? "rtl" : "ltr";
+    const head = el("div", "ch-dash-head");
+    const sums = el("div", "ch-flow-sums");
+    const tools = el("div", "ch-dash-tools");
+    if (window.createButtonGroup) {
+      tools.append(createButtonGroup({
+        kind: "segment",
+        size: "sm",
+        label: lang === "ar" ? "المدى" : "Range",
+        value: String(range),
+        options: [
+          { label: lang === "ar" ? "6 أشهر" : "6 months", value: "6" },
+          { label: lang === "ar" ? "12 شهرًا" : "12 months", value: "12" },
+        ],
+        onChange(value) {
+          range = Number(value);
+          hover = null;
+          paint();
+        },
+      }));
+    }
+    head.append(sums, tools);
+    const plot = el("div", "ch-flow-plot");
+    const axis = el("div", "ch-flow-axis");
+    ["600K", "400K", "200K", "0"].forEach((label) => axis.append(el("span", "", label)));
+    const body = el("div", "ch-flow-body");
+    const grid = el("div", "ch-flow-grid");
+    grid.setAttribute("aria-hidden", "true");
+    [1, 2, 3, 4].forEach(() => grid.append(el("span")));
+    const cols = el("div", "ch-flow-cols");
+    const tip = el("div", "ch-flow-tip");
+    tip.hidden = true;
+    body.append(grid, cols, tip);
+    plot.append(axis, body);
+    root.append(head, plot);
+
+    function slice() {
+      const offset = 12 - range;
+      return {
+        months: (lang === "ar" ? FLOW_MONTHS_AR : FLOW_MONTHS).slice(offset),
+        income: FLOW_IN.slice(offset),
+        spend: FLOW_OUT.slice(offset),
+        offset,
+      };
+    }
+
+    function paint() {
+      const data = slice();
+      const totalIn = data.income.reduce((sum, value) => sum + value, 0) * 1000;
+      const totalOut = data.spend.reduce((sum, value) => sum + value, 0) * 1000;
+      const net = totalIn - totalOut;
+      sums.replaceChildren();
+      [
+        [lang === "ar" ? "وارد" : "Money in", totalIn, "in", ""],
+        [lang === "ar" ? "صادر" : "Money out", totalOut, "out", ""],
+        [lang === "ar" ? "الصافي" : "Net", Math.abs(net), "net", net >= 0 ? "up" : "down"],
+      ].forEach(([label, value, swatch, tone]) => {
+        const item = el("div", "ch-flow-sum");
+        if (tone) item.dataset.tone = tone;
+        const name = el("span", "ch-kicker");
+        const mark = el("span", "ch-swatch");
+        mark.dataset.tone = swatch === "in" ? "1" : swatch === "out" ? "out" : "net";
+        name.append(mark, document.createTextNode(label));
+        const figure = amount(value, "s");
+        if (tone === "down") figure.dataset.kind = "muted";
+        item.append(name, figure);
+        sums.append(item);
+      });
+      cols.replaceChildren();
+      data.months.forEach((month, index) => {
+        const col = el("button", "ch-flow-col");
+        col.type = "button";
+        col.setAttribute("aria-label", month);
+        const pair = el("div", "ch-flow-pair");
+        [["in", data.income[index]], ["out", data.spend[index]]].forEach(([name, value]) => {
+          const bar = el("span", "ch-flow-bar");
+          bar.dataset.series = name;
+          bar.style.height = `${Math.min(100, (value / 600) * 100)}%`;
+          pair.append(bar);
+        });
+        col.append(pair, el("span", "", month));
+        col.addEventListener("mouseenter", () => { hover = index; paintHover(); });
+        col.addEventListener("focus", () => { hover = index; paintHover(); });
+        cols.append(col);
+      });
+      paintHover();
+    }
+
+    function paintHover() {
+      const data = slice();
+      [...cols.children].forEach((col, index) => {
+        col.dataset.on = hover === index ? "true" : "false";
+        col.dataset.dim = hover != null && hover !== index ? "true" : "false";
+      });
+      if (hover == null) {
+        tip.hidden = true;
+        return;
+      }
+      const netMonth = (data.income[hover] - data.spend[hover]) * 1000;
+      tip.hidden = false;
+      tip.dataset.side = hover > data.months.length / 2 ? "end" : "start";
+      tip.style.insetInlineStart = `${((hover + 0.5) / data.months.length) * 100}%`;
+      tip.replaceChildren(el("strong", "", `${data.months[hover]} ${hover + data.offset >= 2 ? "2026" : "2025"}`));
+      [
+        [lang === "ar" ? "وارد" : "In", data.income[hover] * 1000, "in"],
+        [lang === "ar" ? "صادر" : "Out", data.spend[hover] * 1000, "out"],
+      ].forEach(([label, value, tone]) => {
+        const row = el("div", "ch-flow-tip-row");
+        const name = el("span", "", label);
+        name.dataset.tone = tone;
+        row.append(name, amount(value, "xs"));
+        tip.append(row);
+      });
+      const netRow = el("div", "ch-flow-tip-row");
+      netRow.dataset.net = "true";
+      netRow.append(el("span", "", lang === "ar" ? "الصافي" : "Net"), amount(netMonth, "xs"));
+      tip.append(netRow);
+    }
+
+    plot.addEventListener("mouseleave", () => {
+      if (hover == null) return;
+      hover = null;
+      paintHover();
+    });
+    paint();
+    return root;
+  }
+
+  function createBalanceLine(options = {}) {
+    const lang = options.lang === "ar" ? "ar" : "en";
+    const width = 600;
+    const height = 200;
+    const low = 300000;
+    const high = 1400000;
+    const rows = [];
+    let value = 1150000;
+    for (let index = 0; index < 30; index += 1) {
+      value += Math.sin(index * 1.7) * 26000 + (index % 7 === 3 ? -62000 : 14000) + (index === 24 ? -120000 : 0) + (index === 26 ? 160000 : 0);
+      rows.push(Math.round(value * 100) / 100);
+    }
+    rows[29] = 1284530.2;
+    let point = null;
+    const root = el("article", "ch-dash ch-line");
+    root.lang = lang;
+    root.dir = lang === "ar" ? "rtl" : "ltr";
+    const head = el("div", "ch-dash-head");
+    const totals = el("div", "ch-line-totals");
+    const label = el("span", "ch-kicker", lang === "ar" ? "الحساب الرئيسي · اليوم" : "Main account · today");
+    const figure = el("div", "ch-line-figure");
+    const delta = el("span", "ch-delta");
+    totals.append(label, figure, delta);
+    head.append(totals);
+    const plot = el("div", "ch-line-plot");
+    const stage = el("div", "ch-line-stage");
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.classList.add("ch-line-svg");
+    svg.setAttribute("aria-hidden", "true");
+    const payroll = el("span", "ch-line-payroll", lang === "ar" ? "الرواتب · 340,000" : "Payroll due · 340,000");
+    const cross = el("span", "ch-line-cross");
+    const dot = el("span", "ch-line-dot");
+    cross.hidden = true;
+    dot.hidden = true;
+    const hits = el("div", "ch-line-hits");
+    stage.append(svg, payroll, cross, dot, hits);
+    const dates = el("div", "ch-line-dates");
+    ["22 Sep", "29 Sep", "6 Oct", "13 Oct", "21 Oct"].forEach((text) => dates.append(el("span", "", text)));
+    plot.append(stage, dates);
+    root.append(head, plot);
+
+    function dayLabel(index) {
+      return new Date(2026, 8, 22 + index).toLocaleDateString(lang === "ar" ? "ar-SA" : "en-GB", { day: "numeric", month: "short" });
+    }
+
+    function paint() {
+      const points = rows.map((row, index) => [
+        (index / 29) * width,
+        height - ((row - low) / (high - low)) * height,
+      ]);
+      const line = points.map((pt, index) => `${index ? "L" : "M"}${pt[0].toFixed(1)} ${pt[1].toFixed(1)}`).join(" ");
+      svg.replaceChildren();
+      const area = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      area.setAttribute("d", `${line} L${width} ${height} L0 ${height} Z`);
+      area.classList.add("ch-line-area");
+      const threshold = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      const thresholdY = height - ((340000 - low) / (high - low)) * height;
+      threshold.setAttribute("x1", "0");
+      threshold.setAttribute("x2", String(width));
+      threshold.setAttribute("y1", thresholdY.toFixed(1));
+      threshold.setAttribute("y2", thresholdY.toFixed(1));
+      threshold.classList.add("ch-line-threshold");
+      const stroke = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      stroke.setAttribute("d", line);
+      stroke.classList.add("ch-line-stroke");
+      svg.append(area, threshold, stroke);
+      payroll.style.insetBlockStart = `${(thresholdY / height) * 100}%`;
+      const index = point == null ? 29 : point;
+      const change = rows[index] - rows[0];
+      label.textContent = point == null
+        ? (lang === "ar" ? "الحساب الرئيسي · اليوم" : "Main account · today")
+        : `${dayLabel(index)} · ${lang === "ar" ? "الرصيد" : "closing balance"}`;
+      figure.replaceChildren(amount(rows[index], "l"));
+      delta.dataset.up = change >= 0 ? "true" : "false";
+      delta.textContent = `${change >= 0 ? (lang === "ar" ? "ارتفاع " : "Up ") : (lang === "ar" ? "انخفاض " : "Down ")}${money(Math.abs(change))} ${lang === "ar" ? "منذ 22 سبتمبر" : "since 22 Sep"}`;
+      const active = point != null;
+      cross.hidden = !active;
+      dot.hidden = !active;
+      if (active) {
+        cross.style.insetInlineStart = `${(points[index][0] / width) * 100}%`;
+        dot.style.insetInlineStart = `${(points[index][0] / width) * 100}%`;
+        dot.style.insetBlockStart = `${(points[index][1] / height) * 100}%`;
+      }
+    }
+
+    hits.replaceChildren();
+    rows.forEach((_, index) => {
+      const hit = el("button", "ch-line-hit");
+      hit.type = "button";
+      hit.setAttribute("aria-label", dayLabel(index));
+      hit.addEventListener("mouseenter", () => { point = index; paint(); });
+      hit.addEventListener("focus", () => { point = index; paint(); });
+      hits.append(hit);
+    });
+    plot.addEventListener("mouseleave", () => {
+      if (point == null) return;
+      point = null;
+      paint();
+    });
+    paint();
+    return root;
+  }
+
+  function createSparkRows(options = {}) {
+    const lang = options.lang === "ar" ? "ar" : "en";
+    const rows = options.rows || [
+      { label: "Nour Trading Co", labelAr: "نور للتجارة", values: [12, 18, 15, 22, 25, 21, 25], amount: 25000, change: "+ 19%", tone: "up" },
+      { label: "Google Ads", labelAr: "إعلانات غوغل", values: [4, 3.2, 3.8, 2.6, 2.4, 2.2, 2], amount: 2000, change: "− 9%", tone: "up" },
+      { label: "Careem Business", labelAr: "كريم للأعمال", values: [0.8, 1.1, 1.4, 1.2, 1.7, 2.1, 2.4], amount: 2412.75, change: "+ 34%", tone: "down" },
+      { label: "Elm Software", labelAr: "علم", values: [12, 12, 12, 12, 12, 12, 12], amount: 12000, change: "0%", tone: "flat" },
+    ];
+    const root = el("div", "ch-sparks");
+    root.lang = lang;
+    root.dir = lang === "ar" ? "rtl" : "ltr";
+    rows.forEach((row) => {
+      const line = el("div", "ch-spark-row");
+      const change = el("span", "ch-spark-change", row.change);
+      change.dataset.tone = row.tone || "flat";
+      line.append(
+        el("span", "ch-spark-label", lang === "ar" ? (row.labelAr || row.label) : row.label),
+        createSparkline({ values: row.values, tone: row.tone }),
+        amount(row.amount, "s"),
+        change,
+      );
+      root.append(line);
+    });
+    return root;
+  }
+
+  function createCategoryMeter(options = {}) {
+    const lang = options.lang === "ar" ? "ar" : "en";
+    const parts = (options.parts || [
+      { label: "Suppliers", labelAr: "الموردون", value: 268400, tone: 1 },
+      { label: "Payroll", labelAr: "الرواتب", value: 182000, tone: 2 },
+      { label: "Advertising", labelAr: "الإعلان", value: 52000, tone: 4 },
+      { label: "Travel", labelAr: "السفر", value: 28300, tone: 3 },
+      { label: "Other", labelAr: "أخرى", value: 17500, tone: 5 },
+    ]).slice(0, 5);
+    const total = parts.reduce((sum, part) => sum + part.value, 0);
+    const root = el("div", "ch-meter");
+    root.lang = lang;
+    root.dir = lang === "ar" ? "rtl" : "ltr";
+    root.append(el("span", "ch-kicker", lang === "ar" ? "الإنفاق حسب الفئة · أكتوبر" : "Spend by category · October"));
+    const bar = el("div", "ch-meter-bar");
+    const list = el("div", "ch-meter-list");
+    parts.forEach((part) => {
+      const share = part.value / total;
+      const piece = el("span", "ch-meter-seg");
+      piece.dataset.tone = String(part.tone);
+      piece.style.flex = String(part.value);
+      bar.append(piece);
+      const row = el("div", "ch-meter-row");
+      const swatch = el("span", "ch-swatch");
+      swatch.dataset.tone = String(part.tone);
+      const pct = el("span", "ch-pct", `${Math.round(share * 100)}%`);
+      pct.dir = "ltr";
+      row.append(swatch, el("span", "ch-legend-label", lang === "ar" ? (part.labelAr || part.label) : part.label), amount(part.value, "xs"), pct);
+      list.append(row);
+    });
+    root.append(bar, list);
+    return root;
+  }
+
   function createRankedRow(options = {}) {
     const lang = options.lang === "ar" ? "ar" : "en";
     const root = el("div", "ch-rank");
@@ -367,6 +705,11 @@
   window.createChartCard = createChartCard;
   window.createShareBar = createShareBar;
   window.createRankedRow = createRankedRow;
+  window.createCashFlowChart = createCashFlowChart;
+  window.createBalanceLine = createBalanceLine;
+  window.createSparkline = createSparkline;
+  window.createSparkRows = createSparkRows;
+  window.createCategoryMeter = createCategoryMeter;
   window.CHART_DAYS = DAYS;
   window.CHART_WEEK = WEEK;
 })();
