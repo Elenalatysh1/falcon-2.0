@@ -129,6 +129,7 @@ const catalog = {
   language: "language-square",
   support: "message-question",
   "support-24": "24-support",
+  "link-2": "link-2",
   gift: "gift",
   sparkles: "magic-star",
   back: "arrow-left",

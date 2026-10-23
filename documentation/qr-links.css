@@ -1,0 +1,53 @@
+/* QR & links docs page layout. */
+
+[data-qr="scanning"],
+[data-qr="sharing"],
+[data-qr="components"] { display: grid; gap: var(--space-4); }
+
+[data-qr="scanning"] .dtd-block,
+[data-qr="sharing"] .dtd-block { background: var(--surface-canvas); }
+
+[data-qr="platforms"] {
+  display: grid;
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  background: var(--surface-card);
+}
+
+[data-qr="rules"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--size-phone) * 0.9), 1fr));
+  gap: var(--space-4);
+}
+
+.qrd-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-5);
+}
+
+.qrd-row:has(.qr-card) {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.qrd-size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.qrd-toast {
+  position: fixed;
+  z-index: var(--z-overlay);
+  inset-block-end: var(--space-6);
+  inset-inline-end: var(--space-6);
+}
+
+@media (max-width: 720px) {
+  [data-qr="platforms"] .lst-platform { grid-template-columns: minmax(0, 1fr); }
+}

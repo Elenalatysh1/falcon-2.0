@@ -448,6 +448,47 @@
   --size-notch: 20px;
   --perforation-dash: 6px;
   --border-width-perforation: 1.5px;
+  /* QR & links: one style. Light tile is white; Dark inverts to ink with white dots.
+     --qr-*-light never change — use them when a POS scanner must read the light code. */
+  --qr-surface: #FFFFFF;
+  --qr-module: #0C1F1A;
+  --qr-eye: #0B8F6E;
+  --qr-eye-centre: #0C1F1A;
+  --qr-surface-light: #FFFFFF;
+  --qr-module-light: #0C1F1A;
+  --qr-eye-light: #0B8F6E;
+  --qr-eye-centre-light: #0C1F1A;
+  --qr-tile-s: 136px;
+  --qr-code-s: 112px;
+  --qr-pad-s: 12px;
+  --qr-radius-s: 16px;
+  --qr-tile-m: 224px;
+  --qr-code-m: 192px;
+  --qr-pad-m: 16px;
+  --qr-radius-m: 24px;
+  --qr-tile-l: 312px;
+  --qr-code-l: 272px;
+  --qr-pad-l: 20px;
+  --qr-radius-l: 28px;
+  --qr-dot: 0.84;
+  --qr-logo: 0.26;
+  --qr-logo-radius: 0.28;
+  --qr-logo-mark: 0.8;
+  --qr-preview-width: 320px;
+  --qr-preview-height: 168px;
+  --qr-preview-pad-inline: 22px;
+  --qr-preview: #0C1F1A;
+  --qr-preview-text: #FFFFFF;
+  --qr-scan-width: 272px;
+  --qr-scan-height: 478px;
+  --qr-card-width: 360px;
+  --qr-chip-height: 48px;
+  --qr-wordmark-width: 126px;
+  --qr-wordmark-height: 40px;
+  --qr-eye-outer: 1.8;
+  --qr-eye-hole: 1;
+  --qr-eye-inner: 0.9;
+  --qr-quiet: 9;
 
   /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
   --gap-tabs: 18px;
@@ -711,6 +752,10 @@
 
   --surface-canvas: #000000;
   --surface-card: #171717;
+  --qr-surface: #0C1F1A;
+  --qr-module: #FFFFFF;
+  --qr-eye: #40B39A;
+  --qr-eye-centre: #40B39A;
   --glass-fill: rgba(23, 23, 23, 0.72);
   --glass-stroke: rgba(255, 255, 255, 0.08);
   --glass-hover: rgba(255, 255, 255, 0.08);

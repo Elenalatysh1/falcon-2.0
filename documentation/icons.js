@@ -59,6 +59,7 @@ const groups = [
     ["Refresh", "refresh"],
     ["More", "more"],
     ["Open link", "open-link"],
+    ["Link", "link-2"],
   ]],
   ["SECURITY", [
     ["Lock", "lock"],
