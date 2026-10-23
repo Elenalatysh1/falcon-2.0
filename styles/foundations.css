@@ -123,6 +123,8 @@
   --status-warning-border: #F5D9A8;
   --status-warning-on-inverse: #F5B94A;
   --status-error: #E02424;
+  /* Figma status/error/solid: the same red in Light and Dark, for fills under white glyphs. */
+  --status-error-solid: #E02424;
   --status-error-track: #F3C4C4;
   --status-error-tint: #FDECEC;
   --status-error-tint-hover: #FBDCDC;
@@ -385,6 +387,12 @@
   --table-amount-col-width-narrow: 120px;
   --table-identity-min: 160px;
   --table-meta-max: 350px;
+  /* Progress & steppers: Progress bar sizes S / M / L, Step marker and the Upcoming marker ring. */
+  --progress-height-s: 4px;
+  --progress-height-m: 8px;
+  --progress-height-l: 12px;
+  --size-step-marker: 24px;
+  --border-width-step: 1.5px;
 
   /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
   --gap-tabs: 18px;
