@@ -887,6 +887,8 @@ const motion = [
   ["motion/emphasis", "--motion-emphasis", "--ease-standard", "Accordion, chevron"],
   ["motion/drawer", "--motion-drawer", "--ease-standard", "Drawer"],
   ["motion/sheet", "--motion-sheet", "--ease-sheet", "Bottom sheet, full-screen modal"],
+  ["motion/popover", "--motion-popover", "--ease-standard", "Popover, menu, mega menu (closes on --motion-popover-exit, --ease-exit)"],
+  ["motion/indicator", "--motion-indicator", "--ease-spring", "Sliding selection: sidebar, tabs, segments"],
 ];
 
 const curves = [
@@ -910,6 +912,12 @@ const animations = [
   ["Motion/Toast/In", "Fade + 16 px rise", "300 ms", "Smooth spring", "Toasts and snackbars"],
   ["Motion/Toast/Out", "Fade out", "200 ms", "Ease-in-out", "Toast dismiss"],
   ["Motion/Chevron/Turn", "Rotate 0 → 180°", "350 ms", "Smooth spring", "Accordion and dropdown chevrons"],
+  ["Motion/Press", "Scale 100 → 97% (--motion-press-scale)", "100 ms", "Smooth spring", "Every button-like control"],
+  ["Motion/Popover/In", "Fade + scale 95 → 100% from the trigger", "200 ms", "Smooth spring", "Popovers, menus, notifications"],
+  ["Motion/Popover/Out", "Fade + scale 100 → 97%", "150 ms", "Ease-exit", "Popover and menu close"],
+  ["Motion/Indicator/Slide", "Active fill slides to the new item", "320 ms", "Spring (bounce 0.2) · --ease-spring", "Sidebar, tabs, segments"],
+  ["Motion/List/Rise", "Fade + 6 px rise, 50 ms stagger", "300 ms", "Smooth spring", "Menu rows, page content, drawer items"],
+  ["Motion/Icon/Bounce", "Scale 100 → 115 → 100%", "350 ms", "Spring (bounce 0.2)", "Tab bar icon on pick"],
   ["Motion/Reduced/In", "Fade only", "200 ms", "Ease-in-out", "Any entrance when reduce motion is on"],
 ];
 

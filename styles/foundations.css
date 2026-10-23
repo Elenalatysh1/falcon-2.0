@@ -478,6 +478,17 @@
   --motion-skeleton: 1400ms;
   --motion-dots: 1200ms;
   --motion-progress: 1300ms;
+  /* Motion patterns (HeroUI-style): press, popover, indicator, stagger. */
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-popover: 200ms;
+  --motion-popover-exit: 150ms;
+  --motion-indicator: 320ms;
+  --motion-press-scale: 0.97;
+  --motion-pop-scale: 0.95;
+  --motion-pop-exit-scale: 0.97;
+  --motion-bounce-scale: 1.15;
+  --motion-rise-distance: 6px;
 
   /* Icons — Hala twotone set from HALA DNA. Draw with icons/api.js.
      Stroke values apply only to the few icons kept on Lucide 0.453. */
@@ -1000,4 +1011,33 @@ body {
 
 [dir="rtl"] .hala-icon[data-mirror="true"] {
   transform: scaleX(-1);
+}
+
+/* Shared motion keyframes. Pair them with the motion tokens above. */
+@keyframes motion-fade-in { from { opacity: 0; } }
+@keyframes motion-fade-out { to { opacity: 0; } }
+@keyframes motion-rise-in { from { opacity: 0; transform: translateY(var(--motion-rise-distance)); } }
+@keyframes motion-pop-in { from { opacity: 0; transform: scale(var(--motion-pop-scale)); } }
+@keyframes motion-pop-out { to { opacity: 0; transform: scale(var(--motion-pop-exit-scale)); } }
+@keyframes motion-bounce { 40% { transform: scale(var(--motion-bounce-scale)); } }
+
+/* Reduce Motion: the system setting or data-reduce-motion="true" on any container.
+   Movement becomes a 200 ms fade: scales and distances go neutral, timing evens out. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-instant: 200ms; --motion-fast: 200ms; --motion-standard: 200ms; --motion-emphasis: 200ms;
+    --motion-drawer: 200ms; --motion-sheet: 200ms; --motion-modal: 200ms; --motion-modal-exit: 200ms;
+    --motion-drawer-exit: 200ms; --motion-sheet-exit: 200ms; --motion-backdrop-exit: 200ms; --motion-stagger: 0ms;
+    --motion-popover: 200ms; --motion-popover-exit: 200ms; --motion-indicator: 0ms;
+    --ease-spring: ease-in-out; --ease-sheet: ease-in-out;
+    --motion-press-scale: 1; --motion-pop-scale: 1; --motion-pop-exit-scale: 1; --motion-bounce-scale: 1; --motion-rise-distance: 0px;
+  }
+}
+[data-reduce-motion="true"] {
+  --motion-instant: 200ms; --motion-fast: 200ms; --motion-standard: 200ms; --motion-emphasis: 200ms;
+  --motion-drawer: 200ms; --motion-sheet: 200ms; --motion-modal: 200ms; --motion-modal-exit: 200ms;
+  --motion-drawer-exit: 200ms; --motion-sheet-exit: 200ms; --motion-backdrop-exit: 200ms; --motion-stagger: 0ms;
+  --motion-popover: 200ms; --motion-popover-exit: 200ms; --motion-indicator: 0ms;
+  --ease-spring: ease-in-out; --ease-sheet: ease-in-out;
+  --motion-press-scale: 1; --motion-pop-scale: 1; --motion-pop-exit-scale: 1; --motion-bounce-scale: 1; --motion-rise-distance: 0px;
 }

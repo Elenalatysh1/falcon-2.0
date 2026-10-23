@@ -1000,6 +1000,112 @@
 :lang(ar) .nv-kicker, :lang(ar) .nv-user-copy span { font-family: var(--font-arabic); letter-spacing: 0; text-transform: none; }
 :lang(ar) .nv-item, :lang(ar) .nv-side-search { font-family: var(--font-arabic); }
 
-@media (prefers-reduced-motion: reduce) {
-  .nv-side, .nv-drawer, .nv-scrim, .nv-device-bar, .nv-appbar-title { transition: none; }
+/* Motion. Tokens and keyframes come from foundations; Reduce Motion zeroes them. */
+.nv-item, .nv-icon-btn, .nv-tabitem, .nv-switcher, .nv-side-search, .nv-account-row, .nv-link, .nv-mode, .nv-websearch {
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-instant) var(--ease-standard);
 }
+.nv-item:active, .nv-icon-btn:active, .nv-tabitem:active, .nv-switcher:active, .nv-side-search:active,
+.nv-account-row:active, .nv-link:active, .nv-mode:active, .nv-websearch:active {
+  transform: scale(var(--motion-press-scale));
+}
+
+/* Sidebar: the active fill slides between items. */
+.nv-nav[data-indicator="true"] { position: relative; }
+.nv-indicator {
+  position: absolute;
+  top: 0;
+  inset-inline: var(--space-3);
+  height: var(--nv-indicator-h, 0);
+  border-radius: var(--radius-m);
+  background: var(--surface-nav-active);
+  transform: translateY(var(--nv-indicator-y, 0));
+  pointer-events: none;
+}
+.nv-indicator::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(var(--space-3) * -1);
+  top: var(--space-3);
+  bottom: var(--space-3);
+  width: var(--size-divider-dot);
+  border-start-end-radius: var(--size-divider-dot);
+  border-end-end-radius: var(--size-divider-dot);
+  background: var(--status-online);
+}
+.nv-stage[data-mode="tablet"] .nv-indicator { inset-inline: 0; width: var(--size-rail-item); margin-inline: auto; }
+.nv-nav[data-indicator="true"] .nv-item[data-on="true"] { background: transparent; }
+.nv-nav[data-indicator="true"] .nv-item[data-on="true"]::before { display: none; }
+.nv-nav[data-indicator="true"] .nv-item[data-on="true"]:active { background: var(--surface-nav-pressed); }
+
+/* Sidebar: labels fade in as the rail expands; the page rises in on navigation. */
+.nv-stage[data-motion="mode"] .nv-side :is(.nv-label, .nv-kicker, .nv-side-search, .nv-user-copy, .nv-word, .nv-pill, .nv-account-row > .hala-icon) {
+  animation: motion-fade-in var(--motion-standard) var(--ease-standard) var(--motion-instant) both;
+}
+.nv-stage[data-motion="page"] .nv-page > *,
+.nv-stage[data-motion="mode"] .nv-page > * {
+  animation: motion-rise-in var(--motion-standard) var(--ease-standard) both;
+}
+.nv-stage[data-motion] .nv-page > :nth-child(2) { animation-delay: var(--motion-stagger); }
+.nv-stage[data-motion] .nv-page > :nth-child(3) { animation-delay: calc(var(--motion-stagger) * 2); }
+.nv-stage[data-motion] .nv-page > :nth-child(n + 4) { animation-delay: calc(var(--motion-stagger) * 3); }
+.nv-stage[data-mode="tablet"] [data-tip]:hover::after,
+.nv-stage[data-mode="tablet"] [data-tip]:focus-visible::after {
+  transform-origin: left center;
+  animation: motion-pop-in var(--motion-popover) var(--ease-standard);
+}
+[dir="rtl"] .nv-stage[data-mode="tablet"] [data-tip]::after { transform-origin: right center; }
+
+/* Popovers: zoom and fade in from the trigger, fade out faster. */
+.nv-pop { transform-origin: top right; }
+[dir="rtl"] .nv-pop { transform-origin: top left; }
+.nv-pop[data-entering] { animation: motion-pop-in var(--motion-popover) var(--ease-standard); }
+.nv-pop[data-exiting] { animation: motion-pop-out var(--motion-popover-exit) var(--ease-exit) forwards; }
+.nv-pop[data-entering] .nv-note-row { animation: motion-rise-in var(--motion-standard) var(--ease-standard) both; }
+.nv-pop[data-entering] .nv-note-row:nth-of-type(2) { animation-delay: var(--motion-stagger); }
+.nv-pop[data-entering] .nv-note-row:nth-of-type(3) { animation-delay: calc(var(--motion-stagger) * 2); }
+.nv-note-row { transition: background-color var(--motion-standard) var(--ease-standard); }
+.nv-dot[data-exiting] { animation: motion-pop-out var(--motion-popover-exit) var(--ease-exit) forwards; }
+.nv-icon-btn[data-open="true"] .hala-icon { animation: motion-bounce var(--motion-emphasis) var(--ease-spring); }
+.nv-mega[data-entering] { animation: motion-fade-in var(--motion-popover) var(--ease-standard); }
+.nv-mega[data-entering] > * { animation: motion-rise-in var(--motion-standard) var(--ease-standard) both; }
+.nv-mega[data-entering] > :nth-child(2), .nv-mega[data-entering] > :nth-child(5) { animation-delay: var(--motion-stagger); }
+.nv-mega[data-entering] > :nth-child(3), .nv-mega[data-entering] > :nth-child(6) { animation-delay: calc(var(--motion-stagger) * 2); }
+.nv-mega[data-entering] > :nth-child(7) { animation-delay: calc(var(--motion-stagger) * 3); }
+.nv-mega[data-exiting] { animation: motion-fade-out var(--motion-popover-exit) var(--ease-exit) forwards; }
+.nv-link .hala-icon { transition: transform var(--motion-fast) var(--ease-standard); }
+.nv-link[aria-expanded="true"] .hala-icon { transform: rotate(180deg); }
+
+/* Phone-browser drawer: slides in on the standard curve, leaves faster; rows rise in. */
+.nv-drawer { transition: translate var(--motion-drawer-exit) var(--ease-exit); }
+.nv-drawer[data-open="true"] { transition: translate var(--motion-drawer) var(--ease-standard); }
+.nv-scrim { transition: opacity var(--motion-backdrop-exit) var(--ease-exit); }
+.nv-scrim[data-open="true"] { transition: opacity var(--motion-drawer) var(--ease-standard); }
+.nv-drawer[data-motion="open"][data-open="true"] .nv-item {
+  animation: motion-rise-in var(--motion-standard) var(--ease-standard) both;
+  animation-delay: calc(var(--motion-drawer) / 3 + var(--nv-order, 0) * var(--motion-stagger) / 2);
+}
+
+/* Phone shell: tab picks bounce the icon and bring the new screen in. */
+.nv-device[data-motion="tab"] .nv-tabitem[data-on="true"] .nv-tabitem-icon { animation: motion-bounce var(--motion-emphasis) var(--ease-spring); }
+.nv-device[data-motion="tab"] .nv-tabbar[data-layout="floating"] .nv-tabitem[data-on="true"] { animation: motion-pop-in var(--motion-emphasis) var(--ease-spring); }
+.nv-device[data-motion="tab"] .nv-tabbar[data-layout="floating"] .nv-tabitem[data-on="true"] .nv-tabitem-label { animation: motion-fade-in var(--motion-fast) var(--ease-standard) var(--motion-instant) both; }
+.nv-device[data-motion="tab"] .nv-device-scroll > * { animation: motion-rise-in var(--motion-standard) var(--ease-standard) both; }
+.nv-device[data-motion="tab"] .nv-device-scroll > :nth-child(2) { animation-delay: var(--motion-stagger); }
+.nv-device[data-motion="tab"] .nv-appbar-title { animation: motion-fade-in var(--motion-fast) var(--ease-standard); }
+.nv-device[data-motion="scroll"] .nv-appbar[data-scrolled="true"] .nv-appbar-title { animation: motion-rise-in var(--motion-fast) var(--ease-standard); }
+.nv-device[data-motion="set"] :is(.nv-device-bar, .nv-device-tabs) > * { animation: motion-fade-in var(--motion-standard) var(--ease-standard); }
+.nv-device-tabs .nv-tabbar-pill { transition: background-color var(--motion-standard) var(--ease-standard), box-shadow var(--motion-standard) var(--ease-standard); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nv-side, .nv-device-bar, .nv-appbar-title { transition: none; }
+  .nv-drawer { opacity: 0; transition: opacity var(--motion-drawer-exit) var(--ease-standard), translate 0s linear var(--motion-drawer-exit); }
+  .nv-drawer[data-open="true"] { opacity: 1; transition: opacity var(--motion-drawer) var(--ease-standard), translate 0s; }
+}
+[data-reduce-motion="true"] :is(.nv-side, .nv-device-bar, .nv-appbar-title) { transition: none; }
+[data-reduce-motion="true"] .nv-drawer { opacity: 0; transition: opacity var(--motion-drawer-exit) var(--ease-standard), translate 0s linear var(--motion-drawer-exit); }
+[data-reduce-motion="true"] .nv-drawer[data-open="true"] { opacity: 1; transition: opacity var(--motion-drawer) var(--ease-standard), translate 0s; }

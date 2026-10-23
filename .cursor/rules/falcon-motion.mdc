@@ -1,0 +1,48 @@
+---
+description: Every Falcon component animates open, close, select and press from the motion tokens, on Web, Android and iOS
+alwaysApply: true
+---
+
+# Motion
+
+Every component that opens, closes, selects, switches or is pressed animates. HeroUI (heroui.com/docs) is the reference for feel: quick, light, and always tied to what the user did. Navigation is the worked example (`components/navigation`, section Motion).
+
+## Tokens
+
+Timing, easing, scale and distance come from `styles/foundations.css`. The shared keyframes live there too: `motion-fade-in`, `motion-fade-out`, `motion-rise-in`, `motion-pop-in`, `motion-pop-out`, `motion-bounce`.
+
+```css
+/* ❌ BAD */
+.menu { transition: opacity 0.2s ease; transform: scale(0.95); }
+
+/* ✅ GOOD */
+.menu[data-entering] { animation: motion-pop-in var(--motion-popover) var(--ease-standard); }
+.menu[data-exiting] { animation: motion-pop-out var(--motion-popover-exit) var(--ease-exit) forwards; }
+```
+
+## Patterns
+
+- Press: `transform: scale(var(--motion-press-scale))` on `:active` for every button-like control, in `--motion-instant`.
+- Popover, menu, dropdown, tooltip: zoom from `--motion-pop-scale` and fade in with `--motion-popover`. Close with `--motion-popover-exit` on `--ease-exit`. Set `transform-origin` to the trigger side and flip it in RTL.
+- Toggle presence with `data-entering` and `data-exiting`, then `hidden` after `animationend`, as in `presence()` in `components/navigation/navigation.js`. Never flip `hidden` alone on something the user opened.
+- Selection that moves (sidebar item, tab, segment): one indicator slides between items on `--motion-indicator` with `--ease-spring`. Do not fade per-item backgrounds.
+- Drawers and sheets: enter on `--motion-drawer` or `--motion-sheet`, exit faster on the matching `-exit` token with `--ease-exit`. Scrims use `--motion-backdrop-exit` on close.
+- Lists that appear: rows rise in with `motion-rise-in`, delayed by `--motion-stagger` per row, capped at about 4 steps.
+- Content that swaps (page, tab panel): `motion-rise-in` on `--motion-standard`.
+- Play entrances only on a user action. Mark the moment with a short-lived `data-motion` (see `cue()`); never replay on a repaint.
+- If a component re-renders its DOM, keep the previous state, force a reflow, then flip, so transitions still run.
+
+## Rules
+
+- Animate `transform` and `opacity` only, plus colour and shadow transitions. Never animate width, height, top or left on content.
+- Exits are faster than entrances. No animation longer than `--motion-sheet`.
+- Reduce Motion: `prefers-reduced-motion` and `data-reduce-motion="true"` already turn movement into a 200 ms fade through the tokens. Do not hardcode durations that skip this. A sliding indicator jumps.
+- Arabic and RTL: slide directions and transform origins mirror.
+
+## Platforms
+
+Specify motion for all three platforms with the same meaning and tokens.
+
+- Web: the CSS above.
+- iOS: SwiftUI `.spring(duration:bounce:)` from the token duration (bounce 0 for standard, 0.2 for `--ease-spring`), system presentations for sheets and popovers, `.symbolEffect(.bounce)` for tab icons, `accessibilityReduceMotion` for Reduce Motion.
+- Android: Material 3 motion: emphasized easing for enter, emphasized accelerate for exit, shared axis and fade through for content, ripple for press. Honour the animator duration scale.

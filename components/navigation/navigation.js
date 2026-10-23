@@ -13,6 +13,7 @@
  * createNavHeaders()
  * createNavFooters()
  * createNavGuide()
+ * createNavMotion()
  *
  * locale is "en" or "ar". Arabic must sit inside dir="rtl" lang="ar".
  * In the web shell, G then a letter jumps to a main item (G D, G T, G S, G P, G C).
@@ -198,6 +199,52 @@
     if (node) node.focus();
   }
 
+  function reducedMotion(node) {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches || Boolean(node.closest("[data-reduce-motion='true']"));
+  }
+
+  function afterAnimation(node, done) {
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      node.removeEventListener("animationend", onEnd);
+      done();
+    };
+    const onEnd = (event) => { if (event.target === node) finish(); };
+    node.addEventListener("animationend", onEnd);
+    setTimeout(finish, 600);
+  }
+
+  /* Popover presence: data-entering while it appears, data-exiting while it leaves, then hidden. */
+  function presence(node, open) {
+    if (open) {
+      if (!node.hidden && !node.hasAttribute("data-exiting")) return;
+      node.removeAttribute("data-exiting");
+      node.hidden = false;
+      node.setAttribute("data-entering", "");
+      afterAnimation(node, () => node.removeAttribute("data-entering"));
+      return;
+    }
+    if (node.hidden || node.hasAttribute("data-exiting")) return;
+    node.removeAttribute("data-entering");
+    node.setAttribute("data-exiting", "");
+    afterAnimation(node, () => {
+      if (!node.hasAttribute("data-exiting")) return;
+      node.removeAttribute("data-exiting");
+      node.hidden = true;
+    });
+  }
+
+  /* One-off motion moment (page change, mode change, tab pick) so repaints don't replay it. */
+  function cue(node, name) {
+    node.dataset.motion = name;
+    clearTimeout(node.cueTimer);
+    node.cueTimer = setTimeout(() => {
+      if (node.dataset.motion === name) delete node.dataset.motion;
+    }, 700);
+  }
+
   function modeBar(modes, current, onPick, label) {
     const bar = el("div", "nv-modes");
     bar.setAttribute("role", "group");
@@ -271,14 +318,15 @@
     dot.setAttribute("aria-hidden", "true");
     bell.append(dot);
     const pop = el("div", "nv-pop");
+    pop.hidden = true;
     pop.setAttribute("role", "dialog");
     pop.setAttribute("aria-label", t.notifications);
 
     function paint() {
       bell.dataset.open = open ? "true" : "false";
       bell.setAttribute("aria-expanded", open ? "true" : "false");
-      dot.hidden = read;
-      pop.hidden = !open;
+      presence(dot, !read);
+      presence(pop, open);
       pop.replaceChildren();
       const head = el("header");
       head.append(el("strong", "", t.notifications), button("nv-text-btn", t.markRead, () => { read = true; paint(); }));
@@ -438,10 +486,65 @@
       pageEl.append(table);
     }
 
+    let indicatorY = null;
+    function indicatorTop(nav, active) {
+      return active.getBoundingClientRect().top - nav.getBoundingClientRect().top + nav.scrollTop;
+    }
+
+    function placeIndicator(slide) {
+      const nav = side.querySelector(".nv-nav");
+      const active = nav && nav.querySelector('.nv-item[data-on="true"]');
+      if (!active) {
+        indicatorY = null;
+        return;
+      }
+      nav.dataset.indicator = "true";
+      const mark = el("span", "nv-indicator");
+      mark.setAttribute("aria-hidden", "true");
+      nav.prepend(mark);
+      if (!active.isConnected || !active.offsetHeight) {
+        indicatorY = null;
+        return;
+      }
+      const y = indicatorTop(nav, active);
+      mark.style.setProperty("--nv-indicator-h", `${active.offsetHeight}px`);
+      mark.style.setProperty("--nv-indicator-y", `${y}px`);
+      if (slide && indicatorY != null && indicatorY !== y) slideFrom(mark, indicatorY, y);
+      indicatorY = y;
+    }
+
+    function slideFrom(mark, from, to) {
+      const tokens = getComputedStyle(mark);
+      const duration = parseFloat(tokens.getPropertyValue("--motion-indicator")) || 0;
+      if (!duration || reducedMotion(mark)) return;
+      mark.animate(
+        [{ transform: `translateY(${from}px)` }, { transform: `translateY(${to}px)` }],
+        { duration, easing: tokens.getPropertyValue("--ease-spring").trim() },
+      );
+    }
+
+    /* Re-sync without sliding when the sidebar resizes (mount, rail width transition). */
+    new ResizeObserver(() => {
+      const nav = side.querySelector(".nv-nav");
+      const mark = nav && nav.querySelector(".nv-indicator");
+      const active = nav && nav.querySelector('.nv-item[data-on="true"]');
+      if (!mark || !active || !active.offsetHeight) return;
+      const y = indicatorTop(nav, active);
+      if (y === indicatorY && mark.style.getPropertyValue("--nv-indicator-h")) return;
+      mark.style.setProperty("--nv-indicator-h", `${active.offsetHeight}px`);
+      mark.style.setProperty("--nv-indicator-y", `${y}px`);
+      indicatorY = y;
+    }).observe(side);
+
     function paint() {
+      const sameMode = stage.dataset.mode === mode;
+      if (stage.dataset.mode && !sameMode) cue(stage, "mode");
+      else if (stage.dataset.page && stage.dataset.page !== page) cue(stage, "page");
       stage.dataset.mode = mode;
+      stage.dataset.page = page;
       paintModes(modes, mode);
       paintSide();
+      placeIndicator(sameMode);
       paintPage();
       if (restore) focusKey(root, restore);
       restore = "";
@@ -640,6 +743,7 @@
           }
           state.tab = id;
           state.scrolled = false;
+          cue(device, "tab");
           restore = `phone-${t.lang}-${id}`;
           paint();
           scroller.scrollTop = 0;
@@ -662,12 +766,14 @@
       const next = scroller.scrollTop > threshold - 8;
       if (next === state.scrolled) return;
       state.scrolled = next;
+      cue(device, "scroll");
       paintBar();
     });
 
     paint();
     device.set = (key, value) => {
       state[key] = value;
+      cue(device, "set");
       state.scrolled = false;
       paint();
       scroller.scrollTop = 0;
@@ -924,9 +1030,12 @@
       return phone;
     });
 
+    const shown = variants.map(() => false);
+
     function paint() {
       const entry = SIDEBAR.find((item) => item.id === page) || SIDEBAR[0];
       frames.forEach((phone, index) => {
+        const was = shown[index];
         const bottom = variants[index][1];
         const open = drawers[index];
         phone.replaceChildren();
@@ -963,10 +1072,11 @@
           phone.append(nav);
         }
         const scrim = el("div", "nv-scrim");
-        scrim.dataset.open = open ? "true" : "false";
+        scrim.dataset.open = was ? "true" : "false";
         scrim.addEventListener("click", () => { drawers[index] = false; restore = `open-${index}`; paint(); });
         const drawer = el("div", "nv-drawer");
-        drawer.dataset.open = open ? "true" : "false";
+        drawer.dataset.open = was ? "true" : "false";
+        if (open && !was) drawer.dataset.motion = "open";
         drawer.inert = !open;
         drawer.setAttribute("role", "dialog");
         drawer.setAttribute("aria-label", "Menu");
@@ -978,12 +1088,15 @@
         if (searchIcon) search.append(searchIcon);
         search.append(document.createTextNode(t.search));
         const nav = el("nav", "nv-nav");
+        let order = 0;
         [["main", ""], ["business", t.business], ["foot", ""]].forEach(([group, title]) => {
           const block = el("div", "nv-group");
           if (title) block.append(el("span", "nv-kicker", title));
           SIDEBAR.filter((item) => item.group === group).forEach((item) => {
             const row = sideItem({ ...item, key: "" }, t, false, item.id === page, () => go(item.id, `open-${index}`));
             row.dataset.key = `m-${index}-${item.id}`;
+            row.style.setProperty("--nv-order", String(order));
+            order += 1;
             block.append(row);
           });
           nav.append(block);
@@ -995,6 +1108,12 @@
         account.append(who);
         drawer.append(dHead, search, nav, account);
         phone.append(scrim, drawer);
+        if (was !== open) {
+          drawer.getBoundingClientRect();
+          scrim.dataset.open = open ? "true" : "false";
+          drawer.dataset.open = open ? "true" : "false";
+        }
+        shown[index] = open;
       });
       if (restore) focusKey(root, restore);
       restore = "";
@@ -1059,7 +1178,7 @@
     const menu = el("div", "nv-mega");
     function paintMega() {
       links.querySelector("[data-key='products']").setAttribute("aria-expanded", mega ? "true" : "false");
-      menu.hidden = !mega;
+      presence(menu, mega);
     }
     [["Products", true], ["Pricing", false], ["Business", false], ["Help", false]].forEach(([label, dropdown]) => {
       const link = button("nv-link", label, (event) => {
@@ -1184,6 +1303,29 @@
     return root;
   }
 
+  function createNavMotion() {
+    const table = el("div");
+    const head = el("div", "nv-which");
+    ["Moment", "Web", "iOS", "Android"].forEach((label) => head.append(el("span", "", label)));
+    table.append(head);
+    [
+      ["Select a sidebar item", "Mint fill slides to the new item, 320 ms spring (motion/indicator, ease/spring)", "iPad sidebar selection with .spring(duration: 0.32, bounce: 0.2)", "Rail indicator grows from the icon, 320 ms emphasized"],
+      ["Collapse or expand the sidebar", "Width 300 ms standard; labels fade in after 100 ms", "System sidebar column transition", "Rail to drawer: container transform, 300 ms"],
+      ["Open a popover or menu", "Zoom from 0.95 and fade, 200 ms from the trigger; closes in 150 ms (ease/exit)", "System popover and menu presentation", "Menu scales and fades from its anchor, 200 / 150 ms"],
+      ["Open the menu drawer", "Slides in 380 ms, rows rise in with a 25 ms stagger; closes in 250 ms, scrim in 130 ms", "Sheet with system spring and detents", "Modal drawer: 380 ms emphasized decelerate in, 250 ms accelerate out"],
+      ["Change page", "Content rises 6 px and fades in, 300 ms, 50 ms stagger", "Push with the system navigation transition", "Shared axis X, 300 ms"],
+      ["Pick a tab", "Active icon bounces to 1.15 on a spring, 350 ms; the screen rises in", ".symbolEffect(.bounce) on the tab icon; content cross-fades", "Indicator pill expands, icon fills; fade through, 300 ms"],
+      ["Scroll under the top bar", "Scroll-edge blur fades in; the inline title rises in, 200 ms", "Liquid Glass scroll edge; the large title collapses (system)", "Top app bar takes the scrolled container colour, 200 ms"],
+      ["Press", "Scale to 0.97 in 100 ms", "Glass controls scale up to 1.08 with a highlight", "Ripple from the touch point plus the pressed state layer"],
+      ["Reduce Motion", "prefers-reduced-motion or data-reduce-motion: slides, scales and springs become a 200 ms fade; the indicator jumps", "accessibilityReduceMotion: cross-fade instead of slide and scale", "Animator duration scale 0: skip transitions, keep state changes"],
+    ].forEach(([moment, web, ios, android]) => {
+      const row = el("div", "nv-wrow");
+      row.append(el("strong", "", moment), el("span", "", web), el("span", "", ios), el("span", "", android));
+      table.append(row);
+    });
+    return table;
+  }
+
   function createNavGuide() {
     const root = el("div", "nv-stack");
     const table = el("div");
@@ -1235,4 +1377,5 @@
   window.createNavHeaders = createNavHeaders;
   window.createNavFooters = createNavFooters;
   window.createNavGuide = createNavGuide;
+  window.createNavMotion = createNavMotion;
 })();

@@ -18,5 +18,6 @@
   mount("mobile-web").append(createNavMobileWeb());
   mount("headers").append(createNavHeaders());
   mount("footers").append(createNavFooters());
+  mount("motion").append(createNavMotion());
   mount("guide").append(createNavGuide());
 })();
