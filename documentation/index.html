@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/documentation/">
   <title>Introduction · Falcon 2.0</title>
-  <link rel="stylesheet" href="../styles/foundations.css?v=qr-1">
+  <link rel="stylesheet" href="../styles/foundations.css?v=ch-1">
   <link rel="stylesheet" href="page.css?v=me-5">
   <link rel="stylesheet" href="icons.css?v=me-5">
   <link rel="stylesheet" href="logo.css?v=me-5">
@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="../components/money/money-entry.css?v=me-5">
   <link rel="stylesheet" href="../components/balance/balance.css?v=br-1">
   <link rel="stylesheet" href="../components/qr/qr.css?v=qr-1">
+  <link rel="stylesheet" href="../components/charts/charts.css?v=ch-1">
   <link rel="stylesheet" href="../components/empty-states/empty-states.css?v=me-5">
   <link rel="stylesheet" href="../components/navigation/navigation.css?v=me-5">
   <link rel="stylesheet" href="../components/tabs/tabs.css?v=me-5">
@@ -59,6 +60,7 @@
   <link rel="stylesheet" href="money-entry.css?v=me-5">
   <link rel="stylesheet" href="balance-receipts.css?v=br-3">
   <link rel="stylesheet" href="qr-links.css?v=qr-1">
+  <link rel="stylesheet" href="charts.css?v=ch-1">
   <link rel="stylesheet" href="empty-states.css?v=me-5">
   <link rel="stylesheet" href="navigation.css?v=me-5">
   <link rel="stylesheet" href="tabs.css?v=me-5">
@@ -134,6 +136,7 @@
           <a class="docs-link" href="#money-entry">Money entry</a>
           <a class="docs-link" href="#balance-receipts">Balance &amp; receipts</a>
           <a class="docs-link" href="#qr-links">QR &amp; links</a>
+          <a class="docs-link" href="#charts">Charts</a>
           <a class="docs-link" href="#empty-states">Empty states</a>
           <a class="docs-link" href="#navigation">Navigation</a>
           <a class="docs-link" href="#tabs">Tabs</a>
@@ -2714,6 +2717,71 @@
             <div class="wrap qrd-toast" data-qr-toast></div>
           </main>
         </article>
+        <article class="doc-page" data-page="charts" hidden>
+          <header class="wrap head">
+            <p class="kicker">Hala UI · Components</p>
+            <h1 class="type-display">Charts</h1>
+            <p class="lede type-body-l">One chart family for totals over time and parts of a whole. Chart card wraps a Bar chart; Share bar and Ranked row sit under it. Bars start at zero in one colour; the latest or tapped bar is the only highlight. Amounts stay left to right in Arabic, and the latest period sits on the left. Every example with a “Live” tag works.</p>
+          </header>
+          <main>
+            <section class="wrap" id="ch-web">
+              <div class="titles">
+                <h2 class="doc-h2">Web · live</h2>
+                <p class="sub type-body-m">Analytics in App shell: Chart card with the existing Chart filter header, then Share bar and Ranked row. Tap a bar for its Riyal value.</p>
+              </div>
+              <div data-ch="web"></div>
+            </section>
+            <section class="wrap" id="ch-mobile">
+              <div class="titles">
+                <h2 class="doc-h2">Mobile · iOS and Android</h2>
+                <p class="sub type-body-m">Sales tab with a range switch, compact Chart card, schemes and top branches. Empty keeps the card size.</p>
+              </div>
+              <div data-ch="mobile"></div>
+            </section>
+            <section class="wrap" id="ch-components">
+              <div class="titles">
+                <h2 class="doc-h2">Components</h2>
+                <p class="sub type-body-m">Four components, same names on Web, iOS and Android.</p>
+              </div>
+              <div data-ch="components"></div>
+            </section>
+            <section class="wrap" id="ch-states">
+              <div class="titles">
+                <h2 class="doc-h2">States</h2>
+                <p class="sub type-body-m">_Bar Default, Current, Selected and Muted. Bar counts 7, 12 and 24. Chart card Web and App, Default and Empty. Share bar and Ranked row in both directions.</p>
+              </div>
+              <div data-ch="states"></div>
+            </section>
+            <section class="wrap" id="ch-arabic">
+              <div class="titles">
+                <h2 class="doc-h2">Arabic · RTL</h2>
+                <p class="sub type-body-m">Latest period on the left. Labels follow Arabic reading order; Riyal amounts and percents stay left-to-right.</p>
+              </div>
+              <div data-ch="arabic"></div>
+            </section>
+            <section class="wrap" id="ch-responsive">
+              <div class="titles">
+                <h2 class="doc-h2">Responsive · web, iPad app, phone app</h2>
+                <p class="sub type-body-m">Web uses the Chart card with the filter header. iPad and phone use the compact card under a range switch.</p>
+              </div>
+              <div data-ch="responsive"></div>
+            </section>
+            <section class="wrap" id="ch-platforms">
+              <div class="titles">
+                <h2 class="doc-h2">Platforms</h2>
+                <p class="sub type-body-m">One component, three implementations.</p>
+              </div>
+              <div data-ch="platforms"></div>
+            </section>
+            <section class="wrap" id="ch-rules">
+              <div class="titles">
+                <h2 class="doc-h2">Use / Don’t</h2>
+                <p class="sub type-body-m">Habits that keep a chart honest and a share readable.</p>
+              </div>
+              <div data-ch="rules"></div>
+            </section>
+          </main>
+        </article>
         <article class="doc-page" data-page="loading" hidden>
           <header class="wrap head">
             <p class="kicker">Hala UI · Components</p>
@@ -3953,6 +4021,7 @@
   <script src="../components/balance/balance.js?v=br-1"></script>
   <script src="../components/qr/encode.js?v=qr-1"></script>
   <script src="../components/qr/qr.js?v=qr-1"></script>
+  <script src="../components/charts/charts.js?v=ch-2"></script>
   <script src="../components/empty-states/empty-states.js?v=me-5"></script>
   <script src="../components/tabs/tabs.js?v=me-5"></script>
   <script src="../components/navigation/navigation.js?v=me-5"></script>
@@ -3978,6 +4047,7 @@
   <script src="money-entry.js?v=me-5"></script>
   <script src="balance-receipts.js?v=br-3"></script>
   <script src="qr-links.js?v=qr-1"></script>
+  <script src="charts.js?v=ch-1"></script>
   <script src="empty-states.js?v=me-5"></script>
   <script src="navigation.js?v=me-5"></script>
   <script src="tabs.js?v=me-5"></script>

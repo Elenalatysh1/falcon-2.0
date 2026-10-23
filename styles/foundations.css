@@ -489,6 +489,16 @@
   --qr-eye-hole: 1;
   --qr-eye-inner: 0.9;
   --qr-quiet: 9;
+  /* Charts: past bars are mint, the latest or tapped bar is chart/1, muted is the grid. */
+  --chart-bar: #9DD3C2;
+  --chart-bar-muted: var(--border-default);
+  --chart-plot: 160px;
+  --chart-bar-radius: 6px;
+  --chart-share-height: 10px;
+  --chart-share-gap: 3px;
+  --chart-share-radius: 5px;
+  --chart-swatch: 8px;
+  --chart-empty: 200px;
 
   /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
   --gap-tabs: 18px;
@@ -866,6 +876,8 @@
 
   --chart-1: #40B39A;
   --chart-grid: #262626;
+  --chart-bar: #2A6B5A;
+  --chart-bar-muted: #3A3F3D;
 
   --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
   --shadow-2: 0 18px 36px -16px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
