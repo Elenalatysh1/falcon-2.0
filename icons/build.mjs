@@ -41,6 +41,13 @@ for (const name of Object.keys(hala)) {
   if (!checked.has(name)) throw new Error(`${name}: no Figma checksum in sums.json`);
 }
 
+/** Hala names that clash with a Falcon name for a different icon. Falcon "delete" stays the trash can. */
+const renamed = { delete: "backspace" };
+for (const [from, to] of Object.entries(renamed)) {
+  hala[to] = hala[from];
+  delete hala[from];
+}
+
 /** Falcon name → icon, as mapped on the Figma Icons showcase. */
 const catalog = {
   dashboard: "category",
@@ -78,6 +85,7 @@ const catalog = {
   confirm: "tick-square",
   edit: "edit-2",
   delete: "trash",
+  backspace: "backspace",
   copy: "copy",
   download: "import",
   upload: "export",

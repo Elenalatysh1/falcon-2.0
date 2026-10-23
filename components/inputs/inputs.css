@@ -685,6 +685,11 @@ button.input-box {
   line-height: var(--type-overline-line);
 }
 
+:lang(ar) .input-option-code {
+  font-family: var(--font-arabic);
+  letter-spacing: 0;
+}
+
 .input-option-meta {
   font-size: var(--type-caption-size);
   line-height: var(--type-caption-line);
@@ -719,6 +724,7 @@ button.input-box {
 .input-mark[data-mark="sabb"] { background: var(--mark-sabb); }
 .input-mark[data-mark="albilad"] { background: var(--mark-albilad); }
 .input-mark[data-mark="alinma"] { background: var(--mark-alinma); }
+.input-mark[data-mark="contact"] { border-radius: var(--radius-pill); background: var(--avatar-tint-1); color: var(--avatar-text-1); }
 
 .input-check {
   color: var(--action-primary);
@@ -874,9 +880,10 @@ button.input-box {
 
 .otp-box {
   box-sizing: border-box;
-  width: var(--size-otp-box);
+  width: auto;
+  min-width: 0;
   height: var(--size-otp);
-  flex: none;
+  flex: 0 1 var(--size-otp-box);
   margin: 0;
   border: var(--border-width) solid var(--border-input);
   border-radius: var(--radius-m);

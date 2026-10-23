@@ -424,6 +424,16 @@
   --card-peek: 8%;
   --card-fan-step: 14px;
   --card-fan-scale: 0.08;
+  /* Money entry: in-app keypad, recipient strip and the large Riyal sign next to --type-amount-transfer. */
+  --size-key: 56px;
+  --size-key-compact: 48px;
+  --gap-keys: 6px;
+  --size-amount-sign: 36px;
+  --size-recipient: 56px;
+  --size-recipient-ring: 64px;
+  --size-recipient-check: 18px;
+  --width-recipient: 76px;
+  --shadow-key: 0 1px 0 rgba(0, 0, 0, 0.12);
 
   /* Tabs — 44 tall: 12 top, 20 label, 10 gap, 2 underline */
   --gap-tabs: 18px;

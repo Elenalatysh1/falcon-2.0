@@ -12,6 +12,7 @@
  *
  * createOtp({ length, value, title, description, match, verified, wrong, countdown, status, active, interactive })
  * createSelect({ kind, label, value, options, placeholder, limit, emptyTitle, emptyHint, emptyLabel, countLabel })
+ *   combobox options: { value, label, code, initials, mark } — mark is a bank id or "contact" for a person.
  * createUpload({ state, title, browse, hint, file, progress, meta })
  *
  * size: lg | md | sm
