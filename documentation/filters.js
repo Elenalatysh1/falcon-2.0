@@ -28,16 +28,10 @@
   ];
 
   const rules = [
-    [true, 'Show at most 3 filters in the bar. Put the rest in "More filters".'],
-    [true, 'Put the value in the filter label once set: "Status: Settled", "Branch · 2".'],
-    [true, 'Always show applied filters, the result count and "Clear all".'],
-    [true, "Web: apply on change. Mobile sheet: apply with one button that shows the count."],
-    [true, "Keep filters when people open a row and come back."],
-    [true, "Chart series toggles double as the legend."],
-    [false, "Don't let the last chart series be turned off silently; explain why the chart is empty."],
-    [false, "Don't use dropdown-selects for filters with 2–4 options; use chips or segments."],
-    [false, "Don't reset filters when the user changes the search text."],
-    [false, 'Don\'t show "0 results" without a way out.'],
+    ["Show at most 3 filters in the bar; put the rest in More filters.", "Use a dropdown for a filter with 2–4 options; use chips or segments."],
+    ["Put the value in the label once set: “Status: Settled”, “Branch · 2”.", "Reset filters when the search text changes."],
+    ["Always show applied filters, the result count and Clear all.", "Show “0 results” without a way out."],
+    ["Let series toggles double as the chart legend.", "Turn the last chart series off silently; say why the chart is empty."],
   ];
 
   function el(tag, className, text) {
@@ -96,8 +90,11 @@
     compare.append(row);
   });
 
+  const aside = el("div", "flt-aside");
+  aside.append(compare);
+  mount("aside").append(aside);
+
   const guide = el("div", "flt-side");
-  guide.append(el("span", "flt-label", "What each area filters by"));
   areas.forEach(([name, filters]) => {
     const area = el("div", "flt-area");
     const row = el("div", "flt-area-row");
@@ -110,18 +107,31 @@
     guide.append(area);
   });
   guide.append(el("p", "flt-note", 'Green = shown in the bar or chip row. Gray = in "More filters".'));
+  mount("areas").append(guide);
 
-  const aside = el("div", "flt-aside");
-  aside.append(compare, guide);
-  mount("aside").append(aside);
+  const arabic = mount("arabic");
+  if (arabic) {
+    const wrap = el("div", "flt-panel");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    const row = el("div", "flt-specimens");
+    [["الحالة: مكتمل", true], ["الفرع", false, 2], ["فلاتر أخرى"]].forEach(([label, applied, count]) => {
+      row.append(createFilterPill({ label, state: applied ? "applied" : "default", clear: applied, count }));
+    });
+    wrap.append(el("span", "flt-label", "3 من 8 عمليات"), row);
+    arabic.append(wrap);
+  }
 
-  const ruleGrid = el("div", "flt-rules");
-  rules.forEach(([ok, text]) => {
-    const card = el("div", "flt-rule");
-    const mark = el("span", "flt-rule-mark", ok ? "✓" : "×");
-    mark.dataset.ok = ok ? "true" : "false";
-    card.append(mark, el("span", "", text));
-    ruleGrid.append(card);
+  rules.forEach(([yes, no], index) => {
+    const card = el("div", "lst-rule");
+    card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+    [[true, yes], [false, no]].forEach(([ok, text]) => {
+      const line = el("div", "lst-rule-line");
+      line.dataset.ok = ok ? "true" : "false";
+      line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+      card.append(line);
+    });
+    mount("rules").append(card);
   });
-  mount("rules").append(ruleGrid);
 })();

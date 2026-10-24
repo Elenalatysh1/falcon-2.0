@@ -97,14 +97,16 @@
   ];
 
   const rules = [
-    [true, "Try space first, then cards, then a line. Use one method per group."],
-    [true, "Inset list lines to the text, not the icon. No line after the last row."],
-    [true, "Use 1 px on web and 0.5 pt hairlines on mobile."],
-    [true, "Label a divider when it marks a change: a date, \"or\", unread."],
-    [false, "Don't put a line under a card edge or around every card."],
-    [false, "Don't use dividers thicker than 1 px or in brand green."],
-    [false, "Don't separate a heading from its content with a line."],
-    [false, "Don't stack two lines; a section break replaces the row line."],
+    ["Try space first, then cards, then a line. Use one method per group.", "Put a line under a card edge or around every card."],
+    ["Inset list lines to the text, not the icon. No line after the last row.", "Use dividers thicker than 1 px or in brand green."],
+    ["Use 1 px on web and 0.5 pt hairlines on mobile.", "Separate a heading from its content with a line."],
+    ["Label a divider when it marks a change: a date, “or”, unread.", "Stack two lines; a section break replaces the row line."],
+  ];
+
+  const peopleAr = [
+    ["بك", "البيك · العليا", "12:41 · مدى", "+ 86.25"],
+    ["جر", "مكتبة جرير", "11:08 · فيزا", "− 1,249.00"],
+    ["نت", "نور للتجارة", "09:30 · تحويل", "− 25,000.00"],
   ];
 
   const scrollItems = ["Al Baik · Olaya", "Jarir Bookstore", "Nour Trading", "Careem", "Online store", "STC Pay", "Panda", "Tamimi", "Uber", "Aramex"];
@@ -415,15 +417,47 @@
     });
   }
 
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const inset = el("div", "dv-panel dv-panel-inset");
+    inset.dir = "rtl";
+    inset.lang = "ar";
+    inset.style.fontFamily = "var(--font-arabic)";
+    inset.append(el("span", "dv-kicker", "صفوف مُزاحة"));
+    const list = el("div", "dv-list");
+    peopleAr.forEach((person, index) => {
+      list.append(personRow(person, index === peopleAr.length - 1, false));
+    });
+    inset.append(list);
+
+    const labelled = el("div", "dv-panel dv-panel-copy");
+    labelled.dir = "rtl";
+    labelled.lang = "ar";
+    labelled.style.fontFamily = "var(--font-arabic)";
+    const stack = el("div", "dv-label-stack");
+    labelled.append(stack);
+    stack.append(
+      el("span", "dv-kicker", "مقسّمات بعنوان"),
+      createDivider({ tone: "default", label: "أو تابع باستخدام" }),
+      createDivider({ tone: "default", label: "أمس", labelStyle: "overline", align: "start" }),
+      createDivider({ tone: "default", label: "12 عملية جديدة", labelStyle: "chip" }),
+      createDivider({ tone: "danger", label: "غير مقروء من هنا" }),
+    );
+    root.append(inset, labelled);
+  }
+
   function fillRules() {
     const root = mount("rules");
-    rules.forEach(([ok, text]) => {
-      const card = el("div", "dv-rule");
-      const mark = el("span", "dv-mark");
-      mark.dataset.ok = ok ? "true" : "false";
-      const glyph = icon(ok ? "confirm" : "close");
-      if (glyph) mark.append(glyph);
-      card.append(mark, el("p", "", text));
+    rules.forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
       root.append(card);
     });
   }
@@ -434,5 +468,6 @@
   fillLabels();
   fillMobile();
   fillSpacing();
+  fillArabic();
   fillRules();
 })();

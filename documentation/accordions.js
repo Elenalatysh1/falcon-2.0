@@ -45,14 +45,10 @@
   ];
 
   const rules = [
-    [true, "Write titles people scan for: \"Card limits\", not \"More\"."],
-    [true, "Show a summary in the subtitle or meta so people don't need to open it."],
-    [true, "Open the most relevant section by default, e.g. the one with an error."],
-    [true, "Keep state when the user leaves and comes back."],
-    [false, "Don't hide the primary action or required fields inside a collapsed section."],
-    [false, "Don't nest accordions more than one level."],
-    [false, "Don't use for 1–2 short items; just show them."],
-    [false, "Don't use as navigation between pages; use tabs or the sidebar."],
+    ["Write titles people scan for: “Card limits”, not “More”. Summarise in the subtitle or meta.", "Hide the primary action or required fields inside a collapsed section."],
+    ["Open the most relevant section by default, e.g. the one with an error.", "Nest accordions more than one level."],
+    ["Keep the open state when the user leaves and comes back.", "Use an accordion for 1–2 short items; just show them."],
+    ["Pick one style per page: Divided, Card or Compact.", "Use accordions as navigation between pages; use tabs or the sidebar."],
   ];
 
   const mobileSpecs = [
@@ -306,15 +302,45 @@
       use.append(card);
     });
     const rulesRoot = mount("rules");
-    rules.forEach(([ok, text]) => {
-      const card = el("div", "ac-rule");
-      const mark = el("span", "ac-mark");
-      mark.dataset.ok = ok ? "true" : "false";
-      const glyph = window.drawAccordionIcon(ok ? "confirm" : "close");
-      if (glyph) mark.append(glyph);
-      card.append(mark, el("span", "", text));
+    rules.forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
       rulesRoot.append(card);
     });
+  }
+
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const wrap = el("div", "ac-panel");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    wrap.append(createAccordion({
+      variant: "card",
+      items: [{
+        title: "حدود البطاقة",
+        subtitle: "يومي، شهري وعن كل عملية",
+        meta: "3 مضبوطة",
+        icon: "cards",
+        open: true,
+        lines: [
+          { label: "يومي", value: "5,000.00", mono: true },
+          { label: "شهري", value: "40,000.00", mono: true },
+        ],
+      }, {
+        title: "كم تستغرق التحويلات؟",
+        subtitle: "بين حسابات هلا فوراً",
+        body: "إلى البنوك السعودية الأخرى خلال دقائق عبر سريع.",
+      }],
+    }));
+    root.append(wrap);
   }
 
   fillAnatomy();
@@ -323,4 +349,5 @@
   fillMobile();
   fillSizes();
   fillWhen();
+  fillArabic();
 })();

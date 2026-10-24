@@ -87,9 +87,12 @@
 }
 
 [data-page="selection"] .sel-specs,
-[data-page="selection"] .sel-rules,
 [data-page="selection"] .sel-notes {
   grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 4 + var(--space-4)), 1fr));
+}
+
+[data-page="selection"] .sel-rules {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-phone) * 0.9), 1fr));
 }
 
 [data-page="selection"] .sel-split {

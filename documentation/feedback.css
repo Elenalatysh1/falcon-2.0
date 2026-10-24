@@ -474,7 +474,7 @@
 }
 
 [data-page="feedback"] .fb-rules {
-  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 5), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--size-phone) * 0.9), 1fr));
 }
 
 [data-page="feedback"] .fb-rule {

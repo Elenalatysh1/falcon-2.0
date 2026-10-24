@@ -3,16 +3,9 @@
   if (!page || !window.createLoadingGuide) return;
 
   const rules = [
-    [true, "Wait 300 ms before showing any loader; if it's faster, show nothing."],
-    [true, "Once shown, keep a loader at least 500 ms so it doesn't flicker."],
-    [true, "Match skeletons to the real layout and keep known labels visible."],
-    [true, "Load sections independently; never block the whole page for one slow widget."],
-    [true, "Disable a loading button and keep its width; prevent double payments."],
-    [true, "Add aria-busy and a \"Loading\" label for screen readers."],
-    [false, "Don't use a full-screen spinner for content that has a layout."],
-    [false, "Don't show skeletons for more than 10 s; switch to an error with Retry."],
-    [false, "Don't mix skeletons and spinners in the same area."],
-    [false, "Don't animate skeletons when the user prefers reduced motion; keep them still and gray."],
+    ["Match skeletons to the real layout and replace them in place.", "Put a spinner over a whole table, or let the layout jump when data lands."],
+    ["Show skeletons after 300 ms; switch to an error state after 10 s.", "Keep skeletons on screen forever when a request fails."],
+    ["Pulse slowly (1.2 s) and stop under Reduce motion.", "Use a fast shimmer or skeletons for buttons and actions."],
   ];
 
   function el(tag, className, text) {
@@ -37,13 +30,27 @@
 
   mount("mobile").append(createLoadingPhones());
 
+  const arabic = mount("arabic");
+  if (arabic) {
+    const wrap = el("div");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    wrap.append(el("span", "ld-kicker", "العمليات · جارٍ التحميل"), createListSkeleton({ rows: 3 }));
+    arabic.append(wrap);
+  }
+
   const ruleGrid = el("div", "ld-rules");
-  rules.forEach(([ok, text]) => {
-    const rule = el("div", "ld-rule");
-    const mark = el("span", "ld-rule-mark", ok ? "✓" : "×");
-    mark.dataset.ok = ok ? "true" : "false";
-    rule.append(mark, el("span", "", text));
-    ruleGrid.append(rule);
+  rules.forEach(([yes, no], index) => {
+    const card = el("div", "lst-rule");
+    card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+    [[true, yes], [false, no]].forEach(([ok, text]) => {
+      const line = el("div", "lst-rule-line");
+      line.dataset.ok = ok ? "true" : "false";
+      line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+      card.append(line);
+    });
+    ruleGrid.append(card);
   });
   const block = el("div", "ld-rules-block");
   block.append(createLoadingTimeline(), ruleGrid);

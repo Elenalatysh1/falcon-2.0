@@ -484,6 +484,9 @@
       status = "",
       active = -1,
       interactive = true,
+      prompt = "Didn't get it?",
+      resendLabel = "Resend code",
+      resendIn = "Resend in",
     } = options;
 
     const root = el("div", "otp");
@@ -527,14 +530,18 @@
       boxes.append(box);
     });
     root.append(boxes);
+    if (options.lang === "ar") {
+      root.lang = "ar";
+      root.dir = "rtl";
+    }
 
     if (!interactive) return root;
 
     const msg = el("p", "otp-msg");
     msg.setAttribute("role", "status");
     const resend = el("div", "otp-resend");
-    resend.append(document.createTextNode("Didn't get it?"));
-    const resendBtn = el("button", "otp-resend-btn", "Resend code");
+    resend.append(document.createTextNode(prompt));
+    const resendBtn = el("button", "otp-resend-btn", resendLabel);
     resendBtn.type = "button";
     const timer = el("span", "otp-timer");
     resend.append(resendBtn, timer);
@@ -547,7 +554,7 @@
       const waiting = remaining > 0;
       resendBtn.hidden = waiting;
       timer.hidden = !waiting;
-      if (waiting) timer.textContent = `Resend in 0:${String(remaining).padStart(2, "0")}`;
+      if (waiting) timer.textContent = `${resendIn} 0:${String(remaining).padStart(2, "0")}`;
     }
 
     function read() {
@@ -570,6 +577,7 @@
       msg.textContent = ok ? verified : wrong;
       msg.dataset.tone = ok ? "success" : "error";
       msg.setAttribute("role", ok ? "status" : "alert");
+      if (ok && options.onComplete) options.onComplete(code);
     }
 
     function focusAt(index) {

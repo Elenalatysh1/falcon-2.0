@@ -12,16 +12,10 @@
   ];
 
   const rules = [
-    [true, "Use when the answer can be longer than one line or 60 characters."],
-    [true, "Show an example in the placeholder, never the instructions."],
-    [true, "Start at 3 lines and grow to 8; then scroll."],
-    [true, "Show the counter only near the limit; let people type past it and say how much to cut."],
-    [true, "Validate on blur or submit, not while typing."],
-    [true, "Mark it \"optional\" when not required."],
-    [false, "Don't use a text area for structured data (amounts, dates, IBANs)."],
-    [false, "Don't clear what the user typed after an error."],
-    [false, "Don't use font below 16 on mobile."],
-    [false, "Don't submit on Enter in multi-line fields; use ⌘/Ctrl + Enter on web."],
+    ["Use a textarea when the answer may run past one line.", "Use a textarea for short values like names or numbers."],
+    ["Show the counter only when there is a limit.", "Cut the text off silently at the limit."],
+    ["Let the field grow with the text, up to a sensible height.", "Make the user scroll inside a tiny box."],
+    ["Keep the helper line short, under the field.", "Show the helper and the error message together."],
   ];
 
   function el(tag, className, text) {
@@ -58,14 +52,21 @@
     card.append(row);
   });
   const ruleGrid = el("div", "ta-rules");
-  rules.forEach(([ok, text]) => {
-    const rule = el("div", "ta-rule");
-    const mark = el("span", "ta-rule-mark", ok ? "✓" : "×");
-    mark.dataset.ok = ok ? "true" : "false";
-    rule.append(mark, el("span", "", text));
+  rules.forEach(([yes, no], index) => {
+    const rule = el("div", "lst-rule");
+    rule.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+    [[true, yes], [false, no]].forEach(([ok, text]) => {
+      const line = el("div", "lst-rule-line");
+      line.dataset.ok = ok ? "true" : "false";
+      line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+      rule.append(line);
+    });
     ruleGrid.append(rule);
   });
   const bottom = el("div", "ta-bottom");
   bottom.append(card, ruleGrid);
   mount("rules").append(bottom);
+
+  const arabic = mount("arabic");
+  if (arabic && window.createArabicArea) arabic.append(createArabicArea());
 })();

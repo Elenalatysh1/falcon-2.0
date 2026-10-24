@@ -237,6 +237,25 @@
     return list;
   }
 
+  function createAvatar(options = {}) {
+    const node = el("span", "list-avatar", options.initials || "");
+    node.dataset.tone = String(options.tone || 1);
+    if (options.size) node.dataset.size = options.size;
+    node.setAttribute("aria-hidden", "true");
+    if (options.label) node.setAttribute("aria-label", options.label);
+    return node;
+  }
+
+  function createIconTile(options = {}) {
+    const tile = el("span", "list-tile");
+    if (options.size) tile.dataset.size = options.size;
+    if (options.tone) tile.dataset.tone = options.tone;
+    const glyph = icon(options.icon || "cards", options.size === "inline" ? "inline" : options.size === "feature" ? "feature" : "default");
+    if (glyph) tile.append(glyph);
+    tile.setAttribute("aria-hidden", "true");
+    return tile;
+  }
+
   window.createList = createList;
   window.createListItem = createListItem;
   window.createTransactionRow = createTransactionRow;
@@ -245,4 +264,6 @@
   window.createDetails = createDetails;
   window.createListSkeleton = createListSkeleton;
   window.createAmount = createAmount;
+  window.createAvatar = createAvatar;
+  window.createIconTile = createIconTile;
 })();

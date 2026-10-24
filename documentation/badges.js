@@ -382,21 +382,37 @@
   function fillRules() {
     const root = mount("rules");
     [
-      [true, "One color per status everywhere: Settled is always green, Pending always amber."],
-      [true, "Pair color with an icon or dot so the status reads without color."],
-      [true, "Keep labels to one or two words. Put details in a tooltip or the detail screen."],
-      [true, "Use red counters only for items that need action; use a dot for new."],
-      [false, "Don't make badges clickable. If it does something, it's a chip or button."],
-      [false, "Don't put more than two badges next to one title."],
-    ].forEach(([ok, text]) => {
-      const card = el("div", "bd-rule");
-      const mark = el("span", "bd-mark");
-      mark.dataset.ok = ok ? "true" : "false";
-      const glyph = icon(ok ? "confirm" : "close");
-      if (glyph) mark.append(glyph);
-      card.append(mark, el("span", "", text));
+      ["One colour per status everywhere: Settled is always green, Pending always amber.", "Make badges clickable. If it does something, it’s a chip or button."],
+      ["Pair colour with an icon or dot so the status reads without colour.", "Put more than two badges next to one title."],
+      ["Keep labels to one or two words. Put details in a tooltip or the detail screen.", "Show counts over 99. Write 99+ instead."],
+      ["Use red counters only for items that need action; use a dot for new.", "Use a red counter just to say something is new."],
+    ].forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
       root.append(card);
     });
+  }
+
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const wrap = el("div", "bd-row");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    wrap.append(
+      badge({ tone: "settled", icon: true, label: "مكتمل" }),
+      badge({ tone: "pending", icon: true, label: "قيد الانتظار" }),
+      badge({ variant: "trend", tone: "up", icon: true, label: "12.4%" }),
+      badge({ tone: "brand", icon: true, label: "موثّق" }),
+    );
+    root.append(wrap);
   }
 
   function fillExtras() {
@@ -432,5 +448,6 @@
   fillDetail();
   fillChips();
   fillFiltered();
+  fillArabic();
   fillRules();
 })();

@@ -42,12 +42,10 @@
     ["Locked", "", "disabled", -1],
   ];
   const rules = [
-    [true, "Keep labels short and visible. The floating label replaces a separate placeholder."],
-    [true, "Validate on blur or submit, not on every keystroke. Clear the error as soon as the value is valid."],
-    [true, "Error text says how to fix it: \"Enter 9 digits starting with 5\"."],
-    [true, "Use the right keyboard on mobile: numeric for OTP, phone and amount."],
-    [false, "Don't disable a field without a helper line explaining why."],
-    [false, "Don't split IBAN or phone into several fields. Format one field as the user types."],
+    ["Keep labels short and visible. The floating label replaces a separate placeholder.", "Disable a field without a helper line explaining why."],
+    ["Validate on blur or submit, not on every keystroke. Clear the error as soon as the value is valid.", "Split IBAN or phone into several fields. Format one field as the user types."],
+    ["Write error text that says how to fix it: \"Enter 9 digits starting with 5\".", "Show the helper line and the error message together."],
+    ["Use the right keyboard on mobile: numeric for OTP, phone and amount.", "Write SAR or ر.س in amounts. Use the Riyal sign before the number."],
   ];
 
   function el(tag, className, text) {
@@ -439,15 +437,44 @@
     });
   }
 
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const wrap = el("div", "in-special");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    wrap.append(
+      field({ label: "اسم المنشأة", value: "شركة خميس العربية للتجارة", hint: "كما هو في السجل التجاري" }),
+      field({ label: "رقم الجوال", value: "50 333 12", format: "phone", prefix: "+966", error: "أدخل 9 أرقام تبدأ بـ 5", state: "error" }),
+      field({ label: "كلمة المرور", type: "password", value: "Hala2026!", hint: "8 أحرف على الأقل" }),
+      field({ label: "المبلغ", value: "25000", format: "amount", amount: { available: "المتاح 175,000.00" } }),
+    );
+    const otp = createOtp({
+      title: "أدخل الرمز",
+      description: "أُرسل برسالة نصية إلى +966 50 ••• •• 26",
+      value: "482",
+      active: 3,
+      interactive: false,
+      lang: "ar",
+      prompt: "لم يصلك الرمز؟",
+      resendLabel: "إعادة الإرسال",
+      resendIn: "إعادة الإرسال",
+    });
+    root.append(wrap, otp);
+  }
+
   function fillUsage() {
     const root = mount("usage");
-    rules.forEach(([ok, text]) => {
-      const card = el("div", "in-rule");
-      const mark = el("span", "in-mark-icon");
-      mark.dataset.ok = ok ? "true" : "false";
-      const glyph = drawInputIcon(ok ? "confirm" : "close");
-      if (glyph) mark.append(glyph);
-      card.append(mark, el("span", "", text));
+    rules.forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
       root.append(card);
     });
   }
@@ -460,5 +487,6 @@
   fillSpecial();
   fillCompact();
   fillSelection();
+  fillArabic();
   fillUsage();
 })();

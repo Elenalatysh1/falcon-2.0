@@ -24,6 +24,10 @@ const aliases = {
   radio: { page: "selection", section: "selection-radio" },
   switch: { page: "selection", section: "selection-toggle" },
   tables: { page: "data-tables", section: "" },
+  confirm: { page: "confirm-auth", section: "" },
+  auth: { page: "confirm-auth", section: "" },
+  "drop-down": { page: "dropdown", section: "" },
+  upload: { page: "file-upload", section: "" },
 };
 
 function resolve(hash) {

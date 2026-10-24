@@ -44,12 +44,10 @@
   ];
 
   const rules = [
-    [true, "Use the least interruptive layer that works; most actions need none."],
-    [true, "One overlay at a time. Confirmations inside a drawer replace its footer."],
-    [true, "Primary action names the result: \"Add beneficiary\", not \"OK\"."],
-    [true, "Keep typed data when an error happens; never close the modal on failure."],
-    [false, "Don't open a modal from a modal, or a sheet from a sheet."],
-    [false, "Don't use a modal just to show a success message; use a toast or success screen."],
+    ["Use the least interruptive layer that works; most actions need none.", "Open a modal from a modal, or a sheet from a sheet."],
+    ["Name the primary by its result: “Add beneficiary”.", "Use “OK” or “Submit” as the primary label."],
+    ["Keep typed data when an error happens and show it inline.", "Close the modal on failure."],
+    ["Use a toast or success screen after it’s done.", "Use a modal just to show a success message."],
   ];
 
   const transactions = [
@@ -312,22 +310,64 @@
     mount("mobile").append(wrap);
   }
 
-  function fillRules() {
+  function fillBehaviour() {
     const grid = el("div", "ov-behave");
     behave.forEach(([name, copy]) => {
       const card = el("div", "ov-behave-card");
       card.append(el("strong", "", name), el("span", "ov-copy", copy));
       grid.append(card);
     });
-    const rulesGrid = el("div", "ov-rules");
-    rules.forEach(([ok, text]) => {
-      const card = el("div", "ov-rule");
-      const mark = el("span", "ov-mark", ok ? "✓" : "×");
-      mark.dataset.ok = ok ? "true" : "false";
-      card.append(mark, el("span", "", text));
-      rulesGrid.append(card);
+    mount("behaviour").append(grid);
+  }
+
+  function fillHandle() {
+    const root = mount("handle");
+    const row = el("div", "ov-handle-row");
+    [["iOS", "36 × 5"], ["Android", "32 × 4"]].forEach(([name, spec]) => {
+      const card = el("div", "ov-handle-card");
+      const bar = el("span", "ov-handle");
+      bar.dataset.os = name.toLowerCase();
+      card.append(el("span", "ov-kicker", name), bar, el("span", "ov-copy", spec));
+      row.append(card);
     });
-    mount("rules").append(grid, rulesGrid);
+    root.append(row);
+  }
+
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const wrap = el("div", "ov-arabic");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    const sheet = el("div", "ov-arabic-sheet");
+    sheet.append(
+      el("span", "ov-handle"),
+      el("strong", "", "تجميد البطاقة؟"),
+      el("p", "", "تتوقف العمليات فوراً. يمكنك إلغاء التجميد في أي وقت."),
+    );
+    const actions = el("div", "ov-arabic-actions");
+    actions.append(
+      createButton({ label: "تجميد البطاقة", variant: "destructive", size: "md" }),
+      createButton({ label: "إلغاء", variant: "ghost", size: "md" }),
+    );
+    sheet.append(actions);
+    wrap.append(sheet);
+    root.append(wrap);
+  }
+
+  function fillRules() {
+    rules.forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
+      mount("rules").append(card);
+    });
   }
 
   fillGuide();
@@ -335,5 +375,8 @@
   fillDrawer();
   fillPops();
   fillMobile();
+  fillBehaviour();
+  fillHandle();
+  fillArabic();
   fillRules();
 })();

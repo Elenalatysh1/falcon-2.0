@@ -1,0 +1,74 @@
+[data-page="pagination"] .pgz-guide,
+[data-page="pagination"] .pgz-grid,
+[data-page="dropdown"] .ddn-grid,
+[data-page="file-upload"] .upl-grid,
+[data-page="avatars"] .av-grid,
+[data-page="icon-tiles"] .it-grid,
+[data-page="amounts"] .am-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+[data-page="pagination"] .pgz-guide,
+[data-page="dropdown"] .ddn-grid,
+[data-page="file-upload"] .upl-grid,
+[data-page="avatars"] .av-grid,
+[data-page="icon-tiles"] .it-grid,
+[data-page="amounts"] .am-grid {
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 5), 1fr));
+}
+
+[data-page="pagination"] .pgz-card,
+[data-page="dropdown"] .ddn-card,
+[data-page="file-upload"] .upl-card,
+[data-page="avatars"] .av-card,
+[data-page="icon-tiles"] .it-card,
+[data-page="amounts"] .am-card {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--pad-card-y) var(--pad-card-x);
+  border-radius: var(--radius-2xl);
+  background: var(--surface-card);
+}
+
+[data-page="pagination"] .pgz-kicker,
+[data-page="dropdown"] .ddn-kicker,
+[data-page="file-upload"] .upl-kicker,
+[data-page="avatars"] .av-kicker,
+[data-page="icon-tiles"] .it-kicker,
+[data-page="amounts"] .am-kicker {
+  color: var(--text-label);
+  font-size: var(--type-overline-size);
+  letter-spacing: var(--type-overline-tracking);
+  text-transform: uppercase;
+}
+
+[data-page="pagination"] .pgz-card p,
+[data-page="dropdown"] .ddn-card p,
+[data-page="file-upload"] .upl-card p,
+[data-page="avatars"] .av-card p,
+[data-page="icon-tiles"] .it-card p,
+[data-page="amounts"] .am-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-s-size);
+}
+
+[data-page="icon-tiles"] .it-row,
+[data-page="avatars"] .av-row,
+[data-page="amounts"] .am-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+[data-page="pagination"] .pgz-card[data-width="narrow"] {
+  max-width: calc(var(--space-14) * 8);
+}
+
+[data-page="navigation"] [data-nav="rules"] {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-14) * 5), 1fr));
+}

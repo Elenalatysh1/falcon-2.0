@@ -545,22 +545,81 @@
     });
   }
 
+  function fillActions() {
+    const root = mount("actions");
+    if (!root) return;
+    root.append(
+      createFeedback({
+        kind: "notification",
+        tone: "warning",
+        title: "Approve 3 transfers",
+        description: "SAR 48,200 waiting for your approval since 9:12 am.",
+        action: "Review",
+        secondary: "Later",
+        time: "now",
+      }),
+      createFeedback({
+        kind: "notification",
+        tone: "warning",
+        title: "Approve 3 transfers",
+        description: "SAR 48,200 waiting for your approval since 9:12 am.",
+        action: "Add details",
+        secondary: "Dismiss",
+        time: "now",
+      }),
+    );
+  }
+
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const wrap = el("div", "fb-alerts");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    wrap.append(
+      createFeedback({
+        kind: "alert",
+        tone: "warning",
+        title: "تجديد السجل",
+        description: "ينتهي سجلك التجاري خلال 12 يوماً. جدّده عبر واثق لتبقى التحويلات فوق 50,000 متاحة.",
+      }),
+      createFeedback({
+        kind: "alert",
+        tone: "error",
+        title: "فشل التحويل",
+        description: "رفض بنك المستفيد رقم الآيبان. لم يُخصم أي مبلغ من حسابك.",
+        action: "تعديل التحويل",
+      }),
+      createFeedback({
+        kind: "notification",
+        tone: "warning",
+        title: "اعتماد 3 تحويلات",
+        description: "بانتظار اعتمادك 48,200 منذ 9:12 ص.",
+        action: "مراجعة",
+        secondary: "لاحقاً",
+        time: "الآن",
+      }),
+    );
+    root.append(wrap);
+  }
+
   function fillRules() {
     const root = mount("rules");
     [
-      [true, "Say what happened and what to do next. \"Transfer failed. Edit the IBAN and try again.\""],
-      [true, "Errors never disappear on their own; the user closes them or fixes the cause."],
-      [true, "Show at most 3 notifications or toasts at once. Older ones move to the notification center."],
-      [true, "Use role=\"alert\" for errors and role=\"status\" for everything else, so screen readers announce them."],
-      [false, "Don't use a toast for something the user must act on; use a notification or inline alert."],
-      [false, "Don't stack a snackbar on top of a bottom sheet or keyboard; wait until it closes."],
-    ].forEach(([ok, text]) => {
-      const card = el("div", "fb-rule");
-      const mark = el("span", "fb-mark-icon");
-      mark.dataset.ok = ok ? "true" : "false";
-      const glyph = icon(ok ? "confirm" : "close");
-      if (glyph) mark.append(glyph);
-      card.append(mark, el("span", "", text));
+      ["Say what happened and what to do next: “Transfer failed. Edit the IBAN and try again.”", "Use a toast for something the user must act on. Use a notification or an inline alert."],
+      ["Let errors stay until the user closes them or fixes the cause.", "Make error messages disappear on a timer."],
+      ["Show at most 3 notifications or toasts at once; older ones move to the notification centre.", "Stack a snackbar on top of a bottom sheet or the keyboard; wait until it closes."],
+      ["Use role=\"alert\" for errors and role=\"status\" for everything else, so screen readers announce them.", "Rely on colour alone. Every tone has its own icon."],
+    ].forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
       root.append(card);
     });
   }
@@ -580,6 +639,8 @@
   fillPush();
   fillMobileAlerts();
   fillInbox();
+  fillActions();
+  fillArabic();
   fillRules();
 
   mount("reset-alerts").append(button("Show closed alerts", "secondary", () => {

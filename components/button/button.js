@@ -43,6 +43,8 @@
     key: "key-round",
     pending: "clock",
     delivery: "truck",
+    "face-id": "scan",
+    fingerprint: "finger-scan",
   };
 
   const mirror = new Set(["line-arrow-left", "line-arrow-right", "arrow-left", "arrow-right", "chevron-left", "chevron-right", "send"]);

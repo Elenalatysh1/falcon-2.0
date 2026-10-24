@@ -8,12 +8,15 @@
  *   checked, mixed, disabled, error, danger, loading,
  *   state, size, bare, onChange
  * })
+ *
+ * createNavTile({ icon, title, count, disabled, onClick })
  */
 (function () {
   const catalog = {
     cards: "credit-card",
     cash: "banknote",
     confirm: "check",
+    next: "chevron-right",
     contactless: "nfc",
     ecommerce: "shopping-cart",
     "food-delivery": "utensils-crossed",
@@ -146,6 +149,45 @@
     return choice;
   }
 
+  function createNavTile(options = {}) {
+    const tile = document.createElement("button");
+    tile.type = "button";
+    tile.className = "choice-nav";
+    if (options.disabled) {
+      tile.disabled = true;
+      tile.dataset.disabled = "true";
+    }
+    tile.setAttribute("aria-label", options.title || "");
+    const well = document.createElement("span");
+    well.className = "choice-nav-well";
+    const glyph = drawIcon(options.icon);
+    if (glyph) well.append(glyph);
+    const copy = document.createElement("span");
+    copy.className = "choice-nav-copy";
+    if (options.title) {
+      const title = document.createElement("span");
+      title.className = "choice-label";
+      title.textContent = options.title;
+      copy.append(title);
+    }
+    if (options.count) {
+      const count = document.createElement("span");
+      count.className = "choice-sub";
+      count.textContent = options.count;
+      copy.append(count);
+    }
+    tile.append(well, copy);
+    const chevron = drawIcon("next");
+    if (chevron) {
+      chevron.dataset.mirror = "true";
+      chevron.classList.add("choice-nav-chevron");
+      tile.append(chevron);
+    }
+    if (options.onClick) tile.addEventListener("click", options.onClick);
+    return tile;
+  }
+
   window.createChoice = createChoice;
+  window.createNavTile = createNavTile;
   window.drawChoiceIcon = drawIcon;
 })();

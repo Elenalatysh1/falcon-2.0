@@ -32,14 +32,10 @@
   ];
 
   const rules = [
-    [true, "Show something useful before typing: recent items and top actions."],
-    [true, "Search names, IBANs, amounts and card last 4 digits."],
-    [true, "Keep the same shortcut letters as the sidebar (G + D for Dashboard)."],
-    [true, "Hide results the user's role can't open."],
-    [false, "Don't run money actions straight from Enter; open the flow pre-filled."],
-    [false, "Don't show full card numbers or balances of other users."],
-    [false, "Don't center the menu vertically; it jumps as results change."],
-    [false, "Don't use it as the only way to reach a page."],
+    ["Show something useful before typing: recent items and top actions.", "Run money actions straight from Enter; open the flow pre-filled."],
+    ["Search names, IBANs, amounts and the last 4 card digits.", "Show full card numbers or other users’ balances."],
+    ["Keep the same shortcut letters as the sidebar (G + D for Dashboard).", "Centre the menu vertically; it jumps as results change."],
+    ["Hide results the user’s role can’t open.", "Make it the only way to reach a page."],
   ];
 
   function el(tag, className, text) {
@@ -158,15 +154,33 @@
   }
 
   function fillRules() {
-    const grid = el("div", "cm-rules");
-    rules.forEach(([ok, text]) => {
-      const card = el("div", "cm-rule");
-      const mark = el("span", "cm-mark", ok ? "✓" : "×");
-      mark.dataset.ok = ok ? "true" : "false";
-      card.append(mark, el("span", "", text));
-      grid.append(card);
+    rules.forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
+      mount("rules").append(card);
     });
-    mount("rules").append(grid);
+  }
+
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const wrap = el("div", "cm-stage");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    const menu = createCommandMenu({ shortcut: true, label: "قائمة الأوامر" });
+    const search = el("div", "cm-search", "ابحث أو انتقل إلى…");
+    const glyph = icon("Search");
+    if (glyph) search.prepend(glyph);
+    search.append(el("span", "cm-kbd", "ESC"));
+    wrap.append(search, menu);
+    root.append(wrap);
   }
 
   fillPresets();
@@ -174,5 +188,6 @@
   fillStates();
   fillSpecs();
   fillMobile();
+  fillArabic();
   fillRules();
 })();

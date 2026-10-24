@@ -754,20 +754,64 @@
     });
   }
 
+  function fillNav() {
+    const root = mount("nav");
+    if (!root || !window.createNavTile) return;
+    [
+      ["pos", "POS", "12 terminals"],
+      ["cards", "Cards", "3 active"],
+      ["invoicing", "Suppliers", "8 saved"],
+      ["payroll", "Payroll", "Not on your plan", true],
+    ].forEach(([icon, title, count, disabled]) => {
+      root.append(createNavTile({ icon, title, count, disabled }));
+    });
+  }
+
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const list = el("div", "sel-panel");
+    list.dir = "rtl";
+    list.lang = "ar";
+    list.style.fontFamily = "var(--font-arabic)";
+    list.append(el("span", "sel-kicker", "التحكم"));
+    list.append(createChoice({ kind: "checkbox", label: "جميع الأجهزة", extra: "2 من 4", mixed: true, checked: true }));
+    list.append(createChoice({ kind: "radio", label: "يومي", sub: "يوم العمل التالي", checked: true }));
+    list.append(createChoice({ kind: "switch", label: "تجميد جميع البطاقات", sub: "يطلب التأكيد أولًا", danger: true }));
+    const tiles = el("div", "sel-panel");
+    tiles.dir = "rtl";
+    tiles.lang = "ar";
+    tiles.style.fontFamily = "var(--font-arabic)";
+    tiles.append(el("span", "sel-kicker", "اختصارات"));
+    const grid = el("div", "sel-tiles");
+    [
+      ["pos", "نقاط البيع", "12 جهازاً"],
+      ["cards", "البطاقات", "3 نشطة"],
+      ["invoicing", "الموردون", "8 محفوظون"],
+      ["payroll", "الرواتب", "غير متاح في باقتك", true],
+    ].forEach(([icon, title, count, disabled]) => {
+      if (window.createNavTile) grid.append(createNavTile({ icon, title, count, disabled }));
+    });
+    tiles.append(grid);
+    root.append(list, tiles);
+  }
+
   function fillRules() {
     const root = mount("rules");
     [
-      [true, "Toggle: the change happens immediately, such as card controls and notifications."],
-      [true, "Checkbox: the choice is saved with a button, or it confirms consent."],
-      [true, "Radio or plan cards: exactly one option. Preselect the safest default."],
-      [true, "Selection cards: when options need a picture, price, or description."],
-      [false, "Don't use a toggle inside a form that has a Save button."],
-      [false, "Don't mix radios and checkboxes in one group."],
-    ].forEach(([ok, text]) => {
-      const card = el("div", "sel-rule");
-      const mark = el("span", "sel-mark", ok ? "✓" : "×");
-      mark.dataset.ok = ok ? "true" : "false";
-      card.append(mark, el("span", "", text));
+      ["Toggle: the change happens immediately, such as card controls and notifications.", "Use a toggle inside a form that has a Save button."],
+      ["Checkbox: the choice is saved with a button, or it confirms consent.", "Mix radios and checkboxes in one group."],
+      ["Radio or plan cards: exactly one option. Preselect the safest default.", "Show more than 5 radios; use a dropdown instead."],
+      ["Selection cards: when options need a picture, price, or description.", "Switch a risky setting without asking to confirm first."],
+    ].forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
       root.append(card);
     });
   }
@@ -798,6 +842,8 @@
   fillBranches();
   fillResults();
   fillNotes();
+  fillNav();
+  fillArabic();
   fillRules();
 
   const reset = mount("reset");

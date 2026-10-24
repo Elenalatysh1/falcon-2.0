@@ -31,14 +31,10 @@
   ];
 
   const rules = [
-    [true, "Always allow typing as well as picking. Format DD/MM/YYYY."],
-    [true, "Disable dates that can't work (past, weekends, holidays) and explain why in helper text."],
-    [true, "Mark today with a ring, not a fill, so it doesn't look selected."],
-    [true, "Show the weekday next to the chosen date: \"Sunday, 18 October\"."],
-    [false, "Don't use a calendar for date of birth; it takes dozens of taps."],
-    [false, "Don't make people pick a range when a preset covers it."],
-    [false, "Don't mix Hijri and Gregorian in one picker. Show Hijri as a secondary line if needed."],
-    [false, "Don't close the range picker after the first click."],
+    ["Allow typing as well as picking. Format DD/MM/YYYY.", "Use a calendar for a date of birth; it takes dozens of taps."],
+    ["Disable dates that can’t work and say why in the helper text.", "Make people pick a range when a preset covers it."],
+    ["Mark today with a ring, not a fill, so it doesn’t look selected.", "Mix Hijri and Gregorian in one picker; show Hijri as a secondary line."],
+    ["Show the weekday next to the chosen date: “Sunday, 18 October”.", "Close the range picker after the first click."],
   ];
 
   function el(tag, className, text) {
@@ -127,15 +123,28 @@
   }
 
   function fillRules() {
-    const grid = el("div", "dp-rules");
-    rules.forEach(([ok, text]) => {
-      const card = el("div", "dp-rule");
-      const mark = el("span", "dp-mark", ok ? "✓" : "×");
-      mark.dataset.ok = ok ? "true" : "false";
-      card.append(mark, el("span", "", text));
-      grid.append(card);
+    rules.forEach(([yes, no], index) => {
+      const card = el("div", "lst-rule");
+      card.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+      [[true, yes], [false, no]].forEach(([ok, text]) => {
+        const line = el("div", "lst-rule-line");
+        line.dataset.ok = ok ? "true" : "false";
+        line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+        card.append(line);
+      });
+      mount("rules").append(card);
     });
-    mount("rules").append(grid);
+  }
+
+  function fillArabic() {
+    const root = mount("arabic");
+    if (!root) return;
+    const wrap = el("div", "dp-card");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    wrap.append(el("span", "dp-kicker", "جدولة تحويل"), createDatePicker({ open: true }));
+    root.append(wrap);
   }
 
   fillFields();
@@ -143,5 +152,6 @@
   fillRange();
   fillMobile();
   fillWhich();
+  fillArabic();
   fillRules();
 })();

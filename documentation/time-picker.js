@@ -11,16 +11,10 @@
   ];
 
   const rules = [
-    [true, "Always show the time zone once on the page: \"Riyadh time (GMT+3)\"."],
-    [true, "Let people type the time as well as pick it."],
-    [true, "Mark times that change the outcome, e.g. \"Next day\" after the cut-off."],
-    [true, "Validate ranges: closing must be after opening; use \"+1\" past midnight."],
-    [true, "Offer quick choices (Now, 9:00 AM) before the full picker."],
-    [true, "Use Mono for times so digits align in lists."],
-    [false, "Don't use minute steps of 1 when 5 or 30 is enough."],
-    [false, "Don't mix 12h and 24h on one screen."],
-    [false, "Don't hide AM/PM in 12h format."],
-    [false, "Don't use a picker for durations; use a number field with units."],
+    ["Show the time zone once on the page: “Riyadh time (GMT+3)”.", "Use minute steps of 1 when 5 or 30 is enough."],
+    ["Let people type the time as well as pick it, and offer quick picks (Now, 9:00 AM) first.", "Mix 12-hour and 24-hour on one screen, or hide AM/PM in 12-hour."],
+    ["Mark times that change the outcome: “Next day” after the cut-off, “+1” past midnight.", "Accept a closing time before the opening time; validate the range."],
+    ["Use Hala Mono for times so digits align in lists and columns.", "Use a time picker for a duration; use a number field with units."],
   ];
 
   function el(tag, className, text) {
@@ -49,15 +43,27 @@
     row.append(el("strong", "", name), el("span", "", copy));
     card.append(row);
   });
-  const ruleGrid = el("div", "tp-rules");
-  rules.forEach(([ok, text]) => {
-    const rule = el("div", "tp-rule");
-    const mark = el("span", "tp-rule-mark", ok ? "✓" : "×");
-    mark.dataset.ok = ok ? "true" : "false";
-    rule.append(mark, el("span", "", text));
-    ruleGrid.append(rule);
+  mount("which").append(card);
+
+  const arabic = mount("arabic");
+  if (arabic) {
+    const wrap = el("div", "tp-ar");
+    wrap.dir = "rtl";
+    wrap.lang = "ar";
+    wrap.style.fontFamily = "var(--font-arabic)";
+    wrap.append(el("p", "", "تصل الرواتب في نفس اليوم."), el("p", "", "كل الأوقات بتوقيت الرياض (GMT+3). الأوقات بعد منتصف الليل تظهر \"+1\"."));
+    arabic.append(wrap);
+  }
+
+  rules.forEach(([yes, no], index) => {
+    const rule = el("div", "lst-rule");
+    rule.append(el("span", "lst-kicker", String(index + 1).padStart(2, "0")));
+    [[true, yes], [false, no]].forEach(([ok, text]) => {
+      const line = el("div", "lst-rule-line");
+      line.dataset.ok = ok ? "true" : "false";
+      line.append(el("strong", "", ok ? "Do" : "Don't"), el("p", "", text));
+      rule.append(line);
+    });
+    mount("rules").append(rule);
   });
-  const bottom = el("div", "tp-bottom");
-  bottom.append(card, ruleGrid);
-  mount("rules").append(bottom);
 })();
