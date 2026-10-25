@@ -1,9 +1,9 @@
 {
-  "name": "falcon-2.0",
+  "name": "hala-dna",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Falcon 2.0 design system",
+  "description": "HALA DNA design system",
   "scripts": {
     "build:icons": "node icons/build.mjs"
   },

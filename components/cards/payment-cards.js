@@ -1,5 +1,5 @@
 /**
- * Falcon Payment cards: Payment card, Card mini, Card carousel, Design option and Card offer summary.
+ * HALA DNA Payment cards: Payment card, Card mini, Card carousel, Design option and Card offer summary.
  * Artwork comes from the HALA DNA _Card face (media/cards/*.svg); label, last four and scheme are live text.
  * Load selection.js and lists.js before this script.
  *

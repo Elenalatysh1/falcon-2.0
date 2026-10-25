@@ -1,11 +1,11 @@
 ---
-description: Falcon 2.0 component contract shared by Web, Android, and iOS
+description: HALA DNA component contract shared by Web, Android, and iOS
 alwaysApply: true
 ---
 
 # Components
 
-Every Falcon component uses the same name, anatomy, variants, and states on Web, Android, and iOS.
+Every HALA DNA component uses the same name, anatomy, variants, and states on Web, Android, and iOS.
 
 ## Contract
 
@@ -20,11 +20,11 @@ Style every component from `styles/foundations.css` only. Color, spacing, radius
 
 ## Anatomy
 
-- Give each component one job. Build larger UI from existing Falcon components.
-- Use Falcon icon names from `icons/api.js` (`transfers`, `search`, `cards`). The Hala icon set from HALA DNA is the only icon set, with the Lucide fallbacks listed in `falcon-icons.mdc`. The same name must exist on every platform.
+- Give each component one job. Build larger UI from existing HALA DNA components.
+- Use HALA DNA icon names from `icons/api.js` (`transfers`, `search`, `cards`). The Hala icon set from HALA DNA is the only icon set, with the Lucide fallbacks listed in `hala-dna-icons.mdc`. The same name must exist on every platform.
 - Example copy is sentence case.
 
 ```text
-❌ BAD   Web: <Btn type="main">   Android: FalconCTA   iOS: PrimaryActionButton
+❌ BAD   Web: <Btn type="main">   Android: HalaCTA   iOS: PrimaryActionButton
 ✅ GOOD  Web, Android, and iOS: Button variant="primary" size="md"
 ```

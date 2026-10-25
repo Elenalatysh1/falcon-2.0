@@ -1,21 +1,21 @@
 ---
-description: Falcon 2.0 Android implementation
+description: HALA DNA Android implementation
 globs: "**/*.{kt,kts,xml}"
 alwaysApply: false
 ---
 
 # Android
 
-- Build Falcon components in Jetpack Compose.
+- Build HALA DNA components in Jetpack Compose.
 - Map color, type, spacing, radius, border, and shadow to tokens in `styles/foundations.css`. Keep raw `Color`, `dp`, and `sp` values out of composables. Use the same names (`brand/500`, `space/4`, `radius/xl`).
 - Touch targets are at least 48.dp.
 - Meaningful icons set `contentDescription`. Decorative icons use `null`.
-- Use Material ripple and system back when they do not change Falcon tokens or component meaning.
+- Use Material ripple and system back when they do not change HALA DNA tokens or component meaning.
 
 ```kotlin
 // ❌ BAD
 Button(colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF009A78)))
 
 // ✅ GOOD
-FalconButton(variant = ButtonVariant.Primary, size = ButtonSize.Md)
+Button(variant = ButtonVariant.Primary, size = ButtonSize.Md)
 ```

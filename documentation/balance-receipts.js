@@ -319,7 +319,7 @@
   function fillWeb() {
     const host = mount("web");
     host.append(
-      block("Dashboard · Balance header, then recent activity. The eye remembers the choice.", dashboard("en", { remember: "falcon-br-web" }), "Live · hide the balance"),
+      block("Dashboard · Balance header, then recent activity. The eye remembers the choice.", dashboard("en", { remember: "hala-dna-br-web" }), "Live · hide the balance"),
       block("Dashboard · transaction drawer opened from a row", dashboardWithDrawer("en"), "Live · close the drawer"),
       block("Printable receipt · A4. The same Receipt card, without actions.", printable("en")),
     );
@@ -328,7 +328,7 @@
   function fillMobile() {
     const review = reviewPhone("en", "review");
     mount("mobile").append(
-      phone(T.en.home, home("en", { remember: "falcon-br-home" }), "iOS · Account header Greeting and Balance hero Card", { tabs: true }),
+      phone(T.en.home, home("en", { remember: "hala-dna-br-home" }), "iOS · Account header Greeting and Balance hero Card", { tabs: true }),
       phone(review.title, review.body, "Review transfer · Receipt card. Confirm moves it to Success", { bar: "nav" }),
       phone(T.en.sent, reviewPhone("en", "success").body, "Transfer sent · same rows, Share and Download PDF", { bar: "nav" }),
     );
@@ -421,7 +421,7 @@
     const review = reviewPhone("ar", "success");
     const phones = el("div", "brd-phones");
     phones.append(
-      phone("الرئيسية", home("ar", { remember: "falcon-br-home-ar" }), "Home · Arabic. The amount stays left to right.", { lang: "ar", tabs: true }),
+      phone("الرئيسية", home("ar", { remember: "hala-dna-br-home-ar" }), "Home · Arabic. The amount stays left to right.", { lang: "ar", tabs: true }),
       phone("الرصيد مخفي", home("ar", { masked: true }), "Home · balance hidden · Arabic", { lang: "ar", tabs: true }),
       phone(T.ar.sent, review.body, "Transfer sent · Arabic", { lang: "ar", bar: "nav" }),
     );
@@ -439,7 +439,7 @@
       frame.dataset.width = width;
       if (width === "desktop") frame.replaceChildren(dashboard("en"));
       else if (width === "tablet") frame.replaceChildren(home("en", { compact: true, hero: "plain" }));
-      else frame.replaceChildren(home("en", { remember: "falcon-br-phone" }));
+      else frame.replaceChildren(home("en", { remember: "hala-dna-br-phone" }));
     }
     paint("desktop");
     stack.append(

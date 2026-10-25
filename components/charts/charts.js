@@ -1,5 +1,5 @@
 /**
- * Falcon Charts: Bar chart, Chart card, Share bar, Ranked row.
+ * HALA DNA Charts: Bar chart, Chart card, Share bar, Ranked row.
  * Load vendor/hala-icons.js, lists.js (createAmount), filters.css (web header), progress.js first.
  *
  * createBarChart({ values, labels, selected, average, lang, onSelect })

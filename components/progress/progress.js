@@ -1,5 +1,5 @@
 /**
- * Falcon Progress & steppers: Progress bar, Spend meter, Stepper, Progress checklist,
+ * HALA DNA Progress & steppers: Progress bar, Spend meter, Stepper, Progress checklist,
  * and the Step marker part. Load button.js and lists.js before this script.
  *
  * createProgressBar({ value, tone, size, label })

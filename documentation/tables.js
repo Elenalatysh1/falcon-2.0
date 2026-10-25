@@ -182,7 +182,7 @@
         row(createHeaderCell({ label: "Merchant", sort: "none" }), createHeaderCell({ label: "Date", sort: "desc" }), createHeaderCell({ label: "Amount", sort: "none", align: "end" }))),
       specimen("Table cell", "Inside a Table column, one per row.", "Web tables.", "Type sets the content: Text, Two-line, Avatar, Date, Amount, Status, Checkbox, Actions or Slot. State (Default, Hover, Selected) is set per row.",
         row(...["avatar", "date", "status", "amount"].map((type) => createTableCell({ type, row: ROWS[0] })))),
-      specimen("Slot", "Custom content inside a Table cell (Type = Slot).", "Any column that needs a control.", "Prefer Amount, Status badge, Avatar, Button, Toggle or Icon button. Any Falcon component works.",
+      specimen("Slot", "Custom content inside a Table cell (Type = Slot).", "Any column that needs a control.", "Prefer Amount, Status badge, Avatar, Button, Toggle or Icon button. Any HALA DNA component works.",
         row(createTableCell({ type: "slot" }), createTableCell({ type: "slot", node: reviewButton(ROWS[0]) }))),
       specimen("Table column", "Custom web-only tables: admin, reports, settings.", "Side by side in a row.", "Add a column, set its Type, give it a Priority so it hides at Tablet. Tables that must work on mobile use Responsive rows instead.",
         el("p", "lst-quiet", "See the approvals table in Web · live: seven columns, Status has Priority Desktop only.")),

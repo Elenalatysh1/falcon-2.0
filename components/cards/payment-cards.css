@@ -1,4 +1,4 @@
-/* Falcon Payment cards. Every face measurement is in --card-unit (one Figma pixel of the 336 Full card). */
+/* HALA DNA Payment cards. Every face measurement is in --card-unit (one Figma pixel of the 336 Full card). */
 
 .pay-card {
   container-type: inline-size;

@@ -275,7 +275,7 @@
     [
       ["Web", "Progress bar, Spend meter, Stepper, Progress checklist, Step marker", "role progressbar with aria-valuenow, or aria-valuetext for money · Stepper is an ordered list with aria-current=\"step\" · the container query switches to Step 2 of 4 below 800 · fills slide on transform with --motion-standard"],
       ["iOS", "Same names · ProgressView(value:) with a custom style, HStack stepper", "Step 2 of 4 with segments on iPhone; full labels on iPad · VoiceOver reads \"Amount, step 2 of 4, current\" · fills animate with .spring(duration: 0.3, bounce: 0) and turn into a fade with Reduce Motion"],
-      ["Android", "Same names · LinearProgressIndicator with Falcon colours, Row stepper", "Segments on phones, labels from 840 dp · semantics { progressBarRangeInfo } and stateDescription on each step · emphasized easing for fills, honouring the animator duration scale"],
+      ["Android", "Same names · LinearProgressIndicator with HALA DNA colours, Row stepper", "Segments on phones, labels from 840 dp · semantics { progressBarRangeInfo } and stateDescription on each step · emphasized easing for fills, honouring the animator duration scale"],
     ].forEach(([platform, api, notes]) => {
       const line = el("div", "lst-platform");
       line.append(el("strong", "", platform), el("span", "lst-mono", api), el("span", "", notes));

@@ -5,7 +5,7 @@
  *   const svg = halaIcons.createElement(halaIcons.icons.Send2);
  *
  * Keys are PascalCase. Hala names (Send2), the Lucide names components
- * already use (Send, Plus, X) and Falcon names (Transfers) all work. Names Hala does not draw stay on
+ * already use (Send, Plus, X) and HALA DNA names (Transfers) all work. Names Hala does not draw stay on
  * Lucide 0.453.0 (ISC). Missing names are collected in halaIcons.missing.
  */
 (function (global) {

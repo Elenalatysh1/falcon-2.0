@@ -41,14 +41,14 @@ for (const name of Object.keys(hala)) {
   if (!checked.has(name)) throw new Error(`${name}: no Figma checksum in sums.json`);
 }
 
-/** Hala names that clash with a Falcon name for a different icon. Falcon "delete" stays the trash can. */
+/** Hala names that clash with a HALA DNA name for a different icon. HALA DNA "delete" stays the trash can. */
 const renamed = { delete: "backspace" };
 for (const [from, to] of Object.entries(renamed)) {
   hala[to] = hala[from];
   delete hala[from];
 }
 
-/** Falcon name → icon, as mapped on the Figma Icons showcase. */
+/** HALA DNA name → icon, as mapped on the Figma Icons showcase. */
 const catalog = {
   dashboard: "category",
   home: "home",
@@ -269,7 +269,7 @@ const out = `/**
  *   const svg = halaIcons.createElement(halaIcons.icons.Send2);
  *
  * Keys are PascalCase. Hala names (Send2), the Lucide names components
- * already use (Send, Plus, X) and Falcon names (Transfers) all work. Names Hala does not draw stay on
+ * already use (Send, Plus, X) and HALA DNA names (Transfers) all work. Names Hala does not draw stay on
  * Lucide 0.453.0 (ISC). Missing names are collected in halaIcons.missing.
  */
 (function (global) {

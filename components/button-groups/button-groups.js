@@ -10,7 +10,7 @@
  *
  * options: [{ label, value, icon, description, variant, size, tone, iconOnly, ariaLabel, inert }]
  * Segment, choice, and icon keep one selection. Filter keeps many.
- * Split uses Falcon buttons for the action and the menu chevron.
+ * Split uses HALA DNA buttons for the action and the menu chevron.
  * Attached groups and action pairs use createButton.
  */
 (function () {

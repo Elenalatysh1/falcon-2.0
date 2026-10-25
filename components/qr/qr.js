@@ -1,5 +1,5 @@
 /**
- * Falcon QR & links: QR code, Scan to pay, Link chip, Payment link card, Link preview.
+ * HALA DNA QR & links: QR code, Scan to pay, Link chip, Payment link card, Link preview.
  * Load vendor/hala-icons.js, lists.js (createAmount), button.js and encode.js first.
  *
  * createQrCode({ data, size, logo, light })

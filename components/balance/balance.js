@@ -1,5 +1,5 @@
 /**
- * Falcon Balance & receipts: Balance hero, Account header, Balance header, Receipt card and the Perforated divider part.
+ * HALA DNA Balance & receipts: Balance hero, Account header, Balance header, Receipt card and the Perforated divider part.
  * Load vendor/hala-icons.js, button.js, badges.js and lists.js (createAmount, createDetails) first.
  *
  * createBalanceHero({ style, balance, received, label, iban, masked, showTrend, remember, lang, onToggle })

@@ -45,10 +45,10 @@ tile.append(icon('cards', { tone: 'default' }));`;
 const sar = n => (n < 0 ? '− ' : '+ ') +
   Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2 });`;
 
-  const rules = `# Falcon 2.0 — Hala design system rules
+  const rules = `# HALA DNA — Hala design system rules
 
 You are building UI for Hala Business (Saudi business banking).
-Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
+Follow HALA DNA exactly. If unsure, ask instead of inventing.
 
 ## Tokens
 - Use CSS variables from styles/foundations.css. Never hard-code hex, px radius or shadows.
@@ -73,7 +73,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
 - Dates DD/MM/YYYY.`;
 
   const tools = [
-    ["Cursor", ".cursor/rules/falcon.mdc", "---\ndescription: Falcon 2.0 design system\nglobs: [\"**/*.tsx\",\"**/*.css\"]\nalwaysApply: true\n---\n\n"],
+    ["Cursor", ".cursor/rules/hala-dna-system.mdc", "---\ndescription: HALA DNA design system\nglobs: [\"**/*.tsx\",\"**/*.css\"]\nalwaysApply: true\n---\n\n"],
     ["Claude Code", "CLAUDE.md", ""],
     ["Copilot / others", ".github/copilot-instructions.md", ""],
   ];
@@ -131,11 +131,11 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   const brand = el("div", "gs-brand");
   const home = el("a", "gs-brand");
   home.href = "#introduction";
-  const mark = el("span", "gs-mark", "F");
-  home.append(mark, el("span", "gs-brand-name", "Falcon 2.0"), el("span", "gs-quiet", "/ How to use"));
+  const mark = el("span", "gs-mark", "H");
+  home.append(mark, el("span", "gs-brand-name", "HALA DNA"), el("span", "gs-quiet", "/ How to use"));
   brand.append(home, draft(), el("span", "gs-quiet", "Guide · v2.0"));
-  const title = el("h1", "", "How to use Falcon 2.0");
-  const lede = el("p", "gs-hero-copy", "Practical setup for the three groups who build with Falcon: engineers writing the code, AI coding assistants like Cursor and Claude Code, and designers working in Figma. Copy the setup, then use tokens everywhere.");
+  const title = el("h1", "", "How to use HALA DNA");
+  const lede = el("p", "gs-hero-copy", "Practical setup for the three groups who build with HALA DNA: engineers writing the code, AI coding assistants like Cursor and Claude Code, and designers working in Figma. Copy the setup, then use tokens everywhere.");
   const jumps = el("div", "gs-jumps");
   [["Developers", "Tokens, fonts, icons, RTL", "#how-to-use/developers", "settings"], ["AI assistants", "Cursor, Claude Code, Copilot", "#how-to-use/assistants", "help"], ["Designers", "Figma setup, handoff, review", "#how-to-use/designers", "edit"], ["Product and content", "Copy, formats, requests", "#how-to-use/content", "documents"]].forEach(([name, copy, href, iconName]) => {
     const item = el("a", "gs-jump");
@@ -166,7 +166,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   dev.id = "developers";
   dev.append(el("p", "gs-kicker", "01 · Developers"), el("h2", "", "Set up once, then use tokens everywhere"), el("p", "gs-lead", "Tokens come first. Components only reference tokens, never hex values, so a theme change or an Arabic layout needs no component changes."));
   const devPanel = el("div", "gs-panel gs-dev");
-  [["1", "Add the tokens", "Paste into your global CSS. On mobile, mirror the same names in the theme file.", "styles/foundations.css", tokens], ["2", "Load the fonts", "Three families. Use Mono with tabular numbers for anything people compare or copy.", "index.html", fonts], ["3", "Wrap the icons", "Hala icons with Falcon names. Only use icons from the approved set on the Icons page.", "icons/api.js", iconCode], ["4", "Support Arabic and money formats", "Logical CSS properties, flipped direction icons, and one shared money formatter.", "styles/rtl.css", rtl]].forEach(([number, name, copy, file, code]) => {
+  [["1", "Add the tokens", "Paste into your global CSS. On mobile, mirror the same names in the theme file.", "styles/foundations.css", tokens], ["2", "Load the fonts", "Three families. Use Mono with tabular numbers for anything people compare or copy.", "index.html", fonts], ["3", "Wrap the icons", "Hala icons with HALA DNA names. Only use icons from the approved set on the Icons page.", "icons/api.js", iconCode], ["4", "Support Arabic and money formats", "Logical CSS properties, flipped direction icons, and one shared money formatter.", "styles/rtl.css", rtl]].forEach(([number, name, copy, file, code]) => {
     const step = el("div", "");
     const head = el("div", "gs-step-head");
     head.append(el("span", "gs-num", number), el("h3", "", name));
@@ -199,7 +199,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   });
   const map = el("div", "gs-panel gs-map");
   map.append(el("h3", "", "Platform mapping"));
-  [["Web", "Angular and CSS variables from foundations.css. Hala icons."], ["iOS", "SwiftUI. The same token names as Color and Font extensions. Sheets for overlays."], ["Android", "Jetpack Compose. The same token names in a Falcon theme. Sheets for overlays."], ["Email / PDF", "Inline styles with the same values. Plex with a system fallback."]].forEach(([name, copy]) => {
+  [["Web", "Angular and CSS variables from foundations.css. Hala icons."], ["iOS", "SwiftUI. The same token names as Color and Font extensions. Sheets for overlays."], ["Android", "Jetpack Compose. The same token names in a HALA DNA theme. Sheets for overlays."], ["Email / PDF", "Inline styles with the same values. Plex with a system fallback."]].forEach(([name, copy]) => {
     const row = el("div", "gs-map-row");
     row.append(el("b", "", name), el("span", "", copy));
     map.append(row);
@@ -209,7 +209,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
 
   const ai = el("section", "gs-block");
   ai.id = "assistants";
-  ai.append(el("p", "gs-kicker", "02 · AI assistants"), el("h2", "", "Teach Cursor and Claude Code the system"), el("p", "gs-lead", "AI tools follow the rules you give them. Put the Falcon rules file in the repo, link the token file, and ask for one component at a time. Then review the result against the checklist."));
+  ai.append(el("p", "gs-kicker", "02 · AI assistants"), el("h2", "", "Teach Cursor and Claude Code the system"), el("p", "gs-lead", "AI tools follow the rules you give them. Put the HALA DNA rules file in the repo, link the token file, and ask for one component at a time. Then review the result against the checklist."));
   const rulesCard = el("div", "gs-panel gs-card");
   const rulesHead = el("div", "gs-spread");
   rulesHead.append(el("h3", "", "Rules file"));
@@ -241,7 +241,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   const prompts = el("div", "gs-pair");
   const promptCard = el("div", "gs-panel gs-card");
   promptCard.append(el("h3", "", "Prompt templates"));
-  [["Build a component", "Build a TransferAmountInput using Falcon 2.0.\nRead the Falcon rules and styles/foundations.css.\nInclude default, focus, filled, error (“Amount is above your daily limit”), and disabled.\nAmount in Mono, SAR prefix, RTL support."], ["Build a screen", "Build the “Order POS terminals” step 1 screen, web.\nUse Falcon components only: selection cards, a live order summary with VAT 15%, one primary button.\nNo new colors."], ["Review my code", "Review this file against Falcon 2.0.\nList hard-coded values, missing states, RTL issues, accessibility issues, and more than one primary button."], ["Mobile version", "Convert this web table to the Falcon mobile pattern:\nlist rows, amount and status on the right, 64 pt rows, 16 pt margins."]].forEach(([name, text]) => {
+  [["Build a component", "Build a TransferAmountInput using HALA DNA.\nRead the HALA DNA rules and styles/foundations.css.\nInclude default, focus, filled, error (“Amount is above your daily limit”), and disabled.\nAmount in Mono, SAR prefix, RTL support."], ["Build a screen", "Build the “Order POS terminals” step 1 screen, web.\nUse HALA DNA components only: selection cards, a live order summary with VAT 15%, one primary button.\nNo new colors."], ["Review my code", "Review this file against HALA DNA.\nList hard-coded values, missing states, RTL issues, accessibility issues, and more than one primary button."], ["Mobile version", "Convert this web table to the HALA DNA mobile pattern:\nlist rows, amount and status on the right, 64 pt rows, 16 pt margins."]].forEach(([name, text]) => {
     const item = el("div", "gs-prompt");
     const head = el("header", "");
     const button = window.createButton
@@ -264,7 +264,7 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   aside.style.gap = "var(--space-3)";
   const context = el("div", "gs-panel gs-card");
   context.append(el("h3", "", "Give the AI this context"));
-  [["@rules", "falcon.mdc or CLAUDE.md, always on"], ["@tokens", "styles/foundations.css"], ["@component", "An existing Falcon component as an example"], ["@screenshot", "The Falcon page for that component"], ["@data", "Real field names and sample values"]].forEach(([name, copy]) => {
+  [["@rules", "hala-dna-system.mdc or CLAUDE.md, always on"], ["@tokens", "styles/foundations.css"], ["@component", "An existing HALA DNA component as an example"], ["@screenshot", "The HALA DNA page for that component"], ["@data", "Real field names and sample values"]].forEach(([name, copy]) => {
     const row = el("div", "gs-line");
     row.append(el("strong", "gs-ok", name), el("span", "", copy));
     context.append(row);
@@ -286,14 +286,14 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   const designGrid = el("div", "gs-three");
   const setup = el("div", "gs-panel gs-card");
   setup.append(el("h3", "", "Library setup"));
-  [["Enable the library", "Turn on Falcon 2.0 in Assets. Don't detach components."], ["Use variables", "Colors, radius and spacing as variables with code names (brand/600, radius/xl)."], ["Use text styles", "The same names as the type scale."], ["Set modes", "Light, plus an Arabic mode that swaps the font and mirrors auto layout."], ["Start from templates", "Web page with sidebar, mobile screen with tab bar, modal, drawer, sheet."]].forEach(([name, copy], index) => {
+  [["Enable the library", "Turn on HALA DNA in Assets. Don't detach components."], ["Use variables", "Colors, radius and spacing as variables with code names (brand/600, radius/xl)."], ["Use text styles", "The same names as the type scale."], ["Set modes", "Light, plus an Arabic mode that swaps the font and mirrors auto layout."], ["Start from templates", "Web page with sidebar, mobile screen with tab bar, modal, drawer, sheet."]].forEach(([name, copy], index) => {
     const row = el("div", "gs-line");
     row.append(el("span", "gs-num", String(index + 1)), el("div", ""));
     row.lastChild.append(el("strong", "", name), el("span", "", copy));
     setup.append(row);
   });
   const tree = el("div", "gs-panel gs-card");
-  tree.append(el("h3", "", "File structure"), el("pre", "gs-code gs-code-soft gs-tree", "Falcon 2.0 (library)\n├─ 00 Cover\n├─ 01 Foundations\n├─ 02 Icons\n├─ 03 Components\n├─ 04 Patterns\n└─ 05 Templates\n\nProduct file\n├─ Ready for dev\n├─ In review\n└─ Exploration"), el("span", "gs-note", "Component names match code: Button, Input, Overlay."));
+  tree.append(el("h3", "", "File structure"), el("pre", "gs-code gs-code-soft gs-tree", "HALA DNA (library)\n├─ 00 Cover\n├─ 01 Foundations\n├─ 02 Icons\n├─ 03 Components\n├─ 04 Patterns\n└─ 05 Templates\n\nProduct file\n├─ Ready for dev\n├─ In review\n└─ Exploration"), el("span", "gs-note", "Component names match code: Button, Input, Overlay."));
   const handoff = el("div", "gs-panel gs-card");
   handoff.append(el("h3", "", "Handoff checklist"));
   ["Every state designed, including empty, error and loading", "Web and mobile frames, or a note saying why not", "Arabic frame for any new layout", "Only library components and variables", "Real copy, real amounts with SAR and decimals", "Interactions noted: what opens, what closes, what animates", "Edge cases: long names, 0 results, limit reached", "Linked to the ticket"].forEach((text) => {
@@ -341,10 +341,10 @@ Follow Falcon 2.0 exactly. If unsure, ask instead of inventing.
   const ask = el("section", "gs-block");
   const band = el("div", "gs-ask");
   const askCopy = el("div", "");
-  askCopy.append(el("h2", "", "Need something Falcon doesn't have?"), el("p", "", "Check Patterns first. If it's still missing, share the use case, a screenshot and which platforms need it with the design team. New components ship with every state, on web and mobile."));
+  askCopy.append(el("h2", "", "Need something HALA DNA doesn't have?"), el("p", "", "Check Patterns first. If it's still missing, share the use case, a screenshot and which platforms need it with the design team. New components ship with every state, on web and mobile."));
   const back = window.createButton
-    ? window.createButton({ label: "Back to Falcon 2.0", variant: "primary", size: "md" })
-    : el("a", "", "Back to Falcon 2.0");
+    ? window.createButton({ label: "Back to HALA DNA", variant: "primary", size: "md" })
+    : el("a", "", "Back to HALA DNA");
   back.addEventListener("click", () => { location.hash = "#introduction"; });
   band.append(askCopy, back);
   ask.append(band);

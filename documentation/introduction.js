@@ -74,11 +74,11 @@
   const hero = el("section", "gs-hero");
   const inner = el("div", "gs-hero-inner");
   const brand = el("div", "gs-brand");
-  const mark = el("span", "gs-mark", "F");
-  brand.append(mark, el("span", "gs-brand-name", "Falcon 2.0"), el("span", "gs-pill", "Hala design system"), draft());
+  const mark = el("span", "gs-mark", "H");
+  brand.append(mark, el("span", "gs-brand-name", "HALA DNA"), el("span", "gs-pill", "Hala design system"), draft());
   const meta = el("div", "gs-brand");
   meta.append(brand, el("span", "gs-quiet", "v2.0 · October 2026"));
-  const title = el("h1", "", "Falcon 2.0");
+  const title = el("h1", "", "HALA DNA");
   const lede = el("p", "gs-hero-copy", "The design system behind Hala Business, the banking and payments app for Saudi companies. It covers web and mobile in English and Arabic, from the brand foundations to complete flows.");
   const actions = el("div", "gs-actions");
   const start = window.createButton
@@ -105,7 +105,7 @@
   whatCopy.append(el("p", "gs-kicker", "01 · What it is"), el("h2", "", "One system, two platforms, two languages."));
   const prose = el("div", "gs-prose");
   prose.append(
-    el("p", "", "Falcon 2.0 is the shared language for everyone building Hala Business: designers, engineers, product and content. It sets out how the product looks, how it behaves and how it speaks."),
+    el("p", "", "HALA DNA is the shared language for everyone building Hala Business: designers, engineers, product and content. It sets out how the product looks, how it behaves and how it speaks."),
     el("p", "", "Each component page shows every state, live examples you can use, mobile versions, and rules for when to use it and when not to. The values on those pages come from one token file.")
   );
   const covers = el("div", "gs-grid");
@@ -231,7 +231,7 @@
   [
     ["Designers", ["Start from Foundations and use tokens, never raw values.", "Copy components from their page; check every state is covered.", "Read the rules section before combining components.", "Design mobile and Arabic versions with the web version, not after it."]],
     ["Engineers", ["Map tokens to your theme: CSS variables on web, theme files on mobile.", "Use Hala icons through icons/api.js and Plex fonts from Google Fonts.", "Use the live demos to check behavior: focus, errors, loading.", "Support RTL from the start with logical properties."]],
-    ["Product and content", ["Use Patterns to choose the right flow and feedback.", "Write buttons as verbs and errors as fixes.", "Format money as “SAR 25,000.00”, dates as DD/MM/YYYY.", "Ask for new components in #falcon-design before building one-offs."]],
+    ["Product and content", ["Use Patterns to choose the right flow and feedback.", "Write buttons as verbs and errors as fixes.", "Format money as “SAR 25,000.00”, dates as DD/MM/YYYY.", "Ask for new components in #hala-dna-design before building one-offs."]],
   ].forEach(([name, steps]) => {
     const item = card();
     item.append(el("h3", "", name));
@@ -280,8 +280,8 @@
 
   const foot = el("footer", "gs-foot");
   const footBrand = el("div", "gs-brand");
-  footBrand.append(el("strong", "", "Falcon 2.0"), el("span", "", "· Hala design system"));
-  foot.append(footBrand, el("span", "", "Questions or a component you need? Ask the design team in #falcon-design."));
+  footBrand.append(el("strong", "", "HALA DNA"), el("span", "", "· Hala design system"));
+  foot.append(footBrand, el("span", "", "Questions or a component you need? Ask the design team in #hala-dna-design."));
 
   root.append(hero, whatWrap, principles, blocks, library, startSection, news, foot);
   page.append(root);

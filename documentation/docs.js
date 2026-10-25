@@ -15,7 +15,7 @@ function pageTitle(route) {
   const exact = document.querySelector(`.docs-link[href="#${route.page}${route.section ? `/${route.section}` : ""}"]`);
   if (exact) return linkName(exact);
   const link = document.querySelector(`.docs-link[href="#${route.page}"]`);
-  return link ? linkName(link) : "Falcon 2.0";
+  return link ? linkName(link) : "HALA DNA";
 }
 
 const aliases = {
@@ -77,7 +77,7 @@ function buildToc(page, pageId) {
   headings.forEach((heading) => watcher.observe(heading));
 }
 
-const themeKey = "falcon-docs-theme";
+const themeKey = "hala-dna-docs-theme";
 const themedPages = new Set(
   [...document.querySelectorAll(".docs-group")]
     .filter((group) => /^(All Components|Patterns)$/.test(group.querySelector(".docs-group-btn span")?.textContent.trim()))
@@ -144,7 +144,7 @@ function show() {
     current.scrollIntoView({ block: "nearest" });
   }
   buildToc(page, route.page);
-  document.title = `${pageTitle(route)} · Falcon 2.0`;
+  document.title = `${pageTitle(route)} · HALA DNA`;
   side.classList.remove("is-open");
   if (route.section) {
     const target = document.getElementById(route.section);

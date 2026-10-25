@@ -499,7 +499,7 @@
     row.append(el("strong", "", key), el("span", "bcard-quiet", value));
     mount("mada").append(row);
   });
-  mount("mada-colors").append(el("span", "bcard-quiet", "Official mada colors, kept as a reference and not added to the Falcon palette: blue #00A3E0, green #84BD00, black #1D1D1B."));
+  mount("mada-colors").append(el("span", "bcard-quiet", "Official mada colors, kept as a reference and not added to the HALA DNA palette: blue #00A3E0, green #84BD00, black #1D1D1B."));
 
   [
     ["mada in the middle", ["VISA", "mada", "Mastercard"], false],

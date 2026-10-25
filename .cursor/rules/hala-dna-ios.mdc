@@ -1,21 +1,21 @@
 ---
-description: Falcon 2.0 iOS implementation
+description: HALA DNA iOS implementation
 globs: "**/*.swift"
 alwaysApply: false
 ---
 
 # iOS
 
-- Build Falcon components in SwiftUI.
+- Build HALA DNA components in SwiftUI.
 - Map color, type, spacing, radius, border, and shadow to tokens in `styles/foundations.css`. Keep raw colors and point sizes out of views. Use the same names (`brand/500`, `space/4`, `radius/xl`).
 - Touch targets are at least 44 pt.
 - Support Dynamic Type. Give every control a VoiceOver label.
-- Map icons through Falcon icon names so the same icon exists on Web and Android.
+- Map icons through HALA DNA icon names so the same icon exists on Web and Android.
 
 ```swift
 // ❌ BAD
 Button("Save") { }.background(Color(red: 0, green: 0.604, blue: 0.471))
 
 // ✅ GOOD
-FalconButton("Save", variant: .primary, size: .md)
+Button("Save", variant: .primary, size: .md)
 ```

@@ -141,7 +141,7 @@ function isLucide(key) {
 function icon(name, options = {}) {
   const kebab = halaName(name);
   const node = iconSet.icons[pascal(kebab)];
-  if (!node) throw new Error(`Unknown Falcon icon "${name}"`);
+  if (!node) throw new Error(`Unknown HALA DNA icon "${name}"`);
   const size = iconSizes[options.size] ? options.size : "default";
   const svg = iconSet.createElement(node);
   svg.classList.add("hala-icon");
@@ -500,8 +500,8 @@ function practice() {
 
 function developers() {
   const rows = [
-    ["Web", "<script src=\"vendor/hala-icons.js\"></script>\n\nimport { icon } from './icons/api.js';\n\nbutton.append(icon('transfers'));\ntile.append(icon('cards', { tone: 'default' }));", "Falcon names come from icons/api.js. Both tones use currentColor unless you pass a tone."],
-    ["Web · React", "const HalaIcon = ({ name, size = 'default', ...p }) =>\n  <span ref={(n) => n && n.replaceChildren(\n    icon(name, { size }))} {...p} />;", "Wrap icon() once. Keep the Falcon name and size tokens as props."],
+    ["Web", "<script src=\"vendor/hala-icons.js\"></script>\n\nimport { icon } from './icons/api.js';\n\nbutton.append(icon('transfers'));\ntile.append(icon('cards', { tone: 'default' }));", "HALA DNA names come from icons/api.js. Both tones use currentColor unless you pass a tone."],
+    ["Web · React", "const HalaIcon = ({ name, size = 'default', ...p }) =>\n  <span ref={(n) => n && n.replaceChildren(\n    icon(name, { size }))} {...p} />;", "Wrap icon() once. Keep the HALA DNA name and size tokens as props."],
     ["iOS · Android native", "# Figma: HALA DNA · Icons · Source\n# Export SVG at 16 × 16, keep both tones\n# iOS: Assets as Symbol Image\n# Android: import as Vector Asset", "Export only the icons on this page. Keep the kebab-case names, e.g. ic_credit_card."],
   ];
   const host = iconPage.querySelector("[data-dev]");
@@ -516,7 +516,7 @@ function developers() {
 
 if (!iconSet || !iconSet.icons) {
   const note = iconPage.querySelector("[data-groups]");
-  if (note) note.textContent = "Hala icons did not load. Open this page from the Falcon 2.0 folder.";
+  if (note) note.textContent = "Hala icons did not load. Open this page from the HALA DNA folder.";
 } else {
   specs();
   anatomy();

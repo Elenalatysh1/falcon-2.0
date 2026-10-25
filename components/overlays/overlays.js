@@ -101,9 +101,9 @@
     }
   }
 
-  if (!window.__falconOverlayKeys) {
+  if (!window.__halaDnaOverlayKeys) {
     window.addEventListener("keydown", onDocKey);
-    window.__falconOverlayKeys = true;
+    window.__halaDnaOverlayKeys = true;
   }
 
   function shell(options) {

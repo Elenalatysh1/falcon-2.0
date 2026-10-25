@@ -1,5 +1,5 @@
 /**
- * Falcon Data table: Table filters, Table header cell, Table cell, Responsive row,
+ * HALA DNA Data table: Table filters, Table header cell, Table cell, Responsive row,
  * Bulk bar, pagination and the Loading, Empty and Error states.
  * Load badges.js, button.js, selection.js and lists.js before this script.
  *

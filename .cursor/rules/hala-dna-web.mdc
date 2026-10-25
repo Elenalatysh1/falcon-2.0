@@ -1,5 +1,5 @@
 ---
-description: Falcon 2.0 web implementation
+description: HALA DNA web implementation
 globs: "**/*.{tsx,jsx,vue,css,scss,html}"
 alwaysApply: false
 ---

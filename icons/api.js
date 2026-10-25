@@ -1,5 +1,5 @@
 /**
- * Falcon icon API. Hala icons from the HALA DNA Figma set, twotone and filled.
+ * HALA DNA icon API. Hala icons from the HALA DNA Figma set, twotone and filled.
  * A few names Hala does not draw stay on Lucide 0.453.0 (ISC).
  * Import foundations.css, then:
  *
@@ -13,7 +13,7 @@ import "../vendor/hala-icons.js";
 
 const { icons, createElement, mirror } = globalThis.halaIcons;
 
-/** Falcon name → Hala icon name (or a kept Lucide name). */
+/** HALA DNA name → Hala icon name (or a kept Lucide name). */
 export const catalog = globalThis.halaIcons.catalog;
 
 const sizes = {
@@ -39,14 +39,14 @@ function resolve(name) {
 }
 
 /**
- * @param {string} name Falcon name (`transfers`) or Hala name (`send-2`)
+ * @param {string} name HALA DNA name (`transfers`) or Hala name (`send-2`)
  * @param {{ size?: "inline" | "default" | "nav" | "feature", active?: boolean, tone?: "default" | "secondary" }} options
  *   tone shows the two Hala tones. Without it, both tones use currentColor.
  * @returns {SVGElement}
  */
 export function icon(name, options = {}) {
   const found = resolve(name);
-  if (!found) throw new Error(`Unknown Falcon icon "${name}"`);
+  if (!found) throw new Error(`Unknown HALA DNA icon "${name}"`);
   const size = sizes[options.size] ? options.size : "default";
   const svg = createElement(found.node);
   svg.classList.add("hala-icon");

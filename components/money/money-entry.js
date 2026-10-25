@@ -1,5 +1,5 @@
 /**
- * Falcon Money entry: Amount entry, Keypad (with the Key part) and Recipient strip.
+ * HALA DNA Money entry: Amount entry, Keypad (with the Key part) and Recipient strip.
  * Load vendor/hala-icons.js, lists.js (createAmount) and button.js (amount chips) first.
  *
  * createAmountEntry({ value, balance, quickAmounts, showQuick, showCaption, keypad, lang, state, onChange })
