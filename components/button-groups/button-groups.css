@@ -358,6 +358,16 @@
   box-shadow: var(--shadow-0);
 }
 
+.button-group[data-kind="split"] .button-group-bar > .button:first-child {
+  border-start-start-radius: var(--radius-pill);
+  border-end-start-radius: var(--radius-pill);
+}
+
+.button-group[data-kind="split"] .button-group-bar > .button:last-child {
+  border-start-end-radius: var(--radius-pill);
+  border-end-end-radius: var(--radius-pill);
+}
+
 .button-group[data-variant="primary"] .button-group-bar > .button,
 .button-group[data-variant="primary"] .button-group-bar > .button:hover,
 .button-group[data-variant="primary"] .button-group-bar > .button:active {

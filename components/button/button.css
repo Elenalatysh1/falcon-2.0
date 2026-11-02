@@ -272,10 +272,18 @@
   align-items: center;
   justify-content: center;
   visibility: visible;
+  color: currentColor;
 }
 
-.button-spinner .hala-icon {
-  animation: button-spin var(--motion-emphasis) linear infinite;
+.button[data-loading="true"] .button-spinner::before {
+  content: "";
+  box-sizing: border-box;
+  width: var(--button-icon);
+  height: var(--button-icon);
+  border-radius: var(--radius-pill);
+  border: var(--border-width-emphasis) solid color-mix(in srgb, currentColor 30%, transparent);
+  border-top-color: currentColor;
+  animation: button-spin var(--motion-spin) linear infinite;
 }
 
 .button[data-shape="tile"] {
@@ -520,14 +528,16 @@
 }
 
 @keyframes button-spin {
+  from {
+    transform: rotate(0deg);
+  }
   to {
     transform: rotate(360deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .button,
-  .button-spinner .hala-icon {
+  .button {
     transition: none;
     animation: none;
   }

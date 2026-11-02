@@ -432,18 +432,24 @@
       line.style.setProperty("--dt-order", String(Math.min(index, 4)));
       const check = el("span", "dt-cell dt-cell-check");
       check.setAttribute("role", "cell");
+      const toggle = () => {
+        if (state.selected.has(row.key)) state.selected.delete(row.key);
+        else state.selected.add(row.key);
+        state.focus = `row-${row.key}`;
+        paint();
+      };
       const box = checkbox({
         checked: state.selected.has(row.key),
         label: copy.selectRow(name),
-        onChange: () => {
-          if (state.selected.has(row.key)) state.selected.delete(row.key);
-          else state.selected.add(row.key);
-          state.focus = `row-${row.key}`;
-          paint();
-        },
+        onChange: toggle,
       });
       box.dataset.key = `row-${row.key}`;
       check.append(box);
+      line.dataset.selectable = "true";
+      line.addEventListener("click", (event) => {
+        if (event.target.closest("button, a")) return;
+        toggle();
+      });
       const who = el("span", "dt-cell dt-cell-merchant");
       who.setAttribute("role", "cell");
       who.append(identity(row, copy, lang, true));
@@ -615,6 +621,13 @@
             cell.replaceChildren(box);
           };
           draw();
+          line.dataset.selectable = "true";
+          line.addEventListener("click", (event) => {
+            if (event.target.closest("button, a")) return;
+            if (selected.has(row.id)) selected.delete(row.id);
+            else selected.add(row.id);
+            draw();
+          });
         }
         else if (column.type === "actions") cell.append(iconButton("more", copy.rowMenu(row.name)));
         else if (column.type === "slot" && column.render) cell.append(column.render(row));

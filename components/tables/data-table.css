@@ -82,6 +82,7 @@
   border-top: 0;
   background: var(--surface-subtle);
 }
+.dt-body .dt-row[data-selectable="true"] { cursor: pointer; }
 .dt-body .dt-row:hover { background: var(--surface-hover); }
 .dt-row[data-selected="true"],
 .dt-body .dt-row[data-selected="true"]:hover { background: var(--surface-selected); }

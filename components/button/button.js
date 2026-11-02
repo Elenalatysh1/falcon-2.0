@@ -148,8 +148,6 @@
     const spinner = document.createElement("span");
     spinner.className = "button-spinner";
     spinner.setAttribute("aria-hidden", "true");
-    const spinIcon = drawIcon("refresh");
-    if (spinIcon) spinner.append(spinIcon);
     button.append(spinner);
 
     if (iconOnly) button.setAttribute("aria-label", ariaLabel || label);
